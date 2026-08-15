@@ -60,10 +60,10 @@ jobs:
           mkdir -p release
           python -m pip install --disable-pip-version-check pex==2.100.4
           pex -r apps/agent-ui/agent/requirements.lock \
-            ./apps/agent-ui/agent \
+            --sources-directory apps/agent-ui/agent \
             --python python3.12 \
             --python-shebang /usr/bin/python3 \
-            --console-script poetry-agent \
+            --entry-point poetry_agent.main:run \
             --output-file release/poetry-agent.pex
 
       - name: Package releases
