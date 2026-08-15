@@ -129,15 +129,21 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
           remote_dir="/tmp/shixing-deploy-${GITHUB_SHA}"
-          ssh "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote_dir'"
-          scp \
+          ssh_opts=(
+            -o ConnectTimeout=20
+            -o ConnectionAttempts=3
+            -o ServerAliveInterval=15
+            -o ServerAliveCountMax=3
+          )
+          ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote_dir'"
+          scp "${ssh_opts[@]}" \
             release/web-release.tar.gz \
             release/api-release.tar.gz \
             release/static-release.tar.gz \
             release/SHA256SUMS \
             ops/deploy-server.sh \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_dir/"
-          ssh "$DEPLOY_USER@$DEPLOY_HOST" \
+          ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
             "bash '$remote_dir/deploy-server.sh' '$GITHUB_SHA' '$remote_dir'"
 
       - name: Verify public endpoints
