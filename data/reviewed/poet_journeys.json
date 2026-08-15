@@ -1,0 +1,1389 @@
+{
+  "schema_version": "1.0",
+  "title": "诗人行旅与生命情感审核数据",
+  "updated_at": "2026-07-22",
+  "methodology": {
+    "scope": "选取李白、杜甫、白居易、苏轼、陆游、李清照的知名生平节点，并与本项目 poems.json 中实际存在的代表作关联。",
+    "line_semantics": "地图连线仅表示人工选定节点的时间先后，不代表诗人实际行走的道路、交通方式或完整停留轨迹。",
+    "three_layers": {
+      "journey_fact": "年代、历史地名、现代对应地、坐标与已知生平事件。",
+      "life_context": "基于审核生平事件归纳处境，并按战乱、贬谪、囚禁、贫病、丧亲和仕途受挫等因素人工编码为处境指数；只用于同一诗人的阶段比较，不是心理诊断，也不能用于诗人之间排名。",
+      "text_emotion": "仅根据关联诗词文本标注的情感倾向和强度，不直接等同于诗人的真实性格。"
+    },
+    "source_levels": {
+      "A": "作品自序、正史或可定位的一手文献直接支持。",
+      "B": "学术年谱、权威注本或可追溯的学术数据库整理。",
+      "C": "项目组根据年谱、诗题、文本和传统系年所作的推定，必须连同依据展示。"
+    },
+    "coordinate_note": "经纬度为历史地名对应现代城市或景点的近似中心坐标，不表示精确住所。",
+    "emotion_scale": "text_emotion.valence 取值 -1 至 1，负值偏哀感/冷峻，正值偏明朗/豪迈；intensity 与底层字段 external_pressure 取值 0 至 1。页面将 external_pressure 显示为 0 至 100 的“生平处境指数（项目人工编码）”。"
+  },
+  "poets": [
+    {
+      "poet": "李白",
+      "dynasty": "唐",
+      "nodes": [
+        {
+          "id": "libai-0725-jingmen",
+          "route_order": 1,
+          "year": 725,
+          "year_label": "约开元十三年（725）",
+          "year_precision": "approximate",
+          "place_historical": "荆门",
+          "place_modern": "湖北省荆门市",
+          "longitude": 112.1993,
+          "latitude": 31.0354,
+          "event": "出蜀后沿长江东下，过荆门进入楚地漫游阶段。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李白年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD",
+          "note": "出蜀与荆门漫游为年谱常见节点；精确作年存在异说，故年份标为约数。",
+          "confidence": 0.82,
+          "life_context": {
+            "label": "青年远游",
+            "external_pressure": 0.26,
+            "analysis_level": "C",
+            "reason": "离开蜀地、拓展交游和空间经验的人生阶段归纳。"
+          },
+          "linked_poem": {
+            "title": "渡荆门送别",
+            "relation": "传统系年与诗题地名共同支持",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "壮游与恋乡",
+              "valence": 0.48,
+              "intensity": 0.73,
+              "evidence": "仍怜故乡水，万里送行舟",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "libai-0728-wuhan",
+          "route_order": 2,
+          "year": 728,
+          "year_label": "开元十六年（728）",
+          "year_precision": "year",
+          "place_historical": "江夏·黄鹤楼",
+          "place_modern": "湖北省武汉市",
+          "longitude": 114.311831,
+          "latitude": 30.598428,
+          "event": "在江夏黄鹤楼为孟浩然送行，是青年交游与江汉漫游的知名节点。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·作品地点数据",
+          "source_url": "https://open.cnkgraph.com/api/writing/25660",
+          "note": "cnkgraph 作品接口给出 AuthorPlace；坐标取黄鹤楼附近。",
+          "confidence": 0.93,
+          "life_context": {
+            "label": "交游送别",
+            "external_pressure": 0.34,
+            "analysis_level": "C",
+            "reason": "以文人交游和离别作为处境标签，不推断其长期心理状态。"
+          },
+          "linked_poem": {
+            "title": "黄鹤楼送孟浩然之广陵",
+            "relation": "作品地点数据与诗题直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "送别与情谊",
+              "valence": -0.16,
+              "intensity": 0.67,
+              "evidence": "孤帆远影碧空尽，唯见长江天际流",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "libai-0742-changan",
+          "route_order": 3,
+          "year": 742,
+          "year_label": "天宝元年（742）",
+          "year_precision": "year",
+          "place_historical": "长安",
+          "place_modern": "陕西省西安市",
+          "longitude": 108.9398,
+          "latitude": 34.3416,
+          "event": "奉诏入长安，供奉翰林，进入宫廷文学活动中心。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李白年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD",
+          "note": "入长安、待诏翰林是李白生平中有明确系年的转折。",
+          "confidence": 0.92,
+          "life_context": {
+            "label": "入京待诏",
+            "external_pressure": 0.42,
+            "analysis_level": "C",
+            "reason": "处于宫廷文学生活与政治期待交叠的阶段。"
+          },
+          "linked_poem": {
+            "title": "清平调·其一",
+            "relation": "长安翰林时期代表作",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "华美与欣赏",
+              "valence": 0.72,
+              "intensity": 0.68,
+              "evidence": "云想衣裳花想容，春风拂槛露华浓",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "libai-0744-changan-departure",
+          "route_order": 4,
+          "year": 744,
+          "year_label": "天宝三载（744）",
+          "year_precision": "year",
+          "place_historical": "长安",
+          "place_modern": "陕西省西安市",
+          "longitude": 108.9398,
+          "latitude": 34.3416,
+          "event": "离开长安，结束翰林供奉阶段，重新进入漫游生活。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李白年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD",
+          "note": "赐金放还的叙述在李白传记中常见；关联作品的精确系年仍有异说。",
+          "confidence": 0.88,
+          "life_context": {
+            "label": "仕途受挫",
+            "external_pressure": 0.78,
+            "analysis_level": "C",
+            "reason": "离开政治中心与仕进期待受挫，使该阶段处境明显趋于艰难。"
+          },
+          "linked_poem": {
+            "title": "行路难·其一",
+            "relation": "传统上常系于离长安前后，精确时地属推定",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "茫然中的坚信",
+              "valence": 0.18,
+              "intensity": 0.94,
+              "evidence": "长风破浪会有时，直挂云帆济沧海",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "libai-0753-xuancheng",
+          "route_order": 5,
+          "year": 753,
+          "year_label": "约天宝十二载（753）",
+          "year_precision": "approximate",
+          "place_historical": "宣州",
+          "place_modern": "安徽省宣城市",
+          "longitude": 118.7588,
+          "latitude": 30.9407,
+          "event": "游宣州，在谢朓楼一带留下送别与抒怀作品。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李白年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD",
+          "note": "诗题直指宣州谢朓楼；不同系年资料对年份有细微差异。",
+          "confidence": 0.84,
+          "life_context": {
+            "label": "漫游与怀才",
+            "external_pressure": 0.62,
+            "analysis_level": "C",
+            "reason": "长期漫游、送别场景和政治理想难展的阶段性归纳。"
+          },
+          "linked_poem": {
+            "title": "宣州谢朓楼饯别校书叔云",
+            "relation": "诗题地名直接支持，作年为年谱系年",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "烦忧与逸兴",
+              "valence": -0.32,
+              "intensity": 0.91,
+              "evidence": "抽刀断水水更流，举杯消愁愁更愁",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "libai-0759-baidi",
+          "route_order": 6,
+          "year": 759,
+          "year_label": "乾元二年（759）",
+          "year_precision": "year",
+          "place_historical": "白帝城",
+          "place_modern": "重庆市奉节县",
+          "longitude": 109.4639,
+          "latitude": 31.0184,
+          "event": "流放夜郎途中遇赦，由白帝城东下返还江陵方向。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李白年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD",
+          "note": "遇赦东归与《早发白帝城》的传统系年关联较稳定。",
+          "confidence": 0.92,
+          "life_context": {
+            "label": "遇赦东归",
+            "external_pressure": 0.68,
+            "analysis_level": "C",
+            "reason": "节点前有流放压力，遇赦则带来处境的突然转折。"
+          },
+          "linked_poem": {
+            "title": "早发白帝城",
+            "relation": "诗题、行程与传统系年相互支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "释然与轻快",
+              "valence": 0.86,
+              "intensity": 0.88,
+              "evidence": "两岸猿声啼不住，轻舟已过万重山",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "poet": "杜甫",
+      "dynasty": "唐",
+      "nodes": [
+        {
+          "id": "dufu-0735-taian",
+          "route_order": 1,
+          "year": 735,
+          "year_label": "约开元二十三年（735）",
+          "year_precision": "approximate",
+          "place_historical": "齐鲁·岱宗",
+          "place_modern": "山东省泰安市",
+          "longitude": 117.0876,
+          "latitude": 36.2003,
+          "event": "漫游齐赵，登临泰山地区，是青年壮游阶段的代表节点。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "齐赵漫游与《望岳》的系年通常置于开元二十三年前后。",
+          "confidence": 0.84,
+          "life_context": {
+            "label": "青年壮游",
+            "external_pressure": 0.22,
+            "analysis_level": "C",
+            "reason": "科举前后的漫游经验，作品呈现明显的空间开展感。"
+          },
+          "linked_poem": {
+            "title": "望岳",
+            "relation": "传统系年与山川地名支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "壮志与昂扬",
+              "valence": 0.82,
+              "intensity": 0.83,
+              "evidence": "会当凌绝顶，一览众山小",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0751-changan",
+          "route_order": 2,
+          "year": 751,
+          "year_label": "约天宝十载（751）",
+          "year_precision": "approximate",
+          "place_historical": "长安",
+          "place_modern": "陕西省西安市",
+          "longitude": 108.9398,
+          "latitude": 34.3416,
+          "event": "客居长安求仕，长期接触京畿征役、贫富与民生现实。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "长安十年求仕为杜甫生平的重要阶段；《兵车行》精确作年存在异说。",
+          "confidence": 0.83,
+          "life_context": {
+            "label": "困守长安",
+            "external_pressure": 0.73,
+            "analysis_level": "C",
+            "reason": "仕进不顺与生计压力增加，同时开始强烈关注社会现实。"
+          },
+          "linked_poem": {
+            "title": "兵车行",
+            "relation": "长安时期的代表作，具体年份属传统系年推定",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "悲愤与民生关切",
+              "valence": -0.86,
+              "intensity": 0.96,
+              "evidence": "牵衣顿足拦道哭，哭声直上干云霄",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0757-changan",
+          "route_order": 3,
+          "year": 757,
+          "year_label": "至德二载（757）",
+          "year_precision": "year",
+          "place_historical": "长安",
+          "place_modern": "陕西省西安市",
+          "longitude": 108.9398,
+          "latitude": 34.3416,
+          "event": "安史之乱中困居被占领的长安，与家人分离。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "《春望》通常系于至德二载春，与长安陷落背景对应。",
+          "confidence": 0.95,
+          "life_context": {
+            "label": "战乱困城",
+            "external_pressure": 0.98,
+            "analysis_level": "C",
+            "reason": "国都陷落、人身受限和家人离散，使该阶段处境极为艰难。"
+          },
+          "linked_poem": {
+            "title": "春望",
+            "relation": "作年、地点与战乱背景均有年谱支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "忧国与怀家",
+              "valence": -0.92,
+              "intensity": 0.98,
+              "evidence": "感时花溅泪，恨别鸟惊心",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0759-qinzhou",
+          "route_order": 4,
+          "year": 759,
+          "year_label": "乾元二年（759）",
+          "year_precision": "year",
+          "place_historical": "秦州",
+          "place_modern": "甘肃省天水市",
+          "longitude": 105.7249,
+          "latitude": 34.5809,
+          "event": "弃官西行，居秦州时正值战乱未息、兄弟分散。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "秦州时期与《月夜忆舍弟》系年相对稳定。",
+          "confidence": 0.91,
+          "life_context": {
+            "label": "弃官漂泊",
+            "external_pressure": 0.9,
+            "analysis_level": "C",
+            "reason": "官职中断、战乱和亲人离散同时作用。"
+          },
+          "linked_poem": {
+            "title": "月夜忆舍弟",
+            "relation": "秦州居留与作品系年直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "怀亲与忧乱",
+              "valence": -0.88,
+              "intensity": 0.93,
+              "evidence": "有弟皆分散，无家问死生",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0761-chengdu",
+          "route_order": 5,
+          "year": 761,
+          "year_label": "上元二年（761）",
+          "year_precision": "year",
+          "place_historical": "成都草堂",
+          "place_modern": "四川省成都市",
+          "longitude": 104.0665,
+          "latitude": 30.5723,
+          "event": "定居成都草堂后经历秋风破屋，生活暂定中仍有贫困。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "草堂居留和秋风破屋事件与作品内容相互印证。",
+          "confidence": 0.95,
+          "life_context": {
+            "label": "草堂贫困",
+            "external_pressure": 0.85,
+            "analysis_level": "C",
+            "reason": "居所损毁、贫困和战乱后的生活不安定形成高压处境。"
+          },
+          "linked_poem": {
+            "title": "茅屋为秋风所破歌",
+            "relation": "作品自述与草堂事件直接支持",
+            "relation_level": "A",
+            "text_emotion": {
+              "label": "苦难中的悲悯",
+              "valence": -0.48,
+              "intensity": 0.97,
+              "evidence": "安得广厦千万间，大庇天下寒士俱欢颜",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0766-kuizhou",
+          "route_order": 6,
+          "year": 766,
+          "year_label": "大历元年（766）",
+          "year_precision": "year",
+          "place_historical": "夔州·白帝城",
+          "place_modern": "重庆市奉节县",
+          "longitude": 109.4639,
+          "latitude": 31.0184,
+          "event": "寓居夔州，面对巫山巫峡景观，集中写作《秋兴》等组诗。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "夔州寓居、白帝城和《秋兴八首》的时地关联明确。",
+          "confidence": 0.95,
+          "life_context": {
+            "label": "夔州寓居",
+            "external_pressure": 0.82,
+            "analysis_level": "C",
+            "reason": "漂泊、多病和对故园的持续牵挂构成阶段性处境。"
+          },
+          "linked_poem": {
+            "title": "秋兴八首·其一",
+            "relation": "作品地名、景物与夔州系年直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "故园之思",
+              "valence": -0.79,
+              "intensity": 0.9,
+              "evidence": "丛菊两开他日泪，孤舟一系故园心",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "dufu-0768-yueyang",
+          "route_order": 7,
+          "year": 768,
+          "year_label": "大历三年（768）",
+          "year_precision": "year",
+          "place_historical": "岳阳楼",
+          "place_modern": "湖南省岳阳市",
+          "longitude": 113.1289,
+          "latitude": 29.3571,
+          "event": "出川漂泊江湘，年末登岳阳楼，此时年老多病且仍忧战事。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·杜甫年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB",
+          "note": "《登岳阳楼》诗题和传统系年共同支持该节点。",
+          "confidence": 0.94,
+          "life_context": {
+            "label": "江湘晚泊",
+            "external_pressure": 0.93,
+            "analysis_level": "C",
+            "reason": "年老多病、孤舟漂泊与战乱关切同时存在。"
+          },
+          "linked_poem": {
+            "title": "登岳阳楼",
+            "relation": "诗题地名与系年直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "孤病与忧时",
+              "valence": -0.9,
+              "intensity": 0.95,
+              "evidence": "戎马关山北，凭轩涕泗流",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "poet": "白居易",
+      "dynasty": "唐",
+      "nodes": [
+        {
+          "id": "baijuyi-0800-changan",
+          "route_order": 1,
+          "year": 800,
+          "year_label": "贞元十六年（800）",
+          "year_precision": "year",
+          "place_historical": "长安",
+          "place_modern": "陕西省西安市",
+          "longitude": 108.9398,
+          "latitude": 34.3416,
+          "event": "进士及第，进入以长安为中心的仕宦与文学生活。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·白居易年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "进士及第年份明确；《赋得古原草送别》的具体作年早于此节点，仅作早年代表作展示。",
+          "confidence": 0.9,
+          "life_context": {
+            "label": "科举入仕",
+            "external_pressure": 0.38,
+            "analysis_level": "C",
+            "reason": "从布衣士子转入仕宦通道的关键节点。"
+          },
+          "linked_poem": {
+            "title": "赋得古原草送别",
+            "relation": "只作早年诗风代表，不声称为 800 年长安所作",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "生命韧性与送别",
+              "valence": 0.34,
+              "intensity": 0.72,
+              "evidence": "野火烧不尽，春风吹又生",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "baijuyi-0805-zhouzhi",
+          "route_order": 2,
+          "year": 805,
+          "year_label": "贞元二十一年（805）",
+          "year_precision": "year",
+          "place_historical": "盩厔县",
+          "place_modern": "陕西省西安市周至县",
+          "longitude": 108.222,
+          "latitude": 34.163,
+          "event": "任盩厔县尉期间接触农事与赋税现实，写下关切田家生计的作品。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·白居易年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "盩厔县尉经历与《观刈麦》中的官禄自省有较强互证。",
+          "confidence": 0.92,
+          "life_context": {
+            "label": "基层仕宦",
+            "external_pressure": 0.52,
+            "analysis_level": "C",
+            "reason": "亲历县政与农民生计，官员身份与社会现实形成张力。"
+          },
+          "linked_poem": {
+            "title": "观刈麦",
+            "relation": "任官地、作年与诗中自述相互支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "悲悯与自愧",
+              "valence": -0.72,
+              "intensity": 0.89,
+              "evidence": "念此私自愧，尽日不能忘",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "baijuyi-0815-jiangzhou",
+          "route_order": 3,
+          "year": 815,
+          "year_label": "元和十年（815）",
+          "year_precision": "year",
+          "place_historical": "江州·浔阳",
+          "place_modern": "江西省九江市",
+          "longitude": 116.0019,
+          "latitude": 29.7051,
+          "event": "贬为江州司马；次年秋在浔阳江头送客，作《琵琶行》。",
+          "source_level": "A",
+          "source_name": "《琵琶行》作者自序，cnkgraph 年历辅助校验",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "作者自序明言‘予左迁九江郡司马’，并记次年送客湓浦口的创作场景。",
+          "confidence": 0.99,
+          "life_context": {
+            "label": "贬谪江州",
+            "external_pressure": 0.88,
+            "analysis_level": "C",
+            "reason": "政治贬谪、远离长安和自述迁谪意识构成高压处境。"
+          },
+          "linked_poem": {
+            "title": "琵琶行",
+            "relation": "作者自序直接支持时间、地点和贬谪背景",
+            "relation_level": "A",
+            "text_emotion": {
+              "label": "沦落与共情",
+              "valence": -0.86,
+              "intensity": 0.97,
+              "evidence": "同是天涯沦落人，相逢何必曾相识",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "baijuyi-0817-lushan",
+          "route_order": 4,
+          "year": 817,
+          "year_label": "约元和十二年（817）",
+          "year_precision": "approximate",
+          "place_historical": "庐山·大林寺",
+          "place_modern": "江西省九江市庐山市",
+          "longitude": 115.982,
+          "latitude": 29.556,
+          "event": "江州时期游庐山大林寺，从山中物候差异获得诗意。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·白居易年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "诗题直指大林寺；常见系年为元和十二年，因版本系年差异标约数。",
+          "confidence": 0.88,
+          "life_context": {
+            "label": "贬居自遣",
+            "external_pressure": 0.64,
+            "analysis_level": "C",
+            "reason": "贬居背景仍在，游山和对物候的观察展现自我调适。"
+          },
+          "linked_poem": {
+            "title": "大林寺桃花",
+            "relation": "诗题地点与江州时期系年支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "惊喜与新发现",
+              "valence": 0.74,
+              "intensity": 0.71,
+              "evidence": "长恨春归无觅处，不知转入此中来",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "baijuyi-0822-hangzhou",
+          "route_order": 5,
+          "year": 822,
+          "year_label": "长庆二年（822）",
+          "year_precision": "year",
+          "place_historical": "杭州·钱塘湖",
+          "place_modern": "浙江省杭州市",
+          "longitude": 120.1551,
+          "latitude": 30.2741,
+          "event": "出任杭州刺史，治理水利并频繁游览西湖地区。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·白居易年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "杭州刺史任期与《钱塘湖春行》的地点、时段关联明确。",
+          "confidence": 0.96,
+          "life_context": {
+            "label": "杭州治郡",
+            "external_pressure": 0.46,
+            "analysis_level": "C",
+            "reason": "地方行政职责与山水游览并行，处境相对稳定。"
+          },
+          "linked_poem": {
+            "title": "钱塘湖春行",
+            "relation": "任官时段与诗题地名直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "春日欣悦",
+              "valence": 0.88,
+              "intensity": 0.78,
+              "evidence": "最爱湖东行不足，绿杨阴里白沙堤",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "baijuyi-0825-suzhou",
+          "route_order": 6,
+          "year": 825,
+          "year_label": "宝历元年（825）",
+          "year_precision": "year",
+          "place_historical": "苏州",
+          "place_modern": "江苏省苏州市",
+          "longitude": 120.5853,
+          "latitude": 31.2989,
+          "event": "出任苏州刺史，延续江南地方仕宦经历，后因病离任。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·白居易年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93",
+          "note": "苏州任职是可核验生平节点；《忆江南》作于晚年的具体时地有异说，此处只关联为江南经验的后期回忆。",
+          "confidence": 0.9,
+          "life_context": {
+            "label": "江南仕宦",
+            "external_pressure": 0.56,
+            "analysis_level": "C",
+            "reason": "地方治理职责、健康变化与江南文化经验交织。"
+          },
+          "linked_poem": {
+            "title": "忆江南",
+            "relation": "属江南官宦经验的晚年回忆，不声称在苏州任上写成",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "欣赏与怀念",
+              "valence": 0.76,
+              "intensity": 0.8,
+              "evidence": "江南好，风景旧曾谙",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "poet": "苏轼",
+      "dynasty": "宋",
+      "nodes": [
+        {
+          "id": "sushi-1061-mianchi",
+          "route_order": 1,
+          "year": 1061,
+          "year_label": "嘉祐六年（1061）",
+          "year_precision": "year",
+          "place_historical": "渑池",
+          "place_modern": "河南省三门峡市渑池县",
+          "longitude": 111.762,
+          "latitude": 34.767,
+          "event": "赴凤翔签判任途中重经渑池，回忆早年入京时的旅途踪迹。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "赴凤翔任和重过渑池为年谱常见节点，诗题与内容可直接互证。",
+          "confidence": 0.92,
+          "life_context": {
+            "label": "初仕远行",
+            "external_pressure": 0.4,
+            "analysis_level": "C",
+            "reason": "初入仕途、离京赴任与兄弟离别构成阶段性处境。"
+          },
+          "linked_poem": {
+            "title": "和子由渑池怀旧",
+            "relation": "诗题、诗中旧迹与赴任行程直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "人生无常与怀旧",
+              "valence": -0.12,
+              "intensity": 0.7,
+              "evidence": "人生到处知何似，应似飞鸿踏雪泥",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "sushi-1071-hangzhou",
+          "route_order": 2,
+          "year": 1071,
+          "year_label": "熙宁四年（1071）",
+          "year_precision": "year",
+          "place_historical": "杭州",
+          "place_modern": "浙江省杭州市",
+          "longitude": 120.1551,
+          "latitude": 30.2741,
+          "event": "出任杭州通判，经历西湖山水与地方政务生活。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "杭州通判任期和西湖诗作的时地关联稳定。",
+          "confidence": 0.95,
+          "life_context": {
+            "label": "杭州外任",
+            "external_pressure": 0.48,
+            "analysis_level": "C",
+            "reason": "因政见差异请求外任，但山水游赏与地方实践并存。"
+          },
+          "linked_poem": {
+            "title": "饮湖上初晴后雨",
+            "relation": "杭州任期与西湖景观直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "山水欣赏",
+              "valence": 0.84,
+              "intensity": 0.73,
+              "evidence": "欲把西湖比西子，淡妆浓抹总相宜",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "sushi-1075-mizhou",
+          "route_order": 3,
+          "year": 1075,
+          "year_label": "熙宁八年（1075）",
+          "year_precision": "year",
+          "place_historical": "密州",
+          "place_modern": "山东省诸城市",
+          "longitude": 119.4101,
+          "latitude": 35.9957,
+          "event": "知密州，组织出猎并在次年中秋怀念弟弟苏辙。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "密州任期、出猎与丙辰中秋的时地背景有较稳定的系年。",
+          "confidence": 0.96,
+          "life_context": {
+            "label": "密州治郡",
+            "external_pressure": 0.55,
+            "analysis_level": "C",
+            "reason": "地方政务、与亲人异地以及政治抱负同时存在。"
+          },
+          "linked_poem": {
+            "title": "江城子·密州出猎",
+            "relation": "词题与密州知州任期直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "豪迈与报国志",
+              "valence": 0.81,
+              "intensity": 0.92,
+              "evidence": "会挽雕弓如满月，西北望，射天狼",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "sushi-1080-huangzhou",
+          "route_order": 4,
+          "year": 1080,
+          "year_label": "元丰三年（1080）",
+          "year_precision": "year",
+          "place_historical": "黄州",
+          "place_modern": "湖北省黄冈市",
+          "longitude": 114.8724,
+          "latitude": 30.4537,
+          "event": "乌台诗案后贬为黄州团练副使，在黄州生活与写作至 1084 年。",
+          "source_level": "A",
+          "source_name": "《定风波》词序、《赤壁赋》纪年与 cnkgraph 苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "《定风波》序明言沙湖道中，《赤壁赋》明言壬戌之秋；两者与黄州贬居时间相合。",
+          "confidence": 0.99,
+          "life_context": {
+            "label": "黄州贬居",
+            "external_pressure": 0.94,
+            "analysis_level": "C",
+            "reason": "经历御史台案、政治贬谪与经济压力，是生平显著逆境阶段。"
+          },
+          "linked_poem": {
+            "title": "定风波·莫听穿林打叶声",
+            "relation": "词序直接给出沙湖道中和作日，属黄州贬居时期",
+            "relation_level": "A",
+            "text_emotion": {
+              "label": "旷达与自我调适",
+              "valence": 0.52,
+              "intensity": 0.91,
+              "evidence": "一蓑烟雨任平生",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "sushi-1084-lushan",
+          "route_order": 5,
+          "year": 1084,
+          "year_label": "元丰七年（1084）",
+          "year_precision": "year",
+          "place_historical": "庐山·西林寺",
+          "place_modern": "江西省九江市庐山市",
+          "longitude": 115.982,
+          "latitude": 29.556,
+          "event": "离黄州赴汝州途中游庐山，留下对观察角度与认识局限的思考。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "离黄州后游庐山与《题西林壁》的时地关联明确。",
+          "confidence": 0.95,
+          "life_context": {
+            "label": "离贬转任",
+            "external_pressure": 0.58,
+            "analysis_level": "C",
+            "reason": "结束黄州贬居、赴新任途中，处境有所缓和但仍不稳定。"
+          },
+          "linked_poem": {
+            "title": "题西林壁",
+            "relation": "诗题与游庐山行程直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "观照与哲思",
+              "valence": 0.28,
+              "intensity": 0.66,
+              "evidence": "不识庐山真面目，只缘身在此山中",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "sushi-1094-huizhou",
+          "route_order": 6,
+          "year": 1094,
+          "year_label": "绍圣元年（1094）",
+          "year_precision": "year",
+          "place_historical": "惠州",
+          "place_modern": "广东省惠州市",
+          "longitude": 114.4162,
+          "latitude": 23.1118,
+          "event": "再遭贬谪至惠州，进入晚年岭南贬居阶段。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·苏轼年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC",
+          "note": "惠州贬居是明确生平节点；《蝶恋花·春景》作年存在争议，此处仅作晚年天涯意识的文本对照。",
+          "confidence": 0.92,
+          "life_context": {
+            "label": "岭南再贬",
+            "external_pressure": 0.96,
+            "analysis_level": "C",
+            "reason": "远离政治中心、迁谪距离扩大与晚年健康风险构成高压处境。"
+          },
+          "linked_poem": {
+            "title": "蝶恋花·春景",
+            "relation": "仅作天涯意识的文本对照，不声称为惠州所作",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "旷达语句与失落反差",
+              "valence": -0.2,
+              "intensity": 0.72,
+              "evidence": "天涯何处无芳草",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "poet": "陆游",
+      "dynasty": "宋",
+      "nodes": [
+        {
+          "id": "luyou-1155-shenyuan",
+          "route_order": 1,
+          "year": 1155,
+          "year_label": "约绍兴二十五年（1155）",
+          "year_precision": "approximate",
+          "place_historical": "山阴·沈园",
+          "place_modern": "浙江省绍兴市",
+          "longitude": 120.5902,
+          "latitude": 30.0044,
+          "event": "传统年谱将沈园重逢与《钗头凤》系于绍兴二十五年前后。",
+          "source_level": "C",
+          "source_name": "项目组依据 cnkgraph 陆游年历与传统系年推定",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "沈园重逢与《钗头凤》具体年份有争议，此节点作为 C 级推定展示，不作精确断言。",
+          "confidence": 0.68,
+          "life_context": {
+            "label": "婚恋离索",
+            "external_pressure": 0.79,
+            "analysis_level": "C",
+            "reason": "依传统叙述归纳的个人离索处境，具体史实细节仍需专书复核。"
+          },
+          "linked_poem": {
+            "title": "钗头凤·红酥手",
+            "relation": "传统上与沈园重逢关联，具体系年属推定",
+            "relation_level": "C",
+            "text_emotion": {
+              "label": "离索与哀痛",
+              "valence": -0.91,
+              "intensity": 0.97,
+              "evidence": "一怀愁绪，几年离索",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1167-shanyin",
+          "route_order": 2,
+          "year": 1167,
+          "year_label": "乾道三年（1167）",
+          "year_precision": "year",
+          "place_historical": "山阴·三山",
+          "place_modern": "浙江省绍兴市",
+          "longitude": 120.582,
+          "latitude": 30.03,
+          "event": "罢职闲居山阴三山，游访乡村，写下农家社日与山水行路经验。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "山阴闲居、游村与《游山西村》系年有年谱支持。",
+          "confidence": 0.93,
+          "life_context": {
+            "label": "罢职乡居",
+            "external_pressure": 0.63,
+            "analysis_level": "C",
+            "reason": "仕途中断带来失意，乡村交往和日常生活又提供调适空间。"
+          },
+          "linked_poem": {
+            "title": "游山西村",
+            "relation": "山阴闲居时段、乡村出游与作品系年支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "豁然与乡村欣悦",
+              "valence": 0.75,
+              "intensity": 0.82,
+              "evidence": "山重水复疑无路，柳暗花明又一村",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1172-nanzheng",
+          "route_order": 3,
+          "year": 1172,
+          "year_label": "乾道八年（1172）",
+          "year_precision": "year",
+          "place_historical": "南郑·大散关前线",
+          "place_modern": "陕西省汉中市",
+          "longitude": 107.023,
+          "latitude": 33.067,
+          "event": "入四川宣抚使王炎幕府，赴南郑参与西北前线军务，后经剑门入蜀。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "南郑军幕经历和同年经剑门入蜀为陆游生平中的著名军旅节点。",
+          "confidence": 0.96,
+          "life_context": {
+            "label": "南郑军幕",
+            "external_pressure": 0.83,
+            "analysis_level": "C",
+            "reason": "距离敌境较近的军幕经验使抗金理想与现实战事直接接触。"
+          },
+          "linked_poem": {
+            "title": "剑门道中遇微雨",
+            "relation": "同年离南郑后经剑门入蜀，诗题与行程直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "壮志未酬与自嘲",
+              "valence": -0.42,
+              "intensity": 0.78,
+              "evidence": "此身合是诗人未？细雨骑驴入剑门",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1186-linan",
+          "route_order": 4,
+          "year": 1186,
+          "year_label": "淳熙十三年（1186）",
+          "year_precision": "year",
+          "place_historical": "临安",
+          "place_modern": "浙江省杭州市",
+          "longitude": 120.1551,
+          "latitude": 30.2741,
+          "event": "奉诏入临安等候召见，久居京华客舍，后出任严州。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "《临安春雨初霁》的诗题、客京自述和奉诏行程可直接互证。",
+          "confidence": 0.97,
+          "life_context": {
+            "label": "客京待召",
+            "external_pressure": 0.74,
+            "analysis_level": "C",
+            "reason": "对京华仕途的疏离、等候召见和思归心理共同构成处境张力。"
+          },
+          "linked_poem": {
+            "title": "临安春雨初霁",
+            "relation": "诗题、客京经历和作品系年直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "疏离与思归",
+              "valence": -0.5,
+              "intensity": 0.81,
+              "evidence": "素衣莫起风尘叹，犹及清明可到家",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1192-shanyin",
+          "route_order": 5,
+          "year": 1192,
+          "year_label": "绍熙三年（1192）",
+          "year_precision": "year",
+          "place_historical": "山阴三山",
+          "place_modern": "浙江省绍兴市",
+          "longitude": 120.582,
+          "latitude": 30.03,
+          "event": "罢官闲居山阴，在风雨夜中仍以军旅与北伐为梦。",
+          "source_level": "A",
+          "source_name": "《十一月四日风雨大作》题日与 cnkgraph 陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "作品题日提供明确日期，山阴闲居为同期年谱事实。",
+          "confidence": 0.97,
+          "life_context": {
+            "label": "罢官归里",
+            "external_pressure": 0.77,
+            "analysis_level": "C",
+            "reason": "远离政治与军事实践的现实，与持续抗金意愿构成强烈落差。"
+          },
+          "linked_poem": {
+            "title": "十一月四日风雨大作·其二",
+            "relation": "作品题日与山阴闲居年谱直接支持",
+            "relation_level": "A",
+            "text_emotion": {
+              "label": "忧国与壮志",
+              "valence": 0.32,
+              "intensity": 0.96,
+              "evidence": "夜阑卧听风吹雨，铁马冰河入梦来",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1199-shenyuan",
+          "route_order": 6,
+          "year": 1199,
+          "year_label": "庆元五年（1199）",
+          "year_precision": "year",
+          "place_historical": "山阴·沈园",
+          "place_modern": "浙江省绍兴市",
+          "longitude": 120.5902,
+          "latitude": 30.0044,
+          "event": "晚年再游沈园，回忆数十年前的人事与旧迹。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "《沈园二首》通常系于庆元五年，诗题与现场旧迹相对应。",
+          "confidence": 0.94,
+          "life_context": {
+            "label": "晚年怀旧",
+            "external_pressure": 0.69,
+            "analysis_level": "C",
+            "reason": "年老归里与旧地重游使长时段的个人记忆被再度激活。"
+          },
+          "linked_poem": {
+            "title": "沈园二首·其一",
+            "relation": "作品系年与诗题地点直接支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "哀伤与追忆",
+              "valence": -0.88,
+              "intensity": 0.92,
+              "evidence": "伤心桥下春波绿，曾是惊鸿照影来",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "luyou-1210-shanyin",
+          "route_order": 7,
+          "year": 1210,
+          "year_label": "嘉定二年末（1210 年初即 1209 年岁末）",
+          "year_precision": "year",
+          "place_historical": "山阴",
+          "place_modern": "浙江省绍兴市",
+          "longitude": 120.582,
+          "latitude": 30.03,
+          "event": "晚年卧病山阴，临终前作《示儿》，以国家统一之望嘱咐后人。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·陆游年历",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8",
+          "note": "陆游卒年按公元纪年常写 1210，与南宋年号跨年换算需在页面保留说明。",
+          "confidence": 0.93,
+          "life_context": {
+            "label": "临终未忘中原",
+            "external_pressure": 0.94,
+            "analysis_level": "C",
+            "reason": "疾病、生命终点与毕生政治愿望未实现共同构成极高压处境。"
+          },
+          "linked_poem": {
+            "title": "示儿",
+            "relation": "临终作品的传统系年与山阴晚年居所支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "遗憾与不改志愿",
+              "valence": -0.38,
+              "intensity": 0.98,
+              "evidence": "王师北定中原日，家祭无忘告乃翁",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "poet": "李清照",
+      "dynasty": "宋",
+      "nodes": [
+        {
+          "id": "liqingzhao-1103-kaifeng",
+          "route_order": 1,
+          "year": 1103,
+          "year_label": "崇宁二年（1103）",
+          "year_precision": "year",
+          "place_historical": "东京开封府",
+          "place_modern": "河南省开封市",
+          "longitude": 114.307581,
+          "latitude": 34.797239,
+          "event": "居京期间，赵明诚于七月出游；年谱将《一剪梅》系于此年送别情境。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存条目标注开封居住期为1090—1107年，并记1103年7月赵明诚出游、有词送别。",
+          "confidence": 0.82,
+          "life_context": {
+            "label": "汴京婚后生活",
+            "external_pressure": 0.35,
+            "analysis_level": "C",
+            "reason": "只描述配偶出游与两地生活这一外部情境，不据此推断作者长期心理状态。"
+          },
+          "linked_poem": {
+            "title": "一剪梅·红藕香残玉簟秋",
+            "relation": "年谱条目明确记1103年7月有送别词《一剪梅》",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "相思与闲愁",
+              "valence": -0.42,
+              "intensity": 0.77,
+              "evidence": "一种相思，两处闲愁",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "liqingzhao-1108-yidu",
+          "route_order": 2,
+          "year": 1108,
+          "year_label": "大观二年（1108）",
+          "year_precision": "year",
+          "place_historical": "益都（青州）",
+          "place_modern": "山东省青州市",
+          "longitude": 118.479636,
+          "latitude": 36.6846,
+          "event": "屏居青州期间，重阳日赵明诚游仰天山，年谱记李清照作《醉花阴》。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存以益都统摄1108—1121年条目，并明确记录1108年九月九日作《醉花阴》。",
+          "confidence": 0.88,
+          "life_context": {
+            "label": "青州屏居",
+            "external_pressure": 0.46,
+            "analysis_level": "C",
+            "reason": "以居住地点、节日和配偶出游为处境信息，不把词中愁绪直接外推为传记心理。"
+          },
+          "linked_poem": {
+            "title": "醉花阴·薄雾浓云愁永昼",
+            "relation": "年谱条目明确记1108年重阳日作《醉花阴》",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "重阳离思",
+              "valence": -0.65,
+              "intensity": 0.84,
+              "evidence": "莫道不销魂，帘卷西风，人比黄花瘦",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "liqingzhao-1109-yidu",
+          "route_order": 3,
+          "year": 1109,
+          "year_label": "大观三年（1109）",
+          "year_precision": "year",
+          "place_historical": "益都（青州）",
+          "place_modern": "山东省青州市",
+          "longitude": 118.479636,
+          "latitude": 36.6846,
+          "event": "青州居住期内，赵明诚于九月出游，年谱将《凤凰台上忆吹箫》系于此时。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存条目明确记录1109年9月13日赵明诚出游及作品题名。",
+          "confidence": 0.87,
+          "life_context": {
+            "label": "青州离别情境",
+            "external_pressure": 0.48,
+            "analysis_level": "C",
+            "reason": "处境标签仅概括年谱所记出游与离别，不替代作品文本的情感证据。"
+          },
+          "linked_poem": {
+            "title": "凤凰台上忆吹箫·香冷金猊",
+            "relation": "年谱条目明确将作品系于1109年赵明诚出游",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "离怀与凝望",
+              "valence": -0.7,
+              "intensity": 0.87,
+              "evidence": "生怕离怀别苦，多少事、欲说还休",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "liqingzhao-1121-changle",
+          "route_order": 4,
+          "year": 1121,
+          "year_label": "宣和三年（1121）",
+          "year_precision": "year",
+          "place_historical": "昌乐",
+          "place_modern": "山东省昌乐县",
+          "longitude": 118.829992,
+          "latitude": 36.706774,
+          "event": "秋赴莱州途中经过昌乐，宿馆并作词寄姊妹。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存连续条目标注昌乐、1121年秋、赴莱州途中及有词寄姊妹。",
+          "confidence": 0.91,
+          "life_context": {
+            "label": "赴莱州途中",
+            "external_pressure": 0.58,
+            "analysis_level": "C",
+            "reason": "长途行程、驿馆停留与亲属离别构成可核实的外部情境。"
+          },
+          "linked_poem": {
+            "title": "蝶恋花·晚止昌乐馆寄姊妹",
+            "relation": "题名地名、寄赠对象与年谱昌乐条目相互支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "惜别与旅愁",
+              "valence": -0.56,
+              "intensity": 0.78,
+              "evidence": "人道山长山又断，萧萧微雨闻孤馆",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "liqingzhao-1129-wujiang",
+          "route_order": 5,
+          "year": 1129,
+          "year_label": "建炎三年（1129）",
+          "year_precision": "year",
+          "place_historical": "乌江（和州）",
+          "place_modern": "安徽省马鞍山市和县",
+          "longitude": 118.3515,
+          "latitude": 31.7418,
+          "event": "南渡途中舟经乌江，年谱记其赋诗吊项羽并讽现实。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存条目标注1129年4月舟经乌江及赋诗吊项羽；作品题名由现有语料对应。",
+          "confidence": 0.84,
+          "life_context": {
+            "label": "南渡行程",
+            "external_pressure": 0.89,
+            "analysis_level": "C",
+            "reason": "战争背景下的迁徙与渡江路线属于外部史实，文本态度另由诗句支持。"
+          },
+          "linked_poem": {
+            "title": "夏日绝句",
+            "relation": "年谱乌江吊项羽条目与诗中项羽、江东意象相互支持",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "激越与讽喻",
+              "valence": 0.18,
+              "intensity": 0.94,
+              "evidence": "生当作人杰，死亦为鬼雄",
+              "analysis_level": "C"
+            }
+          }
+        },
+        {
+          "id": "liqingzhao-1147-linan",
+          "route_order": 6,
+          "year": 1147,
+          "year_label": "绍兴十七年（1147）",
+          "year_precision": "year",
+          "place_historical": "临安",
+          "place_modern": "浙江省杭州市",
+          "longitude": 120.1551,
+          "latitude": 30.2741,
+          "event": "晚年居临安，年谱将《声声慢》系于1147年。",
+          "source_level": "B",
+          "source_name": "cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）",
+          "source_url": "https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7",
+          "note": "缓存条目明确记录1147年居临安及作品《声声慢》。",
+          "confidence": 0.89,
+          "life_context": {
+            "label": "临安晚居",
+            "external_pressure": 0.82,
+            "analysis_level": "C",
+            "reason": "晚居地点与时代变局作为背景信息，具体情感只从作品文本提取。"
+          },
+          "linked_poem": {
+            "title": "声声慢·寻寻觅觅",
+            "relation": "年谱条目明确记1147年临安作《声声慢》",
+            "relation_level": "B",
+            "text_emotion": {
+              "label": "深愁与孤寂",
+              "valence": -0.92,
+              "intensity": 0.98,
+              "evidence": "这次第，怎一个愁字了得",
+              "analysis_level": "C"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

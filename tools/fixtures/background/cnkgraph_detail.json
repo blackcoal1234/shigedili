@@ -1,0 +1,12 @@
+{
+  "Writing": {
+    "Id": 26355,
+    "Author": {"Name": "李白"},
+    "Title": {"Name": "望庐山瀑布"},
+    "AuthorDate": "725年",
+    "AuthorPlace": "360400,庐山",
+    "Links": [
+      {"ResourcePath": "AuthorPlace", "Value": "庐山"}
+    ]
+  }
+}

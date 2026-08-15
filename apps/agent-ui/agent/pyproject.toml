@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "poetry-agent-backend"
+version = "0.1.0"
+description = "Evidence-bound AG-UI backend for the Poetry Across China exhibition"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+  "ag-ui-langgraph[fastapi]==0.0.42",
+  "copilotkit==0.1.94",
+  "deepagents==0.7.0",
+  "fastapi>=0.115,<1",
+  "langchain>=1.3.14,<2",
+  "langchain-openai>=1.1,<2",
+  "langgraph>=1,<2",
+  "pydantic>=2.10,<3",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.3,<10", "httpx>=0.28,<1"]
+vectors = ["numpy>=2,<3"]
+
+[project.scripts]
+poetry-agent = "poetry_agent.main:run"
+
+[tool.hatch.build.targets.wheel]
+packages = ["poetry_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

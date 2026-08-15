@@ -1,0 +1,24 @@
+{
+  "finished_at": "2026-07-29T09:25:10.013742+00:00",
+  "input": "D:\\game存档\\诗行万里2\\诗行万里\\data\\poems.json",
+  "input_sha256": "bcab4a15f58aa3f7643d8f2c5f32b8fb7bd2c3a788a611e16a1aa93889b144e2",
+  "input_records": 20562,
+  "unique_source_records": 20437,
+  "processed_source_records": 20437,
+  "validated_source_records": 20437,
+  "errors": [],
+  "requests": 21240,
+  "bodies_changed_to_new_version": 803,
+  "selected_nonlatest_stored_version": 862,
+  "duplicate_source_records_collapsed": 125,
+  "validation_modes": {
+    "matched_stored_version": 19634,
+    "repeated_fresh_version": 803
+  },
+  "complete": true,
+  "dry_run": false,
+  "output": "D:\\game存档\\诗行万里2\\诗行万里\\data\\poems.json",
+  "output_records": 20437,
+  "backup": "D:\\game存档\\诗行万里2\\诗行万里\\data\\poems_backup_pre_body_validation_20260729_172510.json",
+  "output_sha256": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e"
+}

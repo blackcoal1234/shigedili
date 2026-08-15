@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同一意象的诗人情感差异</title>
+                <script type="text/javascript" src="assets/pyecharts/v6/echarts.min.js"></script>
+
+    
+<link rel="icon" href="data:,">
+
+<style id="imagery-emotion-page-style">
+:root {
+    --bg: #eef3f7;
+    --panel: #ffffff;
+    --ink: #102033;
+    --muted: #607083;
+    --line: #d7e0e9;
+    --teal: #0f766e;
+    --teal-soft: #dff4ef;
+    --amber: #b45309;
+    --rose: #be123c;
+    --green: #15803d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+body { font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif; }
+.imagery-page { width: min(1240px, calc(100vw - 32px)); margin: 0 auto; padding: 18px 0 48px; }
+.hero { padding: 30px; border: 1px solid #18354a; border-radius: 8px; background: #102c3a; color: #f8fafc; }
+.eyebrow, .section-kicker, .control-label { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0; }
+.eyebrow { color: #6ee7d8; }
+.hero h1 { margin: 12px 0 10px; font-size: 34px; line-height: 1.2; letter-spacing: 0; }
+.hero > p { max-width: 850px; margin: 0; color: #c8d5df; font-size: 15px; line-height: 1.8; }
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 24px; }
+.metrics > div { min-height: 76px; padding: 13px 15px; border: 1px solid rgba(255,255,255,.18); border-radius: 6px; background: rgba(255,255,255,.07); }
+.metrics span { display: block; color: #b7c7d3; font-size: 12px; }
+.metrics strong { display: block; margin-top: 7px; font-size: 22px; }
+.control-band, .chart-panel, .evidence-section, .method-section { margin-top: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.control-band { display: grid; grid-template-columns: minmax(330px, 1fr) 230px auto; gap: 20px; align-items: end; padding: 15px 17px; }
+.control-label { margin-bottom: 7px; color: var(--muted); }
+.segmented { display: inline-grid; grid-template-columns: repeat(5, 48px); border: 1px solid #b9c7d4; border-radius: 6px; overflow: hidden; }
+.segmented button { width: 48px; min-height: 38px; padding: 0; border: 0; border-right: 1px solid #b9c7d4; background: #fff; color: #334155; font: inherit; font-weight: 800; cursor: pointer; }
+.segmented button:last-child { border-right: 0; }
+.segmented button.is-active { background: var(--teal); color: #fff; }
+.segmented button:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #5eead4; outline-offset: 2px; }
+.metric-control { display: block; }
+select { width: 100%; min-height: 40px; padding: 0 34px 0 11px; border: 1px solid #b9c7d4; border-radius: 6px; background: #fff; color: var(--ink); font: inherit; }
+.threshold-legend { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding-bottom: 8px; color: var(--muted); font-size: 12px; }
+.threshold-legend span { white-space: nowrap; }
+.level-dot { display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; }
+.no-rank { background: #94a3b8; } .explore { background: var(--amber); } .formal { background: var(--green); }
+.section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
+.section-kicker { color: var(--teal); }
+.section-head h2 { margin: 5px 0 0; font-size: 21px; line-height: 1.35; letter-spacing: 0; }
+.section-head p { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.sample-status { flex: 0 0 auto; padding: 7px 10px; border-radius: 6px; background: #fff7ed; color: var(--amber); font-size: 12px; font-weight: 800; }
+#imagery_emotion_heatmap { width: 100% !important; height: 600px !important; }
+.evidence-table-wrap { overflow-x: auto; }
+.evidence-table { width: 100%; min-width: 1000px; border-collapse: collapse; }
+.evidence-table th, .evidence-table td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.evidence-table th { color: #475569; background: #f8fafc; font-size: 12px; }
+.evidence-table td { color: #334155; font-size: 13px; line-height: 1.65; }
+.evidence-table tbody tr:last-child td { border-bottom: 0; }
+.poet-name { font-size: 15px; color: var(--ink); }
+.sample-badge { display: inline-flex; margin-top: 5px; padding: 2px 7px; border: 1px solid #cbd5e1; border-radius: 999px; color: #64748b; font-size: 11px; }
+.sample-badge.explore { border-color: #fed7aa; background: #fff7ed; color: var(--amber); }
+.sample-badge.formal { border-color: #bbf7d0; background: #f0fdf4; color: var(--green); }
+.pill-list { display: flex; flex-wrap: wrap; gap: 5px; max-width: 310px; }
+.pill { display: inline-flex; align-items: center; min-height: 25px; padding: 3px 7px; border: 1px solid #cbd5e1; border-radius: 999px; background: #fff; color: #334155; font-size: 12px; white-space: nowrap; }
+.pill b { margin-left: 4px; color: var(--teal); }
+.empty { color: #94a3b8; }
+details { max-width: 420px; }
+summary { color: var(--teal); font-weight: 800; cursor: pointer; }
+.evidence-list { display: grid; gap: 8px; margin-top: 9px; }
+.evidence-item { padding-left: 10px; border-left: 2px solid #99f6e4; }
+.evidence-item strong { display: block; color: var(--ink); font-size: 12px; }
+.evidence-item q { display: block; margin-top: 3px; color: #475569; }
+.evidence-item small { display: block; margin-top: 3px; color: #76869a; }
+.formula-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.formula-grid article { padding: 18px 20px; border-right: 1px solid var(--line); }
+.formula-grid article:last-child { border-right: 0; }
+.formula-grid span { color: var(--teal); font-size: 12px; font-weight: 800; }
+.formula-grid strong { display: block; margin-top: 7px; font-family: Consolas, monospace; font-size: 15px; overflow-wrap: anywhere; }
+.formula-grid p, .method-notes p { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.method-notes { padding: 15px 20px 19px; border-top: 1px solid var(--line); background: #f8fafc; }
+.method-notes p:first-child { margin-top: 0; }
+@media (max-width: 900px) {
+    .control-band { grid-template-columns: 1fr 1fr; }
+    .threshold-legend { grid-column: 1 / -1; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .formula-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
+    .formula-grid article:last-child { border-bottom: 0; }
+}
+@media (max-width: 640px) {
+    .imagery-page { width: calc(100vw - 20px); padding-top: 10px; }
+    .hero { padding: 20px 17px; }
+    .hero h1 { font-size: 28px; }
+    .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .control-band { grid-template-columns: 1fr; gap: 14px; }
+    .threshold-legend { grid-column: auto; }
+    .section-head { display: block; padding: 15px; }
+    .sample-status { display: inline-flex; margin-top: 10px; }
+    #imagery_emotion_heatmap { height: 560px !important; }
+}
+</style>
+
+
+    <style id="shixing-index-backlink-style">
+        .shixing-index-backlink {
+            position: sticky;
+            top: 12px;
+            z-index: 9999;
+            box-sizing: border-box;
+            width: min(1240px, calc(100% - 32px));
+            margin: 14px auto 0;
+            font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+            pointer-events: none;
+        }
+        .shixing-index-backlink a {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 38px;
+            padding: 8px 14px;
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            border-radius: 999px;
+            background:
+                linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.70)),
+                rgba(255, 255, 255, 0.08);
+            color: #cffafe;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-decoration: none;
+            box-shadow:
+                0 16px 42px rgba(0, 0, 0, 0.22),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(18px);
+            transition:
+                transform .18s ease,
+                border-color .18s ease,
+                box-shadow .18s ease,
+                color .18s ease;
+        }
+        .shixing-index-backlink a::before {
+            content: "←";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            background: rgba(34, 211, 238, 0.16);
+            color: #67e8f9;
+            font-weight: 900;
+        }
+        .shixing-index-backlink a:focus-visible,
+        .shixing-index-backlink a:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34, 211, 238, 0.72);
+            color: #ffffff;
+            box-shadow:
+                0 22px 54px rgba(0, 0, 0, 0.30),
+                0 0 28px rgba(34, 211, 238, 0.18);
+        }
+        @media (max-width: 640px) {
+            .shixing-index-backlink {
+                width: calc(100% - 20px);
+                margin-top: 10px;
+            }
+            .shixing-index-backlink a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+</head>
+<body >
+
+    <nav class="shixing-index-backlink" aria-label="页面导航">
+        <a href="index.html">返回总入口</a>
+    </nav>
+
+
+
+    <main class="imagery-page">
+        <header class="hero">
+            <div class="eyebrow">TANG–SONG IMAGERY LAB</div>
+            <h1>同象异情：诗人如何写同一个意象</h1>
+            <p>以月、酒、舟、雁、雨为观察入口，比较李白、杜甫、白居易、苏轼、陆游、李清照的局部语境情感。意象不预设固定情感，所有标签均由证据分句及其相邻语境触发。</p>
+            <div class="metrics" aria-label="样本摘要">
+                <div><span>精细样本</span><strong>120 首</strong></div>
+                <div><span>代表诗人</span><strong>6 位</strong></div>
+                <div><span>目标意象</span><strong>5 类</strong></div>
+                <div><span>意象诗次</span><strong>122 次</strong></div>
+            </div>
+        </header>
+
+        <section class="control-band" aria-label="比较维度">
+            <div>
+                <span class="control-label">意象</span>
+                <div id="imagerySegment" class="segmented" role="group" aria-label="选择意象"></div>
+            </div>
+            <label class="metric-control" for="metricSelect">
+                <span class="control-label">热力指标</span>
+                <select id="metricSelect">
+                    <option value="lift">提升度 lift</option>
+                    <option value="conditional">条件概率 P(e|i,p)</option>
+                </select>
+            </label>
+            <div class="threshold-legend" aria-label="样本等级">
+                <span><i class="level-dot no-rank"></i>&lt;10 不排名</span>
+                <span><i class="level-dot explore"></i>10–29 探索</span>
+                <span><i class="level-dot formal"></i>≥30 正式</span>
+            </div>
+        </section>
+
+        <section class="chart-panel" aria-labelledby="heatmapTitle">
+            <div class="section-head">
+                <div>
+                    <span class="section-kicker">诗人 × 情感</span>
+                    <h2 id="heatmapTitle">月意象的情感提升度</h2>
+                    <p id="heatmapMeta"></p>
+                </div>
+                <div id="viewSampleStatus" class="sample-status"></div>
+            </div>
+    
+    <div id="imagery_emotion_heatmap" class="chart-container" style="width:1240px; height:600px; "></div>
+
+        </section>
+
+        <section class="evidence-section" aria-labelledby="evidenceTitle">
+            <div class="section-head">
+                <div>
+                    <span class="section-kicker">语境审计</span>
+                    <h2 id="evidenceTitle">伴随意象与证据诗句</h2>
+                    <p>样本量、伴随意象、情感标签和原文证据使用同一统计口径。</p>
+                </div>
+            </div>
+            <div id="evidenceTable" class="evidence-table-wrap"></div>
+        </section>
+
+        <section class="method-section" aria-labelledby="methodTitle">
+            <div class="section-head">
+                <div>
+                    <span class="section-kicker">METHOD</span>
+                    <h2 id="methodTitle">计算口径与限制</h2>
+                </div>
+            </div>
+            <div class="formula-grid">
+                <article>
+                    <span>局部条件概率</span>
+                    <strong>P(e|i,p) = N(i∩e,p) / N(i,p)</strong>
+                    <p>某诗人含该意象的诗中，局部语境命中情感 e 的比例。同一诗可多标签，因此各比例之和不必为 100%。</p>
+                </article>
+                <article>
+                    <span>诗人情感基线</span>
+                    <strong>P(e|p) = N(e,p) / 20</strong>
+                    <p>该诗人 20 首固定样本中命中情感 e 的比例，用来区分“诗人本来常写”与“该意象特别强化”。</p>
+                </article>
+                <article>
+                    <span>意象情感提升度</span>
+                    <strong>lift = P(e|i,p) / P(e|p)</strong>
+                    <p>lift &gt; 1 表示该情感在此意象语境中高于诗人自身基线；基线为 0 时不计算提升度。</p>
+                </article>
+            </div>
+            <div class="method-notes">
+                <p><strong>语境窗口：</strong>意象所在分句及前后各一个分句。每首诗对同一意象、同一标签最多计一次。</p>
+                <p><strong>样本等级：</strong>&lt;10 仅展示证据、不参与排名；10–29 为探索结果；≥30 才可作为正式比较。本页每位诗人固定取语料中前 20 首作为可比样本（扩充语料不进入本页），因此不会出现“正式”等级。</p>
+                <p><strong>解释边界：</strong>规则分析反映当前样本中的文本语境，不等同于诗人的真实心理，也不能替代作品注释和文学史研究。</p>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        var chart_imagery_emotion_heatmap = echarts.init(
+            document.getElementById('imagery_emotion_heatmap'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_imagery_emotion_heatmap = {
+    "backgroundColor": "#ffffff",
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "series": [
+        {
+            "type": "heatmap",
+            "name": "\u63d0\u5347\u5ea6 lift",
+            "coordinateSystem": "cartesian2d",
+            "data": [
+                [
+                    0,
+                    0,
+                    1.090908,
+                    0.272727,
+                    0.25,
+                    1.090908,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    0,
+                    1.090908,
+                    0.272727,
+                    0.25,
+                    1.090908,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    0,
+                    0.90909,
+                    0.181818,
+                    0.2,
+                    0.90909,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    0,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    0,
+                    0.727272,
+                    0.181818,
+                    0.25,
+                    0.727272,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    0,
+                    1.363635,
+                    0.272727,
+                    0.2,
+                    1.363635,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    0,
+                    0.727272,
+                    0.181818,
+                    0.25,
+                    0.727272,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    0,
+                    0.90909,
+                    0.090909,
+                    0.1,
+                    0.90909,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    0,
+                    1.157025,
+                    0.636364,
+                    0.55,
+                    1.157025,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u674e\u767d",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ],
+                [
+                    0,
+                    1,
+                    2.0,
+                    0.5,
+                    0.25,
+                    2.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    1,
+                    3.333333,
+                    0.5,
+                    0.15,
+                    3.333333,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    1,
+                    0.0,
+                    0.0,
+                    0.2,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    1,
+                    0.0,
+                    0.0,
+                    0.15,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    1,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    1,
+                    0.0,
+                    0.0,
+                    0.25,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    1,
+                    0.0,
+                    0.0,
+                    0.1,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    1,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    1,
+                    1.666667,
+                    1.0,
+                    0.6,
+                    1.666667,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u675c\u752b",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ],
+                [
+                    0,
+                    2,
+                    0.0,
+                    0.0,
+                    0.15,
+                    0.0,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    2,
+                    1.66667,
+                    0.166667,
+                    0.1,
+                    1.66667,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    2,
+                    1.111113,
+                    0.166667,
+                    0.15,
+                    1.111113,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    2,
+                    3.33334,
+                    0.166667,
+                    0.05,
+                    3.33334,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    2,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    2,
+                    0.476191,
+                    0.166667,
+                    0.35,
+                    0.476191,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    2,
+                    0.0,
+                    0.0,
+                    0.1,
+                    0.0,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    2,
+                    1.111113,
+                    0.166667,
+                    0.15,
+                    1.111113,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    2,
+                    1.212122,
+                    0.666667,
+                    0.55,
+                    1.212122,
+                    6,
+                    "\u4e0d\u6392\u540d",
+                    "\u767d\u5c45\u6613",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ],
+                [
+                    0,
+                    3,
+                    0.727272,
+                    0.181818,
+                    0.25,
+                    0.727272,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    3,
+                    1.81818,
+                    0.181818,
+                    0.1,
+                    1.81818,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    3,
+                    0.90909,
+                    0.272727,
+                    0.3,
+                    0.90909,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    3,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    3,
+                    0.227272,
+                    0.090909,
+                    0.4,
+                    0.227272,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    3,
+                    0.51948,
+                    0.181818,
+                    0.35,
+                    0.51948,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    3,
+                    0.60606,
+                    0.272727,
+                    0.45,
+                    0.60606,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    3,
+                    1.090908,
+                    0.272727,
+                    0.25,
+                    1.090908,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    3,
+                    0.60606,
+                    0.363636,
+                    0.6,
+                    0.60606,
+                    11,
+                    "\u63a2\u7d22",
+                    "\u82cf\u8f7c",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ],
+                [
+                    0,
+                    4,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    4,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    4,
+                    0.0,
+                    0.0,
+                    0.25,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    4,
+                    0.909091,
+                    0.5,
+                    0.55,
+                    0.909091,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    4,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    4,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    4,
+                    2.0,
+                    0.5,
+                    0.25,
+                    2.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    4,
+                    0.0,
+                    0.0,
+                    0.1,
+                    0.0,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    4,
+                    0.625,
+                    0.5,
+                    0.8,
+                    0.625,
+                    2,
+                    "\u4e0d\u6392\u540d",
+                    "\u9646\u6e38",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ],
+                [
+                    0,
+                    5,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u601d\u4e61\u6000\u4eba",
+                    "\u6708"
+                ],
+                [
+                    1,
+                    5,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u79bb\u522b\u60dc\u522b",
+                    "\u6708"
+                ],
+                [
+                    2,
+                    5,
+                    0.0,
+                    0.0,
+                    0.1,
+                    0.0,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u6f02\u6cca\u5b64\u5bc2",
+                    "\u6708"
+                ],
+                [
+                    3,
+                    5,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u5fe7\u56fd\u4f24\u65f6",
+                    "\u6708"
+                ],
+                [
+                    4,
+                    5,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u8c6a\u8fc8\u65f7\u8fbe",
+                    "\u6708"
+                ],
+                [
+                    5,
+                    5,
+                    null,
+                    0.0,
+                    0.0,
+                    null,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u6b22\u6109\u95f2\u9002",
+                    "\u6708"
+                ],
+                [
+                    6,
+                    5,
+                    0.0,
+                    0.0,
+                    0.05,
+                    0.0,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u54f2\u601d\u8d85\u8d8a",
+                    "\u6708"
+                ],
+                [
+                    7,
+                    5,
+                    6.66666,
+                    0.333333,
+                    0.05,
+                    6.66666,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u7231\u60c5\u76f8\u601d",
+                    "\u6708"
+                ],
+                [
+                    8,
+                    5,
+                    0.444444,
+                    0.333333,
+                    0.75,
+                    0.444444,
+                    3,
+                    "\u4e0d\u6392\u540d",
+                    "\u674e\u6e05\u7167",
+                    "\u60b2\u6101\u4f24\u901d",
+                    "\u6708"
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "inside",
+                "color": "#102033",
+                "margin": 8,
+                "fontSize": 11,
+                "formatter": function(p){var v=p.value&&p.value[2];return v==null?'\u2014':Number(v).toFixed(2);},
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "selectedMode": false,
+            "zlevel": 0,
+            "z": 2
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u63d0\u5347\u5ea6 lift"
+            ],
+            "selected": {},
+            "show": false,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10,
+            "triggerEvent": false
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": true,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "displayTransition": true,
+        "formatter":     function (params) {        var v = params.value || [];        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        function pct(value) {            return value == null ? '\u2014' : (Number(value) * 100).toFixed(1) + '%';        }        function num(value) {            return value == null ? '\u57fa\u7ebf\u4e3a 0\uff0c\u672a\u8ba1\u7b97' : Number(value).toFixed(2);        }        return '<strong>' + esc(v[8]) + ' \u00b7 ' + esc(v[9]) + '</strong>'            + '<br/>\u610f\u8c61\uff1a' + esc(v[10])            + '<br/>\u542b\u610f\u8c61\u6837\u672c\uff1a' + esc(v[6]) + ' \u9996\uff08' + esc(v[7]) + '\uff09'            + '<br/>P(e|i,p)\uff1a' + pct(v[3])            + '<br/>\u8bd7\u4eba\u57fa\u7ebf P(e|p)\uff1a' + pct(v[4])            + '<br/>\u63d0\u5347\u5ea6 lift\uff1a' + num(v[5])            + '<br/><span style=\"color:#64748b;\">\u591a\u6807\u7b7e\u8bed\u5883\u6982\u7387\uff0c\u5404\u60c5\u611f\u4e4b\u548c\u4e0d\u8981\u6c42\u4e3a 100%\u3002</span>';    }    ,
+        "textStyle": {
+            "color": "#102033",
+            "richInheritPlainLabel": true
+        },
+        "backgroundColor": "rgba(255,255,255,0.98)",
+        "borderColor": "#cbd5e1",
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "axisLine": {
+                "show": true,
+                "onZero": true,
+                "onZeroAxisIndex": 0,
+                "lineStyle": {
+                    "show": false,
+                    "color": "#cbd5e1"
+                }
+            },
+            "axisLabel": {
+                "show": true,
+                "color": "#334155",
+                "rotate": 0,
+                "margin": 8,
+                "interval": 0,
+                "fontSize": 12,
+                "formatter":                     function(value) {                        if (window.innerWidth > 560) { return value; }                        var labels = {                            '\u601d\u4e61\u6000\u4eba':'\u601d\u4e61',                            '\u79bb\u522b\u60dc\u522b':'\u79bb\u522b',                            '\u6f02\u6cca\u5b64\u5bc2':'\u6f02\u6cca',                            '\u5fe7\u56fd\u4f24\u65f6':'\u5fe7\u56fd',                            '\u8c6a\u8fc8\u65f7\u8fbe':'\u8c6a\u8fc8',                            '\u6b22\u6109\u95f2\u9002':'\u6b22\u6109',                            '\u54f2\u601d\u8d85\u8d8a':'\u54f2\u601d',                            '\u7231\u60c5\u76f8\u601d':'\u7231\u60c5',                            '\u60b2\u6101\u4f24\u901d':'\u60b2\u6101'                        };                        return labels[value] || value;                    }                    ,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "inverse": false,
+            "position": "top",
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "splitArea": {
+                "show": true,
+                "areaStyle": {
+                    "opacity": 0,
+                    "color": [
+                        "#ffffff",
+                        "#f8fafc"
+                    ]
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "\u601d\u4e61\u6000\u4eba",
+                "\u79bb\u522b\u60dc\u522b",
+                "\u6f02\u6cca\u5b64\u5bc2",
+                "\u5fe7\u56fd\u4f24\u65f6",
+                "\u8c6a\u8fc8\u65f7\u8fbe",
+                "\u6b22\u6109\u95f2\u9002",
+                "\u54f2\u601d\u8d85\u8d8a",
+                "\u7231\u60c5\u76f8\u601d",
+                "\u60b2\u6101\u4f24\u901d"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "category",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "axisLine": {
+                "show": true,
+                "onZero": true,
+                "onZeroAxisIndex": 0,
+                "lineStyle": {
+                    "show": false,
+                    "color": "#cbd5e1"
+                }
+            },
+            "axisLabel": {
+                "show": true,
+                "color": "#102033",
+                "margin": 8,
+                "fontSize": 13,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "splitArea": {
+                "show": true,
+                "areaStyle": {
+                    "opacity": 0,
+                    "color": [
+                        "#ffffff",
+                        "#f8fafc"
+                    ]
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "\u674e\u767d",
+                "\u675c\u752b",
+                "\u767d\u5c45\u6613",
+                "\u82cf\u8f7c",
+                "\u9646\u6e38",
+                "\u674e\u6e05\u7167"
+            ]
+        }
+    ],
+    "title": [
+        {
+            "show": true,
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ],
+    "visualMap": {
+        "show": true,
+        "type": "continuous",
+        "min": 0,
+        "max": 6.667,
+        "inRange": {
+            "color": [
+                "#e2e8f0",
+                "#bae6fd",
+                "#86efac",
+                "#fde047",
+                "#fb7185"
+            ]
+        },
+        "calculable": true,
+        "inverse": false,
+        "precision": 2,
+        "splitNumber": 5,
+        "dimension": 2,
+        "hoverLink": true,
+        "orient": "horizontal",
+        "left": "center",
+        "bottom": "3%",
+        "padding": 5,
+        "showLabel": true,
+        "itemWidth": 20,
+        "itemHeight": 140,
+        "borderWidth": 0
+    }
+};
+        chart_imagery_emotion_heatmap.setOption(option_imagery_emotion_heatmap);
+    </script>
+<script id="imagery-emotion-data">window.IMAGERY_EMOTION_DATA={"poets":["李白","杜甫","白居易","苏轼","陆游","李清照"],"imagery":["月","酒","舟","雁","雨"],"emotions":["思乡怀人","离别惜别","漂泊孤寂","忧国伤时","豪迈旷达","欢愉闲适","哲思超越","爱情相思","悲愁伤逝"],"poem_totals":{"李白":20,"杜甫":20,"白居易":20,"苏轼":20,"陆游":20,"李清照":20},"views":{"月":{"imagery":"月","label":"月亮","description":"月体、月色及婵娟等传统代称；排除正月、三月等月份表达。","cells":[{"poet":"李白","emotion":"思乡怀人","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"李白","emotion":"离别惜别","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"李白","emotion":"漂泊孤寂","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.90909},{"poet":"李白","emotion":"忧国伤时","sample_count":11,"level":"探索","conditional_count":0,"conditional_denominator":11,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李白","emotion":"豪迈旷达","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"李白","emotion":"欢愉闲适","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.363635},{"poet":"李白","emotion":"哲思超越","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"李白","emotion":"爱情相思","sample_count":11,"level":"探索","conditional_count":1,"conditional_denominator":11,"conditional":0.090909,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.90909},{"poet":"李白","emotion":"悲愁伤逝","sample_count":11,"level":"探索","conditional_count":7,"conditional_denominator":11,"conditional":0.636364,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.157025},{"poet":"杜甫","emotion":"思乡怀人","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"杜甫","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":3.333333},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"杜甫","emotion":"忧国伤时","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"豪迈旷达","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"杜甫","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"杜甫","emotion":"爱情相思","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":2,"conditional_denominator":2,"conditional":1.0,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.666667},{"poet":"白居易","emotion":"思乡怀人","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.66667},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.111113},{"poet":"白居易","emotion":"忧国伤时","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":3.33334},{"poet":"白居易","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"白居易","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.476191},{"poet":"白居易","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"爱情相思","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.111113},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":4,"conditional_denominator":6,"conditional":0.666667,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.212122},{"poet":"苏轼","emotion":"思乡怀人","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"苏轼","emotion":"离别惜别","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.81818},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":0.90909},{"poet":"苏轼","emotion":"忧国伤时","sample_count":11,"level":"探索","conditional_count":0,"conditional_denominator":11,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":11,"level":"探索","conditional_count":1,"conditional_denominator":11,"conditional":0.090909,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.227272},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.51948},{"poet":"苏轼","emotion":"哲思超越","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.60606},{"poet":"苏轼","emotion":"爱情相思","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":11,"level":"探索","conditional_count":4,"conditional_denominator":11,"conditional":0.363636,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.60606},{"poet":"陆游","emotion":"思乡怀人","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"陆游","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"忧国伤时","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.909091},{"poet":"陆游","emotion":"豪迈旷达","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"欢愉闲适","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"陆游","emotion":"爱情相思","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.625},{"poet":"李清照","emotion":"思乡怀人","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李清照","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"豪迈旷达","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444}],"poets":{"李白":{"poet":"李白","sample_count":11,"level":"探索","poem_total":20,"emotions":[{"poet":"李白","emotion":"悲愁伤逝","sample_count":11,"level":"探索","conditional_count":7,"conditional_denominator":11,"conditional":0.636364,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.157025},{"poet":"李白","emotion":"欢愉闲适","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.363635},{"poet":"李白","emotion":"思乡怀人","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"李白","emotion":"离别惜别","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"李白","emotion":"漂泊孤寂","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.90909},{"poet":"李白","emotion":"哲思超越","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"李白","emotion":"豪迈旷达","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"李白","emotion":"爱情相思","sample_count":11,"level":"探索","conditional_count":1,"conditional_denominator":11,"conditional":0.090909,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.90909}],"companions":[{"name":"酒","count":4,"rate":0.363636},{"name":"花","count":4,"rate":0.363636},{"name":"山","count":3,"rate":0.272727},{"name":"云","count":3,"rate":0.272727},{"name":"风","count":3,"rate":0.272727},{"name":"城楼","count":2,"rate":0.181818},{"name":"江","count":2,"rate":0.181818},{"name":"舟","count":2,"rate":0.181818},{"name":"雪","count":1,"rate":0.090909},{"name":"日","count":1,"rate":0.090909},{"name":"湖","count":1,"rate":0.090909},{"name":"马","count":1,"rate":0.090909},{"name":"猿","count":1,"rate":0.090909},{"name":"露","count":1,"rate":0.090909},{"name":"鹤","count":1,"rate":0.090909},{"name":"海","count":1,"rate":0.090909}],"records":[{"poem_id":"李白-40","title":"将进酒","dynasty":"唐","evidence":[{"line":"人生得意须尽欢，莫使金樽空对月。","context":"君不见高堂明镜悲白发，朝如青丝暮成雪。人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来。","aliases":["月"]}],"emotions":["豪迈旷达","欢愉闲适","哲思超越","悲愁伤逝"],"emotion_hits":{"豪迈旷达":["千金散尽","天生我材","须尽欢"],"欢愉闲适":["得意"],"哲思超越":["人生"],"悲愁伤逝":["不见","白发","悲"]},"companions":["酒","雪"]},{"poem_id":"李白-42","title":"蜀道难","dynasty":"唐","evidence":[{"line":"又闻子规啼夜月，愁空山。","context":"但见悲鸟号古木，雄飞雌从绕林间。又闻子规啼夜月，愁空山。蜀道之难，难于上青天，使人听此凋朱颜！","aliases":["月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["悲","愁","难"]},"companions":["山"]},{"poem_id":"李白-43","title":"宣州谢朓楼饯别校书叔云","dynasty":"唐","evidence":[{"line":"俱怀逸兴壮思飞，欲上青天揽明月。","context":"蓬莱文章建安骨，中间小谢又清发。俱怀逸兴壮思飞，欲上青天揽明月。抽刀断水水更流，举杯消愁愁更愁。","aliases":["明月","月"]}],"emotions":["豪迈旷达","悲愁伤逝"],"emotion_hits":{"豪迈旷达":["壮思"],"悲愁伤逝":["愁"]},"companions":["酒"]},{"poem_id":"李白-44","title":"梦游天姥吟留别","dynasty":"唐","evidence":[{"line":"我欲因之梦吴越，一夜飞度镜湖月。","context":"天台四万八千丈，对此欲倒东南倾。我欲因之梦吴越，一夜飞度镜湖月。湖月照我影，送我至剡溪。","aliases":["月"]},{"line":"湖月照我影，送我至剡溪。","context":"我欲因之梦吴越，一夜飞度镜湖月。湖月照我影，送我至剡溪。谢公宿处今尚在，渌水荡漾清猿啼。","aliases":["月"]},{"line":"青冥浩荡不见底，日月照耀金银台。","context":"洞天石扉，訇然中开。青冥浩荡不见底，日月照耀金银台。霓为衣兮风为马，云之君兮纷纷而来下。","aliases":["月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["不见"]},"companions":["云","日","湖","猿","风","马"]},{"poem_id":"李白-45","title":"三五七言","dynasty":"唐","evidence":[{"line":"秋风清，秋月明，","context":"秋风清，秋月明，落叶聚还散，寒鸦栖复惊。","aliases":["月明","秋月","月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["落叶","寒"]},"companions":["风"]},{"poem_id":"李白-46","title":"清平调·其一","dynasty":"唐","evidence":[{"line":"若非群玉山头见，会向瑶台月下逢。","context":"云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。","aliases":["月下","月"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["春风"]},"companions":["云","山","花","露","风"]},{"poem_id":"李白-47","title":"月下独酌·其一","dynasty":"唐","evidence":[{"line":"举杯邀明月，对影成三人。","context":"花间一壶酒，独酌无相亲。举杯邀明月，对影成三人。月既不解饮，影徒随我身。","aliases":["明月","月"]},{"line":"月既不解饮，影徒随我身。","context":"举杯邀明月，对影成三人。月既不解饮，影徒随我身。暂伴月将影，行乐须及春。","aliases":["月"]},{"line":"暂伴月将影，行乐须及春。","context":"月既不解饮，影徒随我身。暂伴月将影，行乐须及春。我歌月徘徊，我舞影零乱。","aliases":["月"]},{"line":"我歌月徘徊，我舞影零乱。","context":"暂伴月将影，行乐须及春。我歌月徘徊，我舞影零乱。醒时同交欢，醉后各分散。","aliases":["月"]}],"emotions":["漂泊孤寂","欢愉闲适","离别惜别"],"emotion_hits":{"漂泊孤寂":["无相亲","独酌"],"欢愉闲适":["行乐"],"离别惜别":["分散"]},"companions":["花","酒"]},{"poem_id":"李白-49","title":"闻王昌龄左迁龙标遥有此寄","dynasty":"唐","evidence":[{"line":"我寄愁心与明月，随君直到夜郎西。","context":"杨花落尽子规啼，闻道龙标过五溪。我寄愁心与明月，随君直到夜郎西。","aliases":["明月","月"]}],"emotions":["思乡怀人","悲愁伤逝"],"emotion_hits":{"思乡怀人":["寄愁心"],"悲愁伤逝":["愁"]},"companions":["花"]},{"poem_id":"李白-50","title":"黄鹤楼送孟浩然之广陵","dynasty":"唐","evidence":[{"line":"故人西辞黄鹤楼，烟花三月下扬州。","context":"故人西辞黄鹤楼，烟花三月下扬州。孤帆远影碧空尽，唯见长江天际流。","aliases":["月下"]}],"emotions":["思乡怀人","离别惜别","漂泊孤寂"],"emotion_hits":{"思乡怀人":["故人"],"离别惜别":["西辞"],"漂泊孤寂":["孤帆"]},"companions":["城楼","江","舟","花","鹤"]},{"poem_id":"李白-51","title":"渡荆门送别","dynasty":"唐","evidence":[{"line":"月下飞天镜，云生结海楼。","context":"山随平野尽，江入大荒流。月下飞天镜，云生结海楼。仍怜故乡水，万里送行舟。","aliases":["月下","月"]}],"emotions":["思乡怀人","离别惜别"],"emotion_hits":{"思乡怀人":["故乡"],"离别惜别":["送行"]},"companions":["云","城楼","山","江","海","舟"]},{"poem_id":"李白-58","title":"把酒问月·故人贾淳令予问之","dynasty":"唐","evidence":[{"line":"青天有月来几时？","context":"青天有月来几时？我今停杯一问之。","aliases":["月"]},{"line":"人攀明月不可得，月行却与人相随。","context":"我今停杯一问之。人攀明月不可得，月行却与人相随。皎如飞镜临丹阙，绿烟灭尽清辉发。","aliases":["明月","月"]},{"line":"今人不见古时月，今月曾经照古人。","context":"白兔捣药秋复春，嫦娥孤栖与谁邻？今人不见古时月，今月曾经照古人。古人今人若流水，共看明月皆如此。","aliases":["月"]},{"line":"古人今人若流水，共看明月皆如此。","context":"今人不见古时月，今月曾经照古人。古人今人若流水，共看明月皆如此。唯愿当歌对酒时，月光长照金樽里。","aliases":["明月","月"]},{"line":"唯愿当歌对酒时，月光长照金樽里。","context":"古人今人若流水，共看明月皆如此。唯愿当歌对酒时，月光长照金樽里。","aliases":["月光","月"]}],"emotions":["哲思超越","爱情相思","悲愁伤逝"],"emotion_hits":{"哲思超越":["古人今人"],"爱情相思":["与谁邻"],"悲愁伤逝":["不见"]},"companions":["酒"]}]},"杜甫":{"poet":"杜甫","sample_count":2,"level":"不排名","poem_total":20,"emotions":[{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":2,"conditional_denominator":2,"conditional":1.0,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.666667},{"poet":"杜甫","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":3.333333},{"poet":"杜甫","emotion":"思乡怀人","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0}],"companions":[{"name":"露","count":1,"rate":0.5},{"name":"雁","count":1,"rate":0.5},{"name":"舟","count":1,"rate":0.5},{"name":"风","count":1,"rate":0.5},{"name":"星","count":1,"rate":0.5},{"name":"江","count":1,"rate":0.5}],"records":[{"poem_id":"杜甫-89","title":"月夜忆舍弟","dynasty":"唐","evidence":[{"line":"露从今夜白，月是故乡明。","context":"戍鼓断人行，边秋一雁声。露从今夜白，月是故乡明。有弟皆分散，无家问死生。","aliases":["月"]}],"emotions":["思乡怀人","离别惜别","悲愁伤逝"],"emotion_hits":{"思乡怀人":["故乡"],"离别惜别":["分散"],"悲愁伤逝":["死"]},"companions":["雁","露"]},{"poem_id":"杜甫-91","title":"旅夜书怀","dynasty":"唐","evidence":[{"line":"星垂平野阔，月涌大江流。","context":"细草微风岸，危樯独夜舟。星垂平野阔，月涌大江流。名岂文章著，官应老病休。","aliases":["月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["老"]},"companions":["星","江","舟","风"]}]},"白居易":{"poet":"白居易","sample_count":6,"level":"不排名","poem_total":20,"emotions":[{"poet":"白居易","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":4,"conditional_denominator":6,"conditional":0.666667,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.212122},{"poet":"白居易","emotion":"忧国伤时","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":3.33334},{"poet":"白居易","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.66667},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.111113},{"poet":"白居易","emotion":"爱情相思","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.111113},{"poet":"白居易","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.476191}],"companions":[{"name":"江","count":4,"rate":0.666667},{"name":"山","count":3,"rate":0.5},{"name":"日","count":3,"rate":0.5},{"name":"琴瑟","count":2,"rate":0.333333},{"name":"风","count":2,"rate":0.333333},{"name":"雨","count":1,"rate":0.166667},{"name":"酒","count":1,"rate":0.166667},{"name":"笛箫","count":1,"rate":0.166667},{"name":"花","count":1,"rate":0.166667},{"name":"马","count":1,"rate":0.166667},{"name":"舟","count":1,"rate":0.166667},{"name":"猿","count":1,"rate":0.166667},{"name":"露","count":1,"rate":0.166667},{"name":"城楼","count":1,"rate":0.166667}],"records":[{"poem_id":"白居易-0","title":"长恨歌","dynasty":"唐","evidence":[{"line":"行宫见月伤心色，夜雨闻铃肠断声。","context":"蜀江水碧蜀山青，圣主朝朝暮暮情。行宫见月伤心色，夜雨闻铃肠断声。天旋地转回龙驭，到此踌躇不能去。","aliases":["月"]},{"line":"昭阳殿里恩爱绝，蓬莱宫中日月长。","context":"含情凝睇谢君王，一别音容两渺茫。昭阳殿里恩爱绝，蓬莱宫中日月长。回头下望人寰处，不见长安见尘雾。","aliases":["月"]}],"emotions":["悲愁伤逝","爱情相思"],"emotion_hits":{"悲愁伤逝":["不见","伤心","肠断"],"爱情相思":["恩爱"]},"companions":["山","日","江","雨"]},{"poem_id":"白居易-1","title":"琵琶行","dynasty":"唐","evidence":[{"line":"醉不成欢惨将别，别时茫茫江浸月。","context":"主人下马客在船，举酒欲饮无管弦。醉不成欢惨将别，别时茫茫江浸月。忽闻水上琵琶声，主人忘归客不发。","aliases":["月"]},{"line":"东船西舫悄无言，唯见江心秋月白。","context":"曲终收拨当心画，四弦一声如裂帛。东船西舫悄无言，唯见江心秋月白。沉吟放拨插弦中，整顿衣裳起敛容。","aliases":["秋月","月"]},{"line":"今年欢笑复明年，秋月春风等闲度。","context":"钿头银篦击节碎，血色罗裙翻酒污。今年欢笑复明年，秋月春风等闲度。弟走从军阿姨死，暮去朝来颜色故。","aliases":["秋月","月"]},{"line":"商人重利轻别离，前月浮梁买茶去。","context":"门前冷落鞍马稀，老大嫁作商人妇。商人重利轻别离，前月浮梁买茶去。去来江口守空船，绕船月明江水寒。","aliases":["月"]},{"line":"去来江口守空船，绕船月明江水寒。","context":"商人重利轻别离，前月浮梁买茶去。去来江口守空船，绕船月明江水寒。夜深忽梦少年事，梦啼妆泪红阑干。","aliases":["月明","月"]},{"line":"春江花朝秋月夜，往往取酒还独倾。","context":"杜鹃啼血猿哀鸣。春江花朝秋月夜，往往取酒还独倾。岂无山歌与村笛，呕哑嘲哳难为听。","aliases":["月夜","秋月","月"]}],"emotions":["离别惜别","忧国伤时","欢愉闲适","悲愁伤逝","漂泊孤寂"],"emotion_hits":{"离别惜别":["别时","别离","将别"],"忧国伤时":["从军"],"欢愉闲适":["春风","欢笑"],"悲愁伤逝":["冷","哀","寒","死","泪","老","难"],"漂泊孤寂":["独倾","空船"]},"companions":["山","江","猿","琴瑟","笛箫","舟","花","酒","风","马"]},{"poem_id":"白居易-8","title":"暮江吟","dynasty":"唐","evidence":[{"line":"可怜九月初三夜，露似真珠月似弓。","context":"一道残阳铺水中，半江瑟瑟半江红。可怜九月初三夜，露似真珠月似弓。","aliases":["月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["残阳"]},"companions":["日","江","琴瑟","露"]},{"poem_id":"白居易-12","title":"长相思·汴水流","dynasty":"唐","evidence":[{"line":"月明人倚楼。","context":"思悠悠，恨悠悠，恨到归时方始休。月明人倚楼。","aliases":["月明","月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["恨"]},"companions":["城楼"]},{"poem_id":"白居易-13","title":"忆江南词三首","dynasty":"唐","evidence":[{"line":"山寺月中寻桂子，郡亭枕上看潮头。","context":"江南忆，最忆是杭州。山寺月中寻桂子，郡亭枕上看潮头。何日更重游？","aliases":["月"]}],"emotions":[],"emotion_hits":{},"companions":["山","日","江"]},{"poem_id":"白居易-15","title":"观刈麦","dynasty":"唐","evidence":[{"line":"田家少闲月，五月人倍忙。","context":"田家少闲月，五月人倍忙。夜来食风起，小麦覆陇黄。","aliases":["月"]}],"emotions":[],"emotion_hits":{},"companions":["风"]}]},"苏轼":{"poet":"苏轼","sample_count":11,"level":"探索","poem_total":20,"emotions":[{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":11,"level":"探索","conditional_count":4,"conditional_denominator":11,"conditional":0.363636,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.60606},{"poet":"苏轼","emotion":"爱情相思","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.090908},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":0.90909},{"poet":"苏轼","emotion":"哲思超越","sample_count":11,"level":"探索","conditional_count":3,"conditional_denominator":11,"conditional":0.272727,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.60606},{"poet":"苏轼","emotion":"离别惜别","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.81818},{"poet":"苏轼","emotion":"思乡怀人","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.727272},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":11,"level":"探索","conditional_count":2,"conditional_denominator":11,"conditional":0.181818,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.51948},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":11,"level":"探索","conditional_count":1,"conditional_denominator":11,"conditional":0.090909,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.227272}],"companions":[{"name":"酒","count":6,"rate":0.545455},{"name":"云","count":3,"rate":0.272727},{"name":"江","count":2,"rate":0.181818},{"name":"日","count":2,"rate":0.181818},{"name":"山","count":1,"rate":0.090909},{"name":"星","count":1,"rate":0.090909},{"name":"风","count":1,"rate":0.090909},{"name":"露","count":1,"rate":0.090909},{"name":"舟","count":1,"rate":0.090909},{"name":"雁","count":1,"rate":0.090909},{"name":"竹","count":1,"rate":0.090909},{"name":"花","count":1,"rate":0.090909},{"name":"城楼","count":1,"rate":0.090909}],"records":[{"poem_id":"苏轼-857","title":"赤壁赋","dynasty":"宋","evidence":[{"line":"举酒属客，诵明月之诗，歌窈窕之章。","context":"清风徐来，水波不兴。举酒属客，诵明月之诗，歌窈窕之章。少焉，月出于东山之上，徘徊于斗牛之间。","aliases":["明月","月"]},{"line":"少焉，月出于东山之上，徘徊于斗牛之间。","context":"举酒属客，诵明月之诗，歌窈窕之章。少焉，月出于东山之上，徘徊于斗牛之间。白露横江，水光接天。","aliases":["月"]},{"line":"”客曰：“‘月明星稀，乌鹊南飞’，此非曹孟德之诗乎？","context":"苏子愀然，正襟危坐而问客曰：“何为其然也？”客曰：“‘月明星稀，乌鹊南飞’，此非曹孟德之诗乎？西望夏口，东望武昌，山川相缪，郁乎苍苍，此非孟德之困于周郎者乎？","aliases":["月明","月"]},{"line":"挟飞仙以遨游，抱明月而长终。","context":"哀吾生之须臾，羡长江之无穷。挟飞仙以遨游，抱明月而长终。知不可乎骤得，托遗响于悲风。","aliases":["明月","月"]},{"line":"苏子曰：“客亦知夫水与月乎？","context":"”苏子曰：“客亦知夫水与月乎？逝者如斯，而未尝往也；","aliases":["月"]},{"line":"惟江上之清风，与山间之明月，耳得之而为声，目遇之而成色，取之无禁，用之不竭。","context":"且夫天地之间，物各有主，苟非吾之所有，虽一毫而莫取。惟江上之清风，与山间之明月，耳得之而为声，目遇之而成色，取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。","aliases":["明月","月"]}],"emotions":["欢愉闲适","爱情相思","哲思超越","悲愁伤逝","豪迈旷达"],"emotion_hits":{"欢愉闲适":["清风徐来"],"爱情相思":["窈窕"],"哲思超越":["逝者如斯","天地","无尽","无穷","造物","须臾"],"悲愁伤逝":["哀","悲"],"豪迈旷达":["无尽藏","共适"]},"companions":["山","星","江","酒","露","风"]},{"poem_id":"苏轼-858","title":"江城子·乙卯正月二十日夜记梦","dynasty":"宋","evidence":[{"line":"料得年年肠断处，明月夜，短松冈。","context":"相顾无言，惟有泪千行。料得年年肠断处，明月夜，短松冈。","aliases":["月夜","明月","月"]}],"emotions":["爱情相思","悲愁伤逝"],"emotion_hits":{"爱情相思":["肠断处"],"悲愁伤逝":["肠断","泪"]},"companions":[]},{"poem_id":"苏轼-860","title":"念奴娇·赤壁怀古","dynasty":"宋","evidence":[{"line":"人生如梦，一尊还酹江月。","context":"故国神游，多情应笑我，早生华发。人生如梦，一尊还酹江月。","aliases":["月"]}],"emotions":["思乡怀人","哲思超越","爱情相思"],"emotion_hits":{"思乡怀人":["故国"],"哲思超越":["人生"],"爱情相思":["多情"]},"companions":["江","酒"]},{"poem_id":"苏轼-861","title":"水调歌头·明月几时有","dynasty":"宋","evidence":[{"line":"明月几时有？","context":"丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。明月几时有？把酒问青天。","aliases":["明月","月"]},{"line":"人有悲欢离合，月有阴晴圆缺，此事古难全。","context":"不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。","aliases":["月"]},{"line":"但愿人长久，千里共婵娟。","context":"人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。","aliases":["婵娟"]}],"emotions":["思乡怀人","离别惜别","哲思超越","悲愁伤逝"],"emotion_hits":{"思乡怀人":["怀子由"],"离别惜别":["别时","离合"],"哲思超越":["此事古难全","人有悲欢","阴晴圆缺"],"悲愁伤逝":["恨","悲","难"]},"companions":["酒"]},{"poem_id":"苏轼-862","title":"江城子·密州出猎","dynasty":"宋","evidence":[{"line":"会挽雕弓如满月，西北望，射天狼。","context":"持节云中，何日遣冯唐？会挽雕弓如满月，西北望，射天狼。","aliases":["月"]}],"emotions":[],"emotion_hits":{},"companions":["云","日"]},{"poem_id":"苏轼-865","title":"临江仙·送钱穆父","dynasty":"宋","evidence":[{"line":"惆怅孤帆连夜发，送行淡月微云。","context":"无波真古井，有节是秋筠。惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。","aliases":["月"]}],"emotions":["离别惜别","漂泊孤寂"],"emotion_hits":{"离别惜别":["送行"],"漂泊孤寂":["孤帆"]},"companions":["云","舟","酒"]},{"poem_id":"苏轼-866","title":"卜算子·黄州定慧院寓居作","dynasty":"宋","evidence":[{"line":"缺月挂疏桐，漏断人初静。","context":"缺月挂疏桐，漏断人初静。谁见幽人独往来，缥缈孤鸿影。","aliases":["缺月","月"]}],"emotions":["漂泊孤寂"],"emotion_hits":{"漂泊孤寂":["独往来","孤鸿"]},"companions":["雁"]},{"poem_id":"苏轼-867","title":"西江月·中秋和子由","dynasty":"宋","evidence":[{"line":"酒贱常愁客少，月明多被云妨。","context":"看取眉头鬓上。酒贱常愁客少，月明多被云妨。中秋谁与共孤光。","aliases":["月明","月"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["谁与共","孤光"],"悲愁伤逝":["愁"]},"companions":["云","酒"]},{"poem_id":"苏轼-871","title":"记承天寺夜游","dynasty":"宋","evidence":[{"line":"元丰六年十月十二日夜，解衣欲睡，月色入户，欣然起行。","context":"元丰六年十月十二日夜，解衣欲睡，月色入户，欣然起行。念无与为乐者，遂至承天寺寻张怀民。","aliases":["月色","月"]},{"line":"何夜无月？","context":"庭下如积水空明，水中藻、荇交横，盖竹柏影也。何夜无月？何处无竹柏？","aliases":["月"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["为乐","欣然"]},"companions":["日","竹"]},{"poem_id":"苏轼-875","title":"行香子·述怀","dynasty":"宋","evidence":[{"line":"清夜无尘，月色如银。","context":"清夜无尘，月色如银。酒斟时、须满十分。","aliases":["月色","月"]}],"emotions":[],"emotion_hits":{},"companions":["酒"]},{"poem_id":"苏轼-876","title":"春宵","dynasty":"宋","evidence":[{"line":"春宵一刻值千金，花有清香月有阴。","context":"春宵一刻值千金，花有清香月有阴。歌管楼台声细细，秋千院落夜沉沉。","aliases":["月"]}],"emotions":[],"emotion_hits":{},"companions":["城楼","花"]}]},"陆游":{"poet":"陆游","sample_count":2,"level":"不排名","poem_total":20,"emotions":[{"poet":"陆游","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"陆游","emotion":"忧国伤时","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.909091},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.625}],"companions":[{"name":"笛箫","count":2,"rate":1.0},{"name":"风","count":1,"rate":0.5},{"name":"马","count":1,"rate":0.5},{"name":"城楼","count":1,"rate":0.5}],"records":[{"poem_id":"陆游-920","title":"游山西村","dynasty":"宋","evidence":[{"line":"从今若许闲乘月，拄杖无时夜叩门。","context":"箫鼓追随春社近，衣冠简朴古风存。从今若许闲乘月，拄杖无时夜叩门。","aliases":["月"]}],"emotions":[],"emotion_hits":{},"companions":["笛箫","风"]},{"poem_id":"陆游-928","title":"关山月","dynasty":"宋","evidence":[{"line":"戍楼刁斗催落月，三十从军今白发。","context":"朱门沉沉按歌舞，厩马肥死弓断弦。戍楼刁斗催落月，三十从军今白发。笛里谁知壮士心，沙头空照征人骨。","aliases":["落月","月"]}],"emotions":["忧国伤时","哲思超越","悲愁伤逝"],"emotion_hits":{"忧国伤时":["从军","征人","戍楼"],"哲思超越":["谁知"],"悲愁伤逝":["白发","空照","死"]},"companions":["城楼","笛箫","马"]}]},"李清照":{"poet":"李清照","sample_count":3,"level":"不排名","poem_total":20,"emotions":[{"poet":"李清照","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444}],"companions":[{"name":"花","count":2,"rate":0.666667},{"name":"云","count":1,"rate":0.333333},{"name":"城楼","count":1,"rate":0.333333},{"name":"雁","count":1,"rate":0.333333},{"name":"风","count":1,"rate":0.333333}],"records":[{"poem_id":"李清照-938","title":"一剪梅·红藕香残玉簟秋","dynasty":"宋","evidence":[{"line":"雁字回时，月满西楼。","context":"云中谁寄锦书来？雁字回时，月满西楼。花自飘零水自流。","aliases":["月"]}],"emotions":["爱情相思"],"emotion_hits":{"爱情相思":["锦书"]},"companions":["云","城楼","花","雁"]},{"poem_id":"李清照-949","title":"浣溪沙·闺情","dynasty":"宋","evidence":[{"line":"月移花影约重来。","context":"一面风情深有韵，半笺娇恨寄幽怀。月移花影约重来。","aliases":["月"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["恨"]},"companions":["花","风"]},{"poem_id":"李清照-950","title":"摊破浣溪沙·病起萧萧两鬓华","dynasty":"宋","evidence":[{"line":"病起萧萧两鬓华，卧看残月上枕纱。","context":"病起萧萧两鬓华，卧看残月上枕纱。豆蔻连梢煎熟水，莫分茶。","aliases":["残月","月"]}],"emotions":[],"emotion_hits":{},"companions":[]}]}},"max_lift":6.667,"matched_poem_count":35},"酒":{"imagery":"酒","label":"酒","description":"酒、酒器及明确的饮酒动作；不把一般饮水词直接计作酒。","cells":[{"poet":"李白","emotion":"思乡怀人","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668},{"poet":"李白","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.666665},{"poet":"李白","emotion":"忧国伤时","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李白","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":3,"conditional_denominator":6,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"李白","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.833335},{"poet":"李白","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":3,"conditional_denominator":6,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"李白","emotion":"爱情相思","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李白","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"杜甫","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.0},{"poet":"杜甫","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.25},{"poet":"杜甫","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.0},{"poet":"杜甫","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":2.5},{"poet":"杜甫","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.25},{"poet":"白居易","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":2.5},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667},{"poet":"白居易","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"白居易","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"白居易","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":4,"conditional_denominator":4,"conditional":1.0,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":2.857143},{"poet":"白居易","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.454545},{"poet":"苏轼","emotion":"思乡怀人","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.2},{"poet":"苏轼","emotion":"离别惜别","sample_count":10,"level":"探索","conditional_count":1,"conditional_denominator":10,"conditional":0.1,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.0},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":10,"level":"探索","conditional_count":2,"conditional_denominator":10,"conditional":0.2,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":0.666667},{"poet":"苏轼","emotion":"忧国伤时","sample_count":10,"level":"探索","conditional_count":0,"conditional_denominator":10,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.75},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":10,"level":"探索","conditional_count":4,"conditional_denominator":10,"conditional":0.4,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.142857},{"poet":"苏轼","emotion":"哲思超越","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.666667},{"poet":"苏轼","emotion":"爱情相思","sample_count":10,"level":"探索","conditional_count":2,"conditional_denominator":10,"conditional":0.2,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.8},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":10,"level":"探索","conditional_count":4,"conditional_denominator":10,"conditional":0.4,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.666667},{"poet":"陆游","emotion":"思乡怀人","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"陆游","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"陆游","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"陆游","emotion":"豪迈旷达","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"陆游","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":3.33333},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.0},{"poet":"李清照","emotion":"思乡怀人","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"离别惜别","sample_count":9,"level":"不排名","conditional_count":1,"conditional_denominator":9,"conditional":0.111111,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":2.22222},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":9,"level":"不排名","conditional_count":1,"conditional_denominator":9,"conditional":0.111111,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.11111},{"poet":"李清照","emotion":"忧国伤时","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"豪迈旷达","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"欢愉闲适","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"哲思超越","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"爱情相思","sample_count":9,"level":"不排名","conditional_count":0,"conditional_denominator":9,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":9,"level":"不排名","conditional_count":4,"conditional_denominator":9,"conditional":0.444444,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.592592}],"poets":{"李白":{"poet":"李白","sample_count":6,"level":"不排名","poem_total":20,"emotions":[{"poet":"李白","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":3,"conditional_denominator":6,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"李白","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":3,"conditional_denominator":6,"conditional":0.5,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.0},{"poet":"李白","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.666665},{"poet":"李白","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"李白","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.833335},{"poet":"李白","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668}],"companions":[{"name":"月","count":4,"rate":0.666667},{"name":"花","count":3,"rate":0.5},{"name":"雪","count":2,"rate":0.333333},{"name":"剑","count":2,"rate":0.333333},{"name":"马","count":1,"rate":0.166667},{"name":"山","count":1,"rate":0.166667},{"name":"河","count":1,"rate":0.166667},{"name":"城楼","count":1,"rate":0.166667},{"name":"雁","count":1,"rate":0.166667},{"name":"日","count":1,"rate":0.166667},{"name":"风","count":1,"rate":0.166667},{"name":"舟","count":1,"rate":0.166667},{"name":"云","count":1,"rate":0.166667}],"records":[{"poem_id":"李白-40","title":"将进酒","dynasty":"唐","evidence":[{"line":"人生得意须尽欢，莫使金樽空对月。","context":"君不见高堂明镜悲白发，朝如青丝暮成雪。人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来。","aliases":["金樽","樽"]},{"line":"烹羊宰牛且为乐，会须一饮三百杯。","context":"天生我材必有用，千金散尽还复来。烹羊宰牛且为乐，会须一饮三百杯。岑夫子，丹丘生，将进酒，杯莫停。","aliases":["杯"]},{"line":"岑夫子，丹丘生，将进酒，杯莫停。","context":"烹羊宰牛且为乐，会须一饮三百杯。岑夫子，丹丘生，将进酒，杯莫停。与君歌一曲，请君为我倾耳听。","aliases":["杯","酒"]},{"line":"钟鼓馔玉不足贵，但愿长醉不愿醒。","context":"与君歌一曲，请君为我倾耳听。钟鼓馔玉不足贵，但愿长醉不愿醒。古来圣贤皆寂寞，惟有饮者留其名。","aliases":["醉"]},{"line":"陈王昔时宴平乐，斗酒十千恣欢谑。","context":"古来圣贤皆寂寞，惟有饮者留其名。陈王昔时宴平乐，斗酒十千恣欢谑。主人何为言少钱，径须沽取对君酌。","aliases":["酒"]},{"line":"主人何为言少钱，径须沽取对君酌。","context":"陈王昔时宴平乐，斗酒十千恣欢谑。主人何为言少钱，径须沽取对君酌。五花马、千金裘，呼儿将出换美酒，与尔同销万古愁。","aliases":["酌"]},{"line":"五花马、千金裘，呼儿将出换美酒，与尔同销万古愁。","context":"主人何为言少钱，径须沽取对君酌。五花马、千金裘，呼儿将出换美酒，与尔同销万古愁。","aliases":["美酒","酒"]}],"emotions":["豪迈旷达","欢愉闲适","哲思超越","悲愁伤逝","漂泊孤寂"],"emotion_hits":{"豪迈旷达":["千金散尽","天生我材","须尽欢"],"欢愉闲适":["为乐","得意","宴"],"哲思超越":["人生"],"悲愁伤逝":["不见","寂寞","白发","悲","愁"],"漂泊孤寂":["寂寞"]},"companions":["月","花","雪","马"]},{"poem_id":"李白-41","title":"行路难·其一","dynasty":"唐","evidence":[{"line":"金樽清酒斗十千，玉盘珍羞直万钱。","context":"金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。","aliases":["金樽","清酒","酒","樽"]},{"line":"停杯投箸不能食，拔剑四顾心茫然。","context":"金樽清酒斗十千，玉盘珍羞直万钱。停杯投箸不能食，拔剑四顾心茫然。欲渡黄河冰塞川，将登太行雪满山。","aliases":["杯"]}],"emotions":[],"emotion_hits":{},"companions":["剑","山","河","雪"]},{"poem_id":"李白-43","title":"宣州谢朓楼饯别校书叔云","dynasty":"唐","evidence":[{"line":"长风万里送秋雁，对此可以酣高楼。","context":"乱我心者，今日之日多烦忧。长风万里送秋雁，对此可以酣高楼。蓬莱文章建安骨，中间小谢又清发。","aliases":["酣"]},{"line":"抽刀断水水更流，举杯消愁愁更愁。","context":"俱怀逸兴壮思飞，欲上青天揽明月。抽刀断水水更流，举杯消愁愁更愁。人生在世不称意，明朝散发弄扁舟。","aliases":["杯"]}],"emotions":["豪迈旷达","哲思超越","悲愁伤逝"],"emotion_hits":{"豪迈旷达":["壮思"],"哲思超越":["人生"],"悲愁伤逝":["愁"]},"companions":["城楼","日","月","舟","雁","风"]},{"poem_id":"李白-47","title":"月下独酌·其一","dynasty":"唐","evidence":[{"line":"花间一壶酒，独酌无相亲。","context":"花间一壶酒，独酌无相亲。举杯邀明月，对影成三人。","aliases":["酒","酌"]},{"line":"举杯邀明月，对影成三人。","context":"花间一壶酒，独酌无相亲。举杯邀明月，对影成三人。月既不解饮，影徒随我身。","aliases":["杯"]},{"line":"醒时同交欢，醉后各分散。","context":"我歌月徘徊，我舞影零乱。醒时同交欢，醉后各分散。永结无情游，相期邈云汉。","aliases":["醉"]}],"emotions":["漂泊孤寂","离别惜别"],"emotion_hits":{"漂泊孤寂":["无相亲","独酌"],"离别惜别":["分散"]},"companions":["云","月","花"]},{"poem_id":"李白-48","title":"侠客行","dynasty":"唐","evidence":[{"line":"将炙啖朱亥，持觞劝侯嬴。","context":"闲过信陵饮，脱剑膝前横。将炙啖朱亥，持觞劝侯嬴。三杯吐然诺，五岳倒为轻。","aliases":["觞"]},{"line":"三杯吐然诺，五岳倒为轻。","context":"将炙啖朱亥，持觞劝侯嬴。三杯吐然诺，五岳倒为轻。眼花耳热后，意气素霓生。","aliases":["杯"]}],"emotions":["豪迈旷达"],"emotion_hits":{"豪迈旷达":["意气"]},"companions":["剑","花"]},{"poem_id":"李白-58","title":"把酒问月·故人贾淳令予问之","dynasty":"唐","evidence":[{"line":"我今停杯一问之。","context":"青天有月来几时？我今停杯一问之。人攀明月不可得，月行却与人相随。","aliases":["杯"]},{"line":"唯愿当歌对酒时，月光长照金樽里。","context":"古人今人若流水，共看明月皆如此。唯愿当歌对酒时，月光长照金樽里。","aliases":["金樽","酒","樽"]}],"emotions":["哲思超越"],"emotion_hits":{"哲思超越":["古人今人"]},"companions":["月"]}]},"杜甫":{"poet":"杜甫","sample_count":4,"level":"不排名","poem_total":20,"emotions":[{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.25},{"poet":"杜甫","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":2.5},{"poet":"杜甫","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.25},{"poet":"杜甫","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.0}],"companions":[{"name":"日","count":2,"rate":0.5},{"name":"霜","count":1,"rate":0.25},{"name":"花","count":1,"rate":0.25},{"name":"山","count":1,"rate":0.25},{"name":"雨","count":1,"rate":0.25}],"records":[{"poem_id":"杜甫-80","title":"登高","dynasty":"唐","evidence":[{"line":"艰难苦恨繁霜鬓，潦倒新停浊酒杯。","context":"万里悲秋常作客，百年多病独登台。艰难苦恨繁霜鬓，潦倒新停浊酒杯。","aliases":["浊酒","杯","酒"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["作客","独登"],"悲愁伤逝":["多病","恨","悲","苦","难"]},"companions":["霜"]},{"poem_id":"杜甫-88","title":"闻官军收河南河北","dynasty":"唐","evidence":[{"line":"白日放歌须纵酒，青春作伴好还乡。","context":"却看妻子愁何在，漫卷诗书喜欲狂。白日放歌须纵酒，青春作伴好还乡。即从巴峡穿巫峡，便下襄阳向洛阳。","aliases":["酒"]}],"emotions":["思乡怀人","悲愁伤逝"],"emotion_hits":{"思乡怀人":["还乡"],"悲愁伤逝":["愁"]},"companions":["日"]},{"poem_id":"杜甫-92","title":"客至","dynasty":"唐","evidence":[{"line":"盘飧市远无兼味，樽酒家贫只旧醅。","context":"花径不曾缘客扫，蓬门今始为君开。盘飧市远无兼味，樽酒家贫只旧醅。肯与邻翁相对饮，隔篱呼取尽余杯。","aliases":["酒","樽"]},{"line":"肯与邻翁相对饮，隔篱呼取尽余杯。","context":"盘飧市远无兼味，樽酒家贫只旧醅。肯与邻翁相对饮，隔篱呼取尽余杯。","aliases":["杯"]}],"emotions":[],"emotion_hits":{},"companions":["花"]},{"poem_id":"杜甫-95","title":"赠卫八处士","dynasty":"唐","evidence":[{"line":"问答乃未已，驱儿罗酒浆。","context":"怡然敬父执，问我来何方。问答乃未已，驱儿罗酒浆。夜雨剪春韭，新炊间黄粱。","aliases":["酒"]},{"line":"主称会面难，一举累十觞。","context":"夜雨剪春韭，新炊间黄粱。主称会面难，一举累十觞。十觞亦不醉，感子故意长。","aliases":["觞"]},{"line":"十觞亦不醉，感子故意长。","context":"主称会面难，一举累十觞。十觞亦不醉，感子故意长。明日隔山岳，世事两茫茫。","aliases":["醉","觞"]}],"emotions":["欢愉闲适","悲愁伤逝","离别惜别","哲思超越"],"emotion_hits":{"欢愉闲适":["会面","怡然"],"悲愁伤逝":["难"],"离别惜别":["明日隔"],"哲思超越":["世事"]},"companions":["山","日","雨"]}]},"白居易":{"poet":"白居易","sample_count":4,"level":"不排名","poem_total":20,"emotions":[{"poet":"白居易","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":4,"conditional_denominator":4,"conditional":1.0,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":2.857143},{"poet":"白居易","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":2.5},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.454545}],"companions":[{"name":"江","count":2,"rate":0.5},{"name":"城楼","count":1,"rate":0.25},{"name":"山","count":1,"rate":0.25},{"name":"琴瑟","count":1,"rate":0.25},{"name":"笛箫","count":1,"rate":0.25},{"name":"花","count":1,"rate":0.25},{"name":"湖","count":1,"rate":0.25},{"name":"风","count":1,"rate":0.25},{"name":"月","count":1,"rate":0.25},{"name":"马","count":1,"rate":0.25},{"name":"舟","count":1,"rate":0.25},{"name":"猿","count":1,"rate":0.25},{"name":"灯","count":1,"rate":0.25},{"name":"雪","count":1,"rate":0.25},{"name":"竹","count":1,"rate":0.25}],"records":[{"poem_id":"白居易-0","title":"长恨歌","dynasty":"唐","evidence":[{"line":"金屋妆成娇侍夜，玉楼宴罢醉和春。","context":"后宫佳丽三千人，三千宠爱在一身。金屋妆成娇侍夜，玉楼宴罢醉和春。姊妹弟兄皆列土，可怜光彩生门户。","aliases":["醉"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["宴"]},"companions":["城楼"]},{"poem_id":"白居易-1","title":"琵琶行","dynasty":"唐","evidence":[{"line":"遂命酒，使快弹数曲。","context":"问其人，本长安倡女，尝学琵琶于穆、曹二善才，年长色衰，委身为贾人妇。遂命酒，使快弹数曲。曲罢悯然，自叙少小时欢乐事，今漂沦憔悴，转徙于江湖间。","aliases":["酒"]},{"line":"主人下马客在船，举酒欲饮无管弦。","context":"浔阳江头夜送客，枫叶荻花秋瑟瑟。主人下马客在船，举酒欲饮无管弦。醉不成欢惨将别，别时茫茫江浸月。","aliases":["酒"]},{"line":"醉不成欢惨将别，别时茫茫江浸月。","context":"主人下马客在船，举酒欲饮无管弦。醉不成欢惨将别，别时茫茫江浸月。忽闻水上琵琶声，主人忘归客不发。","aliases":["醉"]},{"line":"移船相近邀相见，添酒回灯重开宴。","context":"寻声暗问弹者谁，琵琶声停欲语迟。移船相近邀相见，添酒回灯重开宴。千呼万唤始出来，犹抱琵琶半遮面。","aliases":["酒"]},{"line":"钿头银篦击节碎，血色罗裙翻酒污。","context":"五陵年少争缠头，一曲红绡不知数。钿头银篦击节碎，血色罗裙翻酒污。今年欢笑复明年，秋月春风等闲度。","aliases":["酒"]},{"line":"春江花朝秋月夜，往往取酒还独倾。","context":"杜鹃啼血猿哀鸣。春江花朝秋月夜，往往取酒还独倾。岂无山歌与村笛，呕哑嘲哳难为听。","aliases":["酒"]}],"emotions":["漂泊孤寂","欢愉闲适","悲愁伤逝","离别惜别"],"emotion_hits":{"漂泊孤寂":["漂沦","独倾"],"欢愉闲适":["春风","欢乐","欢笑","宴"],"悲愁伤逝":["憔悴","哀","难"],"离别惜别":["别时","将别"]},"companions":["山","月","江","湖","灯","猿","琴瑟","笛箫","舟","花","风","马"]},{"poem_id":"白居易-4","title":"问刘十九","dynasty":"唐","evidence":[{"line":"绿蚁新醅酒，红泥小火炉。","context":"绿蚁新醅酒，红泥小火炉。晚来天欲雪，能饮一杯无？","aliases":["新醅","绿蚁","酒"]},{"line":"晚来天欲雪，能饮一杯无？","context":"绿蚁新醅酒，红泥小火炉。晚来天欲雪，能饮一杯无？","aliases":["杯"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["能饮一杯"]},"companions":["雪"]},{"poem_id":"白居易-13","title":"忆江南词三首","dynasty":"唐","evidence":[{"line":"吴酒一杯春竹叶，吴娃双舞醉芙蓉。","context":"江南忆，其次忆吴宫。吴酒一杯春竹叶，吴娃双舞醉芙蓉。早晚复相逢？","aliases":["醉","杯","酒"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["相逢"]},"companions":["江","竹"]}]},"苏轼":{"poet":"苏轼","sample_count":10,"level":"探索","poem_total":20,"emotions":[{"poet":"苏轼","emotion":"欢愉闲适","sample_count":10,"level":"探索","conditional_count":4,"conditional_denominator":10,"conditional":0.4,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.142857},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":10,"level":"探索","conditional_count":4,"conditional_denominator":10,"conditional":0.4,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.666667},{"poet":"苏轼","emotion":"思乡怀人","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.2},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.75},{"poet":"苏轼","emotion":"哲思超越","sample_count":10,"level":"探索","conditional_count":3,"conditional_denominator":10,"conditional":0.3,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.666667},{"poet":"苏轼","emotion":"爱情相思","sample_count":10,"level":"探索","conditional_count":2,"conditional_denominator":10,"conditional":0.2,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.8},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":10,"level":"探索","conditional_count":2,"conditional_denominator":10,"conditional":0.2,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":0.666667},{"poet":"苏轼","emotion":"离别惜别","sample_count":10,"level":"探索","conditional_count":1,"conditional_denominator":10,"conditional":0.1,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.0}],"companions":[{"name":"月","count":6,"rate":0.6},{"name":"云","count":3,"rate":0.3},{"name":"山","count":2,"rate":0.2},{"name":"江","count":2,"rate":0.2},{"name":"风","count":2,"rate":0.2},{"name":"舟","count":2,"rate":0.2},{"name":"琴瑟","count":2,"rate":0.2},{"name":"雨","count":2,"rate":0.2},{"name":"海","count":1,"rate":0.1},{"name":"星","count":1,"rate":0.1},{"name":"霜","count":1,"rate":0.1},{"name":"城楼","count":1,"rate":0.1}],"records":[{"poem_id":"苏轼-857","title":"赤壁赋","dynasty":"宋","evidence":[{"line":"举酒属客，诵明月之诗，歌窈窕之章。","context":"清风徐来，水波不兴。举酒属客，诵明月之诗，歌窈窕之章。少焉，月出于东山之上，徘徊于斗牛之间。","aliases":["酒"]},{"line":"于是饮酒乐甚，扣舷而歌之。","context":"飘飘乎如遗世独立，羽化而登仙。于是饮酒乐甚，扣舷而歌之。歌曰：“桂棹兮兰桨，击空明兮溯流光。","aliases":["酒"]},{"line":"方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？","context":"西望夏口，东望武昌，山川相缪，郁乎苍苍，此非孟德之困于周郎者乎？方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。","aliases":["酒"]},{"line":"况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。","context":"方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。寄蜉蝣于天地，渺沧海之一粟。","aliases":["匏樽","樽"]},{"line":"客喜而笑，洗盏更酌。","context":"”客喜而笑，洗盏更酌。肴核既尽，杯盘狼籍。","aliases":["盏","酌"]},{"line":"肴核既尽，杯盘狼籍。","context":"客喜而笑，洗盏更酌。肴核既尽，杯盘狼籍。相与枕藉乎舟中，不知东方之既白。","aliases":["杯"]}],"emotions":["欢愉闲适","爱情相思","哲思超越"],"emotion_hits":{"欢愉闲适":["清风徐来","乐甚"],"爱情相思":["窈窕"],"哲思超越":["天地"]},"companions":["山","星","月","江","海","舟","风"]},{"poem_id":"苏轼-859","title":"定风波·莫听穿林打叶声","dynasty":"宋","evidence":[{"line":"料峭春风吹酒醒，微冷，山头斜照却相迎。","context":"一蓑烟雨任平生。料峭春风吹酒醒，微冷，山头斜照却相迎。回首向来萧瑟处，归去，也无风雨也无晴。","aliases":["酒"]}],"emotions":["豪迈旷达","欢愉闲适","悲愁伤逝"],"emotion_hits":{"豪迈旷达":["任平生","归去"],"欢愉闲适":["春风"],"悲愁伤逝":["萧瑟","冷"]},"companions":["山","琴瑟","雨","风"]},{"poem_id":"苏轼-860","title":"念奴娇·赤壁怀古","dynasty":"宋","evidence":[{"line":"人生如梦，一尊还酹江月。","context":"故国神游，多情应笑我，早生华发。人生如梦，一尊还酹江月。","aliases":["一尊"]}],"emotions":["思乡怀人","哲思超越","爱情相思"],"emotion_hits":{"思乡怀人":["故国"],"哲思超越":["人生"],"爱情相思":["多情"]},"companions":["月","江"]},{"poem_id":"苏轼-861","title":"水调歌头·明月几时有","dynasty":"宋","evidence":[{"line":"丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。","context":"丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。明月几时有？","aliases":["醉"]},{"line":"把酒问青天。","context":"明月几时有？把酒问青天。不知天上宫阙，今夕是何年。","aliases":["酒"]}],"emotions":["思乡怀人"],"emotion_hits":{"思乡怀人":["怀子由"]},"companions":["月"]},{"poem_id":"苏轼-862","title":"江城子·密州出猎","dynasty":"宋","evidence":[{"line":"酒酣胸胆尚开张。","context":"为报倾城随太守，亲射虎，看孙郎。酒酣胸胆尚开张。鬓微霜，又何妨！","aliases":["酒","酣"]}],"emotions":["豪迈旷达"],"emotion_hits":{"豪迈旷达":["何妨","胸胆"]},"companions":["城楼","霜"]},{"poem_id":"苏轼-864","title":"望江南·超然台作","dynasty":"宋","evidence":[{"line":"寒食后，酒醒却咨嗟。","context":"烟雨暗千家。寒食后，酒醒却咨嗟。休对故人思故国，且将新火试新茶。","aliases":["酒"]},{"line":"诗酒趁年华。","context":"休对故人思故国，且将新火试新茶。诗酒趁年华。","aliases":["诗酒","酒"]}],"emotions":["思乡怀人","欢愉闲适","悲愁伤逝"],"emotion_hits":{"思乡怀人":["故人","故国"],"欢愉闲适":["新茶"],"悲愁伤逝":["咨嗟","寒"]},"companions":["雨"]},{"poem_id":"苏轼-865","title":"临江仙·送钱穆父","dynasty":"宋","evidence":[{"line":"尊前不用翠眉颦。","context":"惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。人生如逆旅，我亦是行人。","aliases":["尊前"]}],"emotions":["离别惜别","漂泊孤寂","哲思超越"],"emotion_hits":{"离别惜别":["送行"],"漂泊孤寂":["孤帆","行人"],"哲思超越":["人生","逆旅"]},"companions":["云","月","舟"]},{"poem_id":"苏轼-867","title":"西江月·中秋和子由","dynasty":"宋","evidence":[{"line":"酒贱常愁客少，月明多被云妨。","context":"看取眉头鬓上。酒贱常愁客少，月明多被云妨。中秋谁与共孤光。","aliases":["酒"]},{"line":"把盏凄然北望。","context":"中秋谁与共孤光。把盏凄然北望。","aliases":["盏"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["谁与共","孤光"],"悲愁伤逝":["凄","愁"]},"companions":["云","月"]},{"poem_id":"苏轼-868","title":"临江仙·夜归临皋","dynasty":"宋","evidence":[{"line":"夜饮东坡醒复醉，归来仿佛三应。","context":"夜饮东坡醒复醉，归来仿佛三应。家童鼻息已雷鸣。","aliases":["醉"]}],"emotions":[],"emotion_hits":{},"companions":[]},{"poem_id":"苏轼-875","title":"行香子·述怀","dynasty":"宋","evidence":[{"line":"酒斟时、须满十分。","context":"清夜无尘，月色如银。酒斟时、须满十分。浮名浮利，虚苦劳神。","aliases":["酒"]},{"line":"对一张琴，一壶酒，一溪云。","context":"几时归去，作个闲人。对一张琴，一壶酒，一溪云。","aliases":["酒"]}],"emotions":["悲愁伤逝","豪迈旷达","欢愉闲适"],"emotion_hits":{"悲愁伤逝":["苦"],"豪迈旷达":["归去"],"欢愉闲适":["闲人"]},"companions":["云","月","琴瑟"]}]},"陆游":{"poet":"陆游","sample_count":3,"level":"不排名","poem_total":20,"emotions":[{"poet":"陆游","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"陆游","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":3.33333},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"陆游","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606}],"companions":[{"name":"柳","count":2,"rate":0.666667},{"name":"风","count":1,"rate":0.333333},{"name":"城楼","count":1,"rate":0.333333},{"name":"山","count":1,"rate":0.333333},{"name":"花","count":1,"rate":0.333333}],"records":[{"poem_id":"陆游-917","title":"钗头凤·红酥手","dynasty":"宋","evidence":[{"line":"红酥手，黄縢酒，满城春色宫墙柳。","context":"红酥手，黄縢酒，满城春色宫墙柳。东风恶，欢情薄。","aliases":["酒"]}],"emotions":["爱情相思"],"emotion_hits":{"爱情相思":["欢情"]},"companions":["城楼","柳","风"]},{"poem_id":"陆游-920","title":"游山西村","dynasty":"宋","evidence":[{"line":"莫笑农家腊酒浑，丰年留客足鸡豚。","context":"莫笑农家腊酒浑，丰年留客足鸡豚。山重水复疑无路，柳暗花明又一村。","aliases":["酒"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["丰年留客"]},"companions":["山","柳","花"]},{"poem_id":"陆游-930","title":"剑门道中遇微雨","dynasty":"宋","evidence":[{"line":"衣上征尘杂酒痕，远游无处不消魂。","context":"衣上征尘杂酒痕，远游无处不消魂。此身合是诗人未？","aliases":["酒"]}],"emotions":["漂泊孤寂","忧国伤时"],"emotion_hits":{"漂泊孤寂":["远游"],"忧国伤时":["征尘"]},"companions":[]}]},"李清照":{"poet":"李清照","sample_count":9,"level":"不排名","poem_total":20,"emotions":[{"poet":"李清照","emotion":"悲愁伤逝","sample_count":9,"level":"不排名","conditional_count":4,"conditional_denominator":9,"conditional":0.444444,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.592592},{"poet":"李清照","emotion":"离别惜别","sample_count":9,"level":"不排名","conditional_count":1,"conditional_denominator":9,"conditional":0.111111,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":2.22222},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":9,"level":"不排名","conditional_count":1,"conditional_denominator":9,"conditional":0.111111,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.11111}],"companions":[{"name":"风","count":5,"rate":0.555556},{"name":"雨","count":4,"rate":0.444444},{"name":"花","count":4,"rate":0.444444},{"name":"雁","count":2,"rate":0.222222},{"name":"日","count":2,"rate":0.222222},{"name":"梅","count":2,"rate":0.222222},{"name":"海","count":1,"rate":0.111111},{"name":"舟","count":1,"rate":0.111111},{"name":"马","count":1,"rate":0.111111},{"name":"雪","count":1,"rate":0.111111},{"name":"柳","count":1,"rate":0.111111},{"name":"山","count":1,"rate":0.111111}],"records":[{"poem_id":"李清照-937","title":"声声慢·寻寻觅觅","dynasty":"宋","evidence":[{"line":"三杯两盏淡酒，怎敌他、晚来风急！","context":"乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他、晚来风急！雁过也，正伤心，却是旧时相识。","aliases":["杯","酒","盏"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["伤心","寒","难"]},"companions":["雁","风"]},{"poem_id":"李清照-939","title":"如梦令·昨夜雨疏风骤","dynasty":"宋","evidence":[{"line":"昨夜雨疏风骤，浓睡不消残酒。","context":"昨夜雨疏风骤，浓睡不消残酒。试问卷帘人，却道海棠依旧。","aliases":["酒"]}],"emotions":[],"emotion_hits":{},"companions":["海","雨","风"]},{"poem_id":"李清照-941","title":"如梦令·常记溪亭日暮","dynasty":"宋","evidence":[{"line":"常记溪亭日暮，沉醉不知归路。","context":"常记溪亭日暮，沉醉不知归路。兴尽晚回舟，误入藕花深处。","aliases":["醉"]}],"emotions":[],"emotion_hits":{},"companions":["日","舟","花"]},{"poem_id":"李清照-943","title":"醉花阴·薄雾浓云愁永昼","dynasty":"宋","evidence":[{"line":"东篱把酒黄昏后，有暗香盈袖。","context":"佳节又重阳，玉枕纱厨，半夜凉初透。东篱把酒黄昏后，有暗香盈袖。莫道不销魂，帘卷西风，人比黄花瘦。","aliases":["酒"]}],"emotions":[],"emotion_hits":{},"companions":["花","风"]},{"poem_id":"李清照-947","title":"永遇乐·落日熔金","dynasty":"宋","evidence":[{"line":"来相召、香车宝马，谢他酒朋诗侣。","context":"元宵佳节，融和天气，次第岂无风雨。来相召、香车宝马，谢他酒朋诗侣。中州盛日，闺门多暇，记得偏重三五。","aliases":["酒"]}],"emotions":[],"emotion_hits":{},"companions":["日","雨","风","马"]},{"poem_id":"李清照-948","title":"清平乐·年年雪里","dynasty":"宋","evidence":[{"line":"年年雪里，常插梅花醉。","context":"年年雪里，常插梅花醉。挼尽梅花无好意，赢得满衣清泪。","aliases":["醉"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["泪"]},"companions":["梅","花","雪"]},{"poem_id":"李清照-951","title":"蝶恋花·暖雨晴风初破冻","dynasty":"宋","evidence":[{"line":"酒意诗情谁与共？","context":"暖雨晴风初破冻，柳眼梅腮，已觉春心动。酒意诗情谁与共？泪融残粉花钿重。","aliases":["酒"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["谁与共"],"悲愁伤逝":["泪"]},"companions":["柳","梅","花","雨","风"]},{"poem_id":"李清照-954","title":"凤凰台上忆吹箫·香冷金猊","dynasty":"宋","evidence":[{"line":"新来瘦，非干病酒，不是悲秋。","context":"生怕离怀别苦，多少事、欲说还休。新来瘦，非干病酒，不是悲秋。休休，这回去也，千万遍《阳关》，也则难留。","aliases":["酒"]},{"line":"今年瘦，非干病酒，不是悲秋。","context":"生怕闲愁暗恨，多少事、欲说还休。今年瘦，非干病酒，不是悲秋。明朝，者回去也，千万遍阳关，也即难留。","aliases":["酒"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["恨","悲","愁","苦","难"]},"companions":[]},{"poem_id":"李清照-956","title":"蝶恋花·晚止昌乐馆寄姊妹","dynasty":"宋","evidence":[{"line":"惜别伤离方寸乱，忘了临行，酒盏深和浅。","context":"人道山长山又断，萧萧微雨闻孤馆。惜别伤离方寸乱，忘了临行，酒盏深和浅。好把音书凭过雁，东莱不似蓬莱远。","aliases":["酒","盏"]}],"emotions":["离别惜别"],"emotion_hits":{"离别惜别":["惜别"]},"companions":["山","雁","雨"]}]}},"max_lift":6.667,"matched_poem_count":36},"舟":{"imagery":"舟","label":"舟船","description":"舟船本体及帆、棹、桨等能明确指向舟行的相关称谓。","cells":[{"poet":"李白","emotion":"思乡怀人","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"李白","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"李白","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.666665},{"poet":"李白","emotion":"忧国伤时","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李白","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668},{"poet":"李白","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"李白","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668},{"poet":"李白","emotion":"爱情相思","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李白","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"杜甫","emotion":"思乡怀人","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.6},{"poet":"杜甫","emotion":"离别惜别","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":2.0},{"poet":"杜甫","emotion":"忧国伤时","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"豪迈旷达","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"杜甫","emotion":"哲思超越","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"杜甫","emotion":"爱情相思","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.666667},{"poet":"白居易","emotion":"思乡怀人","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":5.0},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":3.333333},{"poet":"白居易","emotion":"忧国伤时","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"白居易","emotion":"豪迈旷达","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"白居易","emotion":"欢愉闲适","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.428571},{"poet":"白居易","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"爱情相思","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.909091},{"poet":"苏轼","emotion":"思乡怀人","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":3.33333},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":2,"conditional_denominator":3,"conditional":0.666667,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":2.222223},{"poet":"苏轼","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.0},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.95238},{"poet":"苏轼","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.74074},{"poet":"苏轼","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.555555},{"poet":"陆游","emotion":"思乡怀人","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"陆游","emotion":"离别惜别","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"忧国伤时","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.818182},{"poet":"陆游","emotion":"豪迈旷达","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"欢愉闲适","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"哲思超越","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":4.0},{"poet":"陆游","emotion":"爱情相思","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":1.25},{"poet":"李清照","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李清照","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":5.0},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.333333}],"poets":{"李白":{"poet":"李白","sample_count":6,"level":"不排名","poem_total":20,"emotions":[{"poet":"李白","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":1.666665},{"poet":"李白","emotion":"思乡怀人","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"李白","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.333332},{"poet":"李白","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"李白","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668},{"poet":"李白","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.666668}],"companions":[{"name":"云","count":3,"rate":0.5},{"name":"山","count":3,"rate":0.5},{"name":"日","count":3,"rate":0.5},{"name":"江","count":3,"rate":0.5},{"name":"海","count":2,"rate":0.333333},{"name":"城楼","count":2,"rate":0.333333},{"name":"月","count":2,"rate":0.333333},{"name":"河","count":1,"rate":0.166667},{"name":"风","count":1,"rate":0.166667},{"name":"雪","count":1,"rate":0.166667},{"name":"酒","count":1,"rate":0.166667},{"name":"鹤","count":1,"rate":0.166667},{"name":"花","count":1,"rate":0.166667},{"name":"猿","count":1,"rate":0.166667}],"records":[{"poem_id":"李白-41","title":"行路难·其一","dynasty":"唐","evidence":[{"line":"闲来垂钓碧溪上，忽复乘舟梦日边。","context":"欲渡黄河冰塞川，将登太行雪满山。闲来垂钓碧溪上，忽复乘舟梦日边。行路难，行路难，多歧路，今安在？","aliases":["舟"]},{"line":"长风破浪会有时，直挂云帆济沧海。","context":"行路难，行路难，多歧路，今安在？长风破浪会有时，直挂云帆济沧海。","aliases":["云帆","帆"]}],"emotions":["悲愁伤逝","豪迈旷达"],"emotion_hits":{"悲愁伤逝":["难"],"豪迈旷达":["直挂云帆","长风破浪"]},"companions":["云","山","日","河","海","雪","风"]},{"poem_id":"李白-43","title":"宣州谢朓楼饯别校书叔云","dynasty":"唐","evidence":[{"line":"人生在世不称意，明朝散发弄扁舟。","context":"抽刀断水水更流，举杯消愁愁更愁。人生在世不称意，明朝散发弄扁舟。","aliases":["扁舟","舟"]}],"emotions":["哲思超越","悲愁伤逝"],"emotion_hits":{"哲思超越":["人生"],"悲愁伤逝":["愁"]},"companions":["酒"]},{"poem_id":"李白-50","title":"黄鹤楼送孟浩然之广陵","dynasty":"唐","evidence":[{"line":"孤帆远影碧空尽，唯见长江天际流。","context":"故人西辞黄鹤楼，烟花三月下扬州。孤帆远影碧空尽，唯见长江天际流。","aliases":["孤帆","帆"]}],"emotions":["思乡怀人","离别惜别","漂泊孤寂"],"emotion_hits":{"思乡怀人":["故人"],"离别惜别":["西辞"],"漂泊孤寂":["孤帆"]},"companions":["城楼","月","江","花","鹤"]},{"poem_id":"李白-51","title":"渡荆门送别","dynasty":"唐","evidence":[{"line":"仍怜故乡水，万里送行舟。","context":"月下飞天镜，云生结海楼。仍怜故乡水，万里送行舟。","aliases":["行舟","舟"]}],"emotions":["思乡怀人","离别惜别"],"emotion_hits":{"思乡怀人":["故乡"],"离别惜别":["送行"]},"companions":["云","城楼","月","海"]},{"poem_id":"李白-52","title":"早发白帝城","dynasty":"唐","evidence":[{"line":"两岸猿声啼不住，轻舟已过万重山。","context":"朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山。","aliases":["轻舟","舟"]}],"emotions":[],"emotion_hits":{},"companions":["云","山","日","江","猿"]},{"poem_id":"李白-57","title":"望天门山","dynasty":"唐","evidence":[{"line":"两岸青山相对出，孤帆一片日边来。","context":"天门中断楚江开，碧水东流至此回。两岸青山相对出，孤帆一片日边来。","aliases":["孤帆","帆"]}],"emotions":["漂泊孤寂"],"emotion_hits":{"漂泊孤寂":["孤帆"]},"companions":["山","日","江"]}]},"杜甫":{"poet":"杜甫","sample_count":5,"level":"不排名","poem_total":20,"emotions":[{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":2.0},{"poet":"杜甫","emotion":"思乡怀人","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":1.6},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.666667}],"companions":[{"name":"风","count":3,"rate":0.6},{"name":"江","count":3,"rate":0.6},{"name":"云","count":2,"rate":0.4},{"name":"城楼","count":2,"rate":0.4},{"name":"日","count":2,"rate":0.4},{"name":"花","count":1,"rate":0.2},{"name":"山","count":1,"rate":0.2},{"name":"马","count":1,"rate":0.2},{"name":"莺燕","count":1,"rate":0.2},{"name":"柳","count":1,"rate":0.2},{"name":"雪","count":1,"rate":0.2},{"name":"星","count":1,"rate":0.2},{"name":"月","count":1,"rate":0.2}],"records":[{"poem_id":"杜甫-85","title":"春夜喜雨","dynasty":"唐","evidence":[{"line":"野径云俱黑，江船火独明。","context":"随风潜入夜，润物细无声。野径云俱黑，江船火独明。晓看红湿处，花重锦官城。","aliases":["船"]}],"emotions":[],"emotion_hits":{},"companions":["云","城楼","江","花","风"]},{"poem_id":"杜甫-86","title":"登岳阳楼","dynasty":"唐","evidence":[{"line":"亲朋无一字，老病有孤舟。","context":"吴楚东南坼，乾坤日夜浮。亲朋无一字，老病有孤舟。戎马关山北，凭轩涕泗流。","aliases":["孤舟","舟"]}],"emotions":["思乡怀人","漂泊孤寂","悲愁伤逝"],"emotion_hits":{"思乡怀人":["亲朋"],"漂泊孤寂":["孤舟"],"悲愁伤逝":["老"]},"companions":["山","日","马"]},{"poem_id":"杜甫-90","title":"绝句","dynasty":"唐","evidence":[{"line":"窗含西岭千秋雪，门泊东吴万里船。","context":"两个黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。","aliases":["船"]}],"emotions":[],"emotion_hits":{},"companions":["柳","莺燕","雪"]},{"poem_id":"杜甫-91","title":"旅夜书怀","dynasty":"唐","evidence":[{"line":"细草微风岸，危樯独夜舟。","context":"细草微风岸，危樯独夜舟。星垂平野阔，月涌大江流。","aliases":["舟"]}],"emotions":[],"emotion_hits":{},"companions":["星","月","江","风"]},{"poem_id":"杜甫-96","title":"秋兴八首·其一","dynasty":"唐","evidence":[{"line":"丛菊两开他日泪，孤舟一系故园心。","context":"江间波浪兼天涌，塞上风云接地阴。丛菊两开他日泪，孤舟一系故园心。寒衣处处催刀尺，白帝城高急暮砧。","aliases":["孤舟","舟"]}],"emotions":["思乡怀人","漂泊孤寂","悲愁伤逝"],"emotion_hits":{"思乡怀人":["故园"],"漂泊孤寂":["孤舟"],"悲愁伤逝":["寒","泪"]},"companions":["云","城楼","日","江","风"]}]},"白居易":{"poet":"白居易","sample_count":2,"level":"不排名","poem_total":20,"emotions":[{"poet":"白居易","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":5.0},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":3.333333},{"poet":"白居易","emotion":"欢愉闲适","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.428571},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.909091}],"companions":[{"name":"酒","count":1,"rate":0.5},{"name":"琴瑟","count":1,"rate":0.5},{"name":"花","count":1,"rate":0.5},{"name":"江","count":1,"rate":0.5},{"name":"月","count":1,"rate":0.5},{"name":"马","count":1,"rate":0.5},{"name":"灯","count":1,"rate":0.5}],"records":[{"poem_id":"白居易-1","title":"琵琶行","dynasty":"唐","evidence":[{"line":"明年秋，送客湓浦口，闻舟中夜弹琵琶者，听其音，铮铮然有京都声。","context":"元和十年，予左迁九江郡司马。明年秋，送客湓浦口，闻舟中夜弹琵琶者，听其音，铮铮然有京都声。问其人，本长安倡女，尝学琵琶于穆、曹二善才，年长色衰，委身为贾人妇。","aliases":["舟"]},{"line":"主人下马客在船，举酒欲饮无管弦。","context":"浔阳江头夜送客，枫叶荻花秋瑟瑟。主人下马客在船，举酒欲饮无管弦。醉不成欢惨将别，别时茫茫江浸月。","aliases":["船"]},{"line":"移船相近邀相见，添酒回灯重开宴。","context":"寻声暗问弹者谁，琵琶声停欲语迟。移船相近邀相见，添酒回灯重开宴。千呼万唤始出来，犹抱琵琶半遮面。","aliases":["船"]},{"line":"东船西舫悄无言，唯见江心秋月白。","context":"曲终收拨当心画，四弦一声如裂帛。东船西舫悄无言，唯见江心秋月白。沉吟放拨插弦中，整顿衣裳起敛容。","aliases":["舫","船"]},{"line":"去来江口守空船，绕船月明江水寒。","context":"商人重利轻别离，前月浮梁买茶去。去来江口守空船，绕船月明江水寒。夜深忽梦少年事，梦啼妆泪红阑干。","aliases":["船"]}],"emotions":["离别惜别","欢愉闲适","漂泊孤寂","悲愁伤逝"],"emotion_hits":{"离别惜别":["别时","别离","将别"],"欢愉闲适":["宴"],"漂泊孤寂":["空船"],"悲愁伤逝":["寒","泪"]},"companions":["月","江","灯","琴瑟","花","酒","马"]},{"poem_id":"白居易-11","title":"池上","dynasty":"唐","evidence":[{"line":"小娃撑小艇，偷采白莲回。","context":"小娃撑小艇，偷采白莲回。不解藏踪迹，浮萍一道开。","aliases":["艇"]}],"emotions":[],"emotion_hits":{},"companions":[]}]},"苏轼":{"poet":"苏轼","sample_count":3,"level":"不排名","poem_total":20,"emotions":[{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":2,"conditional_denominator":3,"conditional":0.666667,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":2.222223},{"poet":"苏轼","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":3.33333},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.95238},{"poet":"苏轼","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.74074},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.555555}],"companions":[{"name":"酒","count":2,"rate":0.666667},{"name":"海","count":2,"rate":0.666667},{"name":"江","count":2,"rate":0.666667},{"name":"风","count":2,"rate":0.666667},{"name":"山","count":1,"rate":0.333333},{"name":"露","count":1,"rate":0.333333},{"name":"云","count":1,"rate":0.333333},{"name":"月","count":1,"rate":0.333333}],"records":[{"poem_id":"苏轼-857","title":"赤壁赋","dynasty":"宋","evidence":[{"line":"壬戌之秋，七月既望，苏子与客泛舟游于赤壁之下。","context":"壬戌之秋，七月既望，苏子与客泛舟游于赤壁之下。清风徐来，水波不兴。","aliases":["舟"]},{"line":"纵一苇之所如，凌万顷之茫然。","context":"白露横江，水光接天。纵一苇之所如，凌万顷之茫然。浩浩乎如冯虚御风，而不知其所止；","aliases":["一苇"]},{"line":"歌曰：“桂棹兮兰桨，击空明兮溯流光。","context":"于是饮酒乐甚，扣舷而歌之。歌曰：“桂棹兮兰桨，击空明兮溯流光。渺渺兮予怀，望美人兮天一方。","aliases":["桨","棹"]},{"line":"舞幽壑之潜蛟，泣孤舟之嫠妇。","context":"余音袅袅，不绝如缕。舞幽壑之潜蛟，泣孤舟之嫠妇。苏子愀然，正襟危坐而问客曰：“何为其然也？","aliases":["孤舟","舟"]},{"line":"方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？","context":"西望夏口，东望武昌，山川相缪，郁乎苍苍，此非孟德之困于周郎者乎？方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。","aliases":["舳舻"]},{"line":"况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。","context":"方其破荆州，下江陵，顺流而东也，舳舻千里，旌旗蔽空，酾酒临江，横槊赋诗，固一世之雄也，而今安在哉？况吾与子渔樵于江渚之上，侣鱼虾而友麋鹿，驾一叶之扁舟，举匏樽以相属。寄蜉蝣于天地，渺沧海之一粟。","aliases":["扁舟","舟"]},{"line":"相与枕藉乎舟中，不知东方之既白。","context":"肴核既尽，杯盘狼籍。相与枕藉乎舟中，不知东方之既白。","aliases":["舟"]}],"emotions":["欢愉闲适","漂泊孤寂","悲愁伤逝","哲思超越"],"emotion_hits":{"欢愉闲适":["清风徐来","乐甚"],"漂泊孤寂":["孤舟"],"悲愁伤逝":["泣"],"哲思超越":["天地"]},"companions":["山","江","海","酒","露","风"]},{"poem_id":"苏轼-865","title":"临江仙·送钱穆父","dynasty":"宋","evidence":[{"line":"惆怅孤帆连夜发，送行淡月微云。","context":"无波真古井，有节是秋筠。惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。","aliases":["孤帆","帆"]}],"emotions":["离别惜别","漂泊孤寂"],"emotion_hits":{"离别惜别":["送行"],"漂泊孤寂":["孤帆"]},"companions":["云","月","酒"]},{"poem_id":"苏轼-868","title":"临江仙·夜归临皋","dynasty":"宋","evidence":[{"line":"小舟从此逝，江海寄余生。","context":"夜阑风静縠纹平。小舟从此逝，江海寄余生。","aliases":["舟"]}],"emotions":[],"emotion_hits":{},"companions":["江","海","风"]}]},"陆游":{"poet":"陆游","sample_count":1,"level":"不排名","poem_total":20,"emotions":[{"poet":"陆游","emotion":"哲思超越","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":4.0},{"poet":"陆游","emotion":"忧国伤时","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":1.818182},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":1.25}],"companions":[{"name":"城楼","count":1,"rate":1.0},{"name":"山","count":1,"rate":1.0},{"name":"风","count":1,"rate":1.0},{"name":"马","count":1,"rate":1.0},{"name":"雪","count":1,"rate":1.0}],"records":[{"poem_id":"陆游-919","title":"书愤","dynasty":"宋","evidence":[{"line":"楼船夜雪瓜洲渡，铁马秋风大散关。","context":"早岁那知世事艰，中原北望气如山。楼船夜雪瓜洲渡，铁马秋风大散关。塞上长城空自许，镜中衰鬓已先斑。","aliases":["楼船","船"]}],"emotions":["忧国伤时","哲思超越","悲愁伤逝"],"emotion_hits":{"忧国伤时":["中原","铁马"],"哲思超越":["世事"],"悲愁伤逝":["衰鬓"]},"companions":["城楼","山","雪","风","马"]}]},"李清照":{"poet":"李清照","sample_count":4,"level":"不排名","poem_total":20,"emotions":[{"poet":"李清照","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":5.0},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.333333}],"companions":[{"name":"云","count":2,"rate":0.5},{"name":"花","count":1,"rate":0.25},{"name":"日","count":1,"rate":0.25},{"name":"酒","count":1,"rate":0.25},{"name":"山","count":1,"rate":0.25},{"name":"河","count":1,"rate":0.25},{"name":"星","count":1,"rate":0.25},{"name":"风","count":1,"rate":0.25}],"records":[{"poem_id":"李清照-938","title":"一剪梅·红藕香残玉簟秋","dynasty":"宋","evidence":[{"line":"轻解罗裳，独上兰舟。","context":"红藕香残玉簟秋。轻解罗裳，独上兰舟。云中谁寄锦书来？","aliases":["兰舟","舟"]}],"emotions":["爱情相思"],"emotion_hits":{"爱情相思":["锦书"]},"companions":["云"]},{"poem_id":"李清照-940","title":"武陵春·春晚","dynasty":"宋","evidence":[{"line":"闻说双溪春尚好，也拟泛轻舟。","context":"物是人非事事休，欲语泪先流。闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。","aliases":["轻舟","舟"]},{"line":"只恐双溪舴艋舟，载不动许多愁。","context":"闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。","aliases":["舟"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["愁","泪"]},"companions":[]},{"poem_id":"李清照-941","title":"如梦令·常记溪亭日暮","dynasty":"宋","evidence":[{"line":"兴尽晚回舟，误入藕花深处。","context":"常记溪亭日暮，沉醉不知归路。兴尽晚回舟，误入藕花深处。争渡，争渡，惊起一滩鸥鹭。","aliases":["舟"]}],"emotions":[],"emotion_hits":{},"companions":["日","花","酒"]},{"poem_id":"李清照-942","title":"渔家傲·记梦","dynasty":"宋","evidence":[{"line":"天接云涛连晓雾，星河欲转千帆舞。","context":"天接云涛连晓雾，星河欲转千帆舞。仿佛梦魂归帝所。","aliases":["帆"]},{"line":"风休住，蓬舟吹取三山去！","context":"九万里风鹏正举。风休住，蓬舟吹取三山去！","aliases":["舟"]}],"emotions":[],"emotion_hits":{},"companions":["云","山","星","河","风"]}]}},"max_lift":5.0,"matched_poem_count":21},"雁":{"imagery":"雁","label":"鸿雁","description":"雁及可确认指鸟的鸿；不把“鸿都”等人名、地名中的单个鸿计入。","cells":[{"poet":"李白","emotion":"思乡怀人","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"离别惜别","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"漂泊孤寂","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"李白","emotion":"忧国伤时","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李白","emotion":"豪迈旷达","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"欢愉闲适","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"李白","emotion":"哲思超越","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"爱情相思","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李白","emotion":"悲愁伤逝","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.0},{"poet":"杜甫","emotion":"思乡怀人","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":4.0},{"poet":"杜甫","emotion":"离别惜别","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"杜甫","emotion":"忧国伤时","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"豪迈旷达","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"杜甫","emotion":"哲思超越","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"杜甫","emotion":"爱情相思","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.0},{"poet":"白居易","emotion":"思乡怀人","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"离别惜别","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"忧国伤时","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"白居易","emotion":"豪迈旷达","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"白居易","emotion":"欢愉闲适","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.0},{"poet":"白居易","emotion":"哲思超越","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"爱情相思","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.0},{"poet":"苏轼","emotion":"思乡怀人","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"离别惜别","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":1.666667},{"poet":"苏轼","emotion":"忧国伤时","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.0},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.0},{"poet":"苏轼","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":1.111111},{"poet":"苏轼","emotion":"爱情相思","sample_count":2,"level":"不排名","conditional_count":0,"conditional_denominator":2,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":2,"conditional_denominator":2,"conditional":1.0,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.666667},{"poet":"陆游","emotion":"思乡怀人","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"陆游","emotion":"离别惜别","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"忧国伤时","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.0},{"poet":"陆游","emotion":"豪迈旷达","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"欢愉闲适","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"哲思超越","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"爱情相思","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":0,"level":"不排名","conditional_count":0,"conditional_denominator":0,"conditional":0.0,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.0},{"poet":"李清照","emotion":"思乡怀人","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李清照","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"豪迈旷达","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444}],"poets":{"李白":{"poet":"李白","sample_count":1,"level":"不排名","poem_total":20,"emotions":[],"companions":[{"name":"日","count":1,"rate":1.0},{"name":"风","count":1,"rate":1.0},{"name":"城楼","count":1,"rate":1.0},{"name":"酒","count":1,"rate":1.0}],"records":[{"poem_id":"李白-43","title":"宣州谢朓楼饯别校书叔云","dynasty":"唐","evidence":[{"line":"长风万里送秋雁，对此可以酣高楼。","context":"乱我心者，今日之日多烦忧。长风万里送秋雁，对此可以酣高楼。蓬莱文章建安骨，中间小谢又清发。","aliases":["秋雁","雁"]}],"emotions":[],"emotion_hits":{},"companions":["城楼","日","酒","风"]}]},"杜甫":{"poet":"杜甫","sample_count":1,"level":"不排名","poem_total":20,"emotions":[{"poet":"杜甫","emotion":"思乡怀人","sample_count":1,"level":"不排名","conditional_count":1,"conditional_denominator":1,"conditional":1.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":4.0}],"companions":[{"name":"露","count":1,"rate":1.0},{"name":"月","count":1,"rate":1.0}],"records":[{"poem_id":"杜甫-89","title":"月夜忆舍弟","dynasty":"唐","evidence":[{"line":"戍鼓断人行，边秋一雁声。","context":"戍鼓断人行，边秋一雁声。露从今夜白，月是故乡明。","aliases":["雁"]}],"emotions":["思乡怀人"],"emotion_hits":{"思乡怀人":["故乡"]},"companions":["月","露"]}]},"白居易":{"poet":"白居易","sample_count":0,"level":"不排名","poem_total":20,"emotions":[],"companions":[],"records":[]},"苏轼":{"poet":"苏轼","sample_count":2,"level":"不排名","poem_total":20,"emotions":[{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":2,"level":"不排名","conditional_count":2,"conditional_denominator":2,"conditional":1.0,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.666667},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":1.666667},{"poet":"苏轼","emotion":"哲思超越","sample_count":2,"level":"不排名","conditional_count":1,"conditional_denominator":2,"conditional":0.5,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":1.111111}],"companions":[{"name":"月","count":1,"rate":0.5},{"name":"雪","count":1,"rate":0.5}],"records":[{"poem_id":"苏轼-866","title":"卜算子·黄州定慧院寓居作","dynasty":"宋","evidence":[{"line":"谁见幽人独往来，缥缈孤鸿影。","context":"缺月挂疏桐，漏断人初静。谁见幽人独往来，缥缈孤鸿影。惊起却回头，有恨无人省。","aliases":["孤鸿","鸿影"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["无人省","独往来","孤鸿"],"悲愁伤逝":["恨"]},"companions":["月"]},{"poem_id":"苏轼-872","title":"和子由渑池怀旧","dynasty":"宋","evidence":[{"line":"人生到处知何似，应似飞鸿踏雪泥。","context":"人生到处知何似，应似飞鸿踏雪泥。泥上偶然留指爪，鸿飞那复计东西。","aliases":["飞鸿"]},{"line":"泥上偶然留指爪，鸿飞那复计东西。","context":"人生到处知何似，应似飞鸿踏雪泥。泥上偶然留指爪，鸿飞那复计东西。老僧已死成新塔，坏壁无由见旧题。","aliases":["鸿飞"]}],"emotions":["哲思超越","悲愁伤逝"],"emotion_hits":{"哲思超越":["人生","何似"],"悲愁伤逝":["死","老"]},"companions":["雪"]}]},"陆游":{"poet":"陆游","sample_count":0,"level":"不排名","poem_total":20,"emotions":[],"companions":[],"records":[]},"李清照":{"poet":"李清照","sample_count":3,"level":"不排名","poem_total":20,"emotions":[{"poet":"李清照","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":6.66666},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444}],"companions":[{"name":"花","count":2,"rate":0.666667},{"name":"酒","count":2,"rate":0.666667},{"name":"风","count":1,"rate":0.333333},{"name":"云","count":1,"rate":0.333333},{"name":"城楼","count":1,"rate":0.333333},{"name":"月","count":1,"rate":0.333333}],"records":[{"poem_id":"李清照-937","title":"声声慢·寻寻觅觅","dynasty":"宋","evidence":[{"line":"雁过也，正伤心，却是旧时相识。","context":"三杯两盏淡酒，怎敌他、晚来风急！雁过也，正伤心，却是旧时相识。满地黄花堆积，憔悴损，如今有谁堪摘？","aliases":["雁"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["伤心","憔悴"]},"companions":["花","酒","风"]},{"poem_id":"李清照-938","title":"一剪梅·红藕香残玉簟秋","dynasty":"宋","evidence":[{"line":"雁字回时，月满西楼。","context":"云中谁寄锦书来？雁字回时，月满西楼。花自飘零水自流。","aliases":["雁字","雁"]}],"emotions":["爱情相思"],"emotion_hits":{"爱情相思":["锦书"]},"companions":["云","城楼","月","花"]},{"poem_id":"李清照-956","title":"蝶恋花·晚止昌乐馆寄姊妹","dynasty":"宋","evidence":[{"line":"好把音书凭过雁，东莱不似蓬莱远。","context":"惜别伤离方寸乱，忘了临行，酒盏深和浅。好把音书凭过雁，东莱不似蓬莱远。","aliases":["雁"]}],"emotions":["离别惜别"],"emotion_hits":{"离别惜别":["惜别"]},"companions":["酒"]}]}},"max_lift":6.667,"matched_poem_count":7},"雨":{"imagery":"雨","label":"雨","description":"各种降雨形态及霖雨等近义表达。","cells":[{"poet":"李白","emotion":"思乡怀人","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"离别惜别","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"漂泊孤寂","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"李白","emotion":"忧国伤时","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李白","emotion":"豪迈旷达","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"欢愉闲适","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"李白","emotion":"哲思超越","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"李白","emotion":"爱情相思","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"李白","emotion":"悲愁伤逝","sample_count":1,"level":"不排名","conditional_count":0,"conditional_denominator":1,"conditional":0.0,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.0},{"poet":"杜甫","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"杜甫","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"杜甫","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":4,"baseline_denominator":20,"baseline":0.2,"lift":0.0},{"poet":"杜甫","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667},{"poet":"杜甫","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":3.0},{"poet":"杜甫","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"杜甫","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.25},{"poet":"白居易","emotion":"思乡怀人","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"离别惜别","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":2,"conditional_denominator":3,"conditional":0.666667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":4.444447},{"poet":"白居易","emotion":"忧国伤时","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"白居易","emotion":"豪迈旷达","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"白居易","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.95238},{"poet":"白居易","emotion":"哲思超越","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"白居易","emotion":"爱情相思","sample_count":3,"level":"不排名","conditional_count":0,"conditional_denominator":3,"conditional":0.0,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":0.0},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606},{"poet":"苏轼","emotion":"思乡怀人","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"离别惜别","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"苏轼","emotion":"漂泊孤寂","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":6,"baseline_denominator":20,"baseline":0.3,"lift":0.0},{"poet":"苏轼","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.625},{"poet":"苏轼","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":2,"conditional_denominator":4,"conditional":0.5,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.428571},{"poet":"苏轼","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.555556},{"poet":"苏轼","emotion":"爱情相思","sample_count":4,"level":"不排名","conditional_count":0,"conditional_denominator":4,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":2,"conditional_denominator":4,"conditional":0.5,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.833333},{"poet":"陆游","emotion":"思乡怀人","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"陆游","emotion":"离别惜别","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"漂泊孤寂","sample_count":5,"level":"不排名","conditional_count":3,"conditional_denominator":5,"conditional":0.6,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.4},{"poet":"陆游","emotion":"忧国伤时","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.727273},{"poet":"陆游","emotion":"豪迈旷达","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"欢愉闲适","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"陆游","emotion":"哲思超越","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":0.0},{"poet":"陆游","emotion":"爱情相思","sample_count":5,"level":"不排名","conditional_count":0,"conditional_denominator":5,"conditional":0.0,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":0.0},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":5,"level":"不排名","conditional_count":3,"conditional_denominator":5,"conditional":0.6,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.75},{"poet":"李清照","emotion":"思乡怀人","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":3.33334},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.66667},{"poet":"李清照","emotion":"忧国伤时","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"豪迈旷达","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"欢愉闲适","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":0,"baseline_denominator":20,"baseline":0.0,"lift":null},{"poet":"李清照","emotion":"哲思超越","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"爱情相思","sample_count":6,"level":"不排名","conditional_count":0,"conditional_denominator":6,"conditional":0.0,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":0.0},{"poet":"李清照","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444}],"poets":{"李白":{"poet":"李白","sample_count":1,"level":"不排名","poem_total":20,"emotions":[],"companions":[{"name":"云","count":1,"rate":1.0}],"records":[{"poem_id":"李白-44","title":"梦游天姥吟留别","dynasty":"唐","evidence":[{"line":"云青青兮欲雨，水澹澹兮生烟。","context":"熊咆龙吟殷岩泉，栗深林兮惊层巅。云青青兮欲雨，水澹澹兮生烟。列缺霹雳，丘峦崩摧。","aliases":["雨"]}],"emotions":[],"emotion_hits":{},"companions":["云"]}]},"杜甫":{"poet":"杜甫","sample_count":4,"level":"不排名","poem_total":20,"emotions":[{"poet":"杜甫","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":3.0},{"poet":"杜甫","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":3,"conditional_denominator":4,"conditional":0.75,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":1.25},{"poet":"杜甫","emotion":"忧国伤时","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":1.666667}],"companions":[{"name":"风","count":2,"rate":0.5},{"name":"山","count":1,"rate":0.25},{"name":"酒","count":1,"rate":0.25},{"name":"海","count":1,"rate":0.25}],"records":[{"poem_id":"杜甫-82","title":"茅屋为秋风所破歌","dynasty":"唐","evidence":[{"line":"床头屋漏无干处，雨脚如麻未断绝。","context":"布衾多年冷似铁，娇儿恶卧踏里裂。床头屋漏无干处，雨脚如麻未断绝。自经丧乱少睡眠，长夜沾湿何由彻！","aliases":["雨"]},{"line":"风雨不动安如山。","context":"安得广厦千万间，大庇天下寒士俱欢颜！风雨不动安如山。呜呼！","aliases":["风雨","雨"]}],"emotions":["忧国伤时","悲愁伤逝","欢愉闲适"],"emotion_hits":{"忧国伤时":["天下寒士","丧乱"],"悲愁伤逝":["冷","寒"],"欢愉闲适":["欢颜"]},"companions":["山","风"]},{"poem_id":"杜甫-85","title":"春夜喜雨","dynasty":"唐","evidence":[{"line":"好雨知时节，当春乃发生。","context":"好雨知时节，当春乃发生。随风潜入夜，润物细无声。","aliases":["好雨","雨"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["好雨"]},"companions":["风"]},{"poem_id":"杜甫-95","title":"赠卫八处士","dynasty":"唐","evidence":[{"line":"夜雨剪春韭，新炊间黄粱。","context":"问答乃未已，驱儿罗酒浆。夜雨剪春韭，新炊间黄粱。主称会面难，一举累十觞。","aliases":["夜雨","雨"]}],"emotions":["欢愉闲适","悲愁伤逝"],"emotion_hits":{"欢愉闲适":["会面"],"悲愁伤逝":["难"]},"companions":["酒"]},{"poem_id":"杜甫-97","title":"兵车行","dynasty":"唐","evidence":[{"line":"新鬼烦冤旧鬼哭，天阴雨湿声啾啾！","context":"君不见，青海头，古来白骨无人收。新鬼烦冤旧鬼哭，天阴雨湿声啾啾！","aliases":["雨"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["不见"]},"companions":["海"]}]},"白居易":{"poet":"白居易","sample_count":3,"level":"不排名","poem_total":20,"emotions":[{"poet":"白居易","emotion":"漂泊孤寂","sample_count":3,"level":"不排名","conditional_count":2,"conditional_denominator":3,"conditional":0.666667,"baseline_count":3,"baseline_denominator":20,"baseline":0.15,"lift":4.444447},{"poet":"白居易","emotion":"欢愉闲适","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":0.95238},{"poet":"白居易","emotion":"悲愁伤逝","sample_count":3,"level":"不排名","conditional_count":1,"conditional_denominator":3,"conditional":0.333333,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.60606}],"companions":[{"name":"风","count":2,"rate":0.666667},{"name":"柳","count":1,"rate":0.333333},{"name":"山","count":1,"rate":0.333333},{"name":"日","count":1,"rate":0.333333},{"name":"花","count":1,"rate":0.333333},{"name":"江","count":1,"rate":0.333333},{"name":"月","count":1,"rate":0.333333},{"name":"灯","count":1,"rate":0.333333}],"records":[{"poem_id":"白居易-0","title":"长恨歌","dynasty":"唐","evidence":[{"line":"行宫见月伤心色，夜雨闻铃肠断声。","context":"蜀江水碧蜀山青，圣主朝朝暮暮情。行宫见月伤心色，夜雨闻铃肠断声。天旋地转回龙驭，到此踌躇不能去。","aliases":["夜雨","雨"]},{"line":"春风桃李花开日，秋雨梧桐叶落时。","context":"芙蓉如面柳如眉，对此如何不泪垂？春风桃李花开日，秋雨梧桐叶落时。西宫南内多秋草，落叶满阶红不扫。","aliases":["秋雨","雨"]},{"line":"玉容寂寞泪阑干，梨花一枝春带雨。","context":"风吹仙袂飘飖举，犹似霓裳羽衣舞。玉容寂寞泪阑干，梨花一枝春带雨。含情凝睇谢君王，一别音容两渺茫。","aliases":["雨"]}],"emotions":["悲愁伤逝","欢愉闲适","漂泊孤寂"],"emotion_hits":{"悲愁伤逝":["伤心","寂寞","肠断","落叶","泪"],"欢愉闲适":["春风"],"漂泊孤寂":["寂寞"]},"companions":["山","日","月","柳","江","花","风"]},{"poem_id":"白居易-1","title":"琵琶行","dynasty":"唐","evidence":[{"line":"大弦嘈嘈如急雨，小弦切切如私语。","context":"轻拢慢捻抹复挑，初为《霓裳》后《六幺》。大弦嘈嘈如急雨，小弦切切如私语。嘈嘈切切错杂弹，大珠小珠落玉盘。","aliases":["雨"]}],"emotions":[],"emotion_hits":{},"companions":[]},{"poem_id":"白居易-14","title":"夜雨","dynasty":"唐","evidence":[{"line":"秋天殊未晓，风雨正苍苍。","context":"况此残灯夜，独宿在空堂。秋天殊未晓，风雨正苍苍。不学头陀法，前心安可忘。","aliases":["风雨","雨"]}],"emotions":["漂泊孤寂"],"emotion_hits":{"漂泊孤寂":["独宿"]},"companions":["灯","风"]}]},"苏轼":{"poet":"苏轼","sample_count":4,"level":"不排名","poem_total":20,"emotions":[{"poet":"苏轼","emotion":"欢愉闲适","sample_count":4,"level":"不排名","conditional_count":2,"conditional_denominator":4,"conditional":0.5,"baseline_count":7,"baseline_denominator":20,"baseline":0.35,"lift":1.428571},{"poet":"苏轼","emotion":"悲愁伤逝","sample_count":4,"level":"不排名","conditional_count":2,"conditional_denominator":4,"conditional":0.5,"baseline_count":12,"baseline_denominator":20,"baseline":0.6,"lift":0.833333},{"poet":"苏轼","emotion":"豪迈旷达","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":8,"baseline_denominator":20,"baseline":0.4,"lift":0.625},{"poet":"苏轼","emotion":"哲思超越","sample_count":4,"level":"不排名","conditional_count":1,"conditional_denominator":4,"conditional":0.25,"baseline_count":9,"baseline_denominator":20,"baseline":0.45,"lift":0.555556}],"companions":[{"name":"山","count":3,"rate":0.75},{"name":"酒","count":2,"rate":0.5},{"name":"湖","count":2,"rate":0.5},{"name":"日","count":1,"rate":0.25},{"name":"竹","count":1,"rate":0.25},{"name":"琴瑟","count":1,"rate":0.25},{"name":"风","count":1,"rate":0.25},{"name":"马","count":1,"rate":0.25},{"name":"花","count":1,"rate":0.25},{"name":"城楼","count":1,"rate":0.25}],"records":[{"poem_id":"苏轼-859","title":"定风波·莫听穿林打叶声","dynasty":"宋","evidence":[{"line":"三月七日，沙湖道中遇雨，雨具先去，同行皆狼狈，余独不觉。","context":"三月七日，沙湖道中遇雨，雨具先去，同行皆狼狈，余独不觉。已而遂晴，故作此。","aliases":["雨"]},{"line":"一蓑烟雨任平生。","context":"竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。料峭春风吹酒醒，微冷，山头斜照却相迎。","aliases":["烟雨","雨"]},{"line":"回首向来萧瑟处，归去，也无风雨也无晴。","context":"料峭春风吹酒醒，微冷，山头斜照却相迎。回首向来萧瑟处，归去，也无风雨也无晴。","aliases":["风雨","雨"]}],"emotions":["豪迈旷达","欢愉闲适","悲愁伤逝"],"emotion_hits":{"豪迈旷达":["任平生","归去","谁怕"],"欢愉闲适":["春风"],"悲愁伤逝":["萧瑟","冷"]},"companions":["山","日","湖","琴瑟","竹","酒","风","马"]},{"poem_id":"苏轼-864","title":"望江南·超然台作","dynasty":"宋","evidence":[{"line":"烟雨暗千家。","context":"试上超然台上看，半壕春水一城花。烟雨暗千家。寒食后，酒醒却咨嗟。","aliases":["烟雨","雨"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["咨嗟","寒"]},"companions":["城楼","花","酒"]},{"poem_id":"苏轼-869","title":"饮湖上初晴后雨","dynasty":"宋","evidence":[{"line":"水光潋滟晴方好，山色空蒙雨亦奇。","context":"水光潋滟晴方好，山色空蒙雨亦奇。欲把西湖比西子，淡妆浓抹总相宜。","aliases":["雨"]}],"emotions":["欢愉闲适"],"emotion_hits":{"欢愉闲适":["晴方好","亦奇"]},"companions":["山","湖"]},{"poem_id":"苏轼-873","title":"浣溪沙·游蕲水清泉寺","dynasty":"宋","evidence":[{"line":"山下兰芽短浸溪，松间沙路净无泥，萧萧暮雨子规啼。","context":"游蕲水清泉寺，寺临兰溪，溪水西流。山下兰芽短浸溪，松间沙路净无泥，萧萧暮雨子规啼。谁道人生无再少？","aliases":["雨"]}],"emotions":["哲思超越"],"emotion_hits":{"哲思超越":["人生"]},"companions":["山"]}]},"陆游":{"poet":"陆游","sample_count":5,"level":"不排名","poem_total":20,"emotions":[{"poet":"陆游","emotion":"漂泊孤寂","sample_count":5,"level":"不排名","conditional_count":3,"conditional_denominator":5,"conditional":0.6,"baseline_count":5,"baseline_denominator":20,"baseline":0.25,"lift":2.4},{"poet":"陆游","emotion":"悲愁伤逝","sample_count":5,"level":"不排名","conditional_count":3,"conditional_denominator":5,"conditional":0.6,"baseline_count":16,"baseline_denominator":20,"baseline":0.8,"lift":0.75},{"poet":"陆游","emotion":"忧国伤时","sample_count":5,"level":"不排名","conditional_count":2,"conditional_denominator":5,"conditional":0.4,"baseline_count":11,"baseline_denominator":20,"baseline":0.55,"lift":0.727273}],"companions":[{"name":"风","count":3,"rate":0.6},{"name":"马","count":3,"rate":0.6},{"name":"河","count":2,"rate":0.4},{"name":"花","count":1,"rate":0.2},{"name":"城楼","count":1,"rate":0.2},{"name":"海","count":1,"rate":0.2},{"name":"山","count":1,"rate":0.2},{"name":"湖","count":1,"rate":0.2},{"name":"江","count":1,"rate":0.2},{"name":"剑","count":1,"rate":0.2}],"records":[{"poem_id":"陆游-918","title":"卜算子·咏梅","dynasty":"宋","evidence":[{"line":"已是黄昏独自愁，更着风和雨。","context":"驿外断桥边，寂寞开无主。已是黄昏独自愁，更着风和雨。无意苦争春，一任群芳妒。","aliases":["雨"]}],"emotions":["漂泊孤寂","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["寂寞"],"悲愁伤逝":["寂寞","愁","苦"]},"companions":["风"]},{"poem_id":"陆游-921","title":"临安春雨初霁","dynasty":"宋","evidence":[{"line":"小楼一夜听春雨，深巷明朝卖杏花。","context":"世味年来薄似纱，谁令骑马客京华。小楼一夜听春雨，深巷明朝卖杏花。矮纸斜行闲作草，晴窗细乳戏分茶。","aliases":["春雨","雨"]}],"emotions":[],"emotion_hits":{},"companions":["城楼","花","马"]},{"poem_id":"陆游-925","title":"十一月四日风雨大作二首","dynasty":"宋","evidence":[{"line":"风卷江湖雨暗村，四山声作海涛翻。","context":"风卷江湖雨暗村，四山声作海涛翻。溪柴火软蛮毡暖，我与狸奴不出门。","aliases":["雨"]},{"line":"夜阑卧听风吹雨，铁马冰河入梦来。","context":"僵卧孤村不自哀，尚思为国戍轮台。夜阑卧听风吹雨，铁马冰河入梦来。","aliases":["雨"]}],"emotions":["漂泊孤寂","忧国伤时","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["孤村"],"忧国伤时":["戍轮台","为国","铁马"],"悲愁伤逝":["哀"]},"companions":["山","江","河","海","湖","风","马"]},{"poem_id":"陆游-929","title":"十一月四日风雨大作·其二","dynasty":"宋","evidence":[{"line":"夜阑卧听风吹雨，铁马冰河入梦来。","context":"僵卧孤村不自哀，尚思为国戍轮台。夜阑卧听风吹雨，铁马冰河入梦来。","aliases":["雨"]}],"emotions":["漂泊孤寂","忧国伤时","悲愁伤逝"],"emotion_hits":{"漂泊孤寂":["孤村"],"忧国伤时":["戍轮台","为国","铁马"],"悲愁伤逝":["哀"]},"companions":["河","风","马"]},{"poem_id":"陆游-930","title":"剑门道中遇微雨","dynasty":"宋","evidence":[{"line":"细雨骑驴入剑门。","context":"此身合是诗人未？细雨骑驴入剑门。","aliases":["细雨","雨"]}],"emotions":[],"emotion_hits":{},"companions":["剑"]}]},"李清照":{"poet":"李清照","sample_count":6,"level":"不排名","poem_total":20,"emotions":[{"poet":"李清照","emotion":"悲愁伤逝","sample_count":6,"level":"不排名","conditional_count":2,"conditional_denominator":6,"conditional":0.333333,"baseline_count":15,"baseline_denominator":20,"baseline":0.75,"lift":0.444444},{"poet":"李清照","emotion":"离别惜别","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":1,"baseline_denominator":20,"baseline":0.05,"lift":3.33334},{"poet":"李清照","emotion":"漂泊孤寂","sample_count":6,"level":"不排名","conditional_count":1,"conditional_denominator":6,"conditional":0.166667,"baseline_count":2,"baseline_denominator":20,"baseline":0.1,"lift":1.66667}],"companions":[{"name":"风","count":4,"rate":0.666667},{"name":"酒","count":4,"rate":0.666667},{"name":"柳","count":2,"rate":0.333333},{"name":"梅","count":2,"rate":0.333333},{"name":"海","count":1,"rate":0.166667},{"name":"笛箫","count":1,"rate":0.166667},{"name":"马","count":1,"rate":0.166667},{"name":"花","count":1,"rate":0.166667},{"name":"日","count":1,"rate":0.166667},{"name":"山","count":1,"rate":0.166667}],"records":[{"poem_id":"李清照-937","title":"声声慢·寻寻觅觅","dynasty":"宋","evidence":[{"line":"梧桐更兼细雨，到黄昏、点点滴滴。","context":"守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！","aliases":["细雨","雨"]}],"emotions":["悲愁伤逝"],"emotion_hits":{"悲愁伤逝":["愁"]},"companions":[]},{"poem_id":"李清照-939","title":"如梦令·昨夜雨疏风骤","dynasty":"宋","evidence":[{"line":"昨夜雨疏风骤，浓睡不消残酒。","context":"昨夜雨疏风骤，浓睡不消残酒。试问卷帘人，却道海棠依旧。","aliases":["夜雨","雨"]}],"emotions":[],"emotion_hits":{},"companions":["海","酒","风"]},{"poem_id":"李清照-947","title":"永遇乐·落日熔金","dynasty":"宋","evidence":[{"line":"元宵佳节，融和天气，次第岂无风雨。","context":"染柳烟浓，吹梅笛怨，春意知几许。元宵佳节，融和天气，次第岂无风雨。来相召、香车宝马，谢他酒朋诗侣。","aliases":["风雨","雨"]}],"emotions":[],"emotion_hits":{},"companions":["柳","梅","笛箫","酒","风","马"]},{"poem_id":"李清照-950","title":"摊破浣溪沙·病起萧萧两鬓华","dynasty":"宋","evidence":[{"line":"枕上诗书闲处好，门前风景雨来佳。","context":"豆蔻连梢煎熟水，莫分茶。枕上诗书闲处好，门前风景雨来佳。终日向人多酝藉，木犀花。","aliases":["雨"]}],"emotions":[],"emotion_hits":{},"companions":["日","花","风"]},{"poem_id":"李清照-951","title":"蝶恋花·暖雨晴风初破冻","dynasty":"宋","evidence":[{"line":"暖雨晴风初破冻，柳眼梅腮，已觉春心动。","context":"暖雨晴风初破冻，柳眼梅腮，已觉春心动。酒意诗情谁与共？","aliases":["雨"]}],"emotions":["漂泊孤寂"],"emotion_hits":{"漂泊孤寂":["谁与共"]},"companions":["柳","梅","酒","风"]},{"poem_id":"李清照-956","title":"蝶恋花·晚止昌乐馆寄姊妹","dynasty":"宋","evidence":[{"line":"人道山长山又断，萧萧微雨闻孤馆。","context":"泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。人道山长山又断，萧萧微雨闻孤馆。惜别伤离方寸乱，忘了临行，酒盏深和浅。","aliases":["微雨","雨"]}],"emotions":["离别惜别","悲愁伤逝"],"emotion_hits":{"离别惜别":["惜别"],"悲愁伤逝":["泪"]},"companions":["山","酒"]}]}},"max_lift":4.444,"matched_poem_count":23}},"summary":{"poet_count":6,"poem_count":120,"poems_per_poet":20,"imagery_count":5,"emotion_count":9,"imagery_poem_hits":122,"evidence_line_count":196},"method":{"context_window":"命中意象的分句及前后各 1 个分句","count_unit":"每首诗对同一意象、同一情感标签最多计 1 次","thresholds":{"不排名":"<10","探索":"10-29","正式":">=30"},"emotion_descriptions":{"思乡怀人":"指向故乡、亲友或跨越空间的怀念。","离别惜别":"送别、分别及对重逢困难的感受。","漂泊孤寂":"羁旅、客居、独处和缺乏陪伴。","忧国伤时":"战争、国家命运、民生疾苦及恢复理想。","豪迈旷达":"进取、自信、超越困境或主动自我调适。","欢愉闲适":"宴饮相聚、游赏、闲居或明朗轻快的感受。","哲思超越":"关于时间、人生、物我、真假或有限与永恒的思考。","爱情相思":"恋慕、夫妻追忆及爱情离合。","悲愁伤逝":"悲哀、忧愁、衰老、死亡与时间消逝。"}}};</script>
+
+<script id="imagery-emotion-interaction">
+(function () {
+    'use strict';
+    const data = window.IMAGERY_EMOTION_DATA;
+    const state = { imagery: '月', metric: 'lift' };
+    const chartElement = document.getElementById('imagery_emotion_heatmap');
+    const chart = window.echarts && chartElement ? echarts.getInstanceByDom(chartElement) : null;
+    const imagerySegment = document.getElementById('imagerySegment');
+    const metricSelect = document.getElementById('metricSelect');
+    const heatmapTitle = document.getElementById('heatmapTitle');
+    const heatmapMeta = document.getElementById('heatmapMeta');
+    const sampleStatus = document.getElementById('viewSampleStatus');
+    const evidenceTable = document.getElementById('evidenceTable');
+
+    function esc(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+        });
+    }
+    function pct(value) { return (Number(value || 0) * 100).toFixed(1) + '%'; }
+    function lift(value) { return value == null ? '—' : Number(value).toFixed(2); }
+    function badgeClass(level) {
+        if (level === '正式') return 'formal';
+        if (level === '探索') return 'explore';
+        return 'no-rank';
+    }
+    function metricValue(cell) { return cell[state.metric]; }
+    function metricLabel() {
+        return state.metric === 'lift' ? '情感提升度 lift' : '条件概率 P(e|i,p)';
+    }
+    function chartData(view) {
+        return view.cells.map(function (cell) {
+            const value = metricValue(cell);
+            return {
+                value: [
+                    data.emotions.indexOf(cell.emotion), data.poets.indexOf(cell.poet), value,
+                    cell.conditional, cell.baseline, cell.lift, cell.sample_count, cell.level,
+                    cell.poet, cell.emotion, state.imagery
+                ],
+                itemStyle: { opacity: cell.level === '不排名' ? 0.48 : (cell.level === '探索' ? 0.82 : 1) }
+            };
+        });
+    }
+    function visualMax(view) {
+        return state.metric === 'lift' ? Math.max(2, Number(view.max_lift || 1)) : 1;
+    }
+    function renderChart(view) {
+        if (!chart) return;
+        const isLift = state.metric === 'lift';
+        chart.setOption({
+            series: [{
+                name: metricLabel(),
+                data: chartData(view),
+                label: {
+                    show: true,
+                    color: '#102033',
+                    fontSize: 11,
+                    formatter: function (p) {
+                        const v = p.value && p.value[2];
+                        if (v == null) return '—';
+                        return isLift ? Number(v).toFixed(2) : Math.round(Number(v) * 100) + '%';
+                    }
+                }
+            }],
+            visualMap: [{
+                min: 0,
+                max: visualMax(view),
+                dimension: 2,
+                precision: 2,
+                text: isLift ? ['相对基线更强', '相对基线更弱'] : ['局部占比高', '局部占比低'],
+                inRange: { color: ['#e2e8f0', '#bae6fd', '#86efac', '#fde047', '#fb7185'] }
+            }]
+        });
+        chart.resize();
+    }
+    function renderSegment() {
+        imagerySegment.innerHTML = data.imagery.map(function (imagery) {
+            const active = imagery === state.imagery ? ' is-active' : '';
+            return '<button type="button" class="' + active + '" data-imagery="' + esc(imagery) +
+                '" aria-pressed="' + (imagery === state.imagery ? 'true' : 'false') + '">' + esc(imagery) + '</button>';
+        }).join('');
+        Array.from(imagerySegment.querySelectorAll('[data-imagery]')).forEach(function (button) {
+            button.addEventListener('click', function () {
+                state.imagery = button.getAttribute('data-imagery');
+                render();
+            });
+        });
+    }
+    function emotionPills(row) {
+        if (!row.emotions.length) return '<span class="empty">局部语境未命中规则标签</span>';
+        return '<div class="pill-list">' + row.emotions.map(function (item) {
+            const detail = state.metric === 'lift' ? lift(item.lift) : pct(item.conditional);
+            return '<span class="pill">' + esc(item.emotion) + '<b>' + detail + '</b></span>';
+        }).join('') + '</div>';
+    }
+    function companionPills(row) {
+        if (!row.companions.length) return '<span class="empty">无伴随意象</span>';
+        return '<div class="pill-list">' + row.companions.slice(0, 8).map(function (item) {
+            return '<span class="pill">' + esc(item.name) + '<b>' + esc(item.count) + '</b></span>';
+        }).join('') + '</div>';
+    }
+    function evidenceDetails(row) {
+        if (!row.records.length) return '<span class="empty">当前样本无此意象</span>';
+        return '<details><summary>' + row.records.length + ' 首诗 / 展开证据</summary><div class="evidence-list">' +
+            row.records.map(function (record) {
+                const quote = record.evidence.map(function (e) { return e.line; }).join(' / ');
+                const labels = record.emotions.length ? record.emotions.join('、') : '语境未判定';
+                return '<div class="evidence-item"><strong>《' + esc(record.title) + '》</strong>' +
+                    '<q>' + esc(quote) + '</q><small>标签：' + esc(labels) + '</small></div>';
+            }).join('') + '</div></details>';
+    }
+    function renderEvidence(view) {
+        const rows = data.poets.map(function (poet) {
+            const row = view.poets[poet];
+            const levelClass = badgeClass(row.level);
+            const label = row.level === '不排名' ? '语境标签（不排名）' : '主要语境标签';
+            return '<tr><td><strong class="poet-name">' + esc(poet) + '</strong><br/>' +
+                '<span class="sample-badge ' + levelClass + '">' + esc(row.sample_count) + ' 首 · ' + esc(row.level) + '</span></td>' +
+                '<td>' + companionPills(row) + '</td>' +
+                '<td><small>' + esc(label) + '</small>' + emotionPills(row) + '</td>' +
+                '<td>' + evidenceDetails(row) + '</td></tr>';
+        }).join('');
+        evidenceTable.innerHTML = '<table class="evidence-table"><thead><tr><th>诗人 / 样本等级</th>' +
+            '<th>局部伴随意象（诗次）</th><th>' + esc(metricLabel()) + '</th><th>原文证据</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    }
+    function renderMeta(view) {
+        const levels = data.poets.reduce(function (acc, poet) {
+            const level = view.poets[poet].level;
+            acc[level] = (acc[level] || 0) + 1;
+            return acc;
+        }, {});
+        heatmapTitle.textContent = state.imagery + '意象的' + metricLabel();
+        heatmapMeta.textContent = view.description + ' 当前共命中 ' + view.matched_poem_count + ' 个“诗人—诗作”样本。';
+        sampleStatus.textContent = '不排名 ' + (levels['不排名'] || 0) + ' 位 · 探索 ' + (levels['探索'] || 0) + ' 位 · 正式 ' + (levels['正式'] || 0) + ' 位';
+    }
+    function render() {
+        const view = data.views[state.imagery];
+        renderSegment();
+        renderMeta(view);
+        renderChart(view);
+        renderEvidence(view);
+    }
+    metricSelect.addEventListener('change', function () {
+        state.metric = metricSelect.value === 'conditional' ? 'conditional' : 'lift';
+        render();
+    });
+    window.addEventListener('resize', function () { if (chart) chart.resize(); });
+    render();
+}());
+</script>
+
+</body>
+</html>

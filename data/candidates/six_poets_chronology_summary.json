@@ -1,0 +1,858 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-07-26",
+ "generated_by": "six_poets chronology QC 独立复核第二轮（前一轮质检中断后补做：全量重跑校验并重算汇总，修正前版汇总中关于lon/lat的失实表述）",
+ "scope": "data/candidates/{libai,dufu,baijuyi,sushi,luyou,liqingzhao}_spirit_chronology.csv 与各 *_life_stages.json（李白用任务书五分期），对账 data/reviewed/verified_poem_contexts.csv（41行）",
+ "header_schema": [
+  "poet",
+  "title",
+  "dynasty",
+  "year_start",
+  "year_end",
+  "year_precision",
+  "period",
+  "historical_place",
+  "modern_city",
+  "province",
+  "lon",
+  "lat",
+  "source_name",
+  "source_url",
+  "source_note",
+  "fact_grade",
+  "status"
+ ],
+ "checks_passed": [
+  "六文件17列表头完全一致，均为 utf-8-sig（BOM）编码、CRLF 行尾",
+  "全部123行 poet/title 与 data/poems.json 对应作者诗题精确匹配，无重复行（poet+title 唯一）",
+  "fact_grade 全部落在 {A,B,C,D}（实际出现 B/C/D），year_precision 全部落在 {exact,approximate,disputed,unknown}，status 全部落在 {candidate,superseded_by_verified}",
+  "有年份行均为整数、year_start<=year_end 且在生卒/分期总区间内；无年份行仅限 fact_grade=D 且 year_precision=unknown",
+  "period 与年份无完全脱节（无 DISJOINT）；8处约数/争议区间跨分期边界的 OVERLAP 属编排取舍并已记录（见各人 period_boundary_overlaps）",
+  "19条 disputed 行 source_note 均载明两说（或多说）及主展示取舍理由",
+  "superseded_by_verified 标记与 verified_poem_contexts.csv 双向对账一致：37条标记者皆在册；在册且同题出现于候选表者皆已标记；李白4条 verified 记录不在候选表（已列入gaps）",
+  "有坐标行 lon/lat 均可解析为有限浮点数；9条可系年行坐标为空系创作地无定说或途中之作（另5条D级不可系年行无地点无坐标），source_note 均已说明留空理由（诚实性原则，不代填坐标）"
+ ],
+ "fixes_applied_this_round": [
+  "无需修改六CSV与stages文件内容：全部校验项通过",
+  "复核确认前一轮已落实：libai_spirit_chronology.csv 带 utf-8-sig BOM 与其余五件一致；luyou《卜算子·咏梅》D级行 year_precision=unknown",
+  "重写本汇总文件：前版 checks_passed 声称 lon/lat 均可解析为有限浮点数、与事实不符（9行坐标为空），本版改为如实表述并新增各人 rows_without_coordinates 清单"
+ ],
+ "known_caveats": [
+  "李清照两条D级不可系年行（浣溪沙·闺情期1、摊破浣溪沙·病起萧萧两鬓华期4）依内容风格保留推定分期但无年份，不计入任何分期可系年数；其余诗人D级行 period 留空",
+  "period_boundary_overlaps 为约数/争议区间跨分期边界、主展示取值落在所标分期内的情况，属编排取舍而非错误",
+  "李清照卒年从 liqingzhao_life_stages.json 取1156（cnkgraph作者档案作1151，另有约1155/1156异说），页面方法区需注明",
+  "陆游卒年取1210（农历1209年十二月廿九公历折算），与 life_stages 口径一致",
+  "fact_grade=D 行不进曲线计算只列出；曲线口径描述作品文本特征，不断言诗人真实心理"
+ ],
+ "poets": {
+  "李白": {
+   "file": "libai_spirit_chronology.csv",
+   "rows": 23,
+   "datable_poems": 23,
+   "life_span": [
+    701,
+    762
+   ],
+   "stage_source": "无 libai_life_stages.json，采用任务书规定五分期（1蜀中~725/2干谒漫游726-741/3翰林742-744/4漫游安史744-756/5永王流放暮年757-762）",
+   "per_period": {
+    "1": {
+     "label": "蜀中读书",
+     "year_start": 701,
+     "year_end": 725,
+     "datable_poems": 0
+    },
+    "2": {
+     "label": "干谒漫游",
+     "year_start": 726,
+     "year_end": 741,
+     "datable_poems": 5
+    },
+    "3": {
+     "label": "长安翰林",
+     "year_start": 742,
+     "year_end": 744,
+     "datable_poems": 4
+    },
+    "4": {
+     "label": "再度漫游至安史乱起",
+     "year_start": 744,
+     "year_end": 756,
+     "datable_poems": 8
+    },
+    "5": {
+     "label": "永王事件·流放与暮年",
+     "year_start": 757,
+     "year_end": 762,
+     "datable_poems": 6
+    }
+   },
+   "grade_distribution": {
+    "B": 23
+   },
+   "precision_distribution": {
+    "approximate": 13,
+    "disputed": 7,
+    "exact": 3
+   },
+   "status_distribution": {
+    "candidate": 23
+   },
+   "disputed": [
+    {
+     "title": "静夜思",
+     "year_range": [
+      726,
+      727
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "蜀道难",
+     "year_range": [
+      731,
+      731
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "将进酒",
+     "year_range": [
+      736,
+      752
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "梁园吟",
+     "year_range": [
+      744,
+      744
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "行路难·其一",
+     "year_range": [
+      744,
+      744
+     ],
+     "period": "3",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "闻王昌龄左迁龙标遥有此寄",
+     "year_range": [
+      748,
+      753
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "独坐敬亭山",
+     "year_range": [
+      753,
+      753
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 0,
+    "titles": [],
+    "verified_only_not_in_candidates": [
+     "早发白帝城",
+     "望庐山瀑布",
+     "登金陵凤凰台",
+     "黄鹤楼送孟浩然之广陵"
+    ]
+   },
+   "undatable_grade_D": [],
+   "weak_grade_C": [],
+   "rows_without_coordinates": [],
+   "period_boundary_overlaps": [
+    {
+     "title": "长干行·其一",
+     "period": 2,
+     "stage_range": [
+      726,
+      741
+     ],
+     "year_range": [
+      725,
+      726
+     ]
+    },
+    {
+     "title": "将进酒",
+     "period": 4,
+     "stage_range": [
+      744,
+      756
+     ],
+     "year_range": [
+      736,
+      752
+     ]
+    }
+   ],
+   "gaps": [
+    "第1期（蜀中读书，~725）无可系年候选诗，早期作品系年多不可考",
+    "verified_poem_contexts.csv 中李白4首人工审核系年（早发白帝城/望庐山瀑布/登金陵凤凰台/黄鹤楼送孟浩然之广陵）未纳入本候选表，页面合并展示时以 verified 为准",
+    "无 libai_life_stages.json，分期采用任务书规定五分期"
+   ]
+  },
+  "杜甫": {
+   "file": "dufu_spirit_chronology.csv",
+   "rows": 20,
+   "datable_poems": 20,
+   "life_span": [
+    712,
+    770
+   ],
+   "stage_source": "dufu_life_stages.json（status=candidate）",
+   "per_period": {
+    "1": {
+     "label": "读书壮游",
+     "year_start": 712,
+     "year_end": 745,
+     "datable_poems": 1
+    },
+    "2": {
+     "label": "困守长安",
+     "year_start": 746,
+     "year_end": 755,
+     "datable_poems": 1
+    },
+    "3": {
+     "label": "陷贼与为官",
+     "year_start": 756,
+     "year_end": 759,
+     "datable_poems": 4
+    },
+    "4": {
+     "label": "漂泊西南·草堂",
+     "year_start": 760,
+     "year_end": 765,
+     "datable_poems": 10
+    },
+    "5": {
+     "label": "夔州与湖湘漂泊",
+     "year_start": 766,
+     "year_end": 770,
+     "datable_poems": 4
+    }
+   },
+   "grade_distribution": {
+    "B": 20
+   },
+   "precision_distribution": {
+    "exact": 17,
+    "approximate": 2,
+    "disputed": 1
+   },
+   "status_distribution": {
+    "candidate": 11,
+    "superseded_by_verified": 9
+   },
+   "disputed": [
+    {
+     "title": "江畔独步寻花·其六",
+     "year_range": [
+      761,
+      762
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 9,
+    "titles": [
+     "春望",
+     "石壕吏",
+     "蜀相",
+     "春夜喜雨",
+     "茅屋为秋风所破歌",
+     "客至",
+     "闻官军收河南河北",
+     "登高",
+     "登岳阳楼"
+    ],
+    "verified_only_not_in_candidates": []
+   },
+   "undatable_grade_D": [],
+   "weak_grade_C": [],
+   "rows_without_coordinates": [],
+   "period_boundary_overlaps": [],
+   "gaps": [
+    "第1期（读书壮游712-745）与第2期（困守长安746-755）各仅1首可系年候选，早中期覆盖薄弱"
+   ]
+  },
+  "白居易": {
+   "file": "baijuyi_spirit_chronology.csv",
+   "rows": 20,
+   "datable_poems": 19,
+   "life_span": [
+    772,
+    846
+   ],
+   "stage_source": "baijuyi_life_stages.json（status=candidate）",
+   "per_period": {
+    "1": {
+     "label": "应举入仕",
+     "year_start": 772,
+     "year_end": 806,
+     "datable_poems": 2
+    },
+    "2": {
+     "label": "谏官岁月",
+     "year_start": 807,
+     "year_end": 814,
+     "datable_poems": 3
+    },
+    "3": {
+     "label": "贬谪江州忠州",
+     "year_start": 815,
+     "year_end": 819,
+     "datable_poems": 5
+    },
+    "4": {
+     "label": "杭苏刺史",
+     "year_start": 820,
+     "year_end": 826,
+     "datable_poems": 3
+    },
+    "5": {
+     "label": "洛阳中隐",
+     "year_start": 827,
+     "year_end": 846,
+     "datable_poems": 6
+    }
+   },
+   "grade_distribution": {
+    "B": 19,
+    "D": 1
+   },
+   "precision_distribution": {
+    "exact": 8,
+    "approximate": 8,
+    "disputed": 3,
+    "unknown": 1
+   },
+   "status_distribution": {
+    "superseded_by_verified": 5,
+    "candidate": 15
+   },
+   "disputed": [
+    {
+     "title": "赋得古原草送别",
+     "year_range": [
+      787,
+      788
+     ],
+     "period": "1",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "问刘十九",
+     "year_range": [
+      817,
+      817
+     ],
+     "period": "3",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "观刈麦",
+     "year_range": [
+      807,
+      807
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 5,
+    "titles": [
+     "长恨歌",
+     "琵琶行",
+     "大林寺桃花",
+     "观刈麦",
+     "夜雪"
+    ],
+    "verified_only_not_in_candidates": []
+   },
+   "undatable_grade_D": [
+    {
+     "title": "花非花",
+     "period": null
+    }
+   ],
+   "weak_grade_C": [],
+   "rows_without_coordinates": [
+    {
+     "title": "赋得古原草送别",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "暮江吟",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "夜雨",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "放言五首·其三",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    }
+   ],
+   "period_boundary_overlaps": [],
+   "gaps": [
+    "4行无坐标（赋得古原草送别/暮江吟/夜雨/放言五首·其三：创作地无定说或途中之作）",
+    "《花非花》D级不可系年，不进曲线计算"
+   ]
+  },
+  "苏轼": {
+   "file": "sushi_spirit_chronology.csv",
+   "rows": 20,
+   "datable_poems": 19,
+   "life_span": [
+    1037,
+    1101
+   ],
+   "stage_source": "sushi_life_stages.json（status=candidate）",
+   "per_period": {
+    "1": {
+     "label": "眉山应举与凤翔初仕",
+     "year_start": 1037,
+     "year_end": 1070,
+     "datable_poems": 1
+    },
+    "2": {
+     "label": "杭密徐湖外任",
+     "year_start": 1071,
+     "year_end": 1079,
+     "datable_poems": 5
+    },
+    "3": {
+     "label": "乌台诗案贬黄州",
+     "year_start": 1080,
+     "year_end": 1085,
+     "datable_poems": 8
+    },
+    "4": {
+     "label": "元祐还朝与再度外任",
+     "year_start": 1086,
+     "year_end": 1093,
+     "datable_poems": 3
+    },
+    "5": {
+     "label": "贬惠州儋州与北归",
+     "year_start": 1094,
+     "year_end": 1101,
+     "datable_poems": 2
+    }
+   },
+   "grade_distribution": {
+    "B": 19,
+    "D": 1
+   },
+   "precision_distribution": {
+    "exact": 15,
+    "disputed": 3,
+    "approximate": 1,
+    "unknown": 1
+   },
+   "status_distribution": {
+    "candidate": 10,
+    "superseded_by_verified": 10
+   },
+   "disputed": [
+    {
+     "title": "定风波·南海归赠王定国侍人寓娘",
+     "year_range": [
+      1083,
+      1086
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "蝶恋花·春景",
+     "year_range": [
+      1076,
+      1095
+     ],
+     "period": "5",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "西江月·中秋和子由",
+     "year_range": [
+      1080,
+      1097
+     ],
+     "period": "5",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 10,
+    "titles": [
+     "水调歌头·明月几时有",
+     "望江南·超然台作",
+     "饮湖上初晴后雨",
+     "卜算子·黄州定慧院寓居作",
+     "定风波·莫听穿林打叶声",
+     "念奴娇·赤壁怀古",
+     "赤壁赋",
+     "临江仙·夜归临皋",
+     "浣溪沙·游蕲水清泉寺",
+     "题西林壁"
+    ],
+    "verified_only_not_in_candidates": []
+   },
+   "undatable_grade_D": [
+    {
+     "title": "春宵",
+     "period": null
+    }
+   ],
+   "weak_grade_C": [],
+   "rows_without_coordinates": [
+    {
+     "title": "定风波·南海归赠王定国侍人寓娘",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "行香子·述怀",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "蝶恋花·春景",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    },
+    {
+     "title": "西江月·中秋和子由",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    }
+   ],
+   "period_boundary_overlaps": [
+    {
+     "title": "定风波·南海归赠王定国侍人寓娘",
+     "period": 4,
+     "stage_range": [
+      1086,
+      1093
+     ],
+     "year_range": [
+      1083,
+      1086
+     ]
+    },
+    {
+     "title": "蝶恋花·春景",
+     "period": 5,
+     "stage_range": [
+      1094,
+      1101
+     ],
+     "year_range": [
+      1076,
+      1095
+     ]
+    },
+    {
+     "title": "西江月·中秋和子由",
+     "period": 5,
+     "stage_range": [
+      1094,
+      1101
+     ],
+     "year_range": [
+      1080,
+      1097
+     ]
+    }
+   ],
+   "gaps": [
+    "4行无坐标（定风波·南海归/行香子·述怀/蝶恋花·春景/西江月·中秋和子由：系年多说、作地随说而异）",
+    "《春宵》D级不可系年，不进曲线计算"
+   ]
+  },
+  "陆游": {
+   "file": "luyou_spirit_chronology.csv",
+   "rows": 20,
+   "datable_poems": 19,
+   "life_span": [
+    1125,
+    1210
+   ],
+   "stage_source": "luyou_life_stages.json（status=candidate）",
+   "per_period": {
+    "1": {
+     "label": "科举蹭蹬与初仕",
+     "year_start": 1125,
+     "year_end": 1169,
+     "datable_poems": 2
+    },
+    "2": {
+     "label": "入蜀从戎",
+     "year_start": 1170,
+     "year_end": 1177,
+     "datable_poems": 4
+    },
+    "3": {
+     "label": "东归宦游",
+     "year_start": 1178,
+     "year_end": 1189,
+     "datable_poems": 2
+    },
+    "4": {
+     "label": "山阴闲居与绝笔",
+     "year_start": 1190,
+     "year_end": 1210,
+     "datable_poems": 11
+    }
+   },
+   "grade_distribution": {
+    "B": 19,
+    "D": 1
+   },
+   "precision_distribution": {
+    "disputed": 1,
+    "unknown": 1,
+    "exact": 17,
+    "approximate": 1
+   },
+   "status_distribution": {
+    "candidate": 12,
+    "superseded_by_verified": 8
+   },
+   "disputed": [
+    {
+     "title": "钗头凤·红酥手",
+     "year_range": [
+      1151,
+      1155
+     ],
+     "period": "1",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 8,
+    "titles": [
+     "书愤",
+     "游山西村",
+     "临安春雨初霁",
+     "示儿",
+     "十一月四日风雨大作二首",
+     "关山月",
+     "剑门道中遇微雨",
+     "金错刀行"
+    ],
+    "verified_only_not_in_candidates": []
+   },
+   "undatable_grade_D": [
+    {
+     "title": "卜算子·咏梅",
+     "period": null
+    }
+   ],
+   "weak_grade_C": [],
+   "rows_without_coordinates": [],
+   "period_boundary_overlaps": [
+    {
+     "title": "诉衷情·当年万里觅封侯",
+     "period": 4,
+     "stage_range": [
+      1190,
+      1210
+     ],
+     "year_range": [
+      1189,
+      1201
+     ]
+    }
+   ],
+   "gaps": [
+    "第3期（东归宦游1178-1189）仅2首可系年候选",
+    "《卜算子·咏梅》D级不可系年，不进曲线计算"
+   ]
+  },
+  "李清照": {
+   "file": "liqingzhao_spirit_chronology.csv",
+   "rows": 20,
+   "datable_poems": 18,
+   "life_span": [
+    1084,
+    1156
+   ],
+   "stage_source": "liqingzhao_life_stages.json（status=candidate）",
+   "per_period": {
+    "1": {
+     "label": "汴京少女与新婚",
+     "year_start": 1084,
+     "year_end": 1107,
+     "datable_poems": 4
+    },
+    "2": {
+     "label": "青州屏居与莱州淄州岁月",
+     "year_start": 1108,
+     "year_end": 1126,
+     "datable_poems": 6
+    },
+    "3": {
+     "label": "南渡流离",
+     "year_start": 1127,
+     "year_end": 1132,
+     "datable_poems": 3
+    },
+    "4": {
+     "label": "晚年临安（间避乱金华）",
+     "year_start": 1133,
+     "year_end": 1156,
+     "datable_poems": 5
+    }
+   },
+   "grade_distribution": {
+    "B": 17,
+    "D": 2,
+    "C": 1
+   },
+   "precision_distribution": {
+    "disputed": 4,
+    "exact": 6,
+    "approximate": 8,
+    "unknown": 2
+   },
+   "status_distribution": {
+    "superseded_by_verified": 5,
+    "candidate": 15
+   },
+   "disputed": [
+    {
+     "title": "声声慢·寻寻觅觅",
+     "year_range": [
+      1147,
+      1147
+     ],
+     "period": "4",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "如梦令·常记溪亭日暮",
+     "year_range": [
+      1108,
+      1108
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "醉花阴·薄雾浓云愁永昼",
+     "year_range": [
+      1108,
+      1108
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    },
+    {
+     "title": "凤凰台上忆吹箫·香冷金猊",
+     "year_range": [
+      1109,
+      1109
+     ],
+     "period": "2",
+     "note_has_both_accounts": true
+    }
+   ],
+   "superseded_by_verified": {
+    "count": 5,
+    "titles": [
+     "声声慢·寻寻觅觅",
+     "一剪梅·红藕香残玉簟秋",
+     "醉花阴·薄雾浓云愁永昼",
+     "凤凰台上忆吹箫·香冷金猊",
+     "蝶恋花·晚止昌乐馆寄姊妹"
+    ],
+    "verified_only_not_in_candidates": []
+   },
+   "undatable_grade_D": [
+    {
+     "title": "浣溪沙·闺情",
+     "period": "1"
+    },
+    {
+     "title": "摊破浣溪沙·病起萧萧两鬓华",
+     "period": "4"
+    }
+   ],
+   "weak_grade_C": [
+    {
+     "title": "临江仙·梅",
+     "year_range": [
+      1128,
+      1129
+     ],
+     "note": "C级：系年依据较弱（通行年谱题录旁证，未获两源印证）"
+    }
+   ],
+   "rows_without_coordinates": [
+    {
+     "title": "清平乐·年年雪里",
+     "reason": "创作地无定说或途中之作，坐标依诚实性原则留空（见source_note）"
+    }
+   ],
+   "period_boundary_overlaps": [
+    {
+     "title": "鹧鸪天·桂花",
+     "period": 2,
+     "stage_range": [
+      1108,
+      1126
+     ],
+     "year_range": [
+      1107,
+      1121
+     ]
+    },
+    {
+     "title": "清平乐·年年雪里",
+     "period": 4,
+     "stage_range": [
+      1133,
+      1156
+     ],
+     "year_range": [
+      1127,
+      1156
+     ]
+    }
+   ],
+   "gaps": [
+    "2首D级不可系年（浣溪沙·闺情暂归期1、摊破浣溪沙·病起萧萧两鬓华暂归期4，依内容风格推定分期、无年份，不进曲线计算）",
+    "《临江仙·梅》为唯一C级行（系年依据较弱）；1行无坐标（清平乐·年年雪里）"
+   ]
+  }
+ },
+ "totals": {
+  "rows": 123,
+  "datable_poems": 118,
+  "disputed_rows": 19,
+  "superseded_by_verified": 37,
+  "grade_D_undatable": 5,
+  "rows_without_coordinates": 9,
+  "weak_grade_C": 1
+ }
+}

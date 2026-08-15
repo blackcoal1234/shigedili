@@ -1,0 +1,294 @@
+.journey-player {
+  --journey-arrival-duration: 440ms;
+  --journey-card-duration: var(--motion-medium, 460ms);
+  --journey-route-ease: var(--motion-ease, cubic-bezier(.2, .8, .2, 1));
+  position: relative;
+  min-width: 0;
+}
+
+.journey-player:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 4px;
+}
+
+.journey-player .journey-controls > .icon-button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+}
+
+.journey-player .journey-evidence-card summary,
+.journey-player .journey-route-method summary {
+  min-height: 44px;
+}
+
+.journey-player[data-motion-profile="restrained"] {
+  --journey-card-duration: 280ms;
+}
+
+.journey-player[data-motion-profile="experimental"] {
+  --journey-arrival-duration: 580ms;
+  --journey-card-duration: 620ms;
+}
+
+.journey-player .arrival-card {
+  transition:
+    opacity var(--journey-card-duration) var(--journey-route-ease),
+    transform var(--journey-card-duration) var(--journey-route-ease);
+}
+
+.journey-player .journey-poem-card {
+  transition:
+    opacity var(--journey-card-duration) var(--journey-route-ease) 80ms,
+    transform var(--journey-card-duration) var(--journey-route-ease) 80ms;
+}
+
+.journey-player .journey-evidence-card {
+  transition:
+    opacity var(--journey-card-duration) var(--journey-route-ease) 140ms,
+    transform var(--journey-card-duration) var(--journey-route-ease) 140ms;
+}
+
+.journey-player[data-phase="travelling"] .journey-stage {
+  border-color: rgba(49, 95, 125, .46);
+  box-shadow: inset 0 0 0 1px rgba(255, 253, 249, .34);
+}
+
+.journey-player[data-motion-profile="experimental"][data-phase="travelling"] .journey-stage {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 253, 249, .4),
+    inset 0 0 42px rgba(37, 43, 39, .08);
+}
+
+.journey-player .travel-status {
+  transition:
+    opacity var(--motion-fast, 180ms) ease,
+    transform var(--motion-fast, 180ms) ease;
+}
+
+.journey-paper-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 249, .97), rgba(255, 250, 239, .92) 72%, rgba(255, 253, 249, .32)),
+    repeating-linear-gradient(0deg, rgba(37, 43, 39, .018) 0 1px, transparent 1px 4px);
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.journey-paper-veil[data-visible="true"] {
+  animation: journey-paper-recede var(--journey-arrival-duration) var(--journey-route-ease) both;
+}
+
+.journey-arrival-seal {
+  position: absolute;
+  top: 132px;
+  right: 28px;
+  z-index: 9;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-content: center;
+  gap: 2px;
+  padding: 7px;
+  border: 2px solid var(--cinnabar);
+  border-radius: 50%;
+  background: rgba(255, 250, 239, .9);
+  box-shadow:
+    inset 0 0 0 3px rgba(182, 75, 63, .14),
+    0 8px 22px rgba(37, 43, 39, .12);
+  color: var(--cinnabar-dark);
+  opacity: 0;
+  text-align: center;
+  transform: translateY(-24px) scale(1.28) rotate(-7deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.journey-arrival-seal span {
+  display: block;
+}
+
+.journey-arrival-seal span {
+  max-width: 58px;
+  overflow: hidden;
+  font-family: "STKaiti", "KaiTi", "Noto Serif SC", serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+.journey-arrival-seal[data-visible="true"] {
+  animation: journey-seal-land var(--journey-arrival-duration) var(--journey-route-ease) both;
+}
+
+.journey-node-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.journey-node-ripple i {
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(182, 75, 63, .66);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(.28);
+}
+
+.journey-node-ripple[data-visible="true"] i {
+  animation: journey-node-ripple 760ms var(--journey-route-ease) both;
+}
+
+.journey-node-ripple[data-visible="true"] i:nth-child(2) {
+  border-color: rgba(49, 95, 125, .46);
+  animation-delay: 110ms;
+}
+
+.journey-player[data-motion-profile="restrained"] .route-legend {
+  backdrop-filter: none;
+}
+
+.journey-player[data-motion-profile="experimental"] .travel-marker {
+  filter: drop-shadow(0 3px 5px rgba(37, 43, 39, .2));
+}
+
+.journey-player[data-document-visible="false"] .travel-marker svg *,
+.journey-player[data-document-visible="false"] .journey-node-ripple i,
+.journey-player[data-document-visible="false"] .journey-paper-veil,
+.journey-player[data-document-visible="false"] .journey-arrival-seal {
+  animation-play-state: paused !important;
+}
+
+.journey-player[data-document-visible="false"] .arrival-card,
+.journey-player[data-document-visible="false"] .journey-poem-card,
+.journey-player[data-document-visible="false"] .journey-evidence-card,
+.journey-player[data-document-visible="false"] .travel-status {
+  transition: none !important;
+}
+
+.journey-player[data-motion-profile="off"] .arrival-card,
+.journey-player[data-motion-profile="off"] .journey-poem-card,
+.journey-player[data-motion-profile="off"] .journey-evidence-card,
+.journey-player[data-motion-profile="off"] .journey-heading-meta i,
+.journey-player[data-motion-profile="off"] .travel-marker,
+.journey-player[data-motion-profile="off"] .journey-stage {
+  transition: none !important;
+}
+
+.journey-player[data-motion-profile="off"] .journey-paper-veil,
+.journey-player[data-motion-profile="off"] .journey-arrival-seal,
+.journey-player[data-motion-profile="off"] .journey-node-ripple {
+  display: none;
+}
+
+.journey-player[data-motion-profile="off"] .arrival-card[data-visible="true"],
+.journey-player[data-motion-profile="off"] .journey-poem-card[data-visible="true"],
+.journey-player[data-motion-profile="off"] .journey-evidence-card[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.journey-player .route-gap-notice,
+.journey-player .journey-route-method p {
+  text-wrap: pretty;
+}
+
+@keyframes journey-paper-recede {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: .96;
+  }
+  58% {
+    clip-path: inset(0 0 0 58%);
+    opacity: .76;
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0;
+  }
+}
+
+@keyframes journey-seal-land {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scale(1.28) rotate(-7deg);
+  }
+  58% {
+    opacity: .96;
+    transform: translateY(2px) scale(.96) rotate(2deg);
+  }
+  76% {
+    transform: translateY(-1px) scale(1.03) rotate(-1deg);
+  }
+  100% {
+    opacity: .94;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes journey-node-ripple {
+  0% {
+    opacity: .76;
+    transform: scale(.28);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.65);
+  }
+}
+
+@media (max-width: 760px) {
+  .journey-paper-veil {
+    right: 0;
+    bottom: auto;
+    height: 318px;
+  }
+
+  .journey-arrival-seal {
+    top: 218px;
+    right: 13px;
+    width: 66px;
+    height: 66px;
+  }
+
+  .journey-arrival-seal span {
+    font-size: 12px;
+    max-width: 49px;
+  }
+
+  .journey-player .route-gap-notice {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-player .journey-paper-veil,
+  .journey-player .journey-arrival-seal,
+  .journey-player .journey-node-ripple {
+    display: none;
+    animation: none !important;
+  }
+
+  .journey-player .arrival-card,
+  .journey-player .journey-poem-card,
+  .journey-player .journey-evidence-card,
+  .journey-player .travel-marker,
+  .journey-player .journey-stage {
+    transition: none !important;
+  }
+}

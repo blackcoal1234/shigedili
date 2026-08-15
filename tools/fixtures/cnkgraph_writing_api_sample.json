@@ -1,0 +1,16 @@
+{
+  "Id": 26460,
+  "Dynasty": "盛唐",
+  "Author": "李白",
+  "Title": "静夜思",
+  "AuthorDate": "727年",
+  "AuthorPlace": "CN420982",
+  "Links": [
+    {
+      "Type": "Region",
+      "Identity": "CN420982",
+      "ResourcePath": "AuthorPlace",
+      "Value": "湖北省孝感市安陆市"
+    }
+  ]
+}

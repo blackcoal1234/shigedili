@@ -1,0 +1,2157 @@
+{
+  "corpus": {
+    "dynasty_counts": {
+      "唐": 46,
+      "宋": 42
+    },
+    "path": "D:\\game存档\\诗行万里2\\诗行万里\\data\\poems.json",
+    "poem_count": 20437,
+    "poet_count": 88,
+    "roster_sha256": "5806927fb9a4f554ae211d0f35c3c43177b7bf859685367a73391491e996490a"
+  },
+  "generated_at": "2026-08-09T09:02:39+00:00",
+  "interpretation_notes": [
+    "chinese-poetry 的 desc 是开放参考简介，不是路线、作诗地点或精确行年证据。",
+    "Kanripo 命中是目录书目关系；仅结构化姓名精确命中可列 matched，书名含名而无责任者佐证列 ambiguous。",
+    "fetch_failed 表示本次相关全局资产不完整；active_status 与旧成功记录仍保留，避免联网失败清空成果。",
+    "同一诗人的本地逐诗朝代标签冲突时采用数量最多的本地标签，并在 per_poet 保留全部计数；票数相同则终止，避免任意绑定。",
+    "所有结果均停留在 data/candidates，不写入 data/reviewed。"
+  ],
+  "parser_version": "poet-reference-corpus-v1",
+  "per_poet": [
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 21
+      },
+      "poem_count": 21,
+      "poet": "上官仪",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "元稹",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "刘禹锡",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "卢纶",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 169
+      },
+      "poem_count": 169,
+      "poet": "司空曙",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "孟浩然",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "孟郊",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 210
+      },
+      "poem_count": 210,
+      "poet": "宋之问",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "岑参",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 63
+      },
+      "poem_count": 63,
+      "poet": "常建",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 221
+      },
+      "poem_count": 221,
+      "poet": "张九龄",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 11
+      },
+      "poem_count": 11,
+      "poet": "张志和",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "张籍",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 50
+      },
+      "poem_count": 50,
+      "poet": "张继",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "李商隐",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 69
+      },
+      "poem_count": 69,
+      "poet": "李煜",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "李白",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 176
+      },
+      "poem_count": 176,
+      "poet": "李益",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 251
+      },
+      "poem_count": 251,
+      "poet": "李贺",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜牧",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜甫",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜荀鹤",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 242
+      },
+      "poem_count": 242,
+      "poet": "柳宗元",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "majority_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 25,
+        "宋": 23
+      },
+      "poem_count": 48,
+      "poet": "欧阳炯",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 162
+      },
+      "poem_count": 162,
+      "poet": "沈佺期",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "温庭筠",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 6
+      },
+      "poem_count": 6,
+      "poet": "王之涣",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 117
+      },
+      "poem_count": 117,
+      "poet": "王勃",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "王建",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 210
+      },
+      "poem_count": 210,
+      "poet": "王昌龄",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "王维",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "白居易",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "皮日休",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 39
+      },
+      "poem_count": 39,
+      "poet": "祖咏",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "罗隐",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 31
+      },
+      "poem_count": 31,
+      "poet": "聂夷中",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "许浑",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "唐": 22
+      },
+      "poem_count": 22,
+      "poet": "贺知章",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "贾岛",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "钱起",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 168
+      },
+      "poem_count": 168,
+      "poet": "陈子昂",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韦庄",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韦应物",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "ambiguous",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "ambiguous"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韩愈",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 142
+      },
+      "poem_count": 142,
+      "poet": "骆宾王",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "majority_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 246,
+        "宋": 1
+      },
+      "poem_count": 247,
+      "poet": "高适",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "刘克庄",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 256
+      },
+      "poem_count": 256,
+      "poet": "叶梦得",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "司马光",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "吕本中",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "吴文英",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 259
+      },
+      "poem_count": 259,
+      "poet": "周邦彦",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 298
+      },
+      "poem_count": 298,
+      "poet": "姜夔",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 81
+      },
+      "poem_count": 81,
+      "poet": "尤袤",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "张元干",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 206
+      },
+      "poem_count": 206,
+      "poet": "张先",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "张孝祥",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "张炎",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "文天祥",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 288
+      },
+      "poem_count": 288,
+      "poet": "晏几道",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 283
+      },
+      "poem_count": 283,
+      "poet": "晏殊",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "曾巩",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "朱淑真",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 4,
+        "persisted_record_count": 4,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "朱熹",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 83
+      },
+      "poem_count": 83,
+      "poet": "李清照",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "majority_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "唐": 1,
+        "宋": 299
+      },
+      "poem_count": 300,
+      "poet": "杨万里",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "杨亿",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 294
+      },
+      "poem_count": 294,
+      "poet": "林逋",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 234
+      },
+      "poem_count": 234,
+      "poet": "柳永",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "梅尧臣",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 4,
+        "persisted_record_count": 4,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "欧阳修",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "王安石",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "宋": 68
+      },
+      "poem_count": 68,
+      "poet": "石延年",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "秦观",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "宋": 70
+      },
+      "poem_count": 70,
+      "poet": "程颢",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 84
+      },
+      "poem_count": 84,
+      "poet": "苏洵",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 8,
+        "persisted_record_count": 8,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "苏轼",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "苏辙",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "范仲淹",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "范成大",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "贺铸",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "辛弃疾",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "not_found",
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "local_dynasty_counts": {
+        "宋": 102
+      },
+      "poem_count": 102,
+      "poet": "钱惟演",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 32
+      },
+      "poem_count": 32,
+      "poet": "陆九渊",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 5,
+        "persisted_record_count": 5,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "陆游",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 4,
+        "persisted_record_count": 4,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "陈与义",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 140
+      },
+      "poem_count": 140,
+      "poet": "陈亮",
+      "selected": true
+    },
+    {
+      "chinese_poetry": {
+        "active_status": "matched",
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "kanripo": {
+        "active_status": "matched",
+        "candidate_count": 4,
+        "persisted_record_count": 4,
+        "status": "matched"
+      },
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "黄庭坚",
+      "selected": true
+    }
+  ],
+  "schema_version": 1,
+  "scope": "all",
+  "selected_poets": [
+    "上官仪",
+    "元稹",
+    "刘禹锡",
+    "卢纶",
+    "司空曙",
+    "孟浩然",
+    "孟郊",
+    "宋之问",
+    "岑参",
+    "常建",
+    "张九龄",
+    "张志和",
+    "张籍",
+    "张继",
+    "李商隐",
+    "李煜",
+    "李白",
+    "李益",
+    "李贺",
+    "杜牧",
+    "杜甫",
+    "杜荀鹤",
+    "柳宗元",
+    "欧阳炯",
+    "沈佺期",
+    "温庭筠",
+    "王之涣",
+    "王勃",
+    "王建",
+    "王昌龄",
+    "王维",
+    "白居易",
+    "皮日休",
+    "祖咏",
+    "罗隐",
+    "聂夷中",
+    "许浑",
+    "贺知章",
+    "贾岛",
+    "钱起",
+    "陈子昂",
+    "韦庄",
+    "韦应物",
+    "韩愈",
+    "骆宾王",
+    "高适",
+    "刘克庄",
+    "叶梦得",
+    "司马光",
+    "吕本中",
+    "吴文英",
+    "周邦彦",
+    "姜夔",
+    "尤袤",
+    "张元干",
+    "张先",
+    "张孝祥",
+    "张炎",
+    "文天祥",
+    "晏几道",
+    "晏殊",
+    "曾巩",
+    "朱淑真",
+    "朱熹",
+    "李清照",
+    "杨万里",
+    "杨亿",
+    "林逋",
+    "柳永",
+    "梅尧臣",
+    "欧阳修",
+    "王安石",
+    "石延年",
+    "秦观",
+    "程颢",
+    "苏洵",
+    "苏轼",
+    "苏辙",
+    "范仲淹",
+    "范成大",
+    "贺铸",
+    "辛弃疾",
+    "钱惟演",
+    "陆九渊",
+    "陆游",
+    "陈与义",
+    "陈亮",
+    "黄庭坚"
+  ],
+  "sources": {
+    "chinese_poetry": {
+      "attempts": [
+        {
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\poet_reference_corpus\\meta\\0ee65780113490fbff1a4c373abf74deadd01b7c0b4df47caa90b65f51cdb8ef.json",
+          "content_sha256": "2c2689a3b5df460f02e4dee2a36ac32cc27c43e2964fba7965eba3469bf617ec",
+          "error": "",
+          "from_cache": true,
+          "http_status": 200,
+          "key": "authors_song",
+          "retrieved_at": "2026-08-09T08:59:16+00:00",
+          "status": "cache_hit",
+          "url": "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/%E5%85%A8%E5%94%90%E8%AF%97/authors.song.json",
+          "usable": true
+        },
+        {
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\poet_reference_corpus\\meta\\ee3966cc8a775d35a867df8005299a1f8bff17fdb30fabc8e061707d48140002.json",
+          "content_sha256": "ebab99f1244b263506d0c0bf1d54495c675f4467d3d91a5b93e89c351b2cc273",
+          "error": "",
+          "from_cache": true,
+          "http_status": 200,
+          "key": "authors_tang",
+          "retrieved_at": "2026-08-09T08:59:38+00:00",
+          "status": "cache_hit",
+          "url": "https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/%E5%85%A8%E5%94%90%E8%AF%97/authors.tang.json",
+          "usable": true
+        }
+      ],
+      "license": "MIT",
+      "license_url": "https://github.com/chinese-poetry/chinese-poetry/blob/master/LICENSE",
+      "name": "chinese-poetry/chinese-poetry authors metadata",
+      "status_counts": {
+        "ambiguous": 1,
+        "matched": 86,
+        "not_found": 1
+      }
+    },
+    "kanripo": {
+      "attempts": [
+        {
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\poet_reference_corpus\\meta\\7d991795eabac4f9d19e09906f2a4c304d8420912959a5478cfd668ba2cab27e.json",
+          "content_sha256": "76dd6ee397c0c96791d901be972d2985c96a143781ab5d03aa6aaad58345555b",
+          "error": "",
+          "from_cache": true,
+          "http_status": 200,
+          "key": "kr4c",
+          "retrieved_at": "2026-08-09T08:59:18+00:00",
+          "status": "cache_hit",
+          "url": "https://raw.githubusercontent.com/kanripo/KR-Catalog/master/KR/KR4c.txt",
+          "usable": true
+        },
+        {
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\poet_reference_corpus\\meta\\de15a6f4d5bbb03191745bb1be354a71a5b8353076239703e2549a0ad9c28b6e.json",
+          "content_sha256": "e178e64baab3f137a4b15c6652d3028319efa9ea1e97c29ec8170c0dbc0e681c",
+          "error": "",
+          "from_cache": true,
+          "http_status": 200,
+          "key": "kr4d",
+          "retrieved_at": "2026-08-09T08:59:42+00:00",
+          "status": "cache_hit",
+          "url": "https://raw.githubusercontent.com/kanripo/KR-Catalog/master/KR/KR4d.txt",
+          "usable": true
+        },
+        {
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\poet_reference_corpus\\meta\\dae8bfdb64e5fc1c4b60c7699d6fdb073ae348a606a6b558ce60cb810f973b33.json",
+          "content_sha256": "8349add1483a19784c4205ade82de54076563869837434380aaed6fcf3c26d10",
+          "error": "",
+          "from_cache": true,
+          "http_status": 200,
+          "key": "kr4j",
+          "retrieved_at": "2026-08-09T08:59:40+00:00",
+          "status": "cache_hit",
+          "url": "https://raw.githubusercontent.com/kanripo/KR-Catalog/master/KR/KR4j.txt",
+          "usable": true
+        }
+      ],
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "name": "Kanripo KR-Catalog",
+      "status_counts": {
+        "matched": 69,
+        "not_found": 19
+      }
+    }
+  },
+  "totals": {
+    "biography_records": 88,
+    "complete_without_fetch_failures": true,
+    "kanripo_catalog_matches": 117,
+    "poets": 88,
+    "selected_poets": 88,
+    "status_counts": {
+      "chinese_poetry": {
+        "ambiguous": 1,
+        "matched": 86,
+        "not_found": 1
+      },
+      "kanripo": {
+        "matched": 69,
+        "not_found": 19
+      }
+    }
+  }
+}

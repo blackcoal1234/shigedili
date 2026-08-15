@@ -1,0 +1,614 @@
+﻿[
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\api\\backend\\catalog\\route.ts",
+        "Hash":  "431D0C63D12519E8C7305A5434D99AC48D7B2DDE7BBDC56749098526C3608C42"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\api\\backend\\tools\\[name]\\route.ts",
+        "Hash":  "7D0BEE00E7A9018AC2228D1A33243ABFA850139BD23CCA8117D904462024FC09"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\api\\copilotkit\\[[...slug]]\\route.ts",
+        "Hash":  "992A52C84CCEF643C0FBC6C8CFB127BB6229E0309BD87DF6FF45856069DA09C1"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\globals.css",
+        "Hash":  "78ADBCEEB4C651684B06A55904324315F2C103CC82E13038F1E4E85580B4C90D"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\icon.svg",
+        "Hash":  "84638A73EF13C99597DD2E09C0C5D7AC3D8DE4A06EB6B4D8200BE5E9D3AFDDAE"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\layout.tsx",
+        "Hash":  "E7F76F0E13E157D728C754FB0A62CBAB33142570017B86E7FF9C785C04B125B5"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\app\\page.tsx",
+        "Hash":  "1062E32F11B85CDE2E1ADFF97AFA786613D0C062140F5BDBDF0516B51DB94CF2"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\EvidencePanel.tsx",
+        "Hash":  "A2591C5A5966A47C020C74B8779DA7EFAF95CF45C78D4031CC88EE0E5155B9F9"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\GenerativeExplanation.tsx",
+        "Hash":  "0BBB16A55F63944FFF759DADE5BDC85493F8D0BFAC72E9807DB50D8658807019"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\ImageryComparison.tsx",
+        "Hash":  "392D2981D0485DD4ABF8401FD9332936DE20B84FB958F589E8DA178410F40266"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\PoemScenePlayer.tsx",
+        "Hash":  "3778C76FE729688C235AF50FB1FAE5BB51A15E3F8F19081BF429D99DD27C8446"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\PoetRouteMap.tsx",
+        "Hash":  "84F761E426EB594F26C324F3E9FCE73A0672AB9E8475B60941D4A21944F1D683"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\PoetryWorkbench.tsx",
+        "Hash":  "B99CAE8404C0CB70BE54D1C1812554A8E08A455D99B29FEBA8C308F8CB32C8F8"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\PoetSelector.tsx",
+        "Hash":  "3E0D882913D8D022CAB1C2EE434E79D55F293E7839B3EE9453BBFBB178534972"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\StateViews.tsx",
+        "Hash":  "BD9470209EBED6D65F4B549E5528B4B3DB6A13F44A058A6D535A962ECC35CC81"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\TransportGlyph.module.css",
+        "Hash":  "C1DE8494C3A6297F9DCE2C711EED1FCE227F574A3BE19DDBFE2AC95E805087F6"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\TransportGlyph.test.ts",
+        "Hash":  "5CAC72A149421CAE157AA74C41ECF67D84127F16AC8B64C614DADB73CB06803A"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\components\\TransportGlyph.tsx",
+        "Hash":  "264B72CAFDFB39DB401A8C9A9F640831F2DE214043F98DB564C85BF7A718203D"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\backend.ts",
+        "Hash":  "BE98A8B6055D6B5E146A5631EF8CCCC07CAF944FCB084AA7F861A8F2A5131D79"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\explanation.test.ts",
+        "Hash":  "A4DABB9262839093E25E1199196FECA7764E66A864D5F5DC299FE1F884B3CD1E"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\explanation.ts",
+        "Hash":  "1A943B846A5F90004FCA8631A919F329853A702693E6788DC847601BD3FAB928"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\journey.test.ts",
+        "Hash":  "B7959BA8CF0D7B49005998D18DF6385248FDF7A7DB7A699A5564C4D620BF5355"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\journey.ts",
+        "Hash":  "9517AC9376ABE73CCB93AF3FCE9D474DB09108E7E31F204DB126E0B913B5B8A5"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\types.ts",
+        "Hash":  "277EF0809D545F3F3A162254C843F84EF39749010D767D30A48080A09642B31B"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\workbench.test.ts",
+        "Hash":  "442694B07E59A56618A90E3D20A4639046DC60CBF0FCA81200FBEC441B03A447"
+    },
+    {
+        "Path":  "apps\\agent-ui\\web\\src\\lib\\workbench.ts",
+        "Hash":  "D1A32483E4626DFAE53F6056FE3FCA01E0481209CB87F7D1AEFBE0DBE1835012"
+    },
+    {
+        "Path":  "data\\__pycache__\\classical_emotion_lexicon.cpython-314.pyc",
+        "Hash":  "9FFDCB64430480C95ADDCC1040B1DF73B1ED1B8538847A599D463E8070BB8D15"
+    },
+    {
+        "Path":  "data\\__pycache__\\classical_emotion_model.cpython-314.pyc",
+        "Hash":  "D6465A512011A578BDD6024E0795903C7A513D653F4751CC1D7CBA63CEEDDF85"
+    },
+    {
+        "Path":  "data\\__pycache__\\composition_status.cpython-313.pyc",
+        "Hash":  "9DC8FC5413B61E63D95D4CFC01E81691FB08F13EF29058D9B832EE5785969D1E"
+    },
+    {
+        "Path":  "data\\__pycache__\\composition_status.cpython-314.pyc",
+        "Hash":  "EACD2A147A583BCE6676859C3DD07AE01DCB1DFE270F0BCAB7EEC698190B2E7A"
+    },
+    {
+        "Path":  "data\\__pycache__\\image_dict.cpython-313.pyc",
+        "Hash":  "2910244702118A87A9A429D557A06A6B7983DD7CB4DA2A641B6C0F4ABDB8855E"
+    },
+    {
+        "Path":  "data\\__pycache__\\image_dict.cpython-314.pyc",
+        "Hash":  "7E2E76128BD22996031DBE553588C8FB23D52F83A9F2F7FE3167652ED613EEAB"
+    },
+    {
+        "Path":  "data\\__pycache__\\imagery_emotion_rules.cpython-314.pyc",
+        "Hash":  "6EC8A06C5CFC692103B90094DCDD4A70968B4F051675C6014E06E82CCB2A3814"
+    },
+    {
+        "Path":  "data\\__pycache__\\place_dict.cpython-313.pyc",
+        "Hash":  "36289079450799665A31B71F417A6DB9375ABA213FD41743F7BA7D0D98F6379A"
+    },
+    {
+        "Path":  "data\\__pycache__\\place_dict.cpython-314.pyc",
+        "Hash":  "FE9517B8EF84B4001CFD6C4311530261A37FEDC1A9A70DE64DAAED6C823FA165"
+    },
+    {
+        "Path":  "data\\__pycache__\\season_rules.cpython-313.pyc",
+        "Hash":  "BE30736B7E61BAF2924FFD69446AF1D9F6E137575128431ACBD87E86E783B85C"
+    },
+    {
+        "Path":  "data\\__pycache__\\season_rules.cpython-314.pyc",
+        "Hash":  "0CE2A4FF40D3AF4CDDED796E5BD3F7F4E96F1BFA419BDA39FABA7E0DBFB4D915"
+    },
+    {
+        "Path":  "data\\__pycache__\\spirit_image_dict.cpython-314.pyc",
+        "Hash":  "D8E600EE3E6495B4F65ED1CDA01BB3FDC514FE5272509CDCEF41F47A0367364C"
+    },
+    {
+        "Path":  "data\\candidates\\_baijuyi_poems_snapshot.tmp.json",
+        "Hash":  "05FAC1A59AD68B9BF0BD7BE370AE4780B9B2AAC983FE40A79EF546B5BEFC3B5B"
+    },
+    {
+        "Path":  "data\\candidates\\_dufu_poems_snapshot.tmp.json",
+        "Hash":  "05FAC1A59AD68B9BF0BD7BE370AE4780B9B2AAC983FE40A79EF546B5BEFC3B5B"
+    },
+    {
+        "Path":  "data\\candidates\\background_collection_status.jsonl",
+        "Hash":  "11F525997A4164EBC712BBF5518FF7F00C2C1FD9970C14C8D8B0819DFAA27541"
+    },
+    {
+        "Path":  "data\\candidates\\background_review.csv",
+        "Hash":  "5133A773DCE18F7A4C40F49C1297D4B6A29AFCDDBCC3CB108F6232D96A5986A3"
+    },
+    {
+        "Path":  "data\\candidates\\baijuyi_life_stages.json",
+        "Hash":  "0EF284FC80C84E2769CF2BFD0F1428EE9CFB2D1C48FFEC7525EAEA9A36CC3248"
+    },
+    {
+        "Path":  "data\\candidates\\baijuyi_spirit_chronology.csv",
+        "Hash":  "30CFB2CB7A6F1A9C563E0275BD8350A7721EFB78EB631920E61D646A54A8B8D8"
+    },
+    {
+        "Path":  "data\\candidates\\dufu_life_stages.json",
+        "Hash":  "67430C5E7955E6B13758FE2E35E6C6938F9D90353942264E22FE758D41B7AFE1"
+    },
+    {
+        "Path":  "data\\candidates\\dufu_spirit_chronology.csv",
+        "Hash":  "12F96DB8B79DA0244BFA5AA06D8CA1BDCB4DB0B7A627B3106716947BE213C884"
+    },
+    {
+        "Path":  "data\\candidates\\libai_spirit_chronology.csv",
+        "Hash":  "2978B1627D3387EF28D11427A09D983821F5CADD921B97256373DF1FC3111041"
+    },
+    {
+        "Path":  "data\\candidates\\libai_spirit_chronology_p2.csv",
+        "Hash":  "82D012B69977211083A46FD7F54640479E0A074433C16D84588727AD20D76CF9"
+    },
+    {
+        "Path":  "data\\candidates\\libai_spirit_chronology_p3.csv",
+        "Hash":  "CB84A07E96A69DDC5FEAB4EB8CC75D38FBD31DC01B9E667F2EA89FCB51A327C0"
+    },
+    {
+        "Path":  "data\\candidates\\libai_spirit_chronology_p4.csv",
+        "Hash":  "968A4A60CA28563D54533AC45E54162DD35552F71908B10D60E406BDE67E78C2"
+    },
+    {
+        "Path":  "data\\candidates\\libai_spirit_chronology_p5.csv",
+        "Hash":  "6B642498FD8254B6E4B9B3A17D01CA63E5B7B0CDAF003375970FBB519E251FB5"
+    },
+    {
+        "Path":  "data\\candidates\\liqingzhao_life_stages.json",
+        "Hash":  "3123DEBDDBD0A9F35A0EA67AD17743F2C85A882E259E3677E8B981B8FE6D885D"
+    },
+    {
+        "Path":  "data\\candidates\\liqingzhao_spirit_chronology.csv",
+        "Hash":  "44145F5023432B3443ACEA39157F15A78F8FC22C9D0CED69B2453AAB1F9077B6"
+    },
+    {
+        "Path":  "data\\candidates\\luyou_life_stages.json",
+        "Hash":  "29C2C315992EC08AAEA5D07D42B2EE30890A52EC9268E2434534A343D7FE5E4F"
+    },
+    {
+        "Path":  "data\\candidates\\luyou_spirit_chronology.csv",
+        "Hash":  "3092B965110CA61E86CC5A177705258B9375124B1CA46484F23CF5AA7CBD05A5"
+    },
+    {
+        "Path":  "data\\candidates\\manual_background_evidence.csv",
+        "Hash":  "44FC30AE62AC83C0F0CC2B3C40787367F4AED3E0F54923C7A9566065081D004F"
+    },
+    {
+        "Path":  "data\\candidates\\poem_background_candidates.jsonl",
+        "Hash":  "B4264EA83A0DAC3087DBBEB62DF208F606E2D4B6215D3A2966F6E2200F12404D"
+    },
+    {
+        "Path":  "data\\candidates\\poet_birth_years.json",
+        "Hash":  "A850CD3E78540AFAD551C0A828722DAD607B182CE9830A94A9E7FE6C4A3F97CE"
+    },
+    {
+        "Path":  "data\\candidates\\poet_identity_status.jsonl",
+        "Hash":  "259C65331C12238D639FC11322042705BE6873BDC7CEDE2C8D2B36C62D6B550F"
+    },
+    {
+        "Path":  "data\\candidates\\six_poets_chronology_summary.json",
+        "Hash":  "E09144A14ECFD87300BB33CA51E7932A3DAF36D253AC94B3C6B71F0EFD9C43FF"
+    },
+    {
+        "Path":  "data\\candidates\\sushi_life_stages.json",
+        "Hash":  "75EE916AE50838E2C1FB956AA8A5BDB4483D288163B44609C79D64859FB43B92"
+    },
+    {
+        "Path":  "data\\candidates\\sushi_spirit_chronology.csv",
+        "Hash":  "FC4FDB69D553147CD8834E8AFEBB0DA435B554F8D730B21ADFA486858C4672A3"
+    },
+    {
+        "Path":  "data\\classical_emotion_lexicon.py",
+        "Hash":  "9C4AED71C46302D2E1FF5967CBDA4F0AB79E9BC87314B622E5156C846BF41523"
+    },
+    {
+        "Path":  "data\\classical_emotion_model.py",
+        "Hash":  "56CA0CE0E8D5F495C79C2A5F1E2ED108D77C1E5B7AB5576D7C4838058311DF12"
+    },
+    {
+        "Path":  "data\\cnkgraph_poet_life_cache.json",
+        "Hash":  "E5A69C4E0B93DB55148A03287F9D60C5EF677BB4B3ABD7657A2D8388EA06526B"
+    },
+    {
+        "Path":  "data\\composition_place_candidates.csv",
+        "Hash":  "20DF5437473CA676E1DAFC20A26837C5D4A34A0F28777E9C2DE871C03B07582A"
+    },
+    {
+        "Path":  "data\\composition_place_review_template.csv",
+        "Hash":  "932161D59775A04AE9BF12BDDA6F1D7DF579DB7E0D53A2134EE05E590FB8BD33"
+    },
+    {
+        "Path":  "data\\composition_status.py",
+        "Hash":  "2BED62FE1DE2E2ED3C16F77D78E3C1A36EF4B3953823EFD05EAEB0E26CE47A8F"
+    },
+    {
+        "Path":  "data\\geojson_cache\\100000_full.json",
+        "Hash":  "02E474DEF2725DB05247568511329AE67FEB2CB53F72176E2180AA6565B53FFA"
+    },
+    {
+        "Path":  "data\\geojson_cache\\130000_full.json",
+        "Hash":  "05B78FA284318741B17C513C0456C7C422DD9DFDD9EDB9ECCA8D66306B847C8E"
+    },
+    {
+        "Path":  "data\\geojson_cache\\140000_full.json",
+        "Hash":  "43ED72032B08ECBD32AC0525DBAC20234707A5EA20CB85A118667FBB356A9BD0"
+    },
+    {
+        "Path":  "data\\geojson_cache\\150000_full.json",
+        "Hash":  "1187029050454285EFAF494664D8CEF6459F18894257E3A3C509C1A4C9011BE1"
+    },
+    {
+        "Path":  "data\\geojson_cache\\210000_full.json",
+        "Hash":  "76076C94A6806928854FFA35B70019AB390F0CADA18437E7BE3EC0372B78CE31"
+    },
+    {
+        "Path":  "data\\geojson_cache\\220000_full.json",
+        "Hash":  "F41CB8D5D3A5187C3ACECF1F2DDD811E3A1F3D0E2CDB3CABD5066BCE5DC11A0E"
+    },
+    {
+        "Path":  "data\\geojson_cache\\230000_full.json",
+        "Hash":  "93A43A3A1FB527252795F9D9A3A09204CB110E04A362EE30E5286CFA9C2203AB"
+    },
+    {
+        "Path":  "data\\geojson_cache\\320000_full.json",
+        "Hash":  "2B9F1E68392851F4C854EEC6C37EF4D6216EF4C57CE5C4DF604C0D73D0B6DB59"
+    },
+    {
+        "Path":  "data\\geojson_cache\\330000_full.json",
+        "Hash":  "85C0C5DF7CCF78832B42C0940D26F015C81A755E039F6921F8F9B013C0F86B16"
+    },
+    {
+        "Path":  "data\\geojson_cache\\340000_full.json",
+        "Hash":  "D91516E0DE4F8CC1A38A1DA874CC69A27BCB17CB8FB11979A262E012E5A38805"
+    },
+    {
+        "Path":  "data\\geojson_cache\\350000_full.json",
+        "Hash":  "1E6FE69928B908EF6F838E00F4092D5DC39B1AE9D08F7D7F4B66CD1CB1F371FD"
+    },
+    {
+        "Path":  "data\\geojson_cache\\360000_full.json",
+        "Hash":  "C179BF300D5B5BC8F562C1221AAFF19248B45AAEB2513C18E483F58935530E04"
+    },
+    {
+        "Path":  "data\\geojson_cache\\370000_full.json",
+        "Hash":  "879B64DA7F32AC7265E2C20D883568501661683710919F0D51F14D5526C5D596"
+    },
+    {
+        "Path":  "data\\geojson_cache\\410000_full.json",
+        "Hash":  "F5D738CFE4FB7D74CC349D540A020E4C9C98D234446CE6AB92F36EE1D24EAF24"
+    },
+    {
+        "Path":  "data\\geojson_cache\\420000_full.json",
+        "Hash":  "EB023C3A126D878599EC13CA94B2567A65B1B469FB6036EC1909736ADFD15584"
+    },
+    {
+        "Path":  "data\\geojson_cache\\430000_full.json",
+        "Hash":  "C6DB47E8E0628A49F46DA684F2C41875CC9919C397E0680801C114243562A68E"
+    },
+    {
+        "Path":  "data\\geojson_cache\\440000_full.json",
+        "Hash":  "78C621EC9989C752FA4716F3D09C47A78AC51B562652579107A92FF36993D39A"
+    },
+    {
+        "Path":  "data\\geojson_cache\\450000_full.json",
+        "Hash":  "A82AFD49C049EF3C7CC50502D191368C64D060091747E9CCBBC98ECDAF739EF8"
+    },
+    {
+        "Path":  "data\\geojson_cache\\460000_full.json",
+        "Hash":  "49D73DB57ED1436BD93D7C1508CB5322A66D0360552535E3D82E9C040862202C"
+    },
+    {
+        "Path":  "data\\geojson_cache\\510000_full.json",
+        "Hash":  "A13321FFF37786A605F05004E8B197702105F900BDFC86596DC0813EFE0DA140"
+    },
+    {
+        "Path":  "data\\geojson_cache\\520000_full.json",
+        "Hash":  "4D706D30C781DAC5E011779350BAAE46765179BC9BF24B5D5C26EE7BF18320EC"
+    },
+    {
+        "Path":  "data\\geojson_cache\\530000_full.json",
+        "Hash":  "22FA9AF5F4999CB306B3DFF263B4DFD16EB0A80C47B295C27357C5F2A5FDCA57"
+    },
+    {
+        "Path":  "data\\geojson_cache\\540000_full.json",
+        "Hash":  "D9B85D8E6C951E7F27C86E55DEB353BE034BD8AB2EC6C87748F9D2BCC8AAE31E"
+    },
+    {
+        "Path":  "data\\geojson_cache\\610000_full.json",
+        "Hash":  "119585B9917A79A3AAA3F0A93AA74BCEC10D94914C397C6B05FD08355B5BE511"
+    },
+    {
+        "Path":  "data\\geojson_cache\\620000_full.json",
+        "Hash":  "85BDDFB10033CE1904C3763BB692A2807355F1AC496AA40B9976B0D1914F1735"
+    },
+    {
+        "Path":  "data\\geojson_cache\\630000_full.json",
+        "Hash":  "FB6E7EDEA03C7E3F87B48866AC4CE3C9029A637E9C2FE2BA9827B04DDF9C8AE6"
+    },
+    {
+        "Path":  "data\\geojson_cache\\640000_full.json",
+        "Hash":  "8E46158A7629FE7E225391ABD238B7180AC2DFB3F747C2070E74E3183278996B"
+    },
+    {
+        "Path":  "data\\geojson_cache\\650000_full.json",
+        "Hash":  "FF7FB5BB8A742A21E272FD9A5CD3CA149433E68CA8B04E62267EB4337DC839ED"
+    },
+    {
+        "Path":  "data\\image_dict.py",
+        "Hash":  "77C169CBDD3FB282DD67042285DF86C7C771FC590AF4326309F3DB003730F71A"
+    },
+    {
+        "Path":  "data\\imagery_emotion_rules.py",
+        "Hash":  "F4AB55E363753E5D9F4E5821C07F40B733D97CAD0056C4CD8153E61F5F502B12"
+    },
+    {
+        "Path":  "data\\place_dict.py",
+        "Hash":  "843877DDC5CC611DA18CB8D11053829E92300529DC49BA36AD3EABB18E394B76"
+    },
+    {
+        "Path":  "data\\poems.json",
+        "Hash":  "D27484A3A98415E1A376FEDB8E602FB7C1FF20F3F6EB75D514C3D97F9924E44E"
+    },
+    {
+        "Path":  "data\\poems_backup.json",
+        "Hash":  "3362593EA86EBCF6847F3A191AE22C79F1398710A91253CF02B8979F716CA7D3"
+    },
+    {
+        "Path":  "data\\poems_backup_20260729_145513.json",
+        "Hash":  "A2301914EB170BB7E4E85AA75E9DE8B868AA107A38D2BDEEB82FB829F3B9D903"
+    },
+    {
+        "Path":  "data\\poems_backup_20260729_152011.json",
+        "Hash":  "A2301914EB170BB7E4E85AA75E9DE8B868AA107A38D2BDEEB82FB829F3B9D903"
+    },
+    {
+        "Path":  "data\\poems_backup_20260729_152955.json",
+        "Hash":  "3362593EA86EBCF6847F3A191AE22C79F1398710A91253CF02B8979F716CA7D3"
+    },
+    {
+        "Path":  "data\\poems_backup_20260729_163248.json",
+        "Hash":  "3362593EA86EBCF6847F3A191AE22C79F1398710A91253CF02B8979F716CA7D3"
+    },
+    {
+        "Path":  "data\\poems_backup_pre_body_validation_20260729_172510.json",
+        "Hash":  "BCAB4A15F58AA3F7643D8F2C5F32B8FB7BD2C3A788A611E16A1AA93889B144E2"
+    },
+    {
+        "Path":  "data\\poems_backup_pre_libai.json",
+        "Hash":  "05FAC1A59AD68B9BF0BD7BE370AE4780B9B2AAC983FE40A79EF546B5BEFC3B5B"
+    },
+    {
+        "Path":  "data\\poems_body_validation.err.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "data\\poems_body_validation.log",
+        "Hash":  "A00F52468C33874306F55D328FECCB1EB9C0DCA9A844C666096B9BB5866190BB"
+    },
+    {
+        "Path":  "data\\poems_body_validation_stats.json",
+        "Hash":  "029F4EFC2E732334A077838E36F5427F4ABB4C5C0179ED7D47CDC25FA1C98017"
+    },
+    {
+        "Path":  "data\\poems_crawl_stats.json",
+        "Hash":  "31124D39B15D774DC0D8113490109AEA62A8D950480E3871259119019836DA2C"
+    },
+    {
+        "Path":  "data\\poems_full_crawl.err.log",
+        "Hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+        "Path":  "data\\poems_full_crawl.log",
+        "Hash":  "B27E38B2C99FDE3CAED3DF881A89CE2073B6E3B040240C360F834F6637B1BF5D"
+    },
+    {
+        "Path":  "data\\reviewed\\poet_journeys.json",
+        "Hash":  "6750FED8C7CBE4F0F314BB78A8D39C4B5E32EF4B86F45048F39859A024CE233B"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_backgrounds.20260722_094600.jsonl.bak",
+        "Hash":  "45061859295ECFAA448EF11C7F3FF9875AD18EE3FDE941361836B0F4C023549B"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_backgrounds.20260722_094630.jsonl.bak",
+        "Hash":  "CCCF173B5F0DA508B0B0E74BA4194F5A14861DDE7C57DF15E35E932040642625"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_backgrounds.20260722_103832.jsonl.bak",
+        "Hash":  "CCCF173B5F0DA508B0B0E74BA4194F5A14861DDE7C57DF15E35E932040642625"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_backgrounds.jsonl",
+        "Hash":  "CCCF173B5F0DA508B0B0E74BA4194F5A14861DDE7C57DF15E35E932040642625"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_contexts.20260721_162844.csv.bak",
+        "Hash":  "0B7DD46489FAB81000098275EC723D99586D0E05C02257501D0E37AB89C49BD7"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_contexts.20260722_094600.csv.bak",
+        "Hash":  "9A8DA8B2A4EFA2E69EC5E5A591F2430C21F2E4CE9E29F80F0FE1D0B8E86F2327"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_contexts.20260722_094630.csv.bak",
+        "Hash":  "BE035C7719D100CB3DD2520A16944F89A4186CD70E3D2A3F19E0C95AB834647D"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_contexts.20260722_103832.csv.bak",
+        "Hash":  "BE035C7719D100CB3DD2520A16944F89A4186CD70E3D2A3F19E0C95AB834647D"
+    },
+    {
+        "Path":  "data\\reviewed\\verified_poem_contexts.csv",
+        "Hash":  "BE035C7719D100CB3DD2520A16944F89A4186CD70E3D2A3F19E0C95AB834647D"
+    },
+    {
+        "Path":  "data\\season_rules.py",
+        "Hash":  "7E5DAB8AC52E75F2955F56AB567A6BE86D27E8AB85CE189138B00428E0DE8FBC"
+    },
+    {
+        "Path":  "data\\spirit_image_dict.py",
+        "Hash":  "84CF55604AE5134C2D53C6BE677E5341D70A9BD3E790BFF510E8E29D2B32BAFA"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\color_dict.cpython-314.pyc",
+        "Hash":  "60D43B7C13896C52DB7CA31BAAA52823FDFF41C745D87164C3D3C8992A6CD7AE"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\number_dict.cpython-314.pyc",
+        "Hash":  "0F91606CE413A521E7F9E7E6E757609FA4059EC1F0E497C8DCE7E8B8DAC51A91"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\scan_color.cpython-314.pyc",
+        "Hash":  "39F09BF4DFF2B604C71AA835645F52E537F86C7C92AF3D22A73727AA2D1FCEF7"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\scan_number.cpython-314.pyc",
+        "Hash":  "FEE32280C5C10135E068BA522F02DAF19D1D5E2B873ACCB256F41A85F273CCDD"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\scan_solitude.cpython-314.pyc",
+        "Hash":  "43F10670D8C2D86E4A110EAB17F69826C299DC510AEB8D24E3FAE033BF07168C"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\scan_sound.cpython-314.pyc",
+        "Hash":  "50AAE2E97FF31A745098747D7AFD4CF593F42C6B1C6B03FB00B56BBA56AC475A"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\solitude_dict.cpython-314.pyc",
+        "Hash":  "38A92D71590B42E84D4DB5D541C489BE9ABCE120AC32D80DCA8E42AE86C6FF09"
+    },
+    {
+        "Path":  "data\\stylometry\\__pycache__\\sound_dict.cpython-314.pyc",
+        "Hash":  "AB07BAE176C0C8720667C152284055DFFA0480D813D49E4DDBBB58DEFF9A464A"
+    },
+    {
+        "Path":  "data\\stylometry\\_poems_snapshot_sound.json",
+        "Hash":  "D27484A3A98415E1A376FEDB8E602FB7C1FF20F3F6EB75D514C3D97F9924E44E"
+    },
+    {
+        "Path":  "data\\stylometry\\color_dict.py",
+        "Hash":  "600A4BC9E5DF089435F95521948613E714DE85BA636D548A3BBA3B684C41552F"
+    },
+    {
+        "Path":  "data\\stylometry\\color_stats.json",
+        "Hash":  "BA288D2F2EC0E1CDCCD2B5038E9FE568E8B21F86B238AEE0D95C83FB089C333D"
+    },
+    {
+        "Path":  "data\\stylometry\\emotion_profiles.json",
+        "Hash":  "39A64FC6E19F6104B9EA3ECC4EF9FE6B28C166A8FE093FAC966B8BDD6173BAB2"
+    },
+    {
+        "Path":  "data\\stylometry\\number_dict.py",
+        "Hash":  "40D7EBEC66C6E67483F96ECA53D836099CA509C31DE53913D768002BCD101344"
+    },
+    {
+        "Path":  "data\\stylometry\\number_stats.json",
+        "Hash":  "C20975B87B95B25BDF7A5F06D5D1EE83EE2D39A74EE1D6445423878F64B31315"
+    },
+    {
+        "Path":  "data\\stylometry\\poems_snapshot.json",
+        "Hash":  "D27484A3A98415E1A376FEDB8E602FB7C1FF20F3F6EB75D514C3D97F9924E44E"
+    },
+    {
+        "Path":  "data\\stylometry\\poems_snapshot_color.json",
+        "Hash":  "D27484A3A98415E1A376FEDB8E602FB7C1FF20F3F6EB75D514C3D97F9924E44E"
+    },
+    {
+        "Path":  "data\\stylometry\\poems_snapshot_solitude.json",
+        "Hash":  "D27484A3A98415E1A376FEDB8E602FB7C1FF20F3F6EB75D514C3D97F9924E44E"
+    },
+    {
+        "Path":  "data\\stylometry\\README.md",
+        "Hash":  "8F7180E032A117C068F2D79107EE244FA2E190BEC90855B1273278D97B4239C8"
+    },
+    {
+        "Path":  "data\\stylometry\\scan_color.py",
+        "Hash":  "9405361B9382FFB08B166C453E41AA85EE556DC835CC66B263B2CD917AA2CA26"
+    },
+    {
+        "Path":  "data\\stylometry\\scan_number.py",
+        "Hash":  "FCD44EF28433D81CA5FA1A19A0FCBAA1AD3A51FF73F24C87311962149DA4CDF6"
+    },
+    {
+        "Path":  "data\\stylometry\\scan_solitude.py",
+        "Hash":  "7AF8D26410CFBEBA057CF27D32A0CD0D3F6BECB42C1F3B852AC03CA8F402D2A0"
+    },
+    {
+        "Path":  "data\\stylometry\\scan_sound.py",
+        "Hash":  "C71ED836BBD4150DDD4479D11E18A268DA2D40CA75575AA9E86EFFD0461D2391"
+    },
+    {
+        "Path":  "data\\stylometry\\solitude_dict.py",
+        "Hash":  "A5A2CB447580687BE94097573499139C387D873469F668853EAB83A6D37DE28E"
+    },
+    {
+        "Path":  "data\\stylometry\\solitude_stats.json",
+        "Hash":  "64D03072DC90B21F578C85180E153E991F90AB81AF4F0C20CC1292285CCB5C85"
+    },
+    {
+        "Path":  "data\\stylometry\\sound_dict.py",
+        "Hash":  "AE3DA012CE148CD56460D89BF196644AB8C57CC2B5A7F3AE3F04A0315E0AF4BC"
+    },
+    {
+        "Path":  "data\\stylometry\\sound_stats.json",
+        "Hash":  "8108FD7B4496EF82F4EBCA05F15E79A6A52A49BA802EB4B30F4212777F60E314"
+    },
+    {
+        "Path":  "data\\verified_composition_places.csv",
+        "Hash":  "43C30D759FB28D43646F7B07354162F42730A8F564CC30E44DCD479401E4FBE3"
+    },
+    {
+        "Path":  "output\\manifest.json",
+        "Hash":  "1BCDC39B3CA90CBD9C30C19830F4518287333401AB186D5781C87E2D8EE8D109"
+    }
+]

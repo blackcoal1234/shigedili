@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>两种孤独 × 夸张签名 · 诗行万里</title>
+<script src="assets/pyecharts/v6/echarts.min.js"></script>
+<style>
+:root{--paper:#f2f4f0;--ink:#252b27;--cinnabar:#b64b3f;--jade:#26786e;--gold:#a87527;--blue:#426f94;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",sans-serif;line-height:1.7;}
+h1,h2,h3,.kai{font-family:KaiTi,STKaiti,"Microsoft YaHei",serif;}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 16px 40px;}
+header.top{text-align:center;padding:26px 12px 6px;}
+header.top h1{font-size:34px;letter-spacing:6px;}
+header.top .sub{color:#5a615c;margin-top:6px;font-size:14px;}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;border:1px solid var(--gold);color:var(--gold);vertical-align:4px;margin-left:8px;}
+.panel{background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;padding:16px 18px;margin-top:18px;box-shadow:0 1px 3px rgba(37,43,39,.05);}
+.panel h2{font-size:22px;letter-spacing:2px;margin-bottom:4px;}
+.panel h3{font-size:17px;margin-bottom:4px;}
+.panel .cap{font-size:13px;color:#5a615c;margin-bottom:8px;}
+.sect{margin-top:34px;}
+.sect>.head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:6px;}
+.sect>.head h2{font-size:26px;letter-spacing:4px;}
+.sect>.head .en{color:#8a918b;font-size:12px;letter-spacing:1px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
+.grid2>*,.grid3>*,.amp>*{min-width:0;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+.chart{width:100%;}
+#quadChart{height:530px;}
+#ratioChart{height:330px;}
+#hypChart{height:430px;}
+.chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.chip{font-size:12.5px;border:1px solid #999;border-radius:14px;padding:2px 11px;background:#fff;}
+.card{border-left:4px solid var(--gold);background:#fbfcfa;border-radius:0 10px 10px 0;border-top:1px solid #dfe4de;border-right:1px solid #dfe4de;border-bottom:1px solid #dfe4de;padding:13px 15px;}
+.card h3{font-size:16px;}
+.card .num{font-family:KaiTi,STKaiti,serif;font-size:30px;line-height:1.2;}
+.card p{font-size:13.5px;margin-top:5px;}
+.card.rev{border-left-color:var(--cinnabar);}
+.card.jade{border-left-color:var(--jade);}
+.card.blue{border-left-color:var(--blue);}
+details.ev{margin-top:8px;font-size:13px;}
+details.ev summary{cursor:pointer;color:var(--blue);font-size:12.5px;}
+details.ev ul{list-style:none;margin-top:6px;}
+details.ev li{padding:3px 0;border-bottom:1px dashed #e2e6e0;}
+.src{color:#8a918b;font-size:12px;}
+.scrollx{overflow-x:auto;}
+table.wl{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px;}
+table.wl th{font-family:KaiTi,STKaiti,serif;font-size:15px;text-align:left;padding:7px 10px;border-bottom:2px solid var(--ink);}
+table.wl td{padding:7px 10px;border-bottom:1px solid #e2e6e0;vertical-align:top;}
+table.wl .vline{font-size:15.5px;white-space:nowrap;}
+.tag{display:inline-block;font-size:11.5px;border-radius:10px;padding:1px 9px;color:#fff;white-space:nowrap;}
+.t-sky{background:var(--blue);}
+.t-road{background:#8a918b;}
+.t-state{background:#8a3b2f;}
+.wl-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+.wl-head .who{font-family:KaiTi,STKaiti,serif;font-size:19px;}
+.wl-sum{font-size:13px;color:#5a615c;margin-top:8px;}
+/* ---------- 三千尺放大器 ---------- */
+.amp{display:grid;grid-template-columns:minmax(300px,1.25fr) 1fr;gap:20px;}
+@media(max-width:900px){.amp{grid-template-columns:1fr;}}
+.amp-stage{position:relative;height:500px;border:1px solid #dfe4de;border-radius:10px;background:linear-gradient(180deg,#eef3f2 0%,#f7f9f6 70%,#eceee9 100%);overflow:hidden;}
+.amp-grid{position:absolute;left:0;right:0;border-top:1px dashed #c8cfc9;font-size:10.5px;color:#8a918b;padding-left:6px;line-height:1.1;}
+.amp-ref{position:absolute;left:0;right:0;border-top:1px solid #b9a06a;}
+.amp-ref span{position:absolute;right:6px;top:-17px;font-size:11px;color:var(--gold);background:rgba(251,252,250,.85);padding:0 4px;border-radius:4px;}
+.bar{position:absolute;bottom:0;width:74px;border-radius:6px 6px 0 0;}
+.bar .lab{position:absolute;top:-40px;left:50%;transform:translateX(-50%);text-align:center;font-size:11.5px;line-height:1.25;white-space:nowrap;color:var(--ink);}
+.bar .hval{font-family:KaiTi,STKaiti,serif;font-size:15px;}
+#barReal{left:16%;background:linear-gradient(180deg,#3d9187,#26786e);}
+#barPoem{left:58%;background:linear-gradient(180deg,#d4776a,#b64b3f);transition:height .45s cubic-bezier(.2,.7,.3,1);}
+#poemVerse{position:absolute;left:6%;top:12px;font-family:KaiTi,STKaiti,serif;font-size:19px;color:var(--cinnabar);letter-spacing:2px;opacity:0;transition:opacity .5s;writing-mode:vertical-rl;}
+.amp-ctrl .read{font-family:KaiTi,STKaiti,serif;font-size:25px;color:var(--cinnabar);margin:4px 0 2px;}
+.amp-ctrl input[type=range]{width:100%;accent-color:var(--cinnabar);height:28px;}
+.amp-ctrl .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.amp-ctrl .btn{border:1px solid var(--blue);color:var(--blue);background:transparent;border-radius:16px;padding:3px 14px;font-size:13px;cursor:pointer;}
+.amp-ctrl .btn:hover{background:var(--blue);color:#fff;}
+.mini{margin-top:14px;font-size:13px;background:#f4f1e9;border:1px solid #e0d9c6;border-radius:8px;padding:10px 12px;}
+.mini b{color:var(--gold);}
+footer.nav{margin-top:40px;padding-top:14px;border-top:1px solid #cfd5cf;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;}
+footer.nav a{color:var(--blue);text-decoration:none;}
+footer.nav a:hover{text-decoration:underline;}
+details.method{margin-top:26px;font-size:13px;color:#414843;}
+details.method summary{cursor:pointer;font-family:KaiTi,STKaiti,serif;font-size:16px;color:var(--ink);}
+details.method ul{margin:8px 0 0 18px;}
+details.method li{margin-bottom:5px;}
+.note{font-size:12.5px;color:#5a615c;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>两种孤独 × 夸张签名<span class="badge">词典口径 · 全语料实测</span></h1>
+  <div class="sub">88 位诗人 · 20437 首 —— 孤独不是一种，夸张也不归李白独有：每次重算都让结论跟着语料更新</div>
+</header>
+
+<!-- ==================== 上半：两种孤独 ==================== -->
+<section class="sect">
+  <div class="head"><h2>上半 · 两种孤独</h2><span class="en">TWO KINDS OF SOLITUDE</span></div>
+
+  <div class="panel">
+    <h2>四象限：孤独密度 × 情感均值</h2>
+    <div class="cap">X＝每百字孤独词密度（73词条人称孤独词典）｜Y＝全部诗作意象情感均值（197词条 spirit_image_dict，[-1,1]）｜虚线＝正文≥300字的 87 人中位线，「昂扬/低回」相对中位线而言（词典整体偏负）。六位核心诗人为彩色大点，其余 82 人为灰色背景分布。</div>
+    <div id="quadChart" class="chart"></div>
+    <div class="chips"><span class="chip" style="border-color:#426f94;color:#426f94">李白 → 低孤独·昂扬</span><span class="chip" style="border-color:#7a5c3d;color:#7a5c3d">杜甫 → 高孤独·低回</span><span class="chip" style="border-color:#26786e;color:#26786e">白居易 → 低孤独·低回</span><span class="chip" style="border-color:#b64b3f;color:#b64b3f">苏轼 → 低孤独·昂扬</span><span class="chip" style="border-color:#8a3b2f;color:#8a3b2f">陆游 → 高孤独·低回</span><span class="chip" style="border-color:#9c5d8f;color:#9c5d8f">李清照 → 低孤独·低回</span></div>
+    <div class="note">六人的实际象限已列在上方彩色标签中；中位线、排名与落点均由当前全语料重算。象限描述的是词典命中的文本相对位置，不是对诗人心理的诊断。</div>
+  </div>
+
+  <div class="grid3">
+    <div class="card rev">
+      <h3>李清照：尖峰，不是弥漫</h3>
+      <div class="num">0.552<span style="font-size:14px;"> /百字</span></div>
+      <p>以孤独著称的李清照，孤独词密度在六人中排<b>第 6/6</b>，在正文充分样本中排第 83/87。这说明她的文本未必靠孤独词弥漫铺陈，更多信息集中在少数<b>尖峰句</b>上。</p>
+      <details class="ev"><summary>展开她的尖峰证据句 ▾</summary><ul><li><span class="kai">又还寂寞</span> <span class="src">《忆秦娥·咏桐》 行内密度 0.25</span></li><li><span class="kai">寂寞深闺</span> <span class="src">《点绛唇·闺思》 行内密度 0.25</span></li><li><span class="kai">独坐一室</span> <span class="src">《感怀》 行内密度 0.25</span></li><li><span class="kai">寂寥浑似</span> <span class="src">《满庭芳·残梅》 行内密度 0.2375</span></li></ul></details>
+    </div>
+    <div class="card jade">
+      <h3>陆游：弥漫型孤独</h3>
+      <div class="num">1.375<span style="font-size:14px;"> /百字</span></div>
+      <p>当前六人中排第 1/6，正文充分样本总榜第 7/87。他的高频孤独词反复落在孤村、孤臣、寂寞与独自等处境里，呈现出更接近<b>弥漫型</b>的文本签名。</p>
+      <details class="ev"><summary>展开他的证据句 ▾</summary><ul><li><span class="kai">而寂然无人声</span> <span class="src">《入蜀记(节选)》 行内密度 0.2833</span></li><li><span class="kai">孤臣耿耿独私忧</span> <span class="src">《归次汉中境上》 行内密度 0.2357</span></li><li><span class="kai">乱山孤垒</span> <span class="src">《水龙吟·春日游摩诃池》 行内密度 0.2125</span></li></ul></details>
+    </div>
+    <div class="card blue">
+      <h3>李白：孤独不是最高频签名</h3>
+      <div class="num">0.822<span style="font-size:14px;"> /百字</span></div>
+      <p>当前六人中排第 5/6（充分样本总榜第 61/87）。「举杯邀明月」等名句很醒目，但扩容后的整体密度显示：孤独并非他最频繁的词汇签名。</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>独白型还是对话型：自称 / 他称之比</h2>
+    <div class="cap">自称（我/吾/余/此身…）÷ 他称（君/汝/故人/客…）。比值＞1＝独白倾向（说给自己听），＜1＝对话倾向（呼唤他者）。悬停看原始词数。</div>
+    <div id="ratioChart" class="chart"></div>
+    <div class="note">当前六人自称/他称比：<b>陆游</b> 1.188；<b>白居易</b> 0.947；<b>杜甫</b> 0.932；<b>苏轼</b> 0.906；<b>李白</b> 0.745；<b>李清照</b> 0.68。比值高于 1 的诗人：<b>陆游</b>。该指标只统计词表中的人称表达，不等同于叙事学意义上的独白或对话。</div>
+  </div>
+</section>
+
+<!-- ==================== 下半：夸张签名 ==================== -->
+<section class="sect">
+  <div class="head"><h2>下半 · 夸张签名</h2><span class="en">SIGNATURES OF HYPERBOLE</span></div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>夸张密度 Top10（正文≥300字的 87 人）</h2>
+      <div class="cap">每百字夸张数词数。夸张标记从严（只标「大数×度量/时间/景物」经典组合与虚指大数），因此是<b>保守下界</b>。悬停看各家量级冠军句。</div>
+      <div id="hypChart" class="chart"></div>
+    </div>
+    <div class="panel">
+      <h2>数据修正了我们的预设</h2>
+      <div class="cap">这一格是方法论诚实的展示位。</div>
+      <div class="card rev" style="margin-top:6px;">
+        <h3>「李白是夸张之王」？——密度上不是</h3>
+        <p>正文不少于 300 字的 87 位诗人中，夸张密度第一是<b>贺知章（0.801/百字）</b>，全体中位数为 0.266；<b>李白 0.491/百字，排第 5</b>，平均数量级排第 18。数据没有配合传说，我们如实呈现。</p>
+        <p style="margin-top:6px;">小样本附注：王之涣 密度 1.667，但仅 6 首/180 字，样本不足不入榜。</p>
+      </div>
+      <div class="card blue" style="margin-top:12px;">
+        <h3>李白神话的真实所在：量级</h3>
+        <p>「扶摇直上<b>九万里</b>」（《上李邕》）量级 log₁₀≈4.95，是全语料<b>「数字×度量单位」组合式夸张的量级冠军</b>（第二名正是他自己的「四万八千丈/岁」4.68，陆游「三万里河」4.48 居后）。李白的签名不是「夸张得频繁」，而是<b>一出手就把尺度拉到极限</b>——密度不第一，量级第一。</p>
+        <p class="src" style="margin-top:5px;">诚实注明：若把「亿/千万」这类<b>虚指大数</b>也算入，陆游「化身千亿」（log₁₀=8.0）等更高；「九万里」的冠军只在「数×度量单位」口径内成立。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>两种「万里」：李白偏天宇，陆游偏家国</h2>
+    <div class="cap">从语料逐句抽取两人全部含「万里」诗句（李白 25 句、陆游 28 句），标注「万里」量的是什么。</div>
+    <div class="grid2">
+      <div>
+        <div class="wl-head"><span class="who" style="color:#426f94;">李白的万里</span><span class="src">仙界与行旅</span></div>
+        <div class="scrollx"><table class="wl">
+          <tr><th>诗句</th><th>出处</th><th>「万里」量的是</th><th>语境</th></tr>
+          <tr><td class="kai vline">长风万里送秋雁</td><td class="src">《宣州谢朓楼饯别校书叔云》</td><td>长风的跨度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里送行舟</td><td class="src">《渡荆门送别》</td><td>故乡水相送的水程</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">扶摇直上九万里</td><td class="src">《上李邕》</td><td>大鹏扶摇的高度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">孤蓬万里征</td><td class="src">《送友人》</td><td>孤蓬漂泊的行程</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">长风几万里</td><td class="src">《关山月》</td><td>天风越关山的跨度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">黄云万里动风色</td><td class="src">《庐山谣寄卢侍御虚舟》</td><td>黄云铺展的广度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">夜郎万里道</td><td class="src">《经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰》</td><td>流放夜郎的路途</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">送此万里目</td><td class="src">《经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰》</td><td>登高目力所及</td><td><span class="tag t-sky">登览</span></td></tr>
+<tr><td class="kai vline">万里浮云卷碧山</td><td class="src">《答王十二寒夜独酌有怀》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">咆哮万里触龙门</td><td class="src">《公无渡河》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里长征战</td><td class="src">《战城南》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">自有云霄万里高</td><td class="src">《观放白鹰二首》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">海水直下万里深</td><td class="src">《远别离》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里写入胸怀间</td><td class="src">《赠裴十四》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">与人万里长相随</td><td class="src">《峨眉山月歌送蜀僧晏入中京》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">有似山开万里云</td><td class="src">《江夏赠韦南陵冰》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">汉江回万里</td><td class="src">《金陵望汉江》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">班超万里侯</td><td class="src">《田园言怀》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">黄河万里触山动</td><td class="src">《西岳云台歌送丹丘子》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">枝叶万里长</td><td class="src">《上云乐》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里清风来</td><td class="src">《游泰山六首》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里足踯躅</td><td class="src">《天马歌》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">一水牵愁万里长</td><td class="src">《横江词六首》</td><td>行旅、人事或历史距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">吹散万里云</td><td class="src">《赠何七判官昌浩》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+<tr><td class="kai vline">万里舒霜合</td><td class="src">《雨后望月》</td><td>天宇、自然或山河尺度</td><td><span class="tag t-sky">天空·仙界</span></td></tr>
+        </table></div>
+        <div class="wl-sum">25 句中 <b>15 句归入天宇/登览</b>，10 句归入江湖行旅或人事距离。扩容后的全部命中均列出，李白的万里并非全是仙界。</div>
+      </div>
+      <div>
+        <div class="wl-head"><span class="who" style="color:#8a3b2f;">陆游的万里</span><span class="src">报国与山河</span></div>
+        <div class="scrollx"><table class="wl">
+          <tr><th>诗句</th><th>出处</th><th>「万里」量的是</th><th>语境</th></tr>
+          <tr><td class="kai vline">当年万里觅封侯</td><td class="src">《诉衷情·当年万里觅封侯》</td><td>从军觅封侯的征途</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">孤臣万里客江干</td><td class="src">《病起书怀》</td><td>孤臣去国之远</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">三万里河东入海</td><td class="src">《秋夜将晓出篱门迎凉有感二首》</td><td>中原山河的长度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">壮图万里战皋兰</td><td class="src">《书愤二首》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">自许封侯在万里</td><td class="src">《夜游宫·记梦寄师伯浑》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">万里关河孤枕梦</td><td class="src">《枕上作》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">如见万里烟尘清</td><td class="src">《题醉中所作草书卷后》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">万里羁愁添白发</td><td class="src">《黄州》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">崖州万里窜酷吏</td><td class="src">《二月二十四日作》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">身万里</td><td class="src">《双头莲·呈范至能待制》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">万里因循成久客</td><td class="src">《宴西楼》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">平生万里心</td><td class="src">《夜读兵书》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">扈跸老臣身万里</td><td class="src">《龙兴寺吊少陵先生寓居》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">九万里中鲲自化</td><td class="src">《寓驿舍》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">更堪万里望吴京</td><td class="src">《登剑南西川门感怀》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">丈夫出门无万里</td><td class="src">《胡无人》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">更驾万里风</td><td class="src">《醉歌》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">忆昔轻装万里行</td><td class="src">《忆昔》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">壮心空万里</td><td class="src">《感皇恩·小阁倚秋空》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">地绵万里尽春耕</td><td class="src">《书喜》</td><td>家国、边疆或报国尺度</td><td><span class="tag t-state">家国·报国</span></td></tr>
+<tr><td class="kai vline">难驯万里鸥</td><td class="src">《学易》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">咫尺长门过万里</td><td class="src">《夜游宫·宫词》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">且作沧溟万里看</td><td class="src">《杂兴》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">行遍天涯千万里</td><td class="src">《小园》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">万里欲呼牛渚月</td><td class="src">《独游城西诸僧舍》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">万里纵横自在身</td><td class="src">《有道流过门留与之语颇异口占赠之》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">伴我云云万里身</td><td class="src">《刘道士赠小葫芦》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+<tr><td class="kai vline">万里江湖烟舸</td><td class="src">《桃源忆故人（五之三）》</td><td>羁旅、身世或江湖距离</td><td><span class="tag t-road">江湖·行旅</span></td></tr>
+        </table></div>
+        <div class="wl-sum">28 句中 <b>11 句归入家国/边疆</b>，17 句归入羁旅、身世或江湖距离。同一个「万里」，两位诗人的高频语境并不相同。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>「三千尺」有多高：夸张放大器</h2>
+    <div class="cap">庐山瀑布实测约 155 米；「飞流直下三千尺」按唐大尺（1尺≈30.7cm）合约 921 米。拖动滑块，把实测瀑布拉伸到诗里的高度。</div>
+    <div class="amp">
+      <div class="amp-stage" id="ampStage">
+        <div id="poemVerse">飞流直下三千尺，疑是银河落九天</div>
+        <div class="bar" id="barReal"><div class="lab">庐山瀑布·实测<br><span class="hval">155 米</span></div></div>
+        <div class="bar" id="barPoem"><div class="lab">诗中瀑布<br><span class="hval" id="poemH">155 米</span></div></div>
+      </div>
+      <div class="amp-ctrl">
+        <h3>诗意放大倍率</h3>
+        <div class="read" id="ampRead">1.00 ×</div>
+        <input type="range" id="ampSlider" min="100" max="594" value="100" step="2" aria-label="诗意放大倍率">
+        <div class="btns">
+          <button class="btn" data-k="100">实测 1×</button>
+          <button class="btn" data-k="300">半程 3×</button>
+          <button class="btn" data-k="594">三千尺 5.94×</button>
+        </div>
+        <p style="font-size:13.5px;margin-top:10px;" id="ampMsg">这是瀑布本来的样子——155 米，已近 50 层楼。</p>
+        <div class="mini"><b>补充叙事 · 密度不第一，量级第一：</b>同一支笔写「扶摇直上九万里」——九万唐里≈ 4.78 万公里，约为地球赤道周长（40075 公里）的 <b>1.19 倍</b>。大鹏一次爬升，绕地球一圈还有余。（唐里≈531米口径，量级冠军仅限「数×度量单位」类，见方法区）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<details class="method">
+  <summary>方法与数据（口径与局限，点开查看）</summary>
+  <ul>
+    <li><b>数据来源</b>：孤独维度 data/stylometry/solitude_stats.json（73词条人称孤独词典）；夸张维度 number_stats.json（137词条数字词典）；情感均值按 data/spirit_image_dict.py（197词条）对每位诗人全部诗作做最长优先贪心匹配后取命中情感值的次数加权平均。三套词典均为本项目<b>人工整理的分析工具，不是权威词库</b>，一切结论只在各自口径内成立。</li>
+    <li><b>孤独密度口径</b>：solitude_per_100_chars 含低权重多义字（「空」0.25、「自」0.15），会略高于真值；按强度加权的 solitude_weighted_per_100_chars 一并写入本页数据文件（李清照 0.263 / 李白 0.365 / 陆游 0.551）。六人样本为 李白300首、杜甫300首、白居易299首、苏轼300首、陆游300首、李清照83首，密度仍是<b>本库统计而非全集断言</b>。</li>
+    <li><b>四象限</b>：中位线取正文≥300字的 87 位诗人中位数（X=0.947，Y=-0.0922）。故Y轴「昂扬/低回」是<b>相对中位线的相对说法</b>，不是绝对褒贬。</li>
+    <li><b>夸张密度</b>：夸张标记从严——只标「大数×度量/时间/景物」经典组合与虚指大数，裸数词不标，故密度是<b>保守下界</b>；榜单设正文≥300字门槛（87/88人），小样本最高者另行附注，不混入主榜。</li>
+    <li><b>「九万里」量级冠军的边界</b>：仅在「数字×度量单位」（measure）类内成立（程序核实词典内该类最高即 4.95）；虚指大数「亿」（log₁₀=8.0，如陆游「化身千亿」）、「千万」（7.0）量级更高，页面已如实注明。</li>
+    <li><b>换算口径</b>：唐大尺≈30.7cm，三千尺≈921米（若按小尺24.6cm则≈738米，同样远超实测）；唐里≈531米，九万里≈4.78万公里。庐山瀑布「约155米」取秀峰瀑布常见实测口径，为约值。换算只为直观感受量级，不是考据结论。</li>
+    <li><b>万里例句</b>：由脚本从 data/poems.json 逐句抽取（含「万里」即收，重复句去重），旧核心句沿用人工标注，扩容新增句按页面声明的关键词规则做粗分类；共 25+28 句全部展示、无筛选，可逐句复核。</li>
+    <li><b>本页数据文件</b>：output/assets/competition/solhyp_data.json，脚本 数据可视化脚本/viz_35_solitude_hyperbole.py 零参数可复跑。</li>
+  </ul>
+</details>
+
+<footer class="nav">
+  <a href="29_参赛导航.html">29 参赛导航</a><a href="30_诗行万里_参赛版.html">30 总入口</a><a href="31_凝望罗盘.html">31 凝望罗盘</a><a href="32_身与心双层地图.html">32 身与心双层地图</a><a href="33_平行时空759.html">33 平行时空759</a><a href="34_一字识诗人.html">34 一字识诗人</a><a href="35_两种孤独与夸张签名.html" style="color:var(--cinnabar);">35 两种孤独与夸张签名</a><a href="36_同龄对齐.html">36 同龄对齐</a><a href="37_可听的诗.html">37 可听的诗</a><a href="38_唐宋意象潮汐.html">38 意象潮汐</a><a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
+</footer>
+</div>
+
+<script>
+var DATA = {"generated_at":"2026-08-13","note":"viz_35 两种孤独×夸张签名。孤独密度/夸张密度均为人工词典口径的保守统计；密度榜设正文≥300字门槛；情感均值为 spirit_image_dict 197词条命中情感值的次数加权平均，全体均值整体偏负，'昂扬/低回'相对中位线。","sources":["data/stylometry/solitude_stats.json（73词条人称孤独词典扫描）","data/stylometry/number_stats.json（137词条数字词典扫描，夸张从严=保守下界）","data/spirit_image_dict.py（197词条，情感值[-1,1]，人工整理非权威词库）","data/poems.json（20437首/88人）"],"median_x":0.947,"median_y":-0.0922,"min_chars":300,"pool_size":87,"scatter":[{"name":"白居易","x":0.919,"xw":0.444,"y":-0.1029,"hits":2967,"poems":299,"chars":36559,"core":true,"color":"#26786e"},{"name":"王维","x":1.154,"xw":0.53,"y":-0.0746,"hits":1846,"poems":300,"chars":17938,"core":false,"color":null},{"name":"李白","x":0.822,"xw":0.365,"y":-0.0339,"hits":3911,"poems":300,"chars":32353,"core":true,"color":"#426f94"},{"name":"孟浩然","x":1.078,"xw":0.441,"y":-0.0439,"hits":1708,"poems":299,"chars":14841,"core":false,"color":null},{"name":"杜甫","x":1.002,"xw":0.484,"y":-0.1323,"hits":2713,"poems":300,"chars":27333,"core":true,"color":"#7a5c3d"},{"name":"高适","x":1.232,"xw":0.563,"y":-0.1244,"hits":2024,"poems":247,"chars":21031,"core":false,"color":null},{"name":"李商隐","x":0.978,"xw":0.434,"y":-0.1056,"hits":1936,"poems":299,"chars":20747,"core":false,"color":null},{"name":"王昌龄","x":1.169,"xw":0.698,"y":-0.1417,"hits":1525,"poems":210,"chars":11377,"core":false,"color":null},{"name":"岑参","x":0.987,"xw":0.474,"y":-0.1034,"hits":2560,"poems":300,"chars":20675,"core":false,"color":null},{"name":"杜牧","x":0.946,"xw":0.423,"y":-0.105,"hits":2166,"poems":300,"chars":21469,"core":false,"color":null},{"name":"王之涣","x":1.111,"xw":0.778,"y":-0.0447,"hits":38,"poems":6,"chars":180,"core":false,"color":null},{"name":"刘禹锡","x":0.941,"xw":0.415,"y":-0.0751,"hits":2341,"poems":299,"chars":28793,"core":false,"color":null},{"name":"柳宗元","x":0.668,"xw":0.254,"y":-0.0928,"hits":1963,"poems":242,"chars":54017,"core":false,"color":null},{"name":"韩愈","x":0.721,"xw":0.264,"y":-0.089,"hits":2964,"poems":300,"chars":67384,"core":false,"color":null},{"name":"王勃","x":0.482,"xw":0.194,"y":-0.0314,"hits":2398,"poems":117,"chars":32779,"core":false,"color":null},{"name":"李贺","x":0.714,"xw":0.286,"y":-0.1008,"hits":2195,"poems":251,"chars":18907,"core":false,"color":null},{"name":"骆宾王","x":1.014,"xw":0.434,"y":-0.0921,"hits":1704,"poems":142,"chars":18928,"core":false,"color":null},{"name":"陈子昂","x":1.03,"xw":0.571,"y":-0.0274,"hits":1374,"poems":168,"chars":15053,"core":false,"color":null},{"name":"张九龄","x":1.44,"xw":0.647,"y":-0.0718,"hits":1335,"poems":221,"chars":16949,"core":false,"color":null},{"name":"贺知章","x":0.641,"xw":0.104,"y":0.0363,"hits":91,"poems":22,"chars":1248,"core":false,"color":null},{"name":"元稹","x":0.805,"xw":0.326,"y":-0.104,"hits":3113,"poems":299,"chars":41217,"core":false,"color":null},{"name":"张志和","x":0.427,"xw":0.064,"y":0.0385,"hits":78,"poems":11,"chars":468,"core":false,"color":null},{"name":"韦应物","x":1.513,"xw":0.785,"y":-0.0976,"hits":1894,"poems":300,"chars":19303,"core":false,"color":null},{"name":"常建","x":1.301,"xw":0.717,"y":-0.0762,"hits":479,"poems":63,"chars":3842,"core":false,"color":null},{"name":"张继","x":1.146,"xw":0.536,"y":-0.1078,"hits":269,"poems":50,"chars":1920,"core":false,"color":null},{"name":"祖咏","x":1.52,"xw":0.73,"y":-0.0967,"hits":213,"poems":39,"chars":1842,"core":false,"color":null},{"name":"韦庄","x":1.069,"xw":0.538,"y":-0.1176,"hits":2328,"poems":300,"chars":18624,"core":false,"color":null},{"name":"李煜","x":1.134,"xw":0.487,"y":-0.1595,"hits":496,"poems":69,"chars":5909,"core":false,"color":null},{"name":"温庭筠","x":0.912,"xw":0.414,"y":-0.1181,"hits":2304,"poems":300,"chars":19081,"core":false,"color":null},{"name":"许浑","x":1.175,"xw":0.547,"y":-0.0926,"hits":2526,"poems":300,"chars":14644,"core":false,"color":null},{"name":"罗隐","x":0.832,"xw":0.344,"y":-0.1329,"hits":1609,"poems":300,"chars":15625,"core":false,"color":null},{"name":"杜荀鹤","x":0.845,"xw":0.334,"y":-0.1422,"hits":1610,"poems":300,"chars":13732,"core":false,"color":null},{"name":"皮日休","x":0.833,"xw":0.341,"y":-0.0282,"hits":1874,"poems":300,"chars":25440,"core":false,"color":null},{"name":"聂夷中","x":1.027,"xw":0.45,"y":-0.0702,"hits":151,"poems":31,"chars":1656,"core":false,"color":null},{"name":"司空曙","x":1.419,"xw":0.662,"y":-0.1255,"hits":945,"poems":169,"chars":7117,"core":false,"color":null},{"name":"卢纶","x":1.089,"xw":0.494,"y":-0.0972,"hits":1863,"poems":300,"chars":16252,"core":false,"color":null},{"name":"钱起","x":1.056,"xw":0.582,"y":-0.1024,"hits":2050,"poems":300,"chars":16284,"core":false,"color":null},{"name":"李益","x":1.353,"xw":0.574,"y":-0.1068,"hits":1018,"poems":176,"chars":8867,"core":false,"color":null},{"name":"孟郊","x":1.33,"xw":0.592,"y":-0.1358,"hits":2318,"poems":300,"chars":25483,"core":false,"color":null},{"name":"贾岛","x":1.185,"xw":0.647,"y":-0.1339,"hits":1747,"poems":300,"chars":13248,"core":false,"color":null},{"name":"张籍","x":1.273,"xw":0.644,"y":-0.0875,"hits":1580,"poems":300,"chars":16417,"core":false,"color":null},{"name":"王建","x":0.765,"xw":0.32,"y":-0.0766,"hits":1779,"poems":299,"chars":19476,"core":false,"color":null},{"name":"沈佺期","x":0.683,"xw":0.292,"y":-0.0575,"hits":1025,"poems":162,"chars":10535,"core":false,"color":null},{"name":"宋之问","x":0.986,"xw":0.398,"y":-0.0319,"hits":1462,"poems":210,"chars":13898,"core":false,"color":null},{"name":"苏轼","x":0.93,"xw":0.415,"y":-0.0712,"hits":2991,"poems":300,"chars":32466,"core":true,"color":"#b64b3f"},{"name":"上官仪","x":0.785,"xw":0.283,"y":-0.0541,"hits":172,"poems":21,"chars":1274,"core":false,"color":null},{"name":"辛弃疾","x":0.885,"xw":0.388,"y":-0.0686,"hits":3024,"poems":300,"chars":23738,"core":false,"color":null},{"name":"陆游","x":1.375,"xw":0.551,"y":-0.1159,"hits":2110,"poems":300,"chars":18688,"core":true,"color":"#8a3b2f"},{"name":"李清照","x":0.552,"xw":0.263,"y":-0.1406,"hits":711,"poems":83,"chars":8883,"core":true,"color":"#9c5d8f"},{"name":"欧阳修","x":0.816,"xw":0.299,"y":-0.0851,"hits":2696,"poems":300,"chars":46703,"core":false,"color":null},{"name":"王安石","x":0.853,"xw":0.317,"y":-0.0564,"hits":1586,"poems":300,"chars":32117,"core":false,"color":null},{"name":"黄庭坚","x":0.819,"xw":0.329,"y":-0.0824,"hits":2215,"poems":300,"chars":21250,"core":false,"color":null},{"name":"范成大","x":0.747,"xw":0.336,"y":-0.0764,"hits":2088,"poems":300,"chars":19689,"core":false,"color":null},{"name":"杨万里","x":0.959,"xw":0.425,"y":-0.0995,"hits":1532,"poems":300,"chars":13979,"core":false,"color":null},{"name":"尤袤","x":1.235,"xw":0.507,"y":-0.0774,"hits":420,"poems":81,"chars":4615,"core":false,"color":null},{"name":"柳永","x":0.959,"xw":0.529,"y":-0.1188,"hits":1978,"poems":234,"chars":19910,"core":false,"color":null},{"name":"晏殊","x":0.546,"xw":0.291,"y":-0.0559,"hits":1330,"poems":283,"chars":12647,"core":false,"color":null},{"name":"晏几道","x":0.62,"xw":0.274,"y":-0.1413,"hits":1960,"poems":288,"chars":14682,"core":false,"color":null},{"name":"秦观","x":1.058,"xw":0.48,"y":-0.1051,"hits":2275,"poems":299,"chars":20612,"core":false,"color":null},{"name":"周邦彦","x":0.728,"xw":0.361,"y":-0.1344,"hits":2251,"poems":259,"chars":25012,"core":false,"color":null},{"name":"姜夔","x":1.131,"xw":0.489,"y":-0.0922,"hits":2247,"poems":298,"chars":19802,"core":false,"color":null},{"name":"吴文英","x":0.851,"xw":0.407,"y":-0.1127,"hits":3844,"poems":299,"chars":26218,"core":false,"color":null},{"name":"张炎","x":1.441,"xw":0.676,"y":-0.0803,"hits":3164,"poems":300,"chars":25193,"core":false,"color":null},{"name":"陈与义","x":1.097,"xw":0.547,"y":-0.1126,"hits":1821,"poems":299,"chars":15502,"core":false,"color":null},{"name":"文天祥","x":0.955,"xw":0.407,"y":-0.1051,"hits":2008,"poems":300,"chars":19683,"core":false,"color":null},{"name":"范仲淹","x":0.695,"xw":0.317,"y":-0.0209,"hits":2078,"poems":299,"chars":25041,"core":false,"color":null},{"name":"司马光","x":0.842,"xw":0.354,"y":-0.0799,"hits":1573,"poems":300,"chars":30039,"core":false,"color":null},{"name":"朱熹","x":1.416,"xw":0.619,"y":-0.1107,"hits":1350,"poems":299,"chars":17016,"core":false,"color":null},{"name":"林逋","x":1.259,"xw":0.701,"y":-0.0945,"hits":1463,"poems":294,"chars":12793,"core":false,"color":null},{"name":"梅尧臣","x":0.871,"xw":0.329,"y":-0.0922,"hits":1733,"poems":300,"chars":24215,"core":false,"color":null},{"name":"苏辙","x":0.99,"xw":0.33,"y":-0.0852,"hits":3170,"poems":299,"chars":49279,"core":false,"color":null},{"name":"苏洵","x":0.766,"xw":0.246,"y":-0.1118,"hits":762,"poems":84,"chars":24937,"core":false,"color":null},{"name":"张孝祥","x":0.892,"xw":0.39,"y":-0.0829,"hits":2122,"poems":299,"chars":18834,"core":false,"color":null},{"name":"曾巩","x":0.915,"xw":0.327,"y":-0.0668,"hits":2184,"poems":300,"chars":33429,"core":false,"color":null},{"name":"张元干","x":0.753,"xw":0.329,"y":-0.0924,"hits":2150,"poems":299,"chars":18726,"core":false,"color":null},{"name":"陈亮","x":0.9,"xw":0.313,"y":-0.0918,"hits":1048,"poems":140,"chars":15551,"core":false,"color":null},{"name":"刘克庄","x":0.801,"xw":0.401,"y":-0.0911,"hits":1638,"poems":300,"chars":18966,"core":false,"color":null},{"name":"叶梦得","x":1.228,"xw":0.437,"y":-0.0756,"hits":1751,"poems":256,"chars":17180,"core":false,"color":null},{"name":"贺铸","x":0.659,"xw":0.314,"y":-0.0915,"hits":2189,"poems":299,"chars":17913,"core":false,"color":null},{"name":"张先","x":0.769,"xw":0.354,"y":-0.0791,"hits":1410,"poems":206,"chars":11699,"core":false,"color":null},{"name":"欧阳炯","x":0.969,"xw":0.404,"y":-0.0734,"hits":365,"poems":48,"chars":4233,"core":false,"color":null},{"name":"朱淑真","x":1.261,"xw":0.687,"y":-0.1558,"hits":1481,"poems":300,"chars":11580,"core":false,"color":null},{"name":"程颢","x":0.768,"xw":0.179,"y":-0.0289,"hits":304,"poems":70,"chars":5342,"core":false,"color":null},{"name":"陆九渊","x":0.541,"xw":0.195,"y":-0.0211,"hits":133,"poems":32,"chars":1850,"core":false,"color":null},{"name":"吕本中","x":1.064,"xw":0.435,"y":-0.1366,"hits":1821,"poems":300,"chars":17289,"core":false,"color":null},{"name":"杨亿","x":0.757,"xw":0.327,"y":-0.0753,"hits":1545,"poems":299,"chars":16381,"core":false,"color":null},{"name":"钱惟演","x":0.947,"xw":0.338,"y":-0.0712,"hits":525,"poems":102,"chars":4965,"core":false,"color":null},{"name":"石延年","x":1.01,"xw":0.55,"y":-0.1174,"hits":265,"poems":68,"chars":2573,"core":false,"color":null}],"six_landing":{"李白":"低孤独·昂扬","杜甫":"高孤独·低回","白居易":"低孤独·低回","苏轼":"低孤独·昂扬","陆游":"高孤独·低回","李清照":"低孤独·低回"},"six_solitude":{"李白":{"density":0.822,"weighted":0.365,"ratio":0.745,"cats":{"孤独":266,"自称":310,"他称":416},"poems":300,"chars":32353,"rank":61,"lines":[{"line":"寂寂还寂寂","title":"于五松山赠南陵常赞府","density":0.36,"solitude_words":["寂寂"]},{"line":"孤云独去闲","title":"独坐敬亭山","density":0.33,"solitude_words":["孤云","独"]},{"line":"独宿孤房泪如雨","title":"乌夜啼","density":0.2643,"solitude_words":["独宿","孤"]},{"line":"孤竹延陵","title":"上留田行","density":0.2125,"solitude_words":["孤"]}]},"杜甫":{"density":1.002,"weighted":0.484,"ratio":0.932,"cats":{"孤独":274,"自称":207,"他称":222},"poems":300,"chars":27333,"rank":35,"lines":[{"line":"春山无伴独相求","title":"题张氏隐居二首","density":0.25,"solitude_words":["无伴","独"]},{"line":"经旬出饮独空床","title":"江畔独步寻花七绝句","density":0.2429,"solitude_words":["独","空床"]},{"line":"经旬出饮独空床","title":"江畔独步寻花七绝句·其一","density":0.2429,"solitude_words":["独","空床"]},{"line":"寂寞书斋里","title":"冬日有怀李白","density":0.2,"solitude_words":["寂寞"]}]},"白居易":{"density":0.919,"weighted":0.444,"ratio":0.947,"cats":{"孤独":336,"自称":358,"他称":378},"poems":299,"chars":36559,"rank":48,"lines":[{"line":"独对孤灯坐","title":"初与元九别后忽梦见之及寤而书适至兼寄桐花诗…此寄","density":0.35,"solitude_words":["独","孤灯"]},{"line":"独宿在空堂","title":"夜雨","density":0.34,"solitude_words":["独宿","空堂"]},{"line":"空房独守时","title":"长相思两首","density":0.33,"solitude_words":["空房","独"]},{"line":"田中寂寞无人至","title":"牡丹芳","density":0.2714,"solitude_words":["寂寞","无人"]}]},"苏轼":{"density":0.93,"weighted":0.415,"ratio":0.906,"cats":{"孤独":302,"自称":317,"他称":350},"poems":300,"chars":32466,"rank":47,"lines":[{"line":"伴君幽独","title":"贺新郎·夏景","density":0.25,"solitude_words":["幽独"]},{"line":"寂寞君平","title":"行香子·寓意","density":0.25,"solitude_words":["寂寞"]},{"line":"寂寞园林","title":"蝶恋花·暮春别李公择","density":0.25,"solitude_words":["寂寞"]},{"line":"大孤小孤江中央","title":"李思训画长江绝岛图","density":0.2429,"solitude_words":["孤"]}]},"陆游":{"density":1.375,"weighted":0.551,"ratio":1.188,"cats":{"孤独":257,"自称":177,"他称":149},"poems":300,"chars":18688,"rank":7,"lines":[{"line":"而寂然无人声","title":"入蜀记(节选)","density":0.2833,"solitude_words":["寂","无人"]},{"line":"孤臣耿耿独私忧","title":"归次汉中境上","density":0.2357,"solitude_words":["孤","独"]},{"line":"乱山孤垒","title":"水龙吟·春日游摩诃池","density":0.2125,"solitude_words":["孤"]},{"line":"孤恨清香","title":"朝中措·梅","density":0.2125,"solitude_words":["孤"]}]},"李清照":{"density":0.552,"weighted":0.263,"ratio":0.68,"cats":{"孤独":49,"自称":34,"他称":50},"poems":83,"chars":8883,"rank":83,"lines":[{"line":"又还寂寞","title":"忆秦娥·咏桐","density":0.25,"solitude_words":["寂寞"]},{"line":"寂寞深闺","title":"点绛唇·闺思","density":0.25,"solitude_words":["寂寞"]},{"line":"独坐一室","title":"感怀","density":0.25,"solitude_words":["独坐"]},{"line":"寂寥浑似","title":"满庭芳·残梅","density":0.2375,"solitude_words":["寂寥"]}]}},"hyperbole":{"top10":[{"name":"贺知章","density":0.801,"hits":10,"chars":1248,"poems":22,"mag":1.63,"example":{"word":"万","line":"昭昭有唐，天俾万国","title":"郊庙歌辞·禅社首乐章·太和"}},{"name":"辛弃疾","density":0.573,"hits":136,"chars":23738,"poems":300,"mag":1.592,"example":{"word":"百万","line":"布衣百万，看君一笑沈醉","title":"念奴娇·双陆和坐客韵"}},{"name":"范仲淹","density":0.523,"hits":131,"chars":25041,"poems":299,"mag":1.541,"example":{"word":"亿","line":"及帝握《赤符》，乘六龙，得圣人之时，臣妾亿兆，天下孰加焉","title":"严先生祠堂记"}},{"name":"常建","density":0.495,"hits":19,"chars":3842,"poems":63,"mag":1.113,"example":{"word":"万","line":"万籁此都寂，但余钟磬音","title":"题破山寺后禅院"}},{"name":"李白","density":0.491,"hits":159,"chars":32353,"poems":300,"mag":1.331,"example":{"word":"亿","line":"天公见玉女，大笑亿千场","title":"短歌行"}},{"name":"王昌龄","density":0.483,"hits":55,"chars":11377,"poems":210,"mag":1.454,"example":{"word":"亿","line":"今我一礼心，亿劫同不移","title":"香积寺礼拜万回平等二圣僧塔"}},{"name":"许浑","density":0.451,"hits":66,"chars":14644,"poems":300,"mag":1.16,"example":{"word":"万","line":"暗滩水落涨虚沙，滩去秦吴万尽赊","title":"南海府罢南康阻浅行侣稍稍登陆…主人燕饯至频暮宿东溪"}},{"name":"文天祥","density":0.422,"hits":83,"chars":19683,"poems":300,"mag":1.088,"example":{"word":"亿","line":"九垠化为魅，亿丑俘为虏","title":"言志"}},{"name":"杨亿","density":0.415,"hits":68,"chars":16381,"poems":299,"mag":1.282,"example":{"word":"亿","line":"翼翼丕承，亿万斯年","title":"太常乐章三十首其九酌献第五室奏大定之舞曲"}},{"name":"晏殊","density":0.411,"hits":52,"chars":12647,"poems":283,"mag":1.366,"example":{"word":"亿","line":"尧年亿万如天远，万国欢心拱太微","title":"元日词其一·御阁"}}],"median":0.266,"libai_rank":5,"libai_mag_rank":18,"libai_density":0.491,"libai_mag":1.331,"headline":"88位诗人中样本充分（≥300字）的87位里，夸张密度（每百字夸张数词）第1名为贺知章：0.80，是第2名辛弃疾（0.57）的1.40倍，全体中位数（0.27）的3.0倍。李白夸张密度 0.49，排第5名；平均数量级排第18名。小样本附注：王之涣（1.67，仅6首/180字）密度更高，但样本不足不入榜。","small_note":{"name":"王之涣","density":1.667,"poems":6,"chars":180},"measure_champion":{"word":"九万里","mag":4.95,"line":"大鹏一日同风起，扶摇直上九万里","title":"上李邕","km":47790,"earth_ratio":1.19},"vague_max":{"word":"亿","mag":8.0,"example":"何方可化身千亿（陆游《梅花绝句二首·其一》）"}},"wanli":{"libai":[{"line":"长风万里送秋雁","title":"宣州谢朓楼饯别校书叔云","object":"长风的跨度","tag":"天空·仙界"},{"line":"万里送行舟","title":"渡荆门送别","object":"故乡水相送的水程","tag":"江湖·行旅"},{"line":"扶摇直上九万里","title":"上李邕","object":"大鹏扶摇的高度","tag":"天空·仙界"},{"line":"孤蓬万里征","title":"送友人","object":"孤蓬漂泊的行程","tag":"江湖·行旅"},{"line":"长风几万里","title":"关山月","object":"天风越关山的跨度","tag":"天空·仙界"},{"line":"黄云万里动风色","title":"庐山谣寄卢侍御虚舟","object":"黄云铺展的广度","tag":"天空·仙界"},{"line":"夜郎万里道","title":"经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰","object":"流放夜郎的路途","tag":"江湖·行旅"},{"line":"送此万里目","title":"经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰","object":"登高目力所及","tag":"登览"},{"line":"万里浮云卷碧山","title":"答王十二寒夜独酌有怀","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"咆哮万里触龙门","title":"公无渡河","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"万里长征战","title":"战城南","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"自有云霄万里高","title":"观放白鹰二首","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"海水直下万里深","title":"远别离","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"万里写入胸怀间","title":"赠裴十四","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"与人万里长相随","title":"峨眉山月歌送蜀僧晏入中京","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"有似山开万里云","title":"江夏赠韦南陵冰","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"汉江回万里","title":"金陵望汉江","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"班超万里侯","title":"田园言怀","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"黄河万里触山动","title":"西岳云台歌送丹丘子","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"枝叶万里长","title":"上云乐","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"万里清风来","title":"游泰山六首","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"万里足踯躅","title":"天马歌","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"一水牵愁万里长","title":"横江词六首","object":"行旅、人事或历史距离","tag":"江湖·行旅"},{"line":"吹散万里云","title":"赠何七判官昌浩","object":"天宇、自然或山河尺度","tag":"天空·仙界"},{"line":"万里舒霜合","title":"雨后望月","object":"天宇、自然或山河尺度","tag":"天空·仙界"}],"luyou":[{"line":"当年万里觅封侯","title":"诉衷情·当年万里觅封侯","object":"从军觅封侯的征途","tag":"家国·报国"},{"line":"孤臣万里客江干","title":"病起书怀","object":"孤臣去国之远","tag":"家国·报国"},{"line":"三万里河东入海","title":"秋夜将晓出篱门迎凉有感二首","object":"中原山河的长度","tag":"家国·报国"},{"line":"壮图万里战皋兰","title":"书愤二首","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"自许封侯在万里","title":"夜游宫·记梦寄师伯浑","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"万里关河孤枕梦","title":"枕上作","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"如见万里烟尘清","title":"题醉中所作草书卷后","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"万里羁愁添白发","title":"黄州","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"崖州万里窜酷吏","title":"二月二十四日作","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"身万里","title":"双头莲·呈范至能待制","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"万里因循成久客","title":"宴西楼","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"平生万里心","title":"夜读兵书","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"扈跸老臣身万里","title":"龙兴寺吊少陵先生寓居","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"九万里中鲲自化","title":"寓驿舍","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"更堪万里望吴京","title":"登剑南西川门感怀","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"丈夫出门无万里","title":"胡无人","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"更驾万里风","title":"醉歌","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"忆昔轻装万里行","title":"忆昔","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"壮心空万里","title":"感皇恩·小阁倚秋空","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"地绵万里尽春耕","title":"书喜","object":"家国、边疆或报国尺度","tag":"家国·报国"},{"line":"难驯万里鸥","title":"学易","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"咫尺长门过万里","title":"夜游宫·宫词","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"且作沧溟万里看","title":"杂兴","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"行遍天涯千万里","title":"小园","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"万里欲呼牛渚月","title":"独游城西诸僧舍","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"万里纵横自在身","title":"有道流过门留与之语颇异口占赠之","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"伴我云云万里身","title":"刘道士赠小葫芦","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"},{"line":"万里江湖烟舸","title":"桃源忆故人（五之三）","object":"羁旅、身世或江湖距离","tag":"江湖·行旅"}],"lb_sky":15,"ly_state":11},"amplifier":{"real_m":155,"chi3000_m":921,"ratio":5.94,"chi_m":0.307,"refs":[{"name":"庐山瀑布实测(约)","h":155},{"name":"埃菲尔铁塔","h":330},{"name":"哈利法塔","h":828},{"name":"「三千尺」","h":921}]}};
+
+/* ---------------- 图1：四象限散点 ---------------- */
+(function(){
+  var el = document.getElementById('quadChart');
+  var ch = echarts.init(el);
+  var MX = DATA.median_x, MY = DATA.median_y;
+  var XMAX = 2.6, YMIN = -0.32, YMAX = 0.09;
+  var bg = [], core = [];
+  DATA.scatter.forEach(function(r){
+    var item = {name:r.name, value:[r.x, r.y], meta:r};
+    if(r.core){ item.itemStyle = {color:r.color, borderColor:'#fbfcfa', borderWidth:1.5}; core.push(item); }
+    else bg.push(item);
+  });
+  function quad(r){
+    return (r.value[0] >= MX ? '高孤独' : '低孤独') + '·' + (r.value[1] >= MY ? '昂扬' : '低回');
+  }
+  var areaLab = function(txt, x0, x1, y0, y1, color){
+    return [{xAxis:x0, yAxis:y0, itemStyle:{color:'rgba(0,0,0,0)'},
+             label:{show:true, position:'inside', color:color, fontSize:13,
+                    fontFamily:'KaiTi,STKaiti,serif', formatter:txt, opacity:0.75}},
+            {xAxis:x1, yAxis:y1}];
+  };
+  ch.setOption({
+    grid:{left:52, right:24, top:34, bottom:46},
+    xAxis:{name:'孤独密度 / 百字', nameLocation:'middle', nameGap:28, min:0, max:XMAX,
+           axisLine:{lineStyle:{color:'#5a615c'}}, splitLine:{show:false}},
+    yAxis:{name:'情感均值', nameGap:36, nameLocation:'middle', min:YMIN, max:YMAX,
+           axisLine:{lineStyle:{color:'#5a615c'}}, splitLine:{show:false}},
+    tooltip:{trigger:'item', backgroundColor:'#fbfcfa', borderColor:'#dfe4de',
+      textStyle:{color:'#252b27', fontSize:12.5},
+      formatter:function(p){
+        var m = p.data.meta;
+        return '<b>' + m.name + '</b>　' + quad(p.data) +
+          '<br>孤独密度 ' + m.x + '/百字（加权 ' + m.xw + '）' +
+          '<br>情感均值 ' + m.y + '（意象命中 ' + m.hits + ' 次）' +
+          '<br>样本 ' + m.poems + ' 首 / ' + m.chars + ' 字';
+      }},
+    series:[
+      {type:'scatter', data:bg, symbolSize:6.5, z:2,
+       itemStyle:{color:'#b9c0ba', opacity:0.75},
+       markLine:{silent:true, symbol:'none',
+         lineStyle:{type:'dashed', color:'#8a918b'},
+         label:{color:'#5a615c', fontSize:11},
+         data:[{xAxis:MX, label:{formatter:'中位 ' + MX}},
+               {yAxis:MY, label:{formatter:'中位 ' + MY, position:'insideEndTop'}}]},
+       markArea:{silent:true, data:[
+         areaLab('低孤独 · 昂扬', 0, MX, MY, YMAX, '#26786e'),
+         areaLab('高孤独 · 昂扬', MX, XMAX, MY, YMAX, '#a87527'),
+         areaLab('低孤独 · 低回', 0, MX, YMIN, MY, '#8a918b'),
+         areaLab('高孤独 · 低回', MX, XMAX, YMIN, MY, '#b64b3f')]}},
+      {type:'scatter', data:core, symbolSize:17, z:5,
+       label:{show:true, position:'top', fontSize:12.5, color:'#252b27',
+              fontFamily:'KaiTi,STKaiti,serif',
+              formatter:function(p){return p.data.name;}}}
+    ]
+  });
+  window.addEventListener('resize', function(){ ch.resize(); });
+})();
+
+/* ---------------- 图2：自称/他称比 ---------------- */
+(function(){
+  var ch = echarts.init(document.getElementById('ratioChart'));
+  var poets = Object.keys(DATA.six_solitude);
+  var rows = poets.map(function(p){
+    var d = DATA.six_solitude[p];
+    return {name:p, ratio:d.ratio, cats:d.cats,
+            color:(DATA.scatter.filter(function(r){return r.name===p;})[0]||{}).color || '#5a615c'};
+  }).sort(function(a,b){return a.ratio-b.ratio;});
+  ch.setOption({
+    grid:{left:70, right:56, top:14, bottom:34},
+    xAxis:{max:1.35, name:'自称 ÷ 他称', nameLocation:'middle', nameGap:24,
+           axisLine:{lineStyle:{color:'#5a615c'}}, splitLine:{lineStyle:{color:'#e6eae4'}}},
+    yAxis:{type:'category', data:rows.map(function(r){return r.name;}),
+           axisLine:{lineStyle:{color:'#5a615c'}},
+           axisLabel:{fontFamily:'KaiTi,STKaiti,serif', fontSize:14}},
+    tooltip:{trigger:'item', backgroundColor:'#fbfcfa', borderColor:'#dfe4de',
+      textStyle:{color:'#252b27', fontSize:12.5},
+      formatter:function(p){
+        var r = rows[p.dataIndex];
+        return '<b>' + r.name + '</b><br>自称 ' + r.cats['自称'] + ' 次 ÷ 他称 ' +
+               r.cats['他称'] + ' 次 = ' + r.ratio +
+               '<br>' + (r.ratio >= 1 ? '独白倾向：说给自己听' : '对话倾向：呼唤他者');
+      }},
+    series:[{type:'bar', barWidth:17,
+      data:rows.map(function(r){return {value:r.ratio, itemStyle:{color:r.color, borderRadius:[0,4,4,0]}};}),
+      label:{show:true, position:'right', fontSize:12, color:'#414843',
+             formatter:function(p){return p.value.toFixed(2);}},
+      markLine:{silent:true, symbol:'none',
+        lineStyle:{type:'dashed', color:'#b64b3f'},
+        label:{formatter:'自称=他称', color:'#b64b3f', fontSize:11},
+        data:[{xAxis:1}]}}]
+  });
+  window.addEventListener('resize', function(){ ch.resize(); });
+})();
+
+/* ---------------- 图3：夸张密度Top10 ---------------- */
+(function(){
+  var ch = echarts.init(document.getElementById('hypChart'));
+  var rows = DATA.hyperbole.top10.slice().reverse();
+  ch.setOption({
+    grid:{left:70, right:60, top:14, bottom:34},
+    xAxis:{max:1.3, name:'夸张数词 / 百字', nameLocation:'middle', nameGap:24,
+           axisLine:{lineStyle:{color:'#5a615c'}}, splitLine:{lineStyle:{color:'#e6eae4'}}},
+    yAxis:{type:'category', data:rows.map(function(r){return r.name;}),
+           axisLine:{lineStyle:{color:'#5a615c'}},
+           axisLabel:{fontFamily:'KaiTi,STKaiti,serif', fontSize:13.5}},
+    tooltip:{trigger:'item', backgroundColor:'#fbfcfa', borderColor:'#dfe4de',
+      textStyle:{color:'#252b27', fontSize:12.5}, confine:true,
+      formatter:function(p){
+        var r = rows[p.dataIndex];
+        var s = '<b>' + r.name + '</b>　' + r.density + '/百字' +
+                '<br>夸张命中 ' + r.hits + ' 次 / ' + r.chars + ' 字（' + r.poems + ' 首）' +
+                '<br>平均数量级 ' + r.mag;
+        if(r.example){ s += '<br>量级冠军句：' + r.example.word + '——「' + r.example.line +
+                            '」《' + r.example.title + '》'; }
+        return s;
+      }},
+    series:[{type:'bar', barWidth:17,
+      data:rows.map(function(r, i){
+        var isLB = r.name === '李白';
+        var top = i === rows.length - 1;
+        return {value:r.density,
+          itemStyle:{color:isLB ? '#426f94' : (top ? '#b64b3f' : '#c9b083'),
+                     borderRadius:[0,4,4,0]}};
+      }),
+      label:{show:true, position:'right', fontSize:12, color:'#414843',
+             formatter:function(p){
+               var r = rows[p.dataIndex];
+               return r.density + (r.name === '李白' ? '（第' + DATA.hyperbole.libai_rank + '）' : '');
+             }},
+      markLine:{silent:true, symbol:'none',
+        lineStyle:{type:'dashed', color:'#8a918b'},
+        label:{formatter:DATA.pool_size + '人中位数 ' + DATA.hyperbole.median, color:'#5a615c', fontSize:11},
+        data:[{xAxis:DATA.hyperbole.median}]}}]
+  });
+  window.addEventListener('resize', function(){ ch.resize(); });
+})();
+
+/* ---------------- 三千尺放大器 ---------------- */
+(function(){
+  var A = DATA.amplifier;
+  var stage = document.getElementById('ampStage');
+  var MAXM = 1000;                       // 舞台顶 = 1000米
+  function px(h){ return (h / MAXM * (stage.clientHeight - 56)); }
+  // 网格线每200米 + 参照线
+  [200, 400, 600, 800].forEach(function(m){
+    var g = document.createElement('div');
+    g.className = 'amp-grid';
+    g.style.bottom = px(m) + 'px';
+    g.textContent = m + ' 米';
+    stage.appendChild(g);
+  });
+  A.refs.forEach(function(r){
+    if(r.name.indexOf('三千尺') >= 0 || r.name.indexOf('实测') >= 0) return;
+    var g = document.createElement('div');
+    g.className = 'amp-ref';
+    g.style.bottom = px(r.h) + 'px';
+    var s = document.createElement('span');
+    s.textContent = r.name + ' ' + r.h + '米';
+    g.appendChild(s);
+    stage.appendChild(g);
+  });
+  var barReal = document.getElementById('barReal');
+  var barPoem = document.getElementById('barPoem');
+  var poemH = document.getElementById('poemH');
+  var read = document.getElementById('ampRead');
+  var msg = document.getElementById('ampMsg');
+  var verse = document.getElementById('poemVerse');
+  var slider = document.getElementById('ampSlider');
+  function render(){
+    var k = slider.value / 100;
+    var h = Math.round(A.real_m * k);
+    if(k >= 5.9) h = A.chi3000_m;        // 顶格对齐 921
+    barReal.style.height = px(A.real_m) + 'px';
+    barPoem.style.height = px(h) + 'px';
+    poemH.textContent = h + ' 米';
+    read.textContent = k.toFixed(2) + ' ×';
+    verse.style.opacity = (k >= 5.9) ? 1 : 0;
+    if(k < 1.2){ msg.textContent = '这是瀑布本来的样子——155 米，已近 50 层楼。'; }
+    else if(k < 3){ msg.textContent = '继续拉伸——夸张不是撒谎，是把感受的强度画成高度。'; }
+    else if(k < 5.9){ msg.textContent = '已超过埃菲尔铁塔（330米），还在往「银河」的方向长。'; }
+    else { msg.textContent = '「三千尺」≈ ' + A.chi3000_m + ' 米：比哈利法塔（828米）还高近百米，是实测的 ' + A.ratio + ' 倍——李白把一条瀑布写成了从九天垂下的银河。'; }
+  }
+  slider.addEventListener('input', render);
+  document.querySelectorAll('.amp-ctrl .btn').forEach(function(b){
+    b.addEventListener('click', function(){ slider.value = b.dataset.k; render(); });
+  });
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
+</body>
+</html>

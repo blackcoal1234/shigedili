@@ -1,0 +1,4 @@
+﻿poet,title,dynasty,year,composition_place,modern_place,lon,lat,source_name,source_url,source_note,confidence,status
+李白,静夜思,唐,727,湖北省孝感市安陆市白兆山桃花岩,湖北省孝感市安陆市,113.69,31.26,cnkgraph/唐宋文学编年地图,https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD,创作地点采用 cnkgraph/唐宋文学编年地图公开示例；经纬度为安陆市近似坐标。,medium,approved
+李白,黄鹤楼送孟浩然之广陵,盛唐,728,武汉市·黄鹤楼,武汉市,114.311831,30.598428,cnkgraph 唐宋文学编年地图,https://open.cnkgraph.com/api/writing/25660,测试默认通过：open.cnkgraph.com API 返回 AuthorPlace 创作地点,high,approved
+杜甫,春望,唐,756,陕西省西安市,陕西省西安市,,,本地测试样本,https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB,测试默认通过：本地测试候选：暂不考证，按默认人工通过流程验证；待补经纬度后才入图,low,approved

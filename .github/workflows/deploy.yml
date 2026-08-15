@@ -1,0 +1,158 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shixing-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/agent-ui/web/package-lock.json
+
+      - name: Install web dependencies
+        working-directory: apps/agent-ui/web
+        run: npm ci --legacy-peer-deps
+
+      - name: Verify web application
+        working-directory: apps/agent-ui/web
+        run: |
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run build
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: apps/agent-ui/agent/requirements.lock
+
+      - name: Verify Agent API
+        run: |
+          python -m pip install --disable-pip-version-check --require-hashes \
+            -r apps/agent-ui/agent/requirements.lock
+          python -m pip install --disable-pip-version-check --no-deps \
+            -e apps/agent-ui/agent
+          python -m pytest apps/agent-ui/agent/tests
+
+      - name: Build self-contained Agent API
+        run: |
+          mkdir -p release
+          python -m pip install --disable-pip-version-check pex==2.100.4
+          pex -r apps/agent-ui/agent/requirements.lock \
+            ./apps/agent-ui/agent \
+            --python python3.12 \
+            --python-shebang /usr/bin/python3 \
+            --console-script poetry-agent \
+            --output-file release/poetry-agent.pex
+
+      - name: Package releases
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release/web
+          cp -a apps/agent-ui/web/.next/standalone/. release/web/
+          mkdir -p release/web/.next
+          cp -a apps/agent-ui/web/.next/static release/web/.next/static
+          if [ -d apps/agent-ui/web/public ]; then
+            cp -a apps/agent-ui/web/public release/web/public
+          fi
+          tar -C release/web -czf release/web-release.tar.gz .
+
+          mkdir -p release/api
+          git ls-files -z -- \
+            apps/agent-ui/agent/poetry_agent \
+            apps/agent-ui/agent/pyproject.toml \
+            apps/agent-ui/agent/requirements.lock \
+            data \
+            output/assets/competition \
+            "数据可视化脚本/viz_33_year759.py" \
+            "数据可视化脚本/viz_38_imagery_tide.py" \
+            | tar --null -T - -cf - \
+            | tar -C release/api -xf -
+          mv release/poetry-agent.pex release/api/poetry-agent.pex
+          tar -C release/api -czf release/api-release.tar.gz .
+
+          mkdir -p release/static
+          git ls-files -z -- output \
+            | tar --null -T - --transform='s,^output/,,' -cf - \
+            | tar -C release/static -xf -
+          cp release/static/29_参赛导航.html release/static/index.html
+          tar -C release/static -czf release/static-release.tar.gz .
+
+          (cd release && sha256sum *-release.tar.gz > SHA256SUMS)
+
+      - name: Configure SSH
+        id: deploy-config
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          if [ -z "$DEPLOY_SSH_KEY" ] || [ -z "$DEPLOY_KNOWN_HOSTS" ] \
+            || [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_USER" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Deployment skipped until the four DEPLOY_* secrets are configured."
+            exit 0
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Upload release
+        if: steps.deploy-config.outputs.ready == 'true'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          remote_dir="/tmp/shixing-deploy-${GITHUB_SHA}"
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote_dir'"
+          scp \
+            release/web-release.tar.gz \
+            release/api-release.tar.gz \
+            release/static-release.tar.gz \
+            release/SHA256SUMS \
+            ops/deploy-server.sh \
+            "$DEPLOY_USER@$DEPLOY_HOST:$remote_dir/"
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash '$remote_dir/deploy-server.sh' '$GITHUB_SHA' '$remote_dir'"
+
+      - name: Verify public endpoints
+        if: steps.deploy-config.outputs.ready == 'true'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
+            "http://$DEPLOY_HOST/" \
+            | grep -F '参赛导航' >/dev/null
+          curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
+            "http://$DEPLOY_HOST:3000/" >/dev/null
+          curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
+            "http://$DEPLOY_HOST:3000/api/backend/catalog" \
+            | jq -e '.status == "ok" and .payload.poetCount == 88' >/dev/null
+          curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
+            "http://$DEPLOY_HOST:3000/api/backend/knowledge/status" \
+            | jq -e '.status == "ok" and .payload.available == true' >/dev/null

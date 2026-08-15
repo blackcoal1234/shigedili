@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>37 · 可听的诗 —— 诗行万里参赛版</title>
+<script src="assets/pyecharts/v6/echarts.min.js"></script>
+<style>
+:root{
+  --paper:#f2f4f0; --ink:#252b27; --cinnabar:#b64b3f; --jade:#26786e;
+  --gold:#a87527; --blue:#426f94; --card:#fbfcfa; --line:#d8ddd6;
+  --muted:#6b736d;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{background:var(--paper); color:var(--ink);
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif; line-height:1.75;}
+body{overflow-x:hidden;}
+h1,h2,h3,h4,.kai{font-family:KaiTi,STKaiti,"Microsoft YaHei",serif;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+a{color:var(--blue); text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ── 页眉 ── */
+header{padding:44px 0 10px; border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#eef1ec,var(--paper));}
+.eyebrow{letter-spacing:.35em; color:var(--muted); font-size:13px;}
+h1{font-size:clamp(28px,4.5vw,44px); letter-spacing:.12em; margin:6px 0 4px;}
+h1 .accent{color:var(--cinnabar);}
+.sub{color:var(--muted); max-width:760px; font-size:15px;}
+.meta-strip{display:flex; flex-wrap:wrap; gap:10px 26px; margin:18px 0 8px;
+  font-size:13px; color:var(--muted);}
+.meta-strip b{color:var(--ink); font-size:17px; font-family:KaiTi,STKaiti,serif;}
+
+/* ── 声音开关条 ── */
+.audio-bar{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin:16px 0 20px; padding:10px 14px; background:var(--card);
+  border:1px solid var(--line); border-radius:10px;}
+#audioToggle{font-family:KaiTi,STKaiti,serif; font-size:15px; cursor:pointer;
+  padding:6px 16px; border-radius:20px; border:1.5px solid var(--ink);
+  background:transparent; color:var(--ink); transition:all .2s;}
+#audioToggle.on{background:var(--cinnabar); border-color:var(--cinnabar); color:#fff;}
+#audioToggle:disabled{opacity:.45; cursor:not-allowed;}
+.audio-note{font-size:12.5px; color:var(--muted);}
+.cat-legend{display:flex; flex-wrap:wrap; gap:8px; width:100%;}
+.cat-pill{display:inline-flex; align-items:center; gap:6px; font-size:13px;
+  padding:4px 10px 4px 8px; border-radius:16px; border:1px solid var(--line);
+  background:#fff; cursor:pointer; user-select:none; transition:transform .15s;}
+.cat-pill:hover{transform:translateY(-1px);}
+.cat-pill .dot{width:10px; height:10px; border-radius:50%; flex:none;}
+.cat-pill small{color:var(--muted); font-size:11px;}
+.cat-pill .play{font-size:10px; color:var(--muted);}
+
+/* ── 区块 ── */
+section{margin:38px 0;}
+.sec-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  border-left:5px solid var(--cinnabar); padding-left:14px; margin-bottom:6px;}
+.sec-head h2{font-size:24px; letter-spacing:.08em;}
+.sec-head .tag{font-size:12px; color:var(--muted);}
+.sec-note{color:var(--muted); font-size:13.5px; max-width:860px; margin-bottom:16px;}
+
+/* ── 卡片与图表 ── */
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px 16px 12px; box-shadow:0 1px 3px rgba(37,43,39,.05);}
+.card h3{font-size:20px; letter-spacing:.1em; display:flex; align-items:baseline; gap:10px;}
+.card h3 .stat{font-family:"Microsoft YaHei"; font-size:12px; color:var(--muted);
+  letter-spacing:0; font-weight:normal;}
+.rose{width:100%; height:200px;}
+.chart-wide{width:100%; height:320px;}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px;}
+.chip{display:inline-flex; align-items:center; gap:4px; font-size:13px;
+  font-family:KaiTi,STKaiti,serif; padding:2px 9px; border-radius:5px;
+  border:1px solid transparent; cursor:pointer; background:#fff;
+  border-left-width:4px; transition:transform .12s;}
+.chip:hover{transform:translateY(-1px);}
+.chip .n{font-size:11px; color:var(--muted); font-family:"Microsoft YaHei";}
+.quiet-row{display:flex; align-items:center; gap:10px; margin:10px 0 4px; font-size:12.5px;}
+.quiet-bar{flex:1; height:8px; border-radius:4px; background:#e3e7e1; overflow:hidden;}
+.quiet-bar i{display:block; height:100%; background:repeating-linear-gradient(
+  -45deg,#b9c2ba 0 6px,#cdd4cc 6px 12px); border-radius:4px;}
+.quiet-row b{font-family:KaiTi,STKaiti,serif;}
+.badge{margin-top:8px; padding:8px 10px; font-size:12.5px; line-height:1.6;
+  background:#fdf6ef; border:1px dashed var(--gold); border-radius:8px; color:#6d5322;}
+details.plist{margin-top:8px; font-size:13px;}
+details.plist summary{cursor:pointer; color:var(--blue); font-size:12.5px;}
+details.plist ul{list-style:none; margin:6px 0 2px;}
+details.plist li{padding:3px 0; border-top:1px dashed #e4e8e2; display:flex;
+  flex-wrap:wrap; gap:4px 8px; align-items:center;}
+details.plist li .t{font-family:KaiTi,STKaiti,serif; min-width:0;}
+.mini-chip{font-size:11.5px; padding:0 6px; border-radius:4px; border-left:3px solid;
+  background:#fff; font-family:KaiTi,STKaiti,serif; cursor:pointer;}
+.mut{color:var(--muted); font-size:12px;}
+
+/* ── 明星案例 ── */
+.star-block{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px; margin:18px 0;}
+.star-block>h3{font-size:22px; letter-spacing:.1em; margin-bottom:4px;}
+.star-block>h3 .who{font-size:14px; color:var(--muted); letter-spacing:.05em;}
+.star-note{font-size:13.5px; color:var(--muted); max-width:900px; margin-bottom:12px;}
+.pipa-grid{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr); gap:18px;}
+.pipa-grid>*{min-width:0;}
+.poem-box{background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; font-family:KaiTi,STKaiti,serif; font-size:16.5px;
+  line-height:2.15; white-space:pre-wrap; max-height:430px; overflow-y:auto;}
+.poem-box.small{max-height:none; font-size:16px; padding:12px 14px;}
+.hit{padding:0 2px; border-radius:4px; border-bottom:2px solid; cursor:pointer;}
+.excl{border-bottom:2px dotted #9aa39c; color:#8a938c;}
+.facts{list-style:none; font-size:13.5px;}
+.facts li{padding:8px 0 8px 14px; border-top:1px dashed #e2e6e0; position:relative;}
+.facts li::before{content:"◆"; position:absolute; left:0; top:8px; font-size:9px;
+  color:var(--cinnabar);}
+.poemcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:12px;}
+.pcard{background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px;}
+.pcard h4{font-size:17px; letter-spacing:.1em; display:flex; justify-content:space-between;
+  align-items:baseline;}
+.pcard h4 .cnt{font-size:11.5px; color:var(--muted); font-family:"Microsoft YaHei";}
+.pcard .poem-body{font-family:KaiTi,STKaiti,serif; font-size:15.5px; line-height:2.05;
+  white-space:pre-wrap; margin-top:6px;}
+.pcard .pnote{font-size:11.5px; color:var(--muted); margin-top:6px; border-top:1px dashed #e4e8e2; padding-top:5px;}
+.border-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;}
+.border-col{border:1px solid var(--line); border-radius:10px; background:#fff; padding:14px;}
+.border-col h4{font-size:19px; letter-spacing:.12em; margin-bottom:2px;}
+.border-col .sub-line{font-size:12px; color:var(--muted); margin-bottom:8px;}
+.reading{font-size:13.5px; max-width:960px;}
+.reading li{margin:6px 0 6px 18px;}
+
+/* ── 榜单表 ── */
+.tbl-scroll{overflow-x:auto; max-width:100%;}
+table.rank{border-collapse:collapse; font-size:13.5px; min-width:420px;}
+table.rank th,table.rank td{padding:6px 14px 6px 0; text-align:left;
+  border-bottom:1px solid #e4e8e2; white-space:nowrap;}
+table.rank th{color:var(--muted); font-weight:normal; font-size:12px;}
+table.rank .kai{font-size:15px;}
+table.rank .genre-prose{color:var(--cinnabar);}
+
+/* ── 方法区 ── */
+details.method{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:14px 18px; margin:30px 0;}
+details.method summary{font-family:KaiTi,STKaiti,serif; font-size:18px; cursor:pointer;
+  letter-spacing:.1em;}
+details.method h4{margin:14px 0 4px; font-size:15.5px; color:var(--cinnabar);}
+details.method p,details.method li{font-size:13.5px; color:#3d453f;}
+details.method ul{margin-left:20px;}
+details.method table{border-collapse:collapse; font-size:13px; margin:6px 0;}
+details.method table td,details.method table th{border:1px solid var(--line);
+  padding:4px 12px; text-align:left;}
+details.method table th{background:#eef1ec; font-weight:normal;}
+
+/* ── 提示浮层 / 页脚 ── */
+#toast{position:fixed; left:50%; bottom:34px; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:#f2f4f0; font-size:13px; padding:8px 18px;
+  border-radius:20px; opacity:0; pointer-events:none; transition:all .3s; z-index:50;
+  max-width:86vw;}
+#toast.show{opacity:.94; transform:translateX(-50%) translateY(0);}
+footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
+  font-size:13px; color:var(--muted);}
+.site-nav{display:flex; flex-wrap:wrap; gap:6px 16px; margin-bottom:10px;}
+.site-nav a{white-space:nowrap;}
+.site-nav .here{color:var(--cinnabar); font-weight:bold; white-space:nowrap;}
+
+@media (max-width:900px){
+  .pipa-grid{grid-template-columns:1fr;}
+  .border-grid{grid-template-columns:1fr;}
+}
+@media (max-width:420px){
+  .wrap{padding:0 12px;}
+  .poem-box{font-size:15px; padding:12px;}
+}
+</style>
+</head>
+<body>
+<script>window.SOUND_DATA={"meta":{"dictSize":88,"corpusPoems":20437,"corpusPoets":88,"corpusHits":14539,"excludeCount":7},"cats":[{"id":"beast","name":"兽鸣","color":"#7a5c3d","desc":"猿·蝉·马嘶·犬吠"},{"id":"bird","name":"鸟啼","color":"#a87527","desc":"莺·杜鹃·乌啼·雁声"},{"id":"strings","name":"器乐","color":"#b64b3f","desc":"琴·笛·琵琶·鼓角"},{"id":"bell","name":"钟磬","color":"#9c5d8f","desc":"钟·磬·铃·更漏"},{"id":"nature","name":"自然声","color":"#426f94","desc":"风雨·流水·萧萧·滴"},{"id":"human","name":"人声","color":"#26786e","desc":"歌·哭·砧·人语"}],"wordInfo":{"猿声":["兽鸣",-0.7],"猿啼":["兽鸣",-0.8],"猿啸":["兽鸣",-0.7],"猿":["兽鸣",-0.7],"蝉鸣":["兽鸣",-0.3],"蝉":["兽鸣",-0.3],"蛩":["兽鸣",-0.4],"马嘶":["兽鸣",-0.2],"嘶":["兽鸣",-0.2],"犬吠":["兽鸣",0.1],"吠":["兽鸣",0.1],"杜鹃":["鸟啼",-0.8],"子规":["鸟啼",-0.8],"鹧鸪":["鸟啼",-0.6],"莺啼":["鸟啼",0.4],"莺":["鸟啼",0.5],"燕语":["鸟啼",0.4],"雁声":["鸟啼",-0.6],"鸡鸣":["鸟啼",0.0],"鸡声":["鸟啼",-0.1],"乌啼":["鸟啼",-0.6],"唳":["鸟啼",-0.4],"啼":["鸟啼",-0.4],"鸣":["鸟啼",0.0],"噪":["鸟啼",-0.2],"琴":["器乐",0.3],"瑟":["器乐",-0.1],"羌笛":["器乐",-0.6],"笛":["器乐",-0.3],"箫":["器乐",-0.2],"笙":["器乐",0.2],"琵琶":["器乐",-0.4],"筝":["器乐",-0.1],"胡笳":["器乐",-0.7],"笳":["器乐",-0.6],"芦管":["器乐",-0.6],"角声":["器乐",-0.6],"画角":["器乐",-0.6],"鼓角":["器乐",-0.5],"戍鼓":["器乐",-0.7],"鼙鼓":["器乐",-0.7],"鼓":["器乐",-0.1],"管弦":["器乐",0.3],"丝竹":["器乐",0.2],"箜篌":["器乐",0.0],"嘈嘈":["器乐",0.0],"切切":["器乐",-0.2],"钟声":["钟磬",-0.2],"钟鼓":["钟磬",-0.1],"钟":["钟磬",-0.1],"磬":["钟磬",0.1],"铃":["钟磬",-0.3],"更漏":["钟磬",-0.4],"漏声":["钟磬",-0.3],"漏断":["钟磬",-0.5],"雨声":["自然声",-0.3],"风声":["自然声",-0.3],"滩声":["自然声",-0.2],"泉声":["自然声",0.2],"水声":["自然声",0.1],"松风":["自然声",0.3],"涛声":["自然声",-0.2],"雷":["自然声",-0.2],"萧萧":["自然声",-0.6],"潇潇":["自然声",-0.5],"飒飒":["自然声",-0.4],"瑟瑟":["自然声",-0.4],"潺":["自然声",0.2],"滴":["自然声",-0.3],"咽":["自然声",-0.6],"响":["自然声",0.0],"砧":["人声",-0.6],"捣衣":["人声",-0.5],"歌声":["人声",0.3],"棹歌":["人声",0.3],"歌":["人声",0.3],"笑语":["人声",0.6],"私语":["人声",-0.1],"人语":["人声",0.1],"吟":["人声",-0.1],"长啸":["人声",0.1],"啸":["人声",-0.2],"喧":["人声",-0.1],"橹":["人声",-0.1],"欸乃":["人声",0.2],"哭":["人声",-0.8],"泣":["人声",-0.7],"呜咽":["人声",-0.7]},"corpusTop":[["歌",2266],["吟",1146],["鸣",1096],["琴",662],["鼓",619],["啼",572],["钟",549],["莺",502],["雷",475],["喧",389],["响",381],["蝉",361],["猿",334],["泣",314]],"topPoems":[["送孟东野序","韩愈",42,"散文"],["古风五十九首","李白",41,"组诗"],["汴都赋","周邦彦",34,"赋"],["琵琶行","白居易",32,"歌行"],["莺莺传","元稹",30,"传奇"],["宫词一百首","王建",28,"诗"]],"poets":[{"name":"李白","color":"#426f94","poems":300,"hits":382,"per100":1.181,"chars":32353,"quietN":158,"quietRatio":0.5267,"catCounts":{"兽鸣":32,"鸟啼":71,"器乐":74,"钟磬":11,"自然声":35,"人声":159},"sig":[["歌",84],["猿声",7],["吟",36],["鸣",34],["松风",8],["琴",22]],"audible":[{"title":"古风五十九首","hits":[["歌",7],["鸣",7],["吟",4],["泣",4],["咽",2],["哭",2],["琴",2],["雷",2],["鸡鸣",2],["响",1],["喧",1],["嘶",1],["猿",1],["瑟",1],["笙",1],["萧萧",1],["蝉",1],["鼙鼓",1]]},{"title":"宫中行乐词八首","hits":[["歌",7],["莺",2],["鸣",2],["吟",1],["燕语",1],["笛",1],["箫",1]]},{"title":"秋浦歌十七首","hits":[["歌",3],["猿",3],["吟",2],["猿声",2]]},{"title":"鸣皋歌送岑徵君","hits":[["鸣",2],["哭",1],["唳",1],["啸",1],["嘈嘈",1],["松风",1],["猿",1],["琴",1],["鼓",1]]},{"title":"忆旧游寄谯郡元参军","hits":[["歌",3],["鸣",2],["松风",1],["笙",1],["箫",1],["鼓",1]]},{"title":"游泰山六首","hits":[["吟",1],["松风",1],["歌",1],["琴",1],["笙",1],["长啸",1],["雷",1],["鸣",1]]},{"title":"经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰","hits":[["歌",3],["吠",1],["哭",1],["钟",1],["鸣",1]]},{"title":"悲歌行","hits":[["吟",2],["琴",2],["啼",1],["猿",1],["鸣",1]]},{"title":"江夏赠韦南陵冰","hits":[["歌",2],["喧",1],["笳",1],["箫",1],["鸣",1],["鼓",1]]},{"title":"猛虎行","hits":[["鼓",2],["吟",1],["歌",1],["琴",1],["笛",1],["铃",1]]},{"title":"送王屋山人魏万还王屋·并序","hits":[["歌",2],["吟",1],["喧",1],["松风",1],["猿声",1],["雷",1]]},{"title":"拟古十二首","hits":[["琴",3],["啼",1],["瑟",1],["箫",1]]},{"title":"梁甫吟","hits":[["吟",2],["歌",1],["长啸",1],["雷",1],["鼓",1]]},{"title":"蜀道难","hits":[["啼",1],["喧",1],["子规",1],["猿",1],["雷",1]]},{"title":"梦游天姥吟留别","hits":[["人语",1],["吟",1],["猿啼",1],["瑟",1],["鼓",1]]},{"title":"梁园吟","hits":[["吟",2],["歌",2],["歌声",1]]},{"title":"答王十二寒夜独酌有怀","hits":[["吟",1],["喧",1],["琴",1],["钟",1],["鸣",1]]},{"title":"远别离","hits":[["哭",1],["啸",1],["啼",1],["泣",1],["雷",1]]},{"title":"剑阁赋","hits":[["吟",1],["松风",1],["猿",1],["瑟",1],["雷",1]]},{"title":"夜坐吟","hits":[["啼",2],["歌",2],["吟",1]]},{"title":"白纻辞三首","hits":[["歌",3],["吟",2]]},{"title":"幽涧泉","hits":[["吟",1],["潺",1],["猿",1],["琴",1],["鸣",1]]},{"title":"永王东巡歌·其一","hits":[["喧",1],["嘈嘈",1],["雷",1],["鼓",1]]},{"title":"塞下曲六首","hits":[["鼓",2],["笛",1],["鸣",1]]},{"title":"上崔相百忧章","hits":[["哭",1],["泣",1],["瑟",1],["雷",1]]},{"title":"访戴天山道士不遇","hits":[["水声",1],["犬吠",1],["钟",1]]},{"title":"下终南山过斛斯山人宿置酒","hits":[["吟",1],["松风",1],["歌",1]]},{"title":"长相思三首","hits":[["啼",1],["琴",1],["瑟",1]]},{"title":"江夏别宋之悌","hits":[["吟",1],["泣",1],["猿啸",1]]},{"title":"襄阳歌","hits":[["歌",1],["猿",1],["笙",1]]},{"title":"月夜听卢子顺弹琴","hits":[["吟",1],["琴",1],["钟",1]]},{"title":"大鹏赋·并序","hits":[["鼓",2],["雷",1]]},{"title":"春日醉起言志","hits":[["歌",1],["莺",1],["鸣",1]]},{"title":"当涂赵炎少府粉图山水歌","hits":[["潺",1],["蝉",1],["鸣",1]]},{"title":"扶风豪士歌","hits":[["吟",1],["啼",1],["歌",1]]},{"title":"少年行三首·其三","hits":[["喧",1],["歌",1],["笙",1]]},{"title":"从军行","hits":[["笛",1],["鸣",1],["鼓",1]]},{"title":"杨叛儿","hits":[["乌啼",2],["歌",1]]},{"title":"鞠歌行","hits":[["歌",1],["泣",1],["鼓",1]]},{"title":"留别于十一兄逖裴十三游塞垣","hits":[["吟",1],["歌",1],["鸣",1]]},{"title":"留别广陵诸公","hits":[["棹歌",1],["歌",1],["蝉",1]]},{"title":"冬日归旧山","hits":[["吠",1],["猿",1],["鸣",1]]},{"title":"登峨眉山","hits":[["吟",1],["瑟",1],["箫",1]]},{"title":"自代内赠","hits":[["啼",1],["歌",1],["鸣",1]]},{"title":"淮南卧病书怀寄蜀中赵徵君蕤","hits":[["吟",1],["琴",1],["钟",1]]},{"title":"将进酒","hits":[["歌",1],["钟鼓",1]]},{"title":"闻王昌龄左迁龙标遥有此寄","hits":[["啼",1],["子规",1]]},{"title":"早发白帝城","hits":[["啼",1],["猿声",1]]},{"title":"送友人","hits":[["萧萧",1],["鸣",1]]},{"title":"庐山谣寄卢侍御虚舟","hits":[["歌",1],["琴",1]]},{"title":"塞下曲六首·其一","hits":[["笛",1],["鼓",1]]},{"title":"行路难三首","hits":[["唳",1],["歌",1]]},{"title":"长相思·其二","hits":[["琴",1],["瑟",1]]},{"title":"听蜀僧濬弹琴","hits":[["响",1],["钟",1]]},{"title":"公无渡河","hits":[["啼",1],["箜篌",1]]},{"title":"采莲曲","hits":[["人语",1],["嘶",1]]},{"title":"笑歌行","hits":[["歌",2]]},{"title":"长相思三首·其二","hits":[["琴",1],["瑟",1]]},{"title":"金陵城西楼月下吟","hits":[["吟",1],["滴",1]]},{"title":"独不见","hits":[["响",1],["鸡鸣",1]]},{"title":"司马将军歌","hits":[["羌笛",1],["雷",1]]},{"title":"谢公亭·盖谢脁范云之所游","hits":[["歌",1],["鸣",1]]},{"title":"相逢行二首","hits":[["歌",2]]},{"title":"代别情人","hits":[["琴",1],["鸡鸣",1]]},{"title":"别匡山","hits":[["啼",1],["猿",1]]},{"title":"题元丹丘山居","hits":[["喧",1],["松风",1]]},{"title":"上云乐","hits":[["歌",1],["鸣",1]]},{"title":"登邯郸洪波台置酒观发兵","hits":[["歌",1],["钟",1]]},{"title":"天马歌","hits":[["嘶",1],["鸡鸣",1]]},{"title":"惜罇空","hits":[["歌",1],["钟鼓",1]]},{"title":"出自蓟北门行","hits":[["歌",1],["画角",1]]},{"title":"酬殷明佐见赠五云裘歌","hits":[["吟",1],["飒飒",1]]},{"title":"万愤词投魏郎中","hits":[["啼",1],["泣",1]]},{"title":"月下独酌·其一","hits":[["歌",1]]},{"title":"把酒问月·故人贾淳令予问之","hits":[["歌",1]]},{"title":"长干行·其一","hits":[["猿声",1]]},{"title":"南陵别儿童入京","hits":[["歌",1]]},{"title":"北风行","hits":[["歌",1]]},{"title":"赠汪伦","hits":[["歌声",1]]},{"title":"流夜郎赠辛判官","hits":[["歌",1]]},{"title":"春夜宴从弟桃花园序","hits":[["歌",1]]},{"title":"春夜洛城闻笛","hits":[["笛",1]]},{"title":"长相思·其一","hits":[["啼",1]]},{"title":"子夜吴歌·秋歌","hits":[["捣衣",1]]},{"title":"山中与幽人对酌","hits":[["琴",1]]},{"title":"月下独酌四首","hits":[["歌",1]]},{"title":"少年行二首","hits":[["歌",1]]},{"title":"江上吟","hits":[["箫",1]]},{"title":"与史郎中钦听黄鹤楼上吹笛","hits":[["笛",1]]},{"title":"夏日山中","hits":[["松风",1]]},{"title":"长干行二首","hits":[["猿声",1]]},{"title":"越中览古","hits":[["鹧鸪",1]]},{"title":"行路难·其二","hits":[["歌",1]]},{"title":"秋浦歌十七首·其十四","hits":[["歌",1]]},{"title":"古风·秦王扫六合","hits":[["雷",1]]},{"title":"沙丘城下寄杜甫","hits":[["歌",1]]},{"title":"长歌行","hits":[["歌",1]]},{"title":"宣城见杜鹃花","hits":[["子规",1]]},{"title":"嘲王历阳不肯饮酒","hits":[["琴",1]]},{"title":"苏台览古","hits":[["歌",1]]},{"title":"草书歌行","hits":[["飒飒",1]]},{"title":"行路难·其三","hits":[["唳",1]]},{"title":"独漉篇","hits":[["鸣",1]]},{"title":"胡无人","hits":[["歌",1]]},{"title":"战城南","hits":[["鸣",1]]},{"title":"乌栖曲","hits":[["歌",1]]},{"title":"白头吟","hits":[["吟",1]]},{"title":"结客少年场行","hits":[["猿",1]]},{"title":"陪族叔刑部侍郎晔及中书贾舍人至游洞庭五首","hits":[["歌",1]]},{"title":"九日","hits":[["歌",1]]},{"title":"咏苎萝山","hits":[["吟",1]]},{"title":"古风·燕昭延郭隗","hits":[["歌",1]]},{"title":"忆东山二首","hits":[["长啸",1]]},{"title":"赠郭将军","hits":[["笛",1]]},{"title":"越女词五首","hits":[["棹歌",1]]},{"title":"紫藤树","hits":[["歌",1]]},{"title":"清溪行","hits":[["啼",1]]},{"title":"陌上桑","hits":[["鸣",1]]},{"title":"灞陵行送别","hits":[["歌",1]]},{"title":"山人劝酒","hits":[["歌",1]]},{"title":"对酒","hits":[["歌",1]]},{"title":"王昭君二首","hits":[["啼",1]]},{"title":"望月有怀","hits":[["吟",1]]},{"title":"月夜金陵怀古","hits":[["歌",1]]},{"title":"苏武","hits":[["泣",1]]},{"title":"西岳云台歌送丹丘子","hits":[["雷",1]]},{"title":"乌夜啼","hits":[["啼",1]]},{"title":"月夜江行寄崔员外宗之","hits":[["歌",1]]},{"title":"宿巫山下","hits":[["猿声",1]]},{"title":"来日大难","hits":[["蝉",1]]},{"title":"清平乐·禁庭春昼","hits":[["莺",1]]},{"title":"赠新平少年","hits":[["啸",1]]},{"title":"前有一樽酒行二首","hits":[["琴",1]]},{"title":"丁督护歌","hits":[["歌",1]]},{"title":"清溪半夜闻笛","hits":[["羌笛",1]]},{"title":"赠何七判官昌浩","hits":[["啸",1]]},{"title":"下途归石门旧居","hits":[["钟",1]]},{"title":"观胡人吹笛","hits":[["笛",1]]},{"title":"上留田行","hits":[["鸣",1]]},{"title":"雨后望月","hits":[["吟",1]]},{"title":"豫章行","hits":[["鸣",1]]},{"title":"经下邳圯桥怀张子房","hits":[["啸",1]]}],"badge":""},{"name":"杜甫","color":"#7a5c3d","poems":300,"hits":243,"per100":0.889,"chars":27333,"quietN":169,"quietRatio":0.5633,"catCounts":{"兽鸣":8,"鸟啼":46,"器乐":45,"钟磬":6,"自然声":30,"人声":108},"sig":[["哭",18],["歌",46],["鸣",18],["啼",13],["吟",18],["呜咽",3]],"audible":[{"title":"乾元中寓居同谷县作歌七首","hits":[["歌",13],["吟",1],["啼",1],["猿",1],["钟",1],["飒飒",1]]},{"title":"秋兴八首","hits":[["吟",1],["歌",1],["猿",1],["砧",1],["笳",1],["鼓",1]]},{"title":"风疾舟中伏枕书怀三十六韵奉呈湖南亲友","hits":[["吟",1],["琴",1],["砧",1],["笛",1],["鸣",1],["鼓",1]]},{"title":"后出塞五首","hits":[["笙",1],["笳",1],["萧萧",1],["鸣",1],["鼓",1]]},{"title":"北征","hits":[["吟",1],["咽",1],["哭",1],["啼",1],["鸣",1]]},{"title":"兵车行","hits":[["哭",3],["萧萧",1]]},{"title":"自京赴奉先县咏怀五百字","hits":[["歌",2],["呜咽",1],["瑟",1]]},{"title":"阁夜","hits":[["哭",1],["歌",1],["角声",1],["鼓",1]]},{"title":"寄李十二白二十韵","hits":[["泣",2],["吟",1],["歌",1]]},{"title":"羌村三首","hits":[["歌",2],["噪",1],["萧萧",1]]},{"title":"石壕吏","hits":[["咽",1],["啼",1],["泣",1]]},{"title":"丽人行","hits":[["吟",1],["箫",1],["鼓",1]]},{"title":"新安吏","hits":[["哭",1],["喧",1],["泣",1]]},{"title":"无家别","hits":[["啼",1],["嘶",1],["鼓",1]]},{"title":"孤雁","hits":[["鸣",2],["噪",1]]},{"title":"成都府","hits":[["喧",1],["笙",1],["箫",1]]},{"title":"秋雨叹三首","hits":[["泣",1],["萧萧",1],["雨声",1]]},{"title":"洗兵马","hits":[["歌",1],["笛",1],["鸡鸣",1]]},{"title":"船下夔州郭宿雨湿不得上岸别王十二判官","hits":[["橹",1],["钟",1],["鸣",1]]},{"title":"陪郑广文游何将军山林","hits":[["歌",1],["筝",1],["莺",1]]},{"title":"雕赋","hits":[["响",1],["喧",1],["鸣",1]]},{"title":"城西陂泛舟","hits":[["歌",1],["笛",1],["箫",1]]},{"title":"玉华宫","hits":[["松风",1],["歌",1],["笙",1]]},{"title":"彭衙行","hits":[["吟",1],["啼",1],["雷",1]]},{"title":"渼陂行","hits":[["歌",1],["雷",1],["鼓",1]]},{"title":"夏日李公见访","hits":[["喧",1],["蝉",1],["鸣",1]]},{"title":"登高","hits":[["猿啸",1],["萧萧",1]]},{"title":"月夜忆舍弟","hits":[["戍鼓",1],["雁声",1]]},{"title":"江畔独步寻花·其六","hits":[["啼",1],["莺",1]]},{"title":"江畔独步寻花七绝句","hits":[["啼",1],["莺",1]]},{"title":"白帝","hits":[["哭",1],["雷",1]]},{"title":"对雪","hits":[["吟",1],["哭",1]]},{"title":"百忧集行","hits":[["啼",1],["笑语",1]]},{"title":"绝句漫兴九首","hits":[["琴",1],["莺",1]]},{"title":"前出塞九首","hits":[["呜咽",1],["雷",1]]},{"title":"羌村三首·其三","hits":[["歌",2]]},{"title":"壮游","hits":[["哭",1],["歌",1]]},{"title":"悲陈陶","hits":[["啼",1],["歌",1]]},{"title":"绝句四首","hits":[["雨声",1],["鸣",1]]},{"title":"夏夜叹","hits":[["喧",1],["笳",1]]},{"title":"短歌行赠王郎司直","hits":[["歌",2]]},{"title":"暮归","hits":[["啼",1],["鼓",1]]},{"title":"九日五首·其一","hits":[["哭",1],["猿",1]]},{"title":"野老","hits":[["琴",1],["画角",1]]},{"title":"堂成","hits":[["吟",1],["滴",1]]},{"title":"即事","hits":[["莺",1],["雷",1]]},{"title":"岁晏行","hits":[["画角",1],["鸣",1]]},{"title":"乐游园歌","hits":[["歌声",1],["雷",1]]},{"title":"夔州歌十绝句","hits":[["歌",1],["箫",1]]},{"title":"秋兴八首·其二","hits":[["猿",1],["笳",1]]},{"title":"秦州杂诗二十首·其四","hits":[["蝉",1],["鼓角",1]]},{"title":"征夫","hits":[["哭",1],["歌",1]]},{"title":"喜达行在所三首","hits":[["呜咽",1],["胡笳",1]]},{"title":"玄都坛歌寄元逸人","hits":[["啼",1],["子规",1]]},{"title":"奉送严公入朝十韵","hits":[["莺",1],["鼓",1]]},{"title":"遣闷戏呈路十九曹长","hits":[["喧",1],["雷",1]]},{"title":"望岳","hits":[["钟",1]]},{"title":"闻官军收河南河北","hits":[["歌",1]]},{"title":"绝句","hits":[["鸣",1]]},{"title":"秋兴八首·其一","hits":[["砧",1]]},{"title":"咏怀古迹五首·其三","hits":[["琵琶",1]]},{"title":"佳人","hits":[["哭",1]]},{"title":"赠李白","hits":[["歌",1]]},{"title":"登楼","hits":[["吟",1]]},{"title":"奉赠韦左丞丈二十二韵","hits":[["歌",1]]},{"title":"观公孙大娘弟子舞剑器行","hits":[["雷",1]]},{"title":"哀江头","hits":[["哭",1]]},{"title":"垂老别","hits":[["啼",1]]},{"title":"宿府","hits":[["角声",1]]},{"title":"琴台","hits":[["琴",1]]},{"title":"偶题","hits":[["喧",1]]},{"title":"奉济驿重送严公四韵","hits":[["歌",1]]},{"title":"江亭","hits":[["吟",1]]},{"title":"别房太尉墓","hits":[["莺啼",1]]},{"title":"与李十二白同寻范十隐居","hits":[["吟",1]]},{"title":"夜宴左氏庄","hits":[["琴",1]]},{"title":"醉时歌","hits":[["歌",1]]},{"title":"曲江对雨","hits":[["瑟",1]]},{"title":"同诸公登慈恩寺塔","hits":[["鸣",1]]},{"title":"漫成一首","hits":[["鸣",1]]},{"title":"南征","hits":[["歌",1]]},{"title":"岁暮","hits":[["鼓角",1]]},{"title":"奉和贾至舍人早朝大明宫","hits":[["漏声",1]]},{"title":"至后","hits":[["吟",1]]},{"title":"哀王孙","hits":[["泣",1]]},{"title":"发潭州","hits":[["燕语",1]]},{"title":"清明二首","hits":[["钟",1]]},{"title":"白帝城最高楼","hits":[["泣",1]]},{"title":"日暮","hits":[["滴",1]]},{"title":"宗武生日","hits":[["滴",1]]},{"title":"送韩十四江东觐省","hits":[["滩声",1]]},{"title":"病马","hits":[["吟",1]]},{"title":"夜","hits":[["鸣",1]]},{"title":"送远","hits":[["哭",1]]},{"title":"秋兴八首·其四","hits":[["鼓",1]]},{"title":"倦夜","hits":[["滴",1]]},{"title":"冬至","hits":[["鸣",1]]},{"title":"送孔巢父谢病归游江东兼呈李白","hits":[["琴",1]]},{"title":"花鸭","hits":[["鸣",1]]},{"title":"羌村三首·其一","hits":[["噪",1]]},{"title":"雨不绝","hits":[["鸣",1]]},{"title":"公安县怀古","hits":[["长啸",1]]},{"title":"曲江三章章五句","hits":[["歌",1]]},{"title":"宿江边阁","hits":[["喧",1]]},{"title":"绝句漫兴九首·其三","hits":[["琴",1]]},{"title":"游龙门奉先寺","hits":[["钟",1]]},{"title":"十六夜玩月","hits":[["笛",1]]},{"title":"天边行","hits":[["哭",1]]},{"title":"望牛头寺","hits":[["歌",1]]},{"title":"绝句四首·其二","hits":[["雨声",1]]},{"title":"负薪行","hits":[["啼",1]]},{"title":"蚕谷行","hits":[["歌",1]]},{"title":"九日寄岑参","hits":[["吟",1]]},{"title":"东屯北崦","hits":[["滴",1]]},{"title":"白丝行","hits":[["鸣",1]]},{"title":"草堂","hits":[["笙",1]]},{"title":"过宋员外之问旧庄","hits":[["吟",1]]},{"title":"陪李北海宴历下亭","hits":[["歌",1]]},{"title":"三绝句","hits":[["哭",1]]},{"title":"晓发公安","hits":[["哭",1]]},{"title":"官定后戏赠","hits":[["歌",1]]},{"title":"戏为韦偃双松图歌","hits":[["雷",1]]},{"title":"绝句漫兴九首·其一","hits":[["莺",1]]},{"title":"怀锦水居止二首","hits":[["歌",1]]},{"title":"促织","hits":[["吟",1]]},{"title":"徒步归行","hits":[["哭",1]]},{"title":"简吴郎司法","hits":[["飒飒",1]]},{"title":"对雨书怀走邀许十一簿公","hits":[["雷",1]]},{"title":"秋兴八首·其六","hits":[["歌",1]]},{"title":"杜位宅守岁","hits":[["喧",1]]},{"title":"解闷十二首","hits":[["吟",1]]}],"badge":""},{"name":"白居易","color":"#26786e","poems":299,"hits":354,"per100":0.968,"chars":36559,"quietN":175,"quietRatio":0.5853,"catCounts":{"兽鸣":19,"鸟啼":42,"器乐":73,"钟磬":10,"自然声":32,"人声":178},"sig":[["哭",34],["歌",75],["吟",39],["琵琶",11],["琴",26],["切切",4]],"audible":[{"title":"琵琶行","hits":[["琵琶",10],["切切",2],["啼",2],["嘈嘈",2],["歌",2],["泣",2],["鸣",2],["丝竹",1],["吟",1],["咽",1],["杜鹃",1],["猿",1],["瑟瑟",1],["私语",1],["笛",1],["管弦",1],["莺",1]]},{"title":"与元九书","hits":[["歌",12],["吟",7],["哭",1],["泣",1]]},{"title":"霓裳羽衣舞歌","hits":[["歌",5],["笙",2],["筝",2],["丝竹",1],["哭",1],["唳",1],["杜鹃",1],["磬",1],["笛",1],["箜篌",1],["箫",1],["钟",1]]},{"title":"醉吟先生传","hits":[["吟",7],["琴",7],["歌",2],["丝竹",1],["鸣",1]]},{"title":"寄唐生","hits":[["哭",12],["歌",3],["琴",1]]},{"title":"代书诗一百韵寄微之","hits":[["吟",3],["啼",2],["喧",1],["歌",1],["琴",1],["钟鼓",1],["鸣",1]]},{"title":"和梦游春诗一百韵","hits":[["歌",3],["吟",1],["响",1],["哭",1],["喧",1],["泣",1],["琴",1],["鹧鸪",1]]},{"title":"游悟真寺诗一百三十韵","hits":[["潺",3],["喧",1],["滴",1],["猿",1],["笛",1],["蝉",1],["鸣",1]]},{"title":"夜闻歌者","hits":[["歌",3],["泣",3],["咽",1]]},{"title":"醉歌示妓人商玲珑","hits":[["歌",4],["琴",1],["瑟",1],["鸣",1]]},{"title":"七德舞－美拨乱，陈王业也","hits":[["歌",4],["呜咽",1],["哭",1],["泣",1]]},{"title":"长恨歌","hits":[["丝竹",1],["歌",1],["私语",1],["钟鼓",1],["铃",1],["鼙鼓",1]]},{"title":"效陶潜体诗十六首","hits":[["歌",3],["吟",1],["喧",1],["琴",1]]},{"title":"筝","hits":[["咽",1],["啼",1],["猿",1],["琴",1],["瑟",1],["莺",1]]},{"title":"上阳白发人","hits":[["莺",2],["哭",1],["歌",1],["萧萧",1]]},{"title":"寒食野望吟","hits":[["哭",2],["乌啼",1],["噪",1],["萧萧",1]]},{"title":"元相公挽歌词三首","hits":[["哭",1],["琴",1],["笳",1],["箫",1],["鸣",1]]},{"title":"庐山草堂记","hits":[["琴",3],["滴",1],["雷",1]]},{"title":"祭微之文","hits":[["哭",2],["吟",1],["歌",1],["风声",1]]},{"title":"秦中吟十首·五弦","hits":[["切切",1],["歌",1],["猿啼",1],["琴",1],["飒飒",1]]},{"title":"与元微之书","hits":[["猿",2],["吟",1],["鸣",1]]},{"title":"竹枝词四首","hits":[["咽",2],["啼",1],["猿",1]]},{"title":"新乐府 西凉伎 刺封疆之臣也","hits":[["泣",3],["鼓",1]]},{"title":"阴雨","hits":[["滩声",1],["滴",1],["琴",1]]},{"title":"寄殷协律","hits":[["歌",1],["琴",1],["萧萧",1]]},{"title":"宴散","hits":[["歌",1],["笙",1],["蝉",1]]},{"title":"新丰折臂翁","hits":[["哭",2],["歌",1]]},{"title":"母别子","hits":[["哭",2],["啼",1]]},{"title":"胡旋女","hits":[["鼓",2],["歌",1]]},{"title":"六月三日夜闻蝉","hits":[["蝉",2],["鸣",1]]},{"title":"放言五首·并序","hits":[["吟",1],["哭",1],["歌",1]]},{"title":"短歌行","hits":[["歌",2],["歌声",1]]},{"title":"缚戎人","hits":[["呜咽",1],["歌",1],["鼙鼓",1]]},{"title":"宿湖中","hits":[["吟",1],["歌",1],["笙",1]]},{"title":"自觉二首","hits":[["哭",2],["泣",1]]},{"title":"首夏南池独酌","hits":[["吟",1],["琴",1],["莺",1]]},{"title":"与梦得沽酒闲饮且约后期","hits":[["吟",1],["管弦",1]]},{"title":"买花","hits":[["喧",2]]},{"title":"放言五首·其四","hits":[["哭",1],["歌",1]]},{"title":"夜雨","hits":[["啼",1],["蛩",1]]},{"title":"编集拙诗成一十五卷因题卷末戏赠元九李二十","hits":[["吟",1],["歌",1]]},{"title":"题岳阳楼","hits":[["啼",1],["猿",1]]},{"title":"长相思两首","hits":[["潇潇",1],["蝉",1]]},{"title":"听弹湘妃怨","hits":[["瑟瑟",1],["萧萧",1]]},{"title":"秦中吟十首·买花","hits":[["喧",2]]},{"title":"早蝉","hits":[["蝉",1],["鸣",1]]},{"title":"池上篇","hits":[["吟",1],["歌",1]]},{"title":"凶宅","hits":[["钟",1],["鸣",1]]},{"title":"钱塘湖春行","hits":[["莺",1]]},{"title":"井底引银瓶·止淫奔也","hits":[["蝉",1]]},{"title":"潜别离","hits":[["哭",1]]},{"title":"醉赠刘二十八使君","hits":[["歌",1]]},{"title":"后宫词","hits":[["歌声",1]]},{"title":"遗爱寺","hits":[["泉声",1]]},{"title":"简简吟","hits":[["啼",1]]},{"title":"村夜","hits":[["切切",1]]},{"title":"山泉煎茶有怀","hits":[["瑟瑟",1]]},{"title":"夜筝","hits":[["咽",1]]},{"title":"重阳席上赋白菊","hits":[["歌",1]]},{"title":"直中书省","hits":[["钟鼓",1]]},{"title":"秋雨夜眠","hits":[["雨声",1]]},{"title":"杭州春望","hits":[["涛声",1]]},{"title":"偶作寄朗之","hits":[["吟",1]]},{"title":"秦中吟十首·议婚","hits":[["歌",1]]},{"title":"赠梦得","hits":[["歌",1]]},{"title":"禁中夜作书与元九","hits":[["鸣",1]]},{"title":"琴茶","hits":[["琴",1]]},{"title":"燕诗示刘叟","hits":[["鸣",1]]},{"title":"寄韬光禅师","hits":[["钟声",1]]},{"title":"红线毯","hits":[["歌",1]]},{"title":"题李次云窗竹","hits":[["鸣",1]]},{"title":"横吹曲辞·长安道","hits":[["歌",1]]},{"title":"牡丹芳","hits":[["莺",1]]},{"title":"秋雨中赠元九","hits":[["吟",1]]},{"title":"冷泉亭记","hits":[["潺",1]]},{"title":"初与元九别后忽梦见之及寤而书适至兼寄桐花诗…此寄","hits":[["吟",1]]},{"title":"慈乌夜啼","hits":[["啼",1]]},{"title":"垂钓","hits":[["长啸",1]]},{"title":"庾楼晓望","hits":[["鼓",1]]},{"title":"船夜援琴","hits":[["琴",1]]},{"title":"晚秋夜","hits":[["鸡鸣",1]]},{"title":"九年十一月二十一日感事而作","hits":[["琴",1]]},{"title":"缭绫","hits":[["歌",1]]},{"title":"中隐","hits":[["喧",1]]},{"title":"八月十五日夜禁中独直对月忆元九","hits":[["钟",1]]},{"title":"池上早夏","hits":[["琴",1]]},{"title":"对酒五首","hits":[["琵琶",1]]},{"title":"魏王堤","hits":[["啼",1]]},{"title":"一七令·诗","hits":[["吟",1]]},{"title":"哭刘尚书梦得二首","hits":[["哭",1]]},{"title":"早兴","hits":[["鼓",1]]},{"title":"李夫人－鉴嬖惑也","hits":[["哭",1]]},{"title":"舟中晚起","hits":[["吟",1]]},{"title":"自咏","hits":[["歌",1]]},{"title":"山石榴寄元九","hits":[["滴",1]]},{"title":"慵不能","hits":[["琴",1]]},{"title":"八骏图","hits":[["歌声",1]]},{"title":"强酒","hits":[["歌",1]]},{"title":"杭州回舫","hits":[["吟",1]]},{"title":"正月三日闲行","hits":[["莺",1]]},{"title":"秦中吟十首·歌舞","hits":[["歌",1]]},{"title":"三游洞序","hits":[["泉声",1]]},{"title":"一字至七字诗","hits":[["吟",1]]},{"title":"劝酒寄元九","hits":[["歌",1]]},{"title":"池鹤二首","hits":[["唳",1]]},{"title":"秦中吟十首·伤友","hits":[["嘶",1]]},{"title":"和梦得夏至忆苏州呈卢宾客","hits":[["管弦",1]]},{"title":"酬元九对新栽竹有怀见寄","hits":[["吟",1]]},{"title":"过元家履信宅","hits":[["歌",1]]},{"title":"新乐府序","hits":[["歌",1]]},{"title":"寄元九","hits":[["歌",1]]},{"title":"立秋日曲江忆元九","hits":[["蝉",1]]},{"title":"问皇甫十","hits":[["歌",1]]},{"title":"晚起","hits":[["鼓",1]]},{"title":"雨后秋凉","hits":[["砧",1]]},{"title":"山中与元九书因题书后","hits":[["猿",1]]},{"title":"禁中九日对菊花酒忆元九","hits":[["吟",1]]},{"title":"读李杜诗集，因题卷后","hits":[["吟",1]]},{"title":"醉后","hits":[["歌",1]]},{"title":"寒闺夜","hits":[["滴",1]]},{"title":"南龙兴寺残雪","hits":[["吟",1]]},{"title":"李夫人","hits":[["哭",1]]},{"title":"杂曲歌辞·何满子","hits":[["歌",1]]},{"title":"重题","hits":[["钟",1]]}],"badge":"反直觉：高总命中与高无声占比并存——本语料 299 首中 175 首整首无声；354 次命中里 53 次集中在《琵琶行》《与元九书》两篇。"},{"name":"苏轼","color":"#b64b3f","poems":300,"hits":238,"per100":0.733,"chars":32466,"quietN":173,"quietRatio":0.5767,"catCounts":{"兽鸣":8,"鸟啼":41,"器乐":54,"钟磬":20,"自然声":30,"人声":85},"sig":[["歌",52],["钟鼓",4],["鼓",15],["钟",14],["松风",4],["琴",13]],"audible":[{"title":"石钟山记","hits":[["钟",5],["响",1],["歌",1],["磬",1],["钟鼓",1],["鸣",1],["鼓",1]]},{"title":"醉翁操·琅然","hits":[["琴",5],["吟",1],["响",1],["啸",1],["歌",1],["鸣",1]]},{"title":"赤壁赋","hits":[["歌",4],["泣",2],["响",1],["箫",1]]},{"title":"水调歌头·昵昵儿女语","hits":[["琴",3],["琵琶",2],["歌",1],["鸣",1],["鼓",1]]},{"title":"望海楼晚景五绝","hits":[["喧",2],["吟",1],["歌",1],["笑语",1],["笙",1],["钟鼓",1],["鼓",1]]},{"title":"水龙吟·黄州梦过栖霞楼","hits":[["歌",2],["响",1],["笑语",1],["笛",1],["鼓",1]]},{"title":"后赤壁赋","hits":[["鸣",3],["歌",1],["长啸",1]]},{"title":"放鹤亭记","hits":[["鸣",2],["歌",1],["琴",1],["鼓",1]]},{"title":"游沙湖","hits":[["啼",1],["子规",1],["歌",1],["萧萧",1]]},{"title":"舟中夜起","hits":[["萧萧",1],["钟",1],["鸡鸣",1],["鼓",1]]},{"title":"浣溪沙·游蕲水清泉寺","hits":[["啼",1],["子规",1],["萧萧",1]]},{"title":"琴诗","hits":[["琴",2],["鸣",1]]},{"title":"陌上花三首","hits":[["歌",3]]},{"title":"蝶恋花·密州上元","hits":[["笙",1],["箫",1],["鼓",1]]},{"title":"南歌子·游赏","hits":[["歌",3]]},{"title":"水调歌头·安石在东海","hits":[["歌",2],["丝竹",1]]},{"title":"贾谊论","hits":[["哭",2],["泣",1]]},{"title":"记游松风亭","hits":[["松风",1],["雷",1],["鼓",1]]},{"title":"木兰花令·次欧公西湖韵","hits":[["潺",2],["咽",1]]},{"title":"日喻","hits":[["钟",3]]},{"title":"醉落魄·苏州阊门留别","hits":[["咽",1],["歌声",1],["潇潇",1]]},{"title":"百步洪二首","hits":[["笛",2],["吟",1]]},{"title":"定风波·莫听穿林打叶声","hits":[["吟",1],["啸",1]]},{"title":"临江仙·夜归临皋","hits":[["雷",1],["鸣",1]]},{"title":"定风波·南海归赠王定国侍人寓娘","hits":[["歌",2]]},{"title":"江城子·江景","hits":[["筝",2]]},{"title":"念奴娇·中秋","hits":[["歌",1],["笛",1]]},{"title":"阮郎归·初夏","hits":[["咽",1],["蝉",1]]},{"title":"木兰花令·次马中玉韵","hits":[["莺",1],["莺啼",1]]},{"title":"浣溪沙·荷花","hits":[["歌",1],["笙",1]]},{"title":"潮州韩文公庙碑","hits":[["吟",1],["歌",1]]},{"title":"喜雨亭记","hits":[["歌",2]]},{"title":"木兰花令·宿造口闻夜雨寄子由才叔","hits":[["歌",1],["蛩",1]]},{"title":"有美堂暴雨","hits":[["雷",1],["鼓",1]]},{"title":"劝金船·无情流水多情客","hits":[["咽",1],["歌声",1]]},{"title":"李思训画长江绝岛图","hits":[["棹歌",1],["猿",1]]},{"title":"蝶恋花·离别","hits":[["啼",1],["角声",1]]},{"title":"江城子·梦中了了醉中醒","hits":[["歌",1],["鸣",1]]},{"title":"浣溪沙·风压轻云贴水飞","hits":[["啼",1],["鹧鸪",1]]},{"title":"菩萨蛮·回文","hits":[["莺",2]]},{"title":"虢国夫人夜游图","hits":[["雷",1],["鼓",1]]},{"title":"渔家傲·临水纵横回晚鞚","hits":[["歌",1],["笛",1]]},{"title":"天仙子·走马探花花发未","hits":[["莺",2]]},{"title":"菩萨蛮·西湖","hits":[["啼",1],["萧萧",1]]},{"title":"诉衷情·琵琶女","hits":[["琵琶",1],["蝉",1]]},{"title":"西江月·姑熟再见胜之次前韵","hits":[["歌",1],["滴",1]]},{"title":"减字木兰花·双龙对起","hits":[["噪",1],["松风",1]]},{"title":"水龙吟·小沟东接长江","hits":[["歌",1],["琴",1]]},{"title":"浣溪沙·照日深红暖见鱼","hits":[["猿",1],["鼓",1]]},{"title":"八月十五日看潮五绝","hits":[["噪",1],["鼓",1]]},{"title":"念奴娇·赤壁怀古","hits":[["橹",1]]},{"title":"卜算子·黄州定慧院寓居作","hits":[["漏断",1]]},{"title":"西江月·中秋和子由","hits":[["鸣",1]]},{"title":"和子由渑池怀旧","hits":[["嘶",1]]},{"title":"行香子·述怀","hits":[["琴",1]]},{"title":"春宵","hits":[["歌",1]]},{"title":"水龙吟·次韵章质夫杨花词","hits":[["莺",1]]},{"title":"鹧鸪天·林断山明竹隐墙","hits":[["蝉",1]]},{"title":"满庭芳·蜗角虚名","hits":[["钟",1]]},{"title":"西江月·平山堂","hits":[["歌",1]]},{"title":"行香子·秋与","hits":[["钟",1]]},{"title":"浣溪沙·簌簌衣巾落枣花","hits":[["响",1]]},{"title":"沁园春·孤馆灯青","hits":[["吟",1]]},{"title":"永遇乐·彭城夜宿燕子楼梦盼盼因作此词","hits":[["鼓",1]]},{"title":"洞仙歌·冰肌玉骨","hits":[["歌",1]]},{"title":"江城子·墨云拖雨过西楼","hits":[["歌",1]]},{"title":"鹊桥仙·七夕送陈令举","hits":[["箫",1]]},{"title":"减字木兰花·莺初解语","hits":[["莺",1]]},{"title":"满庭芳·归去来兮","hits":[["歌",1]]},{"title":"采桑子·润州多景楼与孙巨源相遇","hits":[["琵琶",1]]},{"title":"文与可画筼筜谷偃竹记","hits":[["哭",1]]},{"title":"新城道中二首","hits":[["雨声",1]]},{"title":"守岁","hits":[["鼓",1]]},{"title":"浣溪沙·山色横侵蘸晕霞","hits":[["啼",1]]},{"title":"鹧鸪天·佳人","hits":[["丝竹",1]]},{"title":"石苍舒醉墨堂","hits":[["钟",1]]},{"title":"南乡子·集句","hits":[["吟",1]]},{"title":"江神子·黄昏犹是雨纤纤","hits":[["吟",1]]},{"title":"菩萨蛮·湿云不动溪桥冷","hits":[["水声",1]]},{"title":"新城道中·其一","hits":[["雨声",1]]},{"title":"南歌子·再用前韵","hits":[["钟鼓",1]]},{"title":"汲江煎茶","hits":[["松风",1]]},{"title":"调笑令·渔父","hits":[["笛",1]]},{"title":"寒食雨二首","hits":[["哭",1]]},{"title":"屈原塔","hits":[["咽",1]]},{"title":"浣溪沙·缥缈红妆照浅溪","hits":[["莺啼",1]]},{"title":"醉落魄·离京口作","hits":[["歌",1]]},{"title":"南乡子·寒玉细凝肤","hits":[["歌",1]]},{"title":"月夜与客饮酒杏花下","hits":[["箫",1]]},{"title":"刑赏忠厚之至论","hits":[["歌",1]]},{"title":"江城子·前瞻马耳九仙山","hits":[["歌",1]]},{"title":"定风波·红梅","hits":[["吟",1]]},{"title":"倦夜","hits":[["犬吠",1]]},{"title":"寓居定惠院之东杂花满山有海棠一株土人不知贵也","hits":[["歌",1]]},{"title":"西江月·坐客见和复次韵","hits":[["鼓",1]]},{"title":"满庭芳·归去来兮","hits":[["歌",1]]},{"title":"寒食帖","hits":[["哭",1]]},{"title":"点绛唇·离恨","hits":[["乌啼",1]]},{"title":"宝绘堂记","hits":[["钟",1]]},{"title":"水龙吟·露寒烟冷蒹葭老","hits":[["唳",1]]},{"title":"定风波·感旧","hits":[["啼",1]]},{"title":"雨中花慢·邃院重帘何处","hits":[["笙",1]]},{"title":"少年游·端午赠黄守徐君猷","hits":[["歌",1]]},{"title":"蝶恋花·蝶懒莺慵春过半","hits":[["莺",1]]},{"title":"六国论","hits":[["鸡鸣",1]]},{"title":"一斛珠·洛城春晚","hits":[["歌",1]]},{"title":"桃源忆故人·暮春","hits":[["莺啼",1]]},{"title":"满庭芳·香叆雕盘","hits":[["歌",1]]},{"title":"望江南·暮春","hits":[["鸣",1]]},{"title":"占春芳·红杏了","hits":[["笛",1]]},{"title":"临江仙·昨夜渡江何处宿","hits":[["笛",1]]},{"title":"一丛花·初春病起","hits":[["钟鼓",1]]},{"title":"点绛唇·再和送钱公永","hits":[["歌",1]]},{"title":"行香子·与泗守过南山晚归作","hits":[["人语",1]]},{"title":"画堂春·寄子由","hits":[["歌",1]]},{"title":"西江月·再用前韵戏曹子方","hits":[["泣",1]]},{"title":"浣溪沙·春情","hits":[["鹧鸪",1]]},{"title":"临江仙·疾愈登望湖楼赠项长官","hits":[["箫",1]]},{"title":"醉蓬莱·重九上君猷","hits":[["萧萧",1]]},{"title":"慈湖夹阻风","hits":[["啸",1]]},{"title":"永遇乐·长忆别时","hits":[["歌",1]]},{"title":"南乡子·春情","hits":[["歌",1]]},{"title":"雪后书北台壁二首","hits":[["吟",1]]},{"title":"十一月二十六日松风亭下梅花盛开","hits":[["松风",1]]},{"title":"八月七日初入赣过惶恐滩","hits":[["泣",1]]},{"title":"和子由论书","hits":[["钟",1]]},{"title":"上梅直讲书","hits":[["歌",1]]}],"badge":""},{"name":"陆游","color":"#8a3b2f","poems":300,"hits":163,"per100":0.872,"chars":18688,"quietN":182,"quietRatio":0.6067,"catCounts":{"兽鸣":7,"鸟啼":30,"器乐":39,"钟磬":11,"自然声":35,"人声":41},"sig":[["萧萧",10],["雁声",3],["角声",3],["雨声",4],["鼓",12],["笛",8]],"audible":[{"title":"听雨","hits":[["笛",1],["萧萧",1],["钟",1],["雨声",1]]},{"title":"胡无人","hits":[["雷",1],["飒飒",1],["鼓",1]]},{"title":"时雨","hits":[["歌",2],["莺",1]]},{"title":"入蜀记(节选)","hits":[["丝竹",1],["猿",1],["鸣",1]]},{"title":"南定楼遇急雨","hits":[["人语",1],["棹歌",1],["欸乃",1]]},{"title":"游山西村","hits":[["箫",1],["鼓",1]]},{"title":"关山月","hits":[["歌",1],["笛",1]]},{"title":"对酒","hits":[["啼",1],["莺",1]]},{"title":"长歌行","hits":[["滴",1],["鸣",1]]},{"title":"秋波媚·七月十六日晚登高兴亭望长安南山","hits":[["歌",1],["角声",1]]},{"title":"夜游宫·记梦寄师伯浑","hits":[["漏声",1],["笳",1]]},{"title":"鹊桥仙·夜闻杜鹃","hits":[["啼",1],["莺",1]]},{"title":"题醉中所作草书卷后","hits":[["人语",1],["鼓",1]]},{"title":"汉宫春·初自南郑来成都作","hits":[["歌",1],["笳",1]]},{"title":"秋兴","hits":[["画角",1],["萧萧",1]]},{"title":"宴西楼","hits":[["笙",1],["箫",1]]},{"title":"五月十一日夜且半梦从大驾亲征尽复汉唐故地","hits":[["角声",1],["鼓",1]]},{"title":"哀郢二首","hits":[["歌",2]]},{"title":"度浮桥至南台","hits":[["笛",1],["钟鼓",1]]},{"title":"朝中措·代谭德称作","hits":[["啼",1],["歌",1]]},{"title":"书室明暖终日婆娑其间倦则扶杖至小园戏作长句二首","hits":[["歌",1],["雁声",1]]},{"title":"月下醉题","hits":[["吟",1],["鸣",1]]},{"title":"九月一日夜读诗稿有感走笔作歌","hits":[["琵琶",1],["鼓",1]]},{"title":"十月二十八日风雨大作","hits":[["哭",1],["风声",1]]},{"title":"书巢记","hits":[["吟",1],["雷",1]]},{"title":"雨夜读书","hits":[["潺",2]]},{"title":"书喜","hits":[["鸣",1],["鼓",1]]},{"title":"陆游筑书巢","hits":[["吟",1],["雷",1]]},{"title":"遣怀","hits":[["哭",1],["歌",1]]},{"title":"游诸葛武侯书台","hits":[["吟",1],["松风",1]]},{"title":"烟艇记","hits":[["歌",1],["雷",1]]},{"title":"楚城","hits":[["滩声",1],["猿",1]]},{"title":"长相思·悟浮生","hits":[["泉声",1],["钟",1]]},{"title":"南乡子","hits":[["笛",1],["萧萧",1]]},{"title":"风雨","hits":[["雨声",1],["风声",1]]},{"title":"三山杜门作歌","hits":[["马嘶",1],["鸣",1]]},{"title":"忆秦娥·玉花骢","hits":[["歌",1],["笙",1]]},{"title":"风入松","hits":[["笛",1],["莺",1]]},{"title":"成都书事","hits":[["丝竹",1],["莺",1]]},{"title":"沈园二首·其一","hits":[["画角",1]]},{"title":"秋夜将晓出篱门迎凉有感二首","hits":[["鸣",1]]},{"title":"鹊桥仙·一竿风月","hits":[["歌",1]]},{"title":"谢池春·壮岁从戎","hits":[["歌",1]]},{"title":"秋思","hits":[["砧",1]]},{"title":"书愤二首","hits":[["萧萧",1]]},{"title":"夜泊水村","hits":[["泣",1]]},{"title":"鹧鸪天·懒向青门学种瓜","hits":[["歌",1]]},{"title":"幽居初夏","hits":[["鸣",1]]},{"title":"鹧鸪天·家住苍烟落照间","hits":[["啸",1]]},{"title":"闻武均州报已复西京","hits":[["雷",1]]},{"title":"枕上作","hits":[["萧萧",1]]},{"title":"秋夜读书每以二鼓尽为节","hits":[["鼓",1]]},{"title":"水调歌头·多景楼","hits":[["鼓角",1]]},{"title":"长相思·面苍然","hits":[["杜鹃",1]]},{"title":"蝶恋花·桐叶晨飘蛩夜语","hits":[["蛩",1]]},{"title":"乌夜啼·纨扇婵娟素月","hits":[["蝉",1]]},{"title":"观大散关图有感","hits":[["钟",1]]},{"title":"二月二十四日作","hits":[["鼓",1]]},{"title":"晚泊","hits":[["啼",1]]},{"title":"观村童戏溪上","hits":[["鸣",1]]},{"title":"六月十四日宿东林寺","hits":[["钟",1]]},{"title":"忆昔","hits":[["泣",1]]},{"title":"长相思·桥如虹","hits":[["钟",1]]},{"title":"舟中对月","hits":[["更漏",1]]},{"title":"宝剑吟","hits":[["鸣",1]]},{"title":"夏日六言","hits":[["笛",1]]},{"title":"病起","hits":[["吟",1]]},{"title":"青玉案·与朱景参会北岭","hits":[["雨声",1]]},{"title":"乌夜啼·金鸭余香尚暖","hits":[["莺",1]]},{"title":"自咏示客","hits":[["萧萧",1]]},{"title":"浣花女","hits":[["琵琶",1]]},{"title":"秋兴","hits":[["砧",1]]},{"title":"好事近·秋晓上莲峰","hits":[["雷",1]]},{"title":"追感往事五首·其五","hits":[["泣",1]]},{"title":"满江红·危堞朱栏","hits":[["滴",1]]},{"title":"东关二首·其二","hits":[["萧萧",1]]},{"title":"大圣乐·电转雷惊","hits":[["雷",1]]},{"title":"芒种后经旬无日不雨偶得长句","hits":[["角声",1]]},{"title":"鼠屡败吾书偶得狸奴捕杀无虚日群鼠几空为赋","hits":[["鼓",1]]},{"title":"书室明暖终日婆娑其问倦则扶杖至小园戏作长句二首","hits":[["歌",1]]},{"title":"小雪","hits":[["磬",1]]},{"title":"初夏行平水道中","hits":[["莺",1]]},{"title":"成都行","hits":[["瑟",1]]},{"title":"秋思·乌桕微丹菊渐开","hits":[["雁声",1]]},{"title":"水龙吟·春日游摩诃池","hits":[["筝",1]]},{"title":"登赏心亭","hits":[["萧萧",1]]},{"title":"小舟游近村舍舟步归·其四","hits":[["鼓",1]]},{"title":"江楼吹笛饮酒大醉中作","hits":[["笛",1]]},{"title":"鹧鸪天（送叶梦锡·七之一）","hits":[["瑟",1]]},{"title":"七月十九日大风雨雷电","hits":[["雷",1]]},{"title":"二月四日作","hits":[["鸣",1]]},{"title":"春晴泛舟","hits":[["雷",1]]},{"title":"秋日闻蝉","hits":[["蝉",1]]},{"title":"秋声","hits":[["萧萧",1]]},{"title":"破阵子·仕至千钟良易","hits":[["钟",1]]},{"title":"九月十六日夜梦驻军河外遣使招降诸城觉而有作","hits":[["歌",1]]},{"title":"冬晴","hits":[["鸣",1]]},{"title":"老马行","hits":[["鼓",1]]},{"title":"微雨","hits":[["鸣",1]]},{"title":"山南行","hits":[["鼓",1]]},{"title":"秋夜纪怀","hits":[["鸣",1]]},{"title":"柳梢青·乙巳二月西兴赠别","hits":[["歌",1]]},{"title":"十一月五日夜半偶作","hits":[["雁声",1]]},{"title":"秋雨","hits":[["萧萧",1]]},{"title":"思夔州二首·其一","hits":[["歌",1]]},{"title":"鹧鸪天·看尽巴山看蜀山","hits":[["子规",1]]},{"title":"镜湖女","hits":[["歌",1]]},{"title":"山园草木四绝句 其一 紫薇","hits":[["钟鼓",1]]},{"title":"黄鹤楼","hits":[["笛",1]]},{"title":"冲雪至余庆觉林雪连日不止","hits":[["吟",1]]},{"title":"无题","hits":[["歌",1]]},{"title":"大风雨中作","hits":[["鸣",1]]},{"title":"三峡歌","hits":[["猿啼",1]]},{"title":"寒雨中偶赋二首·其一","hits":[["滴",1]]},{"title":"小园","hits":[["歌",1]]},{"title":"剑池","hits":[["雷",1]]},{"title":"桃源忆故人（五之三）","hits":[["吟",1]]},{"title":"春雨四首","hits":[["雨声",1]]}],"badge":""},{"name":"李清照","color":"#9c5d8f","poems":83,"hits":67,"per100":0.754,"chars":8883,"quietN":51,"quietRatio":0.6145,"catCounts":{"兽鸣":2,"鸟啼":5,"器乐":9,"钟磬":7,"自然声":16,"人声":28},"sig":[["萧萧",10],["歌",16],["笑语",2],["滴",4],["泣",4],["钟",5]],"audible":[{"title":"词论","hits":[["歌",9],["更漏",1],["泣",1],["笙",1],["莺",1]]},{"title":"上枢密韩肖胄诗二首·其一","hits":[["萧萧",2],["歌",1],["泣",1],["鸣",1]]},{"title":"上韩公枢密 其一","hits":[["萧萧",2],["歌",1],["泣",1],["鸣",1]]},{"title":"金石录后序","hits":[["钟",3],["泣",1]]},{"title":"行香子·天与秋光","hits":[["漏声",1],["砧",1],["蛩",1]]},{"title":"孤雁儿·藤床纸帐朝眠起","hits":[["笛",1],["箫",1],["萧萧",1]]},{"title":"声声慢·寻寻觅觅","hits":[["滴",2]]},{"title":"永遇乐·落日熔金","hits":[["笑语",1],["笛",1]]},{"title":"行香子·七夕","hits":[["蛩",1],["鸣",1]]},{"title":"添字丑奴儿·窗前谁种芭蕉树","hits":[["滴",2]]},{"title":"丑奴儿·晚来一阵风兼雨","hits":[["笑语",1],["笙",1]]},{"title":"好事近·风定落花深","hits":[["歌",2]]},{"title":"晓梦","hits":[["喧",1],["钟",1]]},{"title":"浯溪中兴颂诗和张文潜二首","hits":[["响",1],["鼓",1]]},{"title":"清平乐·年年雪里","hits":[["萧萧",1]]},{"title":"摊破浣溪沙·病起萧萧两鬓华","hits":[["萧萧",1]]},{"title":"蝶恋花·晚止昌乐馆寄姊妹","hits":[["萧萧",1]]},{"title":"鹧鸪天·寒日萧萧上琐窗","hits":[["萧萧",1]]},{"title":"临江仙·庭院深深深几许","hits":[["吟",1]]},{"title":"浣溪沙·春景","hits":[["琴",1]]},{"title":"满庭芳·残梅","hits":[["笛",1]]},{"title":"多丽·咏白菊","hits":[["萧萧",1]]},{"title":"浣溪沙·莫许杯深琥珀浓","hits":[["钟",1]]},{"title":"菩萨蛮·归鸿声断残云碧","hits":[["角声",1]]},{"title":"春残","hits":[["燕语",1]]},{"title":"殢人娇·后亭梅花开有感","hits":[["歌声",1]]},{"title":"打马赋","hits":[["响",1]]},{"title":"瑞鹧鸪·双银杏","hits":[["吟",1]]},{"title":"投翰林学士綦崇礼启","hits":[["吟",1]]},{"title":"浪淘沙·素约小腰身","hits":[["歌",1]]},{"title":"失调名·犹将歌扇向人遮","hits":[["歌",1]]},{"title":"端午帖子 夫人阁","hits":[["歌",1]]}],"badge":""}],"star":{"pipa":{"title":"琵琶行","poet":"白居易","total":32,"segs":[["元和十年，予左迁九江郡司马。明年秋，送客湓浦口，闻舟中夜弹",0],["琵琶",1],["者，听其音，铮铮然有京都声。问其人，本长安倡女，尝学",0],["琵琶",1],["于穆、曹二善才，年长色衰，委身为贾人妇。遂命酒，使快弹数曲。曲罢悯然，自叙少小时欢乐事，今漂沦憔悴，转徙于江湖间。予出官二年，恬然自安，感斯人言，是夕始觉有迁谪意。因为长句，",0],["歌",1],["以赠之，凡六百一十六言，命曰《",0],["琵琶",1],["行》。\n浔阳江头夜送客，枫叶荻花秋",0],["瑟瑟",1],["。\n主人下马客在船，举酒欲饮无",0],["管弦",1],["。\n醉不成欢惨将别，别时茫茫江浸月。\n忽闻水上",0],["琵琶",1],["声，主人忘归客不发。\n寻声暗问弹者谁，",0],["琵琶",1],["声停欲语迟。\n移船相近邀相见，添酒回灯重开宴。\n千呼万唤始出来，犹抱",0],["琵琶",1],["半遮面。\n转轴拨弦三两声，未成曲调先有情。\n弦弦掩抑声声思，似诉平生不得志。\n低眉信手续续弹，说尽心中无限事。\n轻拢慢捻抹复挑，初为《霓裳》后《六幺》。\n大弦",0],["嘈嘈",1],["如急雨，小弦",0],["切切",1],["如",0],["私语",1],["。\n",0],["嘈嘈",1],["切切",1],["错杂弹，大珠小珠落玉盘。\n间关",0],["莺",1],["语花底滑，幽",0],["咽",1],["泉流冰下难。\n冰泉冷涩弦凝绝，凝绝不通声暂歇。\n别有幽愁暗恨生，此时无声胜有声。\n银瓶乍破水浆迸，铁骑突出刀枪",0],["鸣",1],["。\n曲终收拨当心画，四弦一声如裂帛。\n东船西舫悄无言，唯见江心秋月白。\n沉",0],["吟",1],["放拨插弦中，整顿衣裳起敛容。\n自言本是京城女，家在虾蟆陵下住。\n十三学得",0],["琵琶",1],["成，名属教坊第一部。\n曲罢曾教善才服，妆成每被秋娘妒。\n五陵年少争缠头，一曲红绡不知数。\n钿头银篦击节碎，血色罗裙翻酒污。\n今年欢笑复明年，秋月春风等闲度。\n弟走从军阿姨死，暮去朝来颜色故。\n门前冷落鞍马稀，老大嫁作商人妇。\n商人重利轻别离，前月浮梁买茶去。\n去来江口守空船，绕船月明江水寒。\n夜深忽梦少年事，梦",0],["啼",1],["妆泪红阑干。\n我闻",0],["琵琶",1],["已叹息，又闻此语重唧唧。\n同是天涯沦落人，相逢何必曾相识！\n我从去年辞帝京，谪居卧病浔阳城。\n浔阳地僻无音乐，终岁不闻",0],["丝竹",1],["声。\n住近湓江地低湿，黄芦苦竹绕宅生。\n其间旦暮闻何物？",0],["杜鹃",1],["啼",1],["血",0],["猿",1],["哀",0],["鸣",1],["。\n春江花朝秋月夜，往往取酒还独倾。\n岂无山",0],["歌",1],["与村",0],["笛",1],["，呕哑嘲哳难为听。\n今夜闻君",0],["琵琶",1],["语，如听仙乐耳暂明。\n莫辞更坐弹一曲，为君翻作《",0],["琵琶",1],["行》。\n感我此言良久立，却坐促弦弦转急。\n凄凄不似向前声，满座重闻皆掩",0],["泣",1],["。\n座中",0],["泣",1],["下谁最多？江州司马青衫湿。",0]],"hits":[["琵琶",10],["切切",2],["啼",2],["嘈嘈",2],["歌",2],["泣",2],["鸣",2],["丝竹",1],["吟",1],["咽",1],["杜鹃",1],["猿",1],["瑟瑟",1],["私语",1],["笛",1],["管弦",1],["莺",1]],"note":"含诗前序文：序中「琵琶」等命中一并计入，与 sound_stats 口径一致。","facts":["共 32 次命中、17 种声音词，在全语料 20437 篇的单篇命中榜列第 4；当前榜首为韩愈《送孟东野序》（42 次）。","「琵琶」×10：全语料「琵琶」共出现 105 次，其中 3 次在本篇诗前序文。","「嘈嘈」×2、「切切」×2：全语料「嘈嘈」共 11 次（见于 10 篇）、「切切」共 22 次（见于 20 篇）——大弦嘈嘈如急雨，小弦切切如私语。","「幽咽泉流冰下难」的「咽」按词典归入自然声（词条注明亦覆盖人声呜咽）；「杜鹃啼血猿哀鸣」一句连中 4 词（杜鹃、啼、猿、鸣）——单句声音密度全篇之最。"]},"wangwei":{"name":"王维","color":"#4a7a52","poems":[{"title":"鹿柴","poet":"王维","total":2,"segs":[["空山不见人，但闻",0],["人语",1],["响",1],["。\n返景入深林，复照青苔上。",0]],"hits":[["人语",1],["响",1]]},{"title":"竹里馆","poet":"王维","total":2,"segs":[["独坐幽篁里，弹",0],["琴",1],["复",0],["长啸",1],["。\n深林人不知，明月来相照。",0]],"hits":[["琴",1],["长啸",1]]},{"title":"山居秋暝","poet":"王维","total":1,"segs":[["空山新雨后，天气晚来秋。\n明月松间照，清泉石上流。\n竹",0],["喧",1],["归浣女，莲动下渔舟。\n随意春芳歇，王孙自可留。",0]],"hits":[["喧",1]]},{"title":"鸟鸣涧","poet":"王维","total":1,"segs":[["人闲桂花落，夜静春山空。\n月出惊山鸟，时",0],["鸣",1],["春涧中。",0]],"hits":[["鸣",1]]},{"title":"观猎","poet":"王维","total":1,"segs":[["风劲角弓",0],["鸣",1],["，将军猎渭城。\n草枯鹰眼疾，雪尽马蹄轻。\n忽过新丰市，还归细柳营。\n回看射雕处，千里暮云平。",0]],"hits":[["鸣",1]],"note":"「角弓鸣」实为弓弦之声，被泛用动词「鸣」捕捉——词典归类近似之一，如实展示。"}],"total":7,"corpusTotal":210,"quietN":171,"poemCount":300,"note":"本语料王维 300 首中 171 首整首无声，全库共 210 次声音命中；本页选取的 5 首经典作品合计 7 次并全部点亮。这里展示的是“以声衬静”的可核案例，不再把精选案例误写成王维全库总量。"},"border":{"dufu":{"name":"杜甫","color":"#7a5c3d","hits":243,"chars":27333,"poemCount":300,"cats":{"兽鸣":8,"鸟啼":46,"器乐":45,"钟磬":6,"自然声":30,"人声":108},"poems":[{"title":"兵车行","poet":"杜甫","total":4,"segs":[["车辚辚，马",0],["萧萧",1],["，行人弓箭各在腰。\n耶娘妻子走相送，尘埃不见咸阳桥。\n牵衣顿足拦道",0],["哭",1],["，",0],["哭",1],["声直上干云霄。\n道旁过者问行人，行人但云点行频。\n或从十五北防河，便至四十西营田。\n去时里正与裹头，归来头白还戍边。\n边庭流血成海水，武皇开边意未已。\n君不闻汉家山东二百州，千村万落生荆杞。\n纵有健妇把锄犁，禾生陇亩无东西。\n况复秦兵耐苦战，被驱不异犬与鸡。\n长者虽有问，役夫敢申恨？\n且如今年冬，未休关西卒。\n县官急索租，租税从何出？\n信知生男恶，反是生女好。\n生女犹得嫁比邻，生男埋没随百草。\n君不见，青海头，古来白骨无人收。\n新鬼烦冤旧鬼",0],["哭",1],["，天阴雨湿声啾啾！",0]],"hits":[["哭",3],["萧萧",1]]},{"title":"石壕吏","poet":"杜甫","total":3,"segs":[["暮投石壕村，有吏夜捉人。\n老翁作墙走，老妇出门看。\n吏呼一一怒！妇",0],["啼",1],["一一苦！\n听妇前致词：三男邺城戍。\n一男附书至，二男新战死。\n存者且偷生，死者长已矣！\n室中更无人，惟有乳下孙。\n有孙母未去，出入无完裙。\n老妪力虽衰，请从吏夜归。\n急应河阳役，犹得备晨炊。\n夜久语声绝，如闻",0],["泣",1],["幽",0],["咽",1],["。\n天明登前途，独与老翁别。",0]],"hits":[["咽",1],["啼",1],["泣",1]]},{"title":"月夜忆舍弟","poet":"杜甫","total":2,"segs":[["戍鼓",1],["断人行，边秋一",0],["雁声",1],["。\n露从今夜白，月是故乡明。\n有弟皆分散，无家问死生。\n寄书长不达，况乃未休兵。",0]],"hits":[["戍鼓",1],["雁声",1]]}]},"gaoshi":{"name":"高适","color":"#a87527","hits":174,"chars":21031,"poemCount":247,"cats":{"兽鸣":19,"鸟啼":43,"器乐":28,"钟磬":6,"自然声":18,"人声":60},"poems":[{"title":"塞上听吹笛","poet":"高适","total":1,"segs":[["雪净胡天牧马还，月明",0],["羌笛",1],["戍楼间。\n借问梅花何处落，风吹一夜满关山。",0]],"hits":[["羌笛",1]]},{"title":"和王七玉门关听吹笛","poet":"高适","total":2,"segs":[["胡人吹",0],["笛",1],["戍楼间，楼上萧条海月闲。\n借问落梅凡几曲，从风一夜满关山。\n雪净胡天牧马还，月明",0],["羌笛",1],["戍楼间。\n借问梅花何处落，风吹一夜满关山。",0]],"hits":[["笛",1],["羌笛",1]]},{"title":"燕歌行·并序","poet":"高适","total":4,"segs":[["开元二十六年，客有从元戎出塞而还者，作《燕",0],["歌",1],["行》以示，适感征戍之事，因而和焉。\n汉家烟尘在东北，汉将辞家破残贼。\n男儿本自重横行，天子非常赐颜色。\n摐金伐",0],["鼓",1],["下榆关，旌旆逶迤碣石间。\n校尉羽书飞瀚海，单于猎火照狼山。\n山川萧条极边土，胡骑凭陵杂风雨。\n战士军前半死生，美人帐下犹",0],["歌",1],["舞。\n大漠穷秋塞草腓，孤城落日斗兵稀。\n身当恩遇常轻敌，力尽关山未解围。\n铁衣远戍辛勤久，玉箸应",0],["啼",1],["别离后。\n少妇城南欲断肠，征人蓟北空回首。\n边庭飘飖那可度，绝域苍茫无所有。\n杀气三时作阵云，寒声一夜传刁斗。\n相看白刃血纷纷，死节从来岂顾勋！\n君不见沙场征战苦，至今犹忆李将军。",0]],"hits":[["歌",2],["啼",1],["鼓",1]],"note":"序文中《燕歌行》篇名的「歌」亦被计入——含序文口径，与统计保持一致。"}]},"reading":["扩容后本库收录杜甫 300 首/27333 字、高适 247 首/21031 字；下图比较两人全库六类声音构成，上方原文只选三首作证据入口。","杜甫全库人声 108 次，其中哭与泣合计 25 次（哭×18、泣×7）；器乐类共 45 次。","高适全库人声 60 次，其中「歌」36 次；器乐类共 28 次。","这些差异是词典口径下的文本声景构成，可用于提出对读问题；具体时代阐释仍需回到上方原句与作品语境。"]}},"excludes":[["萧瑟","萧瑟＝凋敝萧条，其「瑟」非乐器"],["瑟缩","瑟缩＝蜷缩，无声"],["半江瑟瑟","《暮江吟》「半江瑟瑟半江红」：瑟瑟作碧色解，非风声"],["杜鹃花","花名，非鸟啼"],["钟山","地名"],["钟情","钟＝聚集"],["屋漏","「床头屋漏」漏雨非更漏（防御性保留）"]]};</script>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">诗行万里 · 参赛版 · 37</div>
+    <h1>可听的诗<span class="accent">。</span></h1>
+    <p class="sub">给 20437 首诗文做一次「录音」：只统计<b>被听见的声音</b>——猿声、砧杵、琵琶、戍鼓、松风、人语。
+      六类声音、八十八个词条，扫出每位诗人独有的声景指纹；再走进三间录音室，听《琵琶行》的一夜、王维的空山、盛唐的两种边声。</p>
+    <div class="meta-strip" id="metaStrip"></div>
+    <div class="audio-bar">
+      <button id="audioToggle" aria-pressed="false">♪ 声音：关</button>
+      <span class="audio-note">可听化为 Web Audio 合成的抽象音色（振荡器＋噪声＋包络，非真实录音），默认静音；开启后点击任意声音词/芯片即可试听 1–2 秒。音频不可用时自动降级，不影响任何视觉内容。</span>
+      <div class="cat-legend" id="catLegend"></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section id="sec-corpus">
+  <div class="sec-head"><h2>全语料声音榜</h2><span class="tag">88 词条 · 六类 · 最长优先不重叠匹配</span></div>
+  <p class="sec-note">整个语料里最常被写下的声音。「歌」遥遥领先——古人写声音，首先写的是人自己发出的声音；其次才是鸣、啼这些自然的喉咙。条色即声音类别。</p>
+  <div class="card"><div id="corpusChart" class="chart-wide"></div></div>
+</section>
+
+<section id="sec-poets">
+  <div class="sec-head"><h2>六人声景指纹</h2><span class="tag">玫瑰图＝六类声音命中构成 · 芯片＝标志性声音（次数×偏爱度） · 灰条＝无声诗占比</span></div>
+  <p class="sec-note">同一套词典扫过六个人的当前在库作品，比较人声、器乐、自然声等六类构成。「无声诗」指整首未出现词典内任何声音词——占比越高，越接近词典口径下的「默片诗人」。每张卡可展开命中明细核对证据。</p>
+  <div class="grid" id="poetGrid"></div>
+  <p class="mut" style="margin-top:10px">口径提醒：六人当前样本为 李白 300首、杜甫 300首、白居易 299首、苏轼 300首、陆游 300首、李清照 83首；仍以本库收录为边界，密度与占比不外推为诗人全集结论。</p>
+</section>
+
+<section id="sec-star">
+  <div class="sec-head"><h2>明星案例 · 三间录音室</h2><span class="tag">原文命中逐词点亮，亮的即统计里算的</span></div>
+
+  <div class="star-block" id="starPipa">
+    <h3>一、《琵琶行》：一首诗铺开的音墙 <span class="who">白居易 · 32 次命中 · 全库第 4</span></h3>
+    <p class="star-note">声音词按六类染色——琵琶、嘈嘈、切切、幽咽次第出现。扩容后它不再被写成全库第一，实际名次与当前榜首都在右侧实时列出。</p>
+    <div class="pipa-grid">
+      <div>
+        <div class="poem-box" id="pipaText"></div>
+        <p class="mut" id="pipaNote" style="margin-top:6px"></p>
+      </div>
+      <div>
+        <div class="chips" id="pipaChips"></div>
+        <ul class="facts" id="pipaFacts"></ul>
+        <h4 class="kai" style="margin:14px 0 4px">全语料最响篇目</h4>
+        <div class="tbl-scroll"><table class="rank" id="rankTbl"></table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="star-block" id="starWw">
+    <h3>二、王维：以声衬静 <span class="who">精选 5 首 · 7 次命中全部点亮</span></h3>
+    <p class="star-note" id="wwNote"></p>
+    <div class="poemcards" id="wwCards"></div>
+  </div>
+
+  <div class="star-block" id="starBorder">
+    <h3>三、盛唐两种边声 <span class="who">杜甫的哭声与战鼓 · 高适的羌笛与钟鼓</span></h3>
+    <p class="star-note">同写战争与边地，两副耳朵录下两条完全不同的音轨。左右各选三首命中原文，下图为两人全部命中的六类构成对比。</p>
+    <div class="border-grid" id="borderGrid"></div>
+    <div class="card"><div id="dgChart" class="chart-wide" style="height:280px"></div></div>
+    <ul class="reading" id="borderReading" style="margin-top:12px"></ul>
+  </div>
+</section>
+
+<details class="method">
+  <summary>方法与数据（口径 · 排除表 · 局限）</summary>
+  <h4>词典口径：只收「被听见的声音」</h4>
+  <p>声音词典共 88 词条（<code>data/stylometry/sound_dict.py</code>，人工整理，非权威词库）：只收在古典诗词中通常作为「被听见的声音」出现的词——声音源意象（猿声、钟、砧、羌笛、更漏……）与拟声词/听觉动词（啼、萧萧、滴、咽、喧……）。因此不收多为视觉呈现的近邻词：「雁」不收、只收「雁声」；「马」不收、只收「马嘶/嘶」；「波涛」不收、只收「涛声」。六类划分：兽鸣（广义动物含虫声）/ 鸟啼 / 器乐（丝竹与军中鼓角）/ 钟磬（报时宗教器声）/ 自然声 / 人声（人语歌哭与劳作市井声）。每词带 [-1,1] 情感倾向，为人工标注、仅供染色，不宣称权威。</p>
+  <h4>匹配算法</h4>
+  <p>与语料扫描端一致：先从文本挖除排除表片段，再按词长降序<b>最长优先、不重叠</b>贪心匹配——「猿声」只计一次，不再重复计「猿」。本页所有明星案例的高亮由同一算法现场重算，并逐词断言与 <code>sound_stats.json</code> 的 per_poem 记录一致后才写入页面。</p>
+  <h4>排除表（匹配前挖除的已知误报）</h4>
+  <table id="exclTbl"><tr><th>片段</th><th>排除原因</th></tr></table>
+  <h4>散文抬高计数的说明</h4>
+  <p>语料 20437 篇中混有散文、赋、传奇与组诗合刊。当前单篇命中榜首为 韩愈《送孟东野序》（42 次）；议论复沓、合刊篇幅与听觉场景并非同一概念，因此榜单逐项标注体裁。全语料统计数字（含声音榜的「鸣」1096 次）不做体裁剔除，如实保留。</p>
+  <h4>语料与样本口径</h4>
+  <ul>
+    <li>当前语料覆盖 88 位诗人、20437 篇；六人样本为 李白 300首、杜甫 300首、白居易 299首、苏轼 300首、陆游 300首、李清照 83首。所有占比、密度、无声诗占比只在本语料口径内成立。</li>
+    <li>单篇长诗、组诗合刊或散文仍可能显著主导总命中，页面同时给出篇数、字数、密度与无声占比，避免只看一个总数。</li>
+    <li>「无声诗占比」＝整首未出现词典内声音词的诗占比，是词典口径下的近似，不等于真实世界的无声。</li>
+  </ul>
+  <h4>归类近似（如实声明）</h4>
+  <ul>
+    <li>泛用动词「啼／鸣／噪」统一归鸟啼类，实际也覆盖猿啼、蝉鸣、弓弦鸣（王维《观猎》「角弓鸣」即一例，已在卡片注明）；长词优先已消化大部分误差。</li>
+    <li>「咽」归自然声（泉声咽），也覆盖人声呜咽（《石壕吏》「泣幽咽」）；「萧萧」归自然声，也覆盖马鸣（《兵车行》「马萧萧」）。</li>
+    <li>《琵琶行》「秋瑟瑟」按词典计自然声（风声义），而《暮江吟》「半江瑟瑟」为碧色义、已被排除表挖除——同字不同义，逐处人工核对。</li>
+  </ul>
+  <h4>可听化说明</h4>
+  <p>六类音色全部由浏览器 Web Audio API 现场合成（振荡器、噪声缓冲与增益包络的抽象化音效），页面不加载任何音频文件，也不请求任何远程资源；不支持 Web Audio 的环境中开关自动禁用，全部视觉功能不受影响。</p>
+  <h4>数据文件</h4>
+  <p>本页数据快照：<code>output/assets/competition/sound_page_data.json</code>；上游统计：<code>data/stylometry/sound_stats.json</code>（schema v1，覆盖 88 位诗人 / 20437 篇）。生成脚本 <code>数据可视化脚本/viz_37_soundscape.py</code> 零参数可复跑。</p>
+</details>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <nav class="site-nav">
+      <a href="29_参赛导航.html">29 参赛导航</a>
+      <a href="30_诗行万里_参赛版.html">30 总入口</a>
+      <a href="31_凝望罗盘.html">31 凝望罗盘</a>
+      <a href="32_身与心双层地图.html">32 身与心双层地图</a>
+      <a href="33_平行时空759.html">33 平行时空759</a>
+      <a href="34_一字识诗人.html">34 一字识诗人</a>
+      <a href="35_两种孤独与夸张签名.html">35 两种孤独与夸张签名</a>
+      <a href="36_同龄对齐.html">36 同龄对齐</a>
+      <span class="here">37 可听的诗（本页）</span>
+      <a href="38_唐宋意象潮汐.html">38 意象潮汐</a>
+      <a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
+    </nav>
+    <div>诗行万里 · 数媒可视化参赛版 · 声音维度 —— 词典与统计口径见上方「方法与数据」。</div>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var D = window.SOUND_DATA;
+var CAT_BY_NAME = {};
+D.cats.forEach(function(c){ CAT_BY_NAME[c.name] = c; });
+function catOf(w){ var i = D.wordInfo[w]; return i ? i[0] : "人声"; }
+function sentOf(w){ var i = D.wordInfo[w]; return i ? i[1] : 0; }
+function catColor(name){ var c = CAT_BY_NAME[name]; return c ? c.color : "#888"; }
+function fmt(v){ return (typeof v === "number" && v === v) ? v : "—"; }
+function pct(v){ return (typeof v === "number" && v === v) ? Math.round(v*100) + "%" : "—"; }
+function tint(hex, a){
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+}
+function el(tag, cls, text){
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+/* ───────── 音频（默认关，优雅降级） ───────── */
+var AC = window.AudioContext || window.webkitAudioContext;
+var audioOn = false, actx = null, master = null, noiseBuf = null, hinted = false;
+var toggleBtn = document.getElementById("audioToggle");
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast._h);
+  toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+}
+if (!AC){
+  toggleBtn.disabled = true;
+  toggleBtn.textContent = "♪ 此浏览器不支持 Web Audio";
+  toggleBtn.title = "音频不可用；全部视觉功能不受影响";
+}
+toggleBtn.addEventListener("click", function(){
+  if (toggleBtn.disabled) return;
+  if (!audioOn){
+    try{
+      if (!actx){
+        actx = new AC();
+        master = actx.createGain();
+        master.gain.value = 0.28;
+        master.connect(actx.destination);
+      }
+      if (actx.state === "suspended") actx.resume();
+      audioOn = true;
+      toggleBtn.classList.add("on");
+      toggleBtn.setAttribute("aria-pressed","true");
+      toggleBtn.textContent = "♪ 声音：开";
+      toast("已开启合成音效——点击任意声音词试听");
+    }catch(e){
+      toggleBtn.disabled = true;
+      toggleBtn.textContent = "♪ 音频初始化失败";
+      toast("音频不可用；视觉内容不受影响");
+    }
+  } else {
+    audioOn = false;
+    toggleBtn.classList.remove("on");
+    toggleBtn.setAttribute("aria-pressed","false");
+    toggleBtn.textContent = "♪ 声音：关";
+  }
+});
+function getNoise(){
+  if (!noiseBuf){
+    var sr = actx.sampleRate, len = Math.floor(sr * 2);
+    noiseBuf = actx.createBuffer(1, len, sr);
+    var d = noiseBuf.getChannelData(0);
+    for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  }
+  return noiseBuf;
+}
+function tone(type, f0, t, dur, peak, glideTo){
+  var o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f0, t);
+  if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(peak, t + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(master);
+  o.start(t); o.stop(t + dur + 0.05);
+  return o;
+}
+var SYNTH = {
+  bell: function(t){           // 钟磬：非谐分音长衰减
+    [[1,0.55],[2.01,0.24],[2.98,0.16],[4.16,0.09]].forEach(function(p){
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = "sine"; o.frequency.value = 196 * p[0];
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(p[1], t + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.9);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + 2);
+    });
+  },
+  bird: function(t){           // 鸟啼：三声上扬滑音啁啾
+    for (var i = 0; i < 3; i++){
+      var st = t + i * 0.22;
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(2200 + i * 160, st);
+      o.frequency.exponentialRampToValueAtTime(3400, st + 0.07);
+      o.frequency.exponentialRampToValueAtTime(1900, st + 0.15);
+      g.gain.setValueAtTime(0.0001, st);
+      g.gain.exponentialRampToValueAtTime(0.3, st + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, st + 0.17);
+      o.connect(g); g.connect(master); o.start(st); o.stop(st + 0.2);
+    }
+  },
+  beast: function(t){          // 兽鸣：下行哀啸带颤音
+    var o = actx.createOscillator(), g = actx.createGain(), f = actx.createBiquadFilter();
+    o.type = "sawtooth";
+    o.frequency.setValueAtTime(640, t);
+    o.frequency.exponentialRampToValueAtTime(290, t + 1.1);
+    f.type = "lowpass"; f.frequency.value = 950;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.22, t + 0.12);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.25);
+    var lfo = actx.createOscillator(), lg = actx.createGain();
+    lfo.frequency.value = 5.6; lg.gain.value = 0.08;
+    lfo.connect(lg); lg.connect(g.gain);
+    o.connect(f); f.connect(g); g.connect(master);
+    o.start(t); o.stop(t + 1.3); lfo.start(t); lfo.stop(t + 1.3);
+  },
+  strings: function(t){        // 器乐：四声拨弦（琵琶轮指的抽象）
+    [[0,294],[0.14,392],[0.28,440],[0.44,587]].forEach(function(p){
+      var st = t + p[0];
+      tone("triangle", p[1], st, 0.5, 0.3);
+      var n = actx.createBufferSource(), ng = actx.createGain(), hp = actx.createBiquadFilter();
+      n.buffer = getNoise(); hp.type = "highpass"; hp.frequency.value = 2500;
+      ng.gain.setValueAtTime(0.12, st);
+      ng.gain.exponentialRampToValueAtTime(0.0001, st + 0.03);
+      n.connect(hp); hp.connect(ng); ng.connect(master);
+      n.start(st); n.stop(st + 0.05);
+    });
+  },
+  nature: function(t){         // 自然声：滤噪雨幕＋三滴清响
+    var n = actx.createBufferSource(), lp = actx.createBiquadFilter(), g = actx.createGain();
+    n.buffer = getNoise(); n.loop = true;
+    lp.type = "lowpass"; lp.frequency.value = 1050;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.24, t + 0.2);
+    g.gain.setValueAtTime(0.24, t + 1.1);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.7);
+    n.connect(lp); lp.connect(g); g.connect(master);
+    n.start(t); n.stop(t + 1.8);
+    [0.5, 0.9, 1.3].forEach(function(dt, i){
+      tone("sine", 1500 + i * 260, t + dt, 0.09, 0.16);
+    });
+  },
+  human: function(t){          // 人声：带颤音的低吟滑腔
+    var o = actx.createOscillator(), g = actx.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(196, t);
+    o.frequency.exponentialRampToValueAtTime(262, t + 0.5);
+    o.frequency.exponentialRampToValueAtTime(175, t + 1.5);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.26, t + 0.25);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+    var v = actx.createOscillator(), vg = actx.createGain();
+    v.frequency.value = 5.2; vg.gain.value = 5;
+    v.connect(vg); vg.connect(o.frequency);
+    var h = actx.createOscillator(), hg = actx.createGain();
+    h.type = "sine"; h.frequency.setValueAtTime(392, t);
+    h.frequency.exponentialRampToValueAtTime(350, t + 1.5);
+    hg.gain.setValueAtTime(0.0001, t);
+    hg.gain.exponentialRampToValueAtTime(0.07, t + 0.3);
+    hg.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+    o.connect(g); g.connect(master); h.connect(hg); hg.connect(master);
+    o.start(t); o.stop(t + 1.7); v.start(t); v.stop(t + 1.7);
+    h.start(t); h.stop(t + 1.7);
+  }
+};
+function playCat(catName){
+  if (!AC) return;
+  if (!audioOn){
+    if (!hinted){ toast("先开启页面顶部的「♪ 声音」开关，即可试听合成音色"); hinted = true; }
+    else toast("声音开关未开启（页面顶部）");
+    return;
+  }
+  try{
+    var c = CAT_BY_NAME[catName];
+    if (c && SYNTH[c.id]) SYNTH[c.id](actx.currentTime + 0.02);
+  }catch(e){ /* 音频失败不影响视觉 */ }
+}
+document.addEventListener("click", function(ev){
+  var n = ev.target.closest("[data-cat]");
+  if (n) playCat(n.getAttribute("data-cat"));
+});
+
+/* ───────── 通用渲染部件 ───────── */
+function chipNode(w, n, cls){
+  var c = catOf(w), col = catColor(c);
+  var b = el("button", cls || "chip");
+  b.setAttribute("data-cat", c);
+  b.title = w + " · " + c + " · 情感" + (sentOf(w) >= 0 ? "+" : "") + sentOf(w) +
+            (n ? " · 出现" + n + "次" : "") + " · 点击试听该类音色";
+  b.style.borderLeftColor = col;
+  b.style.background = tint(col, 0.10);
+  b.appendChild(document.createTextNode(w));
+  if (n){ var s = el("span", "n", "×" + n); b.appendChild(s); }
+  return b;
+}
+function renderSegs(container, segs){
+  segs.forEach(function(sg){
+    if (sg[1] === 1){
+      var c = catOf(sg[0]), col = catColor(c);
+      var sp = el("span", "hit", sg[0]);
+      sp.setAttribute("data-cat", c);
+      sp.title = sg[0] + " · " + c + " · 点击试听";
+      sp.style.background = tint(col, 0.16);
+      sp.style.borderBottomColor = col;
+      container.appendChild(sp);
+    } else if (sg[1] === 2){
+      var ex = el("span", "excl", sg[0]);
+      ex.title = sg[0] + " · 已被排除表挖除（非声音义）";
+      container.appendChild(ex);
+    } else {
+      container.appendChild(document.createTextNode(sg[0]));
+    }
+  });
+}
+
+/* ───────── 页眉数据条 / 类别图例 ───────── */
+(function(){
+  var m = D.meta, ms = document.getElementById("metaStrip");
+  [["语料", fmt(m.corpusPoems) + " 篇 · " + fmt(m.corpusPoets) + " 位诗人"],
+   ["声音词典", fmt(m.dictSize) + " 词条 · 六类"],
+   ["全语料命中", fmt(m.corpusHits) + " 次"],
+   ["排除表", fmt(m.excludeCount) + " 个已知误报片段"]].forEach(function(kv){
+    var d = el("span"); d.appendChild(el("b", "", kv[1]));
+    d.appendChild(document.createTextNode(" " + kv[0]));
+    ms.appendChild(d);
+  });
+  var lg = document.getElementById("catLegend");
+  D.cats.forEach(function(c){
+    var p = el("span", "cat-pill");
+    p.setAttribute("data-cat", c.name);
+    p.title = "点击试听「" + c.name + "」类合成音色";
+    var dot = el("i", "dot"); dot.style.background = c.color;
+    p.appendChild(dot);
+    p.appendChild(el("span", "", c.name));
+    var sm = el("small", "", c.desc); p.appendChild(sm);
+    p.appendChild(el("span", "play", "▶"));
+    lg.appendChild(p);
+  });
+})();
+
+/* ───────── ECharts ───────── */
+var charts = [];
+var hasEC = typeof window.echarts !== "undefined";
+function mkChart(dom){
+  if (!hasEC || !dom) return null;
+  try{
+    var ch = window.echarts.init(dom);
+    charts.push(ch);
+    return ch;
+  }catch(e){ return null; }
+}
+var baseText = { color:"#252b27", fontFamily:'"Microsoft YaHei",sans-serif' };
+
+/* 全语料榜（横条，按类别染色） */
+(function(){
+  var ch = mkChart(document.getElementById("corpusChart"));
+  if (!ch) return;
+  var rows = D.corpusTop.slice().reverse();
+  ch.setOption({
+    textStyle: baseText,
+    grid:{left:8, right:46, top:8, bottom:8, containLabel:true},
+    xAxis:{type:"value", splitLine:{lineStyle:{color:"#e3e7e1"}}, axisLabel:{color:"#6b736d"}},
+    yAxis:{type:"category", data: rows.map(function(r){ return r[0]; }),
+      axisLine:{lineStyle:{color:"#c9cfc7"}}, axisTick:{show:false},
+      axisLabel:{fontFamily:"KaiTi,STKaiti,serif", fontSize:15}},
+    tooltip:{trigger:"item", formatter:function(p){
+      var w = rows[p.dataIndex][0];
+      return w + " · " + catOf(w) + "<br>全语料命中 " + rows[p.dataIndex][1] + " 次";
+    }},
+    series:[{type:"bar", barWidth:"62%",
+      data: rows.map(function(r){
+        return { value:r[1], itemStyle:{ color: catColor(catOf(r[0])), borderRadius:[0,4,4,0] } };
+      }),
+      label:{show:true, position:"right", color:"#6b736d", fontSize:11,
+        formatter:function(p){ return p.value; }}
+    }]
+  });
+})();
+
+/* 六人卡片（先建全部卡片，网格列宽定型后再统一初始化图表） */
+(function(){
+  var grid = document.getElementById("poetGrid");
+  var pending = [];
+  D.poets.forEach(function(p, idx){
+    var card = el("div", "card");
+    var h = el("h3", "", p.name);
+    h.style.color = p.color;
+    var st = el("span", "stat", "语料 " + fmt(p.poems) + " 首 · 命中 " + fmt(p.hits) +
+      " 次 · 每百字 " + fmt(p.per100));
+    h.appendChild(st);
+    card.appendChild(h);
+    var rose = el("div", "rose"); rose.id = "rose-" + idx;
+    card.appendChild(rose);
+    var chips = el("div", "chips");
+    chips.appendChild(el("span", "mut", "标志性声音："));
+    p.sig.forEach(function(sn){ chips.appendChild(chipNode(sn[0], sn[1])); });
+    if (!p.sig.length) chips.appendChild(el("span", "mut", "（命中过少，无标志性声音）"));
+    card.appendChild(chips);
+    var qr = el("div", "quiet-row");
+    qr.appendChild(el("b", "", "无声诗"));
+    var bar = el("div", "quiet-bar");
+    var fill = el("i"); fill.style.width = Math.round(p.quietRatio * 100) + "%";
+    bar.appendChild(fill); qr.appendChild(bar);
+    qr.appendChild(el("span", "", p.quietN + "/" + p.poems + "（" + pct(p.quietRatio) + "）"));
+    card.appendChild(qr);
+    if (p.badge) card.appendChild(el("div", "badge", p.badge));
+    var det = el("details", "plist");
+    var sm = el("summary", "", "命中明细（证据：" + p.audible.length + " 首有声诗）");
+    det.appendChild(sm);
+    var ul = el("ul");
+    p.audible.forEach(function(a){
+      var li = el("li");
+      li.appendChild(el("span", "t kai", "《" + a.title + "》"));
+      a.hits.forEach(function(hn){
+        var mc = el("button", "mini-chip", hn[0] + (hn[1] > 1 ? "×" + hn[1] : ""));
+        var col = catColor(catOf(hn[0]));
+        mc.style.borderLeftColor = col;
+        mc.setAttribute("data-cat", catOf(hn[0]));
+        mc.title = hn[0] + " · " + catOf(hn[0]);
+        li.appendChild(mc);
+      });
+      ul.appendChild(li);
+    });
+    det.appendChild(ul);
+    det.appendChild(el("div", "mut", "其余 " + p.quietN + " 首整首未出现词典内声音词。"));
+    card.appendChild(det);
+    grid.appendChild(card);
+    var ch = mkChart(rose);
+    if (ch){
+      var data = D.cats.map(function(c){
+        return { name:c.name, value:p.catCounts[c.name], itemStyle:{ color:c.color } };
+      }).filter(function(d){ return d.value > 0; });
+      ch.setOption({
+        textStyle: baseText,
+        tooltip:{trigger:"item", formatter:function(q){
+          return q.name + "：" + q.value + " 次（" + q.percent + "%）";
+        }},
+        series:[{type:"pie", roseType:"area", radius:["10%","78%"], center:["50%","52%"],
+          itemStyle:{borderColor:"#fbfcfa", borderWidth:1.5, borderRadius:3},
+          label:{show:true, fontSize:11, color:"#6b736d",
+            formatter:function(q){ return q.name; }},
+          labelLine:{length:4, length2:4},
+          data:data}]
+      });
+    }
+  });
+})();
+
+/* 《琵琶行》 */
+(function(){
+  var s = D.star.pipa;
+  renderSegs(document.getElementById("pipaText"), s.segs);
+  if (s.note) document.getElementById("pipaNote").textContent = s.note;
+  var chips = document.getElementById("pipaChips");
+  chips.appendChild(el("span", "mut", s.hits.length + " 种声音词 · 共 " + s.total + " 次："));
+  s.hits.forEach(function(hn){ chips.appendChild(chipNode(hn[0], hn[1])); });
+  var ul = document.getElementById("pipaFacts");
+  s.facts.forEach(function(f){ ul.appendChild(el("li", "", f)); });
+  var tbl = document.getElementById("rankTbl");
+  var thead = el("tr");
+  ["篇目","作者","命中","体裁"].forEach(function(t){ thead.appendChild(el("th","",t)); });
+  tbl.appendChild(thead);
+  D.topPoems.forEach(function(r){
+    var tr = el("tr");
+    tr.appendChild(el("td", "kai", "《" + r[0] + "》"));
+    tr.appendChild(el("td", "", r[1]));
+    tr.appendChild(el("td", "", String(r[2])));
+    var g = el("td", (r[3] === "散文" || r[3] === "骈文") ? "genre-prose" : "", r[3]);
+    tr.appendChild(g);
+    tbl.appendChild(tr);
+  });
+})();
+
+/* 王维 */
+(function(){
+  var s = D.star.wangwei;
+  document.getElementById("wwNote").textContent = s.note;
+  var wrap = document.getElementById("wwCards");
+  s.poems.forEach(function(p){
+    var c = el("div", "pcard");
+    var h = el("h4", "kai", "《" + p.title + "》");
+    h.appendChild(el("span", "cnt", p.total + " 次命中"));
+    c.appendChild(h);
+    var body = el("div", "poem-body");
+    renderSegs(body, p.segs);
+    c.appendChild(body);
+    if (p.note) c.appendChild(el("div", "pnote", p.note));
+    wrap.appendChild(c);
+  });
+})();
+
+/* 杜甫 vs 高适 */
+(function(){
+  var b = D.star.border;
+  var grid = document.getElementById("borderGrid");
+  [b.dufu, b.gaoshi].forEach(function(side){
+    var col = el("div", "border-col");
+    var h = el("h4", "", side.name); h.style.color = side.color;
+    col.appendChild(h);
+    col.appendChild(el("div", "sub-line", "本语料 " + side.poemCount + " 首 · " +
+      side.chars + " 字 · 共 " + side.hits + " 次命中"));
+    side.poems.forEach(function(p){
+      var pc = el("div");
+      pc.style.marginBottom = "10px";
+      var t = el("div", "kai", "《" + p.title + "》 ");
+      t.style.fontSize = "16px"; t.style.letterSpacing = ".08em";
+      t.appendChild(el("span", "mut", p.total + " 次"));
+      pc.appendChild(t);
+      var body = el("div", "poem-box small");
+      body.style.maxHeight = "180px"; body.style.overflowY = "auto";
+      renderSegs(body, p.segs);
+      pc.appendChild(body);
+      if (p.note) pc.appendChild(el("div", "mut", p.note));
+      col.appendChild(pc);
+    });
+    grid.appendChild(col);
+  });
+  var ul = document.getElementById("borderReading");
+  b.reading.forEach(function(r){ ul.appendChild(el("li", "", r)); });
+  var ch = mkChart(document.getElementById("dgChart"));
+  if (ch){
+    var cats = D.cats.map(function(c){ return c.name; });
+    ch.setOption({
+      textStyle: baseText,
+      tooltip:{trigger:"axis"},
+      legend:{top:0, textStyle:{color:"#252b27"}},
+      grid:{left:8, right:16, top:36, bottom:8, containLabel:true},
+      xAxis:{type:"category", data:cats,
+        axisLabel:{fontFamily:"KaiTi,STKaiti,serif", fontSize:13},
+        axisLine:{lineStyle:{color:"#c9cfc7"}}},
+      yAxis:{type:"value", name:"命中次数", splitLine:{lineStyle:{color:"#e3e7e1"}},
+        axisLabel:{color:"#6b736d"}},
+      series:[
+        {name:"杜甫（哭声与战鼓）", type:"bar", barWidth:"26%",
+          itemStyle:{color:b.dufu.color, borderRadius:[3,3,0,0]},
+          data:cats.map(function(c){ return b.dufu.cats[c]; })},
+        {name:"高适（羌笛与钟鼓）", type:"bar", barWidth:"26%",
+          itemStyle:{color:b.gaoshi.color, borderRadius:[3,3,0,0]},
+          data:cats.map(function(c){ return b.gaoshi.cats[c]; })}
+      ]
+    });
+  }
+})();
+
+/* 排除表 */
+(function(){
+  var tbl = document.getElementById("exclTbl");
+  D.excludes.forEach(function(r){
+    var tr = el("tr");
+    tr.appendChild(el("td", "kai", r[0]));
+    tr.appendChild(el("td", "", r[1]));
+    tbl.appendChild(tr);
+  });
+})();
+
+window.addEventListener("resize", function(){
+  charts.forEach(function(c){ try{ c.resize(); }catch(e){} });
+});
+})();
+</script>
+</body>
+</html>

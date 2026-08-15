@@ -1,0 +1,3 @@
+﻿poet,title,dynasty,year,composition_place,modern_place,lon,lat,source_name,source_url,source_note,confidence,status
+李白,黄鹤楼送孟浩然之广陵,盛唐,728,武汉市·黄鹤楼,武汉市,114.311831,30.598428,cnkgraph 唐宋文学编年地图,https://open.cnkgraph.com/api/writing/25660,open.cnkgraph.com API 返回 AuthorPlace 创作地点,high,candidate
+杜甫,春望,唐,756,陕西省西安市,陕西省西安市,,,本地测试样本,https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB,本地测试候选：暂不考证，按默认人工通过流程验证；待补经纬度后才入图,low,candidate

@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-26",
+  "status": "verified-online",
+  "note": "六人出生公历年，viz_36 同龄对齐用。虚岁=诗年-出生年+1。",
+  "records": [
+    {
+      "poet": "李白",
+      "birth_year": 701,
+      "note": "cnkgraph 作者档案 Life 字段：701年1月16日—762；与《李太白年谱》（詹锳）通说一致。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E6%9D%8E%E7%99%BD"
+    },
+    {
+      "poet": "杜甫",
+      "birth_year": 712,
+      "note": "cnkgraph 作者档案 Life 字段：712年2月12日—770；与《杜甫年谱》通说一致。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E6%9D%9C%E7%94%AB"
+    },
+    {
+      "poet": "白居易",
+      "birth_year": 772,
+      "note": "cnkgraph 作者档案 Life 字段：772—846；与朱金城《白居易年谱》通说一致。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E7%99%BD%E5%B1%85%E6%98%93"
+    },
+    {
+      "poet": "苏轼",
+      "birth_year": 1037,
+      "note": "生于农历景祐三年十二月十九（丙子年末），公历折算为1037年1月8日。cnkgraph 作者档案 Life 字段记为 1036年12月19日（农历样式）。本项目统一用公历 1037 计虚岁，与按农历丙子年起算的传统虚岁相差1岁，已在页面方法区注明。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）+ 孔凡礼《苏轼年谱》通说",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E8%8B%8F%E8%BD%BC"
+    },
+    {
+      "poet": "李清照",
+      "birth_year": 1084,
+      "note": "cnkgraph 作者档案 Life 字段：1084年2月5日—1151年4月10日；生年与徐培均《李清照集笺注》通说一致（卒年有约1155/1156异说）。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E6%9D%8E%E6%B8%85%E7%85%A7"
+    },
+    {
+      "poet": "陆游",
+      "birth_year": 1125,
+      "note": "cnkgraph 作者档案 Life 字段：1125年10月17日—1210年12月29日（生日为农历十月十七，公历1125年11月13日）；与于北山《陆游年谱》通说一致。",
+      "source_name": "cnkgraph唐宋文学编年地图开放API（2026-07-26在线核实）",
+      "source_url": "https://open.cnkgraph.com/api/Writing/%E9%99%86%E6%B8%B8"
+    }
+  ]
+}

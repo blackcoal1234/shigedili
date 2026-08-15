@@ -1,0 +1,152 @@
+{
+  "Package": {
+    "PersonAuthority": {
+      "PersonInfo": {
+        "Person": {
+          "BasicInfo": {
+            "PersonId": "32540",
+            "EngName": "Li Bai",
+            "ChName": "李白",
+            "IndexYear": "701",
+            "IndexAddrId": "14903",
+            "IndexAddr": "任城",
+            "YearBirth": "701"
+          },
+          "PersonAddresses": {
+            "Address": [
+              {
+                "@AddrId": "501",
+                "AddrName": "绵州昌隆（今江油）",
+                "AddrType": "籍贯",
+                "FirstYear": "0",
+                "LastYear": "0",
+                "Source": "《新唐书·文艺传》"
+              },
+              {
+                "@AddrId": "502",
+                "AddrName": "安陆",
+                "AddrType": "寓居",
+                "FirstYear": "727",
+                "LastYear": "739",
+                "Source": "《李太白全集校注》",
+                "Page": "卷1第15页"
+              },
+              {
+                "@AddrId": "503",
+                "AddrName": "长安",
+                "AddrType": "寓居",
+                "FirstYear": "742",
+                "LastYear": "742",
+                "Source": "《李白年谱》",
+                "Page": "第38页"
+              },
+              {
+                "@AddrId": "504",
+                "AddrName": "",
+                "AddrType": "游寓",
+                "FirstYear": "720",
+                "LastYear": "720"
+              },
+              {
+                "@AddrId": "505",
+                "AddrName": "绵州昌隆",
+                "AddrType": "籍贯",
+                "FirstYear": "",
+                "LastYear": "701",
+                "Source": "《新唐书·文艺传》"
+              }
+            ]
+          },
+          "PersonPostings": {
+            "Posting": [
+              {
+                "@PostingId": "701",
+                "@AddrId": "601",
+                "AddrName": "长安",
+                "OfficeName": "翰林供奉",
+                "FirstYear": "742",
+                "LastYear": "744",
+                "Page": "《李白年谱》第40页"
+              },
+              {
+                "@PostingId": "702",
+                "@AddrId": "602",
+                "AddrName": "[未詳]",
+                "OfficeName": "某职",
+                "FirstYear": "730",
+                "LastYear": "731",
+                "Page": "卷X"
+              },
+              {
+                "@PostingId": "703",
+                "@AddrId": "603",
+                "AddrName": "0",
+                "OfficeName": "某职",
+                "FirstYear": "735",
+                "LastYear": "736"
+              },
+              {
+                "@PostingId": "704",
+                "@AddrId": "604",
+                "AddrName": "",
+                "OfficeName": "某职",
+                "FirstYear": "740",
+                "LastYear": "740"
+              },
+              {
+                "@PostingId": "705",
+                "@AddrId": "605",
+                "AddrName": "渝州",
+                "OfficeName": "节度从事",
+                "FirstYear": "755",
+                "LastYear": "755"
+              },
+              {
+                "@PostingId": "706",
+                "@AddrId": "606",
+                "AddrName": "江夏",
+                "OfficeName": "行军司马（幕僚）",
+                "FirstYear": "757",
+                "LastYear": "757",
+                "Page": "《李太白全集校注》第1200页"
+              },
+              {
+                "@PostingId": "707",
+                "@AddrId": "607",
+                "AddrName": "江夏",
+                "OfficeName": "知制诰",
+                "FirstYear": "758",
+                "LastYear": "758"
+              },
+              {
+                "@PostingId": "710",
+                "@AddrId": "608",
+                "AddrName": "同州",
+                "OfficeName": "刺史",
+                "FirstYear": "835",
+                "LastYear": "835",
+                "Page": "未知"
+              },
+              {
+                "@PostingId": "708",
+                "@AddrId": "607",
+                "AddrName": "江夏",
+                "OfficeName": "主客郎中",
+                "FirstYear": "758",
+                "LastYear": "758"
+              },
+              {
+                "@PostingId": "707",
+                "@AddrId": "607",
+                "AddrName": "江夏",
+                "OfficeName": "知制诰",
+                "FirstYear": "758",
+                "LastYear": "758"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

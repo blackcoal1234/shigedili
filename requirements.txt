@@ -1,0 +1,8 @@
+beautifulsoup4
+lxml
+matplotlib
+Pillow
+pyecharts
+PyMySQL
+playwright
+requests

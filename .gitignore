@@ -1,0 +1,43 @@
+.env
+.env.*
+!.env.example
+.cache/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.log
+*.tsbuildinfo
+.playwright-cli/
+.superpowers/
+tmp/
+tmp_check*.txt
+_cnk_*.tmp.*
+*.bak
+新建 文本文档.txt
+
+# Local runtimes and build caches.
+apps/agent-ui/.cache/
+apps/agent-ui/.run/
+apps/agent-ui/agent/.venv/
+apps/agent-ui/agent/.venv-linux/
+apps/agent-ui/agent/.pytest_cache/
+apps/agent-ui/web/.next/
+apps/agent-ui/web/node_modules/
+apps/agent-ui/web/.pnpm-store/
+apps/agent-ui/web/playwright-report/
+apps/agent-ui/web/test-results/
+
+# Large reproducible datasets. Keep the reviewed/source layers in Git.
+data/candidates/work_chronology_supplements.jsonl
+data/candidates/journey_event_candidates.jsonl
+data/candidates/*_poems_snapshot*.json
+data/stylometry/*poems_snapshot*.json
+data/poems_backup*.json
+data/geojson_cache/
+
+# Runtime knowledge indexes and generated deployment bundles stay on the server.
+output/assets/knowledge/
+output/shixing-agent-ui-*.tar.gz
+output/shixing-agent-ui-part-*.bin
+output/*_codex_backup.html
+output/playwright/

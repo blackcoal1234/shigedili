@@ -1,0 +1,285 @@
+export type ToolStatus =
+  | "ok"
+  | "insufficient_evidence"
+  | "invalid_request"
+  | "source_error";
+
+export interface ToolResponse<T> {
+  status: ToolStatus;
+  schemaVersion: string;
+  sourceHashes: Record<string, string>;
+  methodNote: string;
+  payload: T;
+}
+
+export interface KnowledgeTag {
+  id?: string;
+  label: string;
+  confidence?: number;
+  evidence?: string[];
+  method?: "rules" | "llm" | string;
+  occurrences?: Array<{
+    lineId?: string | null;
+    startOffset?: number | null;
+    endOffset?: number | null;
+    evidence?: string[];
+  }>;
+}
+
+export interface KnowledgeSearchItem {
+  scope: "poem" | "line";
+  poemId: string;
+  lineId?: string;
+  lineNo?: number;
+  title: string;
+  poet: string;
+  dynasty: string;
+  text?: string;
+  snippet?: string;
+  imagery?: Array<KnowledgeTag | string>;
+  emotions?: Array<KnowledgeTag | string>;
+  analysisMethods?: string[];
+  score?: number;
+  retrievalMethod?: "lexical" | "semantic" | "hybrid" | string;
+}
+
+export type KnowledgeSearchMode = "lexical" | "semantic" | "hybrid";
+
+export interface KnowledgeSearchPayload {
+  query: string;
+  scope: "poem" | "line" | "all";
+  total: number;
+  limit: number;
+  offset: number;
+  elapsedMs?: number;
+  items: KnowledgeSearchItem[];
+  sourceHashes?: Record<string, string>;
+  requestedMode?: KnowledgeSearchMode;
+  retrievalMethod?: KnowledgeSearchMode | string;
+  degraded?: boolean;
+  degradationReason?:
+    | "vector_not_ready"
+    | "vector_stale"
+    | "embedding_provider_unavailable"
+    | "embedding_timeout"
+    | string;
+  hasMore?: boolean;
+  totalRelation?: "eq" | "gte";
+  vectorIndexBuildId?: string;
+}
+
+export interface KnowledgeVectorStatus {
+  configured: boolean;
+  ready: boolean;
+  state: "disabled" | "building" | "ready" | "stale" | "error" | string;
+  provider?: string;
+  model?: string;
+  dimension?: number;
+  sourceBuildId?: string;
+  indexBuildId?: string;
+  indexedPoemCount?: number;
+  indexedLineCount?: number;
+  reason?: string;
+}
+
+export interface KnowledgeStatusPayload {
+  available: boolean;
+  stale: boolean;
+  poemCount?: number;
+  lineCount?: number;
+  analysisCount?: number;
+  vector?: KnowledgeVectorStatus;
+  [key: string]: unknown;
+}
+
+export interface KnowledgeAnalysis {
+  kind?: string;
+  summary?: string;
+  interpretation?: string;
+  method?: "rules" | "llm" | string;
+  confidence?: number;
+  model?: string | null;
+  reviewStatus?: string;
+  imagery?: Array<KnowledgeTag | string>;
+  emotions?: Array<KnowledgeTag | string>;
+}
+
+export interface KnowledgeLine {
+  lineId: string;
+  lineNo: number;
+  stanzaNo?: number;
+  text: string;
+  startOffset: number;
+  endOffset: number;
+  analysis?: KnowledgeAnalysis | KnowledgeAnalysis[];
+  analyses?: KnowledgeAnalysis[];
+  imagery?: Array<KnowledgeTag | string>;
+  emotions?: Array<KnowledgeTag | string>;
+}
+
+export interface KnowledgePoemPayload {
+  poemId: string;
+  sourcePoemId?: string;
+  title: string;
+  poet: string;
+  dynasty: string;
+  school?: string;
+  body: string;
+  bodyHash?: string;
+  sourceUrl?: string;
+  lines: KnowledgeLine[];
+  analysis?: KnowledgeAnalysis | KnowledgeAnalysis[];
+  analyses?: KnowledgeAnalysis[];
+  imagery?: Array<KnowledgeTag | string>;
+  emotions?: Array<KnowledgeTag | string>;
+  sourceHashes?: Record<string, string>;
+}
+
+export interface PoetCatalogRow {
+  poet: string;
+  dynasty: string;
+  dynastyCounts: Record<string, number>;
+  workCount: number;
+  routeStatus: "available" | "insufficient_evidence";
+  sceneCount: number;
+  mappedSceneCount: number;
+}
+
+export interface PoetCatalog {
+  poetCount: number;
+  routeAvailableCount: number;
+  insufficientEvidenceCount: number;
+  poets: PoetCatalogRow[];
+}
+
+export interface PoetryScene {
+  index: number;
+  id: string;
+  poet: string;
+  poet_key: string;
+  color: string;
+  dynasty: string;
+  year: number;
+  year_start: number;
+  year_end: number;
+  year_label: string;
+  year_precision: string;
+  year_precision_display: string;
+  sequence: string;
+  place_historical: string;
+  place_modern: string;
+  province: string;
+  lon: number | null;
+  lat: number | null;
+  map_eligible: boolean;
+  event: string;
+  poem_title: string;
+  source_poem_id: string;
+  poem_lines: string[];
+  poem_chars: number;
+  source_grade: string;
+  source_status: string;
+  review_state: string;
+  source_name: string;
+  source_url: string;
+  source_note: string;
+  confidence: number;
+  emotion_label: string;
+  emotion_evidence: string;
+  valence: number;
+  intensity: number;
+  relation_grade: string;
+  read_seconds: number;
+  scene_image?: string;
+}
+
+export interface RouteSegment {
+  from_id: string;
+  to_id: string;
+  coords: [[number, number], [number, number]];
+  kind: "chronology" | "visual_transition";
+  certainty: "strict" | "not_asserted";
+  historical_claim?: boolean;
+  gap_reason?: "adjacent_locatable_scene_gap";
+  transport_mode: "boat" | "horse" | "carriage" | "walk" | "journey";
+  transport_label: string;
+  transport_basis: string;
+  transport_certainty: "documented" | "unspecified";
+}
+
+export interface RoutePayload {
+  poet: string;
+  poetKey?: string;
+  dynasty: string;
+  color?: string;
+  corpusWorkCount: number;
+  sceneCount: number;
+  mappedSceneCount: number;
+  precisionCounts?: Record<string, number>;
+  scenes: PoetryScene[];
+  routeSegments: RouteSegment[];
+  visualTransitions: RouteSegment[];
+  unresolved?: Array<Record<string, unknown>>;
+  missingFacts?: string[];
+}
+
+export interface ScenePayload extends Omit<RoutePayload, "routeSegments" | "visualTransitions"> {
+  mode: "manual_step" | "autoplay" | "scene_playback";
+  autoplay?: boolean;
+  manualStepDefault?: boolean;
+  pauseAtEachScene?: boolean;
+  startSceneId?: string | null;
+  startIndex?: number;
+  controls?: string[];
+}
+
+export interface ImageryRate {
+  rawHits: number;
+  ratePer10k: number;
+  chineseCharDenominator: number;
+  poemRecords: number;
+  poemsWithHit: number;
+}
+
+export interface ImageryEvidence {
+  dynasty: string;
+  poet: string;
+  title: string;
+  sentence: string;
+  sourcePoemId?: string;
+  matchStart?: number;
+  matchEnd?: number;
+}
+
+export interface ImageryComparisonRow {
+  word: string;
+  category: string;
+  higherIn: string;
+  deltaSongMinusTang: number;
+  absoluteDelta: number;
+  tang: ImageryRate;
+  song: ImageryRate;
+  corpusEvidence: ImageryEvidence[];
+  chapterStats?: Record<string, unknown> | null;
+  chapterEvidence?: ImageryEvidence[];
+}
+
+export interface ImageryPayload {
+  selectionRule: string;
+  requestedLimit: number;
+  terms: string[];
+  allowedTermCount: number;
+  normalization?: string;
+  dynastyAggregates?: Record<string, unknown>;
+  comparisons: ImageryComparisonRow[];
+  chapter?: Record<string, unknown> | null;
+  availableChapters?: Array<{
+    id: string;
+    title: string;
+    startYear: number;
+    endYear: number;
+  }>;
+}
+
+export type WorkbenchMode = "route" | "scenes" | "imagery";
+export type WorkbenchPayload = RoutePayload | ScenePayload | ImageryPayload;

@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>诗人的精神地形图 · 交互原型</title>
+  <link rel="icon" href="data:,">
+  <script src="output/assets/pyecharts/v6/echarts.min.js"></script>
+  <script src="output/assets/pyecharts/v6/maps/china.js"></script>
+  <style>
+    :root {
+      --paper: #f3f4f1;
+      --surface: #ffffff;
+      --surface-soft: #f8f8f5;
+      --ink: #202421;
+      --muted: #6f756f;
+      --line: #d9ddd7;
+      --line-strong: #b9c0b8;
+      --cinnabar: #b4473a;
+      --cinnabar-soft: #f3e5e1;
+      --jade: #28786e;
+      --jade-soft: #e2efec;
+      --gold: #ad7b2f;
+      --blue: #426d91;
+      --sidebar: #252a27;
+      --sidebar-muted: #aeb6af;
+      --radius: 6px;
+      --shadow: 0 10px 30px rgba(33, 39, 35, 0.07);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+      background:
+        linear-gradient(rgba(49, 57, 51, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(49, 57, 51, 0.025) 1px, transparent 1px),
+        var(--paper);
+      background-size: 24px 24px;
+      letter-spacing: 0;
+    }
+
+    button, input, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .app-shell { min-height: 100vh; }
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      width: 218px;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 14px 16px;
+      color: #f6f7f4;
+      background: var(--sidebar);
+      border-right: 1px solid #343a36;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 48px;
+      padding: 0 8px;
+    }
+
+    .seal {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: white;
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 22px;
+      background: var(--cinnabar);
+      border: 1px solid #ce7166;
+      border-radius: 4px;
+    }
+
+    .brand-name {
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 19px;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      color: var(--sidebar-muted);
+      font-size: 10px;
+    }
+
+    .nav-label {
+      margin: 30px 10px 8px;
+      color: #7f8982;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav-item {
+      width: 100%;
+      min-height: 44px;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      color: #c7cec8;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      transition: 150ms ease;
+    }
+
+    .nav-item:hover { color: white; background: #2f3531; }
+
+    .nav-item.active {
+      color: white;
+      background: #353c37;
+      border-color: #465049;
+    }
+
+    .nav-index {
+      color: #7f8a82;
+      font-family: Consolas, monospace;
+      font-size: 11px;
+    }
+
+    .nav-item.active .nav-index { color: #de8b80; }
+
+    .side-meta {
+      margin-top: auto;
+      padding: 14px 10px 4px;
+      color: var(--sidebar-muted);
+      font-size: 11px;
+      line-height: 1.7;
+      border-top: 1px solid #3a413c;
+    }
+
+    .side-meta strong { color: #f5f6f3; font-size: 16px; }
+
+    .main-shell { margin-left: 218px; min-width: 0; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 15;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 24px;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .crumb {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .crumb strong { color: var(--ink); }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .search-box {
+      width: min(310px, 30vw);
+      height: 36px;
+      display: flex;
+      align-items: center;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      padding: 0 10px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      outline: 0;
+    }
+
+    .search-box button {
+      height: 100%;
+      padding: 0 12px;
+      color: var(--jade);
+      font-size: 12px;
+      font-weight: 700;
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--line);
+    }
+
+    .concept-badge {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 9px;
+      color: #7e5518;
+      font-size: 11px;
+      font-weight: 700;
+      background: #f7edda;
+      border: 1px solid #dfc38e;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    main { padding: 22px 24px 36px; }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    .view-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin-bottom: 5px;
+      color: var(--cinnabar);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 7px;
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h2 { margin-bottom: 6px; font-size: 20px; }
+    h3 { margin-bottom: 8px; font-size: 14px; }
+
+    .view-intro {
+      max-width: 760px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .segmented {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      background: #e9ece7;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+    }
+
+    .segment {
+      min-width: 48px;
+      height: 30px;
+      padding: 0 11px;
+      color: var(--muted);
+      font-size: 12px;
+      background: transparent;
+      border: 0;
+      border-radius: 3px;
+    }
+
+    .segment.active {
+      color: var(--ink);
+      font-weight: 700;
+      background: white;
+      box-shadow: 0 1px 3px rgba(32, 36, 33, 0.12);
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 82px;
+      padding: 14px 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .metric:last-child { border-right: 0; }
+
+    .metric-label { color: var(--muted); font-size: 11px; }
+
+    .metric-value {
+      margin-top: 5px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-note { margin-top: 5px; color: var(--jade); font-size: 10px; }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .panel {
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-title { font-size: 13px; font-weight: 800; }
+    .panel-meta { color: var(--muted); font-size: 10px; }
+
+    .chart { width: 100%; height: 520px; }
+    .chart.medium { height: 380px; }
+    .chart.small { height: 290px; }
+
+    .insight-list { display: grid; }
+
+    .insight-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .insight-item:last-child { border-bottom: 0; }
+
+    .insight-kicker {
+      color: var(--cinnabar);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .insight-title {
+      margin: 5px 0 6px;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .insight-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      margin-right: 5px;
+      border-radius: 50%;
+    }
+
+    .profile-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 17px 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--cinnabar);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .poet-line {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .poet-name {
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .poet-tags { color: var(--muted); font-size: 12px; }
+
+    .poet-thesis {
+      margin: 5px 0 0;
+      color: #3e4540;
+      font-size: 12px;
+    }
+
+    .profile-score {
+      min-width: 190px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+    }
+
+    .score-cell { padding: 4px 12px; border-left: 1px solid var(--line); }
+    .score-value { font-size: 20px; font-weight: 800; }
+    .score-label { margin-top: 3px; color: var(--muted); font-size: 9px; }
+
+    .evidence-box { padding: 16px; }
+
+    .evidence-quote {
+      margin: 4px 0 12px;
+      padding-left: 13px;
+      color: #303632;
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 18px;
+      line-height: 1.65;
+      border-left: 3px solid var(--cinnabar);
+    }
+
+    .evidence-title { font-size: 13px; font-weight: 800; }
+
+    .evidence-table {
+      width: 100%;
+      margin-top: 12px;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+
+    .evidence-table td {
+      padding: 8px 0;
+      vertical-align: top;
+      border-top: 1px solid var(--line);
+    }
+
+    .evidence-table td:first-child { width: 74px; color: var(--muted); }
+
+    .confidence {
+      display: inline-flex;
+      min-height: 22px;
+      align-items: center;
+      padding: 0 7px;
+      color: #216259;
+      font-size: 9px;
+      font-weight: 800;
+      background: var(--jade-soft);
+      border-radius: 3px;
+    }
+
+    .word-band {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 13px 15px;
+      border-top: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .word-token {
+      min-height: 27px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 8px;
+      color: #4b534d;
+      font-size: 11px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+    }
+
+    .compare-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    select {
+      height: 34px;
+      padding: 0 28px 0 10px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      outline: 0;
+    }
+
+    .versus { color: var(--muted); font-size: 11px; font-weight: 800; }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 16px;
+    }
+
+    .difference-list { padding: 0 15px 14px; }
+
+    .difference-row {
+      display: grid;
+      grid-template-columns: 76px 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      min-height: 47px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .difference-row:last-child { border-bottom: 0; }
+    .difference-label { color: var(--muted); font-size: 10px; }
+    .difference-value { font-size: 11px; font-weight: 700; }
+    .difference-value.right { color: var(--jade); text-align: right; }
+
+    .quote-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-side { min-height: 138px; padding: 17px 20px; }
+    .quote-side + .quote-side { border-left: 1px solid var(--line); }
+    .quote-owner { color: var(--muted); font-size: 10px; font-weight: 800; }
+    .quote-text { margin: 10px 0 5px; font-family: "STKaiti", "KaiTi", serif; font-size: 19px; }
+    .quote-source { color: var(--muted); font-size: 10px; }
+
+    .trajectory-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+      gap: 16px;
+    }
+
+    .event-ribbon {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .event {
+      position: relative;
+      min-height: 112px;
+      padding: 16px;
+      border-right: 1px solid var(--line);
+    }
+
+    .event:last-child { border-right: 0; }
+    .event.active { background: #fbf4f1; }
+    .event-year { color: var(--cinnabar); font-family: Georgia, serif; font-size: 11px; font-weight: 800; }
+    .event-name { margin: 5px 0 5px; font-size: 12px; font-weight: 800; }
+    .event-line { margin: 0; color: var(--muted); font-family: "STKaiti", "KaiTi", serif; font-size: 13px; line-height: 1.5; }
+
+    .method-note {
+      margin-top: 16px;
+      padding: 13px 15px;
+      color: #565e58;
+      font-size: 11px;
+      line-height: 1.65;
+      background: #eef1ec;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 50;
+      min-width: 220px;
+      padding: 12px 14px;
+      color: white;
+      font-size: 12px;
+      background: #303632;
+      border-radius: 5px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+      transform: translateY(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 180ms ease;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 1080px) {
+      .workspace-grid, .compare-grid, .trajectory-grid { grid-template-columns: 1fr; }
+      .chart { height: 450px; }
+      .profile-banner { grid-template-columns: 1fr; }
+      .profile-score { max-width: 330px; }
+      .score-cell:first-child { border-left: 0; }
+    }
+
+    @media (max-width: 760px) {
+      .sidebar {
+        position: relative;
+        top: auto;
+        width: 100%;
+        height: auto;
+        display: block;
+        padding: 9px 10px;
+      }
+
+      .brand { min-height: 40px; }
+      .brand-sub, .nav-label, .side-meta { display: none; }
+      .seal { width: 30px; height: 30px; font-size: 18px; }
+      .brand-name { font-size: 17px; }
+
+      .nav-list {
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 7px;
+      }
+
+      .nav-item {
+        min-height: 38px;
+        display: block;
+        padding: 0 4px;
+        text-align: center;
+        font-size: 11px;
+      }
+
+      .nav-index { display: none; }
+      .main-shell { margin-left: 0; }
+      .topbar { display: none; }
+      main { padding: 15px 12px 28px; }
+      .view-head { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 24px; }
+      .metric-strip { grid-template-columns: repeat(2, 1fr); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .metric { min-height: 76px; }
+      .chart, .chart.medium { height: 390px; }
+      .profile-score { min-width: 0; width: 100%; }
+      .compare-controls { width: 100%; }
+      .compare-controls select { width: 45%; min-width: 0; }
+      .quote-compare, .event-ribbon { grid-template-columns: 1fr; }
+      .quote-side + .quote-side, .event { border-left: 0; border-right: 0; border-top: 1px solid var(--line); }
+      .quote-side + .quote-side { border-left: 0; }
+      .event:first-child { border-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="seal">诗</div>
+        <div>
+          <div class="brand-name">精神地形图</div>
+          <div class="brand-sub">唐宋诗人意象计算平台</div>
+        </div>
+      </div>
+
+      <div class="nav-label">研究视图</div>
+      <nav class="nav-list" aria-label="主导航">
+        <button class="nav-item active" data-view="atlas"><span class="nav-index">01</span><span>群体图谱</span></button>
+        <button class="nav-item" data-view="profile"><span class="nav-index">02</span><span>诗人地形</span></button>
+        <button class="nav-item" data-view="compare"><span class="nav-index">03</span><span>双人对比</span></button>
+        <button class="nav-item" data-view="trajectory"><span class="nav-index">04</span><span>生命轨迹</span></button>
+      </nav>
+
+      <div class="side-meta">
+        当前样本<br><strong>88</strong> 位诗人 · <strong>1,735</strong> 首作品<br>
+        唐宋代表作平衡语料
+      </div>
+    </aside>
+
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="crumb">诗行万里 / <strong id="crumb-current">群体精神图谱</strong></div>
+        <div class="top-actions">
+          <div class="search-box">
+            <input id="poet-search" list="poet-options" aria-label="搜索诗人" placeholder="输入诗人姓名，例如：李白">
+            <datalist id="poet-options"></datalist>
+            <button id="search-button" type="button">定位</button>
+          </div>
+          <span class="concept-badge">概念数据 · 非研究结论</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="view active" id="view-atlas">
+          <div class="view-head">
+            <div>
+              <div class="eyebrow">GROUP ATLAS</div>
+              <h1>唐宋诗人群体精神图谱</h1>
+              <p class="view-intro">诗人的意象表达是否形成稳定而可区分的结构？每个点代表一位诗人，位置来自情感效价与空间开放度的标准化特征。</p>
+            </div>
+            <div class="segmented" aria-label="朝代筛选">
+              <button class="segment active" data-dynasty="全部">全部</button>
+              <button class="segment" data-dynasty="唐">唐</button>
+              <button class="segment" data-dynasty="宋">宋</button>
+            </div>
+          </div>
+
+          <div class="metric-strip">
+            <div class="metric"><div class="metric-label">诗人样本</div><div class="metric-value">88</div><div class="metric-note">唐 45 · 宋 43</div></div>
+            <div class="metric"><div class="metric-label">入库作品</div><div class="metric-value">1,735</div><div class="metric-note">代表作平衡样本</div></div>
+            <div class="metric"><div class="metric-label">意象词条</div><div class="metric-value">111</div><div class="metric-note">10 个语义类别</div></div>
+            <div class="metric"><div class="metric-label">古今地名</div><div class="metric-value">269</div><div class="metric-note">可回溯原诗语境</div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">群体坐标</div>
+                  <div class="panel-meta">横轴：空间收束 → 空间开放　纵轴：低沉 → 昂扬</div>
+                </div>
+                <div class="legend-row"><span><i class="legend-dot" style="background:#b4473a"></i>唐</span><span><i class="legend-dot" style="background:#28786e"></i>宋</span></div>
+              </div>
+              <div id="atlas-chart" class="chart"></div>
+            </div>
+
+            <aside class="panel">
+              <div class="panel-head"><div class="panel-title">群体观察</div><div class="panel-meta">原型示意</div></div>
+              <div class="insight-list">
+                <div class="insight-item">
+                  <div class="insight-kicker">空间极值</div>
+                  <div class="insight-title">边塞诗人的空间开放度整体靠右</div>
+                  <p class="insight-copy">关、塞、马、雪与万里构成远域空间，王昌龄、高适、岑参在图谱中形成邻近区域。</p>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-kicker">跨流派近邻</div>
+                  <div class="insight-title">李白与苏轼呈现跨时代相似</div>
+                  <p class="insight-copy">两人的空间开放度接近，但苏轼的情感波动更均衡，差异可回到月、江、酒等共同意象的具体语境。</p>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-kicker">待验证发现</div>
+                  <div class="insight-title">传统流派标签并不能解释全部距离</div>
+                  <p class="insight-copy">数据聚类与文学史标签并置，寻找同派异质与跨派相似，是群体图谱的研究出口。</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-profile">
+          <div class="view-head">
+            <div>
+              <div class="eyebrow">POET TERRAIN</div>
+              <h1>一人一张精神地形图</h1>
+              <p class="view-intro">每首作品是一个坐标点，诗人的“地形”由作品分布而不是单一平均值构成；结论可以回到原诗、标注和来源。</p>
+            </div>
+            <div class="segmented"><button class="segment active">表达地形</button><button class="segment">意象结构</button></div>
+          </div>
+
+          <div class="profile-banner">
+            <div>
+              <div class="poet-line"><span class="poet-name" id="profile-name">李白</span><span class="poet-tags" id="profile-tags">唐 · 浪漫派 · 当前样本 20 首</span></div>
+              <p class="poet-thesis" id="profile-thesis">表达重心位于“高开放、高波动”区域，宏阔空间与孤独语境并存。</p>
+            </div>
+            <div class="profile-score">
+              <div class="score-cell"><div class="score-value" id="score-open">82</div><div class="score-label">空间开放度</div></div>
+              <div class="score-cell"><div class="score-value" id="score-affect">67</div><div class="score-label">情感张力</div></div>
+              <div class="score-cell"><div class="score-value" id="score-variety">91</div><div class="score-label">意象丰富度</div></div>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <div><div class="panel-title">作品分布地形</div><div class="panel-meta">点越大，意象密度越高；点击作品查看证据</div></div>
+                <div class="legend-row"><span><i class="legend-dot" style="background:#b4473a"></i>代表作品</span><span><i class="legend-dot" style="background:#ad7b2f"></i>当前选中</span></div>
+              </div>
+              <div id="terrain-chart" class="chart"></div>
+              <div class="word-band" id="profile-words">
+                <span class="word-token">月 19</span><span class="word-token">云 14</span><span class="word-token">山 10</span><span class="word-token">酒 8</span><span class="word-token">愁 8</span><span class="word-token">海 6</span><span class="word-token">剑 5</span><span class="word-token">鹏 3</span>
+              </div>
+            </div>
+
+            <aside class="panel">
+              <div class="panel-head"><div class="panel-title">原诗证据</div><span class="confidence" id="evidence-confidence">编年置信度：中</span></div>
+              <div class="evidence-box">
+                <div class="evidence-title" id="evidence-poem">《行路难·其一》</div>
+                <div class="evidence-quote" id="evidence-quote">长风破浪会有时，<br>直挂云帆济沧海。</div>
+                <table class="evidence-table">
+                  <tr><td>情感表征</td><td id="evidence-affect">受阻后的进取</td></tr>
+                  <tr><td>空间结构</td><td id="evidence-space">长风 → 云帆 → 沧海，开放度由近及远</td></tr>
+                  <tr><td>意象命中</td><td id="evidence-images">长风、云帆、沧海</td></tr>
+                  <tr><td>分析边界</td><td>描述作品表达，不推断作者真实心理诊断</td></tr>
+                </table>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-compare">
+          <div class="view-head">
+            <div>
+              <div class="eyebrow">POET COMPARISON</div>
+              <h1>同一坐标系中的诗人差异</h1>
+              <p class="view-intro">相同指标、相同语料口径、相同归一化方式，让“豪放”“沉郁”等文学判断变成可检验、可追溯的结构差异。</p>
+            </div>
+            <div class="compare-controls">
+              <select id="compare-a" aria-label="诗人甲"><option>李白</option><option>杜甫</option><option>苏轼</option><option>李清照</option></select>
+              <span class="versus">对</span>
+              <select id="compare-b" aria-label="诗人乙"><option>杜甫</option><option>苏轼</option><option>李清照</option><option>李白</option></select>
+            </div>
+          </div>
+
+          <div class="compare-grid">
+            <div class="panel">
+              <div class="panel-head"><div class="panel-title">六维表达轮廓</div><div class="legend-row"><span><i class="legend-dot" style="background:#b4473a"></i><b id="legend-a">李白</b></span><span><i class="legend-dot" style="background:#28786e"></i><b id="legend-b">杜甫</b></span></div></div>
+              <div id="compare-chart" class="chart medium"></div>
+            </div>
+            <aside class="panel">
+              <div class="panel-head"><div class="panel-title">关键差异</div><div class="panel-meta">标准化得分</div></div>
+              <div class="difference-list" id="difference-list"></div>
+            </aside>
+          </div>
+
+          <div class="quote-compare">
+            <div class="quote-side">
+              <div class="quote-owner" id="quote-owner-a">李白 · 开放空间证据</div>
+              <div class="quote-text" id="quote-a">黄河之水天上来，奔流到海不复回。</div>
+              <div class="quote-source" id="source-a">《将进酒》</div>
+            </div>
+            <div class="quote-side">
+              <div class="quote-owner" id="quote-owner-b">杜甫 · 现实关切证据</div>
+              <div class="quote-text" id="quote-b">安得广厦千万间，大庇天下寒士俱欢颜。</div>
+              <div class="quote-source" id="source-b">《茅屋为秋风所破歌》</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-trajectory">
+          <div class="view-head">
+            <div>
+              <div class="eyebrow">LIFE TRAJECTORY · FLAGSHIP CASE</div>
+              <h1>从九天到孤舟？李白表达轨迹</h1>
+              <p class="view-intro">问号代表待验证假设。主分析仅纳入高置信编年作品，中低置信样本通过切换口径进行稳健性复算。</p>
+            </div>
+            <div class="segmented"><button class="segment active">高置信样本</button><button class="segment">全部样本</button></div>
+          </div>
+
+          <div class="trajectory-grid">
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">分期表达曲线</div><div class="panel-meta">均值与置信区间 · 示例数据</div></div><div class="legend-row"><span><i class="legend-dot" style="background:#b4473a"></i>情感张力</span><span><i class="legend-dot" style="background:#28786e"></i>空间开放度</span></div></div>
+              <div id="trajectory-chart" class="chart medium"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><div class="panel-title">行旅与创作坐标</div><div class="panel-meta">地点来源与诗中地名分层展示</div></div></div>
+              <div id="route-chart" class="chart medium"></div>
+            </div>
+          </div>
+
+          <div class="event-ribbon">
+            <div class="event"><div class="event-year">725 前</div><div class="event-name">蜀中与出川</div><p class="event-line">峨眉山月半轮秋，影入平羌江水流。</p></div>
+            <div class="event"><div class="event-year">725–742</div><div class="event-name">漫游与求仕</div><p class="event-line">大鹏一日同风起，扶摇直上九万里。</p></div>
+            <div class="event"><div class="event-year">742–744</div><div class="event-name">供奉翰林</div><p class="event-line">仰天大笑出门去，我辈岂是蓬蒿人。</p></div>
+            <div class="event active"><div class="event-year">744–757</div><div class="event-name">赐金放还与乱世</div><p class="event-line">抽刀断水水更流，举杯消愁愁更愁。</p></div>
+            <div class="event"><div class="event-year">757–762</div><div class="event-name">流放、遇赦与暮年</div><p class="event-line">大鹏飞兮振八裔，中天摧兮力不济。</p></div>
+          </div>
+
+          <div class="method-note"><strong>研究边界：</strong>生命轨迹页呈现诗歌意象与空间表达的阶段性变化，不将作品直接等同于作者真实心理；所有年份、地点和事件均应附来源与置信度。</div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">已定位诗人</div>
+
+  <script>
+    const poets = [{"name":"孟浩然","dynasty":"唐","school":"山水田园"},{"name":"白居易","dynasty":"唐","school":"新乐府"},{"name":"王维","dynasty":"唐","school":"山水田园"},{"name":"李白","dynasty":"唐","school":"浪漫派"},{"name":"杜甫","dynasty":"唐","school":"现实派"},{"name":"王昌龄","dynasty":"唐","school":"边塞派"},{"name":"高适","dynasty":"唐","school":"边塞派"},{"name":"岑参","dynasty":"唐","school":"边塞派"},{"name":"李商隐","dynasty":"唐","school":"晚唐"},{"name":"杜牧","dynasty":"唐","school":"晚唐"},{"name":"王之涣","dynasty":"唐","school":"边塞派"},{"name":"刘禹锡","dynasty":"唐","school":"中唐"},{"name":"柳宗元","dynasty":"唐","school":"中唐"},{"name":"韩愈","dynasty":"唐","school":"古文"},{"name":"王勃","dynasty":"唐","school":"初唐"},{"name":"李贺","dynasty":"唐","school":"中唐"},{"name":"骆宾王","dynasty":"唐","school":"初唐"},{"name":"陈子昂","dynasty":"唐","school":"初唐"},{"name":"张九龄","dynasty":"唐","school":"盛唐"},{"name":"贺知章","dynasty":"唐","school":"初唐"},{"name":"元稹","dynasty":"唐","school":"新乐府"},{"name":"韦应物","dynasty":"唐","school":"山水田园"},{"name":"张志和","dynasty":"唐","school":"中唐"},{"name":"常建","dynasty":"唐","school":"山水田园"},{"name":"祖咏","dynasty":"唐","school":"山水田园"},{"name":"张继","dynasty":"唐","school":"中唐"},{"name":"李煜","dynasty":"唐","school":"晚唐"},{"name":"温庭筠","dynasty":"唐","school":"晚唐"},{"name":"许浑","dynasty":"唐","school":"晚唐"},{"name":"罗隐","dynasty":"唐","school":"晚唐"},{"name":"韦庄","dynasty":"唐","school":"晚唐"},{"name":"聂夷中","dynasty":"唐","school":"晚唐"},{"name":"皮日休","dynasty":"唐","school":"晚唐"},{"name":"杜荀鹤","dynasty":"唐","school":"晚唐"},{"name":"司空曙","dynasty":"唐","school":"中唐"},{"name":"卢纶","dynasty":"唐","school":"中唐"},{"name":"李益","dynasty":"唐","school":"中唐"},{"name":"钱起","dynasty":"唐","school":"中唐"},{"name":"贾岛","dynasty":"唐","school":"中唐"},{"name":"孟郊","dynasty":"唐","school":"中唐"},{"name":"张籍","dynasty":"唐","school":"中唐"},{"name":"王建","dynasty":"唐","school":"中唐"},{"name":"沈佺期","dynasty":"唐","school":"初唐"},{"name":"宋之问","dynasty":"唐","school":"初唐"},{"name":"上官仪","dynasty":"唐","school":"初唐"},{"name":"苏轼","dynasty":"宋","school":"豪放派"},{"name":"辛弃疾","dynasty":"宋","school":"豪放派"},{"name":"陆游","dynasty":"宋","school":"爱国派"},{"name":"李清照","dynasty":"宋","school":"婉约派"},{"name":"欧阳修","dynasty":"宋","school":"古文"},{"name":"王安石","dynasty":"宋","school":"改革派"},{"name":"黄庭坚","dynasty":"宋","school":"江西诗派"},{"name":"范成大","dynasty":"宋","school":"中兴四大家"},{"name":"杨万里","dynasty":"宋","school":"中兴四大家"},{"name":"柳永","dynasty":"宋","school":"婉约派"},{"name":"尤袤","dynasty":"宋","school":"中兴四大家"},{"name":"晏几道","dynasty":"宋","school":"婉约派"},{"name":"晏殊","dynasty":"宋","school":"婉约派"},{"name":"秦观","dynasty":"宋","school":"婉约派"},{"name":"周邦彦","dynasty":"宋","school":"婉约派"},{"name":"姜夔","dynasty":"宋","school":"格律派"},{"name":"吴文英","dynasty":"宋","school":"格律派"},{"name":"张炎","dynasty":"宋","school":"格律派"},{"name":"陈与义","dynasty":"宋","school":"江西诗派"},{"name":"文天祥","dynasty":"宋","school":"爱国派"},{"name":"范仲淹","dynasty":"宋","school":"豪放派"},{"name":"司马光","dynasty":"宋","school":"古文"},{"name":"朱熹","dynasty":"宋","school":"理学"},{"name":"林逋","dynasty":"宋","school":"隐逸"},{"name":"苏辙","dynasty":"宋","school":"古文"},{"name":"梅尧臣","dynasty":"宋","school":"古文"},{"name":"苏洵","dynasty":"宋","school":"古文"},{"name":"张孝祥","dynasty":"宋","school":"豪放派"},{"name":"曾巩","dynasty":"宋","school":"古文"},{"name":"张元干","dynasty":"宋","school":"豪放派"},{"name":"陈亮","dynasty":"宋","school":"豪放派"},{"name":"刘克庄","dynasty":"宋","school":"豪放派"},{"name":"贺铸","dynasty":"宋","school":"婉约派"},{"name":"叶梦得","dynasty":"宋","school":"豪放派"},{"name":"张先","dynasty":"宋","school":"婉约派"},{"name":"欧阳炯","dynasty":"宋","school":"婉约派"},{"name":"朱淑真","dynasty":"宋","school":"婉约派"},{"name":"程颢","dynasty":"宋","school":"理学"},{"name":"陆九渊","dynasty":"宋","school":"理学"},{"name":"杨亿","dynasty":"宋","school":"西昆体"},{"name":"吕本中","dynasty":"宋","school":"江西诗派"},{"name":"钱惟演","dynasty":"宋","school":"西昆体"},{"name":"石延年","dynasty":"宋","school":"古文"}];
+
+    const schoolAnchors = {
+      "山水田园": [0.34, 0.34], "新乐府": [0.02, -0.08], "浪漫派": [0.72, 0.57],
+      "现实派": [0.18, -0.30], "边塞派": [0.72, 0.18], "晚唐": [-0.18, -0.22],
+      "中唐": [0.10, 0.02], "古文": [0.05, 0.15], "初唐": [0.31, 0.18],
+      "盛唐": [0.48, 0.38], "豪放派": [0.58, 0.34], "爱国派": [0.45, -0.04],
+      "婉约派": [-0.45, -0.18], "改革派": [0.18, 0.23], "江西诗派": [-0.04, -0.10],
+      "中兴四大家": [0.14, 0.05], "格律派": [-0.32, -0.12], "理学": [-0.04, 0.26],
+      "隐逸": [-0.20, 0.23], "西昆体": [-0.38, -0.24]
+    };
+
+    const highlighted = new Set(["李白", "杜甫", "苏轼", "李清照", "辛弃疾", "王维", "白居易", "陆游", "李商隐", "岑参"]);
+    const charts = {};
+    let atlasDynasty = "全部";
+
+    function hashName(name) {
+      return [...name].reduce((sum, ch) => (sum * 31 + ch.charCodeAt(0)) % 10007, 17);
+    }
+
+    const atlasData = poets.map((p, i) => {
+      const anchor = schoolAnchors[p.school] || [0, 0];
+      const h = hashName(p.name);
+      const dx = ((h % 31) - 15) / 95;
+      const dy = (((Math.floor(h / 31)) % 29) - 14) / 95;
+      return {
+        ...p,
+        value: [Math.max(-0.92, Math.min(0.92, anchor[0] + dx)), Math.max(-0.82, Math.min(0.82, anchor[1] + dy)), 8 + (h % 9)],
+        itemStyle: { color: p.dynasty === "唐" ? "#b4473a" : "#28786e", opacity: highlighted.has(p.name) ? 0.95 : 0.68 }
+      };
+    });
+
+    const profileData = {
+      "李白": { dynasty:"唐", school:"浪漫派", scores:[82,67,91], thesis:"表达重心位于“高开放、高波动”区域，宏阔空间与孤独语境并存。", words:["月 19","云 14","山 10","酒 8","愁 8","海 6","剑 5","鹏 3"] },
+      "杜甫": { dynasty:"唐", school:"现实派", scores:[58,74,86], thesis:"表达重心更靠近现实空间，家国、漂泊与日常苦难形成持续张力。", words:["江 10","风 9","山 9","云 7","独 6","城 6","月 5","河 5"] },
+      "苏轼": { dynasty:"宋", school:"豪放派", scores:[79,61,88], thesis:"宏阔空间与日常经验并行，表达波动之后仍保持较高的开放度。", words:["月 11","江 10","风 9","山 8","酒 7","归 7","梦 5","雨 5"] },
+      "李清照": { dynasty:"宋", school:"婉约派", scores:[42,79,84], thesis:"近身空间与高情感密度叠合，器物、庭院与季节构成细部地形。", words:["风 10","雨 9","酒 8","愁 8","花 7","梦 6","舟 5","雁 5"] }
+    };
+
+    const poemPoints = [
+      {name:"《将进酒》", value:[0.83,0.64,24], quote:"黄河之水天上来，<br>奔流到海不复回。", affect:"昂扬与时间焦虑并置", space:"天上 → 黄河 → 海，形成宇宙级纵深", images:"黄河、天、海", confidence:"中"},
+      {name:"《行路难·其一》", value:[0.72,0.36,21], quote:"长风破浪会有时，<br>直挂云帆济沧海。", affect:"受阻后的进取", space:"长风 → 云帆 → 沧海，开放度由近及远", images:"长风、云帆、沧海", confidence:"中"},
+      {name:"《月下独酌》", value:[0.22,-0.12,19], quote:"举杯邀明月，<br>对影成三人。", affect:"孤独中的自我扩展", space:"个体 → 月 → 影，近身与天象相连", images:"杯、月、影", confidence:"中"},
+      {name:"《蜀道难》", value:[0.78,-0.28,23], quote:"蜀道之难，难于上青天。", affect:"惊惧与崇高感", space:"山路 → 青天，垂直尺度极高", images:"山、天、猿、鸟", confidence:"低"},
+      {name:"《早发白帝城》", value:[0.66,0.58,18], quote:"两岸猿声啼不住，<br>轻舟已过万重山。", affect:"释放与轻快", space:"轻舟高速穿越万重山", images:"猿、轻舟、山", confidence:"高"},
+      {name:"《宣州谢朓楼饯别校书叔云》", value:[0.45,-0.48,22], quote:"抽刀断水水更流，<br>举杯消愁愁更愁。", affect:"失意与自我排遣", space:"高楼、流水与长风并置", images:"楼、水、杯、愁", confidence:"中"},
+      {name:"《上李邕》", value:[0.92,0.72,17], quote:"大鹏一日同风起，<br>扶摇直上九万里。", affect:"自我期许与进取", space:"大鹏 → 扶摇 → 九万里", images:"大鹏、风、九万里", confidence:"中"},
+      {name:"《夜宿山寺》", value:[0.67,0.28,15], quote:"危楼高百尺，<br>手可摘星辰。", affect:"惊奇与超越", space:"危楼 → 百尺 → 星辰", images:"楼、星辰、天", confidence:"低"},
+      {name:"《送友人》", value:[0.32,-0.24,16], quote:"浮云游子意，<br>落日故人情。", affect:"送别与漂泊", space:"浮云、落日构成远眺空间", images:"浮云、落日、孤蓬", confidence:"中"},
+      {name:"《登金陵凤凰台》", value:[0.52,-0.16,20], quote:"总为浮云能蔽日，<br>长安不见使人愁。", affect:"忧思与政治隐喻", space:"凤凰台 → 浮云 → 长安", images:"台、云、日、长安", confidence:"中"}
+    ];
+
+    const compareProfiles = {
+      "李白": {values:[92,82,67,88,54,72], quote:"黄河之水天上来，奔流到海不复回。", source:"《将进酒》"},
+      "杜甫": {values:[76,58,74,91,86,63], quote:"安得广厦千万间，大庇天下寒士俱欢颜。", source:"《茅屋为秋风所破歌》"},
+      "苏轼": {values:[85,79,61,84,68,77], quote:"大江东去，浪淘尽，千古风流人物。", source:"《念奴娇·赤壁怀古》"},
+      "李清照": {values:[64,42,79,80,48,91], quote:"雁过也，正伤心，却是旧时相识。", source:"《声声慢》"}
+    };
+
+    function baseAxis() {
+      return {
+        axisLine: { lineStyle: { color: "#aeb5ae" } },
+        axisLabel: { color: "#707770", fontSize: 10 },
+        splitLine: { lineStyle: { color: "#e5e8e3", type: "dashed" } },
+        nameTextStyle: { color: "#59615b", fontSize: 11 }
+      };
+    }
+
+    function initAtlas() {
+      charts.atlas = echarts.init(document.getElementById("atlas-chart"), null, {renderer:"canvas"});
+      renderAtlas();
+      charts.atlas.on("click", params => {
+        if (!params.data || !params.data.name) return;
+        openProfile(params.data.name);
+      });
+    }
+
+    function renderAtlas() {
+      const data = atlasData.filter(p => atlasDynasty === "全部" || p.dynasty === atlasDynasty);
+      charts.atlas.setOption({
+        animationDuration: 650,
+        grid: {left: 64, right: 30, top: 34, bottom: 52},
+        tooltip: {
+          trigger: "item",
+          backgroundColor: "#252a27",
+          borderWidth: 0,
+          textStyle: {color:"#fff", fontSize:11},
+          formatter: p => `<b>${p.data.name}</b><br>${p.data.dynasty} · ${p.data.school}<br>空间开放度 ${Math.round((p.data.value[0]+1)*50)}<br>情感效价 ${Math.round((p.data.value[1]+1)*50)}`
+        },
+        xAxis: {...baseAxis(), type:"value", min:-1, max:1, name:"空间开放度 →", nameLocation:"middle", nameGap:34},
+        yAxis: {...baseAxis(), type:"value", min:-1, max:1, name:"情感效价 →", nameLocation:"middle", nameGap:42},
+        series: [{
+          type:"scatter",
+          data,
+          symbolSize: d => d[2],
+          emphasis: {scale:1.5, itemStyle:{opacity:1, borderColor:"#202421", borderWidth:1}},
+          label: {
+            show:true,
+            position:"top",
+            distance:5,
+            color:"#323834",
+            fontSize:10,
+            formatter: p => highlighted.has(p.data.name) ? p.data.name : ""
+          },
+          markArea: {
+            silent:true,
+            label:{color:"#9aa19a", fontSize:10},
+            itemStyle:{opacity:0.035},
+            data:[
+              [{name:"收束 · 昂扬", xAxis:-1, yAxis:0, itemStyle:{color:"#ad7b2f"}}, {xAxis:0, yAxis:1}],
+              [{name:"开放 · 昂扬", xAxis:0, yAxis:0, itemStyle:{color:"#28786e"}}, {xAxis:1, yAxis:1}],
+              [{name:"收束 · 低沉", xAxis:-1, yAxis:-1, itemStyle:{color:"#426d91"}}, {xAxis:0, yAxis:0}],
+              [{name:"开放 · 低沉", xAxis:0, yAxis:-1, itemStyle:{color:"#b4473a"}}, {xAxis:1, yAxis:0}]
+            ]
+          }
+        }]
+      }, true);
+    }
+
+    function initTerrain() {
+      charts.terrain = echarts.init(document.getElementById("terrain-chart"), null, {renderer:"canvas"});
+      charts.terrain.setOption({
+        grid:{left:62,right:30,top:38,bottom:50},
+        tooltip:{trigger:"item",backgroundColor:"#252a27",borderWidth:0,textStyle:{color:"#fff",fontSize:11},formatter:p=>`${p.data.name}<br>点击查看原诗证据`},
+        xAxis:{...baseAxis(),type:"value",min:-1,max:1,name:"空间收束 ←　→ 空间开放",nameLocation:"middle",nameGap:33},
+        yAxis:{...baseAxis(),type:"value",min:-1,max:1,name:"低沉 ← 情感效价 → 昂扬",nameLocation:"middle",nameGap:42},
+        series:[{
+          type:"scatter",
+          data:poemPoints,
+          symbolSize:d=>d[2],
+          itemStyle:{color:"#b4473a",opacity:.78,borderColor:"#fff",borderWidth:1},
+          emphasis:{itemStyle:{color:"#ad7b2f",opacity:1},scale:1.25},
+          label:{show:true,position:"top",color:"#414843",fontSize:10,formatter:p=>["《将进酒》","《行路难·其一》","《月下独酌》","《早发白帝城》","《上李邕》"].includes(p.data.name)?p.data.name:""},
+          markLine:{silent:true,symbol:"none",label:{show:false},lineStyle:{color:"#cfd4ce",type:"dashed"},data:[{xAxis:0},{yAxis:0}]}
+        }]
+      });
+      charts.terrain.on("click", p => updateEvidence(p.data));
+    }
+
+    function updateEvidence(item) {
+      document.getElementById("evidence-poem").textContent = item.name;
+      document.getElementById("evidence-quote").innerHTML = item.quote;
+      document.getElementById("evidence-affect").textContent = item.affect;
+      document.getElementById("evidence-space").textContent = item.space;
+      document.getElementById("evidence-images").textContent = item.images;
+      document.getElementById("evidence-confidence").textContent = `编年置信度：${item.confidence}`;
+    }
+
+    function initCompare() {
+      charts.compare = echarts.init(document.getElementById("compare-chart"), null, {renderer:"canvas"});
+      renderCompare();
+    }
+
+    function renderCompare() {
+      const a = document.getElementById("compare-a").value;
+      const b = document.getElementById("compare-b").value;
+      const av = compareProfiles[a];
+      const bv = compareProfiles[b];
+      document.getElementById("legend-a").textContent = a;
+      document.getElementById("legend-b").textContent = b;
+      document.getElementById("quote-owner-a").textContent = `${a} · 代表证据`;
+      document.getElementById("quote-owner-b").textContent = `${b} · 代表证据`;
+      document.getElementById("quote-a").textContent = av.quote;
+      document.getElementById("quote-b").textContent = bv.quote;
+      document.getElementById("source-a").textContent = av.source;
+      document.getElementById("source-b").textContent = bv.source;
+
+      charts.compare.setOption({
+        tooltip:{},
+        legend:{show:false},
+        radar:{
+          center:["50%","52%"],radius:"69%",splitNumber:4,
+          axisName:{color:"#515852",fontSize:11},
+          splitArea:{areaStyle:{color:["#fff","#f8f8f5"]}},
+          splitLine:{lineStyle:{color:"#dfe3de"}},axisLine:{lineStyle:{color:"#c9cfc9"}},
+          indicator:[{name:"意象丰富度",max:100},{name:"空间开放度",max:100},{name:"情感张力",max:100},{name:"自然意象",max:100},{name:"现实关切",max:100},{name:"语言独特度",max:100}]
+        },
+        series:[{type:"radar",data:[
+          {value:av.values,name:a,lineStyle:{color:"#b4473a",width:2},itemStyle:{color:"#b4473a"},areaStyle:{color:"rgba(180,71,58,.16)"}},
+          {value:bv.values,name:b,lineStyle:{color:"#28786e",width:2},itemStyle:{color:"#28786e"},areaStyle:{color:"rgba(40,120,110,.13)"}}
+        ]}]
+      }, true);
+
+      const labels = ["意象丰富度","空间开放度","情感张力","自然意象","现实关切","语言独特度"];
+      document.getElementById("difference-list").innerHTML = labels.map((label,i)=>`<div class="difference-row"><span class="difference-label">${label}</span><span class="difference-value">${a} ${av.values[i]}</span><span class="difference-value right">${bv.values[i]} ${b}</span></div>`).join("");
+    }
+
+    function initTrajectory() {
+      charts.trajectory = echarts.init(document.getElementById("trajectory-chart"), null, {renderer:"canvas"});
+      const phases=["蜀中/出川","漫游求仕","供奉翰林","放还与乱世","流放与暮年"];
+      charts.trajectory.setOption({
+        grid:{left:48,right:28,top:42,bottom:50},
+        tooltip:{trigger:"axis"},
+        xAxis:{...baseAxis(),type:"category",data:phases,axisLabel:{color:"#666d67",fontSize:9,interval:0}},
+        yAxis:{...baseAxis(),type:"value",min:20,max:100,name:"标准化得分",nameGap:25},
+        series:[
+          {name:"情感张力",type:"line",smooth:.28,data:[81,76,88,63,49],symbolSize:8,lineStyle:{color:"#b4473a",width:3},itemStyle:{color:"#b4473a"},areaStyle:{color:"rgba(180,71,58,.06)"}},
+          {name:"空间开放度",type:"line",smooth:.28,data:[72,91,84,66,52],symbolSize:8,lineStyle:{color:"#28786e",width:3},itemStyle:{color:"#28786e"}},
+          {name:"上界",type:"line",data:[87,94,93,72,59],symbol:"none",silent:true,lineStyle:{color:"#b9c0b8",type:"dashed",width:1}},
+          {name:"下界",type:"line",data:[68,78,75,55,42],symbol:"none",silent:true,lineStyle:{color:"#b9c0b8",type:"dashed",width:1}}
+        ]
+      });
+
+      charts.route = echarts.init(document.getElementById("route-chart"), null, {renderer:"canvas"});
+      const routePoints=[
+        {name:"绵阳",value:[104.73,31.47],year:"蜀中"},{name:"荆州",value:[112.24,30.33],year:"出川"},{name:"西安",value:[108.95,34.27],year:"长安"},{name:"济宁",value:[116.59,35.41],year:"东鲁"},{name:"宣城",value:[118.76,30.95],year:"漫游"},{name:"奉节",value:[109.46,31.02],year:"遇赦"},{name:"马鞍山",value:[118.51,31.69],year:"暮年"}
+      ];
+      const routeLines=routePoints.slice(0,-1).map((p,i)=>({coords:[p.value,routePoints[i+1].value]}));
+      charts.route.setOption({
+        tooltip:{trigger:"item",formatter:p=>p.data.year?`${p.data.name} · ${p.data.year}`:p.name},
+        geo:{map:"china",roam:false,zoom:1.18,center:[108,33],itemStyle:{areaColor:"#f1f2ee",borderColor:"#bdc4bd"},emphasis:{itemStyle:{areaColor:"#e5e9e4"},label:{show:false}},label:{show:false}},
+        series:[
+          {type:"lines",coordinateSystem:"geo",data:routeLines,effect:{show:true,symbol:"circle",symbolSize:4,trailLength:.25,period:7},lineStyle:{color:"#b4473a",width:2,opacity:.65,curveness:.14}},
+          {type:"scatter",coordinateSystem:"geo",data:routePoints,symbolSize:9,itemStyle:{color:"#28786e",borderColor:"white",borderWidth:1},label:{show:true,position:"right",formatter:"{b}",color:"#3a413c",fontSize:9}}
+        ]
+      });
+    }
+
+    function switchView(view) {
+      document.querySelectorAll(".nav-item").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===view));
+      document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id===`view-${view}`));
+      const names={atlas:"群体精神图谱",profile:"诗人精神地形",compare:"双人对比",trajectory:"生命轨迹"};
+      document.getElementById("crumb-current").textContent=names[view];
+      requestAnimationFrame(()=>Object.values(charts).forEach(chart=>chart.resize()));
+    }
+
+    function openProfile(name) {
+      const base = profileData[name] || profileData["李白"];
+      const poet = poets.find(p=>p.name===name) || {name,dynasty:base.dynasty,school:base.school};
+      document.getElementById("profile-name").textContent=name;
+      document.getElementById("profile-tags").textContent=`${poet.dynasty} · ${poet.school} · 当前样本 20 首`;
+      document.getElementById("profile-thesis").textContent=base.thesis || "当前显示为概念画像，正式结果需由统一指标重新计算。";
+      document.getElementById("score-open").textContent=base.scores[0];
+      document.getElementById("score-affect").textContent=base.scores[1];
+      document.getElementById("score-variety").textContent=base.scores[2];
+      document.getElementById("profile-words").innerHTML=base.words.map(w=>`<span class="word-token">${w}</span>`).join("");
+      switchView("profile");
+      showToast(`已定位：${name}`);
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast=document.getElementById("toast");
+      toast.textContent=message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer=setTimeout(()=>toast.classList.remove("show"),1700);
+    }
+
+    document.querySelectorAll(".nav-item").forEach(btn=>btn.addEventListener("click",()=>switchView(btn.dataset.view)));
+    document.querySelectorAll("[data-dynasty]").forEach(btn=>btn.addEventListener("click",()=>{
+      atlasDynasty=btn.dataset.dynasty;
+      document.querySelectorAll("[data-dynasty]").forEach(x=>x.classList.toggle("active",x===btn));
+      renderAtlas();
+    }));
+    document.querySelectorAll(".segmented").forEach(group=>group.addEventListener("click",e=>{
+      const btn=e.target.closest(".segment"); if(!btn || btn.dataset.dynasty) return;
+      group.querySelectorAll(".segment").forEach(x=>x.classList.toggle("active",x===btn));
+    }));
+
+    ["compare-a","compare-b"].forEach(id=>document.getElementById(id).addEventListener("change",renderCompare));
+    document.getElementById("search-button").addEventListener("click",()=>{
+      const name=document.getElementById("poet-search").value.trim();
+      if(poets.some(p=>p.name===name)) openProfile(name); else showToast("未找到该诗人");
+    });
+    document.getElementById("poet-search").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("search-button").click();});
+    document.getElementById("poet-options").innerHTML=poets.map(p=>`<option value="${p.name}">${p.dynasty} · ${p.school}</option>`).join("");
+
+    initAtlas();
+    initTerrain();
+    initCompare();
+    initTrajectory();
+    window.addEventListener("resize",()=>Object.values(charts).forEach(chart=>chart.resize()));
+  </script>
+</body>
+</html>

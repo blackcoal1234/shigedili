@@ -1,0 +1,2802 @@
+{
+  "corpus": {
+    "dynasty_counts": {
+      "唐": 46,
+      "宋": 42
+    },
+    "path": "D:\\game存档\\诗行万里2\\诗行万里\\data\\poems.json",
+    "poem_count": 20437,
+    "poet_count": 88,
+    "roster_sha256": "5806927fb9a4f554ae211d0f35c3c43177b7bf859685367a73391491e996490a"
+  },
+  "generated_at": "2026-08-09T23:07:47+00:00",
+  "interpretation_notes": [
+    "DILA/DDBC 為佛學與歷史人名權威資料庫；其朝代與生卒為參考信息，僅用於人名消歧與參考識別，不是作詩地點、路線或行年證據。",
+    "出身地（birthPlace）是靜態參考字段（birthplace_reference_only=true），永不寫入或路由任何旅程事件。",
+    "同名多人時不取首條：按姓名/別名、朝代、生卒重疊三項得分，唯一可信高分者列 matched，其餘同名候選仍保留以展示歧義（ambiguous）。",
+    "所有結果停留在 data/candidates 候選層，不寫入 data/reviewed；本輸出不含任何路線/事件字段。",
+    "來源為 DDBC Authority 開放內容（Open Content：https://authority.dila.edu.tw/docs/open_content/；官方授權 CC BY-SA 2.5 台灣 (CC BY-SA 2.5 TW)）；僅作參考，不作事實或行年斷言。",
+    "fetch_failed/parse_failed 會顯式持久化失敗狀態；失敗不會抹除已存在的舊匹配記錄，也不會縮小 88 人覆蓋。"
+  ],
+  "parser_version": "dila-person-reference-v1",
+  "per_poet": [
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:56:47+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\ed94585ccde3bfdf14f63af5844f8b800f657903d3b21129ab584f77c2eb20f1.json",
+          "content_sha256": "3444d3ed4291255184fc2ee827e888f9ee301b3297c147b2e5b09125908a93ce",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E4%B8%8A%E5%AE%98%E5%84%80&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 21
+      },
+      "poem_count": 21,
+      "poet": "上官仪",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:56:54+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\92bab43e4b47b208beb3a9a78a44a36d9643ab835dd1d44a3b84e8ea5318e08f.json",
+          "content_sha256": "e12b3464c40318db9d95d175b68dc5243aff40b5662e25c629ea62a2fb4a4ebd",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%85%83%E7%A8%B9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "元稹",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:00+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\2dc121de663b1ec78ae0c5c28443c4bdd80ae560928901fb842cc313649b6e08.json",
+          "content_sha256": "1e5601b385c4d57361afdabd5a75c37c382f5dc40ef24d48789d170c98700ef1",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%8A%89%E7%A6%B9%E9%8C%AB&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "刘禹锡",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:06+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\4d158d545df49c4373d31d8c0d36fb6ddcf678ca8d7a4e6c7fb2b99225428890.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%9B%A7%E7%B6%B8&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "卢纶",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:11+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\9236447c97c81aa9e4601bcdf5ed36a5b7c400e714d5592f292e998e651e9b95.json",
+          "content_sha256": "92d25a691c75f7827c1d1e2d1f8f3579f3a7e66dc80b5d1ed8ce549b24aab4be",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%8F%B8%E7%A9%BA%E6%9B%99&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 169
+      },
+      "poem_count": 169,
+      "poet": "司空曙",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:17+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\cca8dd1b174499a66b697bb9247292a1d0ec11dd2dbc8de163d90526d87ad61c.json",
+          "content_sha256": "cff98c68ee003c05f3eead8b798794abbeb62a323b06e61f8f305d4560888b32",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%AD%9F%E6%B5%A9%E7%84%B6&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "孟浩然",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:24+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\a7c49539886b910ff35ac130aeafad8855e796cdcb1698e0ff5d8b33e6c021c6.json",
+          "content_sha256": "97404068629cfba9d6312dc6287531ccfeac574d8135d0c51031ffbdb61a7987",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%AD%9F%E9%83%8A&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "孟郊",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:31+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\3611f679102e14bdd24f8616e52f4308398b4b5256608e850bd322de65de38c8.json",
+          "content_sha256": "fa5f21b953f66a35fce80c4788a241ee257ecd0aaa8e09f93f21f3bb055b1204",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%AE%8B%E4%B9%8B%E5%95%8F&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 210
+      },
+      "poem_count": 210,
+      "poet": "宋之问",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:37+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\a94dbf29a9b3f6846c2c40aba7223edcadc951ddbf0f784d2d88c7a406edc20e.json",
+          "content_sha256": "52f9a4e49060eb3a7c28bd1759ce69a5ca5bf2ea4fddc99c2c04046e4dcabb2d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%B2%91%E5%8F%83&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "岑参",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:42+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\daf67bc6f1733b7e5f6ef7640a5f57e5b7f1d74120ae5f502fbc9d2847e60599.json",
+          "content_sha256": "7d7ed66e3ea789e793e726d05076b7abbbdfab4c44a9e20766405f33105c9fad",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%B8%B8%E5%BB%BA&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 63
+      },
+      "poem_count": 63,
+      "poet": "常建",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:48+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\5a0700fe2be06f2703e1de4eed2ffac0492437188b672b72ffdecee6207f0b2e.json",
+          "content_sha256": "44de158bf58f2da52d32797ef3473b91d6abb7448d2052e2aa0c69d638fb71b4",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E4%B9%9D%E9%BD%A1&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 221
+      },
+      "poem_count": 221,
+      "poet": "张九龄",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:57:54+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\fe8bcb54aa4c63daf4852268ade23ec3c51a61b1903e4d60013c26f8e8ce5686.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E5%BF%97%E5%92%8C&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 11
+      },
+      "poem_count": 11,
+      "poet": "张志和",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:00+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\0a85babc9344a13d47bb63a4ed55772c157d5bf35c2b2ed7c6be7d67016c2a78.json",
+          "content_sha256": "2220d013524cc896068a19108a7bbee89dd2b6cc346270e5141c190a9b839634",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E7%B1%8D&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "张籍",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:05+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\e9fa3777a8b474664fc040104765d4dbbe57623a5a8a2346d84576e6cbdf2524.json",
+          "content_sha256": "2f609947f5f010c20931f021d18bbbdbd4bd5131015b794bfd4a510b10b993f6",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E7%B9%BC&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 3,
+        "persisted_record_count": 3,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 50
+      },
+      "poem_count": 50,
+      "poet": "张继",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:10+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\01f7e83310ed06a1c96b2ba913db016ca15c1cb5ab59e66668b50cdb22c76abf.json",
+          "content_sha256": "b3a124e0fdeea78656f0c2ee6eaa28078b98a585034189bc565a7fde1308007d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E5%95%86%E9%9A%B1&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "李商隐",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:15+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\43a14c8b66de1f98d2e201538036b3a1dd8c4f243e633a415eb45ccf59679ad5.json",
+          "content_sha256": "6d60afeeda11405d17b7b7d49cf8c8d6e2ceb2d0240b886713de4edd76bc5b91",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E7%85%9C&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 69
+      },
+      "poem_count": 69,
+      "poet": "李煜",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:22+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\e98662fc9c46948e799e5d4f011c9187cb256af07fe88b5e367cfb6f2a3a4257.json",
+          "content_sha256": "fde99427016b3ccbcf6b255804fe3d1af4dac634f0c168e0542acdc8e1f58cea",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E7%99%BD&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "李白",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:28+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\07d49fd8306a073bfc0092658529aae30a2d85908ff4331313e644e113934e61.json",
+          "content_sha256": "335991fc9d0d746afcc2b46d93b9d5c9710f795001bd8f2abea76f64283267d7",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E7%9B%8A&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 176
+      },
+      "poem_count": 176,
+      "poet": "李益",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:58:34+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\b956c1bbe9fbca996e9c0fa4c1a03e7eba13b736fbad5e6d7b862df4d9b11b60.json",
+          "content_sha256": "2b92c7a97d701afd34379aa917b6873816c40e2d2367f612442bb90e4a16dc77",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E8%B3%80&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 251
+      },
+      "poem_count": 251,
+      "poet": "李贺",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:03+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\8bdc9590b223be8efaaaaf53178d016191ced234e98d7e2a68d02c947863bfa2.json",
+          "content_sha256": "a0535b79a880238eed3cf545a1ce066168ceb4e1a4a5af6ad51ba3e6c6c12769",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%9C%E7%89%A7&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜牧",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:09+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\a7a4e2d43e3122ad85076523f35b2a5891db1d1bcfd15579a9ce848287ba8000.json",
+          "content_sha256": "7863878893bb1f97d80f59e8a6ac18015fdc5ddc74ff739ff731138fb6193b59",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%9C%E7%94%AB&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜甫",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:15+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\4dfe18ea5414d4d6b6e1752da6a52b9f9874f5d28c25d3eab735f6acd3876e52.json",
+          "content_sha256": "b4c7c3d5dccfcc13a8e2909ce3fbf7f295508f7078b399e6ec750dfd9e00a5be",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%9C%E8%8D%80%E9%B6%B4&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "杜荀鹤",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:22+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\81453046a54ff41249b4cff56dd6148921a535c9f4548df08f1b99f83c5e066a.json",
+          "content_sha256": "2a0293c20900b8c9035c131420e2b491e09e96cc4c39972c0cdc94f128591b25",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9F%B3%E5%AE%97%E5%85%83&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 242
+      },
+      "poem_count": 242,
+      "poet": "柳宗元",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:51+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\167f484eee938f32b72d16e59448b04be7da24341b66742c2de51f907668e2b4.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%AD%90%E9%99%BD%E7%82%AF&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "majority_local_label",
+      "local_dynasty_counts": {
+        "唐": 25,
+        "宋": 23
+      },
+      "poem_count": 48,
+      "poet": "欧阳炯",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:59:58+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\5dbe8fb1386b8ace1ec93d460b6c92e6ecbbee7d0341f4d523bc779059dde6cc.json",
+          "content_sha256": "50a95e722c6e79360b0af752a89cd8154f25157ef01fb9ea6461289b95f51dca",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%B2%88%E4%BD%BA%E6%9C%9F&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 162
+      },
+      "poem_count": 162,
+      "poet": "沈佺期",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:05+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\a0ff7f50023a1cee3aff72563ad74245f2ea7d702216cf8ffc768e935daa5ee0.json",
+          "content_sha256": "f1520d084369804473ecc415727415c9c1b033ffbf72896b3b08127f855483d8",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%BA%AB%E5%BA%AD%E7%AD%A0&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "温庭筠",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:33+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\bd0598e9ea933ba4d372f932523f9a0681b95e1258f5d6907053e5943daf622d.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E4%B9%8B%E6%B8%99&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 6
+      },
+      "poem_count": 6,
+      "poet": "王之涣",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:39+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\b370ad583bfa2c53fd333e884f543454eedad51b36caf704f943aeb39d1cedef.json",
+          "content_sha256": "2e7889aceda78f591af45684ec3b2b85d464d5a44b30066dc55fc86adc155693",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E5%8B%83&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 117
+      },
+      "poem_count": 117,
+      "poet": "王勃",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:45+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\71810ab29764b67f7d3246b0470ab48faf4097996f064c3611f68414088ea383.json",
+          "content_sha256": "c738020f24cc0a255757f9b3b376c5bada480bcb5b26c75e0f533e782bcf6b34",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E5%BB%BA&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 5,
+        "persisted_record_count": 5,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "王建",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:50+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\928a62f07a50638a960d994d7c886ff29d7fb28f9bbd3849135710b62e0d540d.json",
+          "content_sha256": "f41b71a8c2742478def42694d0cf6144468083052ec1948dea78147a6a29933d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E6%98%8C%E9%BD%A1&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 210
+      },
+      "poem_count": 210,
+      "poet": "王昌龄",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:00:56+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\abefcefb4712dae3ee3d34bff7970794fa17cf1bd66252397086fb537b0593e8.json",
+          "content_sha256": "3c6594a02b846c8c404e125c77e0883e2e09da87650c3ba95c8f55bd4c76a1d8",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E7%B6%AD&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "王维",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:02+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\1bc8de05b5c9e6d77b5112d54544ad8c7cb981b2c8d796155e24847104196f38.json",
+          "content_sha256": "23515f088ddc5b773a7d2280a8383186afbbd936cf7b12a568951ad9545c190a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%99%BD%E5%B1%85%E6%98%93&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 299
+      },
+      "poem_count": 299,
+      "poet": "白居易",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:10+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\4bbe730d0533ff7c61e38aad6ec53e661c1fd96e3346e1fba56b0ae36902b4df.json",
+          "content_sha256": "7d68fba8571d294373d2f3051b2ebf41c15cda1df518f3c5dc20993d5ee0f315",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%9A%AE%E6%97%A5%E4%BC%91&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "皮日休",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:15+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\b4c50ad8dcfa951c975a69d20880d932431ad3753e0b15f3905a3428997b3684.json",
+          "content_sha256": "f26ab647c7e67179a878edb7a952195942da11c4f8eac14462401724477a9281",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%A5%96%E8%A9%A0&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 2,
+        "persisted_record_count": 2,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 39
+      },
+      "poem_count": 39,
+      "poet": "祖咏",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:22+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\368846dbdf7e67e4a6b08309f4803806f5a9f49f3b64cf874548ac7787dc14e2.json",
+          "content_sha256": "de51347c0aba35c3af34c5ad46f5815d8af7f05f89c4c6d680d100560c680a4d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%BE%85%E9%9A%B1&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "罗隐",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:29+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\8227461633f55619d191d0d67a55346b89b138d2c0284b59c7e86d9ff0694b8c.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%81%B6%E5%A4%B7%E4%B8%AD&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 31
+      },
+      "poem_count": 31,
+      "poet": "聂夷中",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:01:34+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\ca0f7da7f532c54ff4e3257c3bf123318f0e87f934cfd71976326ba4068e9b56.json",
+          "content_sha256": "1bc81a21e5d80adc863cc67d45d1ed07397e7c0b2767cd2993eb87c62e1cb4ae",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%A8%B1%E6%B8%BE&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "许浑",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T22:55:45+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\6ca5175a91224a542fa6c0832d72ee34d7444a78d903e33b34db0f89a30b207f.json",
+          "content_sha256": "aabf79d542b1dd55acbdeddb4674fc594259fb91e98ca560b6cfc82a0157864d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%B3%80%E7%9F%A5%E7%AB%A0&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 22
+      },
+      "poem_count": 22,
+      "poet": "贺知章",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:04+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\db1c66d1f98d59dc9a156557bc91c5271f7ee4db02d95b8f7970df41c52957cf.json",
+          "content_sha256": "d1163608d7127be60d98a792830c313834bd05e09748810a8d6822f6d2ec2322",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%B3%88%E5%B3%B6&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "贾岛",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:09+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\7235e1b078abd772014f790ec8bb2b727e6a5e5148f58f0e954986bb94352367.json",
+          "content_sha256": "24ccf22b3b5635e969ecdd27f30f40ea3088fdea9db73f5dc62649506c06b90a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%8C%A2%E8%B5%B7&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "钱起",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:15+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\16609d10f4f0150de5f1e60e0c6f80760da61ecd2b67e32b1195bfa001efd139.json",
+          "content_sha256": "9cc3373de826c1ee80b90505c84c232f5ee37dbcab5bdc7ee2774a824b940494",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%99%B3%E5%AD%90%E6%98%82&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 168
+      },
+      "poem_count": 168,
+      "poet": "陈子昂",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:22+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\b54c499195f96ba3d737e46d056a79a4b129ffc0fcbc3a8cd155ce17f44f81b6.json",
+          "content_sha256": "69ca89fa7ba6ccac995812ab4a09f6d4e3ccfc57b647958de76d66aec7d7842b",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%9F%8B%E8%8E%8A&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韦庄",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:28+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f84994e9039f3710a2111d45da60d1a6491121a7c08f81911186afcd501e0426.json",
+          "content_sha256": "335fcb3feb800adc2d7c52b62f0be0ada91ebb5f529f1da8959413e8dc4ae4dd",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%9F%8B%E6%87%89%E7%89%A9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韦应物",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:33+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\efa9a5c9d62005351b54c48352f115cbf1c7ee6cdc04cb508eb031ac855a880f.json",
+          "content_sha256": "01a228feb46b8078233dc9840b45328bdacddc67e4e3b48777eabf4279fa15b6",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%9F%93%E6%84%88&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 300
+      },
+      "poem_count": 300,
+      "poet": "韩愈",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:39+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\924aeab485339f96f49fa61d686e23e1ec4429e867627f585db2d22da03869ba.json",
+          "content_sha256": "6e5968d2d385458a4e113b721f1852ffc87c5174d402f78b0df5267941daf787",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%A7%B1%E8%B3%93%E7%8E%8B&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "唐": 142
+      },
+      "poem_count": 142,
+      "poet": "骆宾王",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:46+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f0a43fefd12535abe71bce7306ba915921ae2d1c2bef895cee5bc6318a918b4a.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%AB%98%E9%81%A9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "唐",
+      "dynasty_resolution": "majority_local_label",
+      "local_dynasty_counts": {
+        "唐": 246,
+        "宋": 1
+      },
+      "poem_count": 247,
+      "poet": "高适",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:52+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\e2201c7e36001f787034f308a0c1a3a54759acecb064b8426274bd52fc06e237.json",
+          "content_sha256": "ff7322fa0c4e3213579e01bdedd9ff1607d7786a351f9831b4edc6f821cebbd6",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%8A%89%E5%85%8B%E8%8E%8A&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "刘克庄",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:02:59+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f7b4a2987e50074678e0d340efbeee68292b2800b5ec571d6b7a72a46b62761f.json",
+          "content_sha256": "a4b98462232d6a1c98783e2edc99b1c01ac64bb6f59dbd9e2674011322cccbcd",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%91%89%E5%A4%A2%E5%BE%97&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 256
+      },
+      "poem_count": 256,
+      "poet": "叶梦得",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:04+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\2e4ffa6cb9c0eef8333fd5d537db7e8af9f83d8eb53d114a12f6ff839c39b323.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%8F%B8%E9%A9%AC%E5%85%89&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "司马光",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:09+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\e31bc5e58a2bd8d66c7f2ddaf82390fe21e4a3743406c025a7c646c8c11d9771.json",
+          "content_sha256": "b9a9e0f2ca5034402a82d9d1f27c7885e2f9ba6b42010ff325fbb28739dae7a7",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%91%82%E6%9C%AC%E4%B8%AD&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "吕本中",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:16+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\c20df2721b4d27230738b41b0ae25e84982e45a36b76914b7a72a56f5c05d92a.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%90%B3%E6%96%87%E8%8B%B1&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "吴文英",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:22+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\283f6955cfe8dc8b6f06238a36feb0c9e0b26f25a52d8aa4883da615a9061eb9.json",
+          "content_sha256": "082f4e98184e54d170c86a53126d75e2072cc2fce51e968b9c67926bd1e3ce5c",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%91%A8%E9%82%A6%E5%BD%A5&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 259
+      },
+      "poem_count": 259,
+      "poet": "周邦彦",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:28+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\d10365420e25f5093d35aa1dcb7648d2240c42fd808a0e9ea04ff70c03821a3f.json",
+          "content_sha256": "a4da5f40ec7a72d1ad9cfc1a187112ba0fb66a2f903ed31bd01225e4a7914e5d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%A7%9C%E5%A4%94&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 298
+      },
+      "poem_count": 298,
+      "poet": "姜夔",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "ambiguous",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:33+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\8761a3681f699e5429a8ef78ae98ec7e5cf313b6d0736dbffc71351be8231bc8.json",
+          "content_sha256": "55c9d1b9ac7a2c8df0ebd2e8ac3b44bb3a3c58e5a43ce9231f0fed1024ffeb5a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%B0%A4%E8%A2%A4&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "ambiguous"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 81
+      },
+      "poem_count": 81,
+      "poet": "尤袤",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:38+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\742509256d4570b80f448eca06a20c713f52b67cd716e409a9110146f37f57f7.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E5%85%83%E5%B9%B9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "张元干",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:45+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\eb13428f25528da97c3b5fa2302f7609ae90e8962e995c17e4d52ea259fa28c7.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E5%85%88&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 206
+      },
+      "poem_count": 206,
+      "poet": "张先",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:51+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\daa2f72dbf4399b4dc273825b29f9094a50f68a61c57bc3327952d6bd99b895e.json",
+          "content_sha256": "b3d819d5156d972d742fb75800c9bf44b748f9648cbc68305b0079f9096b39ed",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E5%AD%9D%E7%A5%A5&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "张孝祥",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:03:56+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\942098583a3031201a66afa1ff4a7b3bd0e0b51ad70154d2c046f4d37e4d5af2.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E5%BC%B5%E7%82%8E&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "张炎",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:02+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\75d9ecfc474742f4e720c57e9a3c9af44de637993198ffbca1a73290b1cdfc22.json",
+          "content_sha256": "20108bdc1680f84ba3fa3655225b50f8410d9019f6480b882fc1f9656f029e91",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%96%87%E5%A4%A9%E7%A5%A5&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "文天祥",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:09+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\018920840d369820c029f82c6d4f36816db39c8e5c655d64d101bb3530c9f077.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%99%8F%E5%87%A0%E9%81%93&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 288
+      },
+      "poem_count": 288,
+      "poet": "晏几道",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:15+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f28f5b8cafc3f9cd211e7629d1c13a187d030cadfe885bee18794ca0aefa8c0f.json",
+          "content_sha256": "fc3fc4b85149b7fb9d974e02e2e4d71da184c8c14fae85cc2f320285d2cdcd7e",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%99%8F%E6%AE%8A&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 283
+      },
+      "poem_count": 283,
+      "poet": "晏殊",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:20+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\a1bbc26457269ae56b5e7fecacc2fb017edad6d55ef2b659289f45fbb05a1c85.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9B%BE%E9%9E%8F&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "曾巩",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:26+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\7a56b8bcd432dd8d024469639e11360dd4e098f1360461f80153534571352d75.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9C%B1%E6%B7%91%E7%9C%9F&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "朱淑真",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:31+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\9ec7a4ca7d0602a717d0fef4797f843f9eb8d9e0cbf4e3829f7d0aa360d450da.json",
+          "content_sha256": "1c0bc7478cc0b1af8224de847a6fae138d95daf35ed4cfc026f9e2a6897c3e63",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9C%B1%E7%86%B9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "朱熹",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:37+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\44e6f9a67fb3d9f4f1f2b1fc13ffbbeeaa96401ae45d43099dac55ab4bd617f8.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9D%8E%E6%B8%85%E7%85%A7&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 83
+      },
+      "poem_count": 83,
+      "poet": "李清照",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:44+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\1780a5174a1512b402ac76b63a61230f069ddd90e14b3a937d3c68047cbeef8a.json",
+          "content_sha256": "dedd156dd6e4bb8519e5e84731e4b8d0ec77980ee2855640a48f509822b888ca",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%A5%8A%E8%90%AC%E9%87%8C&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "majority_local_label",
+      "local_dynasty_counts": {
+        "唐": 1,
+        "宋": 299
+      },
+      "poem_count": 300,
+      "poet": "杨万里",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:50+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\786c5e07dfe565ba0598438d3bdfb80062f9d0f7c9d9cd9f061553b9342134e0.json",
+          "content_sha256": "47f0765e17c85cdedee010b94cedd91e24cd83818a86bbfbedb532cc451cda9f",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%A5%8A%E5%84%84&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "杨亿",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:04:55+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\044372ae39afb4ac8b329c67884f2e995dde537a00c48324c8fdb788c12cf16b.json",
+          "content_sha256": "9a7f80efa7986b984f1d5991e6e9229c14a9422e2f5d48ad74f43782fef9dc20",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9E%97%E9%80%8B&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 294
+      },
+      "poem_count": 294,
+      "poet": "林逋",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:02+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\45c2cc9730e1110291889b04a71b4076907a5effc9d1d76ee4f0f041b696a703.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%9F%B3%E6%B0%B8&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 234
+      },
+      "poem_count": 234,
+      "poet": "柳永",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:07+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\7181c8e29450e71abb305262a266b1cc515be7abb773b71dc1842a3790372650.json",
+          "content_sha256": "e33cf698fe83fc343a273617877183193ae34e994e328a7221202610b9cd9c6f",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%A2%85%E5%A0%AF%E8%87%A3&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "梅尧臣",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:14+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\383e969fadc9633fa1da2db7ea2f66e956e8d860875004e2998a735d57af345c.json",
+          "content_sha256": "60168c2ed8ceee15eaa5da84c7210aaba3483751f495a59456c42d29adb75e3d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E6%AD%90%E9%99%BD%E4%BF%AE&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "欧阳修",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:42+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\ac1751ed1537ec6adeb390d4307c1d194e0c696cdba5a7d446f698c25e63cff6.json",
+          "content_sha256": "ddf3232a8a381f79e0bcb1f08004b39a39e19b15a76007142ea790a61fe428d7",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%8E%8B%E5%AE%89%E7%9F%B3&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "王安石",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:48+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\cdf6420e49dccbe1c1638d147e66132d031ad8c23f4e5ca1f0ef0d57bdb00216.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%9F%B3%E5%BB%B6%E5%B9%B4&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 68
+      },
+      "poem_count": 68,
+      "poet": "石延年",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:53+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\b0978364cc0447c248fe9726671ee1c7690f674d94dd055810bdf47e7bfa6085.json",
+          "content_sha256": "33e78cd1762479b1e01adab5fd79f4fbecd945443aacbfa88e3435b45b035a9c",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%A7%A6%E8%A7%80&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "秦观",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:05:59+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f10a4fb23a59f36b6414cec32ad6969fdfa5a1a4e31d2dd993917eb7361bf037.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E7%A8%8B%E9%A2%A2&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 70
+      },
+      "poem_count": 70,
+      "poet": "程颢",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:05+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\bc7e5a1429bb764a2cd4d704f10941281dffef2c23b5b6080dc50d55ac6095a8.json",
+          "content_sha256": "8bb612ce780cab69d1b281e21ed1e6adc3e421fa47294e2eee501d2e8b68240e",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%98%87%E6%B4%B5&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 84
+      },
+      "poem_count": 84,
+      "poet": "苏洵",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:10+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\2629fa6affe235ac2c4e97924470e1e149af83a600b094e927b26dda6e7b9c06.json",
+          "content_sha256": "8f36f0e28fce3621e5c7e464f365b6268dad3f7697db6e2b12cd1ffaebb224bd",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%98%87%E8%BB%BE&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "苏轼",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:18+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\92a8bf380719cab4fd84b3fabf22bb8f69107b3a01ddaa2d07435fb2b28e227a.json",
+          "content_sha256": "d571d277e98357a4f3a85753884fe638ba7250d93dad98579ea37cda523158b3",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%98%87%E8%BD%8D&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "苏辙",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:23+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\7e4a9a2b856869b3ef6c98265e32f4ff36ba9e1d69425447ffd198a415559502.json",
+          "content_sha256": "a1daa1ac7f74d401670b0090c07a93ad80d78eef198ee3541a64d287880dde4d",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%8C%83%E4%BB%B2%E6%B7%B9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "范仲淹",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:29+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\9a8d26b99bfc1f99c8f6a7de61ce22c47f797c000193e0da0272bc624d31a6c8.json",
+          "content_sha256": "be2ed459abdc1a0e85a89228a50d9521fda49fa0c8ea89ed5b69bfee3e18900c",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%8C%83%E6%88%90%E5%A4%A7&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "范成大",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:36+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\be558fc80a8228c2feb43e4d5225cb9c18d44954c8e966b92af967bb644f116a.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%B3%80%E9%91%84&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "贺铸",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:43+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\f84941bde7861d195f6413b7311d140e4c1be4bf8c35982d6de556140b527b3e.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E8%BE%9B%E6%A3%84%E7%96%BE&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "辛弃疾",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "ambiguous",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:06:48+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\adec73a51821042540e46cb7fe437ba1ae5998568112d354c63411cedb22ef52.json",
+          "content_sha256": "e97f9d08d42de6d593dd6e00215647e889d68bae63dd6f445e387d5dcef817db",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%8C%A2%E6%83%9F%E6%BC%94&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "ambiguous"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 102
+      },
+      "poem_count": 102,
+      "poet": "钱惟演",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:07:17+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\327725050f30ffb743be4fae78b8e888b36bfa324428ab1b5511a86f3471f949.json",
+          "content_sha256": "3183c46e5b4aa7b64ed793d05c96f14b9c4a11157289e002635962a801444a1e",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%99%B8%E4%B9%9D%E6%B7%B5&jsoncallback=shixing_dila_cb",
+          "retry_count": 1,
+          "retry_waits": [
+            1.5
+          ],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 32
+      },
+      "poem_count": 32,
+      "poet": "陆九渊",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:07:24+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\45065ce12713db6d2317faddb5fa2dfb9148b95fc8d27611494e36f78e4eb5f4.json",
+          "content_sha256": "1a4170e2125676d42843af0fe1160d9bdc1ce4e7289cf8e62b0806ac26687864",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%99%B8%E6%B8%B8&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "陆游",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "not_found",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:07:31+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\394631088d8ea1849bfeda4834378b4a01114ed14444049a1dce57e05bac63d8.json",
+          "content_sha256": "88646dad31e7435ff8870e2ac4a0329fc3cb8326442c2063eb09ab1fb786289a",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%99%B3%E8%88%87%E7%BE%A9&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 0,
+        "persisted_record_count": 0,
+        "status": "not_found"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 299
+      },
+      "poem_count": 299,
+      "poet": "陈与义",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "ambiguous",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:07:37+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\6fefc7dff86b5aae86ee3895254fb5084b4e3586b57f229b8ddbe83a8e43f7c8.json",
+          "content_sha256": "ca0ab467f59008982363dd439044af54d05d1a5a378240797aaa5ca000e94541",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%99%B3%E4%BA%AE&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "ambiguous"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 140
+      },
+      "poem_count": 140,
+      "poet": "陈亮",
+      "selected": true
+    },
+    {
+      "dila": {
+        "active_status": "matched",
+        "attempt": {
+          "accessed_at": "2026-08-09T23:07:47+00:00",
+          "attempt_status": "fetched",
+          "cache_path": "D:\\game存档\\诗行万里2\\诗行万里\\.cache\\background_sources\\dila_person\\meta\\d19cdb7ed1bfe59e294f77b80670c116f8e14937ef0b5e39793fe7a873993dad.json",
+          "content_sha256": "2ecafab1af8a7f943b717e3a2310099ce3291baf50929e09600121a4f7f67089",
+          "error": "",
+          "from_cache": false,
+          "http_status": 200,
+          "query_url": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php?type=person&id=%E9%BB%83%E5%BA%AD%E5%A0%85&jsoncallback=shixing_dila_cb",
+          "retry_count": 0,
+          "retry_waits": [],
+          "row_metadata": {},
+          "usable": true
+        },
+        "candidate_count": 1,
+        "persisted_record_count": 1,
+        "status": "matched"
+      },
+      "dynasty": "宋",
+      "dynasty_resolution": "single_local_label",
+      "local_dynasty_counts": {
+        "宋": 300
+      },
+      "poem_count": 300,
+      "poet": "黄庭坚",
+      "selected": true
+    }
+  ],
+  "schema_version": 1,
+  "scope": "all",
+  "selected_poets": [
+    "上官仪",
+    "元稹",
+    "刘克庄",
+    "刘禹锡",
+    "卢纶",
+    "叶梦得",
+    "司空曙",
+    "司马光",
+    "吕本中",
+    "吴文英",
+    "周邦彦",
+    "姜夔",
+    "孟浩然",
+    "孟郊",
+    "宋之问",
+    "尤袤",
+    "岑参",
+    "常建",
+    "张九龄",
+    "张元干",
+    "张先",
+    "张孝祥",
+    "张志和",
+    "张炎",
+    "张籍",
+    "张继",
+    "文天祥",
+    "晏几道",
+    "晏殊",
+    "曾巩",
+    "朱淑真",
+    "朱熹",
+    "李商隐",
+    "李清照",
+    "李煜",
+    "李白",
+    "李益",
+    "李贺",
+    "杜牧",
+    "杜甫",
+    "杜荀鹤",
+    "杨万里",
+    "杨亿",
+    "林逋",
+    "柳宗元",
+    "柳永",
+    "梅尧臣",
+    "欧阳修",
+    "欧阳炯",
+    "沈佺期",
+    "温庭筠",
+    "王之涣",
+    "王勃",
+    "王安石",
+    "王建",
+    "王昌龄",
+    "王维",
+    "白居易",
+    "皮日休",
+    "石延年",
+    "祖咏",
+    "秦观",
+    "程颢",
+    "罗隐",
+    "聂夷中",
+    "苏洵",
+    "苏轼",
+    "苏辙",
+    "范仲淹",
+    "范成大",
+    "许浑",
+    "贺知章",
+    "贺铸",
+    "贾岛",
+    "辛弃疾",
+    "钱惟演",
+    "钱起",
+    "陆九渊",
+    "陆游",
+    "陈与义",
+    "陈亮",
+    "陈子昂",
+    "韦庄",
+    "韦应物",
+    "韩愈",
+    "骆宾王",
+    "高适",
+    "黄庭坚"
+  ],
+  "sources": {
+    "dila_person": {
+      "callback": "shixing_dila_cb",
+      "complete_without_fetch_failures": true,
+      "delay_max": 5.0,
+      "delay_min": 3.0,
+      "docs_url": "https://authority.dila.edu.tw/docs/services/person_query.php",
+      "endpoint": "https://authority.dila.edu.tw/webwidget/getAuthorityData.php",
+      "license_note": "來源為 DDBC Authority 開放內容（Open Content）：https://authority.dila.edu.tw/docs/open_content/；官方授權為 CC BY-SA 2.5 台灣 (CC BY-SA 2.5 TW)（https://creativecommons.org/licenses/by-sa/2.5/tw/）。person_query 說明頁本身未再逐條重申每筆記錄之授權條款，使用前請以 Open Content 頁面為準。本工具僅作人名/朝代/生卒參考識別，不作行年或路線證據。",
+      "name": "DDBC Authority Web Services (DILA 佛學權威資料庫)",
+      "offline": false,
+      "resume": true,
+      "retries": 1,
+      "status_counts": {
+        "ambiguous": 3,
+        "matched": 64,
+        "not_found": 21
+      }
+    }
+  },
+  "totals": {
+    "complete_without_fetch_failures": true,
+    "poets": 88,
+    "records": 77,
+    "selected_poets": 88,
+    "status_counts": {
+      "ambiguous": 3,
+      "matched": 64,
+      "not_found": 21
+    }
+  }
+}

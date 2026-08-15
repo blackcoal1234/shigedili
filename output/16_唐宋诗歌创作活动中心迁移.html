@@ -1,0 +1,4058 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唐宋诗歌创作活动中心迁移</title>
+                <script type="text/javascript" src="assets/pyecharts/v6/echarts.min.js"></script>
+            <script type="text/javascript" src="assets/pyecharts/v6/maps/china.js"></script>
+
+    
+<link rel="icon" href="data:,">
+
+    <style id="shixing-premium-style-literary-centers">
+        :root {
+            --sx-bg-0: #050816;
+            --sx-bg-1: #08111f;
+            --sx-bg-2: #0f172a;
+            --sx-panel: rgba(15, 23, 42, 0.76);
+            --sx-panel-strong: rgba(15, 23, 42, 0.94);
+            --sx-glass: rgba(255, 255, 255, 0.075);
+            --sx-glass-strong: rgba(255, 255, 255, 0.13);
+            --sx-line: rgba(148, 163, 184, 0.22);
+            --sx-line-strong: rgba(148, 163, 184, 0.38);
+            --sx-text: #e5edf9;
+            --sx-muted: #9aa8bd;
+            --sx-soft: #cbd5e1;
+            --sx-accent: #06b6d4;
+            --sx-accent-2: #f59e0b;
+            --sx-accent-3: #22c55e;
+            --sx-warn: #fbbf24;
+            --sx-danger: #fb7185;
+            --sx-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+            --sx-radius-xl: 28px;
+            --sx-radius-lg: 22px;
+            --sx-radius-md: 16px;
+            --sx-radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body {
+            color: var(--sx-text);
+            font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at 8% 10%, color-mix(in srgb, var(--sx-accent), transparent 76%), transparent 30%),
+                radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--sx-accent-2), transparent 76%), transparent 28%),
+                radial-gradient(circle at 60% 90%, color-mix(in srgb, var(--sx-accent-3), transparent 82%), transparent 30%),
+                linear-gradient(135deg, var(--sx-bg-0), var(--sx-bg-1) 42%, #111827);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.16;
+            background-image:
+                linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 86%);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 22% 26%, color-mix(in srgb, var(--sx-accent), transparent 88%), transparent 24%),
+                radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--sx-accent-2), transparent 90%), transparent 28%);
+            filter: blur(2px);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .shixing-premium-shell {
+            width: min(1240px, calc(100vw - 36px));
+            margin: 0 auto;
+            padding: 24px 0 54px;
+        }
+
+        .shixing-premium-hero {
+            position: relative;
+            min-height: 330px;
+            margin: 18px auto 22px;
+            padding: 28px;
+            border: 1px solid var(--sx-line);
+            border-radius: var(--sx-radius-xl);
+            background:
+                linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.64)),
+                radial-gradient(circle at 82% 16%, color-mix(in srgb, var(--sx-accent), transparent 82%), transparent 38%);
+            box-shadow: var(--sx-shadow);
+            overflow: hidden;
+        }
+
+        .shixing-premium-hero::before {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            right: -120px;
+            top: -150px;
+            border-radius: 999px;
+            background: var(--sx-accent);
+            opacity: 0.16;
+            filter: blur(22px);
+        }
+
+        .shixing-premium-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(120deg, transparent, rgba(255,255,255,.07), transparent);
+            transform: translateX(-130%);
+            animation: shixingPremiumSheen 7s ease-in-out infinite;
+        }
+
+        @keyframes shixingPremiumSheen {
+            0%, 62% {
+                transform: translateX(-130%);
+            }
+            100% {
+                transform: translateX(130%);
+            }
+        }
+
+        .shixing-premium-hero-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+            gap: 24px;
+            align-items: end;
+        }
+
+        .shixing-premium-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #67e8f9;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .shixing-premium-eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .shixing-premium-hero h1 {
+            margin: 16px 0 16px;
+            max-width: 780px;
+            font-size: clamp(34px, 5vw, 62px);
+            line-height: 1.02;
+            letter-spacing: -0.06em;
+            color: #f8fafc;
+        }
+
+        .shixing-premium-gradient {
+            background: linear-gradient(90deg, #e0f2fe, #a7f3d0 44%, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .shixing-premium-subtitle {
+            margin: 0;
+            max-width: 820px;
+            color: var(--sx-muted);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .shixing-premium-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .shixing-premium-metric {
+            min-height: 96px;
+            padding: 16px;
+            border: 1px solid var(--sx-line);
+            border-radius: var(--sx-radius-md);
+            background: rgba(255, 255, 255, 0.075);
+            backdrop-filter: blur(20px);
+        }
+
+        .shixing-premium-metric span {
+            display: block;
+            color: var(--sx-muted);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .shixing-premium-metric strong {
+            display: block;
+            margin-top: 9px;
+            color: #f8fafc;
+            font-size: 26px;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            overflow-wrap: anywhere;
+        }
+
+        .shixing-premium-note {
+            margin-top: 12px;
+            padding: 14px 16px;
+            border: 1px solid rgba(251, 191, 36, 0.30);
+            border-radius: var(--sx-radius-md);
+            background:
+                linear-gradient(135deg, rgba(120, 53, 15, 0.30), rgba(15, 23, 42, 0.58));
+            color: #fde68a;
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        .shixing-premium-section {
+            width: min(1240px, calc(100vw - 36px));
+            margin: 22px auto;
+        }
+
+        .shixing-premium-panel {
+            border: 1px solid var(--sx-line);
+            border-radius: var(--sx-radius-lg);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.035)),
+                rgba(15, 23, 42, 0.72);
+            box-shadow: 0 24px 68px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(22px);
+            overflow: hidden;
+        }
+
+        .shixing-premium-panel-head {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--sx-line);
+            background: rgba(2, 6, 23, 0.20);
+        }
+
+        .shixing-premium-panel-head h2 {
+            margin: 0;
+            color: #f8fafc;
+            font-size: 22px;
+            letter-spacing: -0.03em;
+        }
+
+        .shixing-premium-panel-head p {
+            margin: 8px 0 0;
+            color: var(--sx-muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .shixing-premium-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .shixing-premium-info-card {
+            min-height: 118px;
+            padding: 16px;
+            border: 1px solid var(--sx-line);
+            border-radius: var(--sx-radius-md);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .shixing-premium-info-card strong {
+            display: block;
+            color: #f8fafc;
+            font-size: 16px;
+            line-height: 1.45;
+        }
+
+        .shixing-premium-info-card span {
+            display: block;
+            margin-top: 8px;
+            color: var(--sx-muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .box {
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: center !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 24px !important;
+            padding: 0 18px 44px !important;
+        }
+
+        .chart-container {
+            box-sizing: border-box;
+            min-width: 0;
+            border: 1px solid var(--sx-line) !important;
+            border-radius: var(--sx-radius-lg);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.035)),
+                rgba(15, 23, 42, 0.72) !important;
+            box-shadow: 0 24px 68px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(22px);
+            overflow: hidden;
+        }
+
+        .chart-container canvas,
+        .chart-container > div {
+            border-radius: inherit;
+        }
+
+        .shixing-premium-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--sx-text);
+        }
+
+        .shixing-premium-table th,
+        .shixing-premium-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--sx-line);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .shixing-premium-table th {
+            color: #cbd5e1;
+            font-size: 13px;
+            background: rgba(2, 6, 23, 0.28);
+        }
+
+        .shixing-premium-table td {
+            color: var(--sx-muted);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .shixing-premium-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 0 9px;
+            border: 1px solid color-mix(in srgb, var(--sx-accent), transparent 58%);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--sx-accent), transparent 86%);
+            color: #cffafe;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        @media (max-width: 960px) {
+            .shixing-premium-hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .shixing-premium-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .shixing-premium-shell,
+            .shixing-premium-section {
+                width: min(100vw - 22px, 1240px);
+            }
+
+            .shixing-premium-hero {
+                padding: 18px;
+                border-radius: 22px;
+            }
+
+            .shixing-premium-hero h1 {
+                font-size: 34px;
+            }
+
+            .shixing-premium-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .box {
+                padding: 0 8px 32px !important;
+                gap: 18px !important;
+            }
+
+            .chart-container {
+                width: calc(100vw - 22px) !important;
+                max-width: calc(100vw - 22px) !important;
+                height: min(72vh, var(--chart-height, 640px)) !important;
+                max-height: 72vh;
+            }
+        }
+    </style>
+
+
+    <style id="shixing-index-backlink-style">
+        .shixing-index-backlink {
+            position: sticky;
+            top: 12px;
+            z-index: 9999;
+            box-sizing: border-box;
+            width: min(1240px, calc(100% - 32px));
+            margin: 14px auto 0;
+            font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+            pointer-events: none;
+        }
+        .shixing-index-backlink a {
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 38px;
+            padding: 8px 14px;
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            border-radius: 999px;
+            background:
+                linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.70)),
+                rgba(255, 255, 255, 0.08);
+            color: #cffafe;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-decoration: none;
+            box-shadow:
+                0 16px 42px rgba(0, 0, 0, 0.22),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(18px);
+            transition:
+                transform .18s ease,
+                border-color .18s ease,
+                box-shadow .18s ease,
+                color .18s ease;
+        }
+        .shixing-index-backlink a::before {
+            content: "←";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            background: rgba(34, 211, 238, 0.16);
+            color: #67e8f9;
+            font-weight: 900;
+        }
+        .shixing-index-backlink a:focus-visible,
+        .shixing-index-backlink a:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34, 211, 238, 0.72);
+            color: #ffffff;
+            box-shadow:
+                0 22px 54px rgba(0, 0, 0, 0.30),
+                0 0 28px rgba(34, 211, 238, 0.18);
+        }
+        @media (max-width: 640px) {
+            .shixing-index-backlink {
+                width: calc(100% - 20px);
+                margin-top: 10px;
+            }
+            .shixing-index-backlink a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+
+
+    <style id="literary-center-method-style">
+        .center-method { display:grid; grid-template-columns:minmax(0,1fr); gap:18px; }
+        .center-method > * { min-width:0; }
+        .center-kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+        .center-kpis > div,
+        .center-formula-grid article,
+        .center-table-panel,
+        .center-warning {
+            border:1px solid rgba(148,163,184,.24);
+            border-radius:8px;
+            background:rgba(15,23,42,.78);
+        }
+        .center-kpis > div { min-height:112px; padding:16px; }
+        .center-kpis span,
+        .center-kpis small { display:block; color:#94a3b8; font-size:12px; line-height:1.6; }
+        .center-kpis strong { display:block; margin:8px 0 6px; color:#f8fafc; font-size:25px; line-height:1.15; overflow-wrap:anywhere; }
+        .center-warning { padding:14px 16px; border-color:rgba(245,158,11,.4); color:#fde68a; line-height:1.8; }
+        .center-formula-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+        .center-formula-grid article { padding:18px; }
+        .center-formula-grid h2,
+        .center-table-panel h2 { margin:0 0 12px; color:#f8fafc; font-size:18px; }
+        .center-formula-grid code { display:block; padding:12px; overflow-x:auto; border:1px solid rgba(6,182,212,.3); border-radius:6px; background:#07111f; color:#67e8f9; line-height:1.7; white-space:nowrap; }
+        .center-formula-grid p { margin:12px 0 0; color:#aab7c8; font-size:13px; line-height:1.8; }
+        .center-table-panel { padding:18px; }
+        .center-table-panel summary { color:#f8fafc; font-size:17px; font-weight:800; cursor:pointer; }
+        .center-table-panel[open] summary { margin-bottom:14px; }
+        .center-table-scroll { width:100%; max-width:100%; overflow:auto; }
+        .center-table-panel table { width:100%; min-width:900px; border-collapse:collapse; }
+        .center-table-panel th,
+        .center-table-panel td { padding:10px 12px; border-bottom:1px solid rgba(148,163,184,.18); text-align:left; vertical-align:top; line-height:1.65; }
+        .center-table-panel th { position:sticky; top:0; background:#101a2c; color:#cbd5e1; font-size:12px; z-index:1; }
+        .center-table-panel td { color:#aab7c8; font-size:13px; }
+        .center-table-panel td strong { color:#67e8f9; }
+        .center-table-panel td a { color:#7dd3fc; text-decoration:none; }
+        .center-table-panel td a:hover { text-decoration:underline; }
+        .center-table-panel td small { display:block; margin-top:5px; max-width:560px; color:#94a3b8; }
+        .center-grade { display:inline-flex; align-items:center; justify-content:center; width:28px; height:24px; border-radius:4px; font-weight:900; }
+        .grade-a { color:#86efac; background:rgba(34,197,94,.14); }
+        .grade-b { color:#fde68a; background:rgba(245,158,11,.14); }
+        .grade-c { color:#fda4af; background:rgba(244,63,94,.14); }
+        body > .box { width:min(1240px,calc(100vw - 36px)); margin:0 auto 54px !important; padding:0 !important; gap:22px !important; }
+        .chart-container { border-radius:8px !important; }
+        @media (max-width:900px) {
+            .center-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .center-formula-grid { grid-template-columns:1fr; }
+        }
+        @media (max-width:560px) {
+            .center-kpis { grid-template-columns:1fr; }
+            .center-table-panel { padding:12px; }
+        }
+    </style>
+    
+</head>
+<body >
+
+    <nav class="shixing-index-backlink" aria-label="页面导航">
+        <a href="index.html">返回总入口</a>
+    </nav>
+
+
+    
+    
+    <section class="center-method shixing-premium-section" aria-label="样本与方法">
+        <div class="center-kpis">
+            <div><span>审核入图样本</span><strong>41</strong><small>status=approved 且坐标完整</small></div>
+            <div><span>精细语料覆盖率</span><strong>2.6%</strong><small>41 / 1582 首目标诗作</small></div>
+            <div><span>审核记录入图率</span><strong>100.0%</strong><small>41 / 41 条</small></div>
+            <div><span>证据等级</span><strong>A 2 · B 39 · C 0</strong><small>A=1.00 / B=0.75 / C=0.50</small></div>
+        </div>
+
+        <div class="center-warning">
+            本页是六位代表诗人当前精细样本的探索性“创作活动分布”，不能代表唐宋全部诗歌的真实文化中心，
+            也不能据此直接推断全国文学重心。数据只采用有来源的创作地；不使用诗中提及地代替创作地。
+        </div>
+
+        <div class="center-formula-grid">
+            <article>
+                <h2>综合活跃度公式</h2>
+                <code>I(c,t) = 100 × [0.45 × W(c,t) + 0.35 × P(c,t) + 0.20 × Q(c,t)]</code>
+                <p>W：城市作品数 / 当期作品总数；P：城市独立诗人数 / 当期各城市独立诗人数之和；Q：城市证据质量分 / 当期证据质量总分。</p>
+            </article>
+            <article>
+                <h2>样本加权中心</h2>
+                <code>Lon(t) = Σ[Lon(c) × I(c,t)] / ΣI(c,t)</code>
+                <p>纬度同式。地图白色菱形是各期样本加权中心，连线只表达当前样本的空间变化，不是历史因果结论。</p>
+            </article>
+        </div>
+
+        <div class="center-table-panel">
+            <h2>时期汇总</h2>
+            <div class="center-table-scroll"><table>
+                <thead><tr><th>时期</th><th>年份</th><th>作品</th><th>诗人</th><th>城市</th><th>样本重心</th><th>活跃度最高城市</th></tr></thead>
+                <tbody><tr><td>唐·开元天宝</td><td>713-755</td><td>3</td><td>1</td><td>3</td><td>116.367, 30.725</td><td>九江市 / 33.33</td></tr><tr><td>唐·安史至大历</td><td>756-779</td><td>10</td><td>2</td><td>6</td><td>107.857, 31.514</td><td>成都市 / 31.00</td></tr><tr><td>唐·中晚期</td><td>780-907</td><td>5</td><td>1</td><td>2</td><td>112.608, 31.560</td><td>九江市 / 57.00</td></tr><tr><td>宋·北宋前中期</td><td>960-1079</td><td>3</td><td>1</td><td>2</td><td>119.699, 33.751</td><td>潍坊市诸城市 / 60.83</td></tr><tr><td>宋·北宋晚期</td><td>1080-1126</td><td>11</td><td>2</td><td>5</td><td>116.160, 32.888</td><td>黄冈市 / 42.72</td></tr><tr><td>宋·南宋前期</td><td>1127-1179</td><td>5</td><td>2</td><td>5</td><td>110.822, 30.561</td><td>乐山市 / 20.00</td></tr><tr><td>宋·南宋中后期</td><td>1180-1279</td><td>4</td><td>1</td><td>2</td><td>120.436, 30.087</td><td>绍兴市 / 66.25</td></tr></tbody>
+            </table></div>
+        </div>
+
+        <details class="center-table-panel" open>
+            <summary>查看全部单项指标</summary>
+            <div class="center-table-scroll"><table>
+                <thead><tr><th>时期</th><th>城市</th><th>作品数</th><th>诗人数</th><th>证据质量分</th><th>作品份额</th><th>诗人参与份额</th><th>证据份额</th><th>综合活跃度</th></tr></thead>
+                <tbody><tr><td>唐·开元天宝</td><td>江西省 · 九江市</td><td>1</td><td>1</td><td>0.75</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td><strong>33.33</strong></td></tr><tr><td>唐·开元天宝</td><td>江苏省 · 南京市</td><td>1</td><td>1</td><td>0.75</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td><strong>33.33</strong></td></tr><tr><td>唐·开元天宝</td><td>湖北省 · 武汉市</td><td>1</td><td>1</td><td>0.75</td><td>33.3%</td><td>33.3%</td><td>33.3%</td><td><strong>33.33</strong></td></tr><tr><td>唐·安史至大历</td><td>四川省 · 成都市</td><td>4</td><td>1</td><td>3.00</td><td>40.0%</td><td>14.3%</td><td>40.0%</td><td><strong>31.00</strong></td></tr><tr><td>唐·安史至大历</td><td>重庆市 · 重庆市奉节县</td><td>2</td><td>2</td><td>1.50</td><td>20.0%</td><td>28.6%</td><td>20.0%</td><td><strong>23.00</strong></td></tr><tr><td>唐·安史至大历</td><td>河南省 · 三门峡市</td><td>1</td><td>1</td><td>0.75</td><td>10.0%</td><td>14.3%</td><td>10.0%</td><td><strong>11.50</strong></td></tr><tr><td>唐·安史至大历</td><td>湖南省 · 岳阳市</td><td>1</td><td>1</td><td>0.75</td><td>10.0%</td><td>14.3%</td><td>10.0%</td><td><strong>11.50</strong></td></tr><tr><td>唐·安史至大历</td><td>四川省 · 绵阳市三台县</td><td>1</td><td>1</td><td>0.75</td><td>10.0%</td><td>14.3%</td><td>10.0%</td><td><strong>11.50</strong></td></tr><tr><td>唐·安史至大历</td><td>陕西省 · 西安市</td><td>1</td><td>1</td><td>0.75</td><td>10.0%</td><td>14.3%</td><td>10.0%</td><td><strong>11.50</strong></td></tr><tr><td>唐·中晚期</td><td>江西省 · 九江市</td><td>3</td><td>1</td><td>2.50</td><td>60.0%</td><td>50.0%</td><td>62.5%</td><td><strong>57.00</strong></td></tr><tr><td>唐·中晚期</td><td>陕西省 · 西安市周至县</td><td>2</td><td>1</td><td>1.50</td><td>40.0%</td><td>50.0%</td><td>37.5%</td><td><strong>43.00</strong></td></tr><tr><td>宋·北宋前中期</td><td>山东省 · 潍坊市诸城市</td><td>2</td><td>1</td><td>1.50</td><td>66.7%</td><td>50.0%</td><td>66.7%</td><td><strong>60.83</strong></td></tr><tr><td>宋·北宋前中期</td><td>浙江省 · 杭州市</td><td>1</td><td>1</td><td>0.75</td><td>33.3%</td><td>50.0%</td><td>33.3%</td><td><strong>39.17</strong></td></tr><tr><td>宋·北宋晚期</td><td>湖北省 · 黄冈市</td><td>6</td><td>1</td><td>4.75</td><td>54.5%</td><td>20.0%</td><td>55.9%</td><td><strong>42.72</strong></td></tr><tr><td>宋·北宋晚期</td><td>山东省 · 山东省青州市</td><td>2</td><td>1</td><td>1.50</td><td>18.2%</td><td>20.0%</td><td>17.6%</td><td><strong>18.71</strong></td></tr><tr><td>宋·北宋晚期</td><td>江西省 · 九江市</td><td>1</td><td>1</td><td>0.75</td><td>9.1%</td><td>20.0%</td><td>8.8%</td><td><strong>12.86</strong></td></tr><tr><td>宋·北宋晚期</td><td>山东省 · 山东省昌乐县</td><td>1</td><td>1</td><td>0.75</td><td>9.1%</td><td>20.0%</td><td>8.8%</td><td><strong>12.86</strong></td></tr><tr><td>宋·北宋晚期</td><td>河南省 · 河南省开封市</td><td>1</td><td>1</td><td>0.75</td><td>9.1%</td><td>20.0%</td><td>8.8%</td><td><strong>12.86</strong></td></tr><tr><td>宋·南宋前期</td><td>四川省 · 乐山市</td><td>1</td><td>1</td><td>0.75</td><td>20.0%</td><td>20.0%</td><td>20.0%</td><td><strong>20.00</strong></td></tr><tr><td>宋·南宋前期</td><td>四川省 · 广元市剑阁县</td><td>1</td><td>1</td><td>0.75</td><td>20.0%</td><td>20.0%</td><td>20.0%</td><td><strong>20.00</strong></td></tr><tr><td>宋·南宋前期</td><td>四川省 · 成都市</td><td>1</td><td>1</td><td>0.75</td><td>20.0%</td><td>20.0%</td><td>20.0%</td><td><strong>20.00</strong></td></tr><tr><td>宋·南宋前期</td><td>浙江省 · 浙江省杭州市</td><td>1</td><td>1</td><td>0.75</td><td>20.0%</td><td>20.0%</td><td>20.0%</td><td><strong>20.00</strong></td></tr><tr><td>宋·南宋前期</td><td>浙江省 · 绍兴市</td><td>1</td><td>1</td><td>0.75</td><td>20.0%</td><td>20.0%</td><td>20.0%</td><td><strong>20.00</strong></td></tr><tr><td>宋·南宋中后期</td><td>浙江省 · 绍兴市</td><td>3</td><td>1</td><td>2.25</td><td>75.0%</td><td>50.0%</td><td>75.0%</td><td><strong>66.25</strong></td></tr><tr><td>宋·南宋中后期</td><td>浙江省 · 杭州市</td><td>1</td><td>1</td><td>0.75</td><td>25.0%</td><td>50.0%</td><td>25.0%</td><td><strong>33.75</strong></td></tr></tbody>
+            </table></div>
+        </details>
+
+        <details class="center-table-panel">
+            <summary>查看 41 条作品级证据</summary>
+            <div class="center-table-scroll"><table>
+                <thead><tr><th>诗人</th><th>作品</th><th>年份</th><th>创作地</th><th>等级</th><th>分期</th><th>来源与审核说明</th></tr></thead>
+                <tbody><tr><td>李白</td><td>《望庐山瀑布》</td><td>725</td><td>庐山 → 九江市</td><td><span class="center-grade grade-b">B</span></td><td>唐·开元天宝</td><td><a href="https://open.cnkgraph.com/api/Writing/26355" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据郁贤皓《李太白全集校注》）</a><small>API年谱条目标注725年登庐山作《望庐山瀑布二首》；当前语料收录其代表篇。</small></td></tr><tr><td>李白</td><td>《黄鹤楼送孟浩然之广陵》</td><td>728</td><td>江夏黄鹤楼 → 武汉市</td><td><span class="center-grade grade-b">B</span></td><td>唐·开元天宝</td><td><a href="https://open.cnkgraph.com/api/Writing/25660" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据郁贤皓《李太白全集校注》）</a><small>API年谱条目标注728年在江夏遇孟浩然并作诗；另有开元十五年说，故降为B级。</small></td></tr><tr><td>李白</td><td>《登金陵凤凰台》</td><td>747</td><td>金陵凤凰台 → 南京市</td><td><span class="center-grade grade-b">B</span></td><td>唐·开元天宝</td><td><a href="https://open.cnkgraph.com/api/Writing/25793" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据《李太白年谱补正》）</a><small>API年谱条目标注747年在金陵登凤凰台作诗；作品编年存在研究空间，按B级使用。</small></td></tr><tr><td>杜甫</td><td>《春望》</td><td>757</td><td>长安 → 西安市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/30932" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注757年春陷于长安时感时而作。</small></td></tr><tr><td>李白</td><td>《早发白帝城》</td><td>759</td><td>夔州白帝城 → 重庆市奉节县</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/25562" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据《李太白年谱补正》）</a><small>API年谱条目标注759年三月流放途中遇赦后自白帝城返江陵。</small></td></tr><tr><td>杜甫</td><td>《石壕吏》</td><td>759</td><td>陕州石壕镇 → 三门峡市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31491" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注759年春自洛阳返华州途中经石壕作诗。</small></td></tr><tr><td>杜甫</td><td>《蜀相》</td><td>760</td><td>成都武侯祠 → 成都市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31205" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注760年定居成都草堂后游武侯祠作诗。</small></td></tr><tr><td>杜甫</td><td>《茅屋为秋风所破歌》</td><td>761</td><td>成都浣花草堂 → 成都市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31620" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注761年成都草堂遭秋风破屋后作诗。</small></td></tr><tr><td>杜甫</td><td>《客至》</td><td>761-764</td><td>成都浣花草堂 → 成都市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/30896" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API作品年代标为761至764年并说明草堂既成后有客来访，保留区间。</small></td></tr><tr><td>杜甫</td><td>《春夜喜雨》</td><td>761-762</td><td>成都浣花草堂 → 成都市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/30930" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API主系761年并注明另有762年编年意见，因此使用区间并降为B级。</small></td></tr><tr><td>杜甫</td><td>《闻官军收河南河北》</td><td>763</td><td>梓州 → 绵阳市三台县</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31013" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注763年在梓州闻收复河南河北而作。</small></td></tr><tr><td>杜甫</td><td>《登高》</td><td>767</td><td>夔州 → 重庆市奉节县</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31190" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注767年九月九日在夔州作《登高》。</small></td></tr><tr><td>杜甫</td><td>《登岳阳楼》</td><td>768</td><td>岳阳楼 → 岳阳市</td><td><span class="center-grade grade-b">B</span></td><td>唐·安史至大历</td><td><a href="https://open.cnkgraph.com/api/Writing/31189" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）</a><small>API年谱条目标注768年登岳阳楼览洞庭而作。</small></td></tr><tr><td>白居易</td><td>《长恨歌》</td><td>806</td><td>盩厔仙游寺 → 西安市周至县</td><td><span class="center-grade grade-b">B</span></td><td>唐·中晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/14415" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据朱金城《白居易年谱》）</a><small>API年谱条目标注806年十二月与陈鸿和王质夫游仙游寺后作诗。</small></td></tr><tr><td>白居易</td><td>《观刈麦》</td><td>807</td><td>盩厔 → 西安市周至县</td><td><span class="center-grade grade-b">B</span></td><td>唐·中晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/14587" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据朱金城《白居易年谱》）</a><small>API年谱条目标注807年任盩厔县尉期间观刈麦作诗。</small></td></tr><tr><td>白居易</td><td>《夜雪》</td><td>816</td><td>江州 → 九江市</td><td><span class="center-grade grade-b">B</span></td><td>唐·中晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/14745" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据朱金城《白居易年谱》）</a><small>API年谱条目标注816年在江州赏夜雪而作。</small></td></tr><tr><td>白居易</td><td>《琵琶行》</td><td>816</td><td>江州湓浦口 → 九江市</td><td><span class="center-grade grade-a">A</span></td><td>唐·中晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/15104" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据朱金城《白居易年谱》及作品序）</a><small>API年谱条目标注816年秋在江州送客湓浦口后作《琵琶行》。</small></td></tr><tr><td>白居易</td><td>《大林寺桃花》</td><td>817</td><td>庐山大林寺 → 九江市</td><td><span class="center-grade grade-b">B</span></td><td>唐·中晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/12410" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据朱金城《白居易年谱》）</a><small>API年谱条目标注817年游庐山大林寺赏桃花作诗。</small></td></tr><tr><td>苏轼</td><td>《饮湖上初晴后雨》</td><td>1073</td><td>钱塘西湖 → 杭州市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋前中期</td><td><a href="https://open.cnkgraph.com/api/Writing/134580" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据《苏轼全集校注》）</a><small>API年谱条目标注1073年任杭州通判时饮湖上遇初晴后雨作诗二首；当前语料收录代表篇。</small></td></tr><tr><td>苏轼</td><td>《望江南·超然台作》</td><td>1076</td><td>密州超然台 → 潍坊市诸城市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋前中期</td><td><a href="https://open.cnkgraph.com/api/Writing/352026" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）</a><small>API年谱条目标注1076年寒食后登诸城超然台作词。</small></td></tr><tr><td>苏轼</td><td>《水调歌头·明月几时有》</td><td>1076</td><td>密州超然台 → 潍坊市诸城市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋前中期</td><td><a href="https://open.cnkgraph.com/api/Writing/352030" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）</a><small>API年谱条目标注1076年八月十五日在诸城超然台饮酒并作词怀子由。</small></td></tr><tr><td>苏轼</td><td>《卜算子·黄州定慧院寓居作》</td><td>1080</td><td>黄州定慧院 → 黄冈市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/352114" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）</a><small>API年谱条目标注1080年任黄州团练副使期间在黄冈作此词。</small></td></tr><tr><td>苏轼</td><td>《临江仙·夜归临皋》</td><td>1082</td><td>黄州临皋亭 → 黄冈市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/352105" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据《苏轼全集校注》）</a><small>API年谱条目标注1082年九月在黄冈夜归临皋作词。</small></td></tr><tr><td>苏轼</td><td>《定风波·莫听穿林打叶声》</td><td>1082</td><td>黄州沙湖道中 → 黄冈市</td><td><span class="center-grade grade-a">A</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/352093" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》及作品序）</a><small>API年谱条目与词序共同标注1082年三月七日往沙湖途中遇雨而作。</small></td></tr><tr><td>苏轼</td><td>《念奴娇·赤壁怀古》</td><td>1082</td><td>黄州赤壁 → 黄冈市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/352102" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》与《苏轼全集校注》）</a><small>API年谱条目标注1082年七月在黄冈赤壁怀古作词。</small></td></tr><tr><td>苏轼</td><td>《浣溪沙·游蕲水清泉寺》</td><td>1082</td><td>蕲水清泉寺 → 黄冈市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/352094" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）</a><small>API年谱条目标注1082年至蕲水与庞安时游清泉寺作词；坐标采用浠水县展示点。</small></td></tr><tr><td>苏轼</td><td>《赤壁赋》</td><td>1082</td><td>黄州赤壁 → 黄冈市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/1185969" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》与《苏轼全集校注》）</a><small>API年谱条目标注1082年七月十八日在黄冈泛舟赤壁并作前《赤壁赋》。</small></td></tr><tr><td>苏轼</td><td>《题西林壁》</td><td>1084</td><td>庐山西林寺 → 九江市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://open.cnkgraph.com/api/Writing/135392" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）</a><small>API年谱条目标注1084年赴汝州途中往来庐山并题西林壁。</small></td></tr><tr><td>李清照</td><td>《一剪梅·红藕香残玉簟秋》</td><td>1103</td><td>东京开封府 → 河南省开封市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><small>开封（1090年 - 1107年3月，7-24岁，作品：15）；1103年7月，赵明诚出游。有词送别，作品：《一剪梅》</small></td></tr><tr><td>李清照</td><td>《醉花阴·薄雾浓云愁永昼》</td><td>1108</td><td>益都（青州） → 山东省青州市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><small>益都（1108年 - 1121年，25-38岁，作品：13）；1108年9月9日，赵明诚游仰天山，清照有词思之，作品：《醉花阴》</small></td></tr><tr><td>李清照</td><td>《凤凰台上忆吹箫·香冷金猊》</td><td>1109</td><td>益都（青州） → 山东省青州市</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><small>益都（1108年 - 1121年，25-38岁，作品：13）；1109年9月13日，赵明诚出游，有词抒思念之情，作品：《凤凰台上忆吹箫》</small></td></tr><tr><td>李清照</td><td>《蝶恋花·晚止昌乐馆寄姊妹》</td><td>1121</td><td>昌乐 → 山东省昌乐县</td><td><span class="center-grade grade-b">B</span></td><td>宋·北宋晚期</td><td><a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><small>昌乐（1121年，38岁，作品：1）；1121年，秋，清照赴莱州途径昌乐，有词寄姊妹</small></td></tr><tr><td>李清照</td><td>《声声慢·寻寻觅觅》</td><td>1147</td><td>临安 → 浙江省杭州市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋前期</td><td><a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><small>1147年，居临安。有词《声声慢》写国破家亡晚年孀居之惨戚，作品：《声声慢》</small></td></tr><tr><td>陆游</td><td>《游山西村》</td><td>1167</td><td>山阴山西村 → 绍兴市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋前期</td><td><a href="https://open.cnkgraph.com/api/Writing/149430" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）</a><small>API年谱条目标注1167年乡居故里时作诗；月份为研究者姑系，不用于本项目年度统计。</small></td></tr><tr><td>陆游</td><td>《剑门道中遇微雨》</td><td>1172</td><td>剑门 → 广元市剑阁县</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋前期</td><td><a href="https://open.cnkgraph.com/api/Writing/144403" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）</a><small>API年谱条目标注1172年十一月自南郑赴成都途中经剑门作诗。</small></td></tr><tr><td>陆游</td><td>《金错刀行》</td><td>1173</td><td>嘉州 → 乐山市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋前期</td><td><a href="https://open.cnkgraph.com/api/Writing/151228" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）</a><small>API年谱条目标注1173年十月在嘉州任上作诗。</small></td></tr><tr><td>陆游</td><td>《关山月》</td><td>1177</td><td>成都 → 成都市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋前期</td><td><a href="https://open.cnkgraph.com/api/Writing/150574" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）</a><small>API年谱条目标注1177年一月免官后居成都时作诗。</small></td></tr><tr><td>陆游</td><td>《临安春雨初霁》</td><td>1186</td><td>临安 → 杭州市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋中后期</td><td><a href="https://open.cnkgraph.com/api/Writing/147962" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）</a><small>API年谱条目标注1186年赴严州任前在临安作诗。</small></td></tr><tr><td>陆游</td><td>《书愤》</td><td>1186</td><td>山阴 → 绍兴市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋中后期</td><td><a href="https://open.cnkgraph.com/api/Writing/145900" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据于北山《陆游年谱》与《剑南诗稿校注》）</a><small>当前语料所收为早岁那知世事艰篇；API年谱条目标注1186年三月在山阴作。</small></td></tr><tr><td>陆游</td><td>《十一月四日风雨大作二首》</td><td>1192</td><td>山阴 → 绍兴市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋中后期</td><td><a href="https://open.cnkgraph.com/api/Writing/143330" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据于北山《陆游年谱》与《剑南诗稿校注》）</a><small>API年谱条目标注1192年十一月四日在山阴作二首，当前语料按组诗标题收录。</small></td></tr><tr><td>陆游</td><td>《示儿》</td><td>1209</td><td>山阴 → 绍兴市</td><td><span class="center-grade grade-b">B</span></td><td>宋·南宋中后期</td><td><a href="https://open.cnkgraph.com/api/Writing/143682" target="_blank" rel="noreferrer">古籍文献知识图谱开放API（据于北山《陆游年谱》与《剑南诗稿校注》）</a><small>当前语料所收为死去元知万事空篇；API年谱条目标注1209年十二月二十九日临终作。</small></td></tr></tbody>
+            </table></div>
+        </details>
+    </section>
+    
+<div class="box">
+                <div id="113b840cbbc04e468018a8630f9182fe" class="chart-container" data-chart-width="1200" data-chart-height="760" style="--chart-width:1200px; --chart-height:760px; width:100%; max-width:var(--chart-width); height:var(--chart-height);"></div>
+    <script>
+        var chart_113b840cbbc04e468018a8630f9182fe = echarts.init(
+            document.getElementById('113b840cbbc04e468018a8630f9182fe'), 'dark', {renderer: 'canvas', locale: 'ZH'});
+        var option_113b840cbbc04e468018a8630f9182fe = {
+    "baseOption": {
+        "series": [
+            {
+                "type": "effectScatter",
+                "name": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                "coordinateSystem": "geo",
+                "showEffectOn": "render",
+                "rippleEffect": {
+                    "show": true,
+                    "brushType": "stroke",
+                    "scale": 3.0,
+                    "period": 4.0,
+                    "color": "#a855f7"
+                },
+                "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                "data": [
+                    {
+                        "name": "\u7ecd\u5174\u5e02",
+                        "value": [
+                            120.58842699999998,
+                            29.9952,
+                            66.25
+                        ],
+                        "period": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                        "activityIndex": 66.25,
+                        "poemCount": 3,
+                        "poetCount": 1,
+                        "qualityPoints": 2.25,
+                        "workShare": 75.0,
+                        "poetShare": 50.0,
+                        "qualityShare": 75.0,
+                        "poets": "\u9646\u6e38",
+                        "poems": "\u9646\u6e38\u300a\u4e66\u6124\u300b\uff1b\u9646\u6e38\u300a\u5341\u4e00\u6708\u56db\u65e5\u98ce\u96e8\u5927\u4f5c\u4e8c\u9996\u300b\uff1b\u9646\u6e38\u300a\u793a\u513f\u300b"
+                    },
+                    {
+                        "name": "\u676d\u5dde\u5e02",
+                        "value": [
+                            120.136699,
+                            30.265924,
+                            33.75
+                        ],
+                        "period": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                        "activityIndex": 33.75,
+                        "poemCount": 1,
+                        "poetCount": 1,
+                        "qualityPoints": 0.75,
+                        "workShare": 25.0,
+                        "poetShare": 50.0,
+                        "qualityShare": 25.0,
+                        "poets": "\u9646\u6e38",
+                        "poems": "\u9646\u6e38\u300a\u4e34\u5b89\u6625\u96e8\u521d\u9701\u300b"
+                    }
+                ],
+                "label": {
+                    "show": true,
+                    "position": "right",
+                    "color": "#f8fafc",
+                    "margin": 8,
+                    "fontSize": 11,
+                    "formatter": "{b}",
+                    "richInheritPlainLabel": true,
+                    "valueAnimation": false
+                },
+                "tooltip": {
+                    "show": true,
+                    "trigger": "item",
+                    "triggerOn": "mousemove|click",
+                    "axisPointer": {
+                        "type": "line"
+                    },
+                    "showContent": true,
+                    "alwaysShowContent": false,
+                    "showDelay": 0,
+                    "hideDelay": 100,
+                    "enterable": false,
+                    "confine": false,
+                    "appendToBody": false,
+                    "transitionDuration": 0.4,
+                    "displayTransition": true,
+                    "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "richInheritPlainLabel": true
+                    },
+                    "borderWidth": 0,
+                    "padding": 5,
+                    "order": "seriesAsc"
+                }
+            },
+            {
+                "type": "lines",
+                "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                "coordinateSystem": "geo",
+                "zlevel": 3,
+                "progressive": 400,
+                "progressiveThreshold": 3000,
+                "effect": {
+                    "show": true,
+                    "brushType": "stroke",
+                    "scale": 2.5,
+                    "period": 5,
+                    "symbol": "arrow",
+                    "symbolSize": 6,
+                    "trailLength": 0.25
+                },
+                "symbol": [
+                    "none",
+                    "arrow"
+                ],
+                "polyline": false,
+                "large": false,
+                "largeThreshold": 2000,
+                "symbolSize": 12,
+                "data": [
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                        "coords": [
+                            [
+                                116.36711533333333,
+                                30.725195
+                            ],
+                            [
+                                107.85661764000001,
+                                31.514243150000002
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                        "coords": [
+                            [
+                                107.85661764000001,
+                                31.514243150000002
+                            ],
+                            [
+                                112.60782034,
+                                31.55962711
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                        "coords": [
+                            [
+                                112.60782034,
+                                31.55962711
+                            ],
+                            [
+                                119.69946234166667,
+                                33.75149906666667
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                        "coords": [
+                            [
+                                119.69946234166667,
+                                33.75149906666667
+                            ],
+                            [
+                                116.15976603572193,
+                                32.88831738657754
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                        "coords": [
+                            [
+                                116.15976603572193,
+                                32.88831738657754
+                            ],
+                            [
+                                110.8224972,
+                                30.5611664
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                        "coords": [
+                            [
+                                110.8224972,
+                                30.5611664
+                            ],
+                            [
+                                120.4359688,
+                                30.08656935
+                            ]
+                        ]
+                    }
+                ],
+                "lineStyle": {
+                    "show": false,
+                    "width": 2,
+                    "opacity": 0.68,
+                    "curveness": 0.18,
+                    "color": "#e2e8f0"
+                },
+                "tooltip": {
+                    "show": false,
+                    "trigger": "item",
+                    "triggerOn": "mousemove|click",
+                    "axisPointer": {
+                        "type": "line"
+                    },
+                    "showContent": true,
+                    "alwaysShowContent": false,
+                    "showDelay": 0,
+                    "hideDelay": 100,
+                    "enterable": false,
+                    "confine": false,
+                    "appendToBody": false,
+                    "transitionDuration": 0.4,
+                    "displayTransition": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "richInheritPlainLabel": true
+                    },
+                    "borderWidth": 0,
+                    "padding": 5,
+                    "order": "seriesAsc"
+                },
+                "label": {
+                    "show": false,
+                    "margin": 8,
+                    "richInheritPlainLabel": true,
+                    "valueAnimation": false
+                }
+            },
+            {
+                "type": "scatter",
+                "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                "coordinateSystem": "geo",
+                "symbol": "diamond",
+                "symbolSize": 13,
+                "data": [
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                        "value": [
+                            116.36711533333333,
+                            30.725195,
+                            1
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                        "value": [
+                            107.85661764000001,
+                            31.514243150000002,
+                            2
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                        "value": [
+                            112.60782034,
+                            31.55962711,
+                            3
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                        "value": [
+                            119.69946234166667,
+                            33.75149906666667,
+                            4
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                        "value": [
+                            116.15976603572193,
+                            32.88831738657754,
+                            5
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                        "value": [
+                            110.8224972,
+                            30.5611664,
+                            6
+                        ]
+                    },
+                    {
+                        "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                        "value": [
+                            120.4359688,
+                            30.08656935,
+                            7
+                        ]
+                    }
+                ],
+                "label": {
+                    "show": false,
+                    "margin": 8,
+                    "richInheritPlainLabel": true,
+                    "valueAnimation": false
+                },
+                "tooltip": {
+                    "show": true,
+                    "trigger": "item",
+                    "triggerOn": "mousemove|click",
+                    "axisPointer": {
+                        "type": "line"
+                    },
+                    "showContent": true,
+                    "alwaysShowContent": false,
+                    "showDelay": 0,
+                    "hideDelay": 100,
+                    "enterable": false,
+                    "confine": false,
+                    "appendToBody": false,
+                    "transitionDuration": 0.4,
+                    "displayTransition": true,
+                    "formatter": "{b}",
+                    "textStyle": {
+                        "fontSize": 14,
+                        "richInheritPlainLabel": true
+                    },
+                    "borderWidth": 0,
+                    "padding": 5,
+                    "order": "seriesAsc"
+                },
+                "itemStyle": {
+                    "color": "#f8fafc",
+                    "borderColor": "#0f172a",
+                    "borderWidth": 2
+                }
+            }
+        ],
+        "timeline": {
+            "axisType": "category",
+            "currentIndex": 0,
+            "orient": "horizontal",
+            "autoPlay": false,
+            "controlPosition": "left",
+            "loop": false,
+            "rewind": false,
+            "show": true,
+            "inverse": false,
+            "playInterval": 2600,
+            "left": "8%",
+            "right": "8%",
+            "bottom": "1%",
+            "label": {
+                "show": true,
+                "color": "#cbd5e1",
+                "margin": 8,
+                "fontSize": 11,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "itemStyle": {
+                "color": "#334155",
+                "borderColor": "#94a3b8"
+            },
+            "checkpointStyle": {
+                "symbol": "circle",
+                "symbolSize": 13,
+                "symbolKeepAspect": false,
+                "symbolOffset": [
+                    0,
+                    0
+                ],
+                "color": "#f8fafc",
+                "borderWidth": 5,
+                "borderColor": "#06b6d4",
+                "animation": true,
+                "animationDuration": 300,
+                "animationEasing": "quinticInOut"
+            },
+            "controlStyle": {
+                "show": true,
+                "showPlayBtn": true,
+                "showPrevBtn": true,
+                "showNextBtn": true,
+                "itemSize": 22,
+                "itemGap": 12,
+                "position": "left",
+                "color": "#cbd5e1",
+                "borderColor": "#64748b",
+                "borderWidth": 1
+            },
+            "progress": {},
+            "data": [
+                "\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                "\u5510\u00b7\u4e2d\u665a\u671f",
+                "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f"
+            ]
+        },
+        "geo": {
+            "map": "china",
+            "zoom": 1.05,
+            "center": [
+                105,
+                34
+            ],
+            "roam": true,
+            "aspectScale": 0.75,
+            "nameProperty": "name",
+            "selectedMode": false,
+            "label": {
+                "show": false,
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "itemStyle": {
+                "color": "#172033",
+                "borderColor": "#475569",
+                "borderWidth": 0.8
+            },
+            "emphasis": {
+                "itemStyle": {
+                    "color": "#26344d"
+                }
+            },
+            "preserveAspect": false,
+            "clip": false
+        },
+        "legend": [
+            {
+                "data": [
+                    "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                ],
+                "selected": {},
+                "show": true,
+                "padding": 5,
+                "itemGap": 10,
+                "itemWidth": 25,
+                "itemHeight": 14,
+                "backgroundColor": "transparent",
+                "borderColor": "#ccc",
+                "borderRadius": 0,
+                "pageButtonItemGap": 5,
+                "pageButtonPosition": "end",
+                "pageFormatter": "{current}/{total}",
+                "pageIconColor": "#2f4554",
+                "pageIconInactiveColor": "#aaa",
+                "pageIconSize": 15,
+                "animationDurationUpdate": 800,
+                "selector": false,
+                "selectorPosition": "auto",
+                "selectorItemGap": 7,
+                "selectorButtonGap": 10,
+                "triggerEvent": false,
+                "left": "center",
+                "top": "10%",
+                "textStyle": {
+                    "color": "#cbd5e1",
+                    "richInheritPlainLabel": true
+                }
+            }
+        ]
+    },
+    "options": [
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5510\u00b7\u5f00\u5143\u5929\u5b9d\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5510\u00b7\u5f00\u5143\u5929\u5b9d\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#f59e0b"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u4e5d\u6c5f\u5e02",
+                            "value": [
+                                115.989402,
+                                29.560618,
+                                33.33
+                            ],
+                            "period": "\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "activityIndex": 33.33,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 33.3,
+                            "poetShare": 33.3,
+                            "qualityShare": 33.3,
+                            "poets": "\u674e\u767d",
+                            "poems": "\u674e\u767d\u300a\u671b\u5e90\u5c71\u7011\u5e03\u300b"
+                        },
+                        {
+                            "name": "\u5357\u4eac\u5e02",
+                            "value": [
+                                118.802891,
+                                32.064735,
+                                33.33
+                            ],
+                            "period": "\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "activityIndex": 33.33,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 33.3,
+                            "poetShare": 33.3,
+                            "qualityShare": 33.3,
+                            "poets": "\u674e\u767d",
+                            "poems": "\u674e\u767d\u300a\u767b\u91d1\u9675\u51e4\u51f0\u53f0\u300b"
+                        },
+                        {
+                            "name": "\u6b66\u6c49\u5e02",
+                            "value": [
+                                114.309053,
+                                30.550232,
+                                33.33
+                            ],
+                            "period": "\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "activityIndex": 33.33,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 33.3,
+                            "poetShare": 33.3,
+                            "qualityShare": 33.3,
+                            "poets": "\u674e\u767d",
+                            "poems": "\u674e\u767d\u300a\u9ec4\u9e64\u697c\u9001\u5b5f\u6d69\u7136\u4e4b\u5e7f\u9675\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5510\u00b7\u5f00\u5143\u5929\u5b9d\uff08713-755\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 3 \u9996\uff5c\u57ce\u5e02 3 \u4e2a\uff5c\u8bd7\u4eba 1 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u4e5d\u6c5f\u5e02 33.33",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#f59e0b",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#f59e0b",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#ef4444"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u6210\u90fd\u5e02",
+                            "value": [
+                                104.071216,
+                                30.576279,
+                                31.0
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 31.0,
+                            "poemCount": 4,
+                            "poetCount": 1,
+                            "qualityPoints": 3.0,
+                            "workShare": 40.0,
+                            "poetShare": 14.3,
+                            "qualityShare": 40.0,
+                            "poets": "\u675c\u752b",
+                            "poems": "\u675c\u752b\u300a\u8700\u76f8\u300b\uff1b\u675c\u752b\u300a\u8305\u5c4b\u4e3a\u79cb\u98ce\u6240\u7834\u6b4c\u300b\uff1b\u675c\u752b\u300a\u5ba2\u81f3\u300b\uff1b\u675c\u752b\u300a\u6625\u591c\u559c\u96e8\u300b"
+                        },
+                        {
+                            "name": "\u91cd\u5e86\u5e02\u5949\u8282\u53bf",
+                            "value": [
+                                109.525468,
+                                31.0373585,
+                                23.0
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 23.0,
+                            "poemCount": 2,
+                            "poetCount": 2,
+                            "qualityPoints": 1.5,
+                            "workShare": 20.0,
+                            "poetShare": 28.6,
+                            "qualityShare": 20.0,
+                            "poets": "\u674e\u767d\u3001\u675c\u752b",
+                            "poems": "\u674e\u767d\u300a\u65e9\u53d1\u767d\u5e1d\u57ce\u300b\uff1b\u675c\u752b\u300a\u767b\u9ad8\u300b"
+                        },
+                        {
+                            "name": "\u4e09\u95e8\u5ce1\u5e02",
+                            "value": [
+                                111.109829,
+                                34.72676,
+                                11.5
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 11.5,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 10.0,
+                            "poetShare": 14.3,
+                            "qualityShare": 10.0,
+                            "poets": "\u675c\u752b",
+                            "poems": "\u675c\u752b\u300a\u77f3\u58d5\u540f\u300b"
+                        },
+                        {
+                            "name": "\u5cb3\u9633\u5e02",
+                            "value": [
+                                113.135679,
+                                29.363262,
+                                11.5
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 11.5,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 10.0,
+                            "poetShare": 14.3,
+                            "qualityShare": 10.0,
+                            "poets": "\u675c\u752b",
+                            "poems": "\u675c\u752b\u300a\u767b\u5cb3\u9633\u697c\u300b"
+                        },
+                        {
+                            "name": "\u7ef5\u9633\u5e02\u4e09\u53f0\u53bf",
+                            "value": [
+                                105.101082,
+                                31.101709,
+                                11.5
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 11.5,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 10.0,
+                            "poetShare": 14.3,
+                            "qualityShare": 10.0,
+                            "poets": "\u675c\u752b",
+                            "poems": "\u675c\u752b\u300a\u95fb\u5b98\u519b\u6536\u6cb3\u5357\u6cb3\u5317\u300b"
+                        },
+                        {
+                            "name": "\u897f\u5b89\u5e02",
+                            "value": [
+                                108.946306,
+                                34.347436,
+                                11.5
+                            ],
+                            "period": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "activityIndex": 11.5,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 10.0,
+                            "poetShare": 14.3,
+                            "qualityShare": 10.0,
+                            "poets": "\u675c\u752b",
+                            "poems": "\u675c\u752b\u300a\u6625\u671b\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386\uff08756-779\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 10 \u9996\uff5c\u57ce\u5e02 6 \u4e2a\uff5c\u8bd7\u4eba 2 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u6210\u90fd\u5e02 31.00",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#ef4444",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#ef4444",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5510\u00b7\u4e2d\u665a\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5510\u00b7\u4e2d\u665a\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#f97316"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u4e5d\u6c5f\u5e02",
+                            "value": [
+                                115.91147966666666,
+                                29.59071,
+                                57.0
+                            ],
+                            "period": "\u5510\u00b7\u4e2d\u665a\u671f",
+                            "activityIndex": 57.0,
+                            "poemCount": 3,
+                            "poetCount": 1,
+                            "qualityPoints": 2.5,
+                            "workShare": 60.0,
+                            "poetShare": 50.0,
+                            "qualityShare": 62.5,
+                            "poets": "\u767d\u5c45\u6613",
+                            "poems": "\u767d\u5c45\u6613\u300a\u591c\u96ea\u300b\uff1b\u767d\u5c45\u6613\u300a\u7435\u7436\u884c\u300b\uff1b\u767d\u5c45\u6613\u300a\u5927\u6797\u5bfa\u6843\u82b1\u300b"
+                        },
+                        {
+                            "name": "\u897f\u5b89\u5e02\u5468\u81f3\u53bf",
+                            "value": [
+                                108.228551,
+                                34.169587,
+                                43.0
+                            ],
+                            "period": "\u5510\u00b7\u4e2d\u665a\u671f",
+                            "activityIndex": 43.0,
+                            "poemCount": 2,
+                            "poetCount": 1,
+                            "qualityPoints": 1.5,
+                            "workShare": 40.0,
+                            "poetShare": 50.0,
+                            "qualityShare": 37.5,
+                            "poets": "\u767d\u5c45\u6613",
+                            "poems": "\u767d\u5c45\u6613\u300a\u957f\u6068\u6b4c\u300b\uff1b\u767d\u5c45\u6613\u300a\u89c2\u5208\u9ea6\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "coords": [
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ],
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "value": [
+                                112.60782034,
+                                31.55962711,
+                                3
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5510\u00b7\u4e2d\u665a\u671f\uff08780-907\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 5 \u9996\uff5c\u57ce\u5e02 2 \u4e2a\uff5c\u8bd7\u4eba 1 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u4e5d\u6c5f\u5e02 57.00",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#f97316",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#f97316",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#22c55e"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u6f4d\u574a\u5e02\u8bf8\u57ce\u5e02",
+                            "value": [
+                                119.416435,
+                                36.004748,
+                                60.83
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "activityIndex": 60.83,
+                            "poemCount": 2,
+                            "poetCount": 1,
+                            "qualityPoints": 1.5,
+                            "workShare": 66.7,
+                            "poetShare": 50.0,
+                            "qualityShare": 66.7,
+                            "poets": "\u82cf\u8f7c",
+                            "poems": "\u82cf\u8f7c\u300a\u671b\u6c5f\u5357\u00b7\u8d85\u7136\u53f0\u4f5c\u300b\uff1b\u82cf\u8f7c\u300a\u6c34\u8c03\u6b4c\u5934\u00b7\u660e\u6708\u51e0\u65f6\u6709\u300b"
+                        },
+                        {
+                            "name": "\u676d\u5dde\u5e02",
+                            "value": [
+                                120.139058,
+                                30.251772,
+                                39.17
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "activityIndex": 39.17,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 33.3,
+                            "poetShare": 50.0,
+                            "qualityShare": 33.3,
+                            "poets": "\u82cf\u8f7c",
+                            "poems": "\u82cf\u8f7c\u300a\u996e\u6e56\u4e0a\u521d\u6674\u540e\u96e8\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "coords": [
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ],
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "coords": [
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ],
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "value": [
+                                112.60782034,
+                                31.55962711,
+                                3
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "value": [
+                                119.69946234166667,
+                                33.75149906666667,
+                                4
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f\uff08960-1079\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 3 \u9996\uff5c\u57ce\u5e02 2 \u4e2a\uff5c\u8bd7\u4eba 1 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u6f4d\u574a\u5e02\u8bf8\u57ce\u5e02 60.83",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#22c55e",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#22c55e",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#06b6d4"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u9ec4\u5188\u5e02",
+                            "value": [
+                                114.94322666666666,
+                                30.458185,
+                                42.72
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "activityIndex": 42.72,
+                            "poemCount": 6,
+                            "poetCount": 1,
+                            "qualityPoints": 4.75,
+                            "workShare": 54.5,
+                            "poetShare": 20.0,
+                            "qualityShare": 55.9,
+                            "poets": "\u82cf\u8f7c",
+                            "poems": "\u82cf\u8f7c\u300a\u535c\u7b97\u5b50\u00b7\u9ec4\u5dde\u5b9a\u6167\u9662\u5bd3\u5c45\u4f5c\u300b\uff1b\u82cf\u8f7c\u300a\u4e34\u6c5f\u4ed9\u00b7\u591c\u5f52\u4e34\u768b\u300b\uff1b\u82cf\u8f7c\u300a\u5b9a\u98ce\u6ce2\u00b7\u83ab\u542c\u7a7f\u6797\u6253\u53f6\u58f0\u300b\uff1b\u82cf\u8f7c\u300a\u5ff5\u5974\u5a07\u00b7\u8d64\u58c1\u6000\u53e4\u300b\uff1b\u82cf\u8f7c\u300a\u6d63\u6eaa\u6c99\u00b7\u6e38\u8572\u6c34\u6e05\u6cc9\u5bfa\u300b\uff1b\u82cf\u8f7c\u300a\u8d64\u58c1\u8d4b\u300b"
+                        },
+                        {
+                            "name": "\u5c71\u4e1c\u7701\u9752\u5dde\u5e02",
+                            "value": [
+                                118.479636,
+                                36.6846,
+                                18.71
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "activityIndex": 18.71,
+                            "poemCount": 2,
+                            "poetCount": 1,
+                            "qualityPoints": 1.5,
+                            "workShare": 18.2,
+                            "poetShare": 20.0,
+                            "qualityShare": 17.6,
+                            "poets": "\u674e\u6e05\u7167",
+                            "poems": "\u674e\u6e05\u7167\u300a\u9189\u82b1\u9634\u00b7\u8584\u96fe\u6d53\u4e91\u6101\u6c38\u663c\u300b\uff1b\u674e\u6e05\u7167\u300a\u51e4\u51f0\u53f0\u4e0a\u5fc6\u5439\u7bab\u00b7\u9999\u51b7\u91d1\u730a\u300b"
+                        },
+                        {
+                            "name": "\u4e5d\u6c5f\u5e02",
+                            "value": [
+                                116.007993,
+                                29.711328,
+                                12.86
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "activityIndex": 12.86,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 9.1,
+                            "poetShare": 20.0,
+                            "qualityShare": 8.8,
+                            "poets": "\u82cf\u8f7c",
+                            "poems": "\u82cf\u8f7c\u300a\u9898\u897f\u6797\u58c1\u300b"
+                        },
+                        {
+                            "name": "\u5c71\u4e1c\u7701\u660c\u4e50\u53bf",
+                            "value": [
+                                118.829992,
+                                36.706774,
+                                12.86
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "activityIndex": 12.86,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 9.1,
+                            "poetShare": 20.0,
+                            "qualityShare": 8.8,
+                            "poets": "\u674e\u6e05\u7167",
+                            "poems": "\u674e\u6e05\u7167\u300a\u8776\u604b\u82b1\u00b7\u665a\u6b62\u660c\u4e50\u9986\u5bc4\u59ca\u59b9\u300b"
+                        },
+                        {
+                            "name": "\u6cb3\u5357\u7701\u5f00\u5c01\u5e02",
+                            "value": [
+                                114.307581,
+                                34.797239,
+                                12.86
+                            ],
+                            "period": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "activityIndex": 12.86,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 9.1,
+                            "poetShare": 20.0,
+                            "qualityShare": 8.8,
+                            "poets": "\u674e\u6e05\u7167",
+                            "poems": "\u674e\u6e05\u7167\u300a\u4e00\u526a\u6885\u00b7\u7ea2\u85d5\u9999\u6b8b\u7389\u7c1f\u79cb\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "coords": [
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ],
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "coords": [
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ],
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "coords": [
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ],
+                                [
+                                    116.15976603572193,
+                                    32.88831738657754
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "value": [
+                                112.60782034,
+                                31.55962711,
+                                3
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "value": [
+                                119.69946234166667,
+                                33.75149906666667,
+                                4
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "value": [
+                                116.15976603572193,
+                                32.88831738657754,
+                                5
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f\uff081080-1126\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 11 \u9996\uff5c\u57ce\u5e02 5 \u4e2a\uff5c\u8bd7\u4eba 2 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u9ec4\u5188\u5e02 42.72",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#06b6d4",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#06b6d4",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#3b82f6"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u4e50\u5c71\u5e02",
+                            "value": [
+                                103.767758,
+                                29.561307,
+                                20.0
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "activityIndex": 20.0,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 20.0,
+                            "poetShare": 20.0,
+                            "qualityShare": 20.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u91d1\u9519\u5200\u884c\u300b"
+                        },
+                        {
+                            "name": "\u5e7f\u5143\u5e02\u5251\u9601\u53bf",
+                            "value": [
+                                105.531838,
+                                32.294266,
+                                20.0
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "activityIndex": 20.0,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 20.0,
+                            "poetShare": 20.0,
+                            "qualityShare": 20.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u5251\u95e8\u9053\u4e2d\u9047\u5fae\u96e8\u300b"
+                        },
+                        {
+                            "name": "\u6210\u90fd\u5e02",
+                            "value": [
+                                104.069363,
+                                30.680959,
+                                20.0
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "activityIndex": 20.0,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 20.0,
+                            "poetShare": 20.0,
+                            "qualityShare": 20.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u5173\u5c71\u6708\u300b"
+                        },
+                        {
+                            "name": "\u6d59\u6c5f\u7701\u676d\u5dde\u5e02",
+                            "value": [
+                                120.1551,
+                                30.2741,
+                                20.0
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "activityIndex": 20.0,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 20.0,
+                            "poetShare": 20.0,
+                            "qualityShare": 20.0,
+                            "poets": "\u674e\u6e05\u7167",
+                            "poems": "\u674e\u6e05\u7167\u300a\u58f0\u58f0\u6162\u00b7\u5bfb\u5bfb\u89c5\u89c5\u300b"
+                        },
+                        {
+                            "name": "\u7ecd\u5174\u5e02",
+                            "value": [
+                                120.588427,
+                                29.9952,
+                                20.0
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "activityIndex": 20.0,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 20.0,
+                            "poetShare": 20.0,
+                            "qualityShare": 20.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u6e38\u5c71\u897f\u6751\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "coords": [
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ],
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "coords": [
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ],
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "coords": [
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ],
+                                [
+                                    116.15976603572193,
+                                    32.88831738657754
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "coords": [
+                                [
+                                    116.15976603572193,
+                                    32.88831738657754
+                                ],
+                                [
+                                    110.8224972,
+                                    30.5611664
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "value": [
+                                112.60782034,
+                                31.55962711,
+                                3
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "value": [
+                                119.69946234166667,
+                                33.75149906666667,
+                                4
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "value": [
+                                116.15976603572193,
+                                32.88831738657754,
+                                5
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "value": [
+                                110.8224972,
+                                30.5611664,
+                                6
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f\uff081127-1179\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 5 \u9996\uff5c\u57ce\u5e02 5 \u4e2a\uff5c\u8bd7\u4eba 2 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u4e50\u5c71\u5e02 20.00",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#3b82f6",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#3b82f6",
+                "#f8fafc"
+            ]
+        },
+        {
+            "backgroundColor": "#07111f",
+            "legend": [
+                {
+                    "data": [
+                        "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                        "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                        "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3"
+                    ],
+                    "selected": {},
+                    "show": true,
+                    "padding": 5,
+                    "itemGap": 10,
+                    "itemWidth": 25,
+                    "itemHeight": 14,
+                    "backgroundColor": "transparent",
+                    "borderColor": "#ccc",
+                    "borderRadius": 0,
+                    "pageButtonItemGap": 5,
+                    "pageButtonPosition": "end",
+                    "pageFormatter": "{current}/{total}",
+                    "pageIconColor": "#2f4554",
+                    "pageIconInactiveColor": "#aaa",
+                    "pageIconSize": 15,
+                    "animationDurationUpdate": 800,
+                    "selector": false,
+                    "selectorPosition": "auto",
+                    "selectorItemGap": 7,
+                    "selectorButtonGap": 10,
+                    "triggerEvent": false,
+                    "left": "center",
+                    "top": "10%",
+                    "textStyle": {
+                        "color": "#cbd5e1",
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "series": [
+                {
+                    "type": "effectScatter",
+                    "name": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f\u00b7\u5ba1\u6838\u521b\u4f5c\u6837\u672c",
+                    "coordinateSystem": "geo",
+                    "showEffectOn": "render",
+                    "rippleEffect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 3.0,
+                        "period": 4.0,
+                        "color": "#a855f7"
+                    },
+                    "symbolSize": function (value) { return Math.max(12, Math.min(34, 9 + value[2] * 0.42)); },
+                    "data": [
+                        {
+                            "name": "\u7ecd\u5174\u5e02",
+                            "value": [
+                                120.58842699999998,
+                                29.9952,
+                                66.25
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                            "activityIndex": 66.25,
+                            "poemCount": 3,
+                            "poetCount": 1,
+                            "qualityPoints": 2.25,
+                            "workShare": 75.0,
+                            "poetShare": 50.0,
+                            "qualityShare": 75.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u4e66\u6124\u300b\uff1b\u9646\u6e38\u300a\u5341\u4e00\u6708\u56db\u65e5\u98ce\u96e8\u5927\u4f5c\u4e8c\u9996\u300b\uff1b\u9646\u6e38\u300a\u793a\u513f\u300b"
+                        },
+                        {
+                            "name": "\u676d\u5dde\u5e02",
+                            "value": [
+                                120.136699,
+                                30.265924,
+                                33.75
+                            ],
+                            "period": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                            "activityIndex": 33.75,
+                            "poemCount": 1,
+                            "poetCount": 1,
+                            "qualityPoints": 0.75,
+                            "workShare": 25.0,
+                            "poetShare": 50.0,
+                            "qualityShare": 25.0,
+                            "poets": "\u9646\u6e38",
+                            "poems": "\u9646\u6e38\u300a\u4e34\u5b89\u6625\u96e8\u521d\u9701\u300b"
+                        }
+                    ],
+                    "label": {
+                        "show": true,
+                        "position": "right",
+                        "color": "#f8fafc",
+                        "margin": 8,
+                        "fontSize": 11,
+                        "formatter": "{b}",
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter":     function (params) {        var data = params.data || {};        function esc(value) {            return String(value == null ? '' : value).replace(/[&<>\"']/g, function (ch) {                var code = ch.charCodeAt(0);                if (code === 38) { return '&amp;'; }                if (code === 60) { return '&lt;'; }                if (code === 62) { return '&gt;'; }                if (code === 34) { return '&quot;'; }                if (code === 39) { return '&#39;'; }                return ch;            });        }        var value = data.value || [];        var html = '<div style=\"max-width:390px;line-height:1.7;white-space:normal;\">'            + '<strong style=\"font-size:16px;color:#f8fafc;\">' + esc(params.name) + '</strong>'            + '<br/><span style=\"color:#94a3b8;\">' + esc(data.period || '') + '</span>'            + '<br/>\u7efc\u5408\u6d3b\u8dc3\u5ea6\uff1a<b>' + esc(data.activityIndex || value[2] || 0) + '</b>'            + '<br/>\u5ba1\u6838\u4f5c\u54c1\uff1a' + esc(data.poemCount || 0) + ' \u9996'            + '<br/>\u72ec\u7acb\u8bd7\u4eba\uff1a' + esc(data.poetCount || 0) + ' \u4f4d'            + '<br/>\u8bc1\u636e\u8d28\u91cf\u5206\uff1a' + esc(data.qualityPoints || 0)            + '<br/>\u4f5c\u54c1\u4efd\u989d / \u8bd7\u4eba\u53c2\u4e0e\u4efd\u989d / \u8bc1\u636e\u4efd\u989d\uff1a'            + esc(data.workShare || 0) + '% / ' + esc(data.poetShare || 0) + '% / ' + esc(data.qualityShare || 0) + '%';        if (data.poets) {            html += '<br/>\u8bd7\u4eba\uff1a' + esc(data.poets);        }        if (data.poems) {            html += '<br/><span style=\"color:#94a3b8;\">\u6837\u672c\uff1a</span>' + esc(data.poems);        }        return html + '</div>';    }    ,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    }
+                },
+                {
+                    "type": "lines",
+                    "name": "\u6837\u672c\u91cd\u5fc3\u8fc1\u79fb",
+                    "coordinateSystem": "geo",
+                    "zlevel": 3,
+                    "progressive": 400,
+                    "progressiveThreshold": 3000,
+                    "effect": {
+                        "show": true,
+                        "brushType": "stroke",
+                        "scale": 2.5,
+                        "period": 5,
+                        "symbol": "arrow",
+                        "symbolSize": 6,
+                        "trailLength": 0.25
+                    },
+                    "symbol": [
+                        "none",
+                        "arrow"
+                    ],
+                    "polyline": false,
+                    "large": false,
+                    "largeThreshold": 2000,
+                    "symbolSize": 12,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d->\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "coords": [
+                                [
+                                    116.36711533333333,
+                                    30.725195
+                                ],
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386->\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "coords": [
+                                [
+                                    107.85661764000001,
+                                    31.514243150000002
+                                ],
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "coords": [
+                                [
+                                    112.60782034,
+                                    31.55962711
+                                ],
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "coords": [
+                                [
+                                    119.69946234166667,
+                                    33.75149906666667
+                                ],
+                                [
+                                    116.15976603572193,
+                                    32.88831738657754
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "coords": [
+                                [
+                                    116.15976603572193,
+                                    32.88831738657754
+                                ],
+                                [
+                                    110.8224972,
+                                    30.5611664
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f->\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                            "coords": [
+                                [
+                                    110.8224972,
+                                    30.5611664
+                                ],
+                                [
+                                    120.4359688,
+                                    30.08656935
+                                ]
+                            ]
+                        }
+                    ],
+                    "lineStyle": {
+                        "show": false,
+                        "width": 2,
+                        "opacity": 0.68,
+                        "curveness": 0.18,
+                        "color": "#e2e8f0"
+                    },
+                    "tooltip": {
+                        "show": false,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    }
+                },
+                {
+                    "type": "scatter",
+                    "name": "\u5386\u671f\u6837\u672c\u52a0\u6743\u91cd\u5fc3",
+                    "coordinateSystem": "geo",
+                    "symbol": "diamond",
+                    "symbolSize": 13,
+                    "data": [
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                            "value": [
+                                116.36711533333333,
+                                30.725195,
+                                1
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                            "value": [
+                                107.85661764000001,
+                                31.514243150000002,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5510\u00b7\u4e2d\u665a\u671f",
+                            "value": [
+                                112.60782034,
+                                31.55962711,
+                                3
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                            "value": [
+                                119.69946234166667,
+                                33.75149906666667,
+                                4
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                            "value": [
+                                116.15976603572193,
+                                32.88831738657754,
+                                5
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                            "value": [
+                                110.8224972,
+                                30.5611664,
+                                6
+                            ]
+                        },
+                        {
+                            "name": "\u91cd\u5fc3\u00b7\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f",
+                            "value": [
+                                120.4359688,
+                                30.08656935,
+                                7
+                            ]
+                        }
+                    ],
+                    "label": {
+                        "show": false,
+                        "margin": 8,
+                        "richInheritPlainLabel": true,
+                        "valueAnimation": false
+                    },
+                    "tooltip": {
+                        "show": true,
+                        "trigger": "item",
+                        "triggerOn": "mousemove|click",
+                        "axisPointer": {
+                            "type": "line"
+                        },
+                        "showContent": true,
+                        "alwaysShowContent": false,
+                        "showDelay": 0,
+                        "hideDelay": 100,
+                        "enterable": false,
+                        "confine": false,
+                        "appendToBody": false,
+                        "transitionDuration": 0.4,
+                        "displayTransition": true,
+                        "formatter": "{b}",
+                        "textStyle": {
+                            "fontSize": 14,
+                            "richInheritPlainLabel": true
+                        },
+                        "borderWidth": 0,
+                        "padding": 5,
+                        "order": "seriesAsc"
+                    },
+                    "itemStyle": {
+                        "color": "#f8fafc",
+                        "borderColor": "#0f172a",
+                        "borderWidth": 2
+                    }
+                }
+            ],
+            "title": [
+                {
+                    "show": true,
+                    "text": "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f\uff081180-1279\uff09",
+                    "target": "blank",
+                    "subtext": "\u5ba1\u6838\u6837\u672c 4 \u9996\uff5c\u57ce\u5e02 2 \u4e2a\uff5c\u8bd7\u4eba 1 \u4f4d\uff5c\u6837\u672c\u6d3b\u8dc3\u5ea6\u6700\u9ad8\uff1a\u7ecd\u5174\u5e02 66.25",
+                    "subtarget": "blank",
+                    "left": "center",
+                    "top": "2%",
+                    "padding": 5,
+                    "itemGap": 10,
+                    "textAlign": "auto",
+                    "textVerticalAlign": "auto",
+                    "triggerEvent": false,
+                    "textStyle": {
+                        "color": "#f8fafc",
+                        "fontSize": 21,
+                        "richInheritPlainLabel": true
+                    },
+                    "subtextStyle": {
+                        "color": "#94a3b8",
+                        "fontSize": 12,
+                        "richInheritPlainLabel": true
+                    }
+                }
+            ],
+            "tooltip": {
+                "show": true,
+                "trigger": "item",
+                "triggerOn": "mousemove|click",
+                "axisPointer": {
+                    "type": "line"
+                },
+                "showContent": true,
+                "alwaysShowContent": false,
+                "showDelay": 0,
+                "hideDelay": 100,
+                "enterable": false,
+                "confine": false,
+                "appendToBody": false,
+                "transitionDuration": 0.4,
+                "displayTransition": true,
+                "textStyle": {
+                    "color": "#e2e8f0",
+                    "richInheritPlainLabel": true
+                },
+                "backgroundColor": "rgba(7,17,31,0.96)",
+                "borderColor": "#a855f7",
+                "borderWidth": 0,
+                "padding": 5,
+                "order": "seriesAsc"
+            },
+            "color": [
+                "#a855f7",
+                "#f8fafc"
+            ]
+        }
+    ]
+};
+        chart_113b840cbbc04e468018a8630f9182fe.setOption(option_113b840cbbc04e468018a8630f9182fe);
+    </script>
+<br/>                <div id="bc4c44049e8e4b5e9f35fec7aae0df31" class="chart-container" data-chart-width="1200" data-chart-height="500" style="--chart-width:1200px; --chart-height:500px; width:100%; max-width:var(--chart-width); height:var(--chart-height);"></div>
+    <script>
+        var chart_bc4c44049e8e4b5e9f35fec7aae0df31 = echarts.init(
+            document.getElementById('bc4c44049e8e4b5e9f35fec7aae0df31'), 'dark', {renderer: 'canvas', locale: 'ZH'});
+        var option_bc4c44049e8e4b5e9f35fec7aae0df31 = {
+    "backgroundColor": "#07111f",
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5ba1\u6838\u4f5c\u54c1\u6570",
+            "legendHoverLink": true,
+            "data": [
+                3,
+                10,
+                5,
+                3,
+                11,
+                5,
+                4
+            ],
+            "realtimeSort": false,
+            "showBackground": false,
+            "stackStrategy": "samesign",
+            "cursor": "pointer",
+            "barMinHeight": 0,
+            "barCategoryGap": "42%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "color": "#e2e8f0",
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u8986\u76d6\u57ce\u5e02\u6570",
+            "legendHoverLink": true,
+            "data": [
+                3,
+                6,
+                2,
+                2,
+                5,
+                5,
+                2
+            ],
+            "realtimeSort": false,
+            "showBackground": false,
+            "stackStrategy": "samesign",
+            "cursor": "pointer",
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "color": "#e2e8f0",
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5ba1\u6838\u4f5c\u54c1\u6570",
+                "\u8986\u76d6\u57ce\u5e02\u6570"
+            ],
+            "selected": {},
+            "show": true,
+            "top": "12%",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "textStyle": {
+                "color": "#cbd5e1",
+                "richInheritPlainLabel": true
+            },
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10,
+            "triggerEvent": false
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "axis",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "displayTransition": true,
+        "textStyle": {
+            "fontSize": 14,
+            "richInheritPlainLabel": true
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "axisLine": {
+                "show": true,
+                "onZero": true,
+                "onZeroAxisIndex": 0,
+                "lineStyle": {
+                    "show": false,
+                    "color": "#475569"
+                }
+            },
+            "axisLabel": {
+                "show": true,
+                "color": "#cbd5e1",
+                "rotate": 18,
+                "margin": 8,
+                "fontSize": 11,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "\u5510\u00b7\u5f00\u5143\u5929\u5b9d",
+                "\u5510\u00b7\u5b89\u53f2\u81f3\u5927\u5386",
+                "\u5510\u00b7\u4e2d\u665a\u671f",
+                "\u5b8b\u00b7\u5317\u5b8b\u524d\u4e2d\u671f",
+                "\u5b8b\u00b7\u5317\u5b8b\u665a\u671f",
+                "\u5b8b\u00b7\u5357\u5b8b\u524d\u671f",
+                "\u5b8b\u00b7\u5357\u5b8b\u4e2d\u540e\u671f"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "name": "\u6761\u76ee\u6570",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "axisLabel": {
+                "show": true,
+                "color": "#94a3b8",
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "min": 0,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false,
+                    "color": "rgba(148,163,184,0.16)"
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0
+        }
+    ],
+    "color": [
+        "#06b6d4",
+        "#f59e0b"
+    ],
+    "title": [
+        {
+            "show": true,
+            "text": "\u5404\u65f6\u671f\u7cbe\u7ec6\u6837\u672c\u91cf\u4e0e\u7a7a\u95f4\u8986\u76d6",
+            "target": "blank",
+            "subtext": "\u67f1\u9ad8\u53ea\u63cf\u8ff0\u5f53\u524d\u5ba1\u6838\u6837\u672c\uff0c\u4e0d\u7b49\u540c\u4e8e\u5510\u5b8b\u5168\u91cf\u521b\u4f5c\u89c4\u6a21",
+            "subtarget": "blank",
+            "left": "center",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false,
+            "textStyle": {
+                "color": "#f8fafc",
+                "fontSize": 20,
+                "richInheritPlainLabel": true
+            },
+            "subtextStyle": {
+                "color": "#94a3b8",
+                "richInheritPlainLabel": true
+            }
+        }
+    ]
+};
+        chart_bc4c44049e8e4b5e9f35fec7aae0df31.setOption(option_bc4c44049e8e4b5e9f35fec7aae0df31);
+    </script>
+<br/>    </div>
+    <script>
+    </script>
+
+    <script id="shixing-premium-resize-charts">
+        (function () {
+            function resizeCharts() {
+                if (!window.echarts) { return; }
+                document.querySelectorAll(".chart-container").forEach(function (el) {
+                    var chart = echarts.getInstanceByDom(el);
+                    if (chart) { chart.resize(); }
+                });
+            }
+            window.addEventListener("resize", resizeCharts);
+            window.addEventListener("orientationchange", resizeCharts);
+            setTimeout(resizeCharts, 0);
+            setTimeout(resizeCharts, 360);
+        }());
+    </script>
+
+</body>
+</html>

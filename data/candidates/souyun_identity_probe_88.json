@@ -1,0 +1,1708 @@
+{
+  "generated_at": "2026-08-09T08:38:52Z",
+  "rows": [
+    {
+      "poet": "白居易",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "白居易"
+      ],
+      "author_ids": [
+        18804
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 2990,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王维",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "王维"
+      ],
+      "author_ids": [
+        18616
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 387,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "李白",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "李白"
+      ],
+      "author_ids": [
+        15188
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 1068,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "孟浩然",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "孟浩然"
+      ],
+      "author_ids": [
+        13993
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 266,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "杜甫",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "杜甫"
+      ],
+      "author_ids": [
+        17270
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 1471,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "高适",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "高适"
+      ],
+      "author_ids": [
+        21646
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 260,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "李商隐",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "李商隐"
+      ],
+      "author_ids": [
+        16489
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 611,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王昌龄",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "王昌龄"
+      ],
+      "author_ids": [
+        18440
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 201,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "岑参",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "岑参"
+      ],
+      "author_ids": [
+        14000
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 403,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "杜牧",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "杜牧"
+      ],
+      "author_ids": [
+        17274
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 498,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王之涣",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "王之涣"
+      ],
+      "author_ids": [
+        18220
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 6,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 6,
+      "note": ""
+    },
+    {
+      "poet": "刘禹锡",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "刘禹锡"
+      ],
+      "author_ids": [
+        14603
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 823,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "柳宗元",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "柳宗元"
+      ],
+      "author_ids": [
+        17578
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 216,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "韩愈",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "韩愈"
+      ],
+      "author_ids": [
+        21679
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 439,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王勃",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "王勃"
+      ],
+      "author_ids": [
+        18262
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 140,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "李贺",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "李贺"
+      ],
+      "author_ids": [
+        17089
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 245,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "骆宾王",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "骆宾王"
+      ],
+      "author_ids": [
+        21620
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 131,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "陈子昂",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "陈子昂"
+      ],
+      "author_ids": [
+        20887
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 130,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张九龄",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "张九龄"
+      ],
+      "author_ids": [
+        15164
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 247,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "贺知章",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "贺知章"
+      ],
+      "author_ids": [
+        20191
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 22,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "元稹",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "元稹"
+      ],
+      "author_ids": [
+        14615
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 893,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张志和",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "张志和"
+      ],
+      "author_ids": [
+        15239
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 8,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 8,
+      "note": ""
+    },
+    {
+      "poet": "韦应物",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "韦应物"
+      ],
+      "author_ids": [
+        21277
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 569,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "常建",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "常建"
+      ],
+      "author_ids": [
+        14932
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 55,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张继",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "张继"
+      ],
+      "author_ids": [
+        15634
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 37,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "祖咏",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "祖咏"
+      ],
+      "author_ids": [
+        18935
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 38,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "韦庄",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "韦庄"
+      ],
+      "author_ids": [
+        21282
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 375,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "李煜",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "李煜"
+      ],
+      "author_ids": [
+        16875
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 72,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "温庭筠",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "温庭筠"
+      ],
+      "author_ids": [
+        18032
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 396,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "许浑",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "许浑"
+      ],
+      "author_ids": [
+        19980
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 514,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "罗隐",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "罗隐"
+      ],
+      "author_ids": [
+        19207
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 512,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "杜荀鹤",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "杜荀鹤"
+      ],
+      "author_ids": [
+        17287
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 330,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "皮日休",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "皮日休"
+      ],
+      "author_ids": [
+        18853
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 456,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "聂夷中",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "聂夷中"
+      ],
+      "author_ids": [
+        19238
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 30,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "司空曙",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "司空曙"
+      ],
+      "author_ids": [
+        13632
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 165,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "卢纶",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "卢纶"
+      ],
+      "author_ids": [
+        13496
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 337,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "钱起",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "钱起"
+      ],
+      "author_ids": [
+        20818
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 448,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "李益",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "李益"
+      ],
+      "author_ids": [
+        15274
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 169,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "孟郊",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "孟郊"
+      ],
+      "author_ids": [
+        14010
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 500,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "贾岛",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "贾岛"
+      ],
+      "author_ids": [
+        20204
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 409,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张籍",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "张籍"
+      ],
+      "author_ids": [
+        15628
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 441,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王建",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "王建",
+        "王建"
+      ],
+      "author_ids": [
+        18501,
+        19737
+      ],
+      "source_dynasties": [
+        "Tang",
+        "Tang"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "沈佺期",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "沈佺期"
+      ],
+      "author_ids": [
+        17898
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 159,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "宋之问",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "宋之问"
+      ],
+      "author_ids": [
+        13975
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 206,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "苏轼",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "苏轼"
+      ],
+      "author_ids": [
+        29937
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 3254,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "上官仪",
+      "dynasty": "Tang",
+      "status": "fetched",
+      "names": [
+        "上官仪"
+      ],
+      "author_ids": [
+        12429
+      ],
+      "source_dynasties": [
+        "Tang"
+      ],
+      "count": 30,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "辛弃疾",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "辛弃疾"
+      ],
+      "author_ids": [
+        32928
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 770,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "陆游",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "陆游妾",
+        "陆游"
+      ],
+      "author_ids": [
+        0,
+        34522
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "李清照",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "李清照"
+      ],
+      "author_ids": [
+        27794
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 94,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "欧阳修",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "欧阳修"
+      ],
+      "author_ids": [
+        28466
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1199,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "王安石",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "王安石"
+      ],
+      "author_ids": [
+        29874
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1781,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "黄庭坚",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "黄庭坚"
+      ],
+      "author_ids": [
+        34455
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 2420,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "范成大",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "范成大"
+      ],
+      "author_ids": [
+        31372
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 2058,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "杨万里",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "尤袤杨万里",
+        "杨万里"
+      ],
+      "author_ids": [
+        0,
+        27865
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "尤袤",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "尤袤杨万里",
+        "尤袤"
+      ],
+      "author_ids": [
+        0,
+        25130
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "柳永",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "柳永"
+      ],
+      "author_ids": [
+        28448
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 222,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "晏殊",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "晏殊"
+      ],
+      "author_ids": [
+        27290
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 360,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "晏几道",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "晏几道"
+      ],
+      "author_ids": [
+        27313
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 264,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "秦观",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "秦观",
+        "秦观女"
+      ],
+      "author_ids": [
+        30713,
+        30715
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "周邦彦",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "周邦彦"
+      ],
+      "author_ids": [
+        24955
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 237,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "姜夔",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "姜夔"
+      ],
+      "author_ids": [
+        25195
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 283,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "吴文英",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "吴文英"
+      ],
+      "author_ids": [
+        25279
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 342,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张炎",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "张炎民",
+        "张炎"
+      ],
+      "author_ids": [
+        25748,
+        25750
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "陈与义",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "陈与义"
+      ],
+      "author_ids": [
+        34486
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 664,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "文天祥",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "文天祥",
+        "文天祥士友"
+      ],
+      "author_ids": [
+        26406,
+        26318
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "范仲淹",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "范仲淹"
+      ],
+      "author_ids": [
+        29783
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 361,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "司马光",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "司马光"
+      ],
+      "author_ids": [
+        23461
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1270,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "朱熹",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "朱熹"
+      ],
+      "author_ids": [
+        27404
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1492,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "林逋",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "林逋",
+        "林逋叟",
+        "林逋山"
+      ],
+      "author_ids": [
+        28438,
+        0,
+        0
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song",
+        "Song"
+      ],
+      "count": 3,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "梅尧臣",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "梅尧臣"
+      ],
+      "author_ids": [
+        28460
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 2939,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "苏辙",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "苏辙"
+      ],
+      "author_ids": [
+        29941
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1879,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "苏洵",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "苏洵"
+      ],
+      "author_ids": [
+        29837
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 58,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张孝祥",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "张孝祥"
+      ],
+      "author_ids": [
+        25540
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 650,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "曾巩",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "曾巩"
+      ],
+      "author_ids": [
+        27305
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 457,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张元干",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "张元干"
+      ],
+      "author_ids": [
+        25448
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 423,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "陈亮",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "陈亮"
+      ],
+      "author_ids": [
+        34547
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 90,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "刘克庄",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "刘克庄"
+      ],
+      "author_ids": [
+        25254
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 4823,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "叶梦得",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "叶梦得",
+        "叶梦得"
+      ],
+      "author_ids": [
+        24994,
+        23408
+      ],
+      "source_dynasties": [
+        "Song",
+        "Song"
+      ],
+      "count": 2,
+      "page_no": 0,
+      "page_size": 0,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "贺铸",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "贺铸"
+      ],
+      "author_ids": [
+        32277
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 880,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "张先",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "张先"
+      ],
+      "author_ids": [
+        25437
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 192,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "欧阳炯",
+      "dynasty": "Song",
+      "status": "failed",
+      "names": [],
+      "author_ids": [],
+      "source_dynasties": [],
+      "count": null,
+      "page_no": null,
+      "page_size": null,
+      "page0_records": 0,
+      "note": ""
+    },
+    {
+      "poet": "朱淑真",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "朱淑真"
+      ],
+      "author_ids": [
+        26895
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 367,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "程颢",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "程颢"
+      ],
+      "author_ids": [
+        29916
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 74,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "陆九渊",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "陆九渊"
+      ],
+      "author_ids": [
+        34542
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 29,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "吕本中",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "吕本中"
+      ],
+      "author_ids": [
+        25014
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 1361,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "杨亿",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "杨亿"
+      ],
+      "author_ids": [
+        27871
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 515,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "钱惟演",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "钱惟演"
+      ],
+      "author_ids": [
+        34195
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 111,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    },
+    {
+      "poet": "石延年",
+      "dynasty": "Song",
+      "status": "fetched",
+      "names": [
+        "石延年"
+      ],
+      "author_ids": [
+        29797
+      ],
+      "source_dynasties": [
+        "Song"
+      ],
+      "count": 87,
+      "page_no": 0,
+      "page_size": 20,
+      "page0_records": 20,
+      "note": ""
+    }
+  ],
+  "totals": {
+    "poets": 88,
+    "matched": 87,
+    "failed": 1,
+    "works": 49728,
+    "pages": 2540
+  }
+}

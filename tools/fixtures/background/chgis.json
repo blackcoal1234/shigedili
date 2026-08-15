@@ -1,0 +1,22 @@
+{
+  "placenames": [
+    {
+      "sys_id": "hvd_123",
+      "name": "庐山",
+      "years": "618-907",
+      "parent name": "江州",
+      "feature type": "mountain",
+      "xy coordinates": "115.989402,29.560618",
+      "uri": "https://chgis.hudci.org/tgaz/placename/hvd_123"
+    },
+    {
+      "sys_id": "hvd_late",
+      "name": "庐山",
+      "years": "1368-1644",
+      "parent name": "九江府",
+      "feature type": "mountain",
+      "xy coordinates": "116.000000,29.570000",
+      "uri": "https://chgis.hudci.org/tgaz/placename/hvd_late"
+    }
+  ]
+}

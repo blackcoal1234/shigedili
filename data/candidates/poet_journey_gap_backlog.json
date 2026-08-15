@@ -1,0 +1,1346 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-09T22:59:06+00:00",
+  "event_snapshot": {
+    "audited_at": "2026-08-09T21:50:59+08:00",
+    "coverage_file": "data/candidates/journey_source_coverage.json",
+    "coverage_generated_at": "2026-08-09T13:18:14+00:00",
+    "selected_poets": 88,
+    "event_candidates": 41226,
+    "locatable_event_candidates": 40750,
+    "unlocated_event_candidates": 476,
+    "poets_with_event_candidates": 79,
+    "poets_with_locatable_events": 73,
+    "gap_poets": 15,
+    "no_person_event_poets": 9,
+    "person_event_without_locatable_poets": 0,
+    "gap_event_candidates": 30,
+    "gap_locatable_events": 0,
+    "locatable_definition": "A candidate has both a valid latitude and a valid longitude.",
+    "entry_sort": "P0 by event_candidates descending, then P1 by expected evidence yield and identity-review cost.",
+    "souyun_work_retry_note": "Souyun retry scope is work candidates only. Sima Guang changed from fetch_failed at audit time to ok before finalization; this does not alter the person-event gap snapshot.",
+    "coordinate_supplements": 19,
+    "locatable_event_candidates_after_supplement": 40769,
+    "unlocated_event_candidates_after_supplement": 457,
+    "gap_locatable_events_after_supplement": 19,
+    "gap_unresolved_event_coordinates": 11,
+    "poets_with_unresolved_event_coordinates": 6,
+    "coordinate_supplement_note": "19 coordinates are direct CBDB ADDR_CODES joins and remain candidate-layer supplements; 11 event coordinates still require review."
+  },
+  "entries": [
+    {
+      "poet": "司马光",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 14,
+      "locatable_events": 9,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 14,
+          "locatable_events": 9,
+          "coordinate_supplements": 9,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "status_at_audit": "fetch_failed",
+          "scope": "work_only",
+          "person_event_candidates": 0,
+          "retry_effect_on_person_event_gap": "none"
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "matched",
+          "record_kind": "catalog_or_work_text",
+          "record_id": "KR4d0040 傳家集",
+          "person_event_candidates": 0,
+          "route_ready": false
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        },
+        {
+          "source": "Wikidata data access",
+          "url": "https://www.wikidata.org/wiki/Help%3AData_access",
+          "license_or_access": "CC0 structured data; observe query-service etiquette and throttling.",
+          "year_fields": [
+            "time_properties_when_present"
+          ],
+          "place_fields": [
+            "place_entity_ids",
+            "external_authority_ids"
+          ],
+          "automation": "identifier_crosswalk_only",
+          "route_use": "crosswalk_not_event_evidence"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Read each existing CBDB event candidate and retain its original citation and place string.",
+        "Resolve the historical place against an authority source and validate temporal applicability.",
+        "Do not substitute native-place coordinates for an event location.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 9,
+      "unresolved_event_coordinates": 5
+    },
+    {
+      "poet": "李益",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 6,
+      "locatable_events": 4,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 6,
+          "locatable_events": 4,
+          "coordinate_supplements": 4,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        },
+        {
+          "source": "Wikidata SPARQL",
+          "url": "https://www.wikidata.org/wiki/Wikidata%3AQUERY",
+          "license_or_access": "CC0 structured data; observe query-service etiquette and throttling.",
+          "year_fields": [
+            "time_properties_when_present"
+          ],
+          "place_fields": [
+            "place_entity_ids",
+            "external_authority_ids"
+          ],
+          "automation": "identifier_crosswalk_only",
+          "route_use": "crosswalk_not_event_evidence"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Preserve the six existing event candidates and their original place strings.",
+        "Resolve homonymous places and administrative changes for the event date.",
+        "Keep biography text, catalogs and native place outside route geometry.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 4,
+      "unresolved_event_coordinates": 2
+    },
+    {
+      "poet": "钱惟演",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 4,
+      "locatable_events": 1,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 4,
+          "locatable_events": 1,
+          "coordinate_supplements": 1,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "fetch_failed",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Preserve the four existing event candidates and source citations.",
+        "Validate Song-period administrative geography before assigning coordinates.",
+        "Keep static profile data outside route geometry.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 1,
+      "unresolved_event_coordinates": 3
+    },
+    {
+      "poet": "卢纶",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 3,
+      "locatable_events": 3,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 3,
+          "locatable_events": 3,
+          "coordinate_supplements": 3,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Preserve the three existing event candidates and source citations.",
+        "Resolve historical place identity and time slice before assigning coordinates.",
+        "Keep native place, catalogs and biography text outside route geometry.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 3,
+      "unresolved_event_coordinates": 0
+    },
+    {
+      "poet": "司空曙",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 2,
+      "locatable_events": 1,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 2,
+          "locatable_events": 1,
+          "coordinate_supplements": 1,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Preserve the two existing event candidates and source citations.",
+        "Resolve historical place identity and temporal validity.",
+        "Do not use native-place coordinates as event coordinates.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 1,
+      "unresolved_event_coordinates": 1
+    },
+    {
+      "poet": "欧阳炯",
+      "gap_type": "has_unresolved_person_event_coordinates",
+      "event_candidates": 1,
+      "locatable_events": 1,
+      "current_sources": {
+        "cbdb": {
+          "status": "collected",
+          "event_candidates": 1,
+          "locatable_events": 1,
+          "coordinate_supplements": 1,
+          "coordinate_supplement_file": "data/candidates/cbdb_event_coordinate_supplements.jsonl"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "fetch_failed",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "DILA Place Authority API",
+          "url": "https://authority.dila.edu.tw/docs/services/place_query.php",
+          "license_or_access": "Public TEI XML query interface; no daily limit is stated on the checked API page; reuse terms for individual authority records require review before redistribution.",
+          "year_fields": [
+            "dynasty_or_temporal_metadata_when_present"
+          ],
+          "place_fields": [
+            "authority_id",
+            "historical_name",
+            "longitude",
+            "latitude",
+            "modern_district"
+          ],
+          "automation": "small_entity_queries_after_terms_review",
+          "route_use": "geocode_existing_event_candidate_only"
+        },
+        {
+          "source": "CHGIS V6",
+          "url": "https://chgis.fas.harvard.edu/data/chgis/v6/",
+          "license_or_access": "Academic-use project data; observe project restrictions on commercial use, resale and redistribution.",
+          "year_fields": [
+            "temporal_validity_or_time_series_when_present"
+          ],
+          "place_fields": [
+            "historical_place_identifier",
+            "historical_name",
+            "geometry_or_coordinates"
+          ],
+          "automation": "manual_or_dataset_lookup_after_terms_review",
+          "route_use": "validate_historical_place_for_existing_event"
+        }
+      ],
+      "priority": "P0",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Confirm the person and dynasty identity of the existing candidate before geocoding.",
+        "Retain the original event citation and historical place string.",
+        "Keep static profile fields outside route geometry.",
+        "Accept coordinates only after human review; this backlog creates no fact event."
+      ],
+      "coordinate_supplements": 1,
+      "unresolved_event_coordinates": 0
+    },
+    {
+      "poet": "石延年",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "fetch_failed",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/t8xysg5dpoca91sx",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "birth_year",
+            "death_year",
+            "office_year_when_present"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=891411",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project tomb or biography text",
+          "url": "https://ctext.org/wiki.pl?chapter=8979483&if=en",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Confirm identity and source provenance before extracting any claim.",
+        "Extract only year-place statements that co-occur in a citable passage.",
+        "Treat birth/death, native place, office catalogs and biography text as non-route evidence until reviewed.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "贺知章",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/xz1sb4c1ng3lg9nm",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "birth_year",
+            "death_year",
+            "office_years"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "DILA Person Authority A008710",
+          "url": "https://authority.dila.edu.tw/person/search.php?aid=A008710",
+          "license_or_access": "Public authority record; API documentation states no daily limit; review record-level reuse terms before redistribution.",
+          "year_fields": [
+            "birth_date_or_range",
+            "death_date_or_range"
+          ],
+          "place_fields": [
+            "native_place_authority_id",
+            "longitude",
+            "latitude"
+          ],
+          "automation": "single_entity_query_after_terms_review",
+          "route_use": "identity_and_static_place_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=730865",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project collected-prose text",
+          "url": "https://ctext.org/wiki.pl?chapter=220340&if=gb",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Confirm that all authority records refer to the selected poet.",
+        "Do not convert native-place coordinates into a journey point.",
+        "Extract a candidate only from a citable passage that links time, place and action.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "张继",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/4po4uqxtynt9d4mt",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "death_year",
+            "office_years"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "DILA Person Authority A010970",
+          "url": "https://authority.dila.edu.tw/person/search.php?aid=A010970",
+          "license_or_access": "Public authority record; API documentation states no daily limit; review record-level reuse terms before redistribution.",
+          "year_fields": [],
+          "place_fields": [
+            "native_place_authority_id",
+            "longitude",
+            "latitude"
+          ],
+          "automation": "single_entity_query_after_terms_review",
+          "route_use": "identity_and_static_place_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=2747113",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project work text",
+          "url": "https://ctext.org/wiki.pl?chapter=692835&if=en",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Keep death year, office year and native place as separate profile assertions.",
+        "Verify any text-derived year-place-action statement against its cited passage.",
+        "Resolve historical place identity before proposing coordinates.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "聂夷中",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/du1vz6zzgsq83373",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "office_year_when_present"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=8148691",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project poetry-record text",
+          "url": "https://ctext.org/wiki.pl?chapter=680333&if=en",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Check whether an office title, its location and a date co-occur in the same source statement.",
+        "Keep undated office titles and native place as static context.",
+        "Retain exact text location and project URL for every proposed candidate.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "常建",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "identity_ambiguous",
+          "event_candidates": 0,
+          "exact_name_candidates": 4
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "matched",
+          "record_kind": "catalog_or_work_text",
+          "record_id": "KR4c0024 常建詩",
+          "person_event_candidates": 0,
+          "route_ready": false
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "CBDB API documentation",
+          "url": "https://input.cbdb.fas.harvard.edu/cbdbapi/index.html",
+          "license_or_access": "CC BY-NC-SA 4.0 data; mainland-China commercial use has a separate license arrangement.",
+          "year_fields": [
+            "index_year",
+            "office_years_when_present"
+          ],
+          "place_fields": [
+            "addresses",
+            "office_places_when_present"
+          ],
+          "automation": "identity_resolution_queries_only",
+          "route_use": "resolve_four_exact_name_candidates_before_event_review"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&remap=gb&res=3879813",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project appendix text",
+          "url": "https://ctext.org/wiki.pl?chapter=2670339&if=gb",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Resolve the four exact-name CBDB candidates against dynasty, works, offices and aliases.",
+        "Do not attach any candidate event before identity resolution.",
+        "Treat the Kanripo catalog and CTP appendix as text or catalog evidence only.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "上官仪",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/s7ajsy1mhaqjix5h",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "birth_year",
+            "death_year",
+            "office_years"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "DILA Person Authority A002430",
+          "url": "https://authority.dila.edu.tw/person/search.php?aid=A002430",
+          "license_or_access": "Public authority record; API documentation states no daily limit; review record-level reuse terms before redistribution.",
+          "year_fields": [
+            "birth_date_or_range",
+            "death_date_or_range"
+          ],
+          "place_fields": [
+            "native_place_authority_id",
+            "longitude",
+            "latitude"
+          ],
+          "automation": "single_entity_query_after_terms_review",
+          "route_use": "identity_and_static_place_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&remap=gb&res=701508",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project biography text",
+          "url": "https://ctext.org/wiki.pl?chapter=823038&if=en",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Cross-check identity and date ranges across authority records.",
+        "Keep profile years and native place separate from event assertions.",
+        "Extract only a cited text statement that links action, time and place.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "祖咏",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/jc9a8uqjfgcrcldx",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "life_or_office_year_when_present"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_and_candidate_leads_only"
+        },
+        {
+          "source": "DILA Person Authority A045185",
+          "url": "https://authority.dila.edu.tw/person/search.php?aid=A045185",
+          "license_or_access": "Public authority record; API documentation states no daily limit; review record-level reuse terms before redistribution.",
+          "year_fields": [],
+          "place_fields": [
+            "native_place_authority_id",
+            "longitude",
+            "latitude"
+          ],
+          "automation": "single_entity_query_after_terms_review",
+          "route_use": "identity_and_static_place_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=881893",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project collected-text page one",
+          "url": "https://ctext.org/wiki.pl?chapter=993917&if=gb",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        },
+        {
+          "source": "Chinese Text Project collected-text page two",
+          "url": "https://ctext.org/wiki.pl?chapter=336147&if=gb",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Exclude the Song-monk namesake before using any DILA record.",
+        "Keep native-place authority coordinates outside journey geometry.",
+        "Require a cited year-place-action statement for any future candidate.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "张志和",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0,
+          "matched_alias": "张龟龄"
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "ok",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record under alias Zhang Guiling",
+          "url": "https://data.library.sh.cn/entity/person/cjpoitivxrfhchtu",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "life_or_office_year_when_present"
+          ],
+          "place_fields": [
+            "native_place",
+            "office_place_when_present"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_alias_review",
+          "route_use": "alias_and_static_profile_only"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=828166",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        },
+        {
+          "source": "Chinese Text Project New Tang History text",
+          "url": "https://ctext.org/dictionary.pl?chapter=181540&if=gb&sid=3060&trid=3677524",
+          "license_or_access": "Public project text page; follow CTP attribution and automated-access limits.",
+          "year_fields": [
+            "date_expressions_in_text"
+          ],
+          "place_fields": [
+            "place_expressions_in_text"
+          ],
+          "automation": "manual_excerpt_review_only",
+          "route_use": "textual_lead_not_route"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Validate the Zhang Zhihe and Zhang Guiling alias chain before using the record.",
+        "Keep undated office titles and native place as static profile data.",
+        "Extract any future candidate from an exact cited history passage.",
+        "This backlog creates no fact event."
+      ]
+    },
+    {
+      "poet": "朱淑真",
+      "gap_type": "no_person_event",
+      "event_candidates": 0,
+      "locatable_events": 0,
+      "current_sources": {
+        "cbdb": {
+          "status": "no_usable_records",
+          "event_candidates": 0
+        },
+        "cnkgraph": {
+          "status": "not_covered",
+          "event_candidates": 0
+        },
+        "souyun": {
+          "status": "fetch_failed",
+          "scope": "work_only",
+          "person_event_candidates": 0
+        },
+        "chinese-poetry": {
+          "status": "matched",
+          "record_kind": "biography_text",
+          "person_event_candidates": 0,
+          "route_ready": false
+        },
+        "Kanripo": {
+          "status": "not_found",
+          "person_event_candidates": 0
+        }
+      },
+      "recommended_sources": [
+        {
+          "source": "Shanghai Library Open Data person record",
+          "url": "https://data.library.sh.cn/entity/person/1eenywu8eeyrm8ar",
+          "license_or_access": "Portal notice: CC 2.0 BY-NC-SA; documented API requires a key, at least two seconds between requests, and at most 2000 pages per resource per day; preserve upstream provenance.",
+          "year_fields": [
+            "birth_year",
+            "death_year"
+          ],
+          "place_fields": [
+            "native_place"
+          ],
+          "automation": "single_entity_or_rate_limited_api_after_provenance_review",
+          "route_use": "static_profile_only"
+        },
+        {
+          "source": "Ming Qing Women's Writings person record",
+          "url": "https://mhdb.mh.sinica.edu.tw/mingqing/mqww/search/details-poet.php?language=eng&poetID=2163&showanth=&showbio=&showshihuaby=&showshihuaon=",
+          "license_or_access": "Public structured project page; no clear reuse license was found on the checked pages, and bulk or republication terms require review.",
+          "year_fields": [
+            "floruit_or_life_range"
+          ],
+          "place_fields": [
+            "native_place"
+          ],
+          "automation": "manual_review_until_reuse_terms_are_confirmed",
+          "route_use": "static_profile_bibliography_and_dispute_review"
+        },
+        {
+          "source": "Chinese Text Project DataWiki",
+          "url": "https://ctext.org/datawiki.pl?if=gb&res=640330",
+          "license_or_access": "Linked RDF data is CC BY-NC-SA 3.0 with attribution and linkback; follow project limits on automated page access.",
+          "year_fields": [
+            "entity_time_properties_when_present"
+          ],
+          "place_fields": [
+            "entity_place_properties_when_present"
+          ],
+          "automation": "single_entity_rdf_after_license_review",
+          "route_use": "identity_crosswalk_only"
+        }
+      ],
+      "priority": "P1",
+      "status": "needs_manual_review",
+      "review_requirements": [
+        "Record conflicts among life dates and native-place traditions rather than merging them.",
+        "Consult chronology or academic evidence before proposing any year-place claim.",
+        "Keep structured profile and bibliography fields outside route geometry.",
+        "This backlog creates no fact event."
+      ]
+    }
+  ]
+}
