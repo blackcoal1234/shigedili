@@ -37,6 +37,22 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _normalized_source_sha256(path: Path) -> str:
+    """Hash text dependencies after normalizing LF and CRLF line endings."""
+    try:
+        content = path.read_bytes()
+    except OSError as exc:
+        raise SourceDataError(f"文件哈希读取失败: {path}: {exc}") from exc
+    try:
+        text = content.decode("utf-8")
+    except UnicodeDecodeError:
+        return hashlib.sha256(content).hexdigest()
+    # Preserve standalone CR characters used inside some CSV fields while
+    # making LF and CRLF line endings equivalent.
+    normalized = text.replace("\r\n", "\n").replace("\n", "\r\n")
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
 def _read_json(path: Path) -> Any:
     try:
         return json.loads(path.read_text(encoding="utf-8-sig"))
@@ -403,11 +419,14 @@ class SnapshotRepository:
             embedded = embedded[key]
         if not isinstance(embedded, dict):
             raise self._offline_generator_error(spec, "生成快照内置源哈希不是对象")
-        mismatches = [
-            relative
-            for relative, embedded_key in spec.dependency_hash_keys
-            if embedded.get(embedded_key) != dependencies[relative]
-        ]
+        mismatches = []
+        for relative, embedded_key in spec.dependency_hash_keys:
+            expected = embedded.get(embedded_key)
+            if expected == dependencies[relative]:
+                continue
+            if expected == _normalized_source_sha256(self.project_root / relative):
+                continue
+            mismatches.append(relative)
         if mismatches:
             raise self._offline_generator_error(
                 spec,

@@ -22,8 +22,10 @@ EMBEDDING_ENV_KEYS = (
 
 
 def _is_same_or_descendant(path: Path, parent: Path) -> bool:
-    candidate_key = os.path.normcase(str(path.resolve()))
-    parent_key = os.path.normcase(str(parent.resolve()))
+    # Windows paths are case-insensitive; casefold keeps this check portable
+    # when the same project is tested on Linux in CI.
+    candidate_key = str(path.resolve()).casefold()
+    parent_key = str(parent.resolve()).casefold()
     try:
         return os.path.commonpath((candidate_key, parent_key)) == parent_key
     except ValueError:
