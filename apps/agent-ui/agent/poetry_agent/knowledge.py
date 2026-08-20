@@ -505,6 +505,40 @@ class PoetryKnowledgeRepository:
             **counts,
         }
 
+    def quick_status(self) -> dict[str, Any]:
+        """Return manifest-backed status without hashing or scanning the database."""
+
+        if not self.path.is_file():
+            raise KnowledgeUnavailableError(f"知识库文件不存在: {self.path}")
+        manifest = self._manifest(verify_database_hash=False)
+        assert manifest is not None
+        hashes = manifest["sourceHashes"]
+        mismatches = [
+            key
+            for key, expected in self.expected_sources.items()
+            if hashes.get(key) != expected
+        ]
+        if mismatches:
+            raise KnowledgeUnavailableError(
+                "知识库已过期，源哈希不一致: " + ", ".join(mismatches)
+            )
+        return {
+            "available": True,
+            "stale": False,
+            "path": str(self.path),
+            "schemaVersion": manifest["schemaVersion"],
+            "buildId": manifest["buildId"],
+            "generatedAt": manifest.get("generatedAt"),
+            "splitterVersion": manifest.get("splitterVersion"),
+            "sourceHashes": hashes,
+            "manifest": manifest,
+            "poemCount": manifest.get("poemCount", 0),
+            "lineCount": manifest.get("lineCount", 0),
+            "analysisCount": manifest.get("analysisCount", 0),
+            "imageryMentionCount": manifest.get("imageryMentionCount", 0),
+            "emotionMentionCount": manifest.get("emotionMentionCount", 0),
+        }
+
     @staticmethod
     def _validate_search(
         query: str,

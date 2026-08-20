@@ -158,6 +158,9 @@ jobs:
           curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
             "http://$DEPLOY_HOST:3000/" >/dev/null
           curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
+            "http://$DEPLOY_HOST:3000/api/backend/ready" \
+            | jq -e '.status == "ok" and .sources.missing == [] and .sources.knowledgeBase.available == true' >/dev/null
+          curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \
             "http://$DEPLOY_HOST:3000/api/backend/catalog" \
             | jq -e '.status == "ok" and .payload.poetCount == 88' >/dev/null
           curl --retry 10 --retry-delay 3 --retry-connrefused -fsS \

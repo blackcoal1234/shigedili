@@ -8,14 +8,8 @@ from .cache import SnapshotRepository
 from .config import Settings
 
 
-def health_payload(
-    settings: Settings,
-    repository: SnapshotRepository,
-    agent_engine: str,
-    knowledge_repository: Any | None = None,
-    embedding_repository: Any | None = None,
-) -> dict[str, Any]:
-    required_sources = {
+def _required_sources(settings: Settings) -> dict[str, Any]:
+    return {
         "poems": settings.project_root / "data" / "poems.json",
         "yearGenerator": settings.project_root
         / "数据可视化脚本"
@@ -24,6 +18,54 @@ def health_payload(
         / "数据可视化脚本"
         / "viz_38_imagery_tide.py",
     }
+
+
+def readiness_payload(
+    settings: Settings,
+    knowledge_repository: Any | None = None,
+) -> dict[str, Any]:
+    """Return a deployment-safe readiness check without deep artifact scans."""
+
+    required_sources = _required_sources(settings)
+    missing_sources = [name for name, path in required_sources.items() if not path.is_file()]
+    knowledge_path = settings.resolved_knowledge_base_path
+    if knowledge_repository is None:
+        manifest_path = knowledge_path.with_suffix(".manifest.json")
+        knowledge_status: dict[str, Any] = {
+            "available": knowledge_path.is_file() and manifest_path.is_file(),
+            "path": str(knowledge_path),
+            "manifestPath": str(manifest_path),
+        }
+    else:
+        try:
+            knowledge_status = knowledge_repository.quick_status()
+        except Exception as exc:
+            knowledge_status = {
+                "available": False,
+                "path": str(knowledge_path),
+                "error": str(exc),
+            }
+    available = bool(knowledge_status.get("available"))
+    return {
+        "status": "ok" if not missing_sources and available else "degraded",
+        "service": "poetry-agent-backend",
+        "port": settings.port,
+        "sources": {
+            "projectRoot": str(settings.project_root),
+            "missing": missing_sources,
+            "knowledgeBase": knowledge_status,
+        },
+    }
+
+
+def health_payload(
+    settings: Settings,
+    repository: SnapshotRepository,
+    agent_engine: str,
+    knowledge_repository: Any | None = None,
+    embedding_repository: Any | None = None,
+) -> dict[str, Any]:
+    required_sources = _required_sources(settings)
     missing_sources = [name for name, path in required_sources.items() if not path.is_file()]
     if knowledge_repository is None:
         knowledge_status: dict[str, Any] = {
@@ -32,7 +74,7 @@ def health_payload(
         }
     else:
         try:
-            knowledge_status = knowledge_repository.status()
+            knowledge_status = knowledge_repository.quick_status()
         except Exception as exc:  # health must remain available for repair guidance
             knowledge_status = {
                 "available": False,
@@ -41,11 +83,13 @@ def health_payload(
                 "buildCommand": "python tools/build_poetry_knowledge_base.py --rebuild",
             }
     knowledge_available = bool(knowledge_status.get("available", True))
-    if embedding_repository is None:
+    if embedding_repository is None or not settings.embedding_configured:
         vector_status: dict[str, Any] = {
             "available": False,
             "configured": settings.embedding_configured,
             "path": str(settings.resolved_vector_root_path),
+            "ready": False,
+            "state": "disabled",
         }
     else:
         try:

@@ -244,7 +244,7 @@ class PoetryDataService:
         if self.knowledge_repository is None:
             return self._knowledge_unavailable(RuntimeError("未配置知识库仓库"))
         try:
-            payload = self.knowledge_repository.status()
+            payload = self.knowledge_repository.quick_status()
             payload["vector"] = self._vector_status_payload()
             hashes = payload.get("sourceHashes", {}) if isinstance(payload, dict) else {}
             return _base_response(
@@ -327,6 +327,13 @@ class PoetryDataService:
                 "state": "disabled",
             }
         configured = self.embedding_repository.client is not None
+        if not configured:
+            return {
+                "configured": False,
+                "ready": False,
+                "state": "disabled",
+                "queryConfigured": False,
+            }
         try:
             status = self.embedding_repository.status()
             counts = status.get("counts", {})

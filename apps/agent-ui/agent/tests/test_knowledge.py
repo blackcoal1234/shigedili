@@ -172,6 +172,28 @@ class PoetryKnowledgeIntegrationTests(unittest.TestCase):
             repository.get_poem("fixture-jingyesi")
         self.assertEqual(1, digest.call_count)
 
+    def test_quick_status_uses_manifest_without_hashing_database(self) -> None:
+        with patch(
+            "poetry_agent.knowledge.sha256_path",
+            side_effect=AssertionError("quick status must not hash the database"),
+        ):
+            status = self.repository.quick_status()
+        self.assertTrue(status["available"])
+        self.assertEqual(3, status["poemCount"])
+
+    def test_quick_status_rejects_missing_database(self) -> None:
+        missing = self.root / "missing.sqlite3"
+        manifest = json.loads(
+            self.database.with_suffix(".manifest.json").read_text(encoding="utf-8")
+        )
+        manifest["database"] = missing.name
+        missing.with_suffix(".manifest.json").write_text(
+            json.dumps(manifest, ensure_ascii=False), encoding="utf-8"
+        )
+        repository = PoetryKnowledgeRepository(missing)
+        with self.assertRaisesRegex(KnowledgeUnavailableError, "知识库文件不存在"):
+            repository.quick_status()
+
     def test_declared_source_body_hash_must_match_exact_body(self) -> None:
         source = self.root / "bad-body-hash.json"
         record = {**FIXTURE_POEMS[0], "body_hash": "0" * 64}

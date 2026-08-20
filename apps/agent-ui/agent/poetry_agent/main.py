@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 from .agent import AGENT_DESCRIPTION, AGENT_NAME, build_agent_graph
 from .cache import SnapshotRepository, sha256_source_file
 from .config import Settings
-from .health import health_payload
+from .health import health_payload, readiness_payload
 from .knowledge import PoetryKnowledgeRepository
 from .glossary import PoetryGlossary
 from .selection_glossary import (
@@ -169,6 +169,10 @@ def create_app(
             knowledge_repository,
             embedding_repository,
         )
+
+    @app.get("/ready")
+    def ready() -> dict[str, Any]:
+        return readiness_payload(settings, knowledge_repository)
 
     @app.get("/catalog/poets")
     def catalog_poets() -> dict[str, Any]:

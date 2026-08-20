@@ -73,6 +73,13 @@ class FastApiToolEndpointTests(unittest.TestCase):
         self.assertEqual(200, response.status_code)
         self.assert_five_field_response(response.json(), "ok")
 
+    def test_ready_route_reports_lightweight_knowledge_availability(self) -> None:
+        response = self.client.get("/ready")
+        self.assertEqual(200, response.status_code)
+        body = response.json()
+        self.assertIn(body["status"], {"ok", "degraded"})
+        self.assertIn("knowledgeBase", body["sources"])
+
 
 if __name__ == "__main__":
     unittest.main()

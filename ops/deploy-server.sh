@@ -124,6 +124,13 @@ elif kind == "catalog":
 elif kind == "knowledge":
     payload = value.get("payload") or {}
     good = value.get("status") == "ok" and payload.get("available") is True
+elif kind == "ready":
+    sources = value.get("sources") or {}
+    good = (
+        value.get("status") == "ok"
+        and sources.get("missing") == []
+        and (sources.get("knowledgeBase") or {}).get("available") is True
+    )
 else:
     good = False
 raise SystemExit(0 if good else 1)
@@ -163,11 +170,9 @@ fi
     /usr/bin/python3 "$NEW_API/poetry-agent.pex"
 ) >"$INCOMING_DIR/api-preflight.log" 2>&1 &
 PRE_PID=$!
-# Health already verifies the source set and knowledge availability. Defer the
-# catalog/detail probes until after the live API switch so this small host does
-# not warm the same large knowledge database in two API processes at once.
+# Readiness intentionally avoids hashing or scanning the large knowledge assets.
 if ! wait_for_api http://127.0.0.1:18123/openapi.json \
-  || ! check_json http://127.0.0.1:18123/health health 120; then
+  || ! check_json http://127.0.0.1:18123/ready ready 120; then
   cat "$INCOMING_DIR/api-preflight.log" >&2
   cleanup_preflight
   exit 1
@@ -283,12 +288,9 @@ systemctl restart "$WEB_SERVICE"
 
 wait_for_api http://127.0.0.1:8123/openapi.json
 for attempt in $(seq 1 8); do
-  if check_json http://127.0.0.1:8123/health health 120 \
-    && check_json http://127.0.0.1:8123/catalog/poets catalog \
-    && check_json http://127.0.0.1:8123/knowledge/status knowledge 120 \
+  if check_json http://127.0.0.1:8123/ready ready 120 \
     && curl -fsS --max-time 15 http://127.0.0.1:3000/ >/dev/null \
-    && curl -fsS --max-time 15 http://127.0.0.1:3000/api/backend/catalog >/dev/null \
-    && curl -fsS --max-time 15 http://127.0.0.1:3000/api/backend/knowledge/status >/dev/null \
+    && curl -fsS --max-time 15 http://127.0.0.1:3000/api/backend/ready >/dev/null \
     && curl -fsS --max-time 15 http://127.0.0.1/ >/dev/null; then
     break
   fi
