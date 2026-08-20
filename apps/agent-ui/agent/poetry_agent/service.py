@@ -180,6 +180,8 @@ class PoetryDataService:
         self.glossary = glossary
 
     def _catalog_rows(self) -> tuple[list[dict[str, Any]], dict[str, str]]:
+        if self.knowledge_repository is not None:
+            return self.knowledge_repository.catalog_rows()
         poems, hashes = self.repository.load_poems()
         counts: Counter[str] = Counter()
         dynasties: dict[str, Counter[str]] = defaultdict(Counter)

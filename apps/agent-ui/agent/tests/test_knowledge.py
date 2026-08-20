@@ -194,6 +194,17 @@ class PoetryKnowledgeIntegrationTests(unittest.TestCase):
         with self.assertRaisesRegex(KnowledgeUnavailableError, "知识库文件不存在"):
             repository.quick_status()
 
+    def test_catalog_rows_are_aggregated_without_loading_corpus_json(self) -> None:
+        rows, hashes = self.repository.catalog_rows()
+        self.assertEqual(
+            {"李白", "柳宗元", "王安石"}, {row["poet"] for row in rows}
+        )
+        self.assertTrue(all(row["workCount"] == 1 for row in rows))
+        by_poet = {row["poet"]: row for row in rows}
+        self.assertEqual("唐", by_poet["李白"]["dynasty"])
+        self.assertEqual("宋", by_poet["王安石"]["dynasty"])
+        self.assertEqual(self.build_summary["sourceHashes"], hashes)
+
     def test_declared_source_body_hash_must_match_exact_body(self) -> None:
         source = self.root / "bad-body-hash.json"
         record = {**FIXTURE_POEMS[0], "body_hash": "0" * 64}

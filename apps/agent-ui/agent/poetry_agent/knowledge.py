@@ -539,6 +539,42 @@ class PoetryKnowledgeRepository:
             "emotionMentionCount": manifest.get("emotionMentionCount", 0),
         }
 
+    def catalog_rows(self) -> tuple[list[dict[str, Any]], dict[str, str]]:
+        """Aggregate the poet catalog in SQLite without loading the full corpus JSON."""
+
+        status = self.quick_status()
+        with self._connect() as connection:
+            grouped_rows = connection.execute(
+                "SELECT poet,dynasty,COUNT(*) AS work_count,MIN(poem_id) AS first_seen "
+                "FROM poems GROUP BY poet,dynasty ORDER BY first_seen"
+            ).fetchall()
+
+        poets: dict[str, dict[str, Any]] = {}
+        for row in grouped_rows:
+            poet = str(row["poet"])
+            dynasty = str(row["dynasty"] or "未知")
+            work_count = int(row["work_count"])
+            first_seen = str(row["first_seen"])
+            item = poets.setdefault(
+                poet,
+                {
+                    "poet": poet,
+                    "workCount": 0,
+                    "dynastyCounts": {},
+                    "corpusOrder": first_seen,
+                },
+            )
+            item["workCount"] += work_count
+            item["dynastyCounts"][dynasty] = work_count
+            item["corpusOrder"] = min(item["corpusOrder"], first_seen)
+
+        rows = sorted(poets.values(), key=lambda item: item["corpusOrder"])
+        for item in rows:
+            item["dynasty"] = max(
+                item["dynastyCounts"].items(), key=lambda pair: pair[1]
+            )[0]
+        return rows, dict(status["sourceHashes"])
+
     @staticmethod
     def _validate_search(
         query: str,
