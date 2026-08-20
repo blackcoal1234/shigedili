@@ -181,7 +181,12 @@ class PoetryDataService:
 
     def _catalog_rows(self) -> tuple[list[dict[str, Any]], dict[str, str]]:
         if self.knowledge_repository is not None:
-            return self.knowledge_repository.catalog_rows()
+            try:
+                return self.knowledge_repository.catalog_rows()
+            except KnowledgeUnavailableError:
+                # Local development and CI intentionally run without the large
+                # production snapshot; keep the verified JSON fallback there.
+                pass
         poems, hashes = self.repository.load_poems()
         counts: Counter[str] = Counter()
         dynasties: dict[str, Counter[str]] = defaultdict(Counter)
