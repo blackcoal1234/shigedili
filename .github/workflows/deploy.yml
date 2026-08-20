@@ -60,6 +60,7 @@ jobs:
           mkdir -p release
           python -m pip install --disable-pip-version-check pex==2.100.4
           pex -r apps/agent-ui/agent/requirements.lock \
+            --no-transitive \
             --sources-directory apps/agent-ui/agent \
             --python python3.12 \
             --python-shebang /usr/bin/python3 \
