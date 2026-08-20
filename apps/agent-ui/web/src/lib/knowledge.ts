@@ -1,5 +1,7 @@
 import type {
   KnowledgePoemPayload,
+  KnowledgeGlossarySelectionPayload,
+  KnowledgeGlossarySelectionRequest,
   KnowledgeSearchPayload,
   KnowledgeSearchMode,
   KnowledgeStatusPayload,
@@ -76,6 +78,20 @@ export async function fetchKnowledgeStatus(
     signal,
   });
   return readKnowledgeJson<KnowledgeStatusPayload>(response);
+}
+
+export async function explainGlossarySelection(
+  request: KnowledgeGlossarySelectionRequest,
+  signal?: AbortSignal,
+): Promise<ToolResponse<KnowledgeGlossarySelectionPayload>> {
+  const response = await fetch("/api/backend/knowledge/glosses/selection", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(request),
+    cache: "no-store",
+    signal,
+  });
+  return readKnowledgeJson<KnowledgeGlossarySelectionPayload>(response);
 }
 
 export function knowledgeTagLabel(value: { label?: string; id?: string } | string): string {

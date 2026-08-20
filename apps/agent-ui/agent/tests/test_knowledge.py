@@ -21,6 +21,7 @@ from poetry_agent.knowledge_builder import (
     _build_rules_database,
     _llm_task,
     build_knowledge_base,
+    objective_imagery_terms,
     stable_hash,
     validate_llm_result,
 )
@@ -86,6 +87,16 @@ class PoetryKnowledgeIntegrationTests(unittest.TestCase):
         self.assertEqual(3, self.build_summary["poemCount"])
         self.assertEqual(6, self.build_summary["lineCount"])
         self.assertEqual(self.build_summary["buildId"], status["buildId"])
+
+    def test_objective_imagery_terms_follow_the_live_lexicon(self) -> None:
+        terms = objective_imagery_terms()
+        words = [term.word for term in terms]
+
+        self.assertGreater(len(terms), 160)
+        self.assertEqual(len(words), len(set(words)))
+        self.assertIn("玉门关", words)
+        self.assertTrue(all(1 <= term.scale <= 5 for term in terms))
+        self.assertTrue(all(term.description for term in terms))
 
     def test_public_builder_atomically_publishes_the_tiny_corpus(self) -> None:
         output = self.root / "public-build.sqlite3"

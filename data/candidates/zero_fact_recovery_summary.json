@@ -1,0 +1,256 @@
+{
+  "n_candidates": 5,
+  "n_in_corpus": 0,
+  "poets_requested": [
+    "上官仪",
+    "卢纶",
+    "司空曙",
+    "司马光",
+    "常建",
+    "张志和",
+    "张继",
+    "晏几道",
+    "晏殊",
+    "朱淑真",
+    "李益",
+    "欧阳炯",
+    "祖咏",
+    "聂夷中",
+    "钱惟演"
+  ],
+  "per_poet": {
+    "上官仪": {
+      "status": "collected",
+      "author_id": 12429,
+      "pages": 2,
+      "works_seen": 30,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "卢纶": {
+      "status": "collected",
+      "author_id": 13496,
+      "pages": 17,
+      "works_seen": 337,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "司空曙": {
+      "status": "collected",
+      "author_id": 13632,
+      "pages": 9,
+      "works_seen": 165,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "司马光": {
+      "status": "collected",
+      "author_id": 23461,
+      "pages": 31,
+      "works_seen": 620,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "常建": {
+      "status": "collected",
+      "author_id": 14932,
+      "pages": 3,
+      "works_seen": 55,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "张志和": {
+      "status": "collected",
+      "author_id": 15239,
+      "pages": 1,
+      "works_seen": 8,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "张继": {
+      "status": "collected",
+      "author_id": 15634,
+      "pages": 2,
+      "works_seen": 37,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "晏几道": {
+      "status": "collected",
+      "author_id": 27313,
+      "pages": 14,
+      "works_seen": 264,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "晏殊": {
+      "status": "collected",
+      "author_id": 27290,
+      "pages": 18,
+      "works_seen": 360,
+      "dated": 5,
+      "in_corpus": 0
+    },
+    "朱淑真": {
+      "status": "collected",
+      "author_id": 26895,
+      "pages": 19,
+      "works_seen": 367,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "李益": {
+      "status": "collected",
+      "author_id": 15274,
+      "pages": 9,
+      "works_seen": 169,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "欧阳炯": {
+      "status": "no_identity",
+      "pages": 0,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "祖咏": {
+      "status": "collected",
+      "author_id": 18935,
+      "pages": 2,
+      "works_seen": 38,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "聂夷中": {
+      "status": "collected",
+      "author_id": 19238,
+      "pages": 2,
+      "works_seen": 30,
+      "dated": 0,
+      "in_corpus": 0
+    },
+    "钱惟演": {
+      "status": "collected",
+      "author_id": 34195,
+      "pages": 6,
+      "works_seen": 111,
+      "dated": 0,
+      "in_corpus": 0
+    }
+  },
+  "era_dates_skipped": 2,
+  "policy": "补采仅覆盖零事实诗人；来源为搜韵开放API AuthorDate（C 级，年份需人工复核）；只解析数字年份；候选独立落盘，晋级仍须经严格/放宽门。",
+  "generated_by": "tools/collect_zero_fact_poets.py",
+  "gushiwen_recovery": {
+    "n_new_candidates": 23,
+    "n_recovery_total": 62,
+    "per_poet": {
+      "上官仪": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 2,
+        "with_year": 0,
+        "with_place": 1
+      },
+      "卢纶": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 8,
+        "with_year": 0,
+        "with_place": 1
+      },
+      "司空曙": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 6,
+        "with_year": 1,
+        "with_place": 1
+      },
+      "司马光": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 9,
+        "with_year": 5,
+        "with_place": 4
+      },
+      "常建": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 8,
+        "with_year": 6,
+        "with_place": 2
+      },
+      "张志和": {
+        "poems_tried": 10,
+        "pages_ok": 10,
+        "backgrounds": 2,
+        "with_year": 1,
+        "with_place": 1
+      },
+      "张继": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 4,
+        "with_year": 4,
+        "with_place": 2
+      },
+      "晏几道": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 14,
+        "with_year": 1,
+        "with_place": 1
+      },
+      "晏殊": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 12,
+        "with_year": 2,
+        "with_place": 1
+      },
+      "朱淑真": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 10,
+        "with_year": 1,
+        "with_place": 0
+      },
+      "李益": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 11,
+        "with_year": 8,
+        "with_place": 6
+      },
+      "欧阳炯": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 1,
+        "with_year": 0,
+        "with_place": 0
+      },
+      "祖咏": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 5,
+        "with_year": 2,
+        "with_place": 3
+      },
+      "聂夷中": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 2,
+        "with_year": 0,
+        "with_place": 0
+      },
+      "钱惟演": {
+        "poems_tried": 15,
+        "pages_ok": 15,
+        "backgrounds": 3,
+        "with_year": 2,
+        "with_place": 0
+      }
+    },
+    "policy": "古诗文网创作背景条目补采：每诗人取语料序前 15 首；年份取公元/括注纪年，作地仅作「背景条目提及」（composition_place_prose）；C 级，短引保存；晋级仍须过严格/放宽门。"
+  }
+}

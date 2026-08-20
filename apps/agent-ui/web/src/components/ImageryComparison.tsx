@@ -78,7 +78,7 @@ export function ImageryComparison({
   }), []);
 
   if (!selected) {
-    return <EmptyState title="没有意象比较结果" detail="审核词表未返回可比较记录。" />;
+    return <EmptyState title="这位诗人暂无比对数据" detail="词表里还没有他可比较的意象记录，换一位诗人试试。" />;
   }
 
   return (

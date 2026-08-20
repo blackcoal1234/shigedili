@@ -5,7 +5,7 @@
     "generatedFromPoems": 20437,
     "sourceHashes": {
       "poemsJsonSha256": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
-      "spiritImageDictSha256": "84cf55604ae5134c2d53c6be677e5341d70a9bd3e790bff510e8e29d2b32bafa",
+      "spiritImageDictSha256": "f6a4ac1505d9e918499da63b2a29d84290ee8835901727bb14bf455e55b6145a",
       "poetJourneysSha256": "6750fed8c7cbe4f0f314bb78a8d39c4b5e32ef4b86f45048f39859a024ce233b"
     },
     "corpusSha256": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
@@ -27285,7 +27285,7 @@
     ],
     "sourceHashes": {
       "data/poems.json": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
-      "data/spirit_image_dict.py": "84cf55604ae5134c2d53c6be677e5341d70a9bd3e790bff510e8e29d2b32bafa",
+      "data/imagery_tide_lexicon.py": "f6a4ac1505d9e918499da63b2a29d84290ee8835901727bb14bf455e55b6145a",
       "data/reviewed/poet_journeys.json": "6750fed8c7cbe4f0f314bb78a8d39c4b5e32ef4b86f45048f39859a024ce233b"
     }
   }

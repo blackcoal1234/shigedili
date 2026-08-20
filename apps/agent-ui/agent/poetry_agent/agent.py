@@ -25,8 +25,9 @@ def _build_degraded_graph(settings: Settings) -> Any:
             "messages": [
                 AIMessage(
                     content=(
-                        "Agent模型配置不完整，当前仅数据工具与目录接口可用。"
-                        f"缺少：{missing}。"
+                        "问答这边的大脑还没接上（服务器还没配置对话模型，"
+                        f"缺 {missing}），不过目录、诗人档案和各项数据查询都照常可用。"
+                        "让管理员把这几个环境变量配好、重启服务，我就能开口聊诗了。"
                     )
                 )
             ]
@@ -52,7 +53,8 @@ def _build_deep_agent(settings: Settings, tools: list[BaseTool]) -> Any:
         model=settings.llm_model,
         base_url=settings.llm_base_url,
         api_key=settings.llm_api_key,
-        temperature=0,
+        # 事实全部来自工具返回，温度只影响措辞：0 会把语言也冻成报表腔。
+        temperature=0.4,
         streaming=True,
     )
     # DeepAgents adds filesystem and shell helpers by default. This profile removes

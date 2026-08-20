@@ -75,6 +75,7 @@ GEO_EXTRA = {"都门": ("长安城门(今西安)", 108.95, 34.27)}
 PLACE_ALIASES = set(PD.aliases())
 OBJ_WORDS = sorted(PLACE_ALIASES | set(GAZE_NOUNS), key=len, reverse=True)
 SPIRIT_WORDS = SD.words()  # 已按长度降序
+SPIRIT_COUNT = len(SD.SPIRIT_DICT)
 
 CJK = re.compile(r"[一-鿿]")
 
@@ -632,6 +633,7 @@ def render_html(data):
     tpl = tpl.replace("__TOP_DIR_N__", str(c["dir_count"][c["top_dir"]]))
     tpl = tpl.replace("__N_CORPUS__", str(c["n_poems"]))
     tpl = tpl.replace("__N_CORPUS_POETS__", str(c["n_poets"]))
+    tpl = tpl.replace("__SPIRIT_COUNT__", str(SPIRIT_COUNT))
     tpl = tpl.replace("__SIX_COUNTS__", "、".join(f"{p} {c['six_counts'][p]} 首" for p in SIX))
     six_values = list(c["six_counts"].values())
     tpl = tpl.replace("__SIX_RANGE__", f"{min(six_values)}–{max(six_values)}")
@@ -869,7 +871,7 @@ footer{margin-top:14px;color:var(--muted);font-size:12px;border-top:1px solid va
     "相望/瞻望/希望/名望"等按前字黑名单排除；"三顾/相顾"不计入南北之顾。
     同一作者完全相同的句子只计一次（语料存在组诗合刊与单首并存）。词牌名含"望"者（望江南等）不计入诗题之望。</p>
     <h4>情感值</h4>
-    <p>对命中所在句以 spirit_image_dict（197 词条人工词典）做最长匹配，取命中词情感值（-1~1）均值；
+    <p>对命中所在句以 spirit_image_dict（__SPIRIT_COUNT__ 词条人工词典）做最长匹配，取命中词情感值（-1~1）均值；
     无命中记 0 并标"中性"。该数值描述<b>作品文本的意象情感特征</b>，不断言诗人真实心理；
     不同诗人之间不做心理强弱排名（遵守项目 external_pressure 只做同人内部纵向比较的红线）。</p>
     <h4>编年与证据等级</h4>
@@ -887,7 +889,7 @@ footer{margin-top:14px;color:var(--muted);font-size:12px;border-top:1px solid va
     其余方向均为文本自述；⑤"望+宾语"依赖名词表，未收录的宾语（如具体人名）会漏计。</p>
     <h4>数据文件</h4>
     <p>本页全部中间数据见 assets/competition/gaze_data.json（命中明细、六人汇总、故都指数、地理验证）。
-    数据资产：poems.json __N_CORPUS__ 首 / spirit_image_dict 197 词条 / place_dict 269 条古地名 /
+    数据资产：poems.json __N_CORPUS__ 首 / spirit_image_dict __SPIRIT_COUNT__ 词条 / place_dict 269 条古地名 /
     六人精神编年候选 CSV / verified_poem_contexts.csv 41 条人工审核系年。</p>
   </div>
 </details>

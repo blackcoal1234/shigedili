@@ -6,7 +6,7 @@ Zero-argument rerun:
 
 Read-only inputs:
     data/poems.json
-    data/spirit_image_dict.py
+    data/imagery_tide_lexicon.py
     data/reviewed/poet_journeys.json
 
 Owned outputs:
@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 POEMS_JSON = ROOT / "data" / "poems.json"
-LEXICON_PY = ROOT / "data" / "spirit_image_dict.py"
+LEXICON_PY = ROOT / "data" / "imagery_tide_lexicon.py"
 JOURNEYS_JSON = ROOT / "data" / "reviewed" / "poet_journeys.json"
 OUT_JSON = ROOT / "output" / "assets" / "competition" / "imagery_tide_data.json"
 OUT_HTML = ROOT / "output" / "38_唐宋意象潮汐.html"
@@ -129,7 +129,7 @@ REMOTE_SCRIPT_RE = re.compile(r"<script[^>]+src=[\"'](?:https?:)?//", re.I)
 
 
 def load_python_module(path: Path):
-    spec = importlib.util.spec_from_file_location("spirit_image_dict_for_viz38", path)
+    spec = importlib.util.spec_from_file_location("imagery_tide_lexicon_for_viz38", path)
     assert spec and spec.loader, f"词典模块加载失败：{path}"
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -412,26 +412,19 @@ def main() -> None:
     assert set(dynasty_poem_counts) == set(DYNASTIES), "诗库只应包含唐、宋两朝"
     assert all(poem.get("title") and poem.get("author") and poem.get("body") for poem in poems)
 
-    raw_rows = list(lexicon.SPIRIT_DICT)
-    assert len(raw_rows) == 197
-    assert len({row[0] for row in raw_rows}) == len(raw_rows), "词典词条不应重复"
-    included_rows = [
-        row
-        for row in raw_rows
-        if row[1] not in EXCLUDED_CATEGORIES and row[4] is not None and bool(row[5])
-    ]
+    included_rows = list(lexicon.IMAGERY_TIDE_LEXICON)
+    assert lexicon.validate() == {"terms": 160, "categories": 10}
     excluded_terms = [
         {
-            "word": row[0],
-            "category": row[1],
+            "word": word,
+            "category": category,
             "reason": (
-                EXCLUDED_CATEGORIES[row[1]]
-                if row[1] in EXCLUDED_CATEGORIES
+                EXCLUDED_CATEGORIES[category]
+                if category in EXCLUDED_CATEGORIES
                 else "词条缺少具象尺度或意象说明，本页从客观意象口径排除"
             ),
         }
-        for row in raw_rows
-        if row not in included_rows
+        for word, category in lexicon.HISTORICAL_EXCLUDED_TERMS
     ]
     assert len(included_rows) == 160, "客观意象词条口径应固定为 160"
     assert {row[1] for row in included_rows} == set(CATEGORY_COLORS)
@@ -823,7 +816,7 @@ def main() -> None:
             "journeysUpdatedAt": journeys.get("updated_at", ""),
             "dynastyCounts": {dynasty: dynasty_poem_counts[dynasty] for dynasty in DYNASTIES},
             "totalChineseChars": sum(dynasty_chars.values()),
-            "lexiconSourceTerms": len(raw_rows),
+            "lexiconSourceTerms": len(included_rows) + len(excluded_terms),
             "includedObjectiveTerms": len(included_rows),
             "excludedTerms": len(excluded_terms),
             "displayedEvidenceWords": len(evidence_payload),
@@ -886,7 +879,7 @@ def main() -> None:
             "excludedCategories": [
                 {
                     "category": category,
-                    "termCount": sum(row[1] == category for row in raw_rows),
+                    "termCount": sum(item["category"] == category for item in excluded_terms),
                     "reason": reason,
                 }
                 for category, reason in EXCLUDED_CATEGORIES.items()
@@ -937,7 +930,7 @@ def main() -> None:
             "exclusions": excluded_terms,
             "sourceHashes": {
                 "data/poems.json": hashlib.sha256(poems_bytes).hexdigest(),
-                "data/spirit_image_dict.py": hashlib.sha256(lexicon_bytes).hexdigest(),
+                "data/imagery_tide_lexicon.py": hashlib.sha256(lexicon_bytes).hexdigest(),
                 "data/reviewed/poet_journeys.json": hashlib.sha256(journeys_bytes).hexdigest(),
             },
         },

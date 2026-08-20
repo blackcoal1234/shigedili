@@ -2,7 +2,7 @@
 
 构建口径
 --------
-1. 本词典在 data/image_dict.py（人工整理的轻量情感词典，约110词条）基础上
+1. 本词典在 data/image_dict.py（人工整理的细粒度意象词典）基础上
    全部迁移并扩充李白分析核心词而成，是课程项目的人工整理数据，不是外部
    权威词库或模型输出；情感值沿用原词典的 [-1, 1] 口径，迁移词条保持原值。
 2. 情感簇为五选一：豪情进取 / 纵逸狂放 / 漂泊羁旅 / 愁苦幽愤 / 隐逸超脱。
@@ -241,6 +241,100 @@ SPIRIT_DICT = [
     ("凤凰台", "建筑", None,     -0.1, 2, "凤凰台为台阁，近景尺度"),
 ]
 
+# image_dict.py 是共享词的类别和情感值权威来源。这里保留本表已经人工审定的
+# 簇、尺度和依据，并为新增词按“所指对象的通常空间层级”补齐客观尺度。
+try:
+    from data.image_dict import IMAGE_DICT
+except ModuleNotFoundError as exc:
+    # `python data/spirit_image_dict.py` 将 data/ 而非仓库根目录加入 sys.path。
+    if exc.name != "data":
+        raise
+    import sys as _sys
+    from pathlib import Path as _Path
+    _data_dir = str(_Path(__file__).resolve().parent)
+    if _data_dir not in _sys.path:
+        _sys.path.insert(0, _data_dir)
+    from image_dict import IMAGE_DICT
+
+_NON_SPATIAL_CATEGORIES = {"情志", "时令节候", "功名典章", "军旅人物"}
+_CATEGORY_SCALE = {
+    "天象": 5, "晨昏光影": 5, "气象": 3,
+    "地理": 3, "山岳": 3, "地域水乡": 4, "江河湖海": 4,
+    "津渡行旅": 2, "洲渚滩岸": 3, "城郭关塞": 3,
+    "草木": 2, "花卉": 2, "水草": 2, "乔木": 2, "竹木": 2,
+    "香草": 1, "藤蔓": 2,
+    "禽鸟": 2, "鸣禽": 2, "水禽": 2, "候鸟": 4, "家禽": 2,
+    "瑞禽神鸟": 5, "走兽": 2, "猛兽": 2, "灵兽": 2, "灵长兽": 3,
+    "役畜": 2, "战骑": 2, "草虫": 1, "鸣虫": 1, "飞虫": 1,
+    "蛛虫": 1, "鳞介": 2, "江鱼": 2, "神兽": 5,
+    "行旅道路": 3, "舟楫": 1, "车马": 2, "边塞军镇": 3,
+    "战争声色": 3, "兵器": 1, "战争场域": 3,
+    "闺阁": 2, "服饰": 1, "身体容貌": 1,
+    "酒器宴饮": 1, "钟磬礼乐": 1, "丝竹歌舞": 1, "文房书籍": 1,
+    "农事田园": 3, "佛道意象": 2, "神话仙境": 5,
+    "宫苑城市": 3, "器物": 1, "建筑": 2,
+}
+_SCALE_BASIS = {
+    1: "所指为手边器物、身体周边或微小生物，属近身尺度",
+    2: "所指通常见于庭院、林木或单体建筑附近，属近景尺度",
+    3: "所指延展至山野、城郭或一望可及的水陆，属远景尺度",
+    4: "所指跨越江海、地域或迁徙长程，属山河尺度",
+    5: "所指位于天际、神话天界或宇宙层级，属天际尺度",
+}
+
+_old_by_word = {row[0]: row for row in SPIRIT_DICT}
+_image_by_word = {row[0]: row for row in IMAGE_DICT}
+_LEGACY_ONLY_CATEGORY_WORDS = {
+    "瑞禽神鸟": {"大鹏", "鹏"},
+    "风候": {"长风", "扶摇", "清风"},
+    "日月星汉": {"九天", "青天", "白日", "日月"},
+    "云烟雾霭": {"青云", "浮云", "紫烟"},
+    "江河湖海": {"四海", "洞庭"},
+    "山岳": {"五岳", "昆仑", "天门", "敬亭", "天姥", "峨眉", "青崖", "天山"},
+    "神兽": {"天马"},
+    "舟楫": {"云帆"},
+    "溪泉": {"瀑布"},
+    "酒器宴饮": {"美酒", "斗酒", "浊酒"},
+    "战骑": {"五花马"},
+    "服饰": {"千金裘"},
+    "水草": {"萍"},
+    "凋零草木": {"蓬", "孤蓬"},
+    "灵长兽": {"猿声"},
+    "水禽": {"沙鸥"},
+    "乡土家园": {"故乡", "故园"},
+    "城郭关塞": {"乡关", "夜郎", "剑阁", "白帝"},
+    "津渡行旅": {"逆旅"},
+    "晨昏光影": {"残阳"},
+    "行旅道路": {"蜀道"},
+    "灵兽": {"白鹿"},
+    "洲渚滩岸": {"沧洲"},
+    "农事田园": {"东篱"},
+    "闺阁": {"床", "明镜"},
+    "楼阁台榭": {"黄鹤楼", "凤凰台"},
+}
+_legacy_only_category_by_word = {
+    word: category
+    for category, category_words in _LEGACY_ONLY_CATEGORY_WORDS.items()
+    for word in category_words
+}
+_synced: list[tuple] = []
+for word, category, sentiment in IMAGE_DICT:
+    old = _old_by_word.get(word)
+    if old is not None:
+        cluster, scale, basis = old[2], old[4], old[5]
+    else:
+        cluster = None
+        scale = None if category in _NON_SPATIAL_CATEGORIES else _CATEGORY_SCALE.get(category)
+        basis = "" if scale is None else _SCALE_BASIS[scale]
+    _synced.append((word, category, cluster, sentiment, scale, basis))
+
+# 保留本表原有的李白核心扩展词；共享词已在上方按 image_dict 对齐且不会重复。
+for row in SPIRIT_DICT:
+    if row[0] not in _image_by_word:
+        category = _legacy_only_category_by_word.get(row[0], row[1])
+        _synced.append((row[0], category, *row[2:]))
+SPIRIT_DICT = _synced
+
 
 def words() -> list[str]:
     """全部词，按长度降序，供最长匹配。"""
@@ -271,8 +365,8 @@ def clusters() -> dict[str, list[str]]:
     return result
 
 
-if __name__ == "__main__":
-    # 自检：结构、簇合法性、尺度范围、去重、必含词
+def _self_check() -> dict[str, object]:
+    """校验结构、取值范围、去重及对基础词典的完整覆盖。"""
     seen: set[str] = set()
     for row in SPIRIT_DICT:
         assert len(row) == 6, f"字段数不为6：{row}"
@@ -297,8 +391,24 @@ if __name__ == "__main__":
     missing = [w for w in required if w not in seen]
     assert not missing, f"缺少必含词：{missing}"
 
-    counts = {name: len(members) for name, members in clusters().items()}
-    print(f"自检通过：共 {len(SPIRIT_DICT)} 词条")
-    print(f"簇分布：{counts}")
-    print(f"无簇词条：{sum(1 for row in SPIRIT_DICT if row[2] is None)}")
-    print(f"有空间尺度词条：{sum(1 for row in SPIRIT_DICT if row[4] is not None)}")
+    image_words = {row[0] for row in IMAGE_DICT}
+    assert image_words <= seen, f"未覆盖 image_dict：{sorted(image_words - seen)}"
+    coarse_categories = {"天象", "地理", "草木", "禽鸟", "走兽", "草虫", "鳞介", "器物", "建筑"}
+    remaining_coarse = sorted({row[1] for row in SPIRIT_DICT} & coarse_categories)
+    assert not remaining_coarse, f"仍有未细分的旧类别：{remaining_coarse}"
+
+    return {
+        "entries": len(SPIRIT_DICT),
+        "categories": len({row[1] for row in SPIRIT_DICT}),
+        "cluster_counts": {name: len(members) for name, members in clusters().items()},
+        "unclustered": sum(1 for row in SPIRIT_DICT if row[2] is None),
+        "scaled": sum(1 for row in SPIRIT_DICT if row[4] is not None),
+    }
+
+
+if __name__ == "__main__":
+    stats = _self_check()
+    print(f"自检通过：共 {stats['entries']} 词条，{stats['categories']} 类别")
+    print(f"簇分布：{stats['cluster_counts']}")
+    print(f"无簇词条：{stats['unclustered']}")
+    print(f"有空间尺度词条：{stats['scaled']}")

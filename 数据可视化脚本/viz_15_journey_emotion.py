@@ -21,8 +21,11 @@ from pyecharts.globals import ChartType, CurrentConfig, ThemeType
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "data"))
 
 from config import OUTPUT_DIR
+from poetry_glossary import glossary_map, glossed_html, load_glossary
+from offline_selection_glossary import offline_selection_glossary_script
 from viz_assets import (
     PYECHARTS_ASSET_HOST,
     localize_pyecharts_assets,
@@ -34,6 +37,7 @@ from viz_assets import (
 JOURNEY_JSON = ROOT / "data" / "reviewed" / "poet_journeys.json"
 POEMS_JSON = ROOT / "data" / "poems.json"
 OUT_HTML = OUTPUT_DIR / "15_诗人行旅与生命情感.html"
+GLOSSARY_VERSION, GLOSSARY_ENTRIES = load_glossary(ROOT / "data" / "poetry_glossary.json")
 TARGET_POETS = ("李白", "杜甫", "白居易", "苏轼", "陆游", "李清照")
 POET_COLORS = {
     "李白": "#38bdf8",
@@ -516,7 +520,11 @@ def _source_link(url: str, label: str) -> str:
     )
 
 
-def build_audit_html(payload: dict[str, object], nodes: list[dict[str, object]]) -> str:
+def build_audit_html(
+    payload: dict[str, object],
+    nodes: list[dict[str, object]],
+    poems: dict[tuple[str, str], dict[str, str]],
+) -> str:
     grade_counts = Counter(str(node["source_level"]) for node in nodes)
     inferred_relations = sum(
         1 for node in nodes if str(node["linked_poem"]["relation_level"]) == "C"
@@ -532,6 +540,16 @@ def build_audit_html(payload: dict[str, object], nodes: list[dict[str, object]])
             linked = node["linked_poem"]
             emotion = linked["text_emotion"]
             life = node["life_context"]
+            poem = poems.get((str(poet), str(linked["title"])), {"body": ""})
+            poem_body = str(poem.get("body") or "")
+            poem_reader = (
+                '<details class="offline-poem-reader">'
+                '<summary>查看收录原诗</summary>'
+                f'<div class="offline-poem-body" aria-label="《{escape(str(linked["title"]))}》原诗">'
+                f"{glossed_html(poem_body, GLOSSARY_ENTRIES)}"
+                "</div></details>"
+                if poem_body else ""
+            )
             rows.append(
                 """
                 <tr>
@@ -539,7 +557,7 @@ def build_audit_html(payload: dict[str, object], nodes: list[dict[str, object]])
                     <td>__EVENT__</td>
                     <td><span class="journey-grade journey-grade-__NODE_GRADE__">__NODE_GRADE__</span> __SOURCE__<br><small>置信度 __CONFIDENCE__%</small></td>
                     <td>__CONTEXT__<br><small>处境指数 __PRESSURE__ · C 级人工编码</small></td>
-                    <td><strong>《__POEM__》</strong><br>__EMOTION__（__VALENCE__ / __INTENSITY__%）<br><small>“__EVIDENCE__”</small></td>
+                    <td><strong>《__POEM__》</strong><br>__EMOTION__（__VALENCE__ / __INTENSITY__%）<br><small>“__EVIDENCE__”</small>__POEM_READER__</td>
                     <td><span class="journey-grade journey-grade-__REL_GRADE__">__REL_GRADE__</span> __RELATION__</td>
                 </tr>
                 """
@@ -559,6 +577,7 @@ def build_audit_html(payload: dict[str, object], nodes: list[dict[str, object]])
                 .replace("__VALENCE__", f"{float(emotion['valence']):+.2f}")
                 .replace("__INTENSITY__", str(round(float(emotion["intensity"]) * 100)))
                 .replace("__EVIDENCE__", escape(str(emotion["evidence"])))
+                .replace("__POEM_READER__", poem_reader)
                 .replace("__REL_GRADE__", escape(str(linked["relation_level"])))
                 .replace("__RELATION__", escape(str(linked["relation"])))
             )
@@ -610,7 +629,7 @@ def build_audit_html(payload: dict[str, object], nodes: list[dict[str, object]])
         <div class="journey-method-head">
             <span>EVIDENCE LEDGER</span>
             <h2>节点证据账本</h2>
-            <p>展开诗人名称可查看来源、置信度、生平处境归纳、文本证据及作品关联等级。</p>
+            <p>展开诗人名称可查看来源、置信度、生平处境归纳、文本证据及作品关联等级；作品单元可继续展开原诗学习。</p>
         </div>
         {''.join(detail_groups)}
     </section>
@@ -741,6 +760,40 @@ def journey_page_css() -> str:
     .journey-audit-table td small { color: #94a3b8; }
     .journey-audit-table td .journey-grade { color: #07111f; }
     .journey-audit-table a { color: #67e8f9; text-decoration: underline; text-underline-offset: 3px; }
+    .offline-poem-reader { margin-top: 10px; border-top: 1px solid rgba(148,163,184,.2); }
+    .offline-poem-reader summary { padding: 7px 0; color: #67e8f9; cursor: pointer; }
+    .offline-poem-body { position: relative; padding: 4px 0 8px; color: #e2e8f0; white-space: pre-line; user-select: text;
+        font-family: "KaiTi", "STKaiti", serif; font-size: 15px; line-height: 1.9; }
+    ::highlight(offline-selection-active) { color: inherit; background: rgba(251,191,36,.34); }
+    .gloss-term { font: inherit; color: inherit; cursor: pointer; border: 0; border-bottom: 2px dotted #fb7185;
+        padding: 0 1px; background: rgba(251,113,133,.09); user-select: text; -webkit-user-select: text; }
+    .gloss-term:hover, .gloss-term:focus-visible, .gloss-term[aria-expanded="true"] { color: #fff; background: rgba(251,113,133,.18);
+        outline: 2px solid rgba(251,113,133,.35); outline-offset: 2px; }
+    .gloss-popover { position: fixed; z-index: 30; box-sizing: border-box;
+        width: min(320px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow-y: auto; padding: 13px 15px;
+        color: #e2e8f0; background: #101827; border: 1px solid #475569; border-left: 3px solid #fb7185;
+        box-shadow: 0 12px 30px rgba(0,0,0,.38); font-size: 12px; line-height: 1.7;
+        opacity: 0; transform: translateY(4px); transition: opacity 140ms ease, transform 140ms ease; }
+    .gloss-popover.is-open { opacity: 1; transform: translateY(0); }
+    .gloss-popover-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .gloss-popover-head strong { color: #fff; font-family: "KaiTi", "STKaiti", serif; font-size: 18px; }
+    .gloss-popover p { margin: 7px 0 0; }.gloss-popover p b { color: #fb7185; }
+    .gloss-popover span { display: inline-block; margin-top: 9px; padding: 1px 7px; color: #fda4af;
+        border: 1px solid #7f1d3b; font-size: 10px; }.gloss-popover small { display: block; margin-top: 8px;
+        color: #94a3b8; font-size: 10px; }.gloss-close { border: 0; background: transparent; color: #94a3b8;
+        cursor: pointer; font-size: 18px; line-height: 1; }.gloss-close:hover { color: #fff; }
+    .selection-toolbar { position: fixed; z-index: 31; box-sizing: border-box; display: flex; max-width: calc(100vw - 24px);
+        padding: 7px 12px; border: 1px solid #fb7185; color: #fff; background: #101827;
+        box-shadow: 0 8px 24px rgba(0,0,0,.38); opacity: 0; transform: translateY(4px);
+        transition: opacity 140ms ease, transform 140ms ease; }
+    .selection-toolbar.is-open { opacity: 1; transform: translateY(0); }
+    .selection-toolbar button { border: 0; padding: 0; color: inherit; background: transparent; cursor: pointer;
+        font: 600 12px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .selection-toolbar button:hover, .selection-toolbar button:focus-visible { background: #3f1d2e;
+        outline: 2px solid rgba(251,113,133,.4); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+        .gloss-popover, .selection-toolbar { transition: none; transform: none; }
+    }
     .box { padding-top: 12px !important; }
     @media (max-width: 960px) {
         .journey-layer-grid { grid-template-columns: 1fr; }
@@ -791,7 +844,19 @@ def page_metrics(nodes: list[dict[str, object]]) -> list[tuple[str, str]]:
     ]
 
 
-def polish_page(payload: dict[str, object], nodes: list[dict[str, object]]) -> None:
+def journey_glossary_script() -> str:
+    return offline_selection_glossary_script(
+        glossary_map(GLOSSARY_ENTRIES),
+        poem_selector=".offline-poem-body",
+        poem_card_selector=".offline-poem-reader",
+        script_id="journey-emotion-gloss-script",
+    )
+
+def polish_page(
+    payload: dict[str, object],
+    nodes: list[dict[str, object]],
+    poems: dict[tuple[str, str], dict[str, str]],
+) -> None:
     html = OUT_HTML.read_text(encoding="utf-8")
     custom = journey_page_css()
     if "journey-emotion-page-style" not in html:
@@ -809,15 +874,17 @@ def polish_page(payload: dict[str, object], nodes: list[dict[str, object]]) -> N
         )
         html = re.sub(r"(<body\b[^>]*>)", rf"\1\n{hero}", html, count=1, flags=re.I)
 
-    audit_html = build_audit_html(payload, nodes)
+    audit_html = build_audit_html(payload, nodes, poems)
     if '<section class="journey-method"' not in html:
         html = html.replace('<div class="box">', f"{audit_html}\n<div class=\"box\">", 1)
+    if "journey-emotion-gloss-script" not in html:
+        html = html.replace("</body>", f"{journey_glossary_script()}\n</body>", 1)
     OUT_HTML.write_text(html, encoding="utf-8")
 
 
 def render() -> None:
     OUTPUT_DIR.mkdir(exist_ok=True)
-    payload, _ = load_payload()
+    payload, poems = load_payload()
     nodes = flatten_nodes(payload)
     poem_count = len({(str(node["poet"]), str(node["linked_poem"]["title"])) for node in nodes})
 
@@ -841,7 +908,7 @@ def render() -> None:
         accent_3="#c4b5fd",
         backlink_href="index.html",
     )
-    polish_page(payload, nodes)
+    polish_page(payload, nodes, poems)
 
     print(
         f"  [ok] saved {OUT_HTML}  "

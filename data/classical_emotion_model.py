@@ -21,6 +21,7 @@ from classical_emotion_lexicon import (
 
 SAFE_SINGLE_CHAR = frozenset("愁悲哀哭泣泪恨怨愤惧恐惊喜欢笑悔怅孤独病老衰")
 PUNCT_RE = re.compile(r"[^\u3400-\u9fff]+")
+TEXT_BOUNDARY = "\x00"
 
 
 def _is_blocked(source: str, start: int, end: int, term: str) -> bool:
@@ -34,10 +35,10 @@ def _is_blocked(source: str, start: int, end: int, term: str) -> bool:
             p0 = left + offset
             if p0 <= start and end <= p0 + len(phrase):
                 return True
-    if len(term) == 1:
-        prefix = source[max(0, start - 2):start]
-        if any(prefix.endswith(negator) for negator in NEGATORS):
-            return True
+    max_negator_length = max(map(len, NEGATORS), default=0)
+    prefix = source[max(0, start - max_negator_length):start]
+    if any(prefix.endswith(negator) for negator in NEGATORS):
+        return True
     return False
 
 
@@ -105,8 +106,9 @@ def classify_text(
     spirit_words: list[str] | None = None,
 ) -> dict[str, object]:
     """返回一首诗的多维情感画像。"""
-    source = PUNCT_RE.sub("", body or "")
-    title_source = PUNCT_RE.sub("", title or "")
+    # 标点是语义边界，不能直接删除后把相邻分句拼成一个伪短语。
+    source = PUNCT_RE.sub(TEXT_BOUNDARY, body or "")
+    title_source = PUNCT_RE.sub(TEXT_BOUNDARY, title or "")
     scores: Counter[str] = Counter()
     evidence: dict[str, list[str]] = defaultdict(list)
     rule_hits = 0

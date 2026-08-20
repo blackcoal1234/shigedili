@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>40 · 山河证道 —— 从意象读出地理</title>
+<script src="assets/pyecharts/v6/echarts.min.js"></script>
+<script src="assets/pyecharts/v6/maps/china.js"></script>
+<style>
+:root{--paper:#f2f4f0;--ink:#252b27;--cinnabar:#b64b3f;--jade:#26786e;--gold:#a87527;--blue:#426f94;}
+*{box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",sans-serif;line-height:1.7;margin:0;padding:16px;}
+h1,h2,h3,.kai{font-family:KaiTi,STKaiti,"Microsoft YaHei",serif;}
+.wrap{max-width:1180px;margin:0 auto;}
+header{border-bottom:2px solid var(--ink);padding-bottom:10px;}
+h1{margin:0;font-size:30px;letter-spacing:6px;}
+h1 .sub{font-size:16px;color:var(--gold);letter-spacing:2px;margin-left:10px;}
+.lead{margin:6px 0 2px;color:#3c443f;}
+.meta-line{margin:0;font-size:12.5px;color:#6a726c;}
+.meta-line b{color:var(--cinnabar);}
+.panel{background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;padding:12px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(37,43,39,.05);font-size:14px;color:#3c443f;}
+/* ---- 章节中枢 ---- */
+#sealRow{display:flex;gap:14px;margin:14px 0 4px;flex-wrap:wrap;}
+.seal{width:64px;height:64px;border-radius:50%;border:2px dashed #c3cac3;display:flex;align-items:center;justify-content:center;
+  font-family:KaiTi,STKaiti,serif;font-size:30px;color:#c3cac3;background:#f7f9f6;position:relative;}
+.seal.on{border:3px solid var(--cinnabar);color:var(--cinnabar);background:#fdf6f2;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(182,75,63,.3);}
+.seal .sn{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:11px;color:#6a726c;white-space:nowrap;font-family:"Microsoft YaHei",sans-serif;}
+#chCards{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
+.chcard{flex:1 1 240px;background:#fbfcfa;border:1px solid #dfe4de;border-top:4px solid var(--blue);border-radius:10px;padding:10px 14px;position:relative;}
+.chcard.locked{opacity:.55;}
+.chcard h3{margin:2px 0 2px;font-size:19px;}
+.chcard .th{font-size:12.5px;color:#6a726c;min-height:38px;}
+.chcard .st{font-size:13px;margin:4px 0;}
+.chcard .st b{color:var(--cinnabar);}
+button.act{cursor:pointer;background:var(--jade);color:#fff;border:none;border-radius:8px;padding:7px 18px;font-size:14.5px;font-family:KaiTi,STKaiti,serif;letter-spacing:2px;}
+button.act:disabled{background:#a9b3ad;cursor:not-allowed;}
+button.act.ghost{background:transparent;color:var(--jade);border:1px solid var(--jade);}
+button.act.warn{background:var(--cinnabar);}
+button.act.sm{padding:3px 12px;font-size:12.5px;letter-spacing:1px;}
+#hub2col{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;align-items:stretch;}
+#kao{flex:1 1 340px;}
+#journey{flex:1 1 420px;background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;padding:8px;min-height:300px;}
+#jmap{width:100%;height:300px;}
+.kgrid{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.kitem{border:1px solid #cfd6d0;border-radius:8px;padding:6px 10px;font-size:12.5px;background:#fff;min-width:150px;}
+.kitem a{color:var(--blue);text-decoration:none;font-weight:bold;}
+.kitem a:hover{text-decoration:underline;}
+.kitem .note{color:#6a726c;font-size:11.5px;}
+.kitem.lock{background:#f2f4f0;color:#9aa39b;border-style:dashed;}
+.kitem.lock b{color:#9aa39b;}
+/* ---- 答题 ---- */
+#gameArea{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;align-items:stretch;}
+.left{flex:1 1 380px;min-width:340px;}
+.right{flex:1 1 520px;min-width:340px;}
+#mapWrap{background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;height:520px;position:relative;}
+#map{position:absolute;inset:8px;}
+.mapHint{position:absolute;left:14px;top:10px;font-size:12.5px;color:#6a726c;z-index:5;background:rgba(251,252,250,.85);border-radius:6px;padding:2px 8px;}
+.qhead{display:flex;gap:12px;align-items:baseline;font-size:13.5px;color:#3c443f;margin-bottom:8px;flex-wrap:wrap;}
+.qhead .qno{font-family:KaiTi,STKaiti,serif;font-size:18px;color:var(--ink);}
+.qhead .chn{color:var(--gold);font-family:KaiTi,STKaiti,serif;font-size:15px;}
+.badge{display:inline-block;border-radius:4px;padding:0 8px;font-size:12px;line-height:20px;}
+.b1{background:#e4ece7;color:var(--jade);border:1px solid #bcd3c9;}
+.b2{background:#f4ead8;color:var(--gold);border:1px solid #dcc39a;}
+.poemcard{background:#fbfcfa;border:1px solid #dfe4de;border-left:4px solid var(--cinnabar);border-radius:10px;padding:14px 18px;}
+.poemcard .kai{font-size:21px;line-height:2;}
+.poemcard .src{margin-top:6px;font-size:13px;color:#6a726c;}
+#hintArea{margin-top:12px;}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.hbtn{flex:1 1 150px;cursor:pointer;text-align:left;background:#fbfcfa;border:1px solid #cfd6d0;border-radius:8px;padding:7px 10px;font-size:13px;color:#3c443f;transition:all .15s;}
+.hbtn:hover:not(:disabled){border-color:var(--jade);background:#f0f5f2;}
+.hbtn:disabled{opacity:.55;cursor:not-allowed;}
+.hbtn .cost{color:var(--cinnabar);font-weight:bold;}
+.hbtn .free{color:var(--jade);font-weight:bold;}
+.hintext{background:#f6f2e8;border:1px dashed #d8c9a3;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:13.5px;color:#4a4436;display:none;}
+#guessBar{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+#guessBar .tip{font-size:13px;color:#6a726c;flex:1 1 160px;}
+#multNow{font-size:13px;color:var(--gold);}
+#progBar{height:8px;background:#e3e7e1;border-radius:4px;overflow:hidden;margin:6px 0 0;}
+#progFill{height:100%;width:0;background:linear-gradient(90deg,var(--jade),var(--gold));transition:width .3s;}
+/* ---- 章末 / 弹窗 ---- */
+#chEnd .rank{font-size:34px;font-family:KaiTi,STKaiti,serif;color:var(--cinnabar);letter-spacing:8px;}
+#chEnd .bigseal{float:right;width:96px;height:96px;border-radius:50%;border:4px solid var(--cinnabar);color:var(--cinnabar);
+  display:flex;align-items:center;justify-content:center;font-family:KaiTi,STKaiti,serif;font-size:48px;margin-left:14px;
+  background:#fdf6f2;transform:rotate(-8deg);box-shadow:0 2px 8px rgba(182,75,63,.25);}
+.stat3{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0;}
+.stat3>div{flex:1 1 120px;text-align:center;background:#f6f8f4;border:1px solid #e0e5de;border-radius:8px;padding:8px;}
+.stat3 .v{font-size:22px;font-family:KaiTi,STKaiti,serif;}
+.stat3 .k{font-size:12px;color:#6a726c;}
+.placeRows{clear:both;}
+.placeRow{border:1px solid #dfe4de;border-radius:8px;padding:6px 12px;margin:6px 0;font-size:13px;background:#fff;}
+.placeRow b{color:var(--blue);font-family:KaiTi,STKaiti,serif;font-size:15px;}
+.placeRow .lr{color:var(--gold);}
+.qian span{display:inline-block;background:#fff;border:1px solid #d8cdb0;border-radius:6px;padding:2px 10px;margin:3px 4px 3px 0;font-size:13px;cursor:pointer;color:#4a4436;}
+.qian span:hover{border-color:var(--gold);color:var(--gold);}
+.mask{position:fixed;inset:0;background:rgba(37,43,39,.5);display:none;z-index:50;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto;}
+.mask.on{display:flex;}
+.mbox{background:#fbfcfa;border:1px solid #dfe4de;border-radius:12px;max-width:760px;width:100%;padding:20px 24px;margin:auto 0;}
+.mclose{margin-left:auto;border:none;background:transparent;font-size:22px;cursor:pointer;color:#5a615c;line-height:1;}
+.mclose:hover{color:var(--cinnabar);}
+.lc-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px;}
+.lc-head .dist{font-size:26px;font-family:KaiTi,STKaiti,serif;}
+.lc-head .pts{color:var(--cinnabar);font-weight:bold;}
+.lc-place{margin:10px 0 4px;font-family:KaiTi,STKaiti,serif;font-size:19px;}
+.lc-place small{font-size:13px;color:#6a726c;font-family:"Microsoft YaHei",sans-serif;}
+.lc-poem{background:#f6f8f4;border:1px solid #e0e5de;border-radius:8px;padding:10px 14px;margin-top:10px;}
+.lc-poem .t{font-family:KaiTi,STKaiti,serif;font-size:17px;}
+.lc-poem .b{white-space:pre-wrap;font-family:KaiTi,STKaiti,serif;font-size:15.5px;line-height:1.9;margin-top:4px;}
+.lc-sec{margin-top:14px;}
+.lc-sec h3{margin:0 0 6px;font-size:15px;color:var(--blue);border-left:3px solid var(--blue);padding-left:8px;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{border:1px solid #cfd6d0;border-radius:14px;padding:1px 10px;font-size:12.5px;background:#fff;}
+.chip .w{font-family:KaiTi,STKaiti,serif;font-size:15px;}
+.chip.pos{border-color:#a9c4ba;color:var(--jade);}
+.chip.neg{border-color:#ddb1a9;color:var(--cinnabar);}
+table.ptab{border-collapse:collapse;width:100%;font-size:13px;margin-top:4px;}
+table.ptab th,table.ptab td{border:1px solid #dfe4de;padding:4px 8px;text-align:left;}
+table.ptab th{background:#eef1ec;font-weight:normal;color:#4a524c;}
+.duo{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.duo>div{flex:1 1 280px;border:1px solid #dfe4de;border-radius:8px;padding:10px 12px;font-size:13.5px;}
+.duo .h{font-size:14px;margin-bottom:6px;}
+.duo .kao .h{color:var(--jade);border-left:3px solid var(--jade);padding-left:8px;}
+.duo .dao .h{color:var(--gold);border-left:3px solid var(--gold);padding-left:8px;}
+.duo .dao{background:#faf7ef;}
+.evrow{margin:6px 0;padding-left:8px;border-left:2px solid #cfd6d0;}
+.evrow .g{display:inline-block;border-radius:3px;padding:0 5px;font-size:11.5px;color:#fff;background:var(--jade);margin-right:6px;}
+.evrow .g.A{background:var(--blue);}
+.evrow .src{font-size:12px;color:#6a726c;}
+.more li{margin:4px 0;}
+.lc-btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:flex-end;}
+.arc-row{margin:6px 0;font-size:13.5px;}
+.arc-row b{color:var(--blue);}
+footer{margin-top:18px;border-top:1px solid #dfe4de;padding-top:10px;font-size:12.5px;color:#6a726c;}
+/* ---- 章题开卷卡（Seedance 槽位；无视频时水墨底降级） ---- */
+#introOv{position:fixed;inset:0;z-index:60;display:none;background:linear-gradient(135deg,#f2f4f0 0%,#e8ece4 55%,#dfe4d8 100%);}
+#introOv.on{display:block;}
+#introOv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;}
+#introOv .iposter{position:absolute;inset:0;background-size:cover;background-position:center;}
+#introBox{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.itext{text-align:center;position:relative;padding:28px 40px;border-radius:14px;background:rgba(251,252,250,.75);box-shadow:0 4px 18px rgba(37,43,39,.12);max-width:580px;margin:16px;}
+.iseal{width:96px;height:96px;margin:0 auto 12px;border:4px solid var(--cinnabar);border-radius:50%;color:var(--cinnabar);font-family:KaiTi,STKaiti,serif;font-size:52px;display:flex;align-items:center;justify-content:center;background:#fdf6f2;transform:rotate(-8deg);}
+@keyframes izoom{from{transform:rotate(-8deg) scale(1);}to{transform:rotate(-8deg) scale(1.12);}}
+.iname{font-family:KaiTi,STKaiti,serif;font-size:44px;letter-spacing:10px;}
+.itheme{color:#4a524c;font-size:15px;margin-top:4px;}
+.ikai{font-family:KaiTi,STKaiti,serif;font-size:17px;color:var(--blue);margin-top:10px;}
+.iscene{font-size:12px;color:#9aa39b;margin:8px 0 14px;}
+@media (prefers-reduced-motion:reduce){.iseal{animation:none !important;}}
+@media (max-width:900px){#mapWrap{height:420px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>山河证道<span class="sub">卷一 · 六家行迹 · 四章</span></h1>
+  <p class="lead">诗行万里 · 地域化竞猜——读诗句，见山河：在地图上点出这首诗写于何处。通关一章，解锁下一章与考据馆；集齐四章诗印，卷一功成。</p>
+  <p class="meta-line">共 <b>24</b> 题 / <b>4</b> 章（作地均有人工核验 <b>A/B 级</b>证据）｜计分 <b>5000 × e<sup>−距离km/300</sup> × 提示系数</b>｜首章前 <b>3</b> 题教学关提示免费｜数据与口径见页脚</p>
+</header>
+
+<!-- ============ 章节中枢 ============ -->
+<section id="hubArea">
+  <div id="sealRow"></div>
+  <div style="clear:both"></div>
+  <div id="chCards"></div>
+  <div id="hub2col">
+    <div class="panel" id="kao">
+      <b>考据馆</b>——通关章节解锁深度展项（在本页学习卡之外继续深挖证据）：
+      <div class="kgrid" id="kaoGrid"></div>
+    </div>
+    <div id="journey">
+      <div style="font-size:13px;color:#6a726c;padding:4px 8px;">你的行旅——诗人行万里，你行诗万里（绿＝300km 内答对，红＝偏出）</div>
+      <div id="jmap"></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <button class="act ghost sm" id="btnResetAll">清除全部行囊与进度</button>
+  </div>
+</section>
+
+<!-- ============ 答题 ============ -->
+<section id="gameArea" style="display:none;">
+  <div class="left">
+    <div class="qhead">
+      <span class="chn" id="chName"></span>
+      <span class="qno" id="qNo">第 1 题</span>
+      <span id="qDiff"></span>
+      <span>得分 <b id="scoreNow" style="color:var(--cinnabar)">0</b></span>
+      <span id="streakNow"></span>
+      <span style="flex:1 1 30px"></span>
+      <span id="multNow"></span>
+    </div>
+    <div class="poemcard">
+      <div class="kai" id="poemLines"></div>
+      <div class="src" id="poemSrc"></div>
+    </div>
+    <div id="hintArea">
+      <div class="hbtns">
+        <button class="hbtn" id="hProv">一级 · 省份圈定 <span class="cost">×0.7</span><div style="font-size:11.5px;color:#6a726c">缩小到大区</div></button>
+        <button class="hbtn" id="hPlace">二级 · 古今对照 <span class="cost">×0.5</span><div style="font-size:11.5px;color:#6a726c">「长安」＝今西安？</div></button>
+        <button class="hbtn" id="hImg">三级 · 意象证据 <span class="cost">×0.3</span><div style="font-size:11.5px;color:#6a726c">意象的地域归属</div></button>
+      </div>
+      <div class="hintext" id="htProv"></div>
+      <div class="hintext" id="htPlace"></div>
+      <div class="hintext" id="htImg"></div>
+    </div>
+    <div id="guessBar" class="panel">
+      <span class="tip" id="guessTip">在右侧地图上点击你的判断：这首诗写于何处？</span>
+      <button class="act" id="btnConfirm" disabled>落子定夺</button>
+      <button class="act ghost sm" id="btnBackHub">暂回章节页</button>
+    </div>
+    <div id="progBar"><div id="progFill"></div></div>
+  </div>
+  <div class="right">
+    <div id="mapWrap">
+      <div class="mapHint" id="mapHint">滚轮缩放 · 拖拽平移 · 单击落子</div>
+      <div id="map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 章末 ============ -->
+<section id="chEnd" class="panel" style="display:none;"></section>
+
+<div class="panel" id="methodPanel">
+  <b>方法与口径</b>——题目作地仅取人工核验事实包中 A/B 级证据记录；卷一四章依 24 题实际作地分布划定（关即区域：两京·朔方／巴蜀／江南／荆楚·江右）。三级提示中意象统计为核验样本确定性计数，古今对照出自项目古地名词典；「导读」由规则模板自动拼装并显式标注<b>非人工考据</b>，与「考据」栏严格分栏；展示句已剔除含诗人名的句子。地方诗格档案来自 tools/build_place_profile.py：在地创作为核验口径，被写入为全量语料扫描口径，在地率为实验性指标（两侧样本口径不同，展示均附 n）。本页零外部依赖：ECharts 与中国地图均为本地资产，进度存于浏览器 localStorage。编年事实覆盖边界（实时）：语料 19418 首中 6920 首有编年事实（35.6%，三层口径），84/88 位诗人有事实——未覆盖为外部编年源不系年的长尾作品，不以候选冒充事实（详见《事实覆盖口径说明》）。
+</div>
+
+<footer>
+  诗行万里 · 山河证道（卷一）｜24 题 · 4 章 · 地方档案 120 处｜
+  生成：tools/build_quiz_bank.py + tools/build_place_profile.py + 数据可视化脚本/viz_40_shanhe_quest.py
+</footer>
+</div>
+
+<!-- 学习卡 -->
+<div class="mask" id="lcMask"><div class="mbox" id="lcBox"></div></div>
+<!-- 地方档案 -->
+<div class="mask" id="arcMask"><div class="mbox" id="arcBox"></div></div>
+<!-- 章题开卷卡 -->
+<div id="introOv"><div id="introBox"></div></div>
+
+<script>
+(function(){
+"use strict";
+var BANK = {"meta":{"n_candidates":56,"n_selected":24,"n_located_sample":59,"difficulty_dist":{"1":15,"2":9},"poets":[["李清照",4],["李白",4],["杜甫",4],["白居易",4],["苏轼",4],["陆游",4]],"score_formula":"round(5000 * exp(-dist_km/300) * hint_multiplier)","hint_policy":{"province":0.7,"place":0.5,"imagery":0.3,"tutorial_free_first":3},"policy":"题目作地仅取人工核验 A/B 级证据记录；意象统计为核验样本确定性计数；导读为规则模板自动拼装并显式标注，非人工考据；展示句已剔除含诗人名的句子。","generated_by":"tools/build_quiz_bank.py","chapters_note":"卷一四章依 24 题实际作地分布划定（关即区域）；通关一章解锁下一章与考据馆。"},"questions":[{"lines":["念武陵春晚，云锁重楼。","念武陵人远，烟锁秦楼。","明朝，者回去也，千万遍阳关，也即难留。"],"full_body":"香冷金猊，被翻红浪，起来慵自梳头。任宝奁尘满，日上帘钩。生怕离怀别苦，多少事、欲说还休。新来瘦，非干病酒，不是悲秋。\n休休，这回去也，千万遍《阳关》，也则难留。念武陵人远，烟锁秦楼。惟有楼前流水，应念我、终日凝眸。凝眸处，从今又添，一段新愁。\n(香冷金猊，被翻红浪，起来人未梳头。任宝奁闲掩，日上帘钩。生怕闲愁暗恨，多少事、欲说还休。今年瘦，非干病酒，不是悲秋。\n明朝，者回去也，千万遍阳关，也即难留。念武陵春晚，云锁重楼。记取楼前绿水，应念我、终日凝眸。凝眸处，从今更数，几段新愁。版本二)","poet":"李清照","title":"凤凰台上忆吹箫·香冷金猊","dynasty":"宋","answer":{"modern":"山东省青州市","historical":"益都（青州）","province":"山东","lon":118.4796,"lat":36.6846,"year":1109,"grade":"B"},"difficulty":1,"place_names":[{"alias":"阳关","modern":"敦煌","province":"甘肃","lon":94.66,"lat":40.14},{"alias":"武陵","modern":"常德","province":"湖南","lon":111.69,"lat":29.04}],"imagery_hits":[{"word":"云","cat":"天象","emotion":0.0,"line":"念武陵春晚，云锁重楼。"},{"word":"烟","cat":"天象","emotion":-0.2,"line":"念武陵人远，烟锁秦楼。"},{"word":"关","cat":"地理","emotion":-0.3,"line":"休休，这回去也，千万遍阳关，也则难留。"},{"word":"酒","cat":"器物","emotion":0.0,"line":"新来瘦，非干病酒，不是悲秋。"},{"word":"楼","cat":"建筑","emotion":0.0,"line":"念武陵人远，烟锁秦楼。"},{"word":"愁","cat":"情志","emotion":-0.8,"line":"凝眸处，从今又添，一段新愁。"},{"word":"恨","cat":"情志","emotion":-0.7,"line":"生怕闲愁暗恨，多少事、欲说还休。"},{"word":"别","cat":"情志","emotion":-0.5,"line":"生怕离怀别苦，多少事、欲说还休。"}],"emotion":{"primary":"忧国伤时","valence":-0.426,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"山东","decoy":"甘肃","text":"此诗作于今山东或甘肃境内"},"place":{"kind":"place_map","text":"诗中「阳关」＝今敦煌（甘肃）；诗中「武陵」＝今常德（湖南）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人李清照的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）","excerpt":"益都（1108年-1121年，25-38岁，作品：13）。","url":"https://open.cnkgraph.com/api/Biography?Author=%E6%9D%8E%E6%B8%85%E7%85%A7&BeginYear=1109&EndYear=1109"}],"context_facts":["益都（1108年-1121年，25-38岁，作品：13）。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《凤凰台上忆吹箫·香冷金猊》读下来，李清照此刻人应在山东省青州市——1109年前后的事。通篇最扎眼的意象是「云」和「烟」，逐句词典分析出的情绪是「忧国伤时」，整体偏冷（愉悦度 -0.4）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[],"id":"Q01"},{"lines":["泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。","人道山长山又断，萧萧微雨闻孤馆。","惜别伤离方寸乱，忘了临行，酒盏深和浅。"],"full_body":"泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。人道山长山又断，萧萧微雨闻孤馆。\n惜别伤离方寸乱，忘了临行，酒盏深和浅。好把音书凭过雁，东莱不似蓬莱远。","poet":"李清照","title":"蝶恋花·晚止昌乐馆寄姊妹","dynasty":"宋","answer":{"modern":"山东省昌乐县","historical":"昌乐","province":"山东","lon":118.83,"lat":36.7068,"year":1121,"grade":"B"},"difficulty":1,"place_names":[{"alias":"阳关","modern":"敦煌","province":"甘肃","lon":94.66,"lat":40.14}],"imagery_hits":[{"word":"雨","cat":"天象","emotion":-0.2,"line":"人道山长山又断，萧萧微雨闻孤馆。"},{"word":"山","cat":"地理","emotion":0.1,"line":"人道山长山又断，萧萧微雨闻孤馆。"},{"word":"关","cat":"地理","emotion":-0.3,"line":"泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。"},{"word":"雁","cat":"禽鸟","emotion":-0.5,"line":"好把音书凭过雁，东莱不似蓬莱远。"},{"word":"酒","cat":"器物","emotion":0.0,"line":"惜别伤离方寸乱，忘了临行，酒盏深和浅。"},{"word":"孤","cat":"情志","emotion":-0.7,"line":"人道山长山又断，萧萧微雨闻孤馆。"},{"word":"泪","cat":"情志","emotion":-0.6,"line":"泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。"},{"word":"别","cat":"情志","emotion":-0.5,"line":"惜别伤离方寸乱，忘了临行，酒盏深和浅。"}],"emotion":{"primary":"离愁惜别","valence":-0.319,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"山东","decoy":"广西壮族自治","text":"此诗作于今山东或广西壮族自治境内"},"place":{"kind":"place_map","text":"诗中「阳关」＝今敦煌（甘肃）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人李清照的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）","excerpt":"昌乐（1121年，38岁，作品：1）。","url":"https://open.cnkgraph.com/api/Biography?Author=%E6%9D%8E%E6%B8%85%E7%85%A7&BeginYear=1121&EndYear=1121"}],"context_facts":["昌乐（1121年，38岁，作品：1）。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《蝶恋花·晚止昌乐馆寄姊妹》读下来，李清照此刻人应在山东省昌乐县——1121年前后的事。通篇最扎眼的意象是「雨」和「山」，逐句词典分析出的情绪是「离愁惜别」，整体偏冷（愉悦度 -0.3）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰","alias":"昌乐","line":"征乐昌乐馆，开筵列壶觞。","famous":true},{"poet":"韩愈","title":"泷吏","alias":"昌乐","line":"南行逾六旬，始下昌乐泷。","famous":false}],"id":"Q02"},{"lines":["黄河捧土尚可塞，北风雨雪恨难裁。","幽州思妇十二月，停歌罢笑双蛾摧。","倚门望行人，念君长城苦寒良可哀。"],"full_body":"烛龙栖寒门，光曜犹旦开。\n日月照之何不及此？惟有北风号怒天上来。\n燕山雪花大如席，片片吹落轩辕台。\n幽州思妇十二月，停歌罢笑双蛾摧。\n倚门望行人，念君长城苦寒良可哀。\n别时提剑救边去，遗此虎文金鞞靫。\n中有一双白羽箭，蜘蛛结网生尘埃。\n箭空在，人今战死不复回。\n不忍见此物，焚之已成灰。\n黄河捧土尚可塞，北风雨雪恨难裁。","poet":"李白","title":"北风行","dynasty":"唐","answer":{"modern":"北京市","historical":"幽州（范阳一带）","province":"北京","lon":116.41,"lat":39.9,"year":752,"grade":"B"},"difficulty":1,"place_names":[{"alias":"幽州","modern":"北京","province":"北京","lon":116.41,"lat":39.9},{"alias":"长城","modern":"北京","province":"北京","lon":116.41,"lat":40.43}],"imagery_hits":[{"word":"黄河","cat":"地理","emotion":0.2,"line":"黄河捧土尚可塞，北风雨雪恨难裁。"},{"word":"月","cat":"天象","emotion":-0.2,"line":"日月照之何不及此？"},{"word":"雪","cat":"天象","emotion":-0.2,"line":"燕山雪花大如席，片片吹落轩辕台。"},{"word":"风","cat":"天象","emotion":-0.1,"line":"惟有北风号怒天上来。"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"黄河捧土尚可塞，北风雨雪恨难裁。"},{"word":"山","cat":"地理","emotion":0.1,"line":"燕山雪花大如席，片片吹落轩辕台。"},{"word":"河","cat":"地理","emotion":0.0,"line":"黄河捧土尚可塞，北风雨雪恨难裁。"},{"word":"塞","cat":"地理","emotion":-0.3,"line":"黄河捧土尚可塞，北风雨雪恨难裁。"}],"emotion":{"primary":"离愁惜别","valence":-0.321,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"北京","decoy":"甘肃","text":"此诗作于今北京或甘肃境内"},"place":{"kind":"place_map","text":"诗中「幽州」＝今北京（北京）——正是本作之地，落子即得；诗中「长城」＝今北京（北京）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人李白的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"CNKGraph 文学编年或人物年历条目","excerpt":"CNKGraph条目将《北风行》系于752，地点标为幽州（范阳一带）。","url":"https://open.cnkgraph.com/api/Writing/26037"}],"context_facts":["“此诗作于唐玄宗天宝十一载（752年）秋天（一说冬天），当时李白游幽州（今北京、天津与辽宁朝阳一带）”，并引王琦注谓拟鲍照《北风行》而作。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《北风行》读下来，李白此刻人应在北京市——752年前后的事。通篇最扎眼的意象是「黄河」和「月」，逐句词典分析出的情绪是「离愁惜别」，整体偏冷（愉悦度 -0.3）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰","alias":"幽州","line":"十月到幽州，戈鋋若罗星。","famous":true},{"poet":"杜甫","title":"后出塞五首","alias":"幽州","line":"坐见幽州骑，长驱河洛昏。","famous":true},{"poet":"陆游","title":"书愤","alias":"长城","line":"塞上长城空自许，镜中衰鬓已先斑。","famous":true}],"id":"Q03"},{"lines":["朝辞白帝彩云间，千里江陵一日还。","两岸猿声啼不住，轻舟已过万重山。"],"full_body":"朝辞白帝彩云间，千里江陵一日还。\n两岸猿声啼不住，轻舟已过万重山。","poet":"李白","title":"早发白帝城","dynasty":"唐","answer":{"modern":"重庆市奉节县","historical":"夔州白帝城","province":"重庆","lon":109.5804,"lat":31.0502,"year":759,"grade":"B"},"difficulty":1,"place_names":[{"alias":"江陵","modern":"荆州","province":"湖北","lon":112.24,"lat":30.33}],"imagery_hits":[{"word":"云","cat":"天象","emotion":0.0,"line":"朝辞白帝彩云间，千里江陵一日还。"},{"word":"山","cat":"地理","emotion":0.1,"line":"两岸猿声啼不住，轻舟已过万重山。"},{"word":"江","cat":"地理","emotion":0.0,"line":"朝辞白帝彩云间，千里江陵一日还。"},{"word":"猿","cat":"走兽","emotion":-0.5,"line":"两岸猿声啼不住，轻舟已过万重山。"},{"word":"舟","cat":"器物","emotion":0.0,"line":"两岸猿声啼不住，轻舟已过万重山。"}],"emotion":{"primary":"欢愉明快","valence":0.82,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"重庆","decoy":"甘肃","text":"此诗作于今重庆或甘肃境内"},"place":{"kind":"place_map","text":"诗中「江陵」＝今荆州（湖北）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人李白的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据《李太白年谱补正》）","excerpt":"API年谱条目标注759年三月流放途中遇赦后自白帝城返江陵。","url":"https://open.cnkgraph.com/api/Writing/25562"}],"context_facts":["API年谱条目标注759年三月流放途中遇赦后自白帝城返江陵。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《早发白帝城》读下来，李白此刻人应在重庆市奉节县——759年前后的事。通篇最扎眼的意象是「云」和「山」，逐句词典分析出的情绪是「欢愉明快」，整体偏暖（愉悦度 +0.8）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[],"id":"Q04"},{"lines":["总为浮云能蔽日，长安不见使人愁。","凤凰台上凤凰游，凤去台空江自流。","三山半落青天外，二水中分白鹭洲。"],"full_body":"凤凰台上凤凰游，凤去台空江自流。\n吴宫花草埋幽径，晋代衣冠成古丘。\n三山半落青天外，二水中分白鹭洲。\n总为浮云能蔽日，长安不见使人愁。","poet":"李白","title":"登金陵凤凰台","dynasty":"唐","answer":{"modern":"南京市","historical":"金陵凤凰台","province":"江苏","lon":118.8029,"lat":32.0647,"year":747,"grade":"B"},"difficulty":1,"place_names":[{"alias":"长安","modern":"西安","province":"陕西","lon":108.95,"lat":34.27}],"imagery_hits":[{"word":"云","cat":"天象","emotion":0.0,"line":"总为浮云能蔽日，长安不见使人愁。"},{"word":"山","cat":"地理","emotion":0.1,"line":"三山半落青天外，二水中分白鹭洲。"},{"word":"江","cat":"地理","emotion":0.0,"line":"凤凰台上凤凰游，凤去台空江自流。"},{"word":"台","cat":"建筑","emotion":0.1,"line":"凤凰台上凤凰游，凤去台空江自流。"},{"word":"愁","cat":"情志","emotion":-0.8,"line":"总为浮云能蔽日，长安不见使人愁。"}],"emotion":{"primary":"忧国伤时","valence":-0.64,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"江苏","decoy":"山西","text":"此诗作于今江苏或山西境内"},"place":{"kind":"place_map","text":"诗中「长安」＝今西安（陕西）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人李白的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据《李太白年谱补正》）","excerpt":"API年谱条目标注747年在金陵登凤凰台作诗。","url":"https://open.cnkgraph.com/api/Writing/25793"}],"context_facts":["API年谱条目标注747年在金陵登凤凰台作诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《登金陵凤凰台》读下来，李白此刻人应在南京市——747年前后的事。通篇最扎眼的意象是「云」和「山」，逐句词典分析出的情绪是「忧国伤时」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李清照","title":"临江仙·庭院深深深几许","alias":"建康","line":"春归秣陵树，人老建康城。","famous":true},{"poet":"李清照","title":"金石录后序","alias":"建康","line":"至东海，连舻渡淮，又渡江，至建康。","famous":true},{"poet":"李白","title":"月夜金陵怀古","alias":"金陵","line":"苍苍金陵月，空悬帝王州。","famous":true}],"id":"Q05"},{"lines":["金陵子弟来相送，欲行不行各尽觞。","风吹柳花满店香，吴姬压酒劝客尝。","请君试问东流水，别意与之谁短长？"],"full_body":"风吹柳花满店香，吴姬压酒劝客尝。\n金陵子弟来相送，欲行不行各尽觞。\n请君试问东流水，别意与之谁短长？","poet":"李白","title":"金陵酒肆留别","dynasty":"唐","answer":{"modern":"南京市","historical":"金陵","province":"江苏","lon":118.78,"lat":32.06,"year":726,"grade":"B"},"difficulty":1,"place_names":[{"alias":"金陵","modern":"南京","province":"江苏","lon":118.78,"lat":32.06}],"imagery_hits":[{"word":"风","cat":"天象","emotion":-0.1,"line":"风吹柳花满店香，吴姬压酒劝客尝。"},{"word":"柳","cat":"草木","emotion":-0.4,"line":"风吹柳花满店香，吴姬压酒劝客尝。"},{"word":"酒","cat":"器物","emotion":0.0,"line":"风吹柳花满店香，吴姬压酒劝客尝。"},{"word":"别","cat":"情志","emotion":-0.5,"line":"请君试问东流水，别意与之谁短长？"},{"word":"送","cat":"情志","emotion":-0.3,"line":"金陵子弟来相送，欲行不行各尽觞。"}],"emotion":{"primary":"情绪未定","valence":0.0,"confidence":"低"},"hints":{"province":{"kind":"province","correct":"江苏","decoy":"江西","text":"此诗作于今江苏或江西境内"},"place":{"kind":"place_map","text":"诗中「金陵」＝今南京（江苏）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人李白的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"CNKGraph 文学编年或人物年历条目","excerpt":"CNKGraph条目将《金陵酒肆留别》系于726，地点标为金陵。","url":"https://open.cnkgraph.com/api/Writing/26161"}],"context_facts":["（）：开元十四年（726年）春李白将赴扬州、朋友于金陵酒肆饯行时作留别诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《金陵酒肆留别》读下来，李白此刻人应在南京市——726年前后的事。通篇最扎眼的意象是「风」和「柳」，逐句词典分析出的情绪是「情绪未定」，整体冷暖掺半（愉悦度 +0.0）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李清照","title":"临江仙·庭院深深深几许","alias":"建康","line":"春归秣陵树，人老建康城。","famous":true},{"poet":"李清照","title":"金石录后序","alias":"建康","line":"至东海，连舻渡淮，又渡江，至建康。","famous":true},{"poet":"李白","title":"月夜金陵怀古","alias":"金陵","line":"苍苍金陵月，空悬帝王州。","famous":true}],"id":"Q06"},{"lines":["晓看红湿处，花重锦官城。","野径云俱黑，江船火独明。","随风潜入夜，润物细无声。"],"full_body":"好雨知时节，当春乃发生。\n随风潜入夜，润物细无声。\n野径云俱黑，江船火独明。\n晓看红湿处，花重锦官城。","poet":"杜甫","title":"春夜喜雨","dynasty":"唐","answer":{"modern":"成都市","historical":"成都浣花草堂","province":"四川","lon":104.0712,"lat":30.5763,"year":761,"grade":"B"},"difficulty":1,"place_names":[{"alias":"锦官城","modern":"成都","province":"四川","lon":104.07,"lat":30.67}],"imagery_hits":[{"word":"云","cat":"天象","emotion":0.0,"line":"野径云俱黑，江船火独明。"},{"word":"风","cat":"天象","emotion":-0.1,"line":"随风潜入夜，润物细无声。"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"好雨知时节，当春乃发生。"},{"word":"江","cat":"地理","emotion":0.0,"line":"野径云俱黑，江船火独明。"},{"word":"城","cat":"建筑","emotion":0.0,"line":"晓看红湿处，花重锦官城。"},{"word":"独","cat":"情志","emotion":-0.4,"line":"野径云俱黑，江船火独明。"}],"emotion":{"primary":"孤寂清冷","valence":-0.106,"confidence":"低"},"hints":{"province":{"kind":"province","correct":"四川","decoy":"广东","text":"此诗作于今四川或广东境内"},"place":{"kind":"place_map","text":"诗中「锦官城」＝今成都（四川）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人杜甫的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）","excerpt":"API主系761年并注明另有762年编年意见，因此使用区间并降为B级。","url":"https://open.cnkgraph.com/api/Writing/30930"}],"context_facts":["API主系761年并注明另有762年编年意见，因此使用区间并降为B级。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《春夜喜雨》读下来，杜甫此刻人应在成都市——761年前后的事。通篇最扎眼的意象是「云」和「风」，逐句词典分析出的情绪是「孤寂清冷」，整体冷暖掺半（愉悦度 -0.1）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"登锦城散花楼","alias":"锦城","line":"日照锦城头，朝光散花楼。","famous":true},{"poet":"李白","title":"蜀道难","alias":"锦城","line":"锦城虽云乐，不如早还家。","famous":true},{"poet":"杜甫","title":"狂夫","alias":"草堂","line":"万里桥西一草堂，百花潭水即沧浪。","famous":true}],"id":"Q07"},{"lines":["昔闻洞庭水，今上岳阳楼。","戎马关山北，凭轩涕泗流。","亲朋无一字，老病有孤舟。"],"full_body":"昔闻洞庭水，今上岳阳楼。\n吴楚东南坼，乾坤日夜浮。\n亲朋无一字，老病有孤舟。\n戎马关山北，凭轩涕泗流。","poet":"杜甫","title":"登岳阳楼","dynasty":"唐","answer":{"modern":"岳阳市","historical":"岳阳楼","province":"湖南","lon":113.1357,"lat":29.3633,"year":768,"grade":"B"},"difficulty":1,"place_names":[{"alias":"洞庭","modern":"岳阳","province":"湖南","lon":113.13,"lat":29.37},{"alias":"岳阳","modern":"岳阳","province":"湖南","lon":113.13,"lat":29.37},{"alias":"吴楚","modern":"苏州","province":"江苏","lon":120.62,"lat":31.32}],"imagery_hits":[{"word":"孤舟","cat":"器物","emotion":-0.6,"line":"亲朋无一字，老病有孤舟。"},{"word":"山","cat":"地理","emotion":0.1,"line":"戎马关山北，凭轩涕泗流。"},{"word":"关","cat":"地理","emotion":-0.3,"line":"戎马关山北，凭轩涕泗流。"},{"word":"马","cat":"走兽","emotion":0.0,"line":"戎马关山北，凭轩涕泗流。"},{"word":"舟","cat":"器物","emotion":0.0,"line":"亲朋无一字，老病有孤舟。"},{"word":"楼","cat":"建筑","emotion":0.0,"line":"昔闻洞庭水，今上岳阳楼。"},{"word":"孤","cat":"情志","emotion":-0.7,"line":"亲朋无一字，老病有孤舟。"}],"emotion":{"primary":"衰老病痛","valence":-0.533,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"湖南","decoy":"湖北","text":"此诗作于今湖南或湖北境内"},"place":{"kind":"place_map","text":"诗中「洞庭」＝今岳阳（湖南）——正是本作之地，落子即得；诗中「岳阳」＝今岳阳（湖南）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_stat","word":"孤舟","n":3,"m":3,"text":"核验作地样本中，含「孤舟」的诗作 3 首，其中 3 首作于答案地 500 公里内"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）","excerpt":"API年谱条目标注768年登岳阳楼览洞庭而作。","url":"https://open.cnkgraph.com/api/Writing/31189"}],"context_facts":["API年谱条目标注768年登岳阳楼览洞庭而作。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《登岳阳楼》读下来，杜甫此刻人应在岳阳市——768年前后的事。通篇最扎眼的意象是「孤舟」和「山」，逐句词典分析出的情绪是「衰老病痛」，整体偏冷（愉悦度 -0.5）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"与夏十二登岳阳楼","alias":"洞庭","line":"楼观岳阳尽，川迥洞庭开。","famous":true},{"poet":"白居易","title":"轻肥","alias":"洞庭","line":"果擘洞庭橘，脍切天池鳞。","famous":true},{"poet":"元稹","title":"岳阳楼","alias":"岳阳","line":"岳阳楼上日衔窗，影到深潭赤玉幢。","famous":false}],"id":"Q08"},{"lines":["寒衣处处催刀尺，白帝城高急暮砧。","江间波浪兼天涌，塞上风云接地阴。","丛菊两开他日泪，孤舟一系故园心。"],"full_body":"玉露凋伤枫树林，巫山巫峡气萧森。\n江间波浪兼天涌，塞上风云接地阴。\n丛菊两开他日泪，孤舟一系故园心。\n寒衣处处催刀尺，白帝城高急暮砧。","poet":"杜甫","title":"秋兴八首·其一","dynasty":"唐","answer":{"modern":"重庆市奉节县","historical":"夔州","province":"重庆","lon":109.4705,"lat":31.0246,"year":766,"grade":"B"},"difficulty":1,"place_names":[{"alias":"白帝城","modern":"奉节","province":"重庆","lon":109.46,"lat":31.02},{"alias":"巫山","modern":"巫山","province":"重庆","lon":109.88,"lat":31.07}],"imagery_hits":[{"word":"孤舟","cat":"器物","emotion":-0.6,"line":"丛菊两开他日泪，孤舟一系故园心。"},{"word":"云","cat":"天象","emotion":0.0,"line":"江间波浪兼天涌，塞上风云接地阴。"},{"word":"风","cat":"天象","emotion":-0.1,"line":"江间波浪兼天涌，塞上风云接地阴。"},{"word":"山","cat":"地理","emotion":0.1,"line":"玉露凋伤枫树林，巫山巫峡气萧森。"},{"word":"江","cat":"地理","emotion":0.0,"line":"江间波浪兼天涌，塞上风云接地阴。"},{"word":"塞","cat":"地理","emotion":-0.3,"line":"江间波浪兼天涌，塞上风云接地阴。"},{"word":"菊","cat":"草木","emotion":0.3,"line":"丛菊两开他日泪，孤舟一系故园心。"},{"word":"舟","cat":"器物","emotion":0.0,"line":"丛菊两开他日泪，孤舟一系故园心。"}],"emotion":{"primary":"思乡怀人","valence":-0.516,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"重庆","decoy":"湖北","text":"此诗作于今重庆或湖北境内"},"place":{"kind":"place_map","text":"诗中「白帝城」＝今奉节（重庆）；诗中「巫山」＝今巫山（重庆）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_stat","word":"孤舟","n":3,"m":2,"text":"核验作地样本中，含「孤舟」的诗作 3 首，其中 2 首作于答案地 500 公里内"}},"evidence":[{"grade":"B","source":"CNKGraph 文学编年或人物年历条目","excerpt":"CNKGraph条目将《秋兴八首·其一》系于766，地点标为夔州。","url":"https://open.cnkgraph.com/api/Writing/30950"}],"context_facts":["《秋兴八首》为唐大历元年（766）秋杜甫在夔州时所作组诗。两源一致。2026-07-26在线核实。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《秋兴八首·其一》读下来，杜甫此刻人应在重庆市奉节县——766年前后的事。通篇最扎眼的意象是「孤舟」和「云」，逐句词典分析出的情绪是「思乡怀人」，整体偏冷（愉悦度 -0.5）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"杜甫","title":"夔州歌十绝句","alias":"夔州","line":"白帝夔州各异城，蜀江楚峡混殊名。","famous":true},{"poet":"杜甫","title":"负薪行","alias":"夔州","line":"夔州处女发半华，四十五十无夫家。","famous":true},{"poet":"黄庭坚","title":"竹枝词二首","alias":"夔州","line":"三峡猿声泪欲流，夔州竹枝解人愁。","famous":false}],"id":"Q09"},{"lines":["即从巴峡穿巫峡，便下襄阳向洛阳。","剑外忽传收蓟北，初闻涕泪满衣裳。","白日放歌须纵酒，青春作伴好还乡。"],"full_body":"剑外忽传收蓟北，初闻涕泪满衣裳。\n却看妻子愁何在，漫卷诗书喜欲狂。\n白日放歌须纵酒，青春作伴好还乡。\n即从巴峡穿巫峡，便下襄阳向洛阳。","poet":"杜甫","title":"闻官军收河南河北","dynasty":"唐","answer":{"modern":"绵阳市三台县","historical":"梓州","province":"四川","lon":105.1011,"lat":31.1017,"year":763,"grade":"B"},"difficulty":1,"place_names":[{"alias":"洛阳","modern":"洛阳","province":"河南","lon":112.45,"lat":34.62},{"alias":"襄阳","modern":"襄阳","province":"湖北","lon":112.14,"lat":32.04}],"imagery_hits":[{"word":"酒","cat":"器物","emotion":0.0,"line":"白日放歌须纵酒，青春作伴好还乡。"},{"word":"剑","cat":"器物","emotion":0.3,"line":"剑外忽传收蓟北，初闻涕泪满衣裳。"},{"word":"愁","cat":"情志","emotion":-0.8,"line":"却看妻子愁何在，漫卷诗书喜欲狂。"},{"word":"泪","cat":"情志","emotion":-0.6,"line":"剑外忽传收蓟北，初闻涕泪满衣裳。"}],"emotion":{"primary":"欢愉明快","valence":0.142,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"四川","decoy":"北京","text":"此诗作于今四川或北京境内"},"place":{"kind":"place_map","text":"诗中「洛阳」＝今洛阳（河南）；诗中「襄阳」＝今襄阳（湖北）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人杜甫的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据人民文学出版社《杜甫全集校注》）","excerpt":"API年谱条目标注763年在梓州闻收复河南河北而作。","url":"https://open.cnkgraph.com/api/Writing/31013"}],"context_facts":["API年谱条目标注763年在梓州闻收复河南河北而作。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《闻官军收河南河北》读下来，杜甫此刻人应在绵阳市三台县——763年前后的事。通篇最扎眼的意象是「酒」和「剑」，逐句词典分析出的情绪是「欢愉明快」，整体冷暖掺半（愉悦度 +0.1）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"杜甫","title":"去蜀","alias":"梓州","line":"五载客蜀郡，一年居梓州。","famous":true},{"poet":"王勃","title":"江曲孤凫赋·并序","alias":"梓州","line":"梓州之东南，涪江之所合，有潭焉。","famous":false},{"poet":"贾岛","title":"寄令狐相公（一作赴长江道中）","alias":"梓州","line":"策杖驰山驿，逢人问梓州。","famous":false}],"id":"Q10"},{"lines":["孤山寺北贾亭西，水面初平云脚低。","几处早莺争暖树，谁家新燕啄春泥。","最爱湖东行不足，绿杨阴里白沙堤。"],"full_body":"孤山寺北贾亭西，水面初平云脚低。\n几处早莺争暖树，谁家新燕啄春泥。\n乱花渐欲迷人眼，浅草才能没马蹄。\n最爱湖东行不足，绿杨阴里白沙堤。","poet":"白居易","title":"钱塘湖春行","dynasty":"唐","answer":{"modern":"杭州市","historical":"钱塘湖（西湖）","province":"浙江","lon":120.16,"lat":30.29,"year":823,"grade":"B"},"difficulty":1,"place_names":[{"alias":"孤山","modern":"杭州","province":"浙江","lon":120.16,"lat":30.29}],"imagery_hits":[{"word":"云","cat":"天象","emotion":0.0,"line":"孤山寺北贾亭西，水面初平云脚低。"},{"word":"山","cat":"地理","emotion":0.1,"line":"孤山寺北贾亭西，水面初平云脚低。"},{"word":"湖","cat":"地理","emotion":0.1,"line":"最爱湖东行不足，绿杨阴里白沙堤。"},{"word":"莺","cat":"禽鸟","emotion":0.4,"line":"几处早莺争暖树，谁家新燕啄春泥。"},{"word":"燕","cat":"禽鸟","emotion":0.3,"line":"几处早莺争暖树，谁家新燕啄春泥。"},{"word":"马","cat":"走兽","emotion":0.0,"line":"乱花渐欲迷人眼，浅草才能没马蹄。"},{"word":"亭","cat":"建筑","emotion":0.1,"line":"孤山寺北贾亭西，水面初平云脚低。"},{"word":"寺","cat":"建筑","emotion":0.2,"line":"孤山寺北贾亭西，水面初平云脚低。"}],"emotion":{"primary":"孤寂清冷","valence":-0.58,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"浙江","decoy":"重庆","text":"此诗作于今浙江或重庆境内"},"place":{"kind":"place_map","text":"诗中「孤山」＝今杭州（浙江）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人白居易的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"CNKGraph 文学编年或人物年历条目","excerpt":"CNKGraph条目将《钱塘湖春行》系于823—824，地点标为钱塘湖（西湖）。","url":"https://open.cnkgraph.com/api/Writing/13842"}],"context_facts":["（）：长庆二年（822）七月任杭州刺史，诗写于长庆三、四年（823、824）间春天。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《钱塘湖春行》读下来，白居易此刻人应在杭州市——823年前后的事。通篇最扎眼的意象是「云」和「山」，逐句词典分析出的情绪是「孤寂清冷」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"苏轼","title":"饮湖上初晴后雨","alias":"西湖","line":"欲把西湖比西子，淡妆浓抹总相宜。","famous":true},{"poet":"吴文英","title":"莺啼序·春晚感怀","alias":"西湖","line":"十载西湖，傍柳系马，趁娇尘软雾。","famous":false},{"poet":"吴文英","title":"高阳台·落梅","alias":"孤山","line":"细雨归鸿，孤山无限春寒。","famous":false}],"id":"Q11"},{"lines":["人生如梦，一尊还酹江月。","大江东去，浪淘尽，千古风流人物。","江山如画，一时多少豪杰。"],"full_body":"大江东去，浪淘尽，千古风流人物。\n故垒西边，人道是，三国周郎赤壁。\n乱石穿空，惊涛拍岸，卷起千堆雪。\n江山如画，一时多少豪杰。\n遥想公瑾当年，小乔初嫁了，雄姿英发。\n羽扇纶巾，谈笑间，樯橹灰飞烟灭。\n故国神游，多情应笑我，早生华发。\n人生如梦，一尊还酹江月。","poet":"苏轼","title":"念奴娇·赤壁怀古","dynasty":"宋","answer":{"modern":"黄冈市","historical":"黄州赤壁","province":"湖北","lon":114.8789,"lat":30.4594,"year":1082,"grade":"B"},"difficulty":1,"place_names":[{"alias":"赤壁","modern":"赤壁","province":"湖北","lon":113.9,"lat":29.72}],"imagery_hits":[{"word":"大江","cat":"地理","emotion":0.2,"line":"大江东去，浪淘尽，千古风流人物。"},{"word":"月","cat":"天象","emotion":-0.2,"line":"人生如梦，一尊还酹江月。"},{"word":"烟","cat":"天象","emotion":-0.2,"line":"羽扇纶巾，谈笑间，樯橹灰飞烟灭。"},{"word":"雪","cat":"天象","emotion":-0.2,"line":"乱石穿空，惊涛拍岸，卷起千堆雪。"},{"word":"风","cat":"天象","emotion":-0.1,"line":"大江东去，浪淘尽，千古风流人物。"},{"word":"山","cat":"地理","emotion":0.1,"line":"江山如画，一时多少豪杰。"},{"word":"江","cat":"地理","emotion":0.0,"line":"大江东去，浪淘尽，千古风流人物。"},{"word":"梦","cat":"情志","emotion":-0.1,"line":"人生如梦，一尊还酹江月。"}],"emotion":{"primary":"怀古感时","valence":0.125,"confidence":"高"},"hints":{"province":{"kind":"province","correct":"湖北","decoy":"江西","text":"此诗作于今湖北或江西境内"},"place":{"kind":"place_map","text":"诗中「赤壁」＝今赤壁（湖北）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人苏轼的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据孔凡礼《三苏年谱》与《苏轼全集校注》）","excerpt":"API年谱条目标注1082年七月在黄冈赤壁怀古作词。","url":"https://open.cnkgraph.com/api/Writing/352102"}],"context_facts":["API年谱条目标注1082年七月在黄冈赤壁怀古作词。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《念奴娇·赤壁怀古》读下来，苏轼此刻人应在黄冈市——1082年前后的事。通篇最扎眼的意象是「大江」和「月」，逐句词典分析出的情绪是「怀古感时」，整体冷暖掺半（愉悦度 +0.1）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"苏轼","title":"寒食帖","alias":"黄州","line":"一曰：自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"寒食雨二首","alias":"黄州","line":"自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"水龙吟·黄州梦过栖霞楼","alias":"黄州","line":"闾丘大夫孝终公显尝守黄州，作栖霞楼，为郡中胜绝。","famous":true}],"id":"Q12"},{"lines":["欲把西湖比西子，淡妆浓抹总相宜。","水光潋滟晴方好，山色空蒙雨亦奇。"],"full_body":"水光潋滟晴方好，山色空蒙雨亦奇。\n欲把西湖比西子，淡妆浓抹总相宜。","poet":"苏轼","title":"饮湖上初晴后雨","dynasty":"宋","answer":{"modern":"杭州市","historical":"钱塘西湖","province":"浙江","lon":120.1391,"lat":30.2518,"year":1073,"grade":"B"},"difficulty":1,"place_names":[{"alias":"西湖","modern":"杭州","province":"浙江","lon":120.16,"lat":30.29}],"imagery_hits":[{"word":"雨","cat":"天象","emotion":-0.2,"line":"水光潋滟晴方好，山色空蒙雨亦奇。"},{"word":"山","cat":"地理","emotion":0.1,"line":"水光潋滟晴方好，山色空蒙雨亦奇。"},{"word":"湖","cat":"地理","emotion":0.1,"line":"欲把西湖比西子，淡妆浓抹总相宜。"}],"emotion":{"primary":"敬慕赞叹","valence":0.58,"confidence":"高"},"hints":{"province":{"kind":"province","correct":"浙江","decoy":"江西","text":"此诗作于今浙江或江西境内"},"place":{"kind":"place_map","text":"诗中「西湖」＝今杭州（浙江）——正是本作之地，落子即得"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人苏轼的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据《苏轼全集校注》）","excerpt":"API年谱条目标注1073年任杭州通判时饮湖上遇初晴后雨作诗二首。","url":"https://open.cnkgraph.com/api/Writing/134580"}],"context_facts":["API年谱条目标注1073年任杭州通判时饮湖上遇初晴后雨作诗二首。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《饮湖上初晴后雨》读下来，苏轼此刻人应在杭州市——1073年前后的事。通篇最扎眼的意象是「雨」和「山」，逐句词典分析出的情绪是「敬慕赞叹」，整体偏暖（愉悦度 +0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"白居易","title":"钱塘湖春行","alias":"孤山","line":"孤山寺北贾亭西，水面初平云脚低。","famous":true},{"poet":"吴文英","title":"莺啼序·春晚感怀","alias":"西湖","line":"十载西湖，傍柳系马，趁娇尘软雾。","famous":false},{"poet":"吴文英","title":"高阳台·落梅","alias":"孤山","line":"细雨归鸿，孤山无限春寒。","famous":false}],"id":"Q13"},{"lines":["戍楼刁斗催落月，三十从军今白发。","中原干戈古亦闻，岂有逆胡传子孙！","遗民忍死望恢复，几处今宵垂泪痕。"],"full_body":"和戎诏下十五年，将军不战空临边。\n朱门沉沉按歌舞，厩马肥死弓断弦。\n戍楼刁斗催落月，三十从军今白发。\n笛里谁知壮士心，沙头空照征人骨。\n中原干戈古亦闻，岂有逆胡传子孙！\n遗民忍死望恢复，几处今宵垂泪痕。","poet":"陆游","title":"关山月","dynasty":"宋","answer":{"modern":"成都市","historical":"成都","province":"四川","lon":104.0694,"lat":30.681,"year":1177,"grade":"B"},"difficulty":1,"place_names":[{"alias":"中原","modern":"洛阳","province":"河南","lon":112.45,"lat":34.62}],"imagery_hits":[{"word":"月","cat":"天象","emotion":-0.2,"line":"戍楼刁斗催落月，三十从军今白发。"},{"word":"斗","cat":"天象","emotion":0.0,"line":"戍楼刁斗催落月，三十从军今白发。"},{"word":"马","cat":"走兽","emotion":0.0,"line":"朱门沉沉按歌舞，厩马肥死弓断弦。"},{"word":"笛","cat":"器物","emotion":-0.2,"line":"笛里谁知壮士心，沙头空照征人骨。"},{"word":"楼","cat":"建筑","emotion":0.0,"line":"戍楼刁斗催落月，三十从军今白发。"},{"word":"泪","cat":"情志","emotion":-0.6,"line":"遗民忍死望恢复，几处今宵垂泪痕。"}],"emotion":{"primary":"报国壮志","valence":-0.314,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"四川","decoy":"湖南","text":"此诗作于今四川或湖南境内"},"place":{"kind":"place_map","text":"诗中「中原」＝今洛阳（河南）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人陆游的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）","excerpt":"API年谱条目标注1177年一月免官后居成都时作诗。","url":"https://open.cnkgraph.com/api/Writing/150574"}],"context_facts":["API年谱条目标注1177年一月免官后居成都时作诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《关山月》读下来，陆游此刻人应在成都市——1177年前后的事。通篇最扎眼的意象是「月」和「斗」，逐句词典分析出的情绪是「报国壮志」，整体偏冷（愉悦度 -0.3）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"登锦城散花楼","alias":"锦城","line":"日照锦城头，朝光散花楼。","famous":true},{"poet":"李白","title":"蜀道难","alias":"锦城","line":"锦城虽云乐，不如早还家。","famous":true},{"poet":"杜甫","title":"春夜喜雨","alias":"锦官城","line":"晓看红湿处，花重锦官城。","famous":true}],"id":"Q14"},{"lines":["细雨骑驴入剑门。","衣上征尘杂酒痕，远游无处不消魂。","此身合是诗人未？"],"full_body":"衣上征尘杂酒痕，远游无处不消魂。\n此身合是诗人未？细雨骑驴入剑门。","poet":"陆游","title":"剑门道中遇微雨","dynasty":"宋","answer":{"modern":"广元市剑阁县","historical":"剑门","province":"四川","lon":105.5318,"lat":32.2943,"year":1172,"grade":"B"},"difficulty":1,"place_names":[{"alias":"剑门","modern":"剑阁","province":"四川","lon":105.53,"lat":32.29}],"imagery_hits":[{"word":"细雨","cat":"天象","emotion":0.1,"line":"细雨骑驴入剑门。"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"细雨骑驴入剑门。"},{"word":"酒","cat":"器物","emotion":0.0,"line":"衣上征尘杂酒痕，远游无处不消魂。"},{"word":"剑","cat":"器物","emotion":0.3,"line":"细雨骑驴入剑门。"}],"emotion":{"primary":"漂泊羁旅","valence":-0.38,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"四川","decoy":"重庆","text":"此诗作于今四川或重庆境内"},"place":{"kind":"place_map","text":"诗中「剑门」＝今剑阁（四川）；注意：诗中之地未必是写作之地，谨防「身在别处写此地」。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人陆游的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）","excerpt":"API年谱条目标注1172年十一月自南郑赴成都途中经剑门作诗。","url":"https://open.cnkgraph.com/api/Writing/144403"}],"context_facts":["API年谱条目标注1172年十一月自南郑赴成都途中经剑门作诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《剑门道中遇微雨》读下来，陆游此刻人应在广元市剑阁县——1172年前后的事。通篇最扎眼的意象是「细雨」和「雨」，逐句词典分析出的情绪是「漂泊羁旅」，整体偏冷（愉悦度 -0.4）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"杜甫","title":"剑门","alias":"剑门","line":"唯天有设险，剑门天下壮。","famous":true},{"poet":"岑参","title":"入剑门作寄杜杨二郎中时二公并为杜元帅判官","alias":"剑门","line":"四海今一家，徒然剑门石。","famous":false},{"poet":"岑参","title":"送蜀郡李掾","alias":"剑门","line":"夜宿剑门月，朝行巴水云。","famous":false}],"id":"Q15"},{"lines":["雁字回时，月满西楼。","轻解罗裳，独上兰舟。","一种相思，两处闲愁。"],"full_body":"红藕香残玉簟秋。轻解罗裳，独上兰舟。云中谁寄锦书来？雁字回时，月满西楼。\n花自飘零水自流。一种相思，两处闲愁。此情无计可消除，才下眉头，却上心头。","poet":"李清照","title":"一剪梅·红藕香残玉簟秋","dynasty":"宋","answer":{"modern":"河南省开封市","historical":"东京开封府","province":"河南","lon":114.3076,"lat":34.7972,"year":1103,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"月","cat":"天象","emotion":-0.2,"line":"雁字回时，月满西楼。"},{"word":"云","cat":"天象","emotion":0.0,"line":"云中谁寄锦书来？"},{"word":"兰","cat":"草木","emotion":0.4,"line":"轻解罗裳，独上兰舟。"},{"word":"雁","cat":"禽鸟","emotion":-0.5,"line":"雁字回时，月满西楼。"},{"word":"舟","cat":"器物","emotion":0.0,"line":"轻解罗裳，独上兰舟。"},{"word":"楼","cat":"建筑","emotion":0.0,"line":"雁字回时，月满西楼。"},{"word":"独","cat":"情志","emotion":-0.4,"line":"轻解罗裳，独上兰舟。"},{"word":"愁","cat":"情志","emotion":-0.8,"line":"一种相思，两处闲愁。"}],"emotion":{"primary":"爱恋缠绵","valence":0.098,"confidence":"高"},"hints":{"province":{"kind":"province","correct":"河南","decoy":"北京","text":"此诗作于今河南或北京境内"},"place":{"kind":"biography","text":"诗人李清照约于1103年前后：开封（1090年-1107年3月，7-24岁，作品：15）。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人李清照的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）","excerpt":"开封（1090年-1107年3月，7-24岁，作品：15）。","url":"https://open.cnkgraph.com/api/Biography?Author=%E6%9D%8E%E6%B8%85%E7%85%A7&BeginYear=1103&EndYear=1103"}],"context_facts":["开封（1090年-1107年3月，7-24岁，作品：15）。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《一剪梅·红藕香残玉簟秋》读下来，李清照此刻人应在河南省开封市——1103年前后的事。通篇最扎眼的意象是「月」和「云」，逐句词典分析出的情绪是「爱恋缠绵」，整体冷暖掺半（愉悦度 +0.1）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[],"id":"Q16"},{"lines":["三杯两盏淡酒，怎敌他、晚来风急！","梧桐更兼细雨，到黄昏、点点滴滴。","这次第，怎一个愁字了得！"],"full_body":"寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他、晚来风急！雁过也，正伤心，却是旧时相识。\n满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！","poet":"李清照","title":"声声慢·寻寻觅觅","dynasty":"宋","answer":{"modern":"浙江省杭州市","historical":"临安","province":"浙江","lon":120.1551,"lat":30.2741,"year":1147,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"细雨","cat":"天象","emotion":0.1,"line":"梧桐更兼细雨，到黄昏、点点滴滴。"},{"word":"风","cat":"天象","emotion":-0.1,"line":"三杯两盏淡酒，怎敌他、晚来风急！"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"梧桐更兼细雨，到黄昏、点点滴滴。"},{"word":"雁","cat":"禽鸟","emotion":-0.5,"line":"雁过也，正伤心，却是旧时相识。"},{"word":"酒","cat":"器物","emotion":0.0,"line":"三杯两盏淡酒，怎敌他、晚来风急！"},{"word":"杯","cat":"器物","emotion":0.1,"line":"三杯两盏淡酒，怎敌他、晚来风急！"},{"word":"独","cat":"情志","emotion":-0.4,"line":"守着窗儿，独自怎生得黑？"},{"word":"愁","cat":"情志","emotion":-0.8,"line":"这次第，怎一个愁字了得！"}],"emotion":{"primary":"孤寂清冷","valence":-0.602,"confidence":"高"},"hints":{"province":{"kind":"province","correct":"浙江","decoy":"广东","text":"此诗作于今浙江或广东境内"},"place":{"kind":"biography","text":"诗人李清照约于1147年前后：1147年，居临安。有词《声声慢》写国破家亡晚年孀居之惨戚，作品：《声声慢》。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人李清照的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）","excerpt":"1147年，居临安。有词《声声慢》写国破家亡晚年孀居之惨戚，作品：《声声慢》。","url":"https://open.cnkgraph.com/api/Biography?Author=%E6%9D%8E%E6%B8%85%E7%85%A7&BeginYear=1147&EndYear=1147"}],"context_facts":["1147年，居临安。有词《声声慢》写国破家亡晚年孀居之惨戚，作品：《声声慢》。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《声声慢·寻寻觅觅》读下来，李清照此刻人应在浙江省杭州市——1147年前后的事。通篇最扎眼的意象是「细雨」和「风」，逐句词典分析出的情绪是「孤寂清冷」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"张元干","title":"过白彪访沈次律有感十六韵","alias":"临安","line":"坐令临安城，开关犹白著。","famous":false},{"poet":"苏辙","title":"次韵姚道人二首","alias":"临安","line":"远游居临安，间出从诸王。","famous":false}],"id":"Q17"},{"lines":["人间四月芳菲尽，山寺桃花始盛开。","长恨春归无觅处，不知转入此中来。"],"full_body":"人间四月芳菲尽，山寺桃花始盛开。\n长恨春归无觅处，不知转入此中来。","poet":"白居易","title":"大林寺桃花","dynasty":"唐","answer":{"modern":"九江市","historical":"庐山大林寺","province":"江西","lon":115.7185,"lat":29.3495,"year":817,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"桃花","cat":"草木","emotion":0.5,"line":"人间四月芳菲尽，山寺桃花始盛开。"},{"word":"月","cat":"天象","emotion":-0.2,"line":"人间四月芳菲尽，山寺桃花始盛开。"},{"word":"山","cat":"地理","emotion":0.1,"line":"人间四月芳菲尽，山寺桃花始盛开。"},{"word":"桃","cat":"草木","emotion":0.5,"line":"人间四月芳菲尽，山寺桃花始盛开。"},{"word":"寺","cat":"建筑","emotion":0.2,"line":"人间四月芳菲尽，山寺桃花始盛开。"},{"word":"恨","cat":"情志","emotion":-0.7,"line":"长恨春归无觅处，不知转入此中来。"},{"word":"归","cat":"情志","emotion":0.0,"line":"长恨春归无觅处，不知转入此中来。"}],"emotion":{"primary":"幽愤不平","valence":-0.56,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"江西","decoy":"湖南","text":"此诗作于今江西或湖南境内"},"place":{"kind":"biography","text":"诗人白居易约于817年前后：API年谱条目标注817年游庐山大林寺赏桃花作诗。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人白居易的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据朱金城《白居易年谱》）","excerpt":"API年谱条目标注817年游庐山大林寺赏桃花作诗。","url":"https://open.cnkgraph.com/api/Writing/12410"}],"context_facts":["API年谱条目标注817年游庐山大林寺赏桃花作诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《大林寺桃花》读下来，白居易此刻人应在九江市——817年前后的事。通篇最扎眼的意象是「桃花」和「月」，逐句词典分析出的情绪是「幽愤不平」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"庐山谣寄卢侍御虚舟","alias":"庐山","line":"庐山秀出南斗傍，屏风九叠云锦张，","famous":true},{"poet":"李白","title":"横江词六首","alias":"浔阳","line":"海潮南去过浔阳，牛渚由来险马当。","famous":true},{"poet":"李白","title":"登庐山五老峰","alias":"庐山","line":"庐山东南五老峰，青天削出金芙蓉。","famous":true}],"id":"Q18"},{"lines":["君埋泉下泥销骨，我寄人间雪满头。","夜来携手梦同游，晨起盈巾泪莫收。","阿卫韩郎相次去，夜台茫昧得知不？"],"full_body":"夜来携手梦同游，晨起盈巾泪莫收。\n漳浦老身三度病，咸阳宿草八回秋。\n君埋泉下泥销骨，我寄人间雪满头。\n阿卫韩郎相次去，夜台茫昧得知不？","poet":"白居易","title":"梦微之","dynasty":"唐","answer":{"modern":"洛阳市","historical":"洛阳","province":"河南","lon":112.45,"lat":34.62,"year":840,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"雪","cat":"天象","emotion":-0.2,"line":"君埋泉下泥销骨，我寄人间雪满头。"},{"word":"泉","cat":"地理","emotion":0.2,"line":"君埋泉下泥销骨，我寄人间雪满头。"},{"word":"台","cat":"建筑","emotion":0.1,"line":"阿卫韩郎相次去，夜台茫昧得知不？"},{"word":"泪","cat":"情志","emotion":-0.6,"line":"夜来携手梦同游，晨起盈巾泪莫收。"},{"word":"梦","cat":"情志","emotion":-0.1,"line":"夜来携手梦同游，晨起盈巾泪莫收。"}],"emotion":{"primary":"友情酬赠","valence":-0.328,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"河南","decoy":"北京","text":"此诗作于今河南或北京境内"},"place":{"kind":"biography","text":"诗人白居易约于840年前后：开成五年（840）白居易六十九岁大病初愈，夜梦元稹（卒于831年）后作，与诗中“咸阳宿草八回秋”相合。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人白居易的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"CNKGraph 文学编年或人物年历条目","excerpt":"CNKGraph条目将《梦微之》系于840，地点标为洛阳。","url":"https://open.cnkgraph.com/api/Biography?Author=%E7%99%BD%E5%B1%85%E6%98%93&BeginYear=840&EndYear=840"}],"context_facts":["开成五年（840）白居易六十九岁大病初愈，夜梦元稹（卒于831年）后作，与诗中“咸阳宿草八回秋”相合。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《梦微之》读下来，白居易此刻人应在洛阳市——840年前后的事。通篇最扎眼的意象是「雪」和「泉」，逐句词典分析出的情绪是「友情酬赠」，整体偏冷（愉悦度 -0.3）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"杜甫","title":"闻官军收河南河北","alias":"洛阳","line":"即从巴峡穿巫峡，便下襄阳向洛阳。","famous":true},{"poet":"陆游","title":"书愤","alias":"中原","line":"早岁那知世事艰，中原北望气如山。","famous":true},{"poet":"陆游","title":"关山月","alias":"中原","line":"中原干戈古亦闻，岂有逆胡传子孙！","famous":true}],"id":"Q19"},{"lines":["小舟从此逝，江海寄余生。","夜饮东坡醒复醉，归来仿佛三应。","夜阑风静縠纹平。"],"full_body":"夜饮东坡醒复醉，归来仿佛三应。家童鼻息已雷鸣。敲门都不应，倚杖听江声。\n长恨此身非我有，何时忘却营营。夜阑风静縠纹平。小舟从此逝，江海寄余生。","poet":"苏轼","title":"临江仙·夜归临皋","dynasty":"宋","answer":{"modern":"黄冈市","historical":"黄州临皋亭","province":"湖北","lon":114.8789,"lat":30.4594,"year":1082,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"风","cat":"天象","emotion":-0.1,"line":"夜阑风静縠纹平。"},{"word":"江","cat":"地理","emotion":0.0,"line":"敲门都不应，倚杖听江声。"},{"word":"海","cat":"地理","emotion":0.1,"line":"小舟从此逝，江海寄余生。"},{"word":"舟","cat":"器物","emotion":0.0,"line":"小舟从此逝，江海寄余生。"},{"word":"恨","cat":"情志","emotion":-0.7,"line":"长恨此身非我有，何时忘却营营。"},{"word":"醉","cat":"情志","emotion":0.0,"line":"夜饮东坡醒复醉，归来仿佛三应。"},{"word":"归","cat":"情志","emotion":0.0,"line":"夜饮东坡醒复醉，归来仿佛三应。"}],"emotion":{"primary":"幽愤不平","valence":-0.56,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"湖北","decoy":"河北","text":"此诗作于今湖北或河北境内"},"place":{"kind":"biography","text":"诗人苏轼约于1082年前后：API年谱条目标注1082年九月在黄冈夜归临皋作词。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人苏轼的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据《苏轼全集校注》）","excerpt":"API年谱条目标注1082年九月在黄冈夜归临皋作词。","url":"https://open.cnkgraph.com/api/Writing/352105"}],"context_facts":["API年谱条目标注1082年九月在黄冈夜归临皋作词。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《临江仙·夜归临皋》读下来，苏轼此刻人应在黄冈市——1082年前后的事。通篇最扎眼的意象是「风」和「江」，逐句词典分析出的情绪是「幽愤不平」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"苏轼","title":"寒食帖","alias":"黄州","line":"一曰：自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"寒食雨二首","alias":"黄州","line":"自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"水龙吟·黄州梦过栖霞楼","alias":"黄州","line":"闾丘大夫孝终公显尝守黄州，作栖霞楼，为郡中胜绝。","famous":true}],"id":"Q20"},{"lines":["谁见幽人独往来，缥缈孤鸿影。","惊起却回头，有恨无人省。","缺月挂疏桐，漏断人初静。"],"full_body":"缺月挂疏桐，漏断人初静。谁见幽人独往来，缥缈孤鸿影。\n惊起却回头，有恨无人省。拣尽寒枝不肯栖，寂寞沙洲冷。","poet":"苏轼","title":"卜算子·黄州定慧院寓居作","dynasty":"宋","answer":{"modern":"黄冈市","historical":"黄州定慧院","province":"湖北","lon":114.8789,"lat":30.4594,"year":1080,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"月","cat":"天象","emotion":-0.2,"line":"缺月挂疏桐，漏断人初静。"},{"word":"鸿","cat":"禽鸟","emotion":-0.4,"line":"谁见幽人独往来，缥缈孤鸿影。"},{"word":"孤","cat":"情志","emotion":-0.7,"line":"谁见幽人独往来，缥缈孤鸿影。"},{"word":"独","cat":"情志","emotion":-0.4,"line":"谁见幽人独往来，缥缈孤鸿影。"},{"word":"恨","cat":"情志","emotion":-0.7,"line":"惊起却回头，有恨无人省。"}],"emotion":{"primary":"孤寂清冷","valence":-0.591,"confidence":"高"},"hints":{"province":{"kind":"province","correct":"湖北","decoy":"广东","text":"此诗作于今湖北或广东境内"},"place":{"kind":"biography","text":"诗人苏轼约于1080年前后：API年谱条目标注1080年任黄州团练副使期间在黄冈作此词。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人苏轼的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据孔凡礼《三苏年谱》）","excerpt":"API年谱条目标注1080年任黄州团练副使期间在黄冈作此词。","url":"https://open.cnkgraph.com/api/Writing/352114"}],"context_facts":["API年谱条目标注1080年任黄州团练副使期间在黄冈作此词。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《卜算子·黄州定慧院寓居作》读下来，苏轼此刻人应在黄冈市——1080年前后的事。通篇最扎眼的意象是「月」和「鸿」，逐句词典分析出的情绪是「孤寂清冷」，整体偏冷（愉悦度 -0.6）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"苏轼","title":"寒食帖","alias":"黄州","line":"一曰：自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"寒食雨二首","alias":"黄州","line":"自我来黄州，已过三寒食。","famous":true},{"poet":"苏轼","title":"水龙吟·黄州梦过栖霞楼","alias":"黄州","line":"闾丘大夫孝终公显尝守黄州，作栖霞楼，为郡中胜绝。","famous":true}],"id":"Q21"},{"lines":["小楼一夜听春雨，深巷明朝卖杏花。","素衣莫起风尘叹，犹及清明可到家。","世味年来薄似纱，谁令骑马客京华。"],"full_body":"世味年来薄似纱，谁令骑马客京华。\n小楼一夜听春雨，深巷明朝卖杏花。\n矮纸斜行闲作草，晴窗细乳戏分茶。\n素衣莫起风尘叹，犹及清明可到家。","poet":"陆游","title":"临安春雨初霁","dynasty":"宋","answer":{"modern":"杭州市","historical":"临安","province":"浙江","lon":120.1367,"lat":30.2659,"year":1186,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"风","cat":"天象","emotion":-0.1,"line":"素衣莫起风尘叹，犹及清明可到家。"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"小楼一夜听春雨，深巷明朝卖杏花。"},{"word":"马","cat":"走兽","emotion":0.0,"line":"世味年来薄似纱，谁令骑马客京华。"},{"word":"楼","cat":"建筑","emotion":0.0,"line":"小楼一夜听春雨，深巷明朝卖杏花。"}],"emotion":{"primary":"希望向往","valence":0.65,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"浙江","decoy":"广西壮族自治","text":"此诗作于今浙江或广西壮族自治境内"},"place":{"kind":"biography","text":"诗人陆游约于1186年前后：API年谱条目标注1186年赴严州任前在临安作诗。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人陆游的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据钱仲联《剑南诗稿校注》）","excerpt":"API年谱条目标注1186年赴严州任前在临安作诗。","url":"https://open.cnkgraph.com/api/Writing/147962"}],"context_facts":["API年谱条目标注1186年赴严州任前在临安作诗。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《临安春雨初霁》读下来，陆游此刻人应在杭州市——1186年前后的事。通篇最扎眼的意象是「风」和「雨」，逐句词典分析出的情绪是「希望向往」，整体偏暖（愉悦度 +0.7）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"白居易","title":"钱塘湖春行","alias":"孤山","line":"孤山寺北贾亭西，水面初平云脚低。","famous":true},{"poet":"苏轼","title":"饮湖上初晴后雨","alias":"西湖","line":"欲把西湖比西子，淡妆浓抹总相宜。","famous":true},{"poet":"吴文英","title":"莺啼序·春晚感怀","alias":"西湖","line":"十载西湖，傍柳系马，趁娇尘软雾。","famous":false}],"id":"Q22"},{"lines":["风卷江湖雨暗村，四山声作海涛翻。","夜阑卧听风吹雨，铁马冰河入梦来。","溪柴火软蛮毡暖，我与狸奴不出门。"],"full_body":"风卷江湖雨暗村，四山声作海涛翻。\n溪柴火软蛮毡暖，我与狸奴不出门。\n僵卧孤村不自哀，尚思为国戍轮台。\n夜阑卧听风吹雨，铁马冰河入梦来。","poet":"陆游","title":"十一月四日风雨大作二首","dynasty":"宋","answer":{"modern":"绍兴市","historical":"山阴","province":"浙江","lon":120.5884,"lat":29.9952,"year":1192,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"风","cat":"天象","emotion":-0.1,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"雨","cat":"天象","emotion":-0.2,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"山","cat":"地理","emotion":0.1,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"江","cat":"地理","emotion":0.0,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"河","cat":"地理","emotion":0.0,"line":"夜阑卧听风吹雨，铁马冰河入梦来。"},{"word":"湖","cat":"地理","emotion":0.1,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"海","cat":"地理","emotion":0.1,"line":"风卷江湖雨暗村，四山声作海涛翻。"},{"word":"溪","cat":"地理","emotion":0.2,"line":"溪柴火软蛮毡暖，我与狸奴不出门。"}],"emotion":{"primary":"报国壮志","valence":-0.147,"confidence":"中"},"hints":{"province":{"kind":"province","correct":"浙江","decoy":"四川","text":"此诗作于今浙江或四川境内"},"place":{"kind":"biography","text":"诗人陆游约于1192年前后：API年谱条目标注1192年十一月四日在山阴作二首，当前语料按组诗标题收录。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：宋代诗人陆游的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据于北山《陆游年谱》与《剑南诗稿校注》）","excerpt":"API年谱条目标注1192年十一月四日在山阴作二首，当前语料按组诗标题收录。","url":"https://open.cnkgraph.com/api/Writing/143330"}],"context_facts":["API年谱条目标注1192年十一月四日在山阴作二首，当前语料按组诗标题收录。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《十一月四日风雨大作二首》读下来，陆游此刻人应在绍兴市——1192年前后的事。通篇最扎眼的意象是「风」和「雨」，逐句词典分析出的情绪是「报国壮志」，整体冷暖掺半（愉悦度 -0.1）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李清照","title":"金石录后序","alias":"会稽","line":"在会稽，卜居土民钟氏舍。","famous":true},{"poet":"李白","title":"别储邕之剡中","alias":"会稽","line":"舟从广陵去，水入会稽长。","famous":true},{"poet":"李白","title":"南陵别儿童入京","alias":"会稽","line":"会稽愚妇轻买臣，余亦辞家西入秦。","famous":true}],"id":"Q23"},{"lines":["夜深知雪重，时闻折竹声。","已讶衾枕冷，复见窗户明。"],"full_body":"已讶衾枕冷，复见窗户明。\n夜深知雪重，时闻折竹声。","poet":"白居易","title":"夜雪","dynasty":"唐","answer":{"modern":"九江市","historical":"江州","province":"江西","lon":116.008,"lat":29.7113,"year":816,"grade":"B"},"difficulty":2,"place_names":[],"imagery_hits":[{"word":"雪","cat":"天象","emotion":-0.2,"line":"夜深知雪重，时闻折竹声。"},{"word":"竹","cat":"草木","emotion":0.5,"line":"夜深知雪重，时闻折竹声。"}],"emotion":{"primary":"情绪未定","valence":0.0,"confidence":"低"},"hints":{"province":{"kind":"province","correct":"江西","decoy":"陕西","text":"此诗作于今江西或陕西境内"},"place":{"kind":"biography","text":"诗人白居易约于816年前后：API年谱条目标注816年在江州赏夜雪而作。"},"imagery":{"kind":"imagery_fallback","text":"此诗意象地域指向含蓄——换一个角度：唐代诗人白居易的行迹与身份即是线索。"}},"evidence":[{"grade":"B","source":"古籍文献知识图谱开放API（据朱金城《白居易年谱》）","excerpt":"API年谱条目标注816年在江州赏夜雪而作。","url":"https://open.cnkgraph.com/api/Writing/14745"}],"context_facts":["API年谱条目标注816年在江州赏夜雪而作。"],"reading_intro":{"generated_by":"rules_template","label":"自动导读（规则模板拼装，非人工考据）","text":"这首《夜雪》读下来，白居易此刻人应在九江市——816年前后的事。通篇最扎眼的意象是「雪」和「竹」，逐句词典分析出的情绪是「情绪未定」，整体冷暖掺半（愉悦度 +0.0）。年份与作地是人工核验过的，这段导语本身由规则模板拼成，仅作导读参考。"},"same_place_more":[{"poet":"李白","title":"庐山谣寄卢侍御虚舟","alias":"庐山","line":"庐山秀出南斗傍，屏风九叠云锦张，","famous":true},{"poet":"李白","title":"横江词六首","alias":"浔阳","line":"海潮南去过浔阳，牛渚由来险马当。","famous":true},{"poet":"李白","title":"登庐山五老峰","alias":"庐山","line":"庐山东南五老峰，青天削出金芙蓉。","famous":true}],"id":"Q24"}],"chapters":[{"id":"ch1","name":"两京·朔方","theme":"都城气象与北地风霜——汴京、洛阳、青齐与燕山","seal":"京","color":"#426f94","question_ids":["Q01","Q02","Q03","Q16","Q19"],"archives":[{"title":"诗人行旅与生命情感","url":"15_诗人行旅与生命情感.html","note":"六家行旅全程地图与情感联动"},{"title":"凝望罗盘","url":"31_凝望罗盘.html","note":"方位词的文本地理"}]},{"id":"ch2","name":"巴蜀","theme":"蜀道、锦城与夔门——险峻地理如何改写诗风","seal":"蜀","color":"#7a5c3d","question_ids":["Q04","Q07","Q09","Q10","Q14","Q15"],"archives":[{"title":"身与心双层地图","url":"32_身与心双层地图.html","note":"实际行旅 vs 诗中遥想（「身在别处写此地」）"},{"title":"平行时空 759","url":"33_平行时空759.html","note":"白帝城遇赦那年，杜甫在做什么"}]},{"id":"ch3","name":"江南","theme":"烟雨水乡的另一极——湖、扁舟与梅","seal":"南","color":"#26786e","question_ids":["Q05","Q06","Q11","Q13","Q17","Q22","Q23"],"archives":[{"title":"意象地理","url":"41_意象地理.html","note":"意象×地域 lift 矩阵：江南为何是湖与梅"},{"title":"同一意象的诗人情感差异","url":"17_同一意象的诗人情感差异.html","note":"月/酒/舟/雁/雨在诗人间的异情"}]},{"id":"ch4","name":"荆楚·江右","theme":"贬谪者的江湖——黄州、江州与岳阳","seal":"楚","color":"#b64b3f","question_ids":["Q08","Q12","Q18","Q20","Q21","Q24"],"archives":[{"title":"诗人精神地形图","url":"20_诗人精神地形图.html","note":"李白五分期意象漂移"},{"title":"创作活动中心迁移","url":"16_唐宋诗歌创作活动中心迁移.html","note":"乱世之后创作中心南移"},{"title":"诗人自述生命卷","url":"39_诗人自述生命卷.html","note":"卷一终赏：88 人第一人称生命叙事"}]}]};
+var ARCHIVE = {"Q01":{"key":"青州","modern":"青州","province":"山东","historical_aliases":["青州"],"composed_n":0,"mentions_n":10,"mention_poets_n":9,"locality_rate":0.0,"imagery_top":[{"word":"月","cat":"天象","count":4,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":3,"avg_emotion":0.0},{"word":"笑","cat":"情志","count":3,"avg_emotion":0.7},{"word":"阁","cat":"建筑","count":3,"avg_emotion":0.1},{"word":"江","cat":"地理","count":3,"avg_emotion":0.0},{"word":"愁","cat":"情志","count":3,"avg_emotion":-0.8}],"mention_sample_titles":[{"poet":"叶梦得","title":"临江仙","dynasty":"宋"},{"poet":"岑参","title":"送裴校书从大夫淄川觐省","dynasty":"唐"},{"poet":"李清照","title":"感怀","dynasty":"宋"},{"poet":"李清照","title":"金石录后序","dynasty":"宋"},{"poet":"欧阳修","title":"泷冈阡表","dynasty":"宋"},{"poet":"皮日休","title":"醉中寄鲁望一壶并一绝","dynasty":"唐"}]},"Q02":{"key":"山东省昌乐","modern":"昌乐","province":"山东","historical_aliases":["昌乐"],"composed_n":1,"mentions_n":0,"mention_poets_n":0,"locality_rate":1.0,"imagery_top":[],"mention_sample_titles":[]},"Q03":{"key":"北京","modern":"北京","province":"北京","historical_aliases":["幽州","幽州（范阳一带）","燕京","长城"],"composed_n":1,"mentions_n":50,"mention_poets_n":32,"locality_rate":0.0196,"imagery_top":[{"word":"城","cat":"建筑","count":31,"avg_emotion":0.0},{"word":"马","cat":"走兽","count":23,"avg_emotion":0.0},{"word":"月","cat":"天象","count":22,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":21,"avg_emotion":0.0},{"word":"风","cat":"天象","count":17,"avg_emotion":-0.1},{"word":"山","cat":"地理","count":17,"avg_emotion":0.1}],"mention_sample_titles":[{"poet":"元稹","title":"和李校书新题乐府十二首。缚戎人","dynasty":"唐"},{"poet":"元稹","title":"夫远征","dynasty":"唐"},{"poet":"刘禹锡","title":"经檀道济故垒","dynasty":"唐"},{"poet":"刘禹锡","title":"韩十八侍御见示岳阳楼别窦司直诗，因令属和","dynasty":"唐"},{"poet":"卢纶","title":"送刘判官赴丰州","dynasty":"唐"},{"poet":"叶梦得","title":"满庭芳（张敏叔、程致道和示，复用韵寄酬）","dynasty":"宋"}]},"Q04":{"key":"重庆市奉节","modern":"夔州白帝城","province":"重庆","historical_aliases":["夔州","夔州白帝城"],"composed_n":3,"mentions_n":0,"mention_poets_n":0,"locality_rate":1.0,"imagery_top":[],"mention_sample_titles":[]},"Q05":{"key":"南京","modern":"南京","province":"江苏","historical_aliases":["建康","江宁","江宁府","白下","石头城","金陵","金陵凤凰台","金陵长干里"],"composed_n":3,"mentions_n":82,"mention_poets_n":38,"locality_rate":0.0353,"imagery_top":[{"word":"山","cat":"地理","count":44,"avg_emotion":0.1},{"word":"江","cat":"地理","count":37,"avg_emotion":0.0},{"word":"月","cat":"天象","count":36,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":33,"avg_emotion":0.0},{"word":"风","cat":"天象","count":33,"avg_emotion":-0.1},{"word":"城","cat":"建筑","count":17,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"刘禹锡","title":"西塞山怀古","dynasty":"唐"},{"poet":"刘禹锡","title":"金陵五题·并序","dynasty":"唐"},{"poet":"叶梦得","title":"雨夜与模论中原旦起模与徐惇济","dynasty":"宋"},{"poet":"姜夔","title":"杏花天影·绿丝低拂鸳鸯浦","dynasty":"宋"},{"poet":"姜夔","title":"永遇乐·次韵辛克清先生","dynasty":"宋"},{"poet":"姜夔","title":"访费山人","dynasty":"宋"}]},"Q06":{"key":"南京","modern":"南京","province":"江苏","historical_aliases":["建康","江宁","江宁府","白下","石头城","金陵","金陵凤凰台","金陵长干里"],"composed_n":3,"mentions_n":82,"mention_poets_n":38,"locality_rate":0.0353,"imagery_top":[{"word":"山","cat":"地理","count":44,"avg_emotion":0.1},{"word":"江","cat":"地理","count":37,"avg_emotion":0.0},{"word":"月","cat":"天象","count":36,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":33,"avg_emotion":0.0},{"word":"风","cat":"天象","count":33,"avg_emotion":-0.1},{"word":"城","cat":"建筑","count":17,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"刘禹锡","title":"西塞山怀古","dynasty":"唐"},{"poet":"刘禹锡","title":"金陵五题·并序","dynasty":"唐"},{"poet":"叶梦得","title":"雨夜与模论中原旦起模与徐惇济","dynasty":"宋"},{"poet":"姜夔","title":"杏花天影·绿丝低拂鸳鸯浦","dynasty":"宋"},{"poet":"姜夔","title":"永遇乐·次韵辛克清先生","dynasty":"宋"},{"poet":"姜夔","title":"访费山人","dynasty":"宋"}]},"Q07":{"key":"成都","modern":"成都","province":"四川","historical_aliases":["剑南","巴蜀","成都","成都武侯祠","成都浣花草堂","沱江","浣花","草堂"],"composed_n":6,"mentions_n":168,"mention_poets_n":55,"locality_rate":0.0345,"imagery_top":[{"word":"云","cat":"天象","count":72,"avg_emotion":0.0},{"word":"山","cat":"地理","count":66,"avg_emotion":0.1},{"word":"风","cat":"天象","count":65,"avg_emotion":-0.1},{"word":"江","cat":"地理","count":58,"avg_emotion":0.0},{"word":"月","cat":"天象","count":54,"avg_emotion":-0.2},{"word":"雨","cat":"天象","count":36,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"刘克庄","title":"示同志","dynasty":"宋"},{"poet":"刘禹锡","title":"伤愚溪三首","dynasty":"唐"},{"poet":"刘禹锡","title":"浪淘沙·其五","dynasty":"唐"},{"poet":"刘禹锡","title":"竹枝词九首","dynasty":"唐"},{"poet":"刘禹锡","title":"竹枝词九首·其四","dynasty":"唐"},{"poet":"卢纶","title":"寻贾尊师","dynasty":"唐"}]},"Q08":{"key":"岳阳","modern":"岳阳","province":"湖南","historical_aliases":["岳阳","岳阳楼","巴陵","洞庭"],"composed_n":1,"mentions_n":212,"mention_poets_n":58,"locality_rate":0.0047,"imagery_top":[{"word":"风","cat":"天象","count":98,"avg_emotion":-0.1},{"word":"云","cat":"天象","count":96,"avg_emotion":0.0},{"word":"山","cat":"地理","count":94,"avg_emotion":0.1},{"word":"月","cat":"天象","count":91,"avg_emotion":-0.2},{"word":"江","cat":"地理","count":63,"avg_emotion":0.0},{"word":"雨","cat":"天象","count":55,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"元稹","title":"唐故工部员外郎杜君墓系铭并序","dynasty":"唐"},{"poet":"元稹","title":"岳阳楼","dynasty":"唐"},{"poet":"元稹","title":"梦成之","dynasty":"唐"},{"poet":"元稹","title":"洞庭湖","dynasty":"唐"},{"poet":"元稹","title":"解秋十首","dynasty":"唐"},{"poet":"元稹","title":"遭风二十韵","dynasty":"唐"}]},"Q09":{"key":"重庆市奉节","modern":"夔州白帝城","province":"重庆","historical_aliases":["夔州","夔州白帝城"],"composed_n":3,"mentions_n":0,"mention_poets_n":0,"locality_rate":1.0,"imagery_top":[],"mention_sample_titles":[]},"Q10":{"key":"绵阳市三台","modern":"梓州","province":"四川","historical_aliases":["梓州"],"composed_n":1,"mentions_n":0,"mention_poets_n":0,"locality_rate":1.0,"imagery_top":[],"mention_sample_titles":[]},"Q11":{"key":"杭州","modern":"杭州","province":"浙江","historical_aliases":["严州","临安","孤山","武林","睦州","西湖","西溪","钱塘"],"composed_n":3,"mentions_n":235,"mention_poets_n":46,"locality_rate":0.0126,"imagery_top":[{"word":"湖","cat":"地理","count":169,"avg_emotion":0.1},{"word":"山","cat":"地理","count":121,"avg_emotion":0.1},{"word":"风","cat":"天象","count":113,"avg_emotion":-0.1},{"word":"月","cat":"天象","count":102,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":94,"avg_emotion":0.0},{"word":"雨","cat":"天象","count":66,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"元稹","title":"酬乐天雪中见寄","dynasty":"唐"},{"poet":"刘克庄","title":"戊辰书事","dynasty":"宋"},{"poet":"刘克庄","title":"戊辰即事","dynasty":"宋"},{"poet":"刘克庄","title":"沁园春·天造梅花","dynasty":"宋"},{"poet":"刘克庄","title":"贺新郎（宋庵·访梅）","dynasty":"宋"},{"poet":"刘禹锡","title":"白舍人自杭州寄新诗，有柳色春藏苏小家之句","dynasty":"唐"}]},"Q12":{"key":"黄冈","modern":"黄冈","province":"湖北","historical_aliases":["蕲水清泉寺","黄州","黄州临皋亭","黄州定慧院","黄州沙湖道中","黄州赤壁"],"composed_n":6,"mentions_n":22,"mention_poets_n":8,"locality_rate":0.2143,"imagery_top":[{"word":"云","cat":"天象","count":10,"avg_emotion":0.0},{"word":"风","cat":"天象","count":9,"avg_emotion":-0.1},{"word":"江","cat":"地理","count":9,"avg_emotion":0.0},{"word":"月","cat":"天象","count":8,"avg_emotion":-0.2},{"word":"笑","cat":"情志","count":8,"avg_emotion":0.7},{"word":"舟","cat":"器物","count":7,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"文天祥","title":"读赤壁赋前后二首·其一","dynasty":"宋"},{"poet":"曾巩","title":"洪渥传","dynasty":"宋"},{"poet":"杜牧","title":"池州送孟迟先辈","dynasty":"唐"},{"poet":"林逋","title":"读王黄州诗集","dynasty":"宋"},{"poet":"苏轼","title":"寒食帖","dynasty":"宋"},{"poet":"苏轼","title":"寒食雨二首","dynasty":"宋"}]},"Q13":{"key":"杭州","modern":"杭州","province":"浙江","historical_aliases":["严州","临安","孤山","武林","睦州","西湖","西溪","钱塘"],"composed_n":3,"mentions_n":235,"mention_poets_n":46,"locality_rate":0.0126,"imagery_top":[{"word":"湖","cat":"地理","count":169,"avg_emotion":0.1},{"word":"山","cat":"地理","count":121,"avg_emotion":0.1},{"word":"风","cat":"天象","count":113,"avg_emotion":-0.1},{"word":"月","cat":"天象","count":102,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":94,"avg_emotion":0.0},{"word":"雨","cat":"天象","count":66,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"元稹","title":"酬乐天雪中见寄","dynasty":"唐"},{"poet":"刘克庄","title":"戊辰书事","dynasty":"宋"},{"poet":"刘克庄","title":"戊辰即事","dynasty":"宋"},{"poet":"刘克庄","title":"沁园春·天造梅花","dynasty":"宋"},{"poet":"刘克庄","title":"贺新郎（宋庵·访梅）","dynasty":"宋"},{"poet":"刘禹锡","title":"白舍人自杭州寄新诗，有柳色春藏苏小家之句","dynasty":"唐"}]},"Q14":{"key":"成都","modern":"成都","province":"四川","historical_aliases":["剑南","巴蜀","成都","成都武侯祠","成都浣花草堂","沱江","浣花","草堂"],"composed_n":6,"mentions_n":168,"mention_poets_n":55,"locality_rate":0.0345,"imagery_top":[{"word":"云","cat":"天象","count":72,"avg_emotion":0.0},{"word":"山","cat":"地理","count":66,"avg_emotion":0.1},{"word":"风","cat":"天象","count":65,"avg_emotion":-0.1},{"word":"江","cat":"地理","count":58,"avg_emotion":0.0},{"word":"月","cat":"天象","count":54,"avg_emotion":-0.2},{"word":"雨","cat":"天象","count":36,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"刘克庄","title":"示同志","dynasty":"宋"},{"poet":"刘禹锡","title":"伤愚溪三首","dynasty":"唐"},{"poet":"刘禹锡","title":"浪淘沙·其五","dynasty":"唐"},{"poet":"刘禹锡","title":"竹枝词九首","dynasty":"唐"},{"poet":"刘禹锡","title":"竹枝词九首·其四","dynasty":"唐"},{"poet":"卢纶","title":"寻贾尊师","dynasty":"唐"}]},"Q15":{"key":"广元市剑阁","modern":"剑门","province":"四川","historical_aliases":["剑门"],"composed_n":1,"mentions_n":0,"mention_poets_n":0,"locality_rate":1.0,"imagery_top":[],"mention_sample_titles":[]},"Q16":{"key":"开封","modern":"开封","province":"河南","historical_aliases":["东京","汴京","汴梁"],"composed_n":1,"mentions_n":17,"mention_poets_n":15,"locality_rate":0.0556,"imagery_top":[{"word":"云","cat":"天象","count":8,"avg_emotion":0.0},{"word":"山","cat":"地理","count":7,"avg_emotion":0.1},{"word":"月","cat":"天象","count":7,"avg_emotion":-0.2},{"word":"风","cat":"天象","count":5,"avg_emotion":-0.1},{"word":"烟","cat":"天象","count":5,"avg_emotion":-0.2},{"word":"斗","cat":"天象","count":5,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"周邦彦","title":"汴都赋","dynasty":"宋"},{"poet":"孟郊","title":"寄张籍","dynasty":"唐"},{"poet":"宋之问","title":"登禅定寺阁（一作登总持寺阁）","dynasty":"唐"},{"poet":"朱熹","title":"斋居感兴二十首 其六","dynasty":"宋"},{"poet":"李贺","title":"高轩过","dynasty":"唐"},{"poet":"杨亿","title":"义门胡生南归","dynasty":"宋"}]},"Q17":{"key":"杭州","modern":"杭州","province":"浙江","historical_aliases":["严州","临安","孤山","武林","睦州","西湖","西溪","钱塘"],"composed_n":3,"mentions_n":235,"mention_poets_n":46,"locality_rate":0.0126,"imagery_top":[{"word":"湖","cat":"地理","count":169,"avg_emotion":0.1},{"word":"山","cat":"地理","count":121,"avg_emotion":0.1},{"word":"风","cat":"天象","count":113,"avg_emotion":-0.1},{"word":"月","cat":"天象","count":102,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":94,"avg_emotion":0.0},{"word":"雨","cat":"天象","count":66,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"元稹","title":"酬乐天雪中见寄","dynasty":"唐"},{"poet":"刘克庄","title":"戊辰书事","dynasty":"宋"},{"poet":"刘克庄","title":"戊辰即事","dynasty":"宋"},{"poet":"刘克庄","title":"沁园春·天造梅花","dynasty":"宋"},{"poet":"刘克庄","title":"贺新郎（宋庵·访梅）","dynasty":"宋"},{"poet":"刘禹锡","title":"白舍人自杭州寄新诗，有柳色春藏苏小家之句","dynasty":"唐"}]},"Q18":{"key":"九江","modern":"九江","province":"江西","historical_aliases":["修水","分宁","庐山","庐山大林寺","庐山西林寺","江州","江州湓浦口","浔阳"],"composed_n":5,"mentions_n":88,"mention_poets_n":40,"locality_rate":0.0538,"imagery_top":[{"word":"山","cat":"地理","count":62,"avg_emotion":0.1},{"word":"月","cat":"天象","count":40,"avg_emotion":-0.2},{"word":"江","cat":"地理","count":40,"avg_emotion":0.0},{"word":"云","cat":"天象","count":38,"avg_emotion":0.0},{"word":"风","cat":"天象","count":33,"avg_emotion":-0.1},{"word":"雨","cat":"天象","count":25,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"上官仪","title":"谢都督挽歌","dynasty":"唐"},{"poet":"元稹","title":"凭李忠州寄书乐天","dynasty":"唐"},{"poet":"元稹","title":"得乐天书","dynasty":"唐"},{"poet":"元稹","title":"相忆泪","dynasty":"唐"},{"poet":"刘禹锡","title":"赠别约师","dynasty":"唐"},{"poet":"刘禹锡","title":"送僧方及南谒柳员外","dynasty":"唐"}]},"Q19":{"key":"洛阳","modern":"洛阳","province":"河南","historical_aliases":["东都","中原","洛城","洛阳","洛阳池上"],"composed_n":2,"mentions_n":372,"mention_poets_n":65,"locality_rate":0.0053,"imagery_top":[{"word":"风","cat":"天象","count":127,"avg_emotion":-0.1},{"word":"山","cat":"地理","count":119,"avg_emotion":0.1},{"word":"月","cat":"天象","count":112,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":111,"avg_emotion":0.0},{"word":"马","cat":"走兽","count":90,"avg_emotion":0.0},{"word":"城","cat":"建筑","count":81,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"元稹","title":"和李校书新题乐府十二首。缚戎人","dynasty":"唐"},{"poet":"元稹","title":"灯影","dynasty":"唐"},{"poet":"元稹","title":"琵琶歌（寄管儿，兼诲铁山。此后并新题乐府）","dynasty":"唐"},{"poet":"元稹","title":"莺莺传","dynasty":"唐"},{"poet":"元稹","title":"连昌宫词","dynasty":"唐"},{"poet":"刘克庄","title":"北来人二首·其一","dynasty":"宋"}]},"Q20":{"key":"黄冈","modern":"黄冈","province":"湖北","historical_aliases":["蕲水清泉寺","黄州","黄州临皋亭","黄州定慧院","黄州沙湖道中","黄州赤壁"],"composed_n":6,"mentions_n":22,"mention_poets_n":8,"locality_rate":0.2143,"imagery_top":[{"word":"云","cat":"天象","count":10,"avg_emotion":0.0},{"word":"风","cat":"天象","count":9,"avg_emotion":-0.1},{"word":"江","cat":"地理","count":9,"avg_emotion":0.0},{"word":"月","cat":"天象","count":8,"avg_emotion":-0.2},{"word":"笑","cat":"情志","count":8,"avg_emotion":0.7},{"word":"舟","cat":"器物","count":7,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"文天祥","title":"读赤壁赋前后二首·其一","dynasty":"宋"},{"poet":"曾巩","title":"洪渥传","dynasty":"宋"},{"poet":"杜牧","title":"池州送孟迟先辈","dynasty":"唐"},{"poet":"林逋","title":"读王黄州诗集","dynasty":"宋"},{"poet":"苏轼","title":"寒食帖","dynasty":"宋"},{"poet":"苏轼","title":"寒食雨二首","dynasty":"宋"}]},"Q21":{"key":"黄冈","modern":"黄冈","province":"湖北","historical_aliases":["蕲水清泉寺","黄州","黄州临皋亭","黄州定慧院","黄州沙湖道中","黄州赤壁"],"composed_n":6,"mentions_n":22,"mention_poets_n":8,"locality_rate":0.2143,"imagery_top":[{"word":"云","cat":"天象","count":10,"avg_emotion":0.0},{"word":"风","cat":"天象","count":9,"avg_emotion":-0.1},{"word":"江","cat":"地理","count":9,"avg_emotion":0.0},{"word":"月","cat":"天象","count":8,"avg_emotion":-0.2},{"word":"笑","cat":"情志","count":8,"avg_emotion":0.7},{"word":"舟","cat":"器物","count":7,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"文天祥","title":"读赤壁赋前后二首·其一","dynasty":"宋"},{"poet":"曾巩","title":"洪渥传","dynasty":"宋"},{"poet":"杜牧","title":"池州送孟迟先辈","dynasty":"唐"},{"poet":"林逋","title":"读王黄州诗集","dynasty":"宋"},{"poet":"苏轼","title":"寒食帖","dynasty":"宋"},{"poet":"苏轼","title":"寒食雨二首","dynasty":"宋"}]},"Q22":{"key":"杭州","modern":"杭州","province":"浙江","historical_aliases":["严州","临安","孤山","武林","睦州","西湖","西溪","钱塘"],"composed_n":3,"mentions_n":235,"mention_poets_n":46,"locality_rate":0.0126,"imagery_top":[{"word":"湖","cat":"地理","count":169,"avg_emotion":0.1},{"word":"山","cat":"地理","count":121,"avg_emotion":0.1},{"word":"风","cat":"天象","count":113,"avg_emotion":-0.1},{"word":"月","cat":"天象","count":102,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":94,"avg_emotion":0.0},{"word":"雨","cat":"天象","count":66,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"元稹","title":"酬乐天雪中见寄","dynasty":"唐"},{"poet":"刘克庄","title":"戊辰书事","dynasty":"宋"},{"poet":"刘克庄","title":"戊辰即事","dynasty":"宋"},{"poet":"刘克庄","title":"沁园春·天造梅花","dynasty":"宋"},{"poet":"刘克庄","title":"贺新郎（宋庵·访梅）","dynasty":"宋"},{"poet":"刘禹锡","title":"白舍人自杭州寄新诗，有柳色春藏苏小家之句","dynasty":"唐"}]},"Q23":{"key":"绍兴","modern":"绍兴","province":"浙江","historical_aliases":["会稽","山阴","山阴山西村","越州","镜湖"],"composed_n":5,"mentions_n":59,"mention_poets_n":29,"locality_rate":0.0781,"imagery_top":[{"word":"湖","cat":"地理","count":30,"avg_emotion":0.1},{"word":"山","cat":"地理","count":27,"avg_emotion":0.1},{"word":"风","cat":"天象","count":23,"avg_emotion":-0.1},{"word":"月","cat":"天象","count":21,"avg_emotion":-0.2},{"word":"云","cat":"天象","count":15,"avg_emotion":0.0},{"word":"归","cat":"情志","count":14,"avg_emotion":0.0}],"mention_sample_titles":[{"poet":"元稹","title":"初除浙东，妻有阻色，因以四韵晓之","dynasty":"唐"},{"poet":"元稹","title":"戏赠乐天、复言（此后三篇同韵）","dynasty":"唐"},{"poet":"刘克庄","title":"念奴娇·卯君来处","dynasty":"宋"},{"poet":"刘禹锡","title":"月夜忆乐天兼寄微之","dynasty":"唐"},{"poet":"卢纶","title":"题兴善寺后池","dynasty":"唐"},{"poet":"叶梦得","title":"次韵方仁声惠文编","dynasty":"宋"}]},"Q24":{"key":"九江","modern":"九江","province":"江西","historical_aliases":["修水","分宁","庐山","庐山大林寺","庐山西林寺","江州","江州湓浦口","浔阳"],"composed_n":5,"mentions_n":88,"mention_poets_n":40,"locality_rate":0.0538,"imagery_top":[{"word":"山","cat":"地理","count":62,"avg_emotion":0.1},{"word":"月","cat":"天象","count":40,"avg_emotion":-0.2},{"word":"江","cat":"地理","count":40,"avg_emotion":0.0},{"word":"云","cat":"天象","count":38,"avg_emotion":0.0},{"word":"风","cat":"天象","count":33,"avg_emotion":-0.1},{"word":"雨","cat":"天象","count":25,"avg_emotion":-0.2}],"mention_sample_titles":[{"poet":"上官仪","title":"谢都督挽歌","dynasty":"唐"},{"poet":"元稹","title":"凭李忠州寄书乐天","dynasty":"唐"},{"poet":"元稹","title":"得乐天书","dynasty":"唐"},{"poet":"元稹","title":"相忆泪","dynasty":"唐"},{"poet":"刘禹锡","title":"赠别约师","dynasty":"唐"},{"poet":"刘禹锡","title":"送僧方及南谒柳员外","dynasty":"唐"}]}};
+var INTROS = {"meta":{"n_slots":4,"n_videos_ready":0,"policy":"开卷卡优先播放已生成视频；无视频时降级为水墨底开卷卡（章印+主题句+场景占位说明），保证零资产可运行。视频命名 ch{n}.mp4 / 首帧 ch{n}_poster.jpg，放入 output/assets/seedance/ 后重跑本工具与 viz_40 自动接入。","generated_by":"tools/build_seedance_slots.py"},"slots":[{"chapter_id":"ch1","chapter":"两京·朔方","scene":"S25","scene_name":"长安旧梦·夜郎江影","poem_line":"昔在长安醉花柳，五侯七贵同杯酒。","video":null,"poster":null},{"chapter_id":"ch2","chapter":"巴蜀","scene":"S14","scene_name":"彩云白帝·轻舟万山","poem_line":"朝辞白帝彩云间，千里江陵一日还。","video":null,"poster":null},{"chapter_id":"ch3","chapter":"江南","scene":"S09","scene_name":"西湖晴雨·淡妆浓抹","poem_line":"水光潋滟晴方好，山色空蒙雨亦奇。","video":null,"poster":null},{"chapter_id":"ch4","chapter":"荆楚·江右","scene":"S31","scene_name":"雪泥鸿爪","poem_line":"人生到处知何似，应似飞鸿踏雪泥。","video":null,"poster":null}]};
+var META = BANK.meta;
+var QS = BANK.questions;
+var CH = BANK.chapters;
+var INTRO_BY = {};
+(INTROS.slots || []).forEach(function(s){ INTRO_BY[s.chapter_id] = s; });
+var introShown = {};
+var TUT = (META.hint_policy && META.hint_policy.tutorial_free_first) || 0;
+var MAXPTS = 5000 * QS.length;
+var SAVE_KEY = "shxw40_v2";
+
+var el = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
+function havKm(a, b){
+  var R = 6371, p1 = a[1]*Math.PI/180, p2 = b[1]*Math.PI/180;
+  var dp = p2 - p1, dl = (b[0]-a[0])*Math.PI/180;
+  var h = Math.sin(dp/2)*Math.sin(dp/2) + Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)*Math.sin(dl/2);
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+/* ---------- 存档 ---------- */
+function blankCh(order){ return {order: order.slice(), qi:0, score:0, correct:0, best:0, wrong:[], done:false}; }
+function loadSave(){
+  try{
+    var s = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
+    if(s && s.ch) return s;
+  }catch(e){}
+  return {ch:{}, visited:[]};
+}
+function writeSave(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(SAVE)); }catch(e){} }
+function clearSave(){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} }
+var SAVE = loadSave();
+function chDone(i){ var c = SAVE.ch[CH[i].id]; return !!(c && c.done); }
+function allDone(){ for(var i=0;i<CH.length;i++){ if(!chDone(i)) return false; } return true; }
+function totalScore(){ var t=0; for(var i=0;i<CH.length;i++){ var c=SAVE.ch[CH[i].id]; if(c) t+=c.score; } return t; }
+function totalWrong(){ var w=[]; for(var i=0;i<CH.length;i++){ var c=SAVE.ch[CH[i].id]; if(c) w=w.concat(c.wrong); } return w; }
+
+/* ---------- 地图 ---------- */
+var map = null, jmap = null;
+function baseMapOption(){
+  return {
+    geo:{
+      map:"china", roam:true, zoom:1.1, scaleLimit:{min:0.8, max:12},
+      itemStyle:{areaColor:"#eceee8", borderColor:"#b9c2ba", borderWidth:0.8},
+      emphasis:{label:{color:"#3c443f", fontSize:10}, itemStyle:{areaColor:"#e2e8e0"}},
+      label:{show:true, color:"#9aa39b", fontSize:8.5},
+      select:{disabled:true}
+    },
+    series:[]
+  };
+}
+function ensureMap(){
+  if(map || typeof echarts === "undefined") return;
+  map = echarts.init(el("map"));
+  map.setOption(baseMapOption());
+  map.getZr().on("click", function(params){
+    if(revealed || !cur) return;
+    var px = [params.offsetX, params.offsetY];
+    var co = map.convertFromPixel({geoIndex:0}, px);
+    if(!co || !isFinite(co[0]) || !isFinite(co[1])) return;
+    if(co[0]<70 || co[0]>140 || co[1]<14 || co[1]>56) return;
+    guess = [co[0], co[1]];
+    el("btnConfirm").disabled = false;
+    el("guessTip").innerHTML = "落子于 " + co[0].toFixed(1) + "°E, " + co[1].toFixed(1) + "°N——确定吗？";
+    paintMarkers();
+  });
+  window.addEventListener("resize", function(){ map && map.resize(); jmap && jmap.resize(); });
+}
+function ensureJmap(){
+  if(typeof echarts === "undefined") return;
+  if(!jmap) jmap = echarts.init(el("jmap"));
+  var hits = [], misses = [];
+  (SAVE.visited||[]).forEach(function(v){
+    (v.hit ? hits : misses).push({name:v.modern, value:[v.lon, v.lat]});
+  });
+  jmap.setOption({
+    geo:{
+      map:"china", roam:false, zoom:1.05, silent:true,
+      itemStyle:{areaColor:"#eceee8", borderColor:"#c6cdc5", borderWidth:0.6},
+      label:{show:false}
+    },
+    series:[
+      {type:"scatter", coordinateSystem:"geo", symbolSize:9, itemStyle:{color:"#26786e"},
+       label:{show:hits.length<=12, position:"top", color:"#26786e", fontSize:10, formatter:"{b}"},
+       data:hits},
+      {type:"scatter", coordinateSystem:"geo", symbolSize:8, itemStyle:{color:"#b64b3f", opacity:.75},
+       label:{show:false}, data:misses}
+    ]
+  });
+}
+function paintMarkers(){
+  if(!map) return;
+  var series = [{
+    type:"scatter", coordinateSystem:"geo", zlevel:2,
+    symbolSize:12, itemStyle:{color:"#b64b3f"},
+    label:{show:true, position:"top", formatter:"落子", color:"#b64b3f", fontSize:11},
+    data: guess ? [{name:"guess", value:guess}] : []
+  }];
+  if(revealed && guess){
+    var ans = [cur.answer.lon, cur.answer.lat];
+    series.push({
+      type:"scatter", coordinateSystem:"geo", zlevel:2,
+      symbolSize:14, itemStyle:{color:"#26786e"},
+      label:{show:true, position:"top", formatter:esc(cur.answer.modern), color:"#26786e", fontSize:11},
+      data:[{name:"ans", value:ans}]
+    });
+    series.push({
+      type:"lines", coordinateSystem:"geo", zlevel:2,
+      lineStyle:{type:"dashed", color:"#a87527", width:2, curveness:0.15},
+      data:[{coords:[guess, ans]}]
+    });
+  }
+  map.setOption({series:series});
+}
+
+/* ---------- 章节中枢 ---------- */
+function renderHub(){
+  el("gameArea").style.display = "none";
+  el("chEnd").style.display = "none";
+  el("hubArea").style.display = "block";
+  ensureJmap();
+  var seals = [];
+  CH.forEach(function(ch, i){
+    var on = chDone(i);
+    seals.push('<div class="seal' + (on?" on":"") + '">' + (on ? esc(ch.seal) : "？") +
+      '<span class="sn">' + esc(ch.name) + '</span></div>');
+  });
+  el("sealRow").innerHTML = seals.join("");
+
+  var cards = [];
+  CH.forEach(function(ch, i){
+    var locked = i > 0 && !chDone(i - 1);
+    var c = SAVE.ch[ch.id];
+    var st, btn;
+    if(locked){
+      st = "尚未启程——先通关「" + esc(CH[i-1].name) + "」";
+      btn = '<button class="act" disabled>未解锁</button>';
+    } else if(c && c.done){
+      st = "已通关 · 得分 <b>" + c.score + "</b> · 答对 " + c.correct + "/" + c.order.length;
+      btn = '<button class="act ghost sm" data-replay="' + i + '">重走此章（乱序）</button>';
+    } else if(c && c.qi > 0){
+      st = "行至第 " + (c.qi+1) + " / " + c.order.length + " 题 · 已得 " + c.score + " 分";
+      btn = '<button class="act" data-go="' + i + '">继续旅程</button>';
+    } else {
+      st = ch.question_ids.length + " 题待启程" + (i===0 ? " · 前 " + TUT + " 题教学关提示免费" : "");
+      btn = '<button class="act" data-go="' + i + '">启程</button>';
+    }
+    cards.push('<div class="chcard' + (locked?" locked":"") + '" style="border-top-color:' + ch.color + '">' +
+      '<h3>' + (chDone(i) ? '「' + esc(ch.seal) + '」 ' : '') + esc(ch.name) + '</h3>' +
+      '<div class="th">' + esc(ch.theme) + '</div>' +
+      '<div class="st">' + st + '</div><div>' + btn + '</div></div>');
+  });
+  el("chCards").innerHTML = cards.join("");
+
+  var kao = [];
+  CH.forEach(function(ch, i){
+    ch.archives.forEach(function(a){
+      var open = chDone(i);
+      kao.push(open
+        ? '<div class="kitem"><a href="' + esc(a.url) + '" target="_blank">' + esc(a.title) + '</a><div class="note">' + esc(a.note) + '</div></div>'
+        : '<div class="kitem lock"><b>🔒 ' + esc(a.title) + '</b><div class="note">通关「' + esc(ch.name) + '」解锁</div></div>');
+    });
+  });
+  el("kaoGrid").innerHTML = kao.join("");
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"), function(b){
+    b.onclick = function(){ startChapter(+b.getAttribute("data-go"), false); };
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-replay]"), function(b){
+    b.onclick = function(){ startChapter(+b.getAttribute("data-replay"), true); };
+  });
+}
+el("btnResetAll").onclick = function(){ clearSave(); location.reload(); };
+
+/* ---------- 答题 ---------- */
+var S = null;            // 当前章运行态 {ci, order, qi, score, correct, streak, best, wrong}
+var cur = null, guess = null, revealed = false, usedHints = {};
+var QIDX = {};
+QS.forEach(function(q, i){ QIDX[q.id] = i; });
+
+function startChapter(ci, replay){
+  var ch = CH[ci];
+  var order = ch.question_ids.slice();
+  if(replay){
+    for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=order[i]; order[i]=order[j]; order[j]=t; }
+    SAVE.ch[ch.id] = blankCh(order);
+    writeSave();
+  }
+  S = {ci:ci, order:(SAVE.ch[ch.id] || (SAVE.ch[ch.id]=blankCh(order))).order,
+       qi:SAVE.ch[ch.id].qi, score:SAVE.ch[ch.id].score, correct:SAVE.ch[ch.id].correct,
+       streak:0, best:SAVE.ch[ch.id].best, wrong:SAVE.ch[ch.id].wrong};
+  el("hubArea").style.display = "none";
+  el("chEnd").style.display = "none";
+  el("gameArea").style.display = "flex";
+  ensureMap();
+  if(S.qi === 0){ showIntro(ci, showQ); } else { showQ(); }
+}
+
+/* ---------- 章题开卷卡（Seedance 槽位；无视频时水墨底降级） ---------- */
+function showIntro(ci, cb){
+  var ch = CH[ci];
+  var s = INTRO_BY[ch.id] || {};
+  if(introShown[ch.id]){ cb && cb(); return; }
+  introShown[ch.id] = true;
+  var bg = "";
+  if(s.video){
+    bg = '<video src="' + esc(s.video) + '" autoplay muted loop playsinline' +
+         (s.poster ? ' poster="' + esc(s.poster) + '"' : "") + '></video>';
+  } else if(s.poster){
+    bg = '<div class="iposter" style="background-image:url(' + esc(s.poster) + ')"></div>';
+  }
+  var animated = !s.video && !s.poster;
+  el("introBox").innerHTML = bg + '<div class="itext">' +
+    '<div class="iseal"' + (animated ? ' style="animation:izoom 16s ease-in-out infinite alternate"' : "") + '>' + esc(ch.seal) + '</div>' +
+    '<div class="iname">' + esc(ch.name) + '</div>' +
+    '<div class="itheme">' + esc(ch.theme) + '</div>' +
+    (s.poem_line ? '<div class="ikai">「' + esc(s.poem_line) + '」</div>' : "") +
+    '<div class="iscene">' + (s.scene
+        ? '开卷 · Seedance ' + esc(s.scene) + '《' + esc(s.scene_name) + '》' +
+          (s.video ? '' : ' · 视频待生成，水墨底代行')
+        : '开卷') + '</div>' +
+    '<button class="act" id="introGo">启程 →</button></div>';
+  el("introOv").classList.add("on");
+  el("introGo").onclick = function(){
+    el("introOv").classList.remove("on");
+    cb && cb();
+  };
+}
+function persistCh(){
+  var c = SAVE.ch[CH[S.ci].id];
+  c.qi = S.qi; c.score = S.score; c.correct = S.correct; c.best = S.best; c.wrong = S.wrong;
+  writeSave();
+}
+function showQ(){
+  cur = QS[QIDX[S.order[S.qi]]]; guess = null; revealed = false; usedHints = {};
+  el("chName").textContent = CH[S.ci].name + " · " + (S.qi+1) + "/" + S.order.length;
+  el("poemLines").innerHTML = cur.lines.map(function(l){ return esc(l); }).join("<br>");
+  el("poemSrc").innerHTML = esc(cur.dynasty) + "代诗人作 · 题目作者答后揭晓";
+  el("qNo").textContent = "第 " + (S.qi+1) + " 题";
+  var dn = {1:["b1","易 · 诗中有地名"],2:["b2","中 · 意象充分"],3:["b3","难 · 意象含蓄"]}[cur.difficulty];
+  el("qDiff").innerHTML = '<span class="badge '+dn[0]+'">'+dn[1]+'</span>' +
+    (S.ci===0 && S.qi < TUT ? ' <span class="badge b1">教学关 · 提示免费</span>' : "");
+  el("scoreNow").textContent = S.score;
+  el("streakNow").textContent = S.streak > 1 ? "连对 " + S.streak : "";
+  el("guessTip").textContent = "在右侧地图上点击你的判断：这首诗写于何处？";
+  el("btnConfirm").disabled = true;
+  ["Prov","Place","Img"].forEach(function(k){ el("h"+k).disabled = false; });
+  ["htProv","htPlace","htImg"].forEach(function(id){ el(id).style.display = "none"; });
+  updateMult();
+  el("progFill").style.width = (S.qi / S.order.length * 100) + "%";
+  if(map) map.setOption(baseMapOption());
+}
+function hintMult(){
+  var m = 1.0;
+  if(usedHints.province) m = Math.min(m, 0.7);
+  if(usedHints.place) m = Math.min(m, 0.5);
+  if(usedHints.imagery) m = Math.min(m, 0.3);
+  return m;
+}
+function updateMult(){
+  var free = S.ci===0 && S.qi < TUT;
+  ["Prov","Place","Img"].forEach(function(k){
+    var b = el("h"+k);
+    var tag = b.querySelector(".cost, .free");
+    if(tag){ tag.className = free ? "free" : "cost"; tag.textContent = free ? "免费" : ("×" + {Prov:0.7,Place:0.5,Img:0.3}[k]); }
+  });
+  var m = hintMult();
+  el("multNow").textContent = m < 1 ? ("本题得分上限 ×" + m.toFixed(1)) : "";
+}
+function useHint(kind, textElId, btnId){
+  if(revealed) return;
+  usedHints[kind] = true;
+  var h = cur.hints[kind];
+  el(textElId).innerHTML = (kind==="place" ? "【古今对照】" : kind==="imagery" ? "【意象证据】" : "【省份圈定】") + esc(h.text);
+  el(textElId).style.display = "block";
+  el(btnId).disabled = true;
+  updateMult();
+}
+el("hProv").onclick = function(){ useHint("province","htProv","hProv"); };
+el("hPlace").onclick = function(){ useHint("place","htPlace","hPlace"); };
+el("hImg").onclick = function(){ useHint("imagery","htImg","hImg"); };
+el("btnBackHub").onclick = function(){ persistCh(); renderHub(); };
+
+function fmtBody(b){
+  return String(b||"").replace(/\s+/g,"")
+    .replace(/([。！？；])/g, "$1\n").replace(/\n+/g,"\n").trim();
+}
+function confirmGuess(){
+  if(!guess || revealed) return;
+  revealed = true;
+  var ans = [cur.answer.lon, cur.answer.lat];
+  var dist = havKm(guess, ans);
+  var free = S.ci===0 && S.qi < TUT;
+  var mult = free ? 1 : hintMult();
+  var pts = Math.round(5000 * Math.exp(-dist/300) * mult);
+  S.score += pts;
+  var hit = dist <= 300;
+  if(hit){ S.correct++; S.streak++; S.best = Math.max(S.best, S.streak); }
+  else { S.streak = 0; S.wrong.push({idx:S.order[S.qi], dist:Math.round(dist)}); }
+  SAVE.visited.push({lon:ans[0], lat:ans[1], hit:hit, modern:cur.answer.modern});
+  paintMarkers();
+  el("scoreNow").textContent = S.score;
+  el("streakNow").textContent = S.streak > 1 ? "连对 " + S.streak : "";
+  el("guessTip").textContent = "本题相距 " + Math.round(dist) + " 公里——详见学习卡";
+  el("btnConfirm").disabled = true;
+  var last = S.qi === S.order.length - 1;
+  S.qi += 1;
+  if(last){ SAVE.ch[CH[S.ci].id].done = true; }
+  persistCh();
+  el("progFill").style.width = (S.qi / S.order.length * 100) + "%";
+  showCard(dist, pts, mult, hit, false, last ? function(){ showChEnd(); } : function(){ showQ(); });
+}
+
+/* ---------- 学习卡 ---------- */
+function showCard(dist, pts, mult, hit, readonly, onNext){
+  var q = cur;
+  var a = q.answer;
+  var h = [];
+  h.push('<div class="lc-head"><span class="dist">' + (hit?"✓":"✗") + ' 相距 ' + Math.round(dist) + ' 公里</span>' +
+    '<span class="pts">' + (readonly ? "诗签复读" : "+" + pts + " 分" + (mult<1?"（系数 ×"+mult.toFixed(1)+"）":"")) + '</span>' +
+    '<button class="mclose" id="lcClose">×</button></div>');
+  h.push('<div class="lc-place">' + esc(a.historical ? a.historical + " · " : "") + '今' + esc(a.modern) +
+    '（' + esc(a.province) + '）<small>' + (a.year ? "约 " + a.year + " 年 · " : "") +
+    '作地证据 ' + a.grade + ' 级</small></div>');
+  h.push('<div class="lc-poem"><div class="t">' + esc(q.dynasty) + ' · ' + esc(q.poet) + '《' + esc(q.title) + '》</div>' +
+    '<div class="b">' + esc(fmtBody(q.full_body)) + '</div></div>');
+  if(q.imagery_hits && q.imagery_hits.length){
+    h.push('<div class="lc-sec"><h3>证据链 · 意象</h3><div class="chips">');
+    q.imagery_hits.forEach(function(i){
+      h.push('<span class="chip ' + (i.emotion>=0?"pos":"neg") + '"><span class="w">' + esc(i.word) +
+        '</span> ' + esc(i.cat||"") + (i.line?"｜"+esc(i.line):"") + '</span>');
+    });
+    h.push('</div></div>');
+  }
+  var rows = (q.place_names||[]).map(function(p){
+    return '<tr><td class="kai">「' + esc(p.alias) + '」</td><td>' + esc(p.modern) + '</td><td>' + esc(p.province) + '</td></tr>';
+  });
+  rows.push('<tr><td class="kai">本作之地</td><td>' + esc(a.modern) + '</td><td>' + esc(a.province) + '</td></tr>');
+  h.push('<div class="lc-sec"><h3>古今地名对照</h3><table class="ptab"><tr><th>诗中/考订</th><th>今地</th><th>省份</th></tr>' + rows.join("") + '</table></div>');
+  h.push('<div class="lc-sec"><h3>考据 与 导读（分栏，口径不同）</h3><div class="duo">');
+  h.push('<div class="kao"><div class="h">考据 · 人工核验（A/B 级）</div>');
+  (q.context_facts||[]).forEach(function(t){ h.push('<div class="evrow">' + esc(t) + '</div>'); });
+  (q.evidence||[]).forEach(function(ev){
+    h.push('<div class="evrow"><span class="g ' + ev.grade + '">' + ev.grade + '</span>' + esc(ev.excerpt) +
+      '<div class="src">出处：' + esc(ev.source) + '</div></div>');
+  });
+  if(!(q.context_facts||[]).length && !(q.evidence||[]).length) h.push('<div class="evrow">（本题无附加摘录）</div>');
+  h.push('</div><div class="dao"><div class="h">' + esc(q.reading_intro.label) + '</div>' + esc(q.reading_intro.text));
+  if(q.emotion && q.emotion.primary){
+    h.push('<div style="margin-top:6px;font-size:12.5px;color:#6a726c">情感画像：' + esc(q.emotion.primary) +
+      '（愉悦度 ' + (q.emotion.valence>=0?"+":"") + q.emotion.valence.toFixed(2) + '，置信 ' + esc(q.emotion.confidence||"") + '）</div>');
+  }
+  if(q.same_place_more && q.same_place_more.length){
+    h.push('<div style="margin-top:8px"><b>同地再读：</b><ul class="more">');
+    q.same_place_more.forEach(function(m){
+      h.push('<li>' + esc(m.poet) + '《' + esc(m.title) + '》——' + esc(m.line) + '</li>');
+    });
+    h.push('</ul></div>');
+  }
+  h.push('</div></div></div>');
+  var arch = ARCHIVE[q.id];
+  h.push('<div class="lc-btns">');
+  if(arch) h.push('<button class="act ghost" id="btnArc">此地诗格档案</button>');
+  h.push('<button class="act" id="lcNext">' + (onNext ? ((SAVE.ch[CH[S.ci].id]||{}).done ? "章末档案 →" : "下一题 →") : "返回") + '</button>');
+  h.push('</div>');
+  el("lcBox").innerHTML = h.join("");
+  el("lcMask").classList.add("on");
+  el("lcClose").onclick = function(){
+    el("lcMask").classList.remove("on");
+    if(!readonly && onNext) onNext();   /* 学习卡是本题主界面的一部分：关闭即前进 */
+  };
+  if(arch) el("btnArc").onclick = function(){ showArchive(q.id); };
+  el("lcNext").onclick = function(){
+    el("lcMask").classList.remove("on");
+    if(onNext) onNext();  /* 复读模式仅关窗，停留原界面 */
+  };
+}
+
+/* ---------- 地方档案 ---------- */
+function showArchive(qid){
+  var p = ARCHIVE[qid]; if(!p) return;
+  var h = [];
+  h.push('<div class="lc-head"><span class="dist">' + esc(p.modern) + ' · 诗格档案</span><button class="mclose" id="arcClose">×</button></div>');
+  h.push('<div style="font-size:13px;color:#6a726c">古称：' + (p.historical_aliases||[]).map(esc).join("、") + '</div>');
+  h.push('<div class="stat3">' +
+    '<div><div class="v">' + p.composed_n + '</div><div class="k">核验在地创作（A/B）</div></div>' +
+    '<div><div class="v">' + p.mentions_n + '</div><div class="k">语料被写入（含遥想）</div></div>' +
+    '<div><div class="v">' + (p.locality_rate==null?"—":(p.locality_rate*100).toFixed(1)+"%") + '</div><div class="k">在地率（实验指标）</div></div></div>');
+  if(p.imagery_top && p.imagery_top.length){
+    h.push('<div class="lc-sec"><h3>被写入时的高频意象</h3><div class="chips">' +
+      p.imagery_top.map(function(i){ return '<span class="chip ' + (i.avg_emotion>=0?"pos":"neg") + '"><span class="w">' + esc(i.word) + '</span>' + i.count + '</span>'; }).join("") + '</div></div>');
+  }
+  if(p.mention_sample_titles && p.mention_sample_titles.length){
+    h.push('<div class="lc-sec"><h3>写到此地的诗（样本）</h3>');
+    p.mention_sample_titles.forEach(function(t){
+      h.push('<div class="arc-row">' + esc(t.poet) + '《' + esc(t.title) + '》(' + esc(t.dynasty) + ')</div>');
+    });
+    h.push('</div>');
+  }
+  h.push('<div style="font-size:12px;color:#6a726c;margin-top:8px">在地率＝核验在地创作 ÷（核验在地创作＋语料被写入）；两侧样本口径不同，仅为实验性指标。</div>');
+  h.push('<div class="lc-btns"><button class="act ghost" id="arcBack">返回学习卡</button></div>');
+  el("arcBox").innerHTML = h.join("");
+  el("arcMask").classList.add("on");
+  el("arcClose").onclick = function(){ el("arcMask").classList.remove("on"); };
+  el("arcBack").onclick = function(){ el("arcMask").classList.remove("on"); };
+}
+
+/* ---------- 章末档案卡 ---------- */
+function rankOf(pct){
+  if(pct >= 0.85) return ["诗伯","山河尽在胸臆——你已把这部诗集走成了一幅地图。"];
+  if(pct >= 0.70) return ["供奉","好眼力。意象与地理在你这里开始互相指认。"];
+  if(pct >= 0.50) return ["游学士","渐入门径——多看学习卡里的证据链，意象自会报出地名。"];
+  if(pct >= 0.30) return ["行客","已在路上。行囊里的诗签，都是下一次出发的坐标。"];
+  return ["初行者","初行山河，莫愁前路——每一枚错题诗签都是一个再读一首的理由。"];
+}
+function showChEnd(){
+  el("gameArea").style.display = "none";
+  el("chEnd").style.display = "block";
+  var ch = CH[S.ci];
+  var c = SAVE.ch[ch.id];
+  var h = [];
+  h.push('<div class="bigseal">' + esc(ch.seal) + '</div>');
+  h.push('<h2 class="kai">' + esc(ch.name) + ' · 章末档案</h2>');
+  h.push('<div class="stat3">' +
+    '<div><div class="v">' + c.score + '</div><div class="k">本章得分</div></div>' +
+    '<div><div class="v">' + c.correct + '/' + c.order.length + '</div><div class="k">300km 内答对</div></div>' +
+    '<div><div class="v">' + c.best + '</div><div class="k">最长连对</div></div>' +
+    '<div><div class="v">' + totalScore() + '</div><div class="k">卷一累计</div></div></div>');
+  h.push('<div class="placeRows"><h3 style="margin:8px 0 2px;color:var(--blue);border-left:3px solid var(--blue);padding-left:8px;font-size:15px;">本章到访 · 地方诗格</h3>');
+  var seen = {};
+  c.order.forEach(function(qid){
+    var p = ARCHIVE[qid];
+    if(!p || seen[p.key]) return;
+    seen[p.key] = 1;
+    h.push('<div class="placeRow"><b>' + esc(p.modern) + '</b>（' + esc(p.province) + '）　' +
+      '核验在地创作 ' + p.composed_n + ' 首 · 被写入 ' + p.mentions_n + ' 首 · <span class="lr">在地率 ' +
+      (p.locality_rate==null?"—":(p.locality_rate*100).toFixed(1)+"%") + '</span>' +
+      (p.imagery_top && p.imagery_top.length
+        ? '<div style="color:#6a726c;font-size:12.5px;margin-top:2px">意象：' +
+          p.imagery_top.map(function(i){ return esc(i.word)+"("+i.count+")"; }).slice(0,6).join("、") + '</div>'
+        : '') + '</div>');
+  });
+  h.push('</div>');
+  h.push('<div style="margin-top:10px"><b>解锁考据馆：</b>' +
+    ch.archives.map(function(a){ return '<a href="' + esc(a.url) + '" target="_blank" style="color:var(--blue)">' + esc(a.title) + '</a>'; }).join("、") + '</div>');
+  if(c.wrong.length){
+    h.push('<h3 style="margin:12px 0 2px;color:var(--gold);border-left:3px solid var(--gold);padding-left:8px;font-size:15px;">行囊 · 本章错题诗签</h3><div class="qian">');
+    c.wrong.forEach(function(w){
+      var q = QS[QIDX[w.idx]];
+      h.push('<span data-idx="' + w.idx + '" data-dist="' + w.dist + '">' + esc(q.poet) + '《' + esc(q.title) + '》· 差 ' + w.dist + 'km</span>');
+    });
+    h.push('</div>');
+  } else {
+    h.push('<div class="kai" style="margin-top:10px;font-size:15px;color:var(--jade)">本章无错题——山河为证，字字皆中。</div>');
+  }
+  if(allDone()){
+    var pct = totalScore() / MAXPTS;
+    var rk = rankOf(pct);
+    h.push('<div style="margin-top:14px;border-top:2px solid var(--ink);padding-top:10px">' +
+      '<div class="rank">' + rk[0] + '</div><div class="kai" style="font-size:15px;color:#4a524c">' + rk[1] + '</div>' +
+      '<div style="font-size:13px;color:#6a726c">卷一总得分 ' + totalScore() + ' / ' + MAXPTS + ' · 集齐诗印「' +
+      CH.map(function(x){ return esc(x.seal); }).join("") + '」</div></div>');
+  }
+  h.push('<div class="lc-btns" style="justify-content:flex-start">' +
+    '<button class="act" id="btnBackHub2">返回章节页' + (allDone() ? "（可重走任意章）" : "，下一章已解锁") + '</button></div>');
+  el("chEnd").innerHTML = h.join("");
+  el("btnBackHub2").onclick = renderHub;
+  Array.prototype.forEach.call(el("chEnd").querySelectorAll(".qian span"), function(sp){
+    sp.onclick = function(){
+      var keep = cur;
+      cur = QS[QIDX[sp.getAttribute("data-idx")]];
+      showCard(+sp.getAttribute("data-dist"), 0, 1, false, true, null);
+      cur = keep;
+    };
+  });
+  writeSave();
+}
+
+el("btnConfirm").onclick = confirmGuess;
+
+/* ---------- 启动 ---------- */
+renderHub();
+})();
+</script>
+</body>
+</html>

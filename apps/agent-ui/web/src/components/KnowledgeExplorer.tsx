@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BookOpen, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, RotateCw, Search, SlidersHorizontal, X } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -15,6 +15,7 @@ import {
   searchKnowledge,
 } from "@/lib/knowledge";
 import type {
+  KnowledgeAnalysis,
   KnowledgePoemPayload,
   KnowledgeSearchItem,
   KnowledgeSearchPayload,
@@ -440,11 +441,25 @@ function KnowledgeDetail({
 }) {
   const poemImagery = (poem.imagery ?? []).map(knowledgeTagLabel).filter(Boolean);
   const poemEmotions = (poem.emotions ?? []).map(knowledgeTagLabel).filter(Boolean);
+  const poemAnalyses = poem.analyses ?? (
+    Array.isArray(poem.analysis) ? poem.analysis : poem.analysis ? [poem.analysis] : []
+  );
+  const guide = poemAnalyses.find((analysis) => (
+    analysis.kind === "poem_guide"
+    && (analysis.method === "llm" || analysis.payload?.origin)
+    && Boolean(analysis.interpretation ?? analysis.summary)
+  ));
+  const guideOrigin = typeof guide?.payload?.origin === "string" ? guide.payload.origin : "";
+  const guideNote = typeof guide?.payload?.note === "string" ? guide.payload.note : "";
   useEffect(() => {
     if (!targetLineId) return;
     const timer = window.setTimeout(() => {
       const target = document.getElementById(`knowledge-${targetLineId}`);
-      target?.scrollIntoView({ block: "center" });
+      const container = target?.closest<HTMLElement>(".knowledge-detail");
+      if (target && container) {
+        const top = target.offsetTop - (container.clientHeight - target.clientHeight) / 2;
+        container.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
       target?.focus({ preventScroll: true });
     }, 0);
     return () => window.clearTimeout(timer);
@@ -459,11 +474,38 @@ function KnowledgeDetail({
         <h3>{poem.title}</h3>
         <KnowledgeTags values={[...poemImagery, ...poemEmotions]} />
       </div>
+      {guide ? (
+        <section className="knowledge-guide" aria-labelledby="knowledge-guide-title">
+          <div className="knowledge-section-label">
+            <BookOpen size={15} aria-hidden="true" />
+            <span>先从这里读起</span>
+          </div>
+          {guide.summary ? <h4 id="knowledge-guide-title">{guide.summary}</h4> : null}
+          {guide.interpretation ? <p className="knowledge-guide-body">{guide.interpretation}</p> : null}
+          {guideOrigin ? (
+            <details className="knowledge-origin">
+              <summary>背景，留在诗外的一点线索 <ChevronDown size={14} aria-hidden="true" /></summary>
+              <p>{guideOrigin}</p>
+            </details>
+          ) : null}
+        </section>
+      ) : null}
+      <section className="knowledge-poem" aria-labelledby="knowledge-poem-title">
+        <div className="knowledge-section-heading">
+          <h4 id="knowledge-poem-title">原诗</h4>
+          <span>{poem.lines.length} 句</span>
+        </div>
       <div className="knowledge-lines">
         {poem.lines.map((line) => {
           const imagery = (line.imagery ?? []).map(knowledgeTagLabel).filter(Boolean);
           const emotions = (line.emotions ?? []).map(knowledgeTagLabel).filter(Boolean);
           const analyses = line.analyses ?? (Array.isArray(line.analysis) ? line.analysis : line.analysis ? [line.analysis] : []);
+          const readings = analyses.filter((analysis) => (
+            analysis.method === "llm" && Boolean(analysis.interpretation ?? analysis.summary)
+          ));
+          const evidence = analyses.filter((analysis) => (
+            analysis.method !== "llm" && Boolean(analysis.interpretation ?? analysis.summary)
+          ));
           return (
             <section
               key={line.lineId}
@@ -475,31 +517,57 @@ function KnowledgeDetail({
               <div>
                 <p>{line.text}</p>
                 <KnowledgeTags values={[...imagery, ...emotions]} />
-                {analyses.map((analysis, index) => {
+                {readings.map((analysis, index) => {
                   const content = analysis.interpretation ?? analysis.summary;
                   if (!content) return null;
                   return (
-                    <div className="knowledge-analysis" key={`${analysis.method ?? "analysis"}-${index}`}>
-                      <span>
-                        {analysis.method === "llm" ? "模型分析候选" : "本地规则"}
-                        {typeof analysis.confidence === "number" ? ` · 置信度 ${Math.round(analysis.confidence * 100)}%` : ""}
-                        {analysis.model ? ` · ${analysis.model}` : ""}
-                        {analysis.reviewStatus === "candidate" ? " · 待审核" : ""}
-                      </span>
+                    <div className="knowledge-line-reading" key={`${analysis.method ?? "reading"}-${index}`}>
+                      <span>读到这里</span>
                       <p>{content}</p>
                     </div>
                   );
                 })}
+                {evidence.length ? (
+                  <details className="knowledge-line-evidence">
+                    <summary>
+                      <span>这句的线索</span>
+                      <ChevronDown size={14} aria-hidden="true" />
+                    </summary>
+                    <div>
+                      {evidence.map((analysis, index) => {
+                        const content = analysis.interpretation ?? analysis.summary;
+                        if (!content) return null;
+                        return (
+                          <p key={`${analysis.kind ?? "evidence"}-${index}`}>
+                            <span>{content}</span>
+                            {typeof analysis.confidence === "number" ? (
+                              <small>检索信号 · {Math.round(analysis.confidence * 100)}%</small>
+                            ) : null}
+                          </p>
+                        );
+                      })}
+                    </div>
+                  </details>
+                ) : null}
               </div>
             </section>
           );
         })}
       </div>
-      <footer className="knowledge-provenance">
-        <BookOpen size={15} aria-hidden="true" />
-        <span>稳定 ID：{poem.poemId}</span>
-        {poem.sourceUrl ? <a href={poem.sourceUrl} target="_blank" rel="noreferrer">查看原始来源</a> : null}
-      </footer>
+      </section>
+      <details className="knowledge-provenance">
+        <summary>
+          <BookOpen size={15} aria-hidden="true" />
+          <span>证据与出处</span>
+          <ChevronDown size={14} aria-hidden="true" />
+        </summary>
+        <div className="knowledge-provenance-content">
+          <p>稳定 ID：{poem.poemId}</p>
+          {guide?.model ? <p>导读来源：{guide.model}</p> : null}
+          {guideNote ? <p>{guideNote}</p> : null}
+          {poem.sourceUrl ? <a href={poem.sourceUrl} target="_blank" rel="noreferrer">查看原始来源</a> : null}
+        </div>
+      </details>
     </article>
   );
 }
@@ -508,4 +576,151 @@ function KnowledgeTags({ values }: { values: string[] }) {
   const unique = [...new Set(values.filter(Boolean))].slice(0, 8);
   if (!unique.length) return null;
   return <span className="knowledge-tags">{unique.map((value) => <i key={value}>{value}</i>)}</span>;
+}
+
+interface PoemKnowledgeSummaryProps {
+  poemId?: string | null;
+  onOpenKnowledge?: (poemId: string) => void;
+  compact?: boolean;
+}
+
+export type PoemKnowledgePhase = "idle" | "loading" | "success" | "error";
+
+const poemKnowledgeCache = new Map<string, KnowledgePoemPayload>();
+const poemKnowledgeRequests = new Map<string, Promise<KnowledgePoemPayload>>();
+
+function loadPoemKnowledge(poemId: string): Promise<KnowledgePoemPayload> {
+  const cached = poemKnowledgeCache.get(poemId);
+  if (cached) return Promise.resolve(cached);
+  const pending = poemKnowledgeRequests.get(poemId);
+  if (pending) return pending;
+
+  const request = fetchKnowledgePoem(poemId)
+    .then((response) => {
+      if (poemKnowledgeRequests.get(poemId) === request) {
+        poemKnowledgeCache.set(poemId, response.payload);
+      }
+      return response.payload;
+    })
+    .finally(() => {
+      if (poemKnowledgeRequests.get(poemId) === request) {
+        poemKnowledgeRequests.delete(poemId);
+      }
+    });
+  poemKnowledgeRequests.set(poemId, request);
+  return request;
+}
+
+export interface PoemKnowledgeState {
+  phase: PoemKnowledgePhase;
+  payload?: KnowledgePoemPayload;
+  error: string;
+  retry: () => void;
+}
+
+export function usePoemKnowledge(poemId?: string | null): PoemKnowledgeState {
+  const [state, setState] = useState<{
+    poemId?: string;
+    phase: PoemKnowledgePhase;
+    payload?: KnowledgePoemPayload;
+    error: string;
+  }>({ phase: "idle", error: "" });
+  const [retryKey, setRetryKey] = useState(0);
+
+  useEffect(() => {
+    if (!poemId) return;
+
+    let cancelled = false;
+    void loadPoemKnowledge(poemId)
+      .then((nextPayload) => {
+        if (cancelled) return;
+        setState({ poemId, phase: "success", payload: nextPayload, error: "" });
+      })
+      .catch((cause) => {
+        if (cancelled) return;
+        setState({
+          poemId,
+          phase: "error",
+          error: cause instanceof Error ? cause.message : "诗篇知识读取失败",
+        });
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [poemId, retryKey]);
+
+  return {
+    phase: !poemId ? "idle" : state.poemId === poemId ? state.phase : "loading",
+    payload: state.poemId === poemId ? state.payload : undefined,
+    error: state.poemId === poemId ? state.error : "",
+    retry: () => {
+      if (poemId) {
+        poemKnowledgeCache.delete(poemId);
+        poemKnowledgeRequests.delete(poemId);
+        setState({ poemId, phase: "loading", error: "" });
+      }
+      setRetryKey((value) => value + 1);
+    },
+  };
+}
+
+function findPoemGuide(payload: KnowledgePoemPayload): KnowledgeAnalysis | undefined {
+  const analyses = payload.analyses ?? (
+    Array.isArray(payload.analysis) ? payload.analysis : payload.analysis ? [payload.analysis] : []
+  );
+  return analyses.find((analysis) => (
+    analysis.kind === "poem_guide"
+    && Boolean(analysis.interpretation ?? analysis.summary)
+  ));
+}
+
+export function PoemKnowledgeSummary({ poemId, onOpenKnowledge, compact = false }: PoemKnowledgeSummaryProps) {
+  const { phase, payload, error, retry } = usePoemKnowledge(poemId);
+
+  if (!poemId) return null;
+
+  const guide = payload ? findPoemGuide(payload) : undefined;
+  if (phase === "loading") {
+    return <div className="poem-knowledge-summary is-loading" aria-live="polite">正在取回这首诗的导读…</div>;
+  }
+  if (phase === "error") {
+    return (
+      <div className="poem-knowledge-summary is-error" role="status">
+        <span>导读暂时没有接上</span>
+        <button type="button" onClick={retry}>
+          <RotateCw size={13} aria-hidden="true" /> 重试
+        </button>
+        <small>{error}</small>
+      </div>
+    );
+  }
+  if (!guide) {
+    return (
+      <div className="poem-knowledge-summary is-empty" role="status">
+        <span><BookOpen size={15} aria-hidden="true" /> 这首诗的亲笔导读还在整理中</span>
+        {onOpenKnowledge ? (
+          <button type="button" onClick={() => onOpenKnowledge(poemId)}>查看原诗条目</button>
+        ) : null}
+      </div>
+    );
+  }
+
+  return (
+    <section
+      className={`poem-knowledge-summary${compact ? " is-compact" : ""}`}
+      aria-labelledby={`poem-guide-${poemId}`}
+    >
+      <div className="poem-knowledge-summary-heading">
+        <span><BookOpen size={15} aria-hidden="true" /> 读到这里</span>
+        {onOpenKnowledge ? (
+          <button type="button" onClick={() => onOpenKnowledge(poemId)}>
+            打开完整导读
+          </button>
+        ) : null}
+      </div>
+      {guide.summary ? <h3 id={`poem-guide-${poemId}`}>{guide.summary}</h3> : null}
+      {!compact && guide.interpretation ? <p>{guide.interpretation}</p> : null}
+    </section>
+  );
 }

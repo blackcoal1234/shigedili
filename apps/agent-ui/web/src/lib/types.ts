@@ -93,15 +93,53 @@ export interface KnowledgeStatusPayload {
 }
 
 export interface KnowledgeAnalysis {
+  analysisId?: string;
   kind?: string;
   summary?: string;
   interpretation?: string;
   method?: "rules" | "llm" | string;
   confidence?: number;
   model?: string | null;
+  promptHash?: string;
+  inputHash?: string;
   reviewStatus?: string;
+  evidence?: unknown;
+  payload?: Record<string, unknown>;
   imagery?: Array<KnowledgeTag | string>;
   emotions?: Array<KnowledgeTag | string>;
+}
+
+export interface KnowledgeGloss {
+  termId: string;
+  term: string;
+  lineNo: number;
+  startOffset: number;
+  endOffset: number;
+  definition: string;
+  inContext?: string;
+  category?: string;
+  sourceNote?: string;
+}
+
+export interface KnowledgeGlossarySelectionRequest {
+  poemId: string;
+  lineNo: number;
+  startOffset: number;
+  endOffset: number;
+  mode: "model" | "web";
+}
+
+export interface KnowledgeGlossarySelectionPayload {
+  term: string;
+  definition: string;
+  inContext?: string;
+  category?: string;
+  method: "local" | "llm" | "llm_web";
+  reviewStatus: "published" | "draft";
+  sourceNote?: string;
+  sources?: Array<{ title: string; url: string }>;
+  model?: string;
+  draftId?: string;
 }
 
 export interface KnowledgeLine {
@@ -132,6 +170,9 @@ export interface KnowledgePoemPayload {
   analyses?: KnowledgeAnalysis[];
   imagery?: Array<KnowledgeTag | string>;
   emotions?: Array<KnowledgeTag | string>;
+  glossaryVersion?: number | string;
+  glosses?: KnowledgeGloss[];
+  glossaryError?: string;
   sourceHashes?: Record<string, string>;
 }
 

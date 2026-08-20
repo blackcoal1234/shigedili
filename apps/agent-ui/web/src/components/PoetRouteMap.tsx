@@ -23,6 +23,8 @@ import {
 } from "react";
 
 import { EmptyState } from "@/components/StateViews";
+import { InteractivePoemText } from "@/components/InteractivePoemText";
+import { PoemKnowledgeSummary } from "@/components/KnowledgeExplorer";
 import { TransportGlyph } from "@/components/TransportGlyph";
 import {
   clampSceneIndex,
@@ -213,7 +215,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
         setTransitionNotice(
           coordinateMissing
             ? "地点坐标未定，已切换到目标诗篇。"
-            : "两幕之间没有可用的相邻转场数据，已切换到目标诗篇。",
+            : "这两幕之间还没有转场资料，已直接切到目标诗篇。",
         );
       }
       arriveAt(nextIndex, leg);
@@ -496,7 +498,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
   }), [goToScene, syncBoatPixel]);
 
   if (!scene || mappedScenes.length === 0) {
-    return <EmptyState title="没有可落图坐标" detail="镜头仍保留在证据列表中。" />;
+    return <EmptyState title="这个地点还定不了位" detail="镜头先留在证据列表里，坐标补上后会自动落图。" />;
   }
 
   if (mapError) {
@@ -612,20 +614,24 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
             <span>{scene.dynasty} · {scene.poet}</span>
           </div>
           <h3>《{scene.poem_title}》</h3>
-          <p className="sr-only">{poemText}</p>
-          <pre aria-hidden="true">
-            {poemText.slice(0, revealCount)}
-            {phase === "revealing" ? <i className="reveal-cursor" /> : null}
-          </pre>
-          {scene.source_poem_id && onOpenKnowledge && (phase === "revealing" || phase === "waiting") ? (
-            <button
-              type="button"
-              className="inline-knowledge-link"
-              onClick={() => onOpenKnowledge(scene.source_poem_id)}
-            >
-              查看逐句分析
-            </button>
-          ) : null}
+          {phase === "waiting" ? (
+            <InteractivePoemText
+              lines={scene.poem_lines}
+              poemId={scene.source_poem_id}
+              className="journey-interactive-poem"
+              ariaLabel={`${scene.poem_title}完整诗文`}
+            />
+          ) : (
+            <pre aria-hidden="true">
+              {poemText.slice(0, revealCount)}
+              {phase === "revealing" ? <i className="reveal-cursor" /> : null}
+            </pre>
+          )}
+          <PoemKnowledgeSummary
+            poemId={scene.source_poem_id}
+            onOpenKnowledge={onOpenKnowledge}
+            compact
+          />
         </article>
 
         <aside className="journey-evidence-card" data-visible={poemVisible}>

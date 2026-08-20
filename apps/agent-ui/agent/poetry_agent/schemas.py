@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class StrictToolInput(BaseModel):
@@ -151,3 +151,33 @@ class GetLineKnowledgeInput(StrictToolInput):
         if not value:
             raise ValueError("line_id 不能为空")
         return value
+
+
+class ExplainGlossarySelectionInput(StrictToolInput):
+    """Identify a bounded selection by stable poem coordinates, never client prose."""
+
+    model_config = ConfigDict(strict=True, extra="forbid", populate_by_name=True)
+
+    poem_id: str = Field(
+        alias="poemId", min_length=1, max_length=160, description="知识库稳定诗篇 ID"
+    )
+    line_no: int = Field(alias="lineNo", ge=1, le=10_000)
+    start_offset: int = Field(alias="startOffset", ge=0, le=100_000)
+    end_offset: int = Field(alias="endOffset", ge=1, le=100_000)
+    mode: Literal["model", "web"] = Field(default="model")
+
+    @field_validator("poem_id")
+    @classmethod
+    def normalize_poem_id(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("poemId 不能为空")
+        return value
+
+    @model_validator(mode="after")
+    def validate_selection_span(self) -> "ExplainGlossarySelectionInput":
+        if self.end_offset <= self.start_offset:
+            raise ValueError("endOffset 必须大于 startOffset")
+        if self.end_offset - self.start_offset > 32:
+            raise ValueError("一次最多选择 32 个字符")
+        return self

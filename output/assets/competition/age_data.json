@@ -5,8 +5,8 @@
  "emotion_method": "model-assisted-lexicon + deterministic-local-multilabel-vad",
  "emotion_method_note": "模型用于扩充候选情感词与文学形容词；发布值由本地规则复算。标签描述文本特征，不等同于作者心理诊断。",
  "emotion_ontology": {
-  "emotions": 27,
-  "keywords": 617,
+  "emotions": 35,
+  "keywords": 792,
   "dimensions": [
    "valence",
    "arousal",
@@ -39,9 +39,20 @@
    "怀古感时",
    "哲思澄明",
    "归隐超脱",
-   "讽谏批判"
+   "讽谏批判",
+   "闺怨相思",
+   "惜春物哀",
+   "悲秋迟暮",
+   "仕隐矛盾",
+   "怀才不遇",
+   "禅悦悟道",
+   "山水清赏",
+   "酬赠感激"
   ]
  },
+ "emotion_count": 35,
+ "emotion_rule_count": 792,
+ "spirit_count": 409,
  "age_min": 17,
  "age_max": 85,
  "presets": [
@@ -113,14 +124,14 @@
      "period": "干谒与漫游",
      "grade": "B",
      "status": "candidate",
-     "hits": 14,
-     "senti": -0.121,
+     "hits": 15,
+     "senti": -0.087,
      "cluster": "愁苦幽愤",
      "top": [
       "月×2",
       "秋风×1",
       "落叶×1",
-      "长风×1"
+      "蝴蝶×1"
      ],
      "emotion": {
       "primary": "grief",
@@ -220,7 +231,7 @@
      "grade": "B",
      "status": "candidate",
      "hits": 7,
-     "senti": -0.243,
+     "senti": -0.229,
      "cluster": "漂泊羁旅",
      "top": [
       "金陵×1",
@@ -383,8 +394,8 @@
      "period": "干谒与漫游",
      "grade": "B",
      "status": "candidate",
-     "hits": 26,
-     "senti": -0.15,
+     "hits": 30,
+     "senti": -0.133,
      "cluster": "愁苦幽愤",
      "top": [
       "青天×3",
@@ -393,37 +404,18 @@
       "空山×1"
      ],
      "emotion": {
-      "primary": "fearful",
-      "primary_label": "焦灼惊惧",
-      "family": "忧患",
-      "color": "#8b4a58",
+      "primary": "grief",
+      "primary_label": "悲恸哀伤",
+      "family": "低回",
+      "color": "#a84f49",
       "top_emotions": [
-       {
-        "id": "fearful",
-        "label": "焦灼惊惧",
-        "family": "忧患",
-        "color": "#8b4a58",
-        "score": 5.4,
-        "share": 0.409,
-        "adjectives": [
-         "惊惧",
-         "焦灼",
-         "惶惑",
-         "紧张"
-        ],
-        "evidence": [
-         "剑阁峥嵘而崔嵬",
-         "一夫当关万夫莫开",
-         "磨牙吮血杀人如麻"
-        ]
-       },
        {
         "id": "grief",
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
         "score": 3.18,
-        "share": 0.241,
+        "share": 0.331,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -440,12 +432,29 @@
         ]
        },
        {
+        "id": "fearful",
+        "label": "焦灼惊惧",
+        "family": "忧患",
+        "color": "#8b4a58",
+        "score": 1.8,
+        "share": 0.188,
+        "adjectives": [
+         "惊惧",
+         "焦灼",
+         "惶惑",
+         "紧张"
+        ],
+        "evidence": [
+         "剑阁峥嵘而崔嵬"
+        ]
+       },
+       {
         "id": "reclusive",
         "label": "归隐超脱",
         "family": "思辨",
         "color": "#477b68",
         "score": 1.52,
-        "share": 0.115,
+        "share": 0.158,
         "adjectives": [
          "超逸",
          "清远",
@@ -461,29 +470,29 @@
        }
       ],
       "adjectives": [
-       "惊惧",
-       "焦灼",
-       "悲恸"
+       "悲恸",
+       "凄切",
+       "惊惧"
       ],
-      "summary": "惊惧、焦灼、悲恸；兼有悲恸哀伤",
-      "valence": -0.629,
-      "arousal": 0.708,
-      "dominance": -0.524,
-      "confidence": 0.802,
+      "summary": "悲恸、凄切、惊惧；兼有焦灼惊惧",
+      "valence": -0.565,
+      "arousal": 0.611,
+      "dominance": -0.407,
+      "confidence": 0.761,
       "confidence_label": "高",
       "mixed": false,
-      "rule_hits": 7,
+      "rule_hits": 5,
       "evidence": [
-       "剑阁峥嵘而崔嵬",
-       "一夫当关万夫莫开",
-       "磨牙吮血杀人如麻",
        "悲",
        "子规",
        "蜀道",
        "剑阁",
        "枯",
        "愁",
-       "空山"
+       "剑阁峥嵘而崔嵬",
+       "空山",
+       "峨眉",
+       "松"
       ]
      },
      "line": "噫吁嚱，危乎高哉！"
@@ -518,8 +527,8 @@
         "label": "纵逸狂放",
         "family": "进取",
         "color": "#a87527",
-        "score": 15.22,
-        "share": 0.621,
+        "score": 13.42,
+        "share": 0.547,
         "adjectives": [
          "疏狂",
          "豪纵",
@@ -532,7 +541,7 @@
          "烹羊宰牛且为乐",
          "一饮三百杯",
          "斗酒十千",
-         "五花马千金裘"
+         "美酒"
         ]
        },
        {
@@ -578,13 +587,13 @@
        "慷慨",
        "激越"
       ],
-      "summary": "疏狂、豪纵、慷慨；兼有豪迈昂扬",
-      "valence": 0.444,
-      "arousal": 0.793,
-      "dominance": 0.483,
-      "confidence": 0.868,
+      "summary": "疏狂、豪纵、慷慨；兼有豪迈昂扬（复合情绪）",
+      "valence": 0.384,
+      "arousal": 0.777,
+      "dominance": 0.46,
+      "confidence": 0.85,
       "confidence_label": "高",
-      "mixed": false,
+      "mixed": true,
       "rule_hits": 16,
       "evidence": [
        "人生得意须尽欢",
@@ -592,7 +601,7 @@
        "烹羊宰牛且为乐",
        "一饮三百杯",
        "斗酒十千",
-       "五花马千金裘",
+       "美酒",
        "天生我材",
        "黄河",
        "得意",
@@ -814,13 +823,13 @@
      "grade": "B",
      "status": "candidate",
      "hits": 14,
-     "senti": 0.064,
+     "senti": 0.043,
      "cluster": "纵逸狂放",
      "top": [
       "笑×3",
       "酒×2",
-      "高歌×1",
-      "落日×1"
+      "落日×1",
+      "高歌×1"
      ],
      "emotion": {
       "primary": "heroic",
@@ -917,14 +926,14 @@
      "period": "供奉翰林与赐金放还",
      "grade": "B",
      "status": "candidate",
-     "hits": 5,
-     "senti": 0.22,
+     "hits": 6,
+     "senti": 0.217,
      "cluster": "隐逸超脱",
      "top": [
       "春风×1",
+      "露华×1",
       "瑶台×1",
-      "月×1",
-      "云×1"
+      "月×1"
      ],
      "emotion": {
       "primary": "hopeful",
@@ -1101,8 +1110,8 @@
      "period": "漫游与安史乱起",
      "grade": "B",
      "status": "candidate",
-     "hits": 31,
-     "senti": -0.097,
+     "hits": 32,
+     "senti": -0.106,
      "cluster": "纵逸狂放",
      "top": [
       "山×3",
@@ -1216,9 +1225,9 @@
      "cluster": "豪情进取",
      "top": [
       "黄河×1",
-      "长风×1",
       "沧海×1",
-      "云帆×1"
+      "金樽×1",
+      "清酒×1"
      ],
      "emotion": {
       "primary": "heroic",
@@ -1232,7 +1241,7 @@
         "family": "进取",
         "color": "#28776d",
         "score": 5.5,
-        "share": 0.372,
+        "share": 0.381,
         "adjectives": [
          "慷慨",
          "昂扬",
@@ -1243,8 +1252,8 @@
          "长风破浪",
          "直挂云帆",
          "黄河",
-         "长风",
          "沧海",
+         "长风",
          "云帆"
         ]
        },
@@ -1253,8 +1262,8 @@
         "label": "失意无奈",
         "family": "低回",
         "color": "#85716a",
-        "score": 5.4,
-        "share": 0.365,
+        "score": 3.6,
+        "share": 0.25,
         "adjectives": [
          "失落",
          "无奈",
@@ -1263,27 +1272,24 @@
         ],
         "evidence": [
          "停杯投箸不能食",
-         "欲渡黄河冰塞川",
-         "行路难行路难"
+         "欲渡黄河冰塞川"
         ]
        },
        {
-        "id": "unrestrained",
-        "label": "纵逸狂放",
-        "family": "进取",
-        "color": "#a87527",
-        "score": 2.14,
-        "share": 0.145,
+        "id": "career_conflict",
+        "label": "仕隐矛盾",
+        "family": "思辨",
+        "color": "#5f786d",
+        "score": 1.8,
+        "share": 0.125,
         "adjectives": [
-         "疏狂",
-         "豪纵",
-         "洒脱",
-         "酣畅"
+         "进退两难",
+         "仕隐",
+         "矛盾",
+         "自守"
         ],
         "evidence": [
-         "金樽",
-         "酒",
-         "杯"
+         "欲渡黄河冰塞川"
         ]
        }
       ],
@@ -1293,10 +1299,10 @@
        "失落"
       ],
       "summary": "慷慨、昂扬、失落；兼有失意无奈（复合情绪）",
-      "valence": 0.177,
-      "arousal": 0.638,
-      "dominance": 0.18,
-      "confidence": 0.798,
+      "valence": 0.263,
+      "arousal": 0.645,
+      "dominance": 0.293,
+      "confidence": 0.799,
       "confidence_label": "高",
       "mixed": true,
       "rule_hits": 7,
@@ -1304,13 +1310,11 @@
        "长风破浪",
        "直挂云帆",
        "黄河",
-       "长风",
        "沧海",
+       "长风",
        "云帆",
        "停杯投箸不能食",
-       "欲渡黄河冰塞川",
-       "行路难行路难",
-       "金樽"
+       "欲渡黄河冰塞川"
       ]
      },
      "line": "金樽清酒斗十千，玉盘珍羞直万钱。"
@@ -1325,14 +1329,14 @@
      "period": "漫游与安史乱起",
      "grade": "B",
      "status": "candidate",
-     "hits": 37,
-     "senti": 0.076,
+     "hits": 39,
+     "senti": 0.095,
      "cluster": "隐逸超脱",
      "top": [
       "云×3",
-      "烟×3",
       "谢公×2",
-      "天姥×2"
+      "天姥×2",
+      "月×2"
      ],
      "emotion": {
       "primary": "reclusive",
@@ -1346,7 +1350,7 @@
         "family": "思辨",
         "color": "#477b68",
         "score": 6.22,
-        "share": 0.476,
+        "share": 0.454,
         "adjectives": [
          "超逸",
          "清远",
@@ -1363,31 +1367,12 @@
         ]
        },
        {
-        "id": "wandering",
-        "label": "漂泊羁旅",
-        "family": "低回",
-        "color": "#647d7b",
-        "score": 1.14,
-        "share": 0.087,
-        "adjectives": [
-         "苍茫",
-         "漂泊",
-         "羁旅",
-         "无依"
-        ],
-        "evidence": [
-         "猿",
-         "别",
-         "客"
-        ]
-       },
-       {
         "id": "admiration",
         "label": "敬慕赞叹",
         "family": "明朗",
         "color": "#6687a3",
         "score": 1.0,
-        "share": 0.076,
+        "share": 0.073,
         "adjectives": [
          "仰慕",
          "赞叹",
@@ -1397,21 +1382,38 @@
         "evidence": [
          "名山"
         ]
+       },
+       {
+        "id": "career_conflict",
+        "label": "仕隐矛盾",
+        "family": "思辨",
+        "color": "#5f786d",
+        "score": 1.0,
+        "share": 0.073,
+        "adjectives": [
+         "进退两难",
+         "仕隐",
+         "矛盾",
+         "自守"
+        ],
+        "evidence": [
+         "青云"
+        ]
        }
       ],
       "adjectives": [
        "超逸",
        "清远",
-       "苍茫"
+       "仰慕"
       ],
-      "summary": "超逸、清远、苍茫；兼有漂泊羁旅（复合情绪）",
-      "valence": 0.063,
-      "arousal": 0.402,
-      "dominance": 0.316,
-      "confidence": 0.817,
+      "summary": "超逸、清远、仰慕；兼有敬慕赞叹（复合情绪）",
+      "valence": 0.096,
+      "arousal": 0.398,
+      "dominance": 0.37,
+      "confidence": 0.814,
       "confidence_label": "高",
       "mixed": true,
-      "rule_hits": 8,
+      "rule_hits": 9,
       "evidence": [
        "烟霞",
        "且放白鹿青崖间",
@@ -1419,10 +1421,8 @@
        "天姥",
        "白鹿",
        "青崖",
-       "猿",
-       "别",
-       "客",
-       "名山"
+       "名山",
+       "青云"
       ]
      },
      "line": "海客谈瀛洲，烟涛微茫信难求；"
@@ -1437,8 +1437,8 @@
      "period": "漫游与安史乱起",
      "grade": "B",
      "status": "candidate",
-     "hits": 5,
-     "senti": -0.42,
+     "hits": 6,
+     "senti": -0.267,
      "cluster": "愁苦幽愤",
      "top": [
       "明月×1",
@@ -1538,8 +1538,8 @@
      "period": "漫游与安史乱起",
      "grade": "B",
      "status": "candidate",
-     "hits": 23,
-     "senti": -0.113,
+     "hits": 25,
+     "senti": -0.088,
      "cluster": "愁苦幽愤",
      "top": [
       "雪×2",
@@ -1654,36 +1654,18 @@
       "独×1"
      ],
      "emotion": {
-      "primary": "reclusive",
-      "primary_label": "归隐超脱",
-      "family": "思辨",
-      "color": "#477b68",
+      "primary": "lonely",
+      "primary_label": "孤寂清冷",
+      "family": "低回",
+      "color": "#667687",
       "top_emotions": [
-       {
-        "id": "reclusive",
-        "label": "归隐超脱",
-        "family": "思辨",
-        "color": "#477b68",
-        "score": 2.18,
-        "share": 0.499,
-        "adjectives": [
-         "超逸",
-         "清远",
-         "疏淡",
-         "出尘"
-        ],
-        "evidence": [
-         "相看两不厌只有敬亭山",
-         "敬亭"
-        ]
-       },
        {
         "id": "lonely",
         "label": "孤寂清冷",
         "family": "低回",
         "color": "#667687",
         "score": 1.51,
-        "share": 0.346,
+        "share": 0.588,
         "adjectives": [
          "孤清",
          "冷寂",
@@ -1697,12 +1679,29 @@
         ]
        },
        {
+        "id": "reclusive",
+        "label": "归隐超脱",
+        "family": "思辨",
+        "color": "#477b68",
+        "score": 0.38,
+        "share": 0.148,
+        "adjectives": [
+         "超逸",
+         "清远",
+         "疏淡",
+         "出尘"
+        ],
+        "evidence": [
+         "敬亭"
+        ]
+       },
+       {
         "id": "wandering",
         "label": "漂泊羁旅",
         "family": "低回",
         "color": "#647d7b",
         "score": 0.38,
-        "share": 0.087,
+        "share": 0.148,
         "adjectives": [
          "苍茫",
          "漂泊",
@@ -1715,25 +1714,23 @@
        }
       ],
       "adjectives": [
-       "超逸",
-       "清远",
        "孤清",
-       "低回"
+       "冷寂",
+       "超逸"
       ],
-      "summary": "超逸、清远、孤清；兼有孤寂清冷（复合情绪）",
-      "valence": -0.121,
-      "arousal": 0.275,
-      "dominance": 0.079,
-      "confidence": 0.641,
+      "summary": "孤清、冷寂、超逸；兼有归隐超脱",
+      "valence": -0.464,
+      "arousal": 0.336,
+      "dominance": -0.41,
+      "confidence": 0.559,
       "confidence_label": "中",
-      "mixed": true,
-      "rule_hits": 3,
+      "mixed": false,
+      "rule_hits": 2,
       "evidence": [
-       "相看两不厌只有敬亭山",
-       "敬亭",
        "孤",
        "独",
        "题:独坐",
+       "敬亭",
        "孤云"
       ]
      },
@@ -1770,7 +1767,7 @@
         "family": "低回",
         "color": "#766b65",
         "score": 1.8,
-        "share": 0.361,
+        "share": 0.566,
         "adjectives": [
          "衰飒",
          "迟暮",
@@ -1782,29 +1779,12 @@
         ]
        },
        {
-        "id": "indignant",
-        "label": "幽愤不平",
-        "family": "忧患",
-        "color": "#a34b3f",
-        "score": 1.8,
-        "share": 0.361,
-        "adjectives": [
-         "幽愤",
-         "激切",
-         "郁结",
-         "悲壮"
-        ],
-        "evidence": [
-         "白发三千丈缘愁似个长"
-        ]
-       },
-       {
         "id": "grief",
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
         "score": 0.9,
-        "share": 0.181,
+        "share": 0.283,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -1816,24 +1796,40 @@
          "秋霜",
          "愁"
         ]
+       },
+       {
+        "id": "anxious_state",
+        "label": "忧国伤时",
+        "family": "忧患",
+        "color": "#7b4f45",
+        "score": 0.48,
+        "share": 0.151,
+        "adjectives": [
+         "沉郁",
+         "忧患",
+         "感时",
+         "厚重"
+        ],
+        "evidence": [
+         "愁"
+        ]
        }
       ],
       "adjectives": [
        "衰飒",
        "迟暮",
-       "幽愤"
+       "悲恸"
       ],
-      "summary": "衰飒、迟暮、幽愤；兼有幽愤不平",
-      "valence": -0.678,
-      "arousal": 0.609,
-      "dominance": -0.245,
-      "confidence": 0.627,
+      "summary": "衰飒、迟暮、悲恸；兼有悲恸哀伤",
+      "valence": -0.747,
+      "arousal": 0.484,
+      "dominance": -0.638,
+      "confidence": 0.582,
       "confidence_label": "中",
       "mixed": false,
-      "rule_hits": 3,
+      "rule_hits": 2,
       "evidence": [
        "白发三千丈",
-       "白发三千丈缘愁似个长",
        "白发",
        "秋霜",
        "愁"
@@ -1872,7 +1868,7 @@
         "family": "低回",
         "color": "#766b65",
         "score": 1.8,
-        "share": 0.361,
+        "share": 0.566,
         "adjectives": [
          "衰飒",
          "迟暮",
@@ -1884,29 +1880,12 @@
         ]
        },
        {
-        "id": "indignant",
-        "label": "幽愤不平",
-        "family": "忧患",
-        "color": "#a34b3f",
-        "score": 1.8,
-        "share": 0.361,
-        "adjectives": [
-         "幽愤",
-         "激切",
-         "郁结",
-         "悲壮"
-        ],
-        "evidence": [
-         "白发三千丈缘愁似个长"
-        ]
-       },
-       {
         "id": "grief",
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
         "score": 0.9,
-        "share": 0.181,
+        "share": 0.283,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -1918,24 +1897,40 @@
          "秋霜",
          "愁"
         ]
+       },
+       {
+        "id": "anxious_state",
+        "label": "忧国伤时",
+        "family": "忧患",
+        "color": "#7b4f45",
+        "score": 0.48,
+        "share": 0.151,
+        "adjectives": [
+         "沉郁",
+         "忧患",
+         "感时",
+         "厚重"
+        ],
+        "evidence": [
+         "愁"
+        ]
        }
       ],
       "adjectives": [
        "衰飒",
        "迟暮",
-       "幽愤"
+       "悲恸"
       ],
-      "summary": "衰飒、迟暮、幽愤；兼有幽愤不平",
-      "valence": -0.678,
-      "arousal": 0.609,
-      "dominance": -0.245,
-      "confidence": 0.627,
+      "summary": "衰飒、迟暮、悲恸；兼有悲恸哀伤",
+      "valence": -0.747,
+      "arousal": 0.484,
+      "dominance": -0.638,
+      "confidence": 0.582,
       "confidence_label": "中",
       "mixed": false,
-      "rule_hits": 3,
+      "rule_hits": 2,
       "evidence": [
        "白发三千丈",
-       "白发三千丈缘愁似个长",
        "白发",
        "秋霜",
        "愁"
@@ -2049,14 +2044,14 @@
      "period": "永王案流放与暮年",
      "grade": "B",
      "status": "candidate",
-     "hits": 45,
-     "senti": 0.036,
+     "hits": 54,
+     "senti": 0.078,
      "cluster": "豪情进取",
      "top": [
       "楼×5",
+      "龙×5",
       "山×4",
-      "江×4",
-      "云×3"
+      "江×4"
      ],
      "emotion": {
       "primary": "heroic",
@@ -2079,8 +2074,8 @@
         ],
         "evidence": [
          "长风",
-         "四海",
-         "沧海"
+         "沧海",
+         "四海"
         ]
        },
        {
@@ -2136,8 +2131,8 @@
       "rule_hits": 8,
       "evidence": [
        "长风",
-       "四海",
        "沧海",
+       "四海",
        "烽火",
        "胡尘",
        "笑",
@@ -2158,13 +2153,13 @@
      "grade": "B",
      "status": "candidate",
      "hits": 11,
-     "senti": -0.182,
+     "senti": -0.155,
      "cluster": "愁苦幽愤",
      "top": [
       "风×2",
       "胡马×1",
-      "夜郎×1",
-      "长安×1"
+      "长安×1",
+      "夜郎×1"
      ],
      "emotion": {
       "primary": "romantic",
@@ -2264,7 +2259,7 @@
      "cluster": null,
      "top": [
       "青天×2",
-      "山×1"
+      "巫山×1"
      ],
      "emotion": {
       "primary": null,
@@ -3074,18 +3069,35 @@
       "秋×1"
      ],
      "emotion": {
-      "primary": "homesick",
-      "primary_label": "思乡怀人",
+      "primary": "boudoir_longing",
+      "primary_label": "闺怨相思",
       "family": "眷恋",
-      "color": "#7f6a91",
+      "color": "#a45e79",
       "top_emotions": [
+       {
+        "id": "boudoir_longing",
+        "label": "闺怨相思",
+        "family": "眷恋",
+        "color": "#a45e79",
+        "score": 1.0,
+        "share": 0.327,
+        "adjectives": [
+         "幽怨",
+         "相思",
+         "闺愁",
+         "含情"
+        ],
+        "evidence": [
+         "寄书"
+        ]
+       },
        {
         "id": "homesick",
         "label": "思乡怀人",
         "family": "眷恋",
         "color": "#7f6a91",
         "score": 1.0,
-        "share": 0.485,
+        "share": 0.327,
         "adjectives": [
          "乡愁",
          "念远",
@@ -3102,7 +3114,7 @@
         "family": "低回",
         "color": "#647d7b",
         "score": 0.76,
-        "share": 0.369,
+        "share": 0.248,
         "adjectives": [
          "苍茫",
          "漂泊",
@@ -3113,42 +3125,25 @@
          "故乡",
          "雁"
         ]
-       },
-       {
-        "id": "grief",
-        "label": "悲恸哀伤",
-        "family": "低回",
-        "color": "#a84f49",
-        "score": 0.3,
-        "share": 0.146,
-        "adjectives": [
-         "悲恸",
-         "凄切",
-         "哀婉",
-         "沉痛"
-        ],
-        "evidence": [
-         "秋"
-        ]
        }
       ],
       "adjectives": [
-       "乡愁",
-       "念远",
-       "苍茫"
+       "幽怨",
+       "相思",
+       "乡愁"
       ],
-      "summary": "乡愁、念远、苍茫；兼有漂泊羁旅",
-      "valence": -0.402,
-      "arousal": 0.471,
-      "dominance": -0.388,
-      "confidence": 0.476,
-      "confidence_label": "低",
+      "summary": "幽怨、相思、乡愁；兼有思乡怀人",
+      "valence": -0.408,
+      "arousal": 0.487,
+      "dominance": -0.332,
+      "confidence": 0.519,
+      "confidence_label": "中",
       "mixed": false,
-      "rule_hits": 1,
+      "rule_hits": 2,
       "evidence": [
+       "寄书",
        "故乡",
-       "雁",
-       "秋"
+       "雁"
       ]
      },
      "line": "戍鼓断人行，边秋一雁声。"
@@ -3265,10 +3260,11 @@
      "period": "漂泊西南·草堂",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 3,
-     "senti": -0.4,
+     "hits": 4,
+     "senti": -0.175,
      "cluster": "愁苦幽愤",
      "top": [
+      "黄鹂×1",
       "城×1",
       "泪×1",
       "老×1"
@@ -3879,14 +3875,14 @@
      "period": "漂泊西南·草堂",
      "grade": "B",
      "status": "candidate",
-     "hits": 4,
-     "senti": 0.275,
+     "hits": 5,
+     "senti": 0.36,
      "cluster": null,
      "top": [
       "春风×1",
-      "山×1",
-      "江×1",
-      "燕×1"
+      "鸳鸯×1",
+      "燕子×1",
+      "山×1"
      ],
      "emotion": {
       "primary": "hopeful",
@@ -3959,14 +3955,14 @@
      "period": "漂泊西南·草堂",
      "grade": "B",
      "status": "candidate",
-     "hits": 7,
-     "senti": 0.171,
+     "hits": 8,
+     "senti": 0.237,
      "cluster": null,
      "top": [
       "山×2",
       "江×2",
       "春风×1",
-      "燕×1"
+      "鸳鸯×1"
      ],
      "emotion": {
       "primary": "hopeful",
@@ -4144,9 +4140,9 @@
      "cluster": "漂泊羁旅",
      "top": [
       "孤舟×1",
+      "巫山×1",
       "故园×1",
-      "白帝×1",
-      "云×1"
+      "白帝×1"
      ],
      "emotion": {
       "primary": "wandering",
@@ -4263,7 +4259,7 @@
         "family": "低回",
         "color": "#647d7b",
         "score": 4.74,
-        "share": 0.327,
+        "share": 0.262,
         "adjectives": [
          "苍茫",
          "漂泊",
@@ -4284,7 +4280,7 @@
         "family": "低回",
         "color": "#766b65",
         "score": 3.6,
-        "share": 0.248,
+        "share": 0.199,
         "adjectives": [
          "衰飒",
          "迟暮",
@@ -4297,25 +4293,21 @@
         ]
        },
        {
-        "id": "grief",
-        "label": "悲恸哀伤",
+        "id": "autumn_decline",
+        "label": "悲秋迟暮",
         "family": "低回",
-        "color": "#a84f49",
-        "score": 3.06,
-        "share": 0.211,
+        "color": "#71808a",
+        "score": 3.6,
+        "share": 0.199,
         "adjectives": [
-         "悲恸",
-         "凄切",
-         "哀婉",
-         "沉痛"
+         "悲秋",
+         "迟暮",
+         "萧瑟",
+         "苍凉"
         ],
         "evidence": [
-         "哀",
-         "悲",
-         "霜鬓",
-         "独",
-         "恨",
-         "病"
+         "无边落木萧萧下",
+         "万里悲秋常作客"
         ]
        }
       ],
@@ -4325,13 +4317,13 @@
        "衰飒"
       ],
       "summary": "苍茫、漂泊、衰飒；兼有衰老病痛",
-      "valence": -0.425,
-      "arousal": 0.556,
-      "dominance": -0.405,
-      "confidence": 0.786,
+      "valence": -0.437,
+      "arousal": 0.532,
+      "dominance": -0.388,
+      "confidence": 0.778,
       "confidence_label": "高",
       "mixed": false,
-      "rule_hits": 9,
+      "rule_hits": 11,
       "evidence": [
        "万里悲秋常作客",
        "艰难苦恨繁霜鬓",
@@ -4339,10 +4331,7 @@
        "猿",
        "客",
        "多病独登台",
-       "哀",
-       "悲",
-       "霜鬓",
-       "独"
+       "无边落木萧萧下"
       ]
      },
      "line": "风急天高猿啸哀，渚清沙白鸟飞回。"
@@ -4357,14 +4346,14 @@
      "period": "夔州与湖湘漂泊",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 8,
-     "senti": -0.237,
-     "cluster": "漂泊羁旅",
+     "hits": 7,
+     "senti": -0.3,
+     "cluster": "愁苦幽愤",
      "top": [
       "孤舟×1",
+      "关山×1",
       "洞庭×1",
-      "山×1",
-      "关×1"
+      "马×1"
      ],
      "emotion": {
       "primary": "aging",
@@ -4378,7 +4367,7 @@
         "family": "低回",
         "color": "#766b65",
         "score": 1.0,
-        "share": 0.229,
+        "share": 0.251,
         "adjectives": [
          "衰飒",
          "迟暮",
@@ -4395,7 +4384,7 @@
         "family": "眷恋",
         "color": "#7f6a91",
         "score": 1.0,
-        "share": 0.229,
+        "share": 0.251,
         "adjectives": [
          "乡愁",
          "念远",
@@ -4412,7 +4401,7 @@
         "family": "低回",
         "color": "#667687",
         "score": 1.0,
-        "share": 0.229,
+        "share": 0.251,
         "adjectives": [
          "孤清",
          "冷寂",
@@ -4430,10 +4419,10 @@
        "乡愁"
       ],
       "summary": "衰飒、迟暮、乡愁；兼有思乡怀人",
-      "valence": -0.55,
-      "arousal": 0.408,
-      "dominance": -0.541,
-      "confidence": 0.576,
+      "valence": -0.567,
+      "arousal": 0.397,
+      "dominance": -0.548,
+      "confidence": 0.569,
       "confidence_label": "中",
       "mixed": false,
       "rule_hits": 3,
@@ -4456,26 +4445,43 @@
      "grade": "B",
      "status": "candidate",
      "hits": 3,
-     "senti": -0.233,
+     "senti": -0.067,
      "cluster": "愁苦幽愤",
      "top": [
       "落花×1",
-      "风×1",
-      "江×1"
+      "江南×1",
+      "风×1"
      ],
      "emotion": {
-      "primary": "grief",
-      "primary_label": "悲恸哀伤",
+      "primary": "spring_regret",
+      "primary_label": "惜春物哀",
       "family": "低回",
-      "color": "#a84f49",
+      "color": "#ad7563",
       "top_emotions": [
+       {
+        "id": "spring_regret",
+        "label": "惜春物哀",
+        "family": "低回",
+        "color": "#ad7563",
+        "score": 1.0,
+        "share": 0.769,
+        "adjectives": [
+         "惜春",
+         "物哀",
+         "伤花",
+         "流年"
+        ],
+        "evidence": [
+         "落花"
+        ]
+       },
        {
         "id": "grief",
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
         "score": 0.3,
-        "share": 1.0,
+        "share": 0.231,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -4488,17 +4494,18 @@
        }
       ],
       "adjectives": [
-       "悲恸",
-       "凄切"
+       "惜春",
+       "物哀",
+       "悲恸"
       ],
-      "summary": "悲恸、凄切",
-      "valence": -0.86,
-      "arousal": 0.68,
-      "dominance": -0.7,
-      "confidence": 0.446,
-      "confidence_label": "低",
+      "summary": "惜春、物哀、悲恸；兼有悲恸哀伤",
+      "valence": -0.415,
+      "arousal": 0.474,
+      "dominance": -0.271,
+      "confidence": 0.498,
+      "confidence_label": "中",
       "mixed": false,
-      "rule_hits": 0,
+      "rule_hits": 1,
       "evidence": [
        "落花"
       ]
@@ -4562,12 +4569,12 @@
      "grade": "B",
      "status": "candidate",
      "hits": 5,
-     "senti": -0.18,
+     "senti": -0.3,
      "cluster": "愁苦幽愤",
      "top": [
       "春风×1",
+      "荒城×1",
       "枯×1",
-      "城×1",
       "别×1"
      ],
      "emotion": {
@@ -4659,14 +4666,14 @@
      "period": "应举入仕",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 80,
-     "senti": -0.075,
+     "hits": 90,
+     "senti": -0.026,
      "cluster": "愁苦幽愤",
      "top": [
       "云×4",
       "山×4",
       "仙×4",
-      "风×3"
+      "芙蓉×3"
      ],
      "emotion": {
       "primary": "grief",
@@ -4679,8 +4686,8 @@
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
-        "score": 6.46,
-        "share": 0.209,
+        "score": 6.16,
+        "share": 0.195,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -4702,7 +4709,7 @@
         "family": "低回",
         "color": "#85716a",
         "score": 4.8,
-        "share": 0.155,
+        "share": 0.152,
         "adjectives": [
          "失落",
          "无奈",
@@ -4721,7 +4728,7 @@
         "family": "眷恋",
         "color": "#b66c86",
         "score": 3.8,
-        "share": 0.123,
+        "share": 0.12,
         "adjectives": [
          "缠绵",
          "温柔",
@@ -4741,13 +4748,13 @@
        "失落"
       ],
       "summary": "悲恸、凄切、失落；兼有失意无奈（复合情绪）",
-      "valence": -0.318,
-      "arousal": 0.485,
-      "dominance": -0.309,
-      "confidence": 0.77,
+      "valence": -0.311,
+      "arousal": 0.483,
+      "dominance": -0.304,
+      "confidence": 0.767,
       "confidence_label": "高",
       "mixed": true,
-      "rule_hits": 22,
+      "rule_hits": 23,
       "evidence": [
        "泪",
        "伤心",
@@ -4773,11 +4780,12 @@
      "period": "谏官岁月",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 4,
-     "senti": -0.325,
+     "hits": 5,
+     "senti": -0.22,
      "cluster": "愁苦幽愤",
      "top": [
       "月×2",
+      "夏日×1",
       "风×1",
       "悲×1"
      ],
@@ -4843,35 +4851,18 @@
       "城×1"
      ],
      "emotion": {
-      "primary": "satirical",
-      "primary_label": "讽谏批判",
-      "family": "思辨",
-      "color": "#745046",
+      "primary": "helpless",
+      "primary_label": "失意无奈",
+      "family": "低回",
+      "color": "#85716a",
       "top_emotions": [
-       {
-        "id": "satirical",
-        "label": "讽谏批判",
-        "family": "思辨",
-        "color": "#745046",
-        "score": 1.8,
-        "share": 0.529,
-        "adjectives": [
-         "冷峻",
-         "峻切",
-         "讽刺",
-         "警策"
-        ],
-        "evidence": [
-         "可怜身上衣正单心忧炭贱愿天寒"
-        ]
-       },
        {
         "id": "helpless",
         "label": "失意无奈",
         "family": "低回",
         "color": "#85716a",
         "score": 1.0,
-        "share": 0.294,
+        "share": 0.625,
         "adjectives": [
          "失落",
          "无奈",
@@ -4888,7 +4879,7 @@
         "family": "低回",
         "color": "#a84f49",
         "score": 0.6,
-        "share": 0.176,
+        "share": 0.375,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -4902,20 +4893,19 @@
        }
       ],
       "adjectives": [
-       "冷峻",
-       "峻切",
-       "失落"
+       "失落",
+       "无奈",
+       "悲恸"
       ],
-      "summary": "冷峻、峻切、失落；兼有失意无奈",
-      "valence": -0.471,
-      "arousal": 0.65,
-      "dominance": 0.09,
-      "confidence": 0.582,
+      "summary": "失落、无奈、悲恸；兼有悲恸哀伤",
+      "valence": -0.707,
+      "arousal": 0.514,
+      "dominance": -0.687,
+      "confidence": 0.482,
       "confidence_label": "中",
       "mixed": false,
-      "rule_hits": 2,
+      "rule_hits": 1,
       "evidence": [
-       "可怜身上衣正单心忧炭贱愿天寒",
        "不得",
        "忧",
        "寒"
@@ -5089,14 +5079,14 @@
      "period": "贬谪江州忠州",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 80,
-     "senti": -0.089,
+     "hits": 96,
+     "senti": -0.075,
      "cluster": "愁苦幽愤",
      "top": [
+      "琵琶×10",
       "江×10",
       "月×6",
-      "秋×6",
-      "酒×5"
+      "秋×6"
      ],
      "emotion": {
       "primary": "grief",
@@ -5347,14 +5337,14 @@
      "period": "贬谪江州忠州",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 7,
-     "senti": -0.014,
+     "hits": 8,
+     "senti": 0.05,
      "cluster": "隐逸超脱",
      "top": [
       "桃花×1",
+      "芳菲×1",
       "人间×1",
-      "月×1",
-      "山×1"
+      "月×1"
      ],
      "emotion": {
       "primary": "indignant",
@@ -5507,12 +5497,12 @@
      "period": "杭苏刺史",
      "grade": "B",
      "status": "candidate",
-     "hits": 9,
-     "senti": 0.056,
+     "hits": 8,
+     "senti": 0.1,
      "cluster": "隐逸超脱",
      "top": [
+      "孤山×1",
       "云×1",
-      "山×1",
       "湖×1",
       "莺×1"
      ],
@@ -5528,7 +5518,7 @@
         "family": "低回",
         "color": "#667687",
         "score": 0.48,
-        "share": 0.414,
+        "share": 0.558,
         "adjectives": [
          "孤清",
          "冷寂",
@@ -5545,7 +5535,7 @@
         "family": "思辨",
         "color": "#477b68",
         "score": 0.38,
-        "share": 0.328,
+        "share": 0.442,
         "adjectives": [
          "超逸",
          "清远",
@@ -5555,35 +5545,19 @@
         "evidence": [
          "寺"
         ]
-       },
-       {
-        "id": "grief",
-        "label": "悲恸哀伤",
-        "family": "低回",
-        "color": "#a84f49",
-        "score": 0.3,
-        "share": 0.259,
-        "adjectives": [
-         "悲恸",
-         "凄切",
-         "哀婉",
-         "沉痛"
-        ],
-        "evidence": [
-         "孤"
-        ]
        }
       ],
       "adjectives": [
        "孤清",
        "冷寂",
-       "超逸"
+       "超逸",
+       "低回"
       ],
       "summary": "孤清、冷寂、超逸；兼有归隐超脱（复合情绪）",
-      "valence": -0.363,
-      "arousal": 0.35,
-      "dominance": -0.199,
-      "confidence": 0.403,
+      "valence": -0.197,
+      "arousal": 0.24,
+      "dominance": -0.032,
+      "confidence": 0.416,
       "confidence_label": "低",
       "mixed": true,
       "rule_hits": 1,
@@ -5871,10 +5845,11 @@
      "grade": "B",
      "status": "candidate",
      "hits": 6,
-     "senti": -0.05,
+     "senti": 0.117,
      "cluster": null,
      "top": [
-      "江×4",
+      "江南×2",
+      "江×2",
       "风×1",
       "忆×1"
      ],
@@ -5910,14 +5885,14 @@
      "period": "洛阳中隐",
      "grade": "B",
      "status": "candidate",
-     "hits": 20,
-     "senti": -0.015,
+     "hits": 21,
+     "senti": 0.1,
      "cluster": "纵逸狂放",
      "top": [
-      "江×6",
       "忆×5",
-      "月×1",
-      "风×1"
+      "江南×4",
+      "江×2",
+      "芙蓉×1"
      ],
      "emotion": {
       "primary": "unrestrained",
@@ -6014,14 +5989,14 @@
      "period": "洛阳中隐",
      "grade": "B",
      "status": "candidate",
-     "hits": 8,
-     "senti": -0.325,
+     "hits": 9,
+     "senti": -0.311,
      "cluster": "愁苦幽愤",
      "top": [
       "恨×2",
+      "古渡×1",
       "月×1",
-      "山×1",
-      "楼×1"
+      "山×1"
      ],
      "emotion": {
       "primary": "indignant",
@@ -6263,12 +6238,13 @@
      "period": "眉山应举与凤翔初仕",
      "grade": "B",
      "status": "candidate",
-     "hits": 4,
-     "senti": -0.4,
+     "hits": 5,
+     "senti": -0.32,
      "cluster": "漂泊羁旅",
      "top": [
       "鸿×2",
       "雪×1",
+      "驴×1",
       "老×1"
      ],
      "emotion": {
@@ -6380,7 +6356,7 @@
         "family": "明朗",
         "color": "#6687a3",
         "score": 5.4,
-        "share": 1.0,
+        "share": 0.6,
         "adjectives": [
          "仰慕",
          "赞叹",
@@ -6392,20 +6368,39 @@
          "山色空蒙雨亦奇",
          "淡妆浓抹总相宜"
         ]
+       },
+       {
+        "id": "landscape_appreciation",
+        "label": "山水清赏",
+        "family": "明朗",
+        "color": "#5f8d83",
+        "score": 3.6,
+        "share": 0.4,
+        "adjectives": [
+         "清赏",
+         "澄碧",
+         "幽胜",
+         "旷远"
+        ],
+        "evidence": [
+         "水光潋滟晴方好",
+         "山色空蒙雨亦奇"
+        ]
        }
       ],
       "adjectives": [
        "仰慕",
-       "赞叹"
+       "赞叹",
+       "清赏"
       ],
-      "summary": "仰慕、赞叹",
-      "valence": 0.58,
-      "arousal": 0.56,
-      "dominance": 0.3,
-      "confidence": 0.791,
+      "summary": "仰慕、赞叹、清赏；兼有山水清赏",
+      "valence": 0.572,
+      "arousal": 0.475,
+      "dominance": 0.292,
+      "confidence": 0.819,
       "confidence_label": "高",
       "mixed": false,
-      "rule_hits": 3,
+      "rule_hits": 5,
       "evidence": [
        "水光潋滟晴方好",
        "山色空蒙雨亦奇",
@@ -6434,37 +6429,18 @@
       "孤×1"
      ],
      "emotion": {
-      "primary": "mourning_family",
-      "primary_label": "悼亡怀亲",
-      "family": "眷恋",
-      "color": "#9a5968",
+      "primary": "grief",
+      "primary_label": "悲恸哀伤",
+      "family": "低回",
+      "color": "#a84f49",
       "top_emotions": [
-       {
-        "id": "mourning_family",
-        "label": "悼亡怀亲",
-        "family": "眷恋",
-        "color": "#9a5968",
-        "score": 5.4,
-        "share": 0.485,
-        "adjectives": [
-         "哀悼",
-         "深挚",
-         "痛惜",
-         "追怀"
-        ],
-        "evidence": [
-         "十年生死两茫茫",
-         "不思量自难忘",
-         "千里孤坟无处话凄凉"
-        ]
-       },
        {
         "id": "grief",
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
         "score": 2.88,
-        "share": 0.259,
+        "share": 0.337,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -6478,12 +6454,30 @@
         ]
        },
        {
+        "id": "mourning_family",
+        "label": "悼亡怀亲",
+        "family": "眷恋",
+        "color": "#9a5968",
+        "score": 2.8,
+        "share": 0.328,
+        "adjectives": [
+         "哀悼",
+         "深挚",
+         "痛惜",
+         "追怀"
+        ],
+        "evidence": [
+         "十年生死两茫茫",
+         "孤坟"
+        ]
+       },
+       {
         "id": "homesick",
         "label": "思乡怀人",
         "family": "眷恋",
         "color": "#7f6a91",
         "score": 1.0,
-        "share": 0.09,
+        "share": 0.117,
         "adjectives": [
          "乡愁",
          "念远",
@@ -6496,24 +6490,23 @@
        }
       ],
       "adjectives": [
-       "哀悼",
-       "深挚",
-       "悲恸"
+       "悲恸",
+       "凄切",
+       "哀悼"
       ],
-      "summary": "哀悼、深挚、悲恸；兼有悲恸哀伤",
-      "valence": -0.538,
-      "arousal": 0.525,
-      "dominance": -0.44,
-      "confidence": 0.81,
+      "summary": "悲恸、凄切、哀悼；兼有悼亡怀亲",
+      "valence": -0.492,
+      "arousal": 0.542,
+      "dominance": -0.402,
+      "confidence": 0.751,
       "confidence_label": "高",
       "mixed": false,
-      "rule_hits": 8,
+      "rule_hits": 7,
       "evidence": [
        "十年生死两茫茫",
-       "不思量自难忘",
-       "千里孤坟无处话凄凉",
        "泪",
        "孤",
+       "孤坟",
        "还乡"
       ]
      },
@@ -6529,8 +6522,8 @@
      "period": "杭密徐湖外任",
      "grade": "B",
      "status": "candidate",
-     "hits": 6,
-     "senti": -0.217,
+     "hits": 8,
+     "senti": -0.225,
      "cluster": "纵逸狂放",
      "top": [
       "月×1",
@@ -6626,14 +6619,14 @@
      "period": "杭密徐湖外任",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 18,
-     "senti": -0.078,
+     "hits": 20,
+     "senti": -0.02,
      "cluster": "愁苦幽愤",
      "top": [
       "欢×2",
       "明月×1",
-      "青天×1",
-      "天上×1"
+      "中秋×1",
+      "阴晴×1"
      ],
      "emotion": {
       "primary": "philosophical",
@@ -6646,8 +6639,8 @@
         "label": "哲思澄明",
         "family": "思辨",
         "color": "#4e7180",
-        "score": 3.8,
-        "share": 0.278,
+        "score": 4.0,
+        "share": 0.295,
         "adjectives": [
          "澄明",
          "通透",
@@ -6657,7 +6650,8 @@
         "evidence": [
          "又恐琼楼玉宇",
          "何似在人间",
-         "人有悲欢离合月有阴晴圆缺"
+         "悲欢离合",
+         "阴晴圆缺"
         ]
        },
        {
@@ -6666,7 +6660,7 @@
         "family": "眷恋",
         "color": "#7f6a91",
         "score": 1.8,
-        "share": 0.132,
+        "share": 0.133,
         "adjectives": [
          "乡愁",
          "念远",
@@ -6683,7 +6677,7 @@
         "family": "明朗",
         "color": "#4f8a6f",
         "score": 1.8,
-        "share": 0.132,
+        "share": 0.133,
         "adjectives": [
          "憧憬",
          "明朗",
@@ -6701,17 +6695,18 @@
        "乡愁"
       ],
       "summary": "澄明、通透、乡愁；兼有思乡怀人（复合情绪）",
-      "valence": 0.053,
-      "arousal": 0.442,
-      "dominance": 0.165,
-      "confidence": 0.772,
+      "valence": 0.078,
+      "arousal": 0.432,
+      "dominance": 0.192,
+      "confidence": 0.776,
       "confidence_label": "高",
       "mixed": true,
-      "rule_hits": 11,
+      "rule_hits": 12,
       "evidence": [
        "又恐琼楼玉宇",
        "何似在人间",
-       "人有悲欢离合月有阴晴圆缺",
+       "悲欢离合",
+       "阴晴圆缺",
        "千里共婵娟",
        "但愿人长久"
       ]
@@ -6729,13 +6724,13 @@
      "grade": "B",
      "status": "superseded_by_verified",
      "hits": 11,
-     "senti": -0.2,
+     "senti": -0.164,
      "cluster": "纵逸狂放",
      "top": [
       "酒×2",
+      "寒食×1",
       "烟×1",
-      "风×1",
-      "雨×1"
+      "风×1"
      ],
      "emotion": {
       "primary": "friendship",
@@ -6749,7 +6744,7 @@
         "family": "眷恋",
         "color": "#557f91",
         "score": 1.0,
-        "share": 0.174,
+        "share": 0.184,
         "adjectives": [
          "真挚",
          "温厚",
@@ -6766,7 +6761,7 @@
         "family": "眷恋",
         "color": "#7f6a91",
         "score": 1.0,
-        "share": 0.174,
+        "share": 0.184,
         "adjectives": [
          "乡愁",
          "念远",
@@ -6783,7 +6778,7 @@
         "family": "眷恋",
         "color": "#96705d",
         "score": 1.0,
-        "share": 0.174,
+        "share": 0.184,
         "adjectives": [
          "温存",
          "眷恋",
@@ -6801,10 +6796,10 @@
        "乡愁"
       ],
       "summary": "真挚、温厚、乡愁；兼有思乡怀人（复合情绪）",
-      "valence": 0.057,
-      "arousal": 0.459,
-      "dominance": 0.048,
-      "confidence": 0.633,
+      "valence": 0.11,
+      "arousal": 0.446,
+      "dominance": 0.09,
+      "confidence": 0.628,
       "confidence_label": "中",
       "mixed": true,
       "rule_hits": 4,
@@ -6826,13 +6821,13 @@
      "grade": "B",
      "status": "candidate",
      "hits": 7,
-     "senti": 0.086,
+     "senti": 0.1,
      "cluster": "漂泊羁旅",
      "top": [
       "笑×2",
       "芳草×1",
-      "天涯×1",
-      "柳×1"
+      "燕子×1",
+      "天涯×1"
      ],
      "emotion": {
       "primary": "romantic",
@@ -6927,14 +6922,14 @@
      "period": "乌台诗案贬黄州",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 6,
-     "senti": -0.483,
+     "hits": 7,
+     "senti": -0.414,
      "cluster": "愁苦幽愤",
      "top": [
+      "沙洲×1",
       "月×1",
       "鸿×1",
-      "孤×1",
-      "独×1"
+      "孤×1"
      ],
      "emotion": {
       "primary": "lonely",
@@ -7037,10 +7032,10 @@
      "grade": "B",
      "status": "candidate",
      "hits": 10,
-     "senti": -0.31,
+     "senti": -0.23,
      "cluster": "愁苦幽愤",
      "top": [
-      "秋×2",
+      "中秋×1",
       "月×1",
       "云×1",
       "风×1"
@@ -7057,7 +7052,7 @@
         "family": "思辨",
         "color": "#4e7180",
         "score": 2.0,
-        "share": 0.407,
+        "share": 0.433,
         "adjectives": [
          "澄明",
          "通透",
@@ -7074,8 +7069,8 @@
         "label": "悲恸哀伤",
         "family": "低回",
         "color": "#a84f49",
-        "score": 1.2,
-        "share": 0.244,
+        "score": 0.9,
+        "share": 0.195,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -7094,7 +7089,7 @@
         "family": "忧患",
         "color": "#7b4f45",
         "score": 0.48,
-        "share": 0.098,
+        "share": 0.104,
         "adjectives": [
          "沉郁",
          "忧患",
@@ -7112,10 +7107,10 @@
        "悲恸"
       ],
       "summary": "澄明、通透、悲恸；兼有悲恸哀伤",
-      "valence": -0.252,
-      "arousal": 0.457,
-      "dominance": -0.035,
-      "confidence": 0.668,
+      "valence": -0.208,
+      "arousal": 0.441,
+      "dominance": 0.013,
+      "confidence": 0.665,
       "confidence_label": "中",
       "mixed": false,
       "rule_hits": 4,
@@ -7139,8 +7134,8 @@
      "period": "乌台诗案贬黄州",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 15,
-     "senti": -0.02,
+     "hits": 16,
+     "senti": -0.044,
      "cluster": "隐逸超脱",
      "top": [
       "雨×4",
@@ -7159,8 +7154,8 @@
         "label": "归隐超脱",
         "family": "思辨",
         "color": "#477b68",
-        "score": 3.98,
-        "share": 0.648,
+        "score": 3.18,
+        "share": 0.596,
         "adjectives": [
          "超逸",
          "清远",
@@ -7169,7 +7164,7 @@
         ],
         "evidence": [
          "一蓑烟雨任平生",
-         "归去也无风雨也无晴",
+         "归去",
          "竹"
         ]
        },
@@ -7179,7 +7174,7 @@
         "family": "明朗",
         "color": "#4f8a6f",
         "score": 1.0,
-        "share": 0.163,
+        "share": 0.187,
         "adjectives": [
          "憧憬",
          "明朗",
@@ -7196,7 +7191,7 @@
         "family": "低回",
         "color": "#667687",
         "score": 0.48,
-        "share": 0.078,
+        "share": 0.09,
         "adjectives": [
          "孤清",
          "冷寂",
@@ -7214,16 +7209,16 @@
        "憧憬"
       ],
       "summary": "超逸、清远、憧憬；兼有希望向往",
-      "valence": 0.266,
-      "arousal": 0.314,
-      "dominance": 0.505,
-      "confidence": 0.755,
+      "valence": 0.26,
+      "arousal": 0.335,
+      "dominance": 0.473,
+      "confidence": 0.724,
       "confidence_label": "高",
       "mixed": false,
       "rule_hits": 4,
       "evidence": [
        "一蓑烟雨任平生",
-       "归去也无风雨也无晴",
+       "归去",
        "竹",
        "春风",
        "独"
@@ -7261,8 +7256,8 @@
         "label": "怀古感时",
         "family": "思辨",
         "color": "#6d7180",
-        "score": 3.35,
-        "share": 0.258,
+        "score": 2.55,
+        "share": 0.183,
         "adjectives": [
          "苍凉",
          "感喟",
@@ -7270,7 +7265,7 @@
          "历史感"
         ],
         "evidence": [
-         "大江东去浪淘尽千古风流人物",
+         "千古",
          "故垒",
          "题:怀古"
         ]
@@ -7281,7 +7276,7 @@
         "family": "眷恋",
         "color": "#96705d",
         "score": 2.0,
-        "share": 0.154,
+        "share": 0.143,
         "adjectives": [
          "温存",
          "眷恋",
@@ -7299,7 +7294,7 @@
         "family": "明朗",
         "color": "#6687a3",
         "score": 1.8,
-        "share": 0.139,
+        "share": 0.129,
         "adjectives": [
          "仰慕",
          "赞叹",
@@ -7317,15 +7312,15 @@
        "温存"
       ],
       "summary": "苍凉、感喟、温存；兼有眷恋怀旧（复合情绪）",
-      "valence": 0.146,
-      "arousal": 0.495,
-      "dominance": 0.209,
-      "confidence": 0.765,
+      "valence": 0.188,
+      "arousal": 0.468,
+      "dominance": 0.207,
+      "confidence": 0.75,
       "confidence_label": "高",
       "mixed": true,
-      "rule_hits": 12,
+      "rule_hits": 13,
       "evidence": [
-       "大江东去浪淘尽千古风流人物",
+       "千古",
        "故垒",
        "题:怀古",
        "当年",
@@ -7345,8 +7340,8 @@
      "period": "乌台诗案贬黄州",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 54,
-     "senti": -0.028,
+     "hits": 57,
+     "senti": -0.026,
      "cluster": "漂泊羁旅",
      "top": [
       "客×7",
@@ -7365,8 +7360,8 @@
         "label": "哲思澄明",
         "family": "思辨",
         "color": "#4e7180",
-        "score": 7.8,
-        "share": 0.307,
+        "score": 6.0,
+        "share": 0.254,
         "adjectives": [
          "澄明",
          "通透",
@@ -7376,7 +7371,6 @@
         "evidence": [
          "天地",
          "无穷",
-         "逝者如斯而未尝往也",
          "盈虚",
          "造物"
         ]
@@ -7387,7 +7381,7 @@
         "family": "明朗",
         "color": "#6f947a",
         "score": 3.6,
-        "share": 0.142,
+        "share": 0.152,
         "adjectives": [
          "恬淡",
          "闲雅",
@@ -7405,7 +7399,7 @@
         "family": "低回",
         "color": "#647d7b",
         "score": 3.42,
-        "share": 0.135,
+        "share": 0.145,
         "adjectives": [
          "苍茫",
          "漂泊",
@@ -7425,17 +7419,16 @@
        "恬淡"
       ],
       "summary": "澄明、通透、恬淡；兼有闲适恬淡（复合情绪）",
-      "valence": 0.014,
-      "arousal": 0.389,
-      "dominance": 0.141,
-      "confidence": 0.793,
+      "valence": 0.004,
+      "arousal": 0.403,
+      "dominance": 0.115,
+      "confidence": 0.78,
       "confidence_label": "高",
       "mixed": true,
-      "rule_hits": 18,
+      "rule_hits": 17,
       "evidence": [
        "天地",
        "无穷",
-       "逝者如斯而未尝往也",
        "盈虚",
        "造物",
        "清风徐来",
@@ -8150,12 +8143,12 @@
      "grade": "B",
      "status": "candidate",
      "hits": 4,
-     "senti": -0.125,
+     "senti": -0.05,
      "cluster": "愁苦幽愤",
      "top": [
       "夜雨×1",
+      "海棠×1",
       "风×1",
-      "海×1",
       "酒×1"
      ],
      "emotion": {
@@ -8386,13 +8379,13 @@
      "period": "汴京少女与新婚",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 10,
-     "senti": -0.22,
+     "hits": 9,
+     "senti": -0.267,
      "cluster": "愁苦幽愤",
      "top": [
+      "兰舟×1",
       "月×1",
       "云×1",
-      "兰×1",
       "雁×1"
      ],
      "emotion": {
@@ -8406,8 +8399,8 @@
         "label": "爱恋缠绵",
         "family": "眷恋",
         "color": "#b66c86",
-        "score": 4.6,
-        "share": 0.56,
+        "score": 2.8,
+        "share": 0.398,
         "adjectives": [
          "缠绵",
          "温柔",
@@ -8416,8 +8409,24 @@
         ],
         "evidence": [
          "相思",
-         "此情无计可消除",
-         "才下眉头却上心头"
+         "此情无计可消除"
+        ]
+       },
+       {
+        "id": "boudoir_longing",
+        "label": "闺怨相思",
+        "family": "眷恋",
+        "color": "#a45e79",
+        "score": 1.0,
+        "share": 0.142,
+        "adjectives": [
+         "幽怨",
+         "相思",
+         "闺愁",
+         "含情"
+        ],
+        "evidence": [
+         "雁字"
         ]
        },
        {
@@ -8426,7 +8435,7 @@
         "family": "低回",
         "color": "#85716a",
         "score": 1.0,
-        "share": 0.122,
+        "share": 0.142,
         "adjectives": [
          "失落",
          "无奈",
@@ -8436,48 +8445,26 @@
         "evidence": [
          "无计"
         ]
-       },
-       {
-        "id": "grief",
-        "label": "悲恸哀伤",
-        "family": "低回",
-        "color": "#a84f49",
-        "score": 0.9,
-        "share": 0.109,
-        "adjectives": [
-         "悲恸",
-         "凄切",
-         "哀婉",
-         "沉痛"
-        ],
-        "evidence": [
-         "独",
-         "愁",
-         "秋"
-        ]
        }
       ],
       "adjectives": [
        "缠绵",
        "温柔",
-       "失落"
+       "幽怨"
       ],
-      "summary": "缠绵、温柔、失落；兼有失意无奈（复合情绪）",
-      "valence": -0.008,
-      "arousal": 0.486,
-      "dominance": -0.103,
-      "confidence": 0.801,
+      "summary": "缠绵、温柔、幽怨；兼有闺怨相思（复合情绪）",
+      "valence": -0.191,
+      "arousal": 0.505,
+      "dominance": -0.222,
+      "confidence": 0.744,
       "confidence_label": "高",
       "mixed": true,
       "rule_hits": 6,
       "evidence": [
        "相思",
        "此情无计可消除",
-       "才下眉头却上心头",
-       "无计",
-       "独",
-       "愁",
-       "秋"
+       "雁字",
+       "无计"
       ]
      },
      "line": "红藕香残玉簟秋。轻解罗裳，独上兰舟。云中谁寄锦书来？…"
@@ -8493,13 +8480,13 @@
      "grade": "B",
      "status": "candidate",
      "hits": 4,
-     "senti": 0.0,
+     "senti": 0.2,
      "cluster": "隐逸超脱",
      "top": [
+      "中秋×1",
       "梅×1",
       "菊×1",
-      "思×1",
-      "秋×1"
+      "思×1"
      ],
      "emotion": {
       "primary": "nostalgic",
@@ -8513,7 +8500,7 @@
         "family": "眷恋",
         "color": "#96705d",
         "score": 1.0,
-        "share": 0.327,
+        "share": 0.568,
         "adjectives": [
          "温存",
          "眷恋",
@@ -8525,29 +8512,12 @@
         ]
        },
        {
-        "id": "romantic",
-        "label": "爱恋缠绵",
-        "family": "眷恋",
-        "color": "#b66c86",
-        "score": 1.0,
-        "share": 0.327,
-        "adjectives": [
-         "缠绵",
-         "温柔",
-         "悱恻",
-         "含蓄"
-        ],
-        "evidence": [
-         "柔情"
-        ]
-       },
-       {
         "id": "reclusive",
         "label": "归隐超脱",
         "family": "思辨",
         "color": "#477b68",
         "score": 0.76,
-        "share": 0.248,
+        "share": 0.432,
         "adjectives": [
          "超逸",
          "清远",
@@ -8563,19 +8533,19 @@
       "adjectives": [
        "温存",
        "眷恋",
-       "缠绵"
+       "超逸",
+       "低回"
       ],
-      "summary": "温存、眷恋、缠绵；兼有爱恋缠绵",
-      "valence": 0.119,
-      "arousal": 0.382,
-      "dominance": 0.113,
-      "confidence": 0.519,
-      "confidence_label": "中",
+      "summary": "温存、眷恋、超逸；兼有归隐超脱",
+      "valence": 0.139,
+      "arousal": 0.281,
+      "dominance": 0.242,
+      "confidence": 0.478,
+      "confidence_label": "低",
       "mixed": false,
-      "rule_hits": 2,
+      "rule_hits": 1,
       "evidence": [
        "当年",
-       "柔情",
        "梅",
        "菊"
       ]
@@ -8592,14 +8562,14 @@
      "period": "青州屏居与莱州淄州岁月",
      "grade": "B",
      "status": "candidate",
-     "hits": 5,
-     "senti": 0.06,
+     "hits": 6,
+     "senti": 0.1,
      "cluster": "隐逸超脱",
      "top": [
+      "鸥鹭×1",
       "溪×1",
       "舟×1",
-      "亭×1",
-      "醉×1"
+      "亭×1"
      ],
      "emotion": {
       "primary": "fearful",
@@ -8690,38 +8660,37 @@
      "period": "青州屏居与莱州淄州岁月",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 6,
-     "senti": -0.2,
+     "hits": 7,
+     "senti": -0.143,
      "cluster": "愁苦幽愤",
      "top": [
       "西风×1",
+      "重阳×1",
       "东篱×1",
-      "云×1",
-      "雾×1"
+      "云×1"
      ],
      "emotion": {
-      "primary": "grief",
-      "primary_label": "悲恸哀伤",
-      "family": "低回",
-      "color": "#a84f49",
+      "primary": "boudoir_longing",
+      "primary_label": "闺怨相思",
+      "family": "眷恋",
+      "color": "#a45e79",
       "top_emotions": [
        {
-        "id": "grief",
-        "label": "悲恸哀伤",
-        "family": "低回",
-        "color": "#a84f49",
-        "score": 1.6,
-        "share": 0.39,
+        "id": "boudoir_longing",
+        "label": "闺怨相思",
+        "family": "眷恋",
+        "color": "#a45e79",
+        "score": 2.0,
+        "share": 0.392,
         "adjectives": [
-         "悲恸",
-         "凄切",
-         "哀婉",
-         "沉痛"
+         "幽怨",
+         "相思",
+         "闺愁",
+         "含情"
         ],
         "evidence": [
-         "销魂",
-         "西风",
-         "愁"
+         "玉枕",
+         "帘卷西风"
         ]
        },
        {
@@ -8730,7 +8699,7 @@
         "family": "思辨",
         "color": "#477b68",
         "score": 1.38,
-        "share": 0.336,
+        "share": 0.27,
         "adjectives": [
          "超逸",
          "清远",
@@ -8747,7 +8716,7 @@
         "family": "忧患",
         "color": "#7b4f45",
         "score": 0.744,
-        "share": 0.181,
+        "share": 0.146,
         "adjectives": [
          "沉郁",
          "忧患",
@@ -8761,23 +8730,23 @@
        }
       ],
       "adjectives": [
-       "悲恸",
-       "凄切",
+       "幽怨",
+       "相思",
        "超逸"
       ],
-      "summary": "悲恸、凄切、超逸；兼有归隐超脱（复合情绪）",
-      "valence": -0.305,
-      "arousal": 0.538,
-      "dominance": 0.007,
-      "confidence": 0.607,
+      "summary": "幽怨、相思、超逸；兼有归隐超脱（复合情绪）",
+      "valence": -0.233,
+      "arousal": 0.5,
+      "dominance": 0.065,
+      "confidence": 0.669,
       "confidence_label": "中",
       "mixed": true,
-      "rule_hits": 3,
+      "rule_hits": 4,
       "evidence": [
-       "销魂",
-       "西风",
-       "愁",
+       "玉枕",
+       "帘卷西风",
        "东篱",
+       "愁",
        "题:愁"
       ]
      },
@@ -8814,7 +8783,7 @@
         "family": "低回",
         "color": "#a84f49",
         "score": 4.26,
-        "share": 0.424,
+        "share": 0.354,
         "adjectives": [
          "悲恸",
          "凄切",
@@ -8831,12 +8800,29 @@
         ]
        },
        {
+        "id": "autumn_decline",
+        "label": "悲秋迟暮",
+        "family": "低回",
+        "color": "#71808a",
+        "score": 2.0,
+        "share": 0.166,
+        "adjectives": [
+         "悲秋",
+         "迟暮",
+         "萧瑟",
+         "苍凉"
+        ],
+        "evidence": [
+         "悲秋"
+        ]
+       },
+       {
         "id": "anxious_state",
         "label": "忧国伤时",
         "family": "忧患",
         "color": "#7b4f45",
         "score": 1.44,
-        "share": 0.143,
+        "share": 0.12,
         "adjectives": [
          "沉郁",
          "忧患",
@@ -8846,39 +8832,21 @@
         "evidence": [
          "愁"
         ]
-       },
-       {
-        "id": "wandering",
-        "label": "漂泊羁旅",
-        "family": "低回",
-        "color": "#647d7b",
-        "score": 1.14,
-        "share": 0.114,
-        "adjectives": [
-         "苍茫",
-         "漂泊",
-         "羁旅",
-         "无依"
-        ],
-        "evidence": [
-         "关",
-         "别"
-        ]
        }
       ],
       "adjectives": [
        "悲恸",
        "凄切",
-       "沉郁"
+       "悲秋"
       ],
-      "summary": "悲恸、凄切、沉郁；兼有忧国伤时",
-      "valence": -0.515,
-      "arousal": 0.649,
-      "dominance": -0.342,
-      "confidence": 0.787,
+      "summary": "悲恸、凄切、悲秋；兼有悲秋迟暮",
+      "valence": -0.509,
+      "arousal": 0.614,
+      "dominance": -0.338,
+      "confidence": 0.783,
       "confidence_label": "高",
       "mixed": false,
-      "rule_hits": 9,
+      "rule_hits": 11,
       "evidence": [
        "悲",
        "愁",
@@ -8886,8 +8854,7 @@
        "病",
        "苦",
        "秋",
-       "关",
-       "别"
+       "悲秋"
       ]
      },
      "line": "香冷金猊，被翻红浪，起来慵自梳头。任宝奁尘满，日上帘…"
@@ -9002,14 +8969,14 @@
      "period": "青州屏居与莱州淄州岁月",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 10,
-     "senti": -0.21,
+     "hits": 11,
+     "senti": -0.173,
      "cluster": "漂泊羁旅",
      "top": [
       "山×2",
+      "罗衣×1",
       "蓬莱×1",
-      "雨×1",
-      "关×1"
+      "雨×1"
      ],
      "emotion": {
       "primary": "wandering",
@@ -9204,14 +9171,14 @@
      "period": "南渡流离",
      "grade": "C",
      "status": "candidate",
-     "hits": 8,
-     "senti": -0.2,
+     "hits": 9,
+     "senti": -0.133,
      "cluster": "愁苦幽愤",
      "top": [
+      "杏花×1",
       "云×1",
       "雾×1",
-      "风×1",
-      "楼×1"
+      "风×1"
      ],
      "emotion": {
       "primary": "aging",
@@ -9442,14 +9409,14 @@
      "period": "晚年临安（间避乱金华）",
      "grade": "B",
      "status": "candidate",
-     "hits": 7,
-     "senti": -0.114,
+     "hits": 6,
+     "senti": -0.133,
      "cluster": "愁苦幽愤",
      "top": [
-      "江×2",
+      "江城×1",
       "风×1",
       "山×1",
-      "楼×1"
+      "江×1"
      ],
      "emotion": {
       "primary": "historical",
@@ -9642,14 +9609,14 @@
      "period": "晚年临安（间避乱金华）",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 8,
-     "senti": -0.263,
+     "hits": 9,
+     "senti": -0.267,
      "cluster": "愁苦幽愤",
      "top": [
       "细雨×1",
+      "梧桐×1",
       "风×1",
-      "雁×1",
-      "酒×1"
+      "雁×1"
      ],
      "emotion": {
       "primary": "grief",
@@ -9751,13 +9718,13 @@
      "grade": "B",
      "status": "candidate",
      "hits": 15,
-     "senti": -0.107,
+     "senti": -0.127,
      "cluster": "漂泊羁旅",
      "top": [
       "风×2",
       "柳×2",
-      "霜鬓×1",
-      "落日×1"
+      "落日×1",
+      "霜鬓×1"
      ],
      "emotion": {
       "primary": "aging",
@@ -10090,13 +10057,14 @@
      "period": "入蜀从戎",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 3,
-     "senti": 0.133,
+     "hits": 4,
+     "senti": 0.1,
      "cluster": "纵逸狂放",
      "top": [
       "细雨×1",
       "酒×1",
-      "剑×1"
+      "剑×1",
+      "驴×1"
      ],
      "emotion": {
       "primary": "wandering",
@@ -10392,14 +10360,14 @@
      "period": "入蜀从戎",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 7,
-     "senti": -0.229,
+     "hits": 10,
+     "senti": -0.25,
      "cluster": "愁苦幽愤",
      "top": [
-      "白发×1",
-      "月×1",
-      "斗×1",
-      "马×1"
+      "戍楼×1",
+      "征人×1",
+      "将军×1",
+      "白发×1"
      ],
      "emotion": {
       "primary": "patriotic",
@@ -10589,14 +10557,14 @@
      "period": "东归宦游",
      "grade": "B",
      "status": "superseded_by_verified",
-     "hits": 5,
-     "senti": -0.14,
+     "hits": 7,
+     "senti": 0.071,
      "cluster": "漂泊羁旅",
      "top": [
-      "风×1",
-      "雨×1",
-      "马×1",
-      "楼×1"
+      "清明×1",
+      "春雨×1",
+      "杏花×1",
+      "风×1"
      ],
      "emotion": {
       "primary": "hopeful",
@@ -11253,10 +11221,11 @@
      "period": "山阴闲居与绝笔",
      "grade": "B",
      "status": "candidate",
-     "hits": 3,
-     "senti": -0.1,
+     "hits": 4,
+     "senti": -0.175,
      "cluster": "漂泊羁旅",
      "top": [
+      "斜阳×1",
       "鸿×1",
       "台×1",
       "城×1"
@@ -11513,11 +11482,12 @@
      "period": "山阴闲居与绝笔",
      "grade": "B",
      "status": "candidate",
-     "hits": 3,
-     "senti": 0.2,
+     "hits": 4,
+     "senti": 0.15,
      "cluster": "隐逸超脱",
      "top": [
       "梅花×1",
+      "墨痕×1",
       "泉×1",
       "城×1"
      ],

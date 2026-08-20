@@ -1,0 +1,57 @@
+{
+  "corpus": {
+    "n_poems_unique": 19418,
+    "n_poets": 88
+  },
+  "tiers": [
+    {
+      "name": "人工核验",
+      "verification_status": "verified",
+      "n_poems": 124,
+      "n_poets": 70,
+      "n_with_place": 59
+    },
+    {
+      "name": "严格晋级",
+      "verification_status": "promoted_by_rule",
+      "n_poems": 4177,
+      "n_poets": 62,
+      "n_with_place": 976
+    },
+    {
+      "name": "放宽晋级",
+      "verification_status": "promoted_ai_assisted",
+      "n_poems": 2619,
+      "n_poets": 82,
+      "n_with_place": 696
+    }
+  ],
+  "combined": {
+    "n_poems_with_facts": 6920,
+    "coverage_pct": 35.6,
+    "n_poets_with_facts": 84,
+    "n_with_place": 1731,
+    "n_poets_with_place_facts": 72,
+    "n_poems_without_facts": 12498
+  },
+  "zero_fact_poets": [
+    {
+      "poet": "上官仪",
+      "reason": "CNKGraph 无传记（HTTP 204）；搜韵 30 首作品中仅 0 条编年（入语料 0）；古诗文网背景 2 条（带纪年 0）"
+    },
+    {
+      "poet": "卢纶",
+      "reason": "CNKGraph 无传记（HTTP 204）；搜韵 337 首作品中仅 0 条编年（入语料 0）；古诗文网背景 8 条（带纪年 0）；CBDB 行旅事件 3 条（带坐标 0）"
+    },
+    {
+      "poet": "欧阳炯",
+      "reason": "CNKGraph 无传记（HTTP 204）；搜韵 0 首作品中仅 0 条编年（入语料 0）；古诗文网背景 1 条（带纪年 0）；CBDB 行旅事件 1 条（带坐标 0）"
+    },
+    {
+      "poet": "聂夷中",
+      "reason": "CNKGraph 无传记（HTTP 204）；搜韵 30 首作品中仅 0 条编年（入语料 0）；古诗文网背景 2 条（带纪年 0）"
+    }
+  ],
+  "policy": "三层事实口径：verified=人工核验（A/B 级证据）；promoted_by_rule=双源一致硬门规则晋级；promoted_ai_assisted=放宽门+AI 辅助（单源可用、年号纪年解析、地名知识表 grade D）。三层在 verification.status 上分流、零重叠，引用须以不同徽章区分。未覆盖部分为外部编年源不系年的长尾作品，本声明如实标注边界，不以候选冒充事实。",
+  "generated_by": "tools/build_fact_coverage_statement.py"
+}

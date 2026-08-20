@@ -11,6 +11,7 @@ viz_30 参赛版主叙事页生成脚本（零参数、可复跑）
 脚本内以断言锁定断裂点位置——数据变动导致形状变化时断言失败，强制重新命名而非硬套。
 """
 import csv
+import html
 import json
 import math
 import re
@@ -26,6 +27,9 @@ OUT_JSON = ROOT / "output" / "assets" / "competition" / "home_data.json"
 sys.path.insert(0, str(ROOT / "data"))
 import importlib.util
 
+from poetry_glossary import glossary_map, load_glossary, match_text
+from offline_selection_glossary import offline_selection_glossary_script
+
 _spec = importlib.util.spec_from_file_location("spirit_image_dict", ROOT / "data" / "spirit_image_dict.py")
 sid = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(sid)
@@ -33,6 +37,7 @@ _spec.loader.exec_module(sid)
 WORDS = sid.words()                       # 按长度降序
 ENTRY = {e[0]: e for e in sid.SPIRIT_DICT}  # 词 -> (词,类别,簇,情感值,尺度,依据)
 CLUSTERS = sid.clusters()
+GLOSSARY_VERSION, GLOSSARY_ENTRIES = load_glossary(ROOT / "data" / "poetry_glossary.json")
 
 # 按首字分桶加速最长匹配
 _BUCKET = {}
@@ -60,7 +65,7 @@ def norm_title(t):
 
 
 def esc(s):
-    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return html.escape(str(s or ""), quote=True)
 
 
 def r3(x):
@@ -116,9 +121,8 @@ def match_hits(body):
     return hits
 
 
-def highlight_html(body):
-    """正文 -> 带簇色 span 的 HTML(命中词染色), 保留换行。"""
-    out, i, n = [], 0, len(body)
+def match_image_spans(body):
+    spans, i, n = [], 0, len(body)
     while i < n:
         best = None
         for w in _BUCKET.get(body[i], ()):
@@ -126,14 +130,40 @@ def highlight_html(body):
                 best = w
                 break
         if best:
-            e = ENTRY[best]
-            cls = CLUSTER_CLASS.get(e[2], "c0")
-            tip = f"{e[2] or '多义(不归簇)'}·情感{e[3]}" + (f"·尺度{e[4]}" if e[4] is not None else "")
-            out.append(f'<i class="hw {cls}" title="{esc(tip)}">{esc(best)}</i>')
+            spans.append((i, i + len(best), ENTRY[best]))
             i += len(best)
         else:
-            out.append(esc(body[i]))
             i += 1
+    return spans
+
+
+def highlight_html(body):
+    """正文 -> 保留意象染色，并为正式释义词生成可点击标记。"""
+    gloss_spans = [(m.start, m.end, m.entry) for m in match_text(body, GLOSSARY_ENTRIES)]
+    spans = [(start, end, "gloss", entry) for start, end, entry in gloss_spans]
+    for start, end, entry in match_image_spans(body):
+        if any(start < gloss_end and end > gloss_start for gloss_start, gloss_end, _ in gloss_spans):
+            continue
+        spans.append((start, end, "image", entry))
+    spans.sort(key=lambda item: (item[0], item[1] - item[0]))
+
+    out, cursor = [], 0
+    for start, end, kind, entry in spans:
+        if start < cursor:
+            continue
+        out.append(esc(body[cursor:start]))
+        if kind == "gloss":
+            out.append(
+                f'<button type="button" class="gloss-term hw c0" '
+                f'data-gloss-id="{esc(entry.term_id)}" aria-label="{esc(entry.term)}">'
+                f"{esc(body[start:end])}</button>"
+            )
+        else:
+            cls = CLUSTER_CLASS.get(entry[2], "c0")
+            tip = f"{entry[2] or '多义(不归簇)'}·情感{entry[3]}" + (f"·尺度{entry[4]}" if entry[4] is not None else "")
+            out.append(f'<i class="hw {cls}" title="{esc(tip)}">{esc(body[start:end])}</i>')
+        cursor = end
+    out.append(esc(body[cursor:]))
     return "".join(out)
 
 
@@ -239,12 +269,12 @@ CHRONO = load_chronology()
 
 # ---------------------------------------------------------------- 第二章: 六种人生曲线
 # 断裂点位置断言(由本次实际计算得出并锁定; 数据变化时报错强制重命名)
-EXPECT_BREAK = {"李白": (1, 2), "杜甫": (3, 4), "白居易": (2, 3),
+EXPECT_BREAK = {"李白": (1, 2), "杜甫": (3, 4), "白居易": (1, 2),
                 "苏轼": (1, 2), "陆游": (1, 2), "李清照": (2, 3)}
 TYPE_NAME = {
     "李白": ("骤降回光型", "高开骤降：出蜀一跌(-0.52)为六人最大单期落差；供奉翰林短暂回光(+0.24)，此后低位徘徊。期1样本仅1首，解释力有限。"),
     "杜甫": ("沉郁顿挫型", "整体斜率为负，安史陷贼期沉至谷底；最大落差点反而是759/760弃官入蜀后的草堂回暖(+0.24)，夔州再度下沉——沉郁中见顿挫。"),
-    "白居易": ("低谷前移型", "文本最沉痛的不是贬谪江州期，而是更早的谏官讽喻期(-0.27)——新乐府写民生疾苦压低全期均值；最大落差点恰在815贬江州边界，方向却是回升(+0.20)，晚年中隐平缓微降。"),
+    "白居易": ("谏官低谷回升型", "由应举入仕期(-0.04)转入谏官岁月(-0.24)形成最大下落(-0.20)；新乐府中的民生疾苦压低全期均值。贬谪江州忠州期回升至-0.06，晚年小幅回落。"),
     "苏轼": ("低开渐旷型", "自初仕低点逐期上扬直至元祐(乌台诗案贬黄州反而继续上扬)，晚贬惠儋小幅回落。期1样本仅1首，解释力有限。"),
     "陆游": ("低位恒守型", "波动率六人最小(0.059)：入蜀从戎期落至低位后，四十年缓升而不复初值——与其至死不衰的北伐执念底色一致。"),
     "李清照": ("南渡断裂型", "最大落差点恰在1126/1127南渡边界，与史实吻合；但方向是上扬——《渔家傲》梦境大鹏豪语拉高了南渡期均值，晚年临安回落。这是文本意象特征，不等于心境变好。"),
@@ -510,6 +540,10 @@ def build_data():
                    "n_chrono_reviewed": n_rev, "n_chrono_candidate": n_cand,
                    "n_dict": len(WORDS), "hyperbole": hyperbole},
         "cluster_words": {k: len(v) for k, v in CLUSTERS.items()},
+        "glossary": {
+            "version": GLOSSARY_VERSION,
+            "entries": glossary_map(GLOSSARY_ENTRIES),
+        },
         "dict_doc": doc,
         "journey_methodology": JMETH,
         "poets": poets,
@@ -640,7 +674,8 @@ th{background:var(--soft);font-weight:600;white-space:nowrap}
 .poem-box{background:#fbfbf8;border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin:10px 0;
   max-height:270px;overflow-y:auto}
 .poem-box .pt{font-family:"KaiTi","STKaiti",serif;font-size:17px;margin-bottom:6px}
-.poem-body{white-space:pre-line;font-size:14.5px;line-height:2}
+.poem-body{white-space:pre-line;font-size:14.5px;line-height:2;user-select:text;-webkit-user-select:text}
+::highlight(offline-selection-active){color:inherit;background:rgba(211,161,77,.32)}
 .hw{font-style:normal;border-bottom:2px solid;padding:0 1px;border-radius:2px}
 .hw.c1{color:#426f94;border-color:#426f94;background:rgba(66,111,148,.08)}
 .hw.c2{color:#a87527;border-color:#a87527;background:rgba(168,117,39,.08)}
@@ -648,6 +683,30 @@ th{background:var(--soft);font-weight:600;white-space:nowrap}
 .hw.c4{color:#b64b3f;border-color:#b64b3f;background:rgba(182,75,63,.08)}
 .hw.c5{color:#26786e;border-color:#26786e;background:rgba(38,120,110,.08)}
 .hw.c0{color:#666;border-bottom:2px dotted #999;background:none}
+.gloss-term{font:inherit;color:inherit;cursor:pointer;border:0;border-bottom:2px dotted var(--cinnabar);
+  padding:0 1px;background:rgba(182,75,63,.055);user-select:text;-webkit-user-select:text}
+.gloss-term:hover,.gloss-term:focus-visible,.gloss-term[aria-expanded="true"]{color:var(--cinnabar-dark);background:rgba(182,75,63,.12);outline:2px solid rgba(182,75,63,.26);outline-offset:2px}
+.gloss-popover{position:fixed;z-index:20;width:min(320px,calc(100vw - 24px));padding:13px 15px;
+  max-height:calc(100vh - 24px);overflow-y:auto;
+  color:var(--ink);background:#fff;border:1px solid var(--line-strong);border-left:3px solid var(--cinnabar);
+  box-shadow:0 12px 30px rgba(33,39,35,.18);font-size:12px;line-height:1.7;
+  opacity:0;transform:translateY(4px);transition:opacity 140ms ease,transform 140ms ease}
+.gloss-popover.is-open{opacity:1;transform:translateY(0)}
+.gloss-popover-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.gloss-popover-head strong{font-family:"KaiTi","STKaiti",serif;font-size:18px}
+.gloss-popover p{margin:7px 0 0}.gloss-popover p b{color:var(--cinnabar-dark)}
+.gloss-popover span{display:inline-block;margin-top:9px;padding:1px 7px;color:var(--cinnabar-dark);
+  border:1px solid #e2b4ac;font-size:10px}.gloss-popover small{display:block;margin-top:8px;color:var(--muted);font-size:10px}
+.gloss-close{display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.gloss-close:hover{color:var(--cinnabar)}
+.selection-toolbar{position:fixed;z-index:21;display:flex;max-width:calc(100vw - 24px);padding:5px;
+  background:#252b27;border:1px solid #111;color:#fff;box-shadow:0 8px 22px rgba(33,39,35,.24);
+  opacity:0;transform:translateY(4px);transition:opacity 140ms ease,transform 140ms ease}
+.selection-toolbar.is-open{opacity:1;transform:translateY(0)}
+.selection-toolbar button{min-height:34px;padding:5px 12px;border:0;background:transparent;color:inherit;cursor:pointer;
+  font:600 12px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;white-space:nowrap}
+.selection-toolbar button:hover,.selection-toolbar button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid #fff;outline-offset:-2px}
+@media (prefers-reduced-motion:reduce){.gloss-popover,.selection-toolbar{transition:none;transform:none}}
 .legend-hw{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);margin:8px 0 0}
 .src-fold{font-size:12px;color:var(--muted);margin-top:8px}
 .src-fold summary{cursor:pointer;color:var(--blue)}
@@ -696,7 +755,7 @@ footer a.cur{border-color:var(--cinnabar);color:#fff;background:#3a2f2c;cursor:d
   <div class="sub">给每首课本诗一个人生坐标 —— 六位唐宋诗人的生命情感与精神地形</div>
   <p class="intro">课本里的诗常常只是一页纸，我们把它放回诗人的一生里：基于
     <b>__N_POEMS__ 首</b>诗歌语料、<b>__N_JOURNEY_NODES__ 个</b>人工审核的生平行旅节点与 <b>A/B/C 三级证据体系</b>，
-    用一部 197 词条的双维度意象词典（情感值 × 空间尺度），为李白、杜甫、白居易、苏轼、陆游、李清照
+    用一部 __N_DICT__ 词条的双维度意象词典（情感值 × 空间尺度），为李白、杜甫、白居易、苏轼、陆游、李清照
     画出各自的人生情感曲线——每一个数字都能点开看到证据与来源。</p>
   <div class="stats" id="hero-stats"></div>
   <div class="poets" id="hero-poets"></div>
@@ -797,6 +856,8 @@ function badgeStatus(st){
 }
 function badgeDisp(prec){ return prec==="disputed" ? '<span class="badge b-disp">两说</span>' : ''; }
 var charts=[];
+
+/* Shared offline selection/glossary lifecycle is injected after this page script. */
 
 /* ---------- Hero ---------- */
 (function(){
@@ -927,6 +988,7 @@ function stationBadges(st){
   return s;
 }
 function renderStation(){
+  if(window.OfflineSelectionGlossary) window.OfflineSelectionGlossary.closeForReplacement();
   var p=byKey[jState.key], sts=p.stations, st=sts[jState.idx];
   document.getElementById("jpos").textContent=(jState.idx+1)+" / "+sts.length+" 站";
   document.getElementById("jbar").style.width=(100*(jState.idx+1)/sts.length).toFixed(1)+"%";
@@ -944,8 +1006,8 @@ function renderStation(){
   if(chips.length) h+='<div class="chips">'+chips.map(function(c){return "<span>"+c+"</span>";}).join("")+'</div>';
   if(st.title){
     h+='<div class="poem-box"><div class="pt">《'+st.title+'》</div>';
-    h+= st.body_html ? '<div class="poem-body">'+st.body_html+'</div>'
-                     : '<div class="poem-body" style="color:var(--muted)">（本篇不在当前语料内，仅存题目与系年）</div>';
+    h+= st.body_html ? '<div class="poem-body" tabindex="-1">'+st.body_html+'</div>'
+                     : '<div class="poem-body" tabindex="-1" style="color:var(--muted)">（本篇不在当前语料内，仅存题目与系年）</div>';
     h+='</div>';
   }
   if(st.evidence) h+='<div class="evt" style="font-size:12px;color:var(--muted)">情感标注证据句：“'+st.evidence+'”</div>';
@@ -1048,7 +1110,7 @@ selectPoet("libai");
     DATA.poets.map(function(p){return p.name+" "+p.n_corpus+"首";}).join("，")+
     '。曲线只统计<b>已编年</b>（A/B/C 级）诗作；同一诗以审核层（reviewed）为准，候选层同题条目不重复计入。'+
     '所有情感/尺度数值来自词典命中词的均值，不做任何模型推断。</p>');
-  sec("意象词典构建口径（197 词条）",
+  sec("意象词典构建口径（__N_DICT__ 词条）",
     '<p>五个情感簇词量：'+Object.keys(DATA.cluster_words).map(function(k){return k+" "+DATA.cluster_words[k];}).join("，")+
     '（其余为多义不归簇词条，仅保留情感值）。以下节选自 data/spirit_image_dict.py 模块文档：</p>'+
     '<pre>'+DATA.dict_doc.replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</pre>');
@@ -1086,6 +1148,7 @@ selectPoet("libai");
 
 window.addEventListener("resize",function(){ charts.forEach(function(c){ c.resize(); }); });
 </script>
+__OFFLINE_SELECTION_SCRIPT__
 </body>
 </html>
 """
@@ -1100,7 +1163,18 @@ def main():
     html = (HTML_TEMPLATE
             .replace("__DATA__", data_json.replace("</", "<\\/"))
             .replace("__N_POEMS__", str(data["corpus"]["n_poems"]))
-            .replace("__N_JOURNEY_NODES__", str(data["corpus"]["n_journey_nodes"])))
+            .replace("__N_JOURNEY_NODES__", str(data["corpus"]["n_journey_nodes"]))
+            .replace("__N_DICT__", str(data["corpus"]["n_dict"]))
+            .replace(
+                "__OFFLINE_SELECTION_SCRIPT__",
+                offline_selection_glossary_script(
+                    glossary_map(GLOSSARY_ENTRIES),
+                    poem_selector=".poem-body",
+                    poem_card_selector=".poem-box",
+                    dynamic_root_selector="#jstation",
+                    script_id="competition-home-gloss-script",
+                ),
+            ))
     OUT_HTML.write_text(html, encoding="utf-8")
 
     # ---- 自检 ----

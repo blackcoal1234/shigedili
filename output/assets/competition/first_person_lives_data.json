@@ -178,8 +178,8 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 61,
-            "share": 0.203
+            "count": 62,
+            "share": 0.207
           },
           {
             "label": "豪迈昂扬",
@@ -188,13 +188,13 @@
           },
           {
             "label": "归隐超脱",
-            "count": 38,
-            "share": 0.127
+            "count": 33,
+            "share": 0.11
           },
           {
             "label": "纵逸狂放",
-            "count": 28,
-            "share": 0.093
+            "count": 27,
+            "share": 0.09
           },
           {
             "label": "漂泊羁旅",
@@ -206,21 +206,21 @@
           "悲恸",
           "超逸",
           "凄切",
-          "苍茫",
           "慷慨",
+          "苍茫",
           "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.027,
-          "arousal": 0.567,
-          "dominance": 0.051
+          "valence": -0.026,
+          "arousal": 0.561,
+          "dominance": 0.048
         },
-        "summary": "在本地收录的 300 首作品中，李白的反复文本倾向为「悲恸哀伤、豪迈昂扬、归隐超脱」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在本地收录的 300 首作品中，李白的反复文本倾向为「悲恸哀伤、豪迈昂扬、归隐超脱」，聚合形容词为「悲恸、超逸、凄切、慷慨」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 737 年作品所在的「行路与转折」（0.03），高点对应 762 年作品所在的「晚境与记录末端」（0.701）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 9,
-          "signal_rate": 0.03,
-          "reading": "在 300 首有效文本画像中，9 首触发「激愤/讽刺」规则信号（3.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 3,
+          "signal_rate": 0.01,
+          "reading": "在 300 首有效文本画像中，3 首触发「激愤/讽刺」规则信号（1.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "玉阶怨",
@@ -233,9 +233,9 @@
               "signal": 0.408
             },
             {
-              "title": "秋浦歌十七首·十五",
-              "body_hash": "ac213ae0f06568af0ce07a5c0764b42ea1aa63dabe5c28a35ed8ff14841362a1",
-              "signal": 0.361
+              "title": "古风·大雅久不作",
+              "body_hash": "f84767ad68b11de8995470bb732f065e34e5f67770f572f1d223d6913b9cb9c4",
+              "signal": 0.276
             }
           ]
         }
@@ -436,11 +436,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": 0.281,
-            "arousal": 0.603,
-            "dominance": 0.342,
+            "valence": 0.238,
+            "arousal": 0.584,
+            "dominance": 0.343,
             "anger_signal": 0.0,
-            "confidence": 0.767
+            "confidence": 0.765
           },
           "source_ids": [
             "event-2a95a5c4c90ca6da29c630937ed5b1d01059-d3355f9aec46",
@@ -553,18 +553,13 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 87,
-            "share": 0.29
+            "count": 86,
+            "share": 0.287
           },
           {
             "label": "豪迈昂扬",
             "count": 27,
             "share": 0.09
-          },
-          {
-            "label": "归隐超脱",
-            "count": 26,
-            "share": 0.087
           },
           {
             "label": "衰老病痛",
@@ -573,25 +568,30 @@
           },
           {
             "label": "漂泊羁旅",
-            "count": 24,
-            "share": 0.08
+            "count": 23,
+            "share": 0.077
+          },
+          {
+            "label": "归隐超脱",
+            "count": 23,
+            "share": 0.077
           }
         ],
         "textual_traits": [
           "悲恸",
           "凄切",
-          "苍茫",
           "衰飒",
+          "苍茫",
           "超逸",
           "慷慨"
         ],
         "emotional_center": {
-          "valence": -0.247,
-          "arousal": 0.547,
-          "dominance": -0.146
+          "valence": -0.244,
+          "arousal": 0.546,
+          "dominance": -0.144
         },
-        "summary": "在本地收录的 300 首作品中，杜甫的反复文本倾向为「悲恸哀伤、豪迈昂扬、归隐超脱」，聚合形容词为「悲恸、凄切、苍茫、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 736 年作品所在的「初涉世事」（-0.629），高点对应 758 年作品所在的「中岁回望」（-0.245）；这条线不应被读成单向上升或衰落。",
+        "summary": "在本地收录的 300 首作品中，杜甫的反复文本倾向为「悲恸哀伤、豪迈昂扬、衰老病痛」，聚合形容词为「悲恸、凄切、衰飒、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 736 年作品所在的「初涉世事」（-0.629），高点对应 758 年作品所在的「中岁回望」（-0.297）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 6,
           "signal_rate": 0.02,
@@ -776,7 +776,7 @@
           ],
           "title": "中岁回望",
           "event_fact": "候选人物事件记录：758 年，地点系于「户县（鄠县）」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「户县（鄠县）」；另一条编年候选把《九日蓝田崔氏庄》放在 758 年。诗中的「悲恸、凄切、欣悦；兼有欢愉明快（复合情绪）」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「户县（鄠县）」；另一条编年候选把《九日蓝田崔氏庄》放在 758 年。诗中的「悲恸、凄切、悲秋；兼有悲秋迟暮（复合情绪）」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "户县（鄠县）",
@@ -793,24 +793,24 @@
             "body_hash": "1e1961a6ca01d71ad75bb84ebaf2fc1ea6777316ff4dbae2868eb2984eb76b11",
             "year": 758,
             "quote": "老去悲秋强自宽，兴来今日尽人欢。",
-            "emotion_summary": "悲恸、凄切、欣悦；兼有欢愉明快（复合情绪）",
+            "emotion_summary": "悲恸、凄切、悲秋；兼有悲秋迟暮（复合情绪）",
             "primary_emotion": "悲恸哀伤",
             "emotion_evidence": [
               "悲",
               "老",
               "寒",
               "秋",
-              "欢"
+              "悲秋"
             ],
             "chronology_status": "needs_review",
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.245,
-            "arousal": 0.657,
-            "dominance": -0.235,
+            "valence": -0.297,
+            "arousal": 0.609,
+            "dominance": -0.254,
             "anger_signal": 0.0,
-            "confidence": 0.638
+            "confidence": 0.679
           },
           "source_ids": [
             "event-0406afd02f824b86f1cb6ff46d8a08234dad-de96fb78da51",
@@ -899,18 +899,18 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 73,
-            "share": 0.244
+            "count": 69,
+            "share": 0.231
           },
           {
             "label": "归隐超脱",
-            "count": 34,
-            "share": 0.114
+            "count": 38,
+            "share": 0.127
           },
           {
             "label": "情绪未定",
-            "count": 26,
-            "share": 0.087
+            "count": 27,
+            "share": 0.09
           },
           {
             "label": "孤寂清冷",
@@ -928,20 +928,20 @@
           "凄切",
           "超逸",
           "衰飒",
-          "苍茫",
-          "清远"
+          "清远",
+          "苍茫"
         ],
         "emotional_center": {
-          "valence": -0.215,
-          "arousal": 0.509,
-          "dominance": -0.12
+          "valence": -0.211,
+          "arousal": 0.503,
+          "dominance": -0.116
         },
         "summary": "在本地收录的 299 首作品中，白居易的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、凄切、超逸、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 813 年作品所在的「行路与转折」（-0.464），高点对应 794 年作品所在的「初涉世事」（0.3）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 20,
-          "signal_rate": 0.067,
-          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 18,
+          "signal_rate": 0.06,
+          "reading": "在 299 首有效文本画像中，18 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "采地黄者",
@@ -949,14 +949,14 @@
               "signal": 0.625
             },
             {
-              "title": "卖炭翁",
-              "body_hash": "386cd99216cbf138bfab9ead7885a9deda72a1ebdeacacb7c23af4bef2e78f83",
-              "signal": 0.529
-            },
-            {
               "title": "大林寺桃花",
               "body_hash": "e4982966ba041fe900e82b975fc92a0d5d4c30cdaafa7906a52c93b3ce22215b",
               "signal": 0.485
+            },
+            {
+              "title": "编集拙诗成一十五卷因题卷末戏赠元九李二十",
+              "body_hash": "f514b486dd479e1efcc140e7824de428704805b35840313a188d84225d777c57",
+              "signal": 0.42
             }
           ]
         }
@@ -1122,7 +1122,7 @@
           ],
           "title": "中岁回望",
           "event_fact": "候选人物事件记录：829 年，地点系于「洛阳」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「洛阳」；另一条编年候选把《中隐》放在 829 年。诗中的「悲恸、凄切、澄明；兼有哲思澄明（复合情绪）」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「洛阳」；另一条编年候选把《中隐》放在 829 年。诗中的「进退两难、仕隐、悲恸；兼有悲恸哀伤」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "洛阳",
@@ -1138,25 +1138,25 @@
             "title": "中隐",
             "body_hash": "e1789571c5ae5708e4d6189535eadbf786a09a765e1de5091fabba0857316287",
             "year": 829,
-            "quote": "贱即苦冻馁，贵则多忧患。",
-            "emotion_summary": "悲恸、凄切、澄明；兼有哲思澄明（复合情绪）",
-            "primary_emotion": "悲恸哀伤",
+            "quote": "大隐住朝市，小隐入丘樊。",
+            "emotion_summary": "进退两难、仕隐、悲恸；兼有悲恸哀伤",
+            "primary_emotion": "仕隐矛盾",
             "emotion_evidence": [
+              "朝市",
               "忧",
               "苦",
               "寒",
-              "秋",
-              "人生"
+              "秋"
             ],
             "chronology_status": "needs_review",
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.172,
-            "arousal": 0.549,
-            "dominance": -0.091,
+            "valence": -0.102,
+            "arousal": 0.524,
+            "dominance": 0.008,
             "anger_signal": 0.0,
-            "confidence": 0.546
+            "confidence": 0.675
           },
           "source_ids": [
             "event-00b6baed093972c3205057aa4bacee7567fd-39ac2149227e",
@@ -1252,23 +1252,23 @@
         "dominant_emotions": [
           {
             "label": "归隐超脱",
-            "count": 58,
-            "share": 0.193
+            "count": 53,
+            "share": 0.177
           },
           {
             "label": "悲恸哀伤",
-            "count": 51,
-            "share": 0.17
+            "count": 45,
+            "share": 0.15
           },
           {
             "label": "情绪未定",
-            "count": 22,
-            "share": 0.073
+            "count": 23,
+            "share": 0.077
           },
           {
             "label": "漂泊羁旅",
-            "count": 21,
-            "share": 0.07
+            "count": 20,
+            "share": 0.067
           },
           {
             "label": "衰老病痛",
@@ -1285,9 +1285,9 @@
           "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.148,
-          "arousal": 0.477,
-          "dominance": -0.047
+          "valence": -0.143,
+          "arousal": 0.471,
+          "dominance": -0.046
         },
         "summary": "在本地收录的 300 首作品中，王维的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、悲恸、清远、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 734 年作品所在的「行路与转折」（-0.588），高点对应 759 年作品所在的「晚境与记录末端」（0.0）；这条线不应被读成单向上升或衰落。",
@@ -1604,23 +1604,23 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 88,
-            "share": 0.293
+            "count": 89,
+            "share": 0.297
           },
           {
             "label": "失意无奈",
+            "count": 28,
+            "share": 0.093
+          },
+          {
+            "label": "情绪未定",
             "count": 27,
             "share": 0.09
           },
           {
-            "label": "情绪未定",
-            "count": 26,
-            "share": 0.087
-          },
-          {
             "label": "归隐超脱",
-            "count": 20,
-            "share": 0.067
+            "count": 21,
+            "share": 0.07
           },
           {
             "label": "漂泊羁旅",
@@ -1637,16 +1637,16 @@
           "惊惧"
         ],
         "emotional_center": {
-          "valence": -0.26,
-          "arousal": 0.549,
-          "dominance": -0.176
+          "valence": -0.265,
+          "arousal": 0.546,
+          "dominance": -0.179
         },
         "summary": "在本地收录的 300 首作品中，韩愈的反复文本倾向为「悲恸哀伤、失意无奈、情绪未定」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 812 年作品所在的「中岁回望」（-0.614），高点对应 785 年作品所在的「初涉世事」（0.695）；这条线不应被读成单向上升或衰落。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 812 年作品所在的「中岁回望」（-0.591），高点对应 785 年作品所在的「初涉世事」（0.695）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 10,
-          "signal_rate": 0.033,
-          "reading": "在 300 首有效文本画像中，10 首触发「激愤/讽刺」规则信号（3.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 8,
+          "signal_rate": 0.027,
+          "reading": "在 300 首有效文本画像中，8 首触发「激愤/讽刺」规则信号（2.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "游城南十六首。题于宾客庄",
@@ -1772,7 +1772,7 @@
           ],
           "title": "行路与转折",
           "event_fact": "候选人物事件记录：799 年，地点系于「孟津（洛阳）」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「孟津（洛阳）」；另一条编年候选把《上张仆射书》放在 799 年。诗中的「真挚、温厚、悲恸；兼有悲恸哀伤（复合情绪）」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「孟津（洛阳）」；另一条编年候选把《上张仆射书》放在 799 年。诗中的「真挚、温厚、感念；兼有酬赠感激（复合情绪）」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "孟津（洛阳）",
@@ -1789,24 +1789,24 @@
             "body_hash": "3cec592eea4a9936f6f245218b892e52db34f2ae29a84b0cc340d336dcf23a32",
             "year": 799,
             "quote": "苟如是，虽日受千金之赐，一歳九迁其官，感恩则有之矣，将以称于天下曰知己知己则未也。",
-            "emotion_summary": "真挚、温厚、悲恸；兼有悲恸哀伤（复合情绪）",
+            "emotion_summary": "真挚、温厚、感念；兼有酬赠感激（复合情绪）",
             "primary_emotion": "友情酬赠",
             "emotion_evidence": [
               "故旧",
               "知己",
-              "哀",
-              "病",
-              "不得"
+              "报德",
+              "感恩",
+              "哀"
             ],
             "chronology_status": "needs_review",
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.271,
-            "arousal": 0.543,
-            "dominance": -0.213,
+            "valence": -0.118,
+            "arousal": 0.518,
+            "dominance": -0.122,
             "anger_signal": 0.0,
-            "confidence": 0.754
+            "confidence": 0.757
           },
           "source_ids": [
             "event-00a7fdf316d4ad90f2728971f67209588d16-fce01005e21f",
@@ -1859,11 +1859,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.614,
-            "arousal": 0.522,
-            "dominance": -0.518,
+            "valence": -0.591,
+            "arousal": 0.504,
+            "dominance": -0.524,
             "anger_signal": 0.0,
-            "confidence": 0.773
+            "confidence": 0.774
           },
           "source_ids": [
             "event-2adf9e95a4e9e7a145edea357415dba14dc8-fed7da86807b",
@@ -1967,11 +1967,6 @@
             "share": 0.103
           },
           {
-            "label": "失意无奈",
-            "count": 17,
-            "share": 0.07
-          },
-          {
             "label": "衰老病痛",
             "count": 17,
             "share": 0.07
@@ -1980,6 +1975,11 @@
             "label": "情绪未定",
             "count": 17,
             "share": 0.07
+          },
+          {
+            "label": "失意无奈",
+            "count": 16,
+            "share": 0.066
           }
         ],
         "textual_traits": [
@@ -1987,16 +1987,16 @@
           "凄切",
           "超逸",
           "苍茫",
-          "衰飒",
-          "失落"
+          "孤清",
+          "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.255,
-          "arousal": 0.529,
-          "dominance": -0.17
+          "valence": -0.25,
+          "arousal": 0.528,
+          "dominance": -0.166
         },
-        "summary": "在本地收录的 242 首作品中，柳宗元的反复文本倾向为「悲恸哀伤、归隐超脱、失意无奈」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 809 年作品所在的「中岁回望」（-0.712），高点对应 790 年作品所在的「初涉世事」（0.78）；这条线不应被读成单向上升或衰落。",
+        "summary": "在本地收录的 242 首作品中，柳宗元的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 809 年作品所在的「中岁回望」（-0.651），高点对应 790 年作品所在的「初涉世事」（0.78）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 10,
           "signal_rate": 0.041,
@@ -2202,18 +2202,17 @@
             "primary_emotion": "悲恸哀伤",
             "emotion_evidence": [
               "哀",
-              "秋",
               "鸿"
             ],
             "chronology_status": "needs_review",
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.712,
-            "arousal": 0.631,
-            "dominance": -0.632,
+            "valence": -0.651,
+            "arousal": 0.61,
+            "dominance": -0.604,
             "anger_signal": 0.0,
-            "confidence": 0.465
+            "confidence": 0.416
           },
           "source_ids": [
             "event-01bd025abb7c8144a2be8276f7f4e24d4a01-b528846f8a5a",
@@ -2324,13 +2323,13 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 65,
-            "share": 0.217
+            "count": 63,
+            "share": 0.211
           },
           {
             "label": "归隐超脱",
-            "count": 45,
-            "share": 0.151
+            "count": 40,
+            "share": 0.134
           },
           {
             "label": "情绪未定",
@@ -2339,13 +2338,13 @@
           },
           {
             "label": "漂泊羁旅",
-            "count": 25,
-            "share": 0.084
+            "count": 26,
+            "share": 0.087
           },
           {
             "label": "纵逸狂放",
-            "count": 21,
-            "share": 0.07
+            "count": 19,
+            "share": 0.064
           }
         ],
         "textual_traits": [
@@ -2357,16 +2356,16 @@
           "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.141,
-          "arousal": 0.522,
-          "dominance": -0.039
+          "valence": -0.144,
+          "arousal": 0.518,
+          "dominance": -0.044
         },
         "summary": "在本地收录的 299 首作品中，刘禹锡的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 814 年作品所在的「行路与转折」（-0.671），高点对应 801 年作品所在的「初涉世事」（0.62）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 19,
-          "signal_rate": 0.064,
-          "reading": "在 299 首有效文本画像中，19 首触发「激愤/讽刺」规则信号（6.4%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 20,
+          "signal_rate": 0.067,
+          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "相和歌辞。阿娇怨",
@@ -2685,13 +2684,13 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 77,
-            "share": 0.258
+            "count": 72,
+            "share": 0.241
           },
           {
             "label": "情绪未定",
-            "count": 30,
-            "share": 0.1
+            "count": 32,
+            "share": 0.107
           },
           {
             "label": "归隐超脱",
@@ -2718,16 +2717,16 @@
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.216,
-          "arousal": 0.537,
-          "dominance": -0.127
+          "valence": -0.213,
+          "arousal": 0.534,
+          "dominance": -0.126
         },
         "summary": "在本地收录的 299 首作品中，元稹的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 794 年作品所在的「初涉世事」（-0.366），高点对应 819 年作品所在的「中岁回望」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 19,
-          "signal_rate": 0.064,
-          "reading": "在 299 首有效文本画像中，19 首触发「激愤/讽刺」规则信号（6.4%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 20,
+          "signal_rate": 0.067,
+          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "以州宅夸于乐天",
@@ -3027,23 +3026,23 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 61,
-            "share": 0.204
+            "count": 59,
+            "share": 0.197
           },
           {
             "label": "情绪未定",
-            "count": 34,
-            "share": 0.114
+            "count": 35,
+            "share": 0.117
           },
           {
             "label": "归隐超脱",
-            "count": 29,
-            "share": 0.097
+            "count": 27,
+            "share": 0.09
           },
           {
             "label": "漂泊羁旅",
-            "count": 28,
-            "share": 0.094
+            "count": 25,
+            "share": 0.084
           },
           {
             "label": "豪迈昂扬",
@@ -3060,9 +3059,9 @@
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.177,
-          "arousal": 0.535,
-          "dominance": -0.093
+          "valence": -0.184,
+          "arousal": 0.533,
+          "dominance": -0.098
         },
         "summary": "在本地收录的 299 首作品中，李商隐的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 847 年作品所在的「中岁回望」（-0.506），高点对应 837 年作品所在的「行路与转折」（-0.127）；这条线不应被读成单向上升或衰落。",
@@ -3321,11 +3320,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.25,
-            "arousal": 0.59,
-            "dominance": -0.15,
+            "valence": -0.316,
+            "arousal": 0.563,
+            "dominance": -0.192,
             "anger_signal": 0.0,
-            "confidence": 0.718
+            "confidence": 0.724
           },
           "source_ids": [
             "event-0d30f4c9001e93be607def3e1c497a9a6f16-6a98135fbeac",
@@ -3381,18 +3380,18 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 64,
-            "share": 0.213
+            "count": 55,
+            "share": 0.183
           },
           {
             "label": "归隐超脱",
-            "count": 36,
-            "share": 0.12
+            "count": 32,
+            "share": 0.107
           },
           {
             "label": "衰老病痛",
-            "count": 21,
-            "share": 0.07
+            "count": 22,
+            "share": 0.073
           },
           {
             "label": "漂泊羁旅",
@@ -3415,11 +3414,11 @@
         ],
         "emotional_center": {
           "valence": -0.198,
-          "arousal": 0.527,
+          "arousal": 0.522,
           "dominance": -0.097
         },
         "summary": "在本地收录的 300 首作品中，杜牧的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 825 年作品所在的「初涉世事」（-0.59），高点对应 841 年作品所在的「中岁回望」（-0.04）；这条线不应被读成单向上升或衰落。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 825 年作品所在的「初涉世事」（-0.59），高点对应 841 年作品所在的「中岁回望」（-0.014）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 20,
           "signal_rate": 0.067,
@@ -3605,7 +3604,7 @@
           ],
           "title": "中岁回望",
           "event_fact": "候选人物事件记录：841 年，地点系于「西峡（内乡）」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「西峡（内乡）」；另一条编年候选把《题青云馆》放在 841 年。诗中的「超逸、清远、苍茫；兼有漂泊羁旅（复合情绪）」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「西峡（内乡）」；另一条编年候选把《题青云馆》放在 841 年。诗中的「进退两难、仕隐、超逸；兼有归隐超脱（复合情绪）」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "西峡（内乡）",
@@ -3622,9 +3621,10 @@
             "body_hash": "f49d3a11e4c8ceb34a80678d5c1033f8a8d1998d0da29c75c3a259a5c8d04d5c",
             "year": 841,
             "quote": "云连帐影萝阴合，枕绕泉声客梦凉。",
-            "emotion_summary": "超逸、清远、苍茫；兼有漂泊羁旅（复合情绪）",
-            "primary_emotion": "归隐超脱",
+            "emotion_summary": "进退两难、仕隐、超逸；兼有归隐超脱（复合情绪）",
+            "primary_emotion": "仕隐矛盾",
             "emotion_evidence": [
+              "题:青云",
               "泉",
               "客"
             ],
@@ -3632,11 +3632,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.04,
-            "arousal": 0.36,
-            "dominance": 0.1,
+            "valence": -0.014,
+            "arousal": 0.412,
+            "dominance": 0.134,
             "anger_signal": 0.0,
-            "confidence": 0.363
+            "confidence": 0.383
           },
           "source_ids": [
             "event-031d959028e73824f85ab9f4524628665c27-9c0de3599f85",
@@ -3728,23 +3728,23 @@
           },
           {
             "label": "漂泊羁旅",
-            "count": 39,
-            "share": 0.13
+            "count": 37,
+            "share": 0.123
           },
           {
             "label": "归隐超脱",
-            "count": 31,
-            "share": 0.103
-          },
-          {
-            "label": "豪迈昂扬",
-            "count": 27,
-            "share": 0.09
+            "count": 30,
+            "share": 0.1
           },
           {
             "label": "纵逸狂放",
             "count": 27,
             "share": 0.09
+          },
+          {
+            "label": "豪迈昂扬",
+            "count": 26,
+            "share": 0.087
           }
         ],
         "textual_traits": [
@@ -3753,12 +3753,12 @@
           "超逸",
           "凄切",
           "疏狂",
-          "漂泊"
+          "慷慨"
         ],
         "emotional_center": {
           "valence": -0.136,
-          "arousal": 0.546,
-          "dominance": -0.056
+          "arousal": 0.54,
+          "dominance": -0.053
         },
         "summary": "在本地收录的 300 首作品中，岑参的反复文本倾向为「悲恸哀伤、漂泊羁旅、归隐超脱」，聚合形容词为「悲恸、苍茫、超逸、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 741 年作品所在的「初涉世事」（-0.333），高点对应 760 年作品所在的「中岁回望」（-0.022）；这条线不应被读成单向上升或衰落。",
@@ -3773,14 +3773,14 @@
               "signal": 0.558
             },
             {
-              "title": "送张秘书充刘相公通汴河判官，便赴江外觐省",
-              "body_hash": "f05af058dd68f1111ed0d36e0e702fd8862b7ea745262f255fae12b2d3e03f8f",
-              "signal": 0.162
-            },
-            {
               "title": "秦筝歌送外甥萧正归京",
               "body_hash": "c165d8cf995e3f0049e3f63525c4985a3998cf324a36b9881c222cfded61c07a",
               "signal": 0.155
+            },
+            {
+              "title": "送张秘书充刘相公通汴河判官，便赴江外觐省",
+              "body_hash": "f05af058dd68f1111ed0d36e0e702fd8862b7ea745262f255fae12b2d3e03f8f",
+              "signal": 0.15
             }
           ]
         }
@@ -4059,28 +4059,28 @@
         "dominant_emotions": [
           {
             "label": "归隐超脱",
-            "count": 52,
-            "share": 0.173
+            "count": 51,
+            "share": 0.17
           },
           {
             "label": "悲恸哀伤",
-            "count": 48,
-            "share": 0.16
+            "count": 46,
+            "share": 0.153
           },
           {
             "label": "衰老病痛",
-            "count": 22,
-            "share": 0.073
+            "count": 21,
+            "share": 0.07
           },
           {
             "label": "纵逸狂放",
-            "count": 22,
-            "share": 0.073
-          },
-          {
-            "label": "欢愉明快",
             "count": 21,
             "share": 0.07
+          },
+          {
+            "label": "爱恋缠绵",
+            "count": 20,
+            "share": 0.067
           }
         ],
         "textual_traits": [
@@ -4088,20 +4088,20 @@
           "超逸",
           "清远",
           "疏狂",
-          "凄切",
-          "苍茫"
+          "苍茫",
+          "凄切"
         ],
         "emotional_center": {
-          "valence": -0.091,
-          "arousal": 0.526,
-          "dominance": -0.003
+          "valence": -0.086,
+          "arousal": 0.521,
+          "dominance": -0.001
         },
         "summary": "在本地收录的 300 首作品中，苏轼的反复文本倾向为「归隐超脱、悲恸哀伤、衰老病痛」，聚合形容词为「悲恸、超逸、清远、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 1070 年作品所在的「行路与转折」（-0.53），高点对应 1085 年作品所在的「中岁回望」（0.008）；这条线不应被读成单向上升或衰落。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 1070 年作品所在的「行路与转折」（-0.53），高点对应 1085 年作品所在的「中岁回望」（0.009）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 14,
-          "signal_rate": 0.047,
-          "reading": "在 300 首有效文本画像中，14 首触发「激愤/讽刺」规则信号（4.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 12,
+          "signal_rate": 0.04,
+          "reading": "在 300 首有效文本画像中，12 首触发「激愤/讽刺」规则信号（4.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "南歌子·感旧",
@@ -4315,11 +4315,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": 0.008,
-            "arousal": 0.56,
-            "dominance": 0.176,
+            "valence": 0.009,
+            "arousal": 0.527,
+            "dominance": 0.161,
             "anger_signal": 0.0,
-            "confidence": 0.74
+            "confidence": 0.744
           },
           "source_ids": [
             "event-02dd16da6a156d804df0efafa187ac2f5628-f411d1fff09a",
@@ -4449,8 +4449,8 @@
           },
           {
             "label": "漂泊羁旅",
-            "count": 25,
-            "share": 0.083
+            "count": 23,
+            "share": 0.077
           }
         ],
         "textual_traits": [
@@ -4462,16 +4462,16 @@
           "激越"
         ],
         "emotional_center": {
-          "valence": -0.135,
+          "valence": -0.133,
           "arousal": 0.557,
-          "dominance": -0.031
+          "dominance": -0.029
         },
         "summary": "在本地收录的 300 首作品中，陆游的反复文本倾向为「悲恸哀伤、衰老病痛、豪迈昂扬」，聚合形容词为「悲恸、衰飒、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1151 年作品所在的「初涉世事」（-0.86），高点对应 1189 年作品所在的「中岁回望」（-0.152）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 19,
-          "signal_rate": 0.063,
-          "reading": "在 300 首有效文本画像中，19 首触发「激愤/讽刺」规则信号（6.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 18,
+          "signal_rate": 0.06,
+          "reading": "在 300 首有效文本画像中，18 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "宝剑吟",
@@ -4767,8 +4767,8 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 20,
-            "share": 0.241
+            "count": 18,
+            "share": 0.217
           },
           {
             "label": "情绪未定",
@@ -4777,45 +4777,40 @@
           },
           {
             "label": "归隐超脱",
-            "count": 7,
-            "share": 0.084
-          },
-          {
-            "label": "漂泊羁旅",
-            "count": 7,
-            "share": 0.084
+            "count": 6,
+            "share": 0.072
           },
           {
             "label": "衰老病痛",
+            "count": 6,
+            "share": 0.072
+          },
+          {
+            "label": "漂泊羁旅",
             "count": 6,
             "share": 0.072
           }
         ],
         "textual_traits": [
           "悲恸",
-          "凄切",
           "超逸",
+          "凄切",
           "苍茫",
           "疏狂",
-          "衰飒"
+          "含混"
         ],
         "emotional_center": {
-          "valence": -0.217,
-          "arousal": 0.552,
-          "dominance": -0.11
+          "valence": -0.223,
+          "arousal": 0.545,
+          "dominance": -0.116
         },
-        "summary": "在本地收录的 83 首作品中，李清照的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 1135 年作品所在的「中岁回望」（-0.71），高点对应 1098 年作品所在的「初涉世事」（-0.588）；这条线不应被读成单向上升或衰落。",
+        "summary": "在本地收录的 83 首作品中，李清照的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 1135 年作品所在的「中岁回望」（-0.71），高点对应 1116 年作品所在的「行路与转折」（-0.527）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 5,
           "signal_rate": 0.06,
           "reading": "在 83 首有效文本画像中，5 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
-            {
-              "title": "好事近·风定落花深",
-              "body_hash": "776fb1e1a91e851a1da4febe90ef69f06816ed1585395836e425bc08d4a7393d",
-              "signal": 0.414
-            },
             {
               "title": "浣溪沙·闺情",
               "body_hash": "bcfcb3596af0ab63b52084b6ed99733d8e5998ad7eb5c2cf266d19d989cad5c8",
@@ -4824,7 +4819,12 @@
             {
               "title": "怨王孙·春暮",
               "body_hash": "64129f1e8146582157a20e5ac8983217cc2916bcc56b40a92c41a32f3ac09560",
-              "signal": 0.246
+              "signal": 0.273
+            },
+            {
+              "title": "临江仙·梅",
+              "body_hash": "e80b3e94a74652729b9c710b38f0d8fb266378e11939fd46216f50e445dd79cb",
+              "signal": 0.222
             }
           ]
         }
@@ -4936,7 +4936,7 @@
           ],
           "title": "行路与转折",
           "event_fact": "候选人物事件记录：1116 年，地点系于「益都」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「益都」；另一条编年候选把《点绛唇·闺思》放在 1116 年。诗中的「孤清、冷寂、衰飒；兼有衰老病痛」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「益都」；另一条编年候选把《点绛唇·闺思》放在 1116 年。诗中的「悲秋、迟暮、孤清；兼有孤寂清冷」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "益都",
@@ -4952,23 +4952,23 @@
             "title": "点绛唇·闺思",
             "body_hash": "d9d4ec118e7a6a6921ba79af7d2566cf4b33034aa0d79da5d70f0d1fc53fe120",
             "year": 1116,
-            "quote": "寂寞深闺，柔肠一寸愁千缕。",
-            "emotion_summary": "孤清、冷寂、衰飒；兼有衰老病痛",
-            "primary_emotion": "孤寂清冷",
+            "quote": "人何处，连天衰草，望断归来路。",
+            "emotion_summary": "悲秋、迟暮、孤清；兼有孤寂清冷",
+            "primary_emotion": "悲秋迟暮",
             "emotion_evidence": [
+              "衰草",
               "寂寞",
-              "衰",
-              "愁"
+              "惜春"
             ],
             "chronology_status": "needs_review",
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": -0.655,
-            "arousal": 0.427,
-            "dominance": -0.508,
+            "valence": -0.527,
+            "arousal": 0.428,
+            "dominance": -0.379,
             "anger_signal": 0.0,
-            "confidence": 0.54
+            "confidence": 0.639
           },
           "source_ids": [
             "event-bde39d7de9f090fd7f3324193ccdb1cad8f6-50c570658167",
@@ -5111,18 +5111,18 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 64,
-            "share": 0.213
+            "count": 63,
+            "share": 0.21
           },
           {
             "label": "归隐超脱",
-            "count": 44,
-            "share": 0.147
+            "count": 43,
+            "share": 0.143
           },
           {
             "label": "衰老病痛",
-            "count": 26,
-            "share": 0.087
+            "count": 27,
+            "share": 0.09
           },
           {
             "label": "欢愉明快",
@@ -5140,20 +5140,20 @@
           "超逸",
           "凄切",
           "衰飒",
-          "清远",
-          "疏狂"
+          "疏狂",
+          "清远"
         ],
         "emotional_center": {
-          "valence": -0.093,
-          "arousal": 0.554,
-          "dominance": 0.023
+          "valence": -0.087,
+          "arousal": 0.551,
+          "dominance": 0.025
         },
         "summary": "在本地收录的 300 首作品中，辛弃疾的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1207 年作品所在的「现存记录末端」（-0.469），高点对应 1194 年作品所在的「中岁回望」（0.82）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 25,
-          "signal_rate": 0.083,
-          "reading": "在 300 首有效文本画像中，25 首触发「激愤/讽刺」规则信号（8.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 24,
+          "signal_rate": 0.08,
+          "reading": "在 300 首有效文本画像中，24 首触发「激愤/讽刺」规则信号（8.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "南歌子·万万千千恨",
@@ -5459,18 +5459,18 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 64,
-            "share": 0.213
+            "count": 59,
+            "share": 0.197
           },
           {
             "label": "纵逸狂放",
-            "count": 25,
-            "share": 0.083
+            "count": 26,
+            "share": 0.087
           },
           {
             "label": "漂泊羁旅",
-            "count": 25,
-            "share": 0.083
+            "count": 23,
+            "share": 0.077
           },
           {
             "label": "归隐超脱",
@@ -5479,8 +5479,8 @@
           },
           {
             "label": "欢愉明快",
-            "count": 19,
-            "share": 0.063
+            "count": 18,
+            "share": 0.06
           }
         ],
         "textual_traits": [
@@ -5492,16 +5492,16 @@
           "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.131,
-          "arousal": 0.555,
-          "dominance": -0.063
+          "valence": -0.133,
+          "arousal": 0.553,
+          "dominance": -0.062
         },
         "summary": "在本地收录的 300 首作品中，欧阳修的反复文本倾向为「悲恸哀伤、纵逸狂放、漂泊羁旅」，聚合形容词为「悲恸、凄切、苍茫、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1057 年作品所在的「中岁回望」（-0.75），高点对应 1027 年作品所在的「初涉世事」（-0.38）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 25,
-          "signal_rate": 0.083,
-          "reading": "在 300 首有效文本画像中，25 首触发「激愤/讽刺」规则信号（8.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 24,
+          "signal_rate": 0.08,
+          "reading": "在 300 首有效文本画像中，24 首触发「激愤/讽刺」规则信号（8.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "玉楼春",
@@ -5828,8 +5828,8 @@
           },
           {
             "label": "悲恸哀伤",
-            "count": 51,
-            "share": 0.17
+            "count": 49,
+            "share": 0.163
           },
           {
             "label": "归隐超脱",
@@ -5838,8 +5838,8 @@
           },
           {
             "label": "希望向往",
-            "count": 24,
-            "share": 0.08
+            "count": 22,
+            "share": 0.073
           },
           {
             "label": "衰老病痛",
@@ -5856,16 +5856,16 @@
           "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.119,
-          "arousal": 0.494,
-          "dominance": -0.043
+          "valence": -0.117,
+          "arousal": 0.492,
+          "dominance": -0.041
         },
         "summary": "在本地收录的 300 首作品中，王安石的反复文本倾向为「情绪未定、悲恸哀伤、归隐超脱」，聚合形容词为「悲恸、含混、待考、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1054 年作品所在的「行路与转折」（-0.383），高点对应 1035 年作品所在的「初涉世事」（-0.118）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 7,
-          "signal_rate": 0.023,
-          "reading": "在 300 首有效文本画像中，7 首触发「激愤/讽刺」规则信号（2.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 6,
+          "signal_rate": 0.02,
+          "reading": "在 300 首有效文本画像中，6 首触发「激愤/讽刺」规则信号（2.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "司马迁",
@@ -6174,21 +6174,21 @@
           },
           {
             "label": "归隐超脱",
-            "count": 45,
-            "share": 0.15
+            "count": 43,
+            "share": 0.143
           },
           {
             "label": "漂泊羁旅",
-            "count": 32,
-            "share": 0.107
+            "count": 26,
+            "share": 0.087
           },
           {
             "label": "衰老病痛",
-            "count": 23,
-            "share": 0.077
+            "count": 24,
+            "share": 0.08
           },
           {
-            "label": "豪迈昂扬",
+            "label": "纵逸狂放",
             "count": 22,
             "share": 0.073
           }
@@ -6203,7 +6203,7 @@
         ],
         "emotional_center": {
           "valence": -0.101,
-          "arousal": 0.532,
+          "arousal": 0.529,
           "dominance": -0.016
         },
         "summary": "在本地收录的 300 首作品中，黄庭坚的反复文本倾向为「悲恸哀伤、归隐超脱、漂泊羁旅」，聚合形容词为「悲恸、超逸、凄切、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
@@ -6216,7 +6216,7 @@
             {
               "title": "谪居黔南十首",
               "body_hash": "39e7eb79a426973aec96d603f39c365b7924d76831862f0cd4273a8f2aa9d86e",
-              "signal": 0.591
+              "signal": 0.285
             },
             {
               "title": "诉衷情",
@@ -6311,11 +6311,11 @@
             "source_grade": "C"
           },
           "dimensions": {
-            "valence": -0.341,
-            "arousal": 0.485,
-            "dominance": -0.166,
+            "valence": -0.353,
+            "arousal": 0.501,
+            "dominance": -0.123,
             "anger_signal": 0.0,
-            "confidence": 0.608
+            "confidence": 0.649
           },
           "source_ids": [
             "event-11ea4e2e71004278c2343bd63fe2a39e95df-3951c418efb9",
@@ -6534,12 +6534,12 @@
         "sample_poems": 300,
         "dominant_emotions": [
           {
-            "label": "悲恸哀伤",
-            "count": 54,
-            "share": 0.18
+            "label": "归隐超脱",
+            "count": 52,
+            "share": 0.173
           },
           {
-            "label": "归隐超脱",
+            "label": "悲恸哀伤",
             "count": 52,
             "share": 0.173
           },
@@ -6549,12 +6549,12 @@
             "share": 0.153
           },
           {
-            "label": "希望向往",
-            "count": 23,
-            "share": 0.077
+            "label": "欢愉明快",
+            "count": 22,
+            "share": 0.073
           },
           {
-            "label": "欢愉明快",
+            "label": "希望向往",
             "count": 21,
             "share": 0.07
           }
@@ -6562,18 +6562,18 @@
         "textual_traits": [
           "悲恸",
           "超逸",
-          "凄切",
           "清远",
+          "凄切",
           "含混",
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.117,
-          "arousal": 0.498,
-          "dominance": -0.03
+          "valence": -0.12,
+          "arousal": 0.496,
+          "dominance": -0.035
         },
-        "summary": "在本地收录的 300 首作品中，杨万里的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、清远」。这是作品中的言说方式，不是对历史人格的诊断。",
-        "curve_reading": "已生成编年候选章节中，效价低点对应 1188 年作品所在的「中岁回望」（-0.764），高点对应 1170 年作品所在的「行路与转折」（0.377）；这条线不应被读成单向上升或衰落。",
+        "summary": "在本地收录的 300 首作品中，杨万里的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「悲恸、超逸、清远、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "curve_reading": "已生成编年候选章节中，效价低点对应 1188 年作品所在的「中岁回望」（-0.764），高点对应 1162 年作品所在的「初涉世事」（-0.273）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 4,
           "signal_rate": 0.013,
@@ -6703,7 +6703,7 @@
           ],
           "title": "行路与转折",
           "event_fact": "候选人物事件记录：1170 年，地点系于「奉新」（person_event）。",
-          "first_person": "这一阶段，候选记录把我的踪迹系在「奉新」；另一条编年候选把《立秋后一日雨天欲暮小立问月亭》放在 1170 年。诗中的「慷慨、昂扬、苍茫；兼有漂泊羁旅（复合情绪）」只是文本信号，不等于我的全部内心。",
+          "first_person": "这一阶段，候选记录把我的踪迹系在「奉新」；另一条编年候选把《立秋后一日雨天欲暮小立问月亭》放在 1170 年。诗中的「苍茫、漂泊、悲恸；兼有悲恸哀伤」只是文本信号，不等于我的全部内心。",
           "voice_mode": "editorial_first_person_reconstruction",
           "voice_label": "编辑性第一人称重构（非诗人原话）",
           "place": "奉新",
@@ -6720,10 +6720,9 @@
             "body_hash": "eeb03ade0b52189b2dab1bac864c124e5f7a8fa5de86b8597a70810f3b332bf5",
             "year": 1170,
             "quote": "雨后林中别样凉，意行幽径不知长。",
-            "emotion_summary": "慷慨、昂扬、苍茫；兼有漂泊羁旅（复合情绪）",
-            "primary_emotion": "豪迈昂扬",
+            "emotion_summary": "苍茫、漂泊、悲恸；兼有悲恸哀伤",
+            "primary_emotion": "漂泊羁旅",
             "emotion_evidence": [
-              "长风",
               "别",
               "蝉"
             ],
@@ -6731,11 +6730,11 @@
             "source_grade": "B"
           },
           "dimensions": {
-            "valence": 0.377,
-            "arousal": 0.78,
-            "dominance": 0.409,
+            "valence": -0.588,
+            "arousal": 0.589,
+            "dominance": -0.576,
             "anger_signal": 0.0,
-            "confidence": 0.52
+            "confidence": 0.371
           },
           "source_ids": [
             "event-0c34e3f41c6dab65f3a977bce2ef3c5e9dd7-945d728ed365",
@@ -6883,23 +6882,23 @@
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 46,
-            "share": 0.153
+            "count": 45,
+            "share": 0.15
           },
           {
             "label": "归隐超脱",
-            "count": 39,
-            "share": 0.13
+            "count": 38,
+            "share": 0.127
           },
           {
             "label": "情绪未定",
-            "count": 29,
-            "share": 0.097
+            "count": 27,
+            "share": 0.09
           },
           {
             "label": "漂泊羁旅",
-            "count": 23,
-            "share": 0.077
+            "count": 22,
+            "share": 0.073
           },
           {
             "label": "闲适恬淡",
@@ -6910,17 +6909,17 @@
         "textual_traits": [
           "悲恸",
           "超逸",
-          "苍茫",
           "凄切",
+          "苍茫",
           "清远",
           "疏狂"
         ],
         "emotional_center": {
           "valence": -0.083,
-          "arousal": 0.515,
-          "dominance": 0.007
+          "arousal": 0.513,
+          "dominance": 0.009
         },
-        "summary": "在本地收录的 300 首作品中，范成大的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、苍茫、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在本地收录的 300 首作品中，范成大的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1193 年作品所在的「晚境与记录末端」（-0.147），高点对应 1150 年作品所在的「初涉世事」（0.695）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 18,
@@ -7251,13 +7250,13 @@
         "dominant_emotions": [
           {
             "label": "归隐超脱",
-            "count": 74,
-            "share": 0.247
+            "count": 73,
+            "share": 0.244
           },
           {
             "label": "悲恸哀伤",
-            "count": 36,
-            "share": 0.12
+            "count": 33,
+            "share": 0.11
           },
           {
             "label": "情绪未定",
@@ -7266,8 +7265,8 @@
           },
           {
             "label": "豪迈昂扬",
-            "count": 26,
-            "share": 0.087
+            "count": 25,
+            "share": 0.084
           },
           {
             "label": "衰老病痛",
@@ -7279,16 +7278,16 @@
           "超逸",
           "清远",
           "悲恸",
-          "苍茫",
           "低回",
-          "衰飒"
+          "苍茫",
+          "凄切"
         ],
         "emotional_center": {
-          "valence": -0.069,
-          "arousal": 0.474,
-          "dominance": 0.054
+          "valence": -0.073,
+          "arousal": 0.471,
+          "dominance": 0.051
         },
-        "summary": "在本地收录的 299 首作品中，范仲淹的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、清远、悲恸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在本地收录的 299 首作品中，范仲淹的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、清远、悲恸、低回」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1052 年作品所在的「晚境与记录末端」（-0.584），高点对应 1023 年作品所在的「行路与转折」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
           "signal_poems": 14,
@@ -7615,13 +7614,13 @@
         "dominant_emotions": [
           {
             "label": "情绪未定",
-            "count": 62,
-            "share": 0.207
+            "count": 61,
+            "share": 0.204
           },
           {
             "label": "悲恸哀伤",
-            "count": 54,
-            "share": 0.181
+            "count": 49,
+            "share": 0.164
           },
           {
             "label": "归隐超脱",
@@ -7634,9 +7633,9 @@
             "share": 0.08
           },
           {
-            "label": "豪迈昂扬",
-            "count": 14,
-            "share": 0.047
+            "label": "欢愉明快",
+            "count": 13,
+            "share": 0.043
           }
         ],
         "textual_traits": [
@@ -7648,21 +7647,21 @@
           "清远"
         ],
         "emotional_center": {
-          "valence": -0.159,
-          "arousal": 0.483,
-          "dominance": -0.071
+          "valence": -0.149,
+          "arousal": 0.48,
+          "dominance": -0.067
         },
         "summary": "在本地收录的 299 首作品中，朱熹的反复文本倾向为「情绪未定、悲恸哀伤、归隐超脱」，聚合形容词为「悲恸、超逸、含混、待考」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1165 年作品所在的「行路与转折」（-0.249），高点对应 1182 年作品所在的「中岁回望」（0.125）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 6,
-          "signal_rate": 0.02,
-          "reading": "在 299 首有效文本画像中，6 首触发「激愤/讽刺」规则信号（2.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 5,
+          "signal_rate": 0.017,
+          "reading": "在 299 首有效文本画像中，5 首触发「激愤/讽刺」规则信号（1.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "训蒙绝句 其二",
               "body_hash": "b3857e2ab84ae4538ee48ee49d66610ac09f8d468537ab8ebbe476242be88be5",
-              "signal": 1.0
+              "signal": 0.324
             },
             {
               "title": "柚花",

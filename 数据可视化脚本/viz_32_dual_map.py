@@ -411,8 +411,8 @@ def main():
                          "弧=编年创作地→提及地，宽为频次、色为句情感值；系数=心层凸包面积/身层凸包面积"
                          "（正弦等积投影+鞋带公式，球面近似）。"),
         "dict_note": ("place_dict 共 %d 条，本页仅用两字及以上古名 %d 条（剔除单字古称 %d 条防误匹配），"
-                      "并把天界词表 %d 词排除出坐标匹配。")
-                     % (len(place_mod.PLACE_DICT), len(place_entries), n_single_dropped, len(CELESTIAL)),
+                      "并把天界词表 %d 词排除出坐标匹配；句情感值来自 spirit_image_dict %d 词条。")
+                     % (len(place_mod.PLACE_DICT), len(place_entries), n_single_dropped, len(CELESTIAL), len(spirit_mod.SPIRIT_DICT)),
         "exclusions": stop_applied,
         "poets": out_poets,
     }
@@ -458,6 +458,7 @@ def main():
     html = html.replace("__EXCL_TABLE__", excl_table)
     html = html.replace("__GENERATED_AT__", data["generated_at"])
     html = html.replace("__DICT_NOTE__", data["dict_note"])
+    html = html.replace("__SPIRIT_COUNT__", str(len(spirit_mod.SPIRIT_DICT)))
     payload = json.dumps(data, ensure_ascii=False, allow_nan=False,
                          separators=(",", ":")).replace("</", "<\\/")
     html = html.replace("__DATA_JSON__", payload)
@@ -604,7 +605,7 @@ footer.navbar .home{font-weight:700;}
   <li>身层：data/reviewed/poet_journeys.json 六诗人 38 个人工审核行旅节点（A/B/C 分级），连线只表示节点时间先后，不代表实际路线。</li>
   <li>心层：data/poems.json 六诗人全部入库诗作正文；地名匹配用 data/place_dict.py 最长匹配。__DICT_NOTE__</li>
   <li>编年创作地：data/reviewed/verified_poem_contexts.csv（已审核）优先，data/candidates/ 六人编年候选表（候选/推定，页面弧线证据带徽章）兜底；<b>D 级一律不入计算</b>。</li>
-  <li>句情感值：data/spirit_image_dict.py 197 词条（人工整理词典，非模型输出），句内命中意象词情感值取均值，无命中记 0（灰）。</li>
+  <li>句情感值：data/spirit_image_dict.py __SPIRIT_COUNT__ 词条（人工整理词典，非模型输出），句内命中意象词情感值取均值，无命中记 0（灰）。</li>
  </ul>
  <h4>心层与弧线口径</h4>
  <ul>

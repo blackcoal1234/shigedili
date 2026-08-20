@@ -25,14 +25,14 @@
    "西北": 9
   },
   "dir_senti": {
-   "北": -0.006,
+   "北": 0.009,
    "东北": -0.2,
-   "东": -0.008,
+   "东": 0.005,
    "东南": 0.124,
-   "南": -0.083,
+   "南": -0.071,
    "西南": 0.05,
-   "西": -0.068,
-   "西北": -0.022
+   "西": -0.057,
+   "西北": -0.017
   },
   "top_dir": "南",
   "n_poets_hit": 80,
@@ -73,12 +73,12 @@
    "verb": "望人寰",
    "direction": null,
    "obj": "人寰",
-   "sentiment": -0.15,
+   "sentiment": 0.0,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -122,14 +122,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "青天",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "蜀道",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "青天",
+     "sentiment": 0.3,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_d59ec5d6c91c.aspx"
@@ -213,22 +213,27 @@
    "verb": "遥望",
    "direction": null,
    "obj": "玉门",
-   "sentiment": -0.167,
+   "sentiment": -0.2,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "玉门关",
+     "sentiment": -0.5,
+     "cluster": null
+    },
     {
      "word": "孤城",
      "sentiment": -0.7,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "山",
+     "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "雪",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -237,13 +242,8 @@
      "cluster": null
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
-     "word": "雪",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -258,7 +258,7 @@
    "verb": "东望",
    "direction": "东",
    "obj": null,
-   "sentiment": -0.5,
+   "sentiment": -0.167,
    "neutral": false,
    "spirit_words": [
     {
@@ -270,6 +270,11 @@
      "word": "泪",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_10d21c96ba71.aspx"
@@ -303,22 +308,22 @@
    "verb": "西望",
    "direction": "西",
    "obj": null,
-   "sentiment": -0.033,
+   "sentiment": -0.233,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "戍楼",
+     "sentiment": -0.6,
      "cluster": null
     },
     {
      "word": "烟",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -333,12 +338,12 @@
    "verb": "回望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.05,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -362,12 +367,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "云",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -412,8 +417,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -422,8 +427,8 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -458,12 +463,12 @@
    "verb": "望长安",
    "direction": null,
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.15,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -487,8 +492,18 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "台",
+     "word": "杯",
      "sentiment": 0.1,
+     "cluster": "纵逸狂放"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "送",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -497,18 +512,8 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "杯",
+     "word": "台",
      "sentiment": 0.1,
-     "cluster": "纵逸狂放"
-    },
-    {
-     "word": "送",
-     "sentiment": -0.3,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -547,11 +552,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
@@ -560,6 +560,11 @@
      "word": "杯",
      "sentiment": 0.1,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_de77cad0db48.aspx"
@@ -676,13 +681,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "湖",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -701,13 +706,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -726,14 +731,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "雪",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_2a64049b941e.aspx"
@@ -751,14 +756,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "雪",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_2a64049b941e.aspx"
@@ -772,18 +777,23 @@
    "verb": "回望",
    "direction": null,
    "obj": "帝乡",
-   "sentiment": -0.2,
+   "sentiment": -0.067,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "帝乡",
+     "sentiment": 0.2,
      "cluster": null
     },
     {
      "word": "乌",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_ca730908c1e5.aspx"
@@ -821,13 +831,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -866,6 +876,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -874,11 +889,6 @@
      "word": "独",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_6e0fcfd7a813.aspx"
@@ -931,18 +941,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -953,6 +958,11 @@
     {
      "word": "寒",
      "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -996,11 +1006,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
@@ -1009,6 +1014,11 @@
      "word": "客",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_801fafda47af.aspx"
@@ -1042,9 +1052,15 @@
    "verb": "望乡",
    "direction": null,
    "obj": "乡",
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": -0.5,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "征人",
+     "sentiment": -0.5,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_d89eb1125b6d.aspx"
   },
   {
@@ -1060,13 +1076,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -1099,14 +1115,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "雁",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_874a51f7c1ca.aspx"
@@ -1228,9 +1244,14 @@
    "verb": "西北望",
    "direction": "西北",
    "obj": null,
-   "sentiment": -0.2,
+   "sentiment": -0.3,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "狼",
+     "sentiment": -0.4,
+     "cluster": null
+    },
     {
      "word": "月",
      "sentiment": -0.2,
@@ -1287,9 +1308,15 @@
    "verb": "北顾",
    "direction": "北",
    "obj": null,
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": -0.4,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "狼",
+     "sentiment": -0.4,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_12e69f000057.aspx"
   },
   {
@@ -1315,12 +1342,12 @@
    "verb": "西北望",
    "direction": "西北",
    "obj": "长安",
-   "sentiment": 0.05,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -1420,13 +1447,18 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.4,
+   "sentiment": 0.35,
    "neutral": false,
    "spirit_words": [
     {
      "word": "梅花",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "杜若",
+     "sentiment": 0.3,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_cc8f67138ef4.aspx"
@@ -1449,13 +1481,13 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -1470,16 +1502,16 @@
    "verb": "望江",
    "direction": null,
    "obj": "江",
-   "sentiment": -0.15,
+   "sentiment": -0.1,
    "neutral": false,
    "spirit_words": [
     {
      "word": "夕阳",
-     "sentiment": -0.3,
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     },
@@ -1489,7 +1521,7 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "江",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -1649,13 +1681,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "舟",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -1728,13 +1760,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -1833,14 +1865,14 @@
      "cluster": null
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "河",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_7d79ae325a4a.aspx"
@@ -1863,13 +1895,13 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "愁",
-     "sentiment": -0.8,
+     "word": "孤",
+     "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "孤",
-     "sentiment": -0.7,
+     "word": "愁",
+     "sentiment": -0.8,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -1898,12 +1930,12 @@
    "verb": "北望",
    "direction": "北",
    "obj": null,
-   "sentiment": 0.1,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -1928,12 +1960,12 @@
    "verb": "望沧海",
    "direction": null,
    "obj": "沧海",
-   "sentiment": 0.4,
+   "sentiment": 0.1,
    "neutral": false,
    "spirit_words": [
     {
      "word": "沧海",
-     "sentiment": 0.4,
+     "sentiment": 0.1,
      "cluster": "豪情进取"
     }
    ],
@@ -1952,9 +1984,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "醉",
+     "word": "河",
      "sentiment": 0.0,
-     "cluster": "纵逸狂放"
+     "cluster": null
     },
     {
      "word": "城",
@@ -1967,9 +1999,9 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "河",
+     "word": "醉",
      "sentiment": 0.0,
-     "cluster": null
+     "cluster": "纵逸狂放"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_e66934ceb4c4.aspx"
@@ -2008,27 +2040,22 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.375,
+   "sentiment": 0.433,
    "neutral": false,
    "spirit_words": [
-    {
-     "word": "万里",
-     "sentiment": 0.4,
-     "cluster": "豪情进取"
-    },
     {
      "word": "云帆",
      "sentiment": 0.7,
      "cluster": "豪情进取"
     },
     {
-     "word": "兰",
+     "word": "万里",
      "sentiment": 0.4,
-     "cluster": "隐逸超脱"
+     "cluster": "豪情进取"
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "兰舟",
+     "sentiment": 0.2,
      "cluster": null
     }
    ],
@@ -2057,9 +2084,15 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": 0.5,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_e578634d3e6f.aspx"
   },
   {
@@ -2120,14 +2153,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "故乡",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "明月",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "故乡",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "思",
@@ -2150,11 +2183,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "苦",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
@@ -2162,6 +2190,11 @@
     {
      "word": "寒",
      "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "苦",
+     "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -2180,6 +2213,16 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "思",
+     "sentiment": -0.3,
+     "cluster": null
+    },
+    {
      "word": "苦",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
@@ -2188,16 +2231,6 @@
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
-    },
-    {
-     "word": "思",
-     "sentiment": -0.3,
-     "cluster": null
-    },
-    {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_b12f5b4193fd.aspx"
@@ -2215,11 +2248,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "思",
-     "sentiment": -0.3,
-     "cluster": null
-    },
-    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
@@ -2227,6 +2255,11 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     }
    ],
@@ -2245,13 +2278,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -2284,14 +2317,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "乌",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "乌",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "月",
@@ -2314,12 +2347,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "海",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -2400,18 +2433,18 @@
    "verb": "望京华",
    "direction": null,
    "obj": "京华",
-   "sentiment": -0.3,
+   "sentiment": -0.4,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "落日",
+     "sentiment": -0.5,
+     "cluster": null
+    },
     {
      "word": "孤城",
      "sentiment": -0.7,
      "cluster": "漂泊羁旅"
-    },
-    {
-     "word": "落日",
-     "sentiment": -0.2,
-     "cluster": null
     },
     {
      "word": "斗",
@@ -2553,14 +2586,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "秋",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "月",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "秋",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_f1ad949fed22.aspx"
@@ -2574,12 +2607,12 @@
    "verb": "西望",
    "direction": "西",
    "obj": "长安",
-   "sentiment": -0.2,
+   "sentiment": -0.05,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -2619,13 +2652,18 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": -0.2,
+   "sentiment": -0.05,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "鹿",
+     "sentiment": 0.4,
      "cluster": null
+    },
+    {
+     "word": "恨",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "归",
@@ -2633,9 +2671,9 @@
      "cluster": null
     },
     {
-     "word": "恨",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_90e51d955fd4.aspx"
@@ -2667,13 +2705,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "斗",
-     "sentiment": 0.0,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "斗",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -2688,12 +2726,12 @@
    "verb": "南望",
    "direction": "南",
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -2712,6 +2750,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "烟",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
@@ -2719,11 +2762,6 @@
     {
      "word": "云",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "烟",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -2742,14 +2780,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "舟",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_66f8d664a7d1.aspx"
@@ -2763,21 +2801,21 @@
    "verb": "回望",
    "direction": null,
    "obj": null,
-   "sentiment": -0.167,
+   "sentiment": -0.067,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长亭",
-     "sentiment": -0.5,
+     "sentiment": -0.2,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "城",
+     "word": "河",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "河",
+     "word": "城",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -2817,6 +2855,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "舟",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
@@ -2824,11 +2867,6 @@
     {
      "word": "月",
      "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "舟",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -2877,9 +2915,14 @@
    "verb": "望山",
    "direction": null,
    "obj": "山",
-   "sentiment": 0.1,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "渔樵",
+     "sentiment": 0.3,
+     "cluster": null
+    },
     {
      "word": "山",
      "sentiment": 0.1,
@@ -2960,13 +3003,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "海",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -2985,14 +3028,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "云",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "客",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "云",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_023204188c53.aspx"
@@ -3006,17 +3049,17 @@
    "verb": "遥望",
    "direction": null,
    "obj": null,
-   "sentiment": -0.025,
+   "sentiment": -0.12,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "胡笳",
+     "sentiment": -0.5,
      "cluster": null
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "送",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -3025,8 +3068,13 @@
      "cluster": null
     },
     {
-     "word": "送",
-     "sentiment": -0.3,
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -3069,9 +3117,15 @@
    "verb": "遥望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": 0.5,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_a9e6bc1228e1.aspx"
   },
   {
@@ -3083,17 +3137,17 @@
    "verb": "北望",
    "direction": "北",
    "obj": null,
-   "sentiment": -0.067,
+   "sentiment": 0.1,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "烟",
+     "word": "烟波",
      "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
@@ -3117,12 +3171,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "海",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -3142,14 +3196,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "台",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "松",
      "sentiment": 0.5,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "台",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_98d06d2d4263.aspx"
@@ -3237,12 +3291,17 @@
    "verb": "望云",
    "direction": null,
    "obj": "云",
-   "sentiment": 0.0,
+   "sentiment": 0.167,
    "neutral": false,
    "spirit_words": [
     {
+     "word": "帝乡",
+     "sentiment": 0.2,
+     "cluster": null
+    },
+    {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -3286,6 +3345,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "帝乡",
+     "sentiment": 0.2,
+     "cluster": null
+    },
+    {
      "word": "白云",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
@@ -3325,6 +3389,11 @@
      "cluster": "愁苦幽愤"
     },
     {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -3332,11 +3401,6 @@
     {
      "word": "星",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -3484,14 +3548,14 @@
      "cluster": null
     },
     {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
     },
     {
      "word": "客",
@@ -3510,12 +3574,17 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": 0.067,
+   "sentiment": 0.175,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "桃",
+     "word": "晴川",
      "sentiment": 0.5,
+     "cluster": null
+    },
+    {
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -3524,8 +3593,8 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "桃",
+     "sentiment": 0.5,
      "cluster": null
     }
    ],
@@ -3609,14 +3678,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "关",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_d230900828ba.aspx"
@@ -3655,9 +3724,14 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": -0.233,
+   "sentiment": -0.033,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "烟霞",
+     "sentiment": 0.4,
+     "cluster": null
+    },
     {
      "word": "孤舟",
      "sentiment": -0.6,
@@ -3666,11 +3740,6 @@
     {
      "word": "星",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "烟",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -3764,6 +3833,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
@@ -3771,11 +3845,6 @@
     {
      "word": "山",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -3839,12 +3908,12 @@
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "城",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "城",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -3860,18 +3929,23 @@
    "verb": "望乡",
    "direction": null,
    "obj": "乡",
-   "sentiment": -0.267,
+   "sentiment": -0.325,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "愁",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
+     "word": "征人",
+     "sentiment": -0.5,
+     "cluster": null
     },
     {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "愁",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "马",
@@ -3904,13 +3978,13 @@
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "雾",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
-     "word": "雾",
-     "sentiment": -0.3,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -3929,14 +4003,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "竹",
-     "sentiment": 0.5,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "泪",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "竹",
+     "sentiment": 0.5,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_370a8d61a256.aspx"
@@ -3950,12 +4024,17 @@
    "verb": "遥望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.05,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
     {
      "word": "楼",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "龙",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
@@ -4019,7 +4098,7 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "烟",
+     "word": "烟波",
      "sentiment": -0.2,
      "cluster": null
     },
@@ -4040,9 +4119,14 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.25,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
+    },
     {
      "word": "马",
      "sentiment": 0.0,
@@ -4099,11 +4183,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "鸿",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
@@ -4111,6 +4190,11 @@
     {
      "word": "送",
      "sentiment": -0.3,
+     "cluster": null
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -4163,13 +4247,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -4209,23 +4293,18 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": -0.167,
+   "sentiment": -0.25,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "江城",
+     "sentiment": 0.0,
+     "cluster": null
+    },
     {
      "word": "鸦",
      "sentiment": -0.5,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_b4fa01825520.aspx"
@@ -4257,14 +4336,14 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "骤雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "柳",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
     },
     {
      "word": "塞",
@@ -4323,9 +4402,14 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": -0.6,
+   "sentiment": -0.5,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "金鼓",
+     "sentiment": -0.4,
+     "cluster": null
+    },
     {
      "word": "老",
      "sentiment": -0.6,
@@ -4389,7 +4473,7 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "烟",
+     "word": "烟波",
      "sentiment": -0.2,
      "cluster": null
     }
@@ -4429,6 +4513,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "思",
+     "sentiment": -0.3,
+     "cluster": null
+    },
+    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
@@ -4436,11 +4525,6 @@
     {
      "word": "归",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "思",
-     "sentiment": -0.3,
      "cluster": null
     }
    ],
@@ -4455,12 +4539,12 @@
    "verb": "回望",
    "direction": null,
    "obj": null,
-   "sentiment": -0.3,
+   "sentiment": -0.1,
    "neutral": false,
    "spirit_words": [
     {
      "word": "夕阳",
-     "sentiment": -0.3,
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -4499,13 +4583,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
@@ -4565,9 +4649,15 @@
    "verb": "北望",
    "direction": "北",
    "obj": null,
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": 0.5,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_417603de1bbf.aspx"
   },
   {
@@ -4583,13 +4673,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "舟",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -4608,13 +4698,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "仙",
-     "sentiment": 0.6,
+     "word": "琴",
+     "sentiment": 0.2,
      "cluster": "隐逸超脱"
     },
     {
-     "word": "琴",
-     "sentiment": 0.2,
+     "word": "仙",
+     "sentiment": 0.6,
      "cluster": "隐逸超脱"
     },
     {
@@ -4802,13 +4892,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "兰",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "兰舟",
+     "sentiment": 0.2,
      "cluster": null
     }
    ],
@@ -4951,12 +5036,12 @@
      "cluster": null
     },
     {
-     "word": "楼",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "楼",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -4996,14 +5081,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "悲",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "马",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "悲",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_3e5a6906d7e0.aspx"
@@ -5035,11 +5120,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
@@ -5052,6 +5132,11 @@
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5230,12 +5315,12 @@
    "verb": "西望",
    "direction": "西",
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.15,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -5255,17 +5340,17 @@
    "verb": "望秋月",
    "direction": null,
    "obj": "秋月",
-   "sentiment": -0.2,
+   "sentiment": -0.12,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "秋",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
+     "word": "将军",
+     "sentiment": 0.2,
+     "cluster": null
     },
     {
-     "word": "忆",
-     "sentiment": -0.2,
+     "word": "舟",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -5274,8 +5359,13 @@
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "秋",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "忆",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -5294,13 +5384,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     }
    ],
@@ -5319,13 +5409,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     }
    ],
@@ -5349,12 +5439,12 @@
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -5370,7 +5460,7 @@
    "verb": "望吴",
    "direction": null,
    "obj": "吴",
-   "sentiment": -0.175,
+   "sentiment": -0.15,
    "neutral": false,
    "spirit_words": [
     {
@@ -5380,18 +5470,18 @@
     },
     {
      "word": "金陵",
-     "sentiment": 0.0,
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
      "word": "独",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "风",
-     "sentiment": -0.1,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_73ff86a3d623.aspx"
@@ -5448,23 +5538,23 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "青天",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "万里",
      "sentiment": 0.4,
      "cluster": "豪情进取"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "青天",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5533,12 +5623,12 @@
    "verb": "望长安",
    "direction": null,
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -5612,12 +5702,12 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.5,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     }
    ],
@@ -5632,7 +5722,7 @@
    "verb": "望天门",
    "direction": null,
    "obj": "天门",
-   "sentiment": 0.15,
+   "sentiment": 0.14,
    "neutral": false,
    "spirit_words": [
     {
@@ -5641,8 +5731,13 @@
      "cluster": "豪情进取"
     },
     {
-     "word": "星",
+     "word": "朝衣",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "河",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -5651,8 +5746,8 @@
      "cluster": null
     },
     {
-     "word": "河",
-     "sentiment": 0.0,
+     "word": "星",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5771,13 +5866,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5816,13 +5911,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5846,13 +5941,13 @@
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "雾",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
-     "word": "雾",
-     "sentiment": -0.3,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -5910,6 +6005,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "湖",
      "sentiment": 0.1,
      "cluster": null
@@ -5917,11 +6017,6 @@
     {
      "word": "欢",
      "sentiment": 0.7,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -5960,6 +6055,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "松",
+     "sentiment": 0.5,
+     "cluster": "隐逸超脱"
+    },
+    {
      "word": "阁",
      "sentiment": 0.1,
      "cluster": null
@@ -5973,11 +6073,6 @@
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
-    },
-    {
-     "word": "松",
-     "sentiment": 0.5,
-     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_27be0615069f.aspx"
@@ -5991,12 +6086,12 @@
    "verb": "东望",
    "direction": "东",
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -6011,12 +6106,12 @@
    "verb": "望长安",
    "direction": null,
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -6035,13 +6130,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "湖",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "湖",
-     "sentiment": 0.1,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -6135,11 +6230,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "醉",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
@@ -6147,6 +6237,11 @@
     {
      "word": "梦",
      "sentiment": -0.1,
+     "cluster": null
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -6190,11 +6285,6 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
@@ -6203,6 +6293,11 @@
      "word": "关",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_dd83a395cf41.aspx"
@@ -6290,13 +6385,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
+     "word": "关",
+     "sentiment": -0.3,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
+     "word": "客",
+     "sentiment": -0.4,
      "cluster": "漂泊羁旅"
     }
    ],
@@ -6315,17 +6410,17 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "云",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -6492,11 +6587,6 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "星",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "斗",
      "sentiment": 0.0,
      "cluster": null
@@ -6504,6 +6594,11 @@
     {
      "word": "归",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "星",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
@@ -6523,12 +6618,12 @@
    "verb": "北望",
    "direction": "北",
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -6552,12 +6647,12 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "山",
+     "word": "星",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "星",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -6577,9 +6672,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "云",
@@ -6587,9 +6682,9 @@
      "cluster": null
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_a50b294985bf.aspx"
@@ -6603,12 +6698,12 @@
    "verb": "望长安",
    "direction": null,
    "obj": "长安",
-   "sentiment": 0.0,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -6632,9 +6727,9 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "归",
+     "word": "酒",
      "sentiment": 0.0,
-     "cluster": null
+     "cluster": "纵逸狂放"
     },
     {
      "word": "醉",
@@ -6647,9 +6742,9 @@
      "cluster": null
     },
     {
-     "word": "酒",
+     "word": "归",
      "sentiment": 0.0,
-     "cluster": "纵逸狂放"
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_90fd1e717b5d.aspx"
@@ -6722,14 +6817,14 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "烟波",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "烟",
-     "sentiment": -0.2,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_4ed35ed7f032.aspx"
@@ -6876,14 +6971,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_1f96fd00af54.aspx"
@@ -6901,6 +6996,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -6908,11 +7008,6 @@
     {
      "word": "海",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -6971,14 +7066,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "愁",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "客",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "愁",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_4783e5acc9d6.aspx"
@@ -6996,11 +7091,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "琴",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
@@ -7014,6 +7104,11 @@
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_3b8ac5c7401b.aspx"
@@ -7027,9 +7122,14 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": 0.1,
+   "sentiment": 0.25,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "鹿",
+     "sentiment": 0.4,
+     "cluster": null
+    },
     {
      "word": "山",
      "sentiment": 0.1,
@@ -7091,9 +7191,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
+     "word": "酒",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     },
     {
      "word": "樽",
@@ -7101,9 +7201,9 @@
      "cluster": "纵逸狂放"
     },
     {
-     "word": "酒",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_59711d84d055.aspx"
@@ -7141,13 +7241,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -7261,13 +7361,13 @@
      "cluster": null
     },
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "笙",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "笙",
-     "sentiment": 0.1,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -7366,11 +7466,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
@@ -7378,6 +7473,11 @@
     {
      "word": "河",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -7476,8 +7576,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -7486,8 +7586,8 @@
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -7708,12 +7808,17 @@
    "verb": "望云",
    "direction": null,
    "obj": "云",
-   "sentiment": 0.0,
+   "sentiment": 0.167,
    "neutral": false,
    "spirit_words": [
     {
+     "word": "帝乡",
+     "sentiment": 0.2,
+     "cluster": null
+    },
+    {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -7762,13 +7867,13 @@
      "cluster": null
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "燕",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
-     "word": "燕",
-     "sentiment": 0.3,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -7801,14 +7906,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "剑",
      "sentiment": 0.3,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "楼",
+     "sentiment": 0.0,
+     "cluster": null
     },
     {
      "word": "燕",
@@ -7831,8 +7936,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "雾",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -7841,8 +7946,8 @@
      "cluster": null
     },
     {
-     "word": "雾",
-     "sentiment": -0.3,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -7895,8 +8000,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "送",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -7905,14 +8010,14 @@
      "cluster": null
     },
     {
-     "word": "亭",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "塞",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "亭",
+     "sentiment": 0.1,
+     "cluster": null
     },
     {
      "word": "云",
@@ -7920,8 +8025,8 @@
      "cluster": null
     },
     {
-     "word": "送",
-     "sentiment": -0.3,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -7940,6 +8045,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "霜",
      "sentiment": -0.5,
      "cluster": null
@@ -7950,18 +8060,13 @@
      "cluster": "豪情进取"
     },
     {
-     "word": "燕",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "燕",
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -8089,23 +8194,23 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": -0.275,
+   "sentiment": -0.1,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "长安",
+     "word": "新秋",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "长安",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
      "word": "雨",
      "sentiment": -0.2,
      "cluster": null
-    },
-    {
-     "word": "秋",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
     },
     {
      "word": "寒",
@@ -8128,11 +8233,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "琴",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
@@ -8140,6 +8240,11 @@
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -8257,14 +8362,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "寺",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "风",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "寺",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_504b76d9309d.aspx"
@@ -8341,22 +8446,22 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -8376,22 +8481,22 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -8411,11 +8516,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
@@ -8433,6 +8533,11 @@
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -8485,13 +8590,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -8585,9 +8690,15 @@
    "verb": "西望",
    "direction": "西",
    "obj": null,
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": 0.3,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "田畴",
+     "sentiment": 0.3,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_548feba1c017.aspx"
   },
   {
@@ -8603,16 +8714,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "竹",
-     "sentiment": 0.5,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "寺",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
@@ -8620,6 +8721,16 @@
     {
      "word": "雪",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "竹",
+     "sentiment": 0.5,
+     "cluster": "隐逸超脱"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -8782,22 +8893,22 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "乐",
      "sentiment": 0.8,
      "cluster": null
     },
     {
      "word": "忆",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "月",
      "sentiment": -0.2,
      "cluster": null
     }
@@ -8837,11 +8948,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "台",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
@@ -8849,6 +8955,11 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -8975,12 +9086,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "云",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -9040,13 +9151,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -9070,12 +9181,12 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "云",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -9150,13 +9261,13 @@
    "verb": "遥望",
    "direction": null,
    "obj": "江陵",
-   "sentiment": -0.367,
+   "sentiment": -0.233,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "泪",
-     "sentiment": -0.6,
-     "cluster": "愁苦幽愤"
+     "word": "寒食",
+     "sentiment": -0.1,
+     "cluster": null
     },
     {
      "word": "江",
@@ -9164,8 +9275,8 @@
      "cluster": null
     },
     {
-     "word": "寒",
-     "sentiment": -0.5,
+     "word": "泪",
+     "sentiment": -0.6,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -9246,9 +9357,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "苦",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
     },
     {
      "word": "思",
@@ -9256,9 +9367,9 @@
      "cluster": null
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
+     "word": "苦",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_7c8e2defd6a3.aspx"
@@ -9276,9 +9387,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "苦",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
     },
     {
      "word": "思",
@@ -9286,9 +9397,9 @@
      "cluster": null
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
+     "word": "苦",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_287885acfee7.aspx"
@@ -9399,11 +9510,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "亭",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "关",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
@@ -9411,6 +9517,11 @@
     {
      "word": "梦",
      "sentiment": -0.1,
+     "cluster": null
+    },
+    {
+     "word": "亭",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -9425,21 +9536,21 @@
    "verb": "望巫山",
    "direction": null,
    "obj": "巫山",
-   "sentiment": 0.1,
+   "sentiment": 0.22,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "巫山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "雨",
-     "sentiment": -0.2,
+     "word": "烟霞",
+     "sentiment": 0.4,
      "cluster": null
     },
     {
-     "word": "烟",
+     "word": "雨",
      "sentiment": -0.2,
      "cluster": null
     },
@@ -9509,14 +9620,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "亭",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "亭",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_abc58d1b9dc0.aspx"
@@ -9559,13 +9670,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -9580,16 +9691,16 @@
    "verb": "西望",
    "direction": "西",
    "obj": "长安",
-   "sentiment": 0.233,
+   "sentiment": 0.333,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "长安",
-     "sentiment": 0.0,
+     "word": "白日",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
-     "word": "白日",
+     "word": "长安",
      "sentiment": 0.3,
      "cluster": null
     },
@@ -9614,6 +9725,16 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "阁",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -9622,16 +9743,6 @@
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "阁",
-     "sentiment": 0.1,
-     "cluster": null
     },
     {
      "word": "云",
@@ -9680,7 +9791,7 @@
    "verb": "望乡",
    "direction": null,
    "obj": "乡",
-   "sentiment": 0.1,
+   "sentiment": -0.2,
    "neutral": false,
    "spirit_words": [
     {
@@ -9689,8 +9800,8 @@
      "cluster": null
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "荒城",
+     "sentiment": -0.6,
      "cluster": null
     }
    ],
@@ -9757,12 +9868,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "亭",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "亭",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -9846,9 +9957,14 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.1,
+   "sentiment": 0.05,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "朱门",
+     "sentiment": 0.0,
+     "cluster": null
+    },
     {
      "word": "山",
      "sentiment": 0.1,
@@ -9870,8 +9986,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "雪",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -9885,8 +10001,8 @@
      "cluster": null
     },
     {
-     "word": "雪",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -9905,13 +10021,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "兰",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "兰舟",
+     "sentiment": 0.2,
      "cluster": null
     }
    ],
@@ -9935,19 +10046,19 @@
      "cluster": "豪情进取"
     },
     {
-     "word": "剑",
-     "sentiment": 0.3,
-     "cluster": "豪情进取"
-    },
-    {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "老",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "河",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "剑",
+     "sentiment": 0.3,
+     "cluster": "豪情进取"
     },
     {
      "word": "关",
@@ -9955,9 +10066,9 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "河",
-     "sentiment": 0.0,
-     "cluster": null
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_8a03b82a7e52.aspx"
@@ -10059,6 +10170,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "城",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
@@ -10066,11 +10182,6 @@
     {
      "word": "台",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -10182,14 +10293,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "悲",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "欢",
      "sentiment": 0.7,
      "cluster": null
+    },
+    {
+     "word": "悲",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_43ff0d68a6bb.aspx"
@@ -10237,9 +10348,14 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": 0.1,
+   "sentiment": -0.25,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "沙场",
+     "sentiment": -0.6,
+     "cluster": null
+    },
     {
      "word": "山",
      "sentiment": 0.1,
@@ -10330,14 +10446,14 @@
      "cluster": null
     },
     {
-     "word": "醉",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "醉",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_1e231b334576.aspx"
@@ -10405,8 +10521,8 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -10415,8 +10531,8 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -10451,13 +10567,18 @@
    "verb": "回望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.15,
+   "sentiment": 0.267,
    "neutral": false,
    "spirit_words": [
     {
      "word": "泉",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "龙",
+     "sentiment": 0.5,
+     "cluster": null
     },
     {
      "word": "山",
@@ -10480,12 +10601,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "台",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "台",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -10525,13 +10646,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "海",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -10616,9 +10737,15 @@
    "verb": "望乡国",
    "direction": null,
    "obj": "乡国",
-   "sentiment": 0.0,
-   "neutral": true,
-   "spirit_words": [],
+   "sentiment": 0.5,
+   "neutral": false,
+   "spirit_words": [
+    {
+     "word": "芳菲",
+     "sentiment": 0.5,
+     "cluster": null
+    }
+   ],
    "source_url": "https://www.gushiwen.cn/shiwenv_1dfefd9ef84f.aspx"
   },
   {
@@ -10630,9 +10757,14 @@
    "verb": "望洛阳",
    "direction": null,
    "obj": "洛阳",
-   "sentiment": 0.0,
+   "sentiment": 0.15,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "天阙",
+     "sentiment": 0.3,
+     "cluster": null
+    },
     {
      "word": "马",
      "sentiment": 0.0,
@@ -10650,9 +10782,14 @@
    "verb": "北顾",
    "direction": "北",
    "obj": null,
-   "sentiment": 0.1,
+   "sentiment": 0.3,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "霁色",
+     "sentiment": 0.5,
+     "cluster": null
+    },
     {
      "word": "亭",
      "sentiment": 0.1,
@@ -10728,8 +10865,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "舟",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -10738,8 +10875,8 @@
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -10758,14 +10895,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "剑",
-     "sentiment": 0.3,
-     "cluster": "豪情进取"
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "剑",
+     "sentiment": 0.3,
+     "cluster": "豪情进取"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_b87ec9845d8a.aspx"
@@ -10783,13 +10920,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -10828,14 +10965,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "鸿",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_239eccf01161.aspx"
@@ -10853,14 +10990,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "白云",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "明月",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "白云",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_78713418d88c.aspx"
@@ -10963,13 +11100,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "雨",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "雨",
-     "sentiment": -0.2,
+     "word": "烛",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
@@ -10983,8 +11120,8 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "烛",
-     "sentiment": -0.1,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11045,8 +11182,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -11060,8 +11197,8 @@
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11094,8 +11231,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -11104,8 +11241,8 @@
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11207,13 +11344,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "天涯",
-     "sentiment": -0.5,
+     "word": "故园",
+     "sentiment": -0.4,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "故园",
-     "sentiment": -0.4,
+     "word": "天涯",
+     "sentiment": -0.5,
      "cluster": "漂泊羁旅"
     },
     {
@@ -11242,13 +11379,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11353,7 +11490,7 @@
    "verb": "望乡国",
    "direction": null,
    "obj": "乡国",
-   "sentiment": 0.1,
+   "sentiment": 0.267,
    "neutral": false,
    "spirit_words": [
     {
@@ -11362,8 +11499,8 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
@@ -11387,14 +11524,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鹤",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "鹤",
+     "sentiment": 0.4,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_e84967a26d47.aspx"
@@ -11417,18 +11554,18 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11447,8 +11584,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -11457,8 +11594,8 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -11482,13 +11619,13 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "亭",
-     "sentiment": 0.1,
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "亭",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11507,13 +11644,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -11606,6 +11743,16 @@
      "cluster": "漂泊羁旅"
     },
     {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -11616,18 +11763,8 @@
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "梦",
      "sentiment": -0.1,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -11642,12 +11779,12 @@
    "verb": "北望",
    "direction": "北",
    "obj": null,
-   "sentiment": -0.05,
+   "sentiment": -0.2,
    "neutral": false,
    "spirit_words": [
     {
      "word": "落日",
-     "sentiment": -0.2,
+     "sentiment": -0.5,
      "cluster": null
     },
     {
@@ -11701,9 +11838,14 @@
    "verb": "望云",
    "direction": null,
    "obj": "云",
-   "sentiment": -0.15,
+   "sentiment": 0.0,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "天阙",
+     "sentiment": 0.3,
+     "cluster": null
+    },
     {
      "word": "思",
      "sentiment": -0.3,
@@ -11797,14 +11939,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "病",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_c09fb6711a89.aspx"
@@ -11822,6 +11964,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -11829,11 +11976,6 @@
     {
      "word": "山",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -11886,17 +12028,12 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "江城",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -11916,12 +12053,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雨",
+     "word": "烟",
      "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
+     "word": "雨",
      "sentiment": -0.2,
      "cluster": null
     }
@@ -11941,14 +12078,19 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
      "word": "剑",
      "sentiment": 0.3,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "楼",
+     "sentiment": 0.0,
+     "cluster": null
     },
     {
      "word": "海",
@@ -11958,11 +12100,6 @@
     {
      "word": "云",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -11981,8 +12118,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -11991,8 +12128,8 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12011,13 +12148,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "天山",
-     "sentiment": 0.0,
+     "word": "白日",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
-     "word": "白日",
-     "sentiment": 0.3,
+     "word": "天山",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -12041,14 +12178,14 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "蓬",
-     "sentiment": -0.5,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "蓬",
+     "sentiment": -0.5,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_5198e9f523d2.aspx"
@@ -12154,7 +12291,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "湖",
      "sentiment": 0.1,
      "cluster": null
     },
@@ -12164,18 +12306,13 @@
      "cluster": null
     },
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12199,13 +12336,13 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12224,11 +12361,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "醉",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
-    },
-    {
      "word": "鸿",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
@@ -12237,6 +12369,11 @@
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "醉",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_fca81bab2c14.aspx"
@@ -12274,14 +12411,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "塞",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_247dd560067a.aspx"
@@ -12349,11 +12486,6 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
@@ -12361,6 +12493,11 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12379,13 +12516,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "舟",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12400,27 +12537,12 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": -0.083,
+   "sentiment": -0.029,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "鸥鹭",
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -12429,8 +12551,28 @@
      "cluster": null
     },
     {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "庙",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -12509,14 +12651,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "高楼",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "万里",
      "sentiment": 0.4,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "高楼",
+     "sentiment": -0.2,
+     "cluster": null
     },
     {
      "word": "客",
@@ -12564,14 +12706,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "柳",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "柳",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_68dc0e3d5f68.aspx"
@@ -12589,14 +12731,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "笑",
-     "sentiment": 0.7,
-     "cluster": null
-    },
-    {
      "word": "关",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "笑",
+     "sentiment": 0.7,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_570b2eaab646.aspx"
@@ -12639,14 +12781,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "泪",
-     "sentiment": -0.6,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "河",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "泪",
+     "sentiment": -0.6,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_d9ede2ca81fa.aspx"
@@ -12719,18 +12861,18 @@
    "verb": "望江南",
    "direction": null,
    "obj": "江南",
-   "sentiment": 0.067,
+   "sentiment": 0.233,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "江南",
+     "sentiment": 0.5,
+     "cluster": null
+    },
     {
      "word": "梅花",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
     },
     {
      "word": "忆",
@@ -12783,13 +12925,13 @@
      "cluster": "豪情进取"
     },
     {
-     "word": "忆",
-     "sentiment": -0.2,
+     "word": "梦",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
+     "word": "忆",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -12804,12 +12946,12 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.5,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     }
    ],
@@ -12864,9 +13006,14 @@
    "verb": "西望",
    "direction": "西",
    "obj": null,
-   "sentiment": 0.4,
+   "sentiment": 0.333,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "宫阙",
+     "sentiment": 0.2,
+     "cluster": null
+    },
     {
      "word": "九天",
      "sentiment": 0.8,
@@ -12943,14 +13090,14 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_8f39d7a0e914.aspx"
@@ -13066,14 +13213,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_c066294d053f.aspx"
@@ -13111,8 +13258,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
@@ -13121,8 +13268,8 @@
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -13176,13 +13323,13 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "雾",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
-     "word": "雾",
-     "sentiment": -0.3,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -13201,14 +13348,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鸦",
-     "sentiment": -0.5,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "风",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "鸦",
+     "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_de023964e7c5.aspx"
@@ -13226,14 +13373,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "愁",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "雁",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "愁",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_fe2db56efe33.aspx"
@@ -13251,14 +13398,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鸦",
-     "sentiment": -0.5,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "风",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "鸦",
+     "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_947ecce95e5a.aspx"
@@ -13312,23 +13459,18 @@
    "verb": "望楚",
    "direction": null,
    "obj": "楚",
-   "sentiment": 0.133,
+   "sentiment": 0.2,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "江城",
+     "sentiment": 0.0,
+     "cluster": null
+    },
     {
      "word": "梅",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_8f2af703c493.aspx"
@@ -13366,9 +13508,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "秋",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
     },
     {
      "word": "雁",
@@ -13376,9 +13518,9 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
+     "word": "秋",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_971cafde0490.aspx"
@@ -13416,13 +13558,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -13441,11 +13583,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
@@ -13453,6 +13590,11 @@
     {
      "word": "雪",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -13471,13 +13613,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -13510,13 +13652,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -13531,12 +13673,12 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.5,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     }
    ],
@@ -13580,13 +13722,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -13610,12 +13752,12 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "云",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "马",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -13635,14 +13777,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "风",
-     "sentiment": -0.1,
-     "cluster": null
-    },
-    {
      "word": "梅",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "风",
+     "sentiment": -0.1,
+     "cluster": null
     },
     {
      "word": "云",
@@ -13720,7 +13862,7 @@
    "verb": "望天涯",
    "direction": null,
    "obj": "天涯",
-   "sentiment": -0.16,
+   "sentiment": -0.25,
    "neutral": false,
    "spirit_words": [
     {
@@ -13729,13 +13871,8 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "阁",
-     "sentiment": 0.1,
+     "word": "关山",
+     "sentiment": -0.4,
      "cluster": null
     },
     {
@@ -13744,9 +13881,9 @@
      "cluster": null
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
+     "word": "阁",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_e45f568a2c1a.aspx"
@@ -13774,13 +13911,18 @@
    "verb": "极目",
    "direction": null,
    "obj": null,
-   "sentiment": -0.2,
+   "sentiment": -0.267,
    "neutral": false,
    "spirit_words": [
     {
      "word": "天涯",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "狼",
+     "sentiment": -0.4,
+     "cluster": null
     },
     {
      "word": "山",
@@ -13857,18 +13999,18 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "斗",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "斗",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "星",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "斗",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "斗",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -13932,6 +14074,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "城",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "恨",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
@@ -13939,11 +14086,6 @@
     {
      "word": "亭",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -13962,14 +14104,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雁",
-     "sentiment": -0.5,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "雁",
+     "sentiment": -0.5,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_e5b7a042ae0c.aspx"
@@ -14023,17 +14165,17 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.2,
+   "sentiment": 0.35,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "燕",
-     "sentiment": 0.3,
+     "word": "海棠",
+     "sentiment": 0.4,
      "cluster": null
     },
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "燕",
+     "sentiment": 0.3,
      "cluster": null
     }
    ],
@@ -14052,9 +14194,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
-     "cluster": null
+     "word": "梅",
+     "sentiment": 0.4,
+     "cluster": "隐逸超脱"
     },
     {
      "word": "湖",
@@ -14062,9 +14204,9 @@
      "cluster": null
     },
     {
-     "word": "梅",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
+     "word": "楼",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_314d9acddb60.aspx"
@@ -14102,8 +14244,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "思",
-     "sentiment": -0.3,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -14112,8 +14254,8 @@
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "思",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -14207,8 +14349,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -14217,8 +14359,8 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14282,23 +14424,18 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "湖",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -14312,8 +14449,13 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14332,13 +14474,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14411,6 +14553,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
@@ -14418,11 +14565,6 @@
     {
      "word": "云",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -14466,13 +14608,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "海",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14491,13 +14633,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "海",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14589,8 +14731,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -14599,8 +14741,8 @@
      "cluster": null
     },
     {
-     "word": "城",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -14664,14 +14806,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雁",
-     "sentiment": -0.5,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "雁",
+     "sentiment": -0.5,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_8a8e6fa441d8.aspx"
@@ -14714,7 +14856,7 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "烟",
+     "word": "烟波",
      "sentiment": -0.2,
      "cluster": null
     },
@@ -14759,14 +14901,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_1737c63a4239.aspx"
@@ -14784,14 +14926,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "仙",
      "sentiment": 0.6,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_27b4dc8d001c.aspx"
@@ -14857,12 +14999,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "湖",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "湖",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -14882,14 +15024,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "鸿",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_ed10f6d354c4.aspx"
@@ -14927,11 +15069,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "江",
      "sentiment": 0.0,
      "cluster": null
@@ -14939,6 +15076,11 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15050,23 +15192,23 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "烟",
+     "word": "烟波",
      "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "城",
-     "sentiment": 0.0,
      "cluster": null
     },
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "楼",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "城",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -15110,13 +15252,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15154,13 +15296,8 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "送",
+     "sentiment": -0.3,
      "cluster": null
     },
     {
@@ -15169,8 +15306,13 @@
      "cluster": null
     },
     {
-     "word": "送",
-     "sentiment": -0.3,
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15189,13 +15331,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15253,14 +15395,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "松",
      "sentiment": 0.5,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "湖",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_3d475867371c.aspx"
@@ -15367,17 +15509,17 @@
    "verb": "望江南",
    "direction": null,
    "obj": "江南",
-   "sentiment": -0.1,
+   "sentiment": 0.15,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "江南",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -15396,13 +15538,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "醉",
-     "sentiment": 0.0,
+     "word": "杯",
+     "sentiment": 0.1,
      "cluster": "纵逸狂放"
     },
     {
-     "word": "杯",
-     "sentiment": 0.1,
+     "word": "醉",
+     "sentiment": 0.0,
      "cluster": "纵逸狂放"
     }
    ],
@@ -15485,12 +15627,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "海",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "海",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -15565,13 +15707,13 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "樽",
-     "sentiment": 0.1,
+     "word": "酒",
+     "sentiment": 0.0,
      "cluster": "纵逸狂放"
     },
     {
-     "word": "酒",
-     "sentiment": 0.0,
+     "word": "樽",
+     "sentiment": 0.1,
      "cluster": "纵逸狂放"
     }
    ],
@@ -15590,13 +15732,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "星",
-     "sentiment": 0.1,
+     "word": "河",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "河",
-     "sentiment": 0.0,
+     "word": "星",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15636,18 +15778,18 @@
    "verb": "怅望",
    "direction": null,
    "obj": "江南",
-   "sentiment": 0.067,
+   "sentiment": 0.233,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "江南",
+     "sentiment": 0.5,
+     "cluster": null
+    },
     {
      "word": "梅",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
     },
     {
      "word": "雪",
@@ -15774,13 +15916,13 @@
      "cluster": null
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "雪",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "雪",
-     "sentiment": -0.2,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15835,17 +15977,22 @@
    "verb": "南望",
    "direction": "南",
    "obj": null,
-   "sentiment": 0.05,
+   "sentiment": -0.1,
    "neutral": false,
    "spirit_words": [
     {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "斜阳",
+     "sentiment": -0.4,
      "cluster": null
     },
     {
      "word": "城",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15920,12 +16067,12 @@
    "verb": "西望",
    "direction": "西",
    "obj": "长安",
-   "sentiment": 0.35,
+   "sentiment": 0.5,
    "neutral": false,
    "spirit_words": [
     {
      "word": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "cluster": null
     },
     {
@@ -15954,13 +16101,13 @@
      "cluster": null
     },
     {
-     "word": "海",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "海",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -15975,9 +16122,14 @@
    "verb": "怅望",
    "direction": null,
    "obj": null,
-   "sentiment": 0.0,
+   "sentiment": 0.1,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "帝乡",
+     "sentiment": 0.2,
+     "cluster": null
+    },
     {
      "word": "归",
      "sentiment": 0.0,
@@ -15995,9 +16147,19 @@
    "verb": "望帝乡",
    "direction": null,
    "obj": "帝乡",
-   "sentiment": -0.25,
+   "sentiment": -0.16,
    "neutral": false,
    "spirit_words": [
+    {
+     "word": "帝乡",
+     "sentiment": 0.2,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
+    },
     {
      "word": "独",
      "sentiment": -0.4,
@@ -16011,11 +16173,6 @@
     {
      "word": "云",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -16039,9 +16196,9 @@
    },
    "dir_senti": {
     "北": 0.0,
-    "西": -0.043
+    "西": 0.017
    },
-   "headline": "方位凝望 6 处，最强方向为「西」（5 次），如《秋浦歌十七首》「正西望长安」；诗题之望 9 首",
+   "headline": "方位凝望 6 处，最强方向为「西」（5 次），如《横江词六首》「横江西望阻西秦」；诗题之望 9 首",
    "title_gazes": [
     "望庐山瀑布",
     "望天门山",
@@ -16067,14 +16224,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "青天",
-       "sentiment": 0.3,
-       "cluster": null
-      },
-      {
        "word": "蜀道",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "青天",
+       "sentiment": 0.3,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_d59ec5d6c91c.aspx"
@@ -16117,14 +16274,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "故乡",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "明月",
        "sentiment": -0.1,
        "cluster": null
+      },
+      {
+       "word": "故乡",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "思",
@@ -16147,11 +16304,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "苦",
-       "sentiment": -0.7,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "城",
        "sentiment": 0.0,
        "cluster": null
@@ -16159,6 +16311,11 @@
       {
        "word": "寒",
        "sentiment": -0.5,
+       "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "苦",
+       "sentiment": -0.7,
        "cluster": "愁苦幽愤"
       }
      ],
@@ -16177,6 +16334,16 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "思",
+       "sentiment": -0.3,
+       "cluster": null
+      },
+      {
        "word": "苦",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
@@ -16185,16 +16352,6 @@
        "word": "归",
        "sentiment": 0.0,
        "cluster": null
-      },
-      {
-       "word": "思",
-       "sentiment": -0.3,
-       "cluster": null
-      },
-      {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_b12f5b4193fd.aspx"
@@ -16212,11 +16369,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "思",
-       "sentiment": -0.3,
-       "cluster": null
-      },
-      {
        "word": "孤",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
@@ -16224,6 +16376,11 @@
       {
        "word": "月",
        "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "思",
+       "sentiment": -0.3,
        "cluster": null
       }
      ],
@@ -16242,14 +16399,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "秋",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "月",
        "sentiment": -0.2,
        "cluster": null
+      },
+      {
+       "word": "秋",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_f1ad949fed22.aspx"
@@ -16263,12 +16420,12 @@
      "verb": "西望",
      "direction": "西",
      "obj": "长安",
-     "sentiment": -0.2,
+     "sentiment": -0.05,
      "neutral": false,
      "spirit_words": [
       {
        "word": "长安",
-       "sentiment": 0.0,
+       "sentiment": 0.3,
        "cluster": null
       },
       {
@@ -16288,12 +16445,12 @@
      "verb": "西望",
      "direction": "西",
      "obj": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.15,
      "neutral": false,
      "spirit_words": [
       {
        "word": "长安",
-       "sentiment": 0.0,
+       "sentiment": 0.3,
        "cluster": null
       },
       {
@@ -16313,17 +16470,17 @@
      "verb": "望秋月",
      "direction": null,
      "obj": "秋月",
-     "sentiment": -0.2,
+     "sentiment": -0.12,
      "neutral": false,
      "spirit_words": [
       {
-       "word": "秋",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
+       "word": "将军",
+       "sentiment": 0.2,
+       "cluster": null
       },
       {
-       "word": "忆",
-       "sentiment": -0.2,
+       "word": "舟",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
@@ -16332,8 +16489,13 @@
        "cluster": null
       },
       {
-       "word": "舟",
-       "sentiment": 0.0,
+       "word": "秋",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "忆",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -16352,13 +16514,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "思",
-       "sentiment": -0.3,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "思",
+       "sentiment": -0.3,
        "cluster": null
       }
      ],
@@ -16377,13 +16539,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "思",
-       "sentiment": -0.3,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "思",
+       "sentiment": -0.3,
        "cluster": null
       }
      ],
@@ -16407,12 +16569,12 @@
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "江",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -16428,7 +16590,7 @@
      "verb": "望吴",
      "direction": null,
      "obj": "吴",
-     "sentiment": -0.175,
+     "sentiment": -0.15,
      "neutral": false,
      "spirit_words": [
       {
@@ -16438,18 +16600,18 @@
       },
       {
        "word": "金陵",
-       "sentiment": 0.0,
+       "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
        "word": "独",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
-      },
-      {
-       "word": "风",
-       "sentiment": -0.1,
-       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_73ff86a3d623.aspx"
@@ -16506,23 +16668,23 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "青天",
-       "sentiment": 0.3,
-       "cluster": null
-      },
-      {
        "word": "万里",
        "sentiment": 0.4,
        "cluster": "豪情进取"
       },
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "青天",
+       "sentiment": 0.3,
        "cluster": null
       },
       {
        "word": "云",
        "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -16591,12 +16753,12 @@
      "verb": "望长安",
      "direction": null,
      "obj": "长安",
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "neutral": false,
      "spirit_words": [
       {
        "word": "长安",
-       "sentiment": 0.0,
+       "sentiment": 0.3,
        "cluster": null
       }
      ],
@@ -16669,18 +16831,18 @@
      "verb": "望京华",
      "direction": null,
      "obj": "京华",
-     "sentiment": -0.3,
+     "sentiment": -0.4,
      "neutral": false,
      "spirit_words": [
+      {
+       "word": "落日",
+       "sentiment": -0.5,
+       "cluster": null
+      },
       {
        "word": "孤城",
        "sentiment": -0.7,
        "cluster": "漂泊羁旅"
-      },
-      {
-       "word": "落日",
-       "sentiment": -0.2,
-       "cluster": null
       },
       {
        "word": "斗",
@@ -16931,14 +17093,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "烟",
        "sentiment": -0.2,
        "cluster": null
+      },
+      {
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_1f96fd00af54.aspx"
@@ -16962,7 +17124,7 @@
    "dir_senti": {
     "东": -0.167,
     "东南": 0.067,
-    "南": 0.05,
+    "南": 0.125,
     "西": -0.8,
     "西北": 0.1
    },
@@ -17015,12 +17177,12 @@
      "verb": "望人寰",
      "direction": null,
      "obj": "人寰",
-     "sentiment": -0.15,
+     "sentiment": 0.0,
      "neutral": false,
      "spirit_words": [
       {
        "word": "长安",
-       "sentiment": 0.0,
+       "sentiment": 0.3,
        "cluster": null
       },
       {
@@ -17044,14 +17206,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "乌",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "江",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "乌",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       },
       {
        "word": "月",
@@ -17074,12 +17236,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
+       "word": "海",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "海",
+       "word": "山",
        "sentiment": 0.1,
        "cluster": null
       }
@@ -17139,6 +17301,11 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -17146,11 +17313,6 @@
       {
        "word": "海",
        "sentiment": 0.1,
-       "cluster": null
-      },
-      {
-       "word": "江",
-       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -17209,14 +17371,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "愁",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "客",
        "sentiment": -0.4,
        "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "愁",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_4783e5acc9d6.aspx"
@@ -17234,11 +17396,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "琴",
        "sentiment": 0.2,
        "cluster": "隐逸超脱"
@@ -17252,6 +17409,11 @@
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_3b8ac5c7401b.aspx"
@@ -17265,9 +17427,14 @@
      "verb": "南望",
      "direction": "南",
      "obj": null,
-     "sentiment": 0.1,
+     "sentiment": 0.25,
      "neutral": false,
      "spirit_words": [
+      {
+       "word": "鹿",
+       "sentiment": 0.4,
+       "cluster": null
+      },
       {
        "word": "山",
        "sentiment": 0.1,
@@ -17329,9 +17496,9 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
+       "word": "酒",
+       "sentiment": 0.0,
+       "cluster": "纵逸狂放"
       },
       {
        "word": "樽",
@@ -17339,9 +17506,9 @@
        "cluster": "纵逸狂放"
       },
       {
-       "word": "酒",
-       "sentiment": 0.0,
-       "cluster": "纵逸狂放"
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_59711d84d055.aspx"
@@ -17379,13 +17546,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "思",
-       "sentiment": -0.3,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "思",
+       "sentiment": -0.3,
        "cluster": null
       },
       {
@@ -17498,11 +17665,11 @@
     "西北": 1
    },
    "dir_senti": {
-    "北": -0.017,
+    "北": -0.067,
     "东": 0.111,
     "南": -0.133,
     "西": 0.113,
-    "西北": -0.2
+    "西北": -0.3
    },
    "headline": "方位凝望 14 处，最强方向为「西」（4 次），如《超然台记》「西望穆陵」；诗题之望 5 首",
    "title_gazes": [
@@ -17576,9 +17743,14 @@
      "verb": "西北望",
      "direction": "西北",
      "obj": null,
-     "sentiment": -0.2,
+     "sentiment": -0.3,
      "neutral": false,
      "spirit_words": [
+      {
+       "word": "狼",
+       "sentiment": -0.4,
+       "cluster": null
+      },
       {
        "word": "月",
        "sentiment": -0.2,
@@ -17614,13 +17786,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "天涯",
-       "sentiment": -0.5,
+       "word": "故园",
+       "sentiment": -0.4,
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "故园",
-       "sentiment": -0.4,
+       "word": "天涯",
+       "sentiment": -0.5,
        "cluster": "漂泊羁旅"
       },
       {
@@ -17649,13 +17821,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "马",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "马",
-       "sentiment": 0.0,
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -17760,7 +17932,7 @@
      "verb": "望乡国",
      "direction": null,
      "obj": "乡国",
-     "sentiment": 0.1,
+     "sentiment": 0.267,
      "neutral": false,
      "spirit_words": [
       {
@@ -17769,8 +17941,8 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "江",
-       "sentiment": 0.0,
+       "word": "江南",
+       "sentiment": 0.5,
        "cluster": null
       },
       {
@@ -17794,14 +17966,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "鹤",
-       "sentiment": 0.4,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "归",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "鹤",
+       "sentiment": 0.4,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_e84967a26d47.aspx"
@@ -17824,18 +17996,18 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -17854,8 +18026,8 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "归",
-       "sentiment": 0.0,
+       "word": "烟",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
@@ -17864,8 +18036,8 @@
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "烟",
-       "sentiment": -0.2,
+       "word": "归",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -17889,13 +18061,13 @@
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "亭",
-       "sentiment": 0.1,
+       "word": "城",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "城",
-       "sentiment": 0.0,
+       "word": "亭",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -17914,13 +18086,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -18013,6 +18185,16 @@
        "cluster": "漂泊羁旅"
       },
       {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -18023,18 +18205,8 @@
        "cluster": null
       },
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "梦",
        "sentiment": -0.1,
-       "cluster": null
-      },
-      {
-       "word": "月",
-       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -18049,12 +18221,12 @@
      "verb": "北望",
      "direction": "北",
      "obj": null,
-     "sentiment": -0.05,
+     "sentiment": -0.2,
      "neutral": false,
      "spirit_words": [
       {
        "word": "落日",
-       "sentiment": -0.2,
+       "sentiment": -0.5,
        "cluster": null
       },
       {
@@ -18118,7 +18290,7 @@
    "dir_senti": {
     "北": 0.0,
     "东": 0.1,
-    "南": -0.194
+    "南": -0.176
    },
    "headline": "方位凝望 7 处，方向分散：北、南 各 3 次，如《书愤》「中原北望气如山」；诗题之望 2 首",
    "title_gazes": [
@@ -18179,7 +18351,7 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "烟",
+       "word": "烟波",
        "sentiment": -0.2,
        "cluster": null
       },
@@ -18204,13 +18376,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "舟",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "舟",
-       "sentiment": 0.0,
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -18225,27 +18397,12 @@
      "verb": "南望",
      "direction": "南",
      "obj": null,
-     "sentiment": -0.083,
+     "sentiment": -0.029,
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
-       "word": "归",
-       "sentiment": 0.0,
+       "word": "鸥鹭",
+       "sentiment": 0.3,
        "cluster": null
       },
       {
@@ -18254,8 +18411,28 @@
        "cluster": null
       },
       {
+       "word": "雨",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "雨",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "庙",
        "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "归",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -18334,14 +18511,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "高楼",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "万里",
        "sentiment": 0.4,
        "cluster": "豪情进取"
+      },
+      {
+       "word": "高楼",
+       "sentiment": -0.2,
+       "cluster": null
       },
       {
        "word": "客",
@@ -18389,14 +18566,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "柳",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "江",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "柳",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_68dc0e3d5f68.aspx"
@@ -18414,14 +18591,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "笑",
-       "sentiment": 0.7,
-       "cluster": null
-      },
-      {
        "word": "关",
        "sentiment": -0.3,
        "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "笑",
+       "sentiment": 0.7,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_570b2eaab646.aspx"
@@ -18464,14 +18641,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "泪",
-       "sentiment": -0.6,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "河",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "泪",
+       "sentiment": -0.6,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_d9ede2ca81fa.aspx"
@@ -18507,9 +18684,14 @@
      "verb": "极目",
      "direction": null,
      "obj": null,
-     "sentiment": 0.0,
+     "sentiment": 0.25,
      "neutral": false,
      "spirit_words": [
+      {
+       "word": "龙",
+       "sentiment": 0.5,
+       "cluster": null
+      },
       {
        "word": "马",
        "sentiment": 0.0,
@@ -18561,8 +18743,8 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "归",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
@@ -18571,8 +18753,8 @@
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "归",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],

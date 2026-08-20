@@ -610,6 +610,40 @@
     .journey-audit-table td small { color: #94a3b8; }
     .journey-audit-table td .journey-grade { color: #07111f; }
     .journey-audit-table a { color: #67e8f9; text-decoration: underline; text-underline-offset: 3px; }
+    .offline-poem-reader { margin-top: 10px; border-top: 1px solid rgba(148,163,184,.2); }
+    .offline-poem-reader summary { padding: 7px 0; color: #67e8f9; cursor: pointer; }
+    .offline-poem-body { position: relative; padding: 4px 0 8px; color: #e2e8f0; white-space: pre-line; user-select: text;
+        font-family: "KaiTi", "STKaiti", serif; font-size: 15px; line-height: 1.9; }
+    ::highlight(offline-selection-active) { color: inherit; background: rgba(251,191,36,.34); }
+    .gloss-term { font: inherit; color: inherit; cursor: pointer; border: 0; border-bottom: 2px dotted #fb7185;
+        padding: 0 1px; background: rgba(251,113,133,.09); user-select: text; -webkit-user-select: text; }
+    .gloss-term:hover, .gloss-term:focus-visible, .gloss-term[aria-expanded="true"] { color: #fff; background: rgba(251,113,133,.18);
+        outline: 2px solid rgba(251,113,133,.35); outline-offset: 2px; }
+    .gloss-popover { position: fixed; z-index: 30; box-sizing: border-box;
+        width: min(320px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow-y: auto; padding: 13px 15px;
+        color: #e2e8f0; background: #101827; border: 1px solid #475569; border-left: 3px solid #fb7185;
+        box-shadow: 0 12px 30px rgba(0,0,0,.38); font-size: 12px; line-height: 1.7;
+        opacity: 0; transform: translateY(4px); transition: opacity 140ms ease, transform 140ms ease; }
+    .gloss-popover.is-open { opacity: 1; transform: translateY(0); }
+    .gloss-popover-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .gloss-popover-head strong { color: #fff; font-family: "KaiTi", "STKaiti", serif; font-size: 18px; }
+    .gloss-popover p { margin: 7px 0 0; }.gloss-popover p b { color: #fb7185; }
+    .gloss-popover span { display: inline-block; margin-top: 9px; padding: 1px 7px; color: #fda4af;
+        border: 1px solid #7f1d3b; font-size: 10px; }.gloss-popover small { display: block; margin-top: 8px;
+        color: #94a3b8; font-size: 10px; }.gloss-close { border: 0; background: transparent; color: #94a3b8;
+        cursor: pointer; font-size: 18px; line-height: 1; }.gloss-close:hover { color: #fff; }
+    .selection-toolbar { position: fixed; z-index: 31; box-sizing: border-box; display: flex; max-width: calc(100vw - 24px);
+        padding: 7px 12px; border: 1px solid #fb7185; color: #fff; background: #101827;
+        box-shadow: 0 8px 24px rgba(0,0,0,.38); opacity: 0; transform: translateY(4px);
+        transition: opacity 140ms ease, transform 140ms ease; }
+    .selection-toolbar.is-open { opacity: 1; transform: translateY(0); }
+    .selection-toolbar button { border: 0; padding: 0; color: inherit; background: transparent; cursor: pointer;
+        font: 600 12px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .selection-toolbar button:hover, .selection-toolbar button:focus-visible { background: #3f1d2e;
+        outline: 2px solid rgba(251,113,133,.4); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+        .gloss-popover, .selection-toolbar { transition: none; transform: none; }
+    }
     .box { padding-top: 12px !important; }
     @media (max-width: 960px) {
         .journey-layer-grid { grid-template-columns: 1fr; }
@@ -704,7 +738,7 @@
         <div class="journey-method-head">
             <span>EVIDENCE LEDGER</span>
             <h2>节点证据账本</h2>
-            <p>展开诗人名称可查看来源、置信度、生平处境归纳、文本证据及作品关联等级。</p>
+            <p>展开诗人名称可查看来源、置信度、生平处境归纳、文本证据及作品关联等级；作品单元可继续展开原诗学习。</p>
         </div>
         
             <details class="journey-audit-details">
@@ -721,7 +755,10 @@
                     <td>出蜀后沿长江东下，过荆门进入楚地漫游阶段。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李白年历</a><br><small>置信度 82%</small></td>
                     <td>青年远游<br><small>处境指数 26 · C 级人工编码</small></td>
-                    <td><strong>《渡荆门送别》</strong><br>壮游与恋乡（+0.48 / 73%）<br><small>“仍怜故乡水，万里送行舟”</small></td>
+                    <td><strong>《渡荆门送别》</strong><br>壮游与恋乡（+0.48 / 73%）<br><small>“仍怜故乡水，万里送行舟”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《渡荆门送别》原诗">渡远荆门外，来从楚国游。
+山随平野尽，江入大荒流。
+月下飞天镜，云生结海楼。
+仍怜故乡水，万里送行舟。</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 传统系年与诗题地名共同支持</td>
                 </tr>
                 
@@ -730,7 +767,8 @@
                     <td>在江夏黄鹤楼为孟浩然送行，是青年交游与江汉漫游的知名节点。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://open.cnkgraph.com/api/writing/25660" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·作品地点数据</a><br><small>置信度 93%</small></td>
                     <td>交游送别<br><small>处境指数 34 · C 级人工编码</small></td>
-                    <td><strong>《黄鹤楼送孟浩然之广陵》</strong><br>送别与情谊（-0.16 / 67%）<br><small>“孤帆远影碧空尽，唯见长江天际流”</small></td>
+                    <td><strong>《黄鹤楼送孟浩然之广陵》</strong><br>送别与情谊（-0.16 / 67%）<br><small>“孤帆远影碧空尽，唯见长江天际流”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《黄鹤楼送孟浩然之广陵》原诗">故人西辞黄鹤楼，烟花三月下扬州。
+孤帆远影碧空尽，唯见长江天际流。 </div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 作品地点数据与诗题直接支持</td>
                 </tr>
                 
@@ -739,7 +777,8 @@
                     <td>奉诏入长安，供奉翰林，进入宫廷文学活动中心。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李白年历</a><br><small>置信度 92%</small></td>
                     <td>入京待诏<br><small>处境指数 42 · C 级人工编码</small></td>
-                    <td><strong>《清平调·其一》</strong><br>华美与欣赏（+0.72 / 68%）<br><small>“云想衣裳花想容，春风拂槛露华浓”</small></td>
+                    <td><strong>《清平调·其一》</strong><br>华美与欣赏（+0.72 / 68%）<br><small>“云想衣裳花想容，春风拂槛露华浓”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《清平调·其一》原诗">云想衣裳花想容，春风拂槛露华浓。
+若非群玉山头见，会向瑶台月下逢。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 长安翰林时期代表作</td>
                 </tr>
                 
@@ -748,7 +787,12 @@
                     <td>离开长安，结束翰林供奉阶段，重新进入漫游生活。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李白年历</a><br><small>置信度 88%</small></td>
                     <td>仕途受挫<br><small>处境指数 78 · C 级人工编码</small></td>
-                    <td><strong>《行路难·其一》</strong><br>茫然中的坚信（+0.18 / 94%）<br><small>“长风破浪会有时，直挂云帆济沧海”</small></td>
+                    <td><strong>《行路难·其一》</strong><br>茫然中的坚信（+0.18 / 94%）<br><small>“长风破浪会有时，直挂云帆济沧海”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《行路难·其一》原诗">金樽清酒斗十千，玉盘珍羞直万钱。
+停杯投箸不能食，拔剑四顾心茫然。
+欲渡黄河冰塞川，将登太行雪满山。
+闲来垂钓碧溪上，忽复乘舟梦日边。
+行路难，行路难，多歧路，今安在？
+长风破浪会有时，直挂云帆济沧海。</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 传统上常系于离长安前后，精确时地属推定</td>
                 </tr>
                 
@@ -757,7 +801,13 @@
                     <td>游宣州，在谢朓楼一带留下送别与抒怀作品。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李白年历</a><br><small>置信度 84%</small></td>
                     <td>漫游与怀才<br><small>处境指数 62 · C 级人工编码</small></td>
-                    <td><strong>《宣州谢朓楼饯别校书叔云》</strong><br>烦忧与逸兴（-0.32 / 91%）<br><small>“抽刀断水水更流，举杯消愁愁更愁”</small></td>
+                    <td><strong>《宣州谢朓楼饯别校书叔云》</strong><br>烦忧与逸兴（-0.32 / 91%）<br><small>“抽刀断水水更流，举杯消愁愁更愁”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《宣州谢朓楼饯别校书叔云》原诗">弃我去者，昨日之日不可留；
+乱我心者，今日之日多烦忧。
+长风万里送秋雁，对此可以酣高楼。
+蓬莱文章建安骨，中间小谢又清发。
+俱怀逸兴壮思飞，欲上青天揽明月。
+抽刀断水水更流，举杯消愁愁更愁。
+人生在世不称意，明朝散发弄扁舟。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题地名直接支持，作年为年谱系年</td>
                 </tr>
                 
@@ -766,7 +816,8 @@
                     <td>流放夜郎途中遇赦，由白帝城东下返还江陵方向。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E7%99%BD" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李白年历</a><br><small>置信度 92%</small></td>
                     <td>遇赦东归<br><small>处境指数 68 · C 级人工编码</small></td>
-                    <td><strong>《早发白帝城》</strong><br>释然与轻快（+0.86 / 88%）<br><small>“两岸猿声啼不住，轻舟已过万重山”</small></td>
+                    <td><strong>《早发白帝城》</strong><br>释然与轻快（+0.86 / 88%）<br><small>“两岸猿声啼不住，轻舟已过万重山”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《早发白帝城》原诗">朝辞白帝彩云间，千里江陵一日还。
+两岸猿声啼不住，轻舟已过万重山。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题、行程与传统系年相互支持</td>
                 </tr>
                 </tbody>
@@ -788,7 +839,10 @@
                     <td>漫游齐赵，登临泰山地区，是青年壮游阶段的代表节点。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 84%</small></td>
                     <td>青年壮游<br><small>处境指数 22 · C 级人工编码</small></td>
-                    <td><strong>《望岳》</strong><br>壮志与昂扬（+0.82 / 83%）<br><small>“会当凌绝顶，一览众山小”</small></td>
+                    <td><strong>《望岳》</strong><br>壮志与昂扬（+0.82 / 83%）<br><small>“会当凌绝顶，一览众山小”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《望岳》原诗">岱宗夫如何？齐鲁青未了。
+造化钟神秀，阴阳割昏晓。
+荡胸生曾云，决眦入归鸟。
+会当凌绝顶，一览众山小。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 传统系年与山川地名支持</td>
                 </tr>
                 
@@ -797,7 +851,23 @@
                     <td>客居长安求仕，长期接触京畿征役、贫富与民生现实。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 83%</small></td>
                     <td>困守长安<br><small>处境指数 73 · C 级人工编码</small></td>
-                    <td><strong>《兵车行》</strong><br>悲愤与民生关切（-0.86 / 96%）<br><small>“牵衣顿足拦道哭，哭声直上干云霄”</small></td>
+                    <td><strong>《兵车行》</strong><br>悲愤与民生关切（-0.86 / 96%）<br><small>“牵衣顿足拦道哭，哭声直上干云霄”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《兵车行》原诗">车辚辚，马萧萧，行人弓箭各在腰。
+耶娘妻子走相送，尘埃不见咸阳桥。
+牵衣顿足拦道哭，哭声直上干云霄。
+道旁过者问行人，行人但云点行频。
+或从十五北防河，便至四十西营田。
+去时里正与裹头，归来头白还戍边。
+边庭流血成海水，武皇开边意未已。
+君不闻汉家山东二百州，千村万落生荆杞。
+纵有健妇把锄犁，禾生陇亩无东西。
+况复秦兵耐苦战，被驱不异犬与鸡。
+长者虽有问，役夫敢申恨？
+且如今年冬，未休关西卒。
+县官急索租，租税从何出？
+信知生男恶，反是生女好。
+生女犹得嫁比邻，生男埋没随百草。
+君不见，青海头，古来白骨无人收。
+新鬼烦冤旧鬼哭，天阴雨湿声啾啾！</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 长安时期的代表作，具体年份属传统系年推定</td>
                 </tr>
                 
@@ -806,7 +876,10 @@
                     <td>安史之乱中困居被占领的长安，与家人分离。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 95%</small></td>
                     <td>战乱困城<br><small>处境指数 98 · C 级人工编码</small></td>
-                    <td><strong>《春望》</strong><br>忧国与怀家（-0.92 / 98%）<br><small>“感时花溅泪，恨别鸟惊心”</small></td>
+                    <td><strong>《春望》</strong><br>忧国与怀家（-0.92 / 98%）<br><small>“感时花溅泪，恨别鸟惊心”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《春望》原诗">国破山河在，城春草木深。
+感时花溅泪，恨别鸟惊心。
+烽火连三月，家书抵万金。
+白头搔更短，浑欲不胜簪。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 作年、地点与战乱背景均有年谱支持</td>
                 </tr>
                 
@@ -815,7 +888,10 @@
                     <td>弃官西行，居秦州时正值战乱未息、兄弟分散。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 91%</small></td>
                     <td>弃官漂泊<br><small>处境指数 90 · C 级人工编码</small></td>
-                    <td><strong>《月夜忆舍弟》</strong><br>怀亲与忧乱（-0.88 / 93%）<br><small>“有弟皆分散，无家问死生”</small></td>
+                    <td><strong>《月夜忆舍弟》</strong><br>怀亲与忧乱（-0.88 / 93%）<br><small>“有弟皆分散，无家问死生”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《月夜忆舍弟》原诗">戍鼓断人行，边秋一雁声。
+露从今夜白，月是故乡明。
+有弟皆分散，无家问死生。
+寄书长不达，况乃未休兵。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 秦州居留与作品系年直接支持</td>
                 </tr>
                 
@@ -824,7 +900,10 @@
                     <td>定居成都草堂后经历秋风破屋，生活暂定中仍有贫困。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 95%</small></td>
                     <td>草堂贫困<br><small>处境指数 85 · C 级人工编码</small></td>
-                    <td><strong>《茅屋为秋风所破歌》</strong><br>苦难中的悲悯（-0.48 / 97%）<br><small>“安得广厦千万间，大庇天下寒士俱欢颜”</small></td>
+                    <td><strong>《茅屋为秋风所破歌》</strong><br>苦难中的悲悯（-0.48 / 97%）<br><small>“安得广厦千万间，大庇天下寒士俱欢颜”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《茅屋为秋风所破歌》原诗">八月秋高风怒号，卷我屋上三重茅。茅飞渡江洒江郊，高者挂罥长林梢，下者飘转沉塘坳。
+南村群童欺我老无力，忍能对面为盗贼。公然抱茅入竹去，唇焦口燥呼不得，归来倚杖自叹息。
+俄顷风定云墨色，秋天漠漠向昏黑。布衾多年冷似铁，娇儿恶卧踏里裂。床头屋漏无干处，雨脚如麻未断绝。自经丧乱少睡眠，长夜沾湿何由彻！
+安得广厦千万间，大庇天下寒士俱欢颜！风雨不动安如山。呜呼！何时眼前突兀见此屋，吾庐独破受冻死亦足！</div></details></td>
                     <td><span class="journey-grade journey-grade-A">A</span> 作品自述与草堂事件直接支持</td>
                 </tr>
                 
@@ -833,7 +912,10 @@
                     <td>寓居夔州，面对巫山巫峡景观，集中写作《秋兴》等组诗。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 95%</small></td>
                     <td>夔州寓居<br><small>处境指数 82 · C 级人工编码</small></td>
-                    <td><strong>《秋兴八首·其一》</strong><br>故园之思（-0.79 / 90%）<br><small>“丛菊两开他日泪，孤舟一系故园心”</small></td>
+                    <td><strong>《秋兴八首·其一》</strong><br>故园之思（-0.79 / 90%）<br><small>“丛菊两开他日泪，孤舟一系故园心”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《秋兴八首·其一》原诗">玉露凋伤枫树林，巫山巫峡气萧森。
+江间波浪兼天涌，塞上风云接地阴。
+丛菊两开他日泪，孤舟一系故园心。
+寒衣处处催刀尺，白帝城高急暮砧。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 作品地名、景物与夔州系年直接支持</td>
                 </tr>
                 
@@ -842,7 +924,10 @@
                     <td>出川漂泊江湘，年末登岳阳楼，此时年老多病且仍忧战事。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%9C%E7%94%AB" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·杜甫年历</a><br><small>置信度 94%</small></td>
                     <td>江湘晚泊<br><small>处境指数 93 · C 级人工编码</small></td>
-                    <td><strong>《登岳阳楼》</strong><br>孤病与忧时（-0.90 / 95%）<br><small>“戎马关山北，凭轩涕泗流”</small></td>
+                    <td><strong>《登岳阳楼》</strong><br>孤病与忧时（-0.90 / 95%）<br><small>“戎马关山北，凭轩涕泗流”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《登岳阳楼》原诗">昔闻洞庭水，今上岳阳楼。
+吴楚东南坼，乾坤日夜浮。
+亲朋无一字，老病有孤舟。
+戎马关山北，凭轩涕泗流。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题地名与系年直接支持</td>
                 </tr>
                 </tbody>
@@ -864,7 +949,10 @@
                     <td>进士及第，进入以长安为中心的仕宦与文学生活。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·白居易年历</a><br><small>置信度 90%</small></td>
                     <td>科举入仕<br><small>处境指数 38 · C 级人工编码</small></td>
-                    <td><strong>《赋得古原草送别》</strong><br>生命韧性与送别（+0.34 / 72%）<br><small>“野火烧不尽，春风吹又生”</small></td>
+                    <td><strong>《赋得古原草送别》</strong><br>生命韧性与送别（+0.34 / 72%）<br><small>“野火烧不尽，春风吹又生”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《赋得古原草送别》原诗">离离原上草，一岁一枯荣。
+野火烧不尽，春风吹又生。
+远芳侵古道，晴翠接荒城。
+又送王孙去，萋萋满别情。</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 只作早年诗风代表，不声称为 800 年长安所作</td>
                 </tr>
                 
@@ -873,7 +961,19 @@
                     <td>任盩厔县尉期间接触农事与赋税现实，写下关切田家生计的作品。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·白居易年历</a><br><small>置信度 92%</small></td>
                     <td>基层仕宦<br><small>处境指数 52 · C 级人工编码</small></td>
-                    <td><strong>《观刈麦》</strong><br>悲悯与自愧（-0.72 / 89%）<br><small>“念此私自愧，尽日不能忘”</small></td>
+                    <td><strong>《观刈麦》</strong><br>悲悯与自愧（-0.72 / 89%）<br><small>“念此私自愧，尽日不能忘”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《观刈麦》原诗">田家少闲月，五月人倍忙。
+夜来食风起，小麦覆陇黄。
+妇姑荷箪食，童稚携壶浆。
+相随饷田去，丁天在食冈。
+足蒸暑土气，背灼炎天光。
+力尽不知热，但惜夏日长。
+复有贫妇人，抱子在其旁。
+右手秉遗穗，左臂悬敝筐。
+听其相顾言，闻者为悲伤。
+家田输税尽，拾此充饥肠。
+今我何功德？曾不事农桑。
+吏禄三百石，岁晏有余粮。
+念此私自愧，尽日不能忘。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 任官地、作年与诗中自述相互支持</td>
                 </tr>
                 
@@ -882,7 +982,51 @@
                     <td>贬为江州司马；次年秋在浔阳江头送客，作《琵琶行》。</td>
                     <td><span class="journey-grade journey-grade-A">A</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">《琵琶行》作者自序，cnkgraph 年历辅助校验</a><br><small>置信度 99%</small></td>
                     <td>贬谪江州<br><small>处境指数 88 · C 级人工编码</small></td>
-                    <td><strong>《琵琶行》</strong><br>沦落与共情（-0.86 / 97%）<br><small>“同是天涯沦落人，相逢何必曾相识”</small></td>
+                    <td><strong>《琵琶行》</strong><br>沦落与共情（-0.86 / 97%）<br><small>“同是天涯沦落人，相逢何必曾相识”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《琵琶行》原诗">元和十年，予左迁九江郡司马。明年秋，送客湓浦口，闻舟中夜弹琵琶者，听其音，铮铮然有京都声。问其人，本长安倡女，尝学琵琶于穆、曹二善才，年长色衰，委身为贾人妇。遂命酒，使快弹数曲。曲罢悯然，自叙少小时欢乐事，今漂沦憔悴，转徙于江湖间。予出官二年，恬然自安，感斯人言，是夕始觉有迁谪意。因为长句，歌以赠之，凡六百一十六言，命曰《琵琶行》。
+浔阳江头夜送客，枫叶荻花秋瑟瑟。
+主人下马客在船，举酒欲饮无管弦。
+醉不成欢惨将别，别时茫茫江浸月。
+忽闻水上琵琶声，主人忘归客不发。
+寻声暗问弹者谁，琵琶声停欲语迟。
+移船相近邀相见，添酒回灯重开宴。
+千呼万唤始出来，犹抱琵琶半遮面。
+转轴拨弦三两声，未成曲调先有情。
+弦弦掩抑声声思，似诉平生不得志。
+低眉信手续续弹，说尽心中无限事。
+轻拢慢捻抹复挑，初为《霓裳》后《六幺》。
+大弦嘈嘈如急雨，小弦切切如私语。
+嘈嘈切切错杂弹，大珠小珠落玉盘。
+间关莺语花底滑，幽咽泉流冰下难。
+冰泉冷涩弦凝绝，凝绝不通声暂歇。
+别有幽愁暗恨生，此时无声胜有声。
+银瓶乍破水浆迸，铁骑突出刀枪鸣。
+曲终收拨当心画，四弦一声如裂帛。
+东船西舫悄无言，唯见江心秋月白。
+沉吟放拨插弦中，整顿衣裳起敛容。
+自言本是京城女，家在虾蟆陵下住。
+十三学得琵琶成，名属教坊第一部。
+曲罢曾教善才服，妆成每被秋娘妒。
+五陵年少争缠头，一曲红绡不知数。
+钿头银篦击节碎，血色罗裙翻酒污。
+今年欢笑复明年，秋月春风等闲度。
+弟走从军阿姨死，暮去朝来颜色故。
+门前冷落鞍马稀，老大嫁作商人妇。
+商人重利轻别离，前月浮梁买茶去。
+去来江口守空船，绕船月明江水寒。
+夜深忽梦少年事，梦啼妆泪红阑干。
+我闻琵琶已叹息，又闻此语重唧唧。
+同是天涯沦落人，相逢何必曾相识！
+我从去年辞帝京，谪居卧病浔阳城。
+浔阳地僻无音乐，终岁不闻丝竹声。
+住近湓江地低湿，黄芦苦竹绕宅生。
+其间旦暮闻何物？杜鹃啼血猿哀鸣。
+春江花朝秋月夜，往往取酒还独倾。
+岂无山歌与村笛，呕哑嘲哳难为听。
+今夜闻君琵琶语，如听仙乐耳暂明。
+莫辞更坐弹一曲，为君翻作《琵琶行》。
+感我此言良久立，却坐促弦弦转急。
+凄凄不似向前声，满座重闻皆掩泣。
+座中泣下谁最多？江州司马青衫湿。</div></details></td>
                     <td><span class="journey-grade journey-grade-A">A</span> 作者自序直接支持时间、地点和贬谪背景</td>
                 </tr>
                 
@@ -891,7 +1035,8 @@
                     <td>江州时期游庐山大林寺，从山中物候差异获得诗意。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·白居易年历</a><br><small>置信度 88%</small></td>
                     <td>贬居自遣<br><small>处境指数 64 · C 级人工编码</small></td>
-                    <td><strong>《大林寺桃花》</strong><br>惊喜与新发现（+0.74 / 71%）<br><small>“长恨春归无觅处，不知转入此中来”</small></td>
+                    <td><strong>《大林寺桃花》</strong><br>惊喜与新发现（+0.74 / 71%）<br><small>“长恨春归无觅处，不知转入此中来”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《大林寺桃花》原诗">人间四月芳菲尽，山寺桃花始盛开。
+长恨春归无觅处，不知转入此中来。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题地点与江州时期系年支持</td>
                 </tr>
                 
@@ -900,7 +1045,10 @@
                     <td>出任杭州刺史，治理水利并频繁游览西湖地区。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·白居易年历</a><br><small>置信度 96%</small></td>
                     <td>杭州治郡<br><small>处境指数 46 · C 级人工编码</small></td>
-                    <td><strong>《钱塘湖春行》</strong><br>春日欣悦（+0.88 / 78%）<br><small>“最爱湖东行不足，绿杨阴里白沙堤”</small></td>
+                    <td><strong>《钱塘湖春行》</strong><br>春日欣悦（+0.88 / 78%）<br><small>“最爱湖东行不足，绿杨阴里白沙堤”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《钱塘湖春行》原诗">孤山寺北贾亭西，水面初平云脚低。
+几处早莺争暖树，谁家新燕啄春泥。
+乱花渐欲迷人眼，浅草才能没马蹄。
+最爱湖东行不足，绿杨阴里白沙堤。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 任官时段与诗题地名直接支持</td>
                 </tr>
                 
@@ -909,7 +1057,7 @@
                     <td>出任苏州刺史，延续江南地方仕宦经历，后因病离任。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E7%99%BD%E5%B1%85%E6%98%93" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·白居易年历</a><br><small>置信度 90%</small></td>
                     <td>江南仕宦<br><small>处境指数 56 · C 级人工编码</small></td>
-                    <td><strong>《忆江南》</strong><br>欣赏与怀念（+0.76 / 80%）<br><small>“江南好，风景旧曾谙”</small></td>
+                    <td><strong>《忆江南》</strong><br>欣赏与怀念（+0.76 / 80%）<br><small>“江南好，风景旧曾谙”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《忆江南》原诗">江南好，风景旧曾谙。日出江花红胜火，春来江水绿如蓝。能不忆江南？</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 属江南官宦经验的晚年回忆，不声称在苏州任上写成</td>
                 </tr>
                 </tbody>
@@ -931,7 +1079,10 @@
                     <td>赴凤翔签判任途中重经渑池，回忆早年入京时的旅途踪迹。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·苏轼年历</a><br><small>置信度 92%</small></td>
                     <td>初仕远行<br><small>处境指数 40 · C 级人工编码</small></td>
-                    <td><strong>《和子由渑池怀旧》</strong><br>人生无常与怀旧（-0.12 / 70%）<br><small>“人生到处知何似，应似飞鸿踏雪泥”</small></td>
+                    <td><strong>《和子由渑池怀旧》</strong><br>人生无常与怀旧（-0.12 / 70%）<br><small>“人生到处知何似，应似飞鸿踏雪泥”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《和子由渑池怀旧》原诗">人生到处知何似，应似飞鸿踏雪泥。
+泥上偶然留指爪，鸿飞那复计东西。
+老僧已死成新塔，坏壁无由见旧题。
+往日崎岖还记否，路长人困蹇驴嘶。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题、诗中旧迹与赴任行程直接支持</td>
                 </tr>
                 
@@ -940,7 +1091,8 @@
                     <td>出任杭州通判，经历西湖山水与地方政务生活。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·苏轼年历</a><br><small>置信度 95%</small></td>
                     <td>杭州外任<br><small>处境指数 48 · C 级人工编码</small></td>
-                    <td><strong>《饮湖上初晴后雨》</strong><br>山水欣赏（+0.84 / 73%）<br><small>“欲把西湖比西子，淡妆浓抹总相宜”</small></td>
+                    <td><strong>《饮湖上初晴后雨》</strong><br>山水欣赏（+0.84 / 73%）<br><small>“欲把西湖比西子，淡妆浓抹总相宜”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《饮湖上初晴后雨》原诗">水光潋滟晴方好，山色空蒙雨亦奇。
+欲把西湖比西子，淡妆浓抹总相宜。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 杭州任期与西湖景观直接支持</td>
                 </tr>
                 
@@ -949,7 +1101,8 @@
                     <td>知密州，组织出猎并在次年中秋怀念弟弟苏辙。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·苏轼年历</a><br><small>置信度 96%</small></td>
                     <td>密州治郡<br><small>处境指数 55 · C 级人工编码</small></td>
-                    <td><strong>《江城子·密州出猎》</strong><br>豪迈与报国志（+0.81 / 92%）<br><small>“会挽雕弓如满月，西北望，射天狼”</small></td>
+                    <td><strong>《江城子·密州出猎》</strong><br>豪迈与报国志（+0.81 / 92%）<br><small>“会挽雕弓如满月，西北望，射天狼”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《江城子·密州出猎》原诗">老夫聊发少年狂，左牵黄，右擎苍，锦帽貂裘，千骑卷平冈。为报倾城随太守，亲射虎，看孙郎。
+酒酣胸胆尚开张。鬓微霜，又何妨！持节云中，何日遣冯唐？会挽雕弓如满月，西北望，射天狼。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 词题与密州知州任期直接支持</td>
                 </tr>
                 
@@ -958,7 +1111,9 @@
                     <td>乌台诗案后贬为黄州团练副使，在黄州生活与写作至 1084 年。</td>
                     <td><span class="journey-grade journey-grade-A">A</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">《定风波》词序、《赤壁赋》纪年与 cnkgraph 苏轼年历</a><br><small>置信度 99%</small></td>
                     <td>黄州贬居<br><small>处境指数 94 · C 级人工编码</small></td>
-                    <td><strong>《定风波·莫听穿林打叶声》</strong><br>旷达与自我调适（+0.52 / 91%）<br><small>“一蓑烟雨任平生”</small></td>
+                    <td><strong>《定风波·莫听穿林打叶声》</strong><br>旷达与自我调适（+0.52 / 91%）<br><small>“一蓑烟雨任平生”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《定风波·莫听穿林打叶声》原诗">三月七日，沙湖道中遇雨，雨具先去，同行皆狼狈，余独不觉。已而遂晴，故作此。
+莫听穿林打叶声，何妨吟啸且徐行。竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
+料峭春风吹酒醒，微冷，山头斜照却相迎。回首向来萧瑟处，归去，也无风雨也无晴。</div></details></td>
                     <td><span class="journey-grade journey-grade-A">A</span> 词序直接给出沙湖道中和作日，属黄州贬居时期</td>
                 </tr>
                 
@@ -967,7 +1122,8 @@
                     <td>离黄州赴汝州途中游庐山，留下对观察角度与认识局限的思考。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·苏轼年历</a><br><small>置信度 95%</small></td>
                     <td>离贬转任<br><small>处境指数 58 · C 级人工编码</small></td>
-                    <td><strong>《题西林壁》</strong><br>观照与哲思（+0.28 / 66%）<br><small>“不识庐山真面目，只缘身在此山中”</small></td>
+                    <td><strong>《题西林壁》</strong><br>观照与哲思（+0.28 / 66%）<br><small>“不识庐山真面目，只缘身在此山中”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《题西林壁》原诗">横看成岭侧成峰，远近高低各不同。
+不识庐山真面目，只缘身在此山中。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题与游庐山行程直接支持</td>
                 </tr>
                 
@@ -976,7 +1132,8 @@
                     <td>再遭贬谪至惠州，进入晚年岭南贬居阶段。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E8%8B%8F%E8%BD%BC" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·苏轼年历</a><br><small>置信度 92%</small></td>
                     <td>岭南再贬<br><small>处境指数 96 · C 级人工编码</small></td>
-                    <td><strong>《蝶恋花·春景》</strong><br>旷达语句与失落反差（-0.20 / 72%）<br><small>“天涯何处无芳草”</small></td>
+                    <td><strong>《蝶恋花·春景》</strong><br>旷达语句与失落反差（-0.20 / 72%）<br><small>“天涯何处无芳草”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《蝶恋花·春景》原诗">花褪残红青杏小，燕子飞时，绿涯人家绕。枝上柳绵吹又少。天涯何处无芳草。
+墙里秋千墙外道，墙外行人，墙里佳人笑。笑渐不闻声渐悄。多情却被无情恼。</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 仅作天涯意识的文本对照，不声称为惠州所作</td>
                 </tr>
                 </tbody>
@@ -998,7 +1155,8 @@
                     <td>传统年谱将沈园重逢与《钗头凤》系于绍兴二十五年前后。</td>
                     <td><span class="journey-grade journey-grade-C">C</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">项目组依据 cnkgraph 陆游年历与传统系年推定</a><br><small>置信度 68%</small></td>
                     <td>婚恋离索<br><small>处境指数 79 · C 级人工编码</small></td>
-                    <td><strong>《钗头凤·红酥手》</strong><br>离索与哀痛（-0.91 / 97%）<br><small>“一怀愁绪，几年离索”</small></td>
+                    <td><strong>《钗头凤·红酥手》</strong><br>离索与哀痛（-0.91 / 97%）<br><small>“一怀愁绪，几年离索”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《钗头凤·红酥手》原诗">红酥手，黄縢酒，满城春色宫墙柳。东风恶，欢情薄。一怀愁绪，几年离索。错、错、错。
+春如旧，人空瘦，泪痕红浥鲛绡透。桃花落，闲池阁。山盟虽在，锦书难托。莫、莫、莫！</div></details></td>
                     <td><span class="journey-grade journey-grade-C">C</span> 传统上与沈园重逢关联，具体系年属推定</td>
                 </tr>
                 
@@ -1007,7 +1165,10 @@
                     <td>罢职闲居山阴三山，游访乡村，写下农家社日与山水行路经验。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·陆游年历</a><br><small>置信度 93%</small></td>
                     <td>罢职乡居<br><small>处境指数 63 · C 级人工编码</small></td>
-                    <td><strong>《游山西村》</strong><br>豁然与乡村欣悦（+0.75 / 82%）<br><small>“山重水复疑无路，柳暗花明又一村”</small></td>
+                    <td><strong>《游山西村》</strong><br>豁然与乡村欣悦（+0.75 / 82%）<br><small>“山重水复疑无路，柳暗花明又一村”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《游山西村》原诗">莫笑农家腊酒浑，丰年留客足鸡豚。
+山重水复疑无路，柳暗花明又一村。
+箫鼓追随春社近，衣冠简朴古风存。
+从今若许闲乘月，拄杖无时夜叩门。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 山阴闲居时段、乡村出游与作品系年支持</td>
                 </tr>
                 
@@ -1016,7 +1177,8 @@
                     <td>入四川宣抚使王炎幕府，赴南郑参与西北前线军务，后经剑门入蜀。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·陆游年历</a><br><small>置信度 96%</small></td>
                     <td>南郑军幕<br><small>处境指数 83 · C 级人工编码</small></td>
-                    <td><strong>《剑门道中遇微雨》</strong><br>壮志未酬与自嘲（-0.42 / 78%）<br><small>“此身合是诗人未？细雨骑驴入剑门”</small></td>
+                    <td><strong>《剑门道中遇微雨》</strong><br>壮志未酬与自嘲（-0.42 / 78%）<br><small>“此身合是诗人未？细雨骑驴入剑门”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《剑门道中遇微雨》原诗">衣上征尘杂酒痕，远游无处不消魂。
+此身合是诗人未？细雨骑驴入剑门。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 同年离南郑后经剑门入蜀，诗题与行程直接支持</td>
                 </tr>
                 
@@ -1025,7 +1187,10 @@
                     <td>奉诏入临安等候召见，久居京华客舍，后出任严州。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·陆游年历</a><br><small>置信度 97%</small></td>
                     <td>客京待召<br><small>处境指数 74 · C 级人工编码</small></td>
-                    <td><strong>《临安春雨初霁》</strong><br>疏离与思归（-0.50 / 81%）<br><small>“素衣莫起风尘叹，犹及清明可到家”</small></td>
+                    <td><strong>《临安春雨初霁》</strong><br>疏离与思归（-0.50 / 81%）<br><small>“素衣莫起风尘叹，犹及清明可到家”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《临安春雨初霁》原诗">世味年来薄似纱，谁令骑马客京华。
+小楼一夜听春雨，深巷明朝卖杏花。
+矮纸斜行闲作草，晴窗细乳戏分茶。
+素衣莫起风尘叹，犹及清明可到家。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 诗题、客京经历和作品系年直接支持</td>
                 </tr>
                 
@@ -1034,7 +1199,8 @@
                     <td>罢官闲居山阴，在风雨夜中仍以军旅与北伐为梦。</td>
                     <td><span class="journey-grade journey-grade-A">A</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">《十一月四日风雨大作》题日与 cnkgraph 陆游年历</a><br><small>置信度 97%</small></td>
                     <td>罢官归里<br><small>处境指数 77 · C 级人工编码</small></td>
-                    <td><strong>《十一月四日风雨大作·其二》</strong><br>忧国与壮志（+0.32 / 96%）<br><small>“夜阑卧听风吹雨，铁马冰河入梦来”</small></td>
+                    <td><strong>《十一月四日风雨大作·其二》</strong><br>忧国与壮志（+0.32 / 96%）<br><small>“夜阑卧听风吹雨，铁马冰河入梦来”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《十一月四日风雨大作·其二》原诗">僵卧孤村不自哀，尚思为国戍轮台。
+夜阑卧听风吹雨，铁马冰河入梦来。</div></details></td>
                     <td><span class="journey-grade journey-grade-A">A</span> 作品题日与山阴闲居年谱直接支持</td>
                 </tr>
                 
@@ -1043,7 +1209,8 @@
                     <td>晚年再游沈园，回忆数十年前的人事与旧迹。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·陆游年历</a><br><small>置信度 94%</small></td>
                     <td>晚年怀旧<br><small>处境指数 69 · C 级人工编码</small></td>
-                    <td><strong>《沈园二首·其一》</strong><br>哀伤与追忆（-0.88 / 92%）<br><small>“伤心桥下春波绿，曾是惊鸿照影来”</small></td>
+                    <td><strong>《沈园二首·其一》</strong><br>哀伤与追忆（-0.88 / 92%）<br><small>“伤心桥下春波绿，曾是惊鸿照影来”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《沈园二首·其一》原诗">城上斜阳画角哀，沈园非复旧池台。
+伤心桥下春波绿，曾是惊鸿照影来。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 作品系年与诗题地点直接支持</td>
                 </tr>
                 
@@ -1052,7 +1219,8 @@
                     <td>晚年卧病山阴，临终前作《示儿》，以国家统一之望嘱咐后人。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E9%99%86%E6%B8%B8" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·陆游年历</a><br><small>置信度 93%</small></td>
                     <td>临终未忘中原<br><small>处境指数 94 · C 级人工编码</small></td>
-                    <td><strong>《示儿》</strong><br>遗憾与不改志愿（-0.38 / 98%）<br><small>“王师北定中原日，家祭无忘告乃翁”</small></td>
+                    <td><strong>《示儿》</strong><br>遗憾与不改志愿（-0.38 / 98%）<br><small>“王师北定中原日，家祭无忘告乃翁”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《示儿》原诗">死去元知万事空，但悲不见九州同。
+王师北定中原日，家祭无忘告乃翁。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 临终作品的传统系年与山阴晚年居所支持</td>
                 </tr>
                 </tbody>
@@ -1074,7 +1242,8 @@
                     <td>居京期间，赵明诚于七月出游；年谱将《一剪梅》系于此年送别情境。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 82%</small></td>
                     <td>汴京婚后生活<br><small>处境指数 35 · C 级人工编码</small></td>
-                    <td><strong>《一剪梅·红藕香残玉簟秋》</strong><br>相思与闲愁（-0.42 / 77%）<br><small>“一种相思，两处闲愁”</small></td>
+                    <td><strong>《一剪梅·红藕香残玉簟秋》</strong><br>相思与闲愁（-0.42 / 77%）<br><small>“一种相思，两处闲愁”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《一剪梅·红藕香残玉簟秋》原诗">红藕香残玉簟秋。轻解罗裳，独上兰舟。云中谁寄锦书来？雁字回时，月满西楼。
+花自飘零水自流。一种相思，两处闲愁。此情无计可消除，才下眉头，却上心头。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 年谱条目明确记1103年7月有送别词《一剪梅》</td>
                 </tr>
                 
@@ -1083,7 +1252,8 @@
                     <td>屏居青州期间，重阳日赵明诚游仰天山，年谱记李清照作《醉花阴》。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 88%</small></td>
                     <td>青州屏居<br><small>处境指数 46 · C 级人工编码</small></td>
-                    <td><strong>《醉花阴·薄雾浓云愁永昼》</strong><br>重阳离思（-0.65 / 84%）<br><small>“莫道不销魂，帘卷西风，人比黄花瘦”</small></td>
+                    <td><strong>《醉花阴·薄雾浓云愁永昼》</strong><br>重阳离思（-0.65 / 84%）<br><small>“莫道不销魂，帘卷西风，人比黄花瘦”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《醉花阴·薄雾浓云愁永昼》原诗">薄雾浓云愁永昼，瑞脑销金兽。佳节又重阳，玉枕纱厨，半夜凉初透。
+东篱把酒黄昏后，有暗香盈袖。莫道不销魂，帘卷西风，人比黄花瘦。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 年谱条目明确记1108年重阳日作《醉花阴》</td>
                 </tr>
                 
@@ -1092,7 +1262,10 @@
                     <td>青州居住期内，赵明诚于九月出游，年谱将《凤凰台上忆吹箫》系于此时。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 87%</small></td>
                     <td>青州离别情境<br><small>处境指数 48 · C 级人工编码</small></td>
-                    <td><strong>《凤凰台上忆吹箫·香冷金猊》</strong><br>离怀与凝望（-0.70 / 87%）<br><small>“生怕离怀别苦，多少事、欲说还休”</small></td>
+                    <td><strong>《凤凰台上忆吹箫·香冷金猊》</strong><br>离怀与凝望（-0.70 / 87%）<br><small>“生怕离怀别苦，多少事、欲说还休”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《凤凰台上忆吹箫·香冷金猊》原诗">香冷金猊，被翻红浪，起来慵自梳头。任宝奁尘满，日上帘钩。生怕离怀别苦，多少事、欲说还休。新来瘦，非干病酒，不是悲秋。
+休休，这回去也，千万遍《阳关》，也则难留。念武陵人远，烟锁秦楼。惟有楼前流水，应念我、终日凝眸。凝眸处，从今又添，一段新愁。
+(香冷金猊，被翻红浪，起来人未梳头。任宝奁闲掩，日上帘钩。生怕闲愁暗恨，多少事、欲说还休。今年瘦，非干病酒，不是悲秋。
+明朝，者回去也，千万遍阳关，也即难留。念武陵春晚，云锁重楼。记取楼前绿水，应念我、终日凝眸。凝眸处，从今更数，几段新愁。版本二)</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 年谱条目明确将作品系于1109年赵明诚出游</td>
                 </tr>
                 
@@ -1101,7 +1274,8 @@
                     <td>秋赴莱州途中经过昌乐，宿馆并作词寄姊妹。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 91%</small></td>
                     <td>赴莱州途中<br><small>处境指数 58 · C 级人工编码</small></td>
-                    <td><strong>《蝶恋花·晚止昌乐馆寄姊妹》</strong><br>惜别与旅愁（-0.56 / 78%）<br><small>“人道山长山又断，萧萧微雨闻孤馆”</small></td>
+                    <td><strong>《蝶恋花·晚止昌乐馆寄姊妹》</strong><br>惜别与旅愁（-0.56 / 78%）<br><small>“人道山长山又断，萧萧微雨闻孤馆”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《蝶恋花·晚止昌乐馆寄姊妹》原诗">泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。人道山长山又断，萧萧微雨闻孤馆。
+惜别伤离方寸乱，忘了临行，酒盏深和浅。好把音书凭过雁，东莱不似蓬莱远。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 题名地名、寄赠对象与年谱昌乐条目相互支持</td>
                 </tr>
                 
@@ -1110,7 +1284,8 @@
                     <td>南渡途中舟经乌江，年谱记其赋诗吊项羽并讽现实。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 84%</small></td>
                     <td>南渡行程<br><small>处境指数 89 · C 级人工编码</small></td>
-                    <td><strong>《夏日绝句》</strong><br>激越与讽喻（+0.18 / 94%）<br><small>“生当作人杰，死亦为鬼雄”</small></td>
+                    <td><strong>《夏日绝句》</strong><br>激越与讽喻（+0.18 / 94%）<br><small>“生当作人杰，死亦为鬼雄”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《夏日绝句》原诗">生当作人杰，死亦为鬼雄。
+至今思项羽，不肯过江东。</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 年谱乌江吊项羽条目与诗中项羽、江东意象相互支持</td>
                 </tr>
                 
@@ -1119,7 +1294,8 @@
                     <td>晚年居临安，年谱将《声声慢》系于1147年。</td>
                     <td><span class="journey-grade journey-grade-B">B</span> <a href="https://cnkgraph.com/Map/PoetLife?author=%E6%9D%8E%E6%B8%85%E7%85%A7" target="_blank" rel="noopener noreferrer">cnkgraph 唐宋文学编年地图·李清照年历（据徐培均《李清照年谱》）</a><br><small>置信度 89%</small></td>
                     <td>临安晚居<br><small>处境指数 82 · C 级人工编码</small></td>
-                    <td><strong>《声声慢·寻寻觅觅》</strong><br>深愁与孤寂（-0.92 / 98%）<br><small>“这次第，怎一个愁字了得”</small></td>
+                    <td><strong>《声声慢·寻寻觅觅》</strong><br>深愁与孤寂（-0.92 / 98%）<br><small>“这次第，怎一个愁字了得”</small><details class="offline-poem-reader"><summary>查看收录原诗</summary><div class="offline-poem-body" aria-label="《声声慢·寻寻觅觅》原诗">寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还寒时候，最难将息。三杯两盏淡酒，怎敌他、晚来风急！雁过也，正伤心，却是旧时相识。
+满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，独自怎生得黑？梧桐更兼细雨，到黄昏、点点滴滴。这次第，怎一个愁字了得！</div></details></td>
                     <td><span class="journey-grade journey-grade-B">B</span> 年谱条目明确记1147年临安作《声声慢》</td>
                 </tr>
                 </tbody>
@@ -3962,5 +4138,308 @@
         }());
     </script>
 
+<script id="journey-emotion-gloss-script">
+(function(config, glossary) {
+  "use strict";
+  var byTerm = {};
+  Object.keys(glossary || {}).forEach(function(id) {
+    var entry = glossary[id];
+    if (entry && entry.term) byTerm[entry.term] = entry;
+  });
+
+  var toolbar = null;
+  var popover = null;
+  var pending = null;
+  var result = null;
+  var returnTarget = null;
+  var layoutFrame = 0;
+  var keyboardSelecting = false;
+  var highlightName = "offline-selection-active";
+  var hasPersistentHighlight = false;
+
+  function closestElement(node, selector) {
+    var element = node && (node.nodeType === 1 ? node : node.parentElement);
+    return element && element.closest ? element.closest(selector) : null;
+  }
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function(ch) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];
+    });
+  }
+  function codePointLength(value) { return Array.from(value).length; }
+  function poemForRange(range) {
+    var startPoem = closestElement(range.startContainer, config.poemSelector);
+    var endPoem = closestElement(range.endContainer, config.poemSelector);
+    return startPoem && startPoem === endPoem ? startPoem : null;
+  }
+  function lineRect(range) {
+    var rects = Array.prototype.filter.call(range.getClientRects(), function(rect) {
+      return rect.width > 0 && rect.height > 0;
+    });
+    if (!rects.length) return null;
+    var center = rects[0].top + rects[0].height / 2;
+    for (var i = 1; i < rects.length; i += 1) {
+      var otherCenter = rects[i].top + rects[i].height / 2;
+      var tolerance = Math.max(3, Math.min(rects[0].height, rects[i].height) * 0.45);
+      if (Math.abs(otherCenter - center) > tolerance) return null;
+    }
+    var left = Math.min.apply(null, rects.map(function(rect) { return rect.left; }));
+    var right = Math.max.apply(null, rects.map(function(rect) { return rect.right; }));
+    var top = Math.min.apply(null, rects.map(function(rect) { return rect.top; }));
+    var bottom = Math.max.apply(null, rects.map(function(rect) { return rect.bottom; }));
+    return {left:left, right:right, top:top, bottom:bottom, width:right-left, height:bottom-top};
+  }
+  function validSelection() {
+    var selection = window.getSelection && window.getSelection();
+    if (!selection || selection.rangeCount !== 1 || selection.isCollapsed) return null;
+    var range = selection.getRangeAt(0);
+    var poem = poemForRange(range);
+    if (!poem) return null;
+    var term = selection.toString().trim();
+    if (codePointLength(term) < 1 || codePointLength(term) > 32) return null;
+    var rect = lineRect(range);
+    if (!rect) return null;
+    return {term:term, range:range.cloneRange(), poem:poem, rect:rect};
+  }
+  function ensureToolbar() {
+    if (toolbar && toolbar.isConnected) return toolbar;
+    toolbar = document.createElement("div");
+    toolbar.id = "selection-toolbar";
+    toolbar.className = "selection-toolbar";
+    toolbar.setAttribute("role", "toolbar");
+    toolbar.setAttribute("aria-label", "选中文本工具");
+    toolbar.innerHTML = '<button type="button" data-selection-action="gloss">查释义</button>';
+    document.body.appendChild(toolbar);
+    return toolbar;
+  }
+  function dismissToolbar(clearSelection) {
+    if (toolbar) { toolbar.remove(); toolbar = null; }
+    pending = null;
+    if (clearSelection) {
+      var selection = window.getSelection && window.getSelection();
+      if (selection) selection.removeAllRanges();
+    }
+  }
+  function clearPersistentHighlight() {
+    if (window.CSS && window.CSS.highlights) window.CSS.highlights.delete(highlightName);
+    hasPersistentHighlight = false;
+  }
+  function setPersistentHighlight(range) {
+    clearPersistentHighlight();
+    if (!range || !window.CSS || !window.CSS.highlights || typeof window.Highlight !== "function") return false;
+    window.CSS.highlights.set(highlightName, new window.Highlight(range.cloneRange()));
+    hasPersistentHighlight = true;
+    return true;
+  }
+  function boxNearRect(box, rect, gap) {
+    var width = box.offsetWidth;
+    var height = box.offsetHeight;
+    var left = Math.max(12, Math.min(rect.left + (rect.width - width) / 2, window.innerWidth - width - 12));
+    var top = rect.bottom + gap;
+    if (top + height > window.innerHeight - 12) top = rect.top - height - gap;
+    box.style.left = left + "px";
+    box.style.top = Math.max(12, Math.min(top, window.innerHeight - height - 12)) + "px";
+  }
+  function showToolbar(selectionInfo) {
+    if (result) closeResult(false);
+    dismissToolbar(false);
+    pending = selectionInfo;
+    var box = ensureToolbar();
+    box.querySelector("button").setAttribute("aria-label", "查询“" + selectionInfo.term + "”的本地释义");
+    boxNearRect(box, selectionInfo.rect, 8);
+    requestAnimationFrame(function() { if (box.isConnected) box.classList.add("is-open"); });
+  }
+  function cardFor(poem) { return poem.closest(config.poemCardSelector) || poem; }
+  function intersectRect(rect) {
+    var left = Math.max(0, rect.left);
+    var right = Math.min(window.innerWidth, rect.right);
+    var top = Math.max(0, rect.top);
+    var bottom = Math.min(window.innerHeight, rect.bottom);
+    return right > left && bottom > top ? {left:left,right:right,top:top,bottom:bottom,width:right-left,height:bottom-top} : null;
+  }
+  function currentAnchorRect() {
+    if (!result) return null;
+    if (result.element && result.element.isConnected) return result.element.getBoundingClientRect();
+    if (result.range) return lineRect(result.range) || result.range.getBoundingClientRect();
+    return null;
+  }
+  function dockRect(anchorRect, poem) {
+    var cardRect = cardFor(poem).getBoundingClientRect();
+    var visible = intersectRect(cardRect);
+    if (!visible) {
+      var x = Math.max(0, Math.min(cardRect.left + cardRect.width / 2, window.innerWidth));
+      var y = Math.max(0, Math.min(cardRect.top + cardRect.height / 2, window.innerHeight));
+      return {left:x,right:x,top:y,bottom:y,width:0,height:0};
+    }
+    var centerX = anchorRect.left + anchorRect.width / 2;
+    var centerY = anchorRect.top + anchorRect.height / 2;
+    var x = Math.max(visible.left, Math.min(centerX, visible.right));
+    var y = Math.max(visible.top, Math.min(centerY, visible.bottom));
+    var distances = [Math.abs(y-visible.top), Math.abs(visible.right-x), Math.abs(visible.bottom-y), Math.abs(x-visible.left)];
+    var edge = distances.indexOf(Math.min.apply(null, distances));
+    if (edge === 0) y = visible.top;
+    else if (edge === 1) x = visible.right;
+    else if (edge === 2) y = visible.bottom;
+    else x = visible.left;
+    return {left:x,right:x,top:y,bottom:y,width:0,height:0};
+  }
+  function positionResult() {
+    layoutFrame = 0;
+    if (!result || !popover || !result.poem.isConnected) return;
+    var anchorRect = currentAnchorRect();
+    if (!anchorRect) return;
+    var cardVisible = intersectRect(cardFor(result.poem).getBoundingClientRect());
+    var anchorVisible = cardVisible && anchorRect.bottom > cardVisible.top && anchorRect.top < cardVisible.bottom &&
+      anchorRect.right > cardVisible.left && anchorRect.left < cardVisible.right;
+    boxNearRect(popover, anchorVisible ? anchorRect : dockRect(anchorRect, result.poem), 10);
+  }
+  function schedulePosition() {
+    if (!result || layoutFrame) return;
+    layoutFrame = requestAnimationFrame(positionResult);
+  }
+  function closeResult(restoreFocus) {
+    if (!result && !popover) return;
+    if (result && result.element) result.element.setAttribute("aria-expanded", "false");
+    var focusTarget = returnTarget;
+    if (result && result.range) {
+      var selection = window.getSelection && window.getSelection();
+      if (selection) selection.removeAllRanges();
+    }
+    if (popover) { popover.remove(); popover = null; }
+    result = null;
+    returnTarget = null;
+    clearPersistentHighlight();
+    if (layoutFrame) { cancelAnimationFrame(layoutFrame); layoutFrame = 0; }
+    if (restoreFocus && focusTarget && focusTarget.isConnected) focusTarget.focus({preventScroll:true});
+  }
+  function openResult(entry, term, anchor) {
+    closeResult(false);
+    dismissToolbar(false);
+    var resolved = entry || {
+      term: term,
+      definition: "本地词典暂无该词条。",
+      inContext: "离线模式不会调用 AI 或 Web，也不会发起网络请求。",
+      category: "本地未收录",
+      sourceNote: "仅使用页面内嵌词典"
+    };
+    popover = document.createElement("aside");
+    popover.id = "gloss-popover";
+    popover.className = "gloss-popover";
+    popover.setAttribute("role", "dialog");
+    popover.setAttribute("aria-label", "词语释义");
+    popover.innerHTML = '<div class="gloss-popover-head"><strong>' + escapeHtml(resolved.term || term) + '</strong>' +
+      '<button type="button" class="gloss-close" aria-label="关闭释义" title="关闭释义">×</button></div>' +
+      '<p>' + escapeHtml(resolved.definition) + '</p>' +
+      (resolved.inContext ? '<p><b>句中：</b>' + escapeHtml(resolved.inContext) + '</p>' : '') +
+      (resolved.category ? '<span>' + escapeHtml(resolved.category) + '</span>' : '') +
+      (resolved.sourceNote ? '<small>' + escapeHtml(resolved.sourceNote) + '</small>' : '');
+    document.body.appendChild(popover);
+    result = anchor;
+    if (anchor.range) setPersistentHighlight(anchor.range);
+    returnTarget = anchor.returnTarget || anchor.element || anchor.poem;
+    if (anchor.element) {
+      anchor.element.setAttribute("aria-expanded", "true");
+      anchor.element.setAttribute("aria-controls", "gloss-popover");
+    }
+    positionResult();
+    requestAnimationFrame(function() { if (popover) popover.classList.add("is-open"); });
+    var close = popover.querySelector(".gloss-close");
+    if (close) close.focus({preventScroll:true});
+  }
+  function processSelection() {
+    var info = validSelection();
+    if (!info) { if (!result) dismissToolbar(false); return; }
+    showToolbar(info);
+  }
+  function desktopFinePointer(event) {
+    var fine = window.matchMedia && window.matchMedia("(any-pointer: fine)").matches;
+    var fromTouch = event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents;
+    return fine && !fromTouch;
+  }
+
+  document.addEventListener("mouseup", function(event) {
+    if (!desktopFinePointer(event) || event.button !== 0) return;
+    if (event.target.closest && event.target.closest("#selection-toolbar")) return;
+    if (!(event.target.closest && event.target.closest(config.poemSelector))) {
+      if (!result) dismissToolbar(false);
+      return;
+    }
+    window.setTimeout(processSelection, 0);
+  });
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      if (popover) { event.preventDefault(); closeResult(true); }
+      dismissToolbar(true);
+      return;
+    }
+    keyboardSelecting = event.shiftKey || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "a");
+  });
+  document.addEventListener("keyup", function() {
+    if (!keyboardSelecting) return;
+    keyboardSelecting = false;
+    window.setTimeout(processSelection, 0);
+  });
+  document.addEventListener("mousedown", function(event) {
+    if (event.target.closest && event.target.closest("#selection-toolbar")) event.preventDefault();
+  });
+  document.addEventListener("click", function(event) {
+    var close = event.target.closest && event.target.closest(".gloss-close");
+    if (close) { closeResult(true); return; }
+    var action = event.target.closest && event.target.closest('[data-selection-action="gloss"]');
+    if (action && pending) {
+      event.preventDefault();
+      var selected = pending;
+      openResult(byTerm[selected.term] || null, selected.term, {
+        range:selected.range, poem:selected.poem, returnTarget:selected.poem
+      });
+      var selection = window.getSelection && window.getSelection();
+      if (selection && hasPersistentHighlight) selection.removeAllRanges();
+      return;
+    }
+    var termButton = event.target.closest && event.target.closest(".gloss-term");
+    if (termButton) {
+      event.preventDefault();
+      var entry = glossary[termButton.getAttribute("data-gloss-id")];
+      if (entry) openResult(entry, entry.term, {element:termButton, poem:termButton.closest(config.poemSelector)});
+      return;
+    }
+    if (!popover && toolbar && !(event.target.closest && event.target.closest("#selection-toolbar"))) dismissToolbar(false);
+  });
+  document.addEventListener("scroll", function() {
+    if (result) schedulePosition();
+    else dismissToolbar(false);
+  }, true);
+  window.addEventListener("resize", schedulePosition);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", schedulePosition);
+    window.visualViewport.addEventListener("scroll", schedulePosition);
+  }
+  document.addEventListener("toggle", function(event) {
+    if (!event.target.open && result && event.target.contains(result.poem)) closeResult(false);
+    if (!event.target.open && pending && event.target.contains(pending.poem)) dismissToolbar(true);
+  }, true);
+
+  var observer = new MutationObserver(function(mutations) {
+    if (!result) return;
+    if (!result.poem.isConnected) { closeResult(false); return; }
+    if (mutations.some(function(mutation) {
+      return mutation.target === result.poem || result.poem.contains(mutation.target);
+    })) { closeResult(false); return; }
+    if (!config.dynamicRootSelector) return;
+    var root = result.poem.closest(config.dynamicRootSelector);
+    if (!root || !root.isConnected) closeResult(false);
+    else mutations.some(function(mutation) {
+      if (mutation.target === root || root.contains(mutation.target)) { closeResult(false); return true; }
+      return false;
+    });
+  });
+  observer.observe(document.body, {childList:true, subtree:true});
+
+  window.OfflineSelectionGlossary = {
+    closeForReplacement: function() { closeResult(false); dismissToolbar(true); },
+    reposition: schedulePosition
+  };
+})({"poemSelector":".offline-poem-body","poemCardSelector":".offline-poem-reader","dynamicRootSelector":null}, {"gloss:初覆额":{"termId":"gloss:初覆额","term":"初覆额","definition":"头发刚刚长到可以遮住额头。","inContext":"写少女年幼初长发的样子，点出故事开始时的年纪与稚气。","category":"古义短语","sourceNote":"本地人工整理，依据《长干行·其一》句中语境。","sourceUrl":""},"gloss:竹马":{"termId":"gloss:竹马","term":"竹马","definition":"儿童把竹竿当作马来骑的游戏。","inContext":"指男女主人公幼年一起玩耍，因此后来有‘青梅竹马’的说法。","category":"童戏","sourceNote":"本地人工整理，依据诗句语境与传统词义。","sourceUrl":""},"gloss:青梅":{"termId":"gloss:青梅","term":"青梅","definition":"尚未成熟的青色梅子。","inContext":"写儿童采弄青梅的游戏，也与‘竹马’共同构成幼年相伴的意象。","category":"植物·童戏","sourceNote":"本地人工整理，依据诗句语境与传统词义。","sourceUrl":""},"gloss:长干":{"termId":"gloss:长干","term":"长干","definition":"古地名，在今南京一带。","inContext":"诗中指男女主人公共同居住的地方。","category":"地名","sourceNote":"本地人工整理，地点范围采用今南京一带的通行解释。","sourceUrl":""},"gloss:无嫌猜":{"termId":"gloss:无嫌猜","term":"无嫌猜","definition":"没有猜疑和隔阂。","inContext":"写两人小时候相处亲近、坦率，没有男女之间的猜忌。","category":"古义短语","sourceNote":"本地人工整理，依据诗句语境。","sourceUrl":""},"gloss:抱柱信":{"termId":"gloss:抱柱信","term":"抱柱信","definition":"守信不渝的誓约，典出尾生抱柱守约的故事。","inContext":"写女子相信丈夫会守约归来。","category":"典故","sourceNote":"本地人工整理，依据尾生抱柱典故和诗句语境。","sourceUrl":""},"gloss:望夫台":{"termId":"gloss:望夫台","term":"望夫台","definition":"传说中妻子登高远望丈夫归来的台或山。","inContext":"诗中借望夫的传说写女子不愿只作苦等丈夫的妇人。","category":"传说意象","sourceNote":"本地人工整理，按诗中典故语境解释。","sourceUrl":""},"gloss:瞿塘":{"termId":"gloss:瞿塘","term":"瞿塘","definition":"瞿塘峡，长江三峡之一。","inContext":"指丈夫远行将经过的险要峡口。","category":"地理","sourceNote":"本地人工整理，依据长江三峡通行地理名称。","sourceUrl":""},"gloss:滟滪堆":{"termId":"gloss:滟滪堆","term":"滟滪堆","definition":"瞿塘峡中的险滩礁石，古代行舟视为险处。","inContext":"写丈夫远行经过三峡险滩，暗含对旅途艰险的担忧。","category":"地理","sourceNote":"本地人工整理，依据瞿塘峡地理语境。","sourceUrl":""}});
+</script>
 </body>
 </html>

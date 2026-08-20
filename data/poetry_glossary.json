@@ -1,0 +1,86 @@
+{
+  "glossaryVersion": "1.0.0",
+  "entries": [
+    {
+      "term_id": "gloss:初覆额",
+      "forms": ["初覆额"],
+      "definition": "头发刚刚长到可以遮住额头。",
+      "in_context": "写少女年幼初长发的样子，点出故事开始时的年纪与稚气。",
+      "category": "古义短语",
+      "source_note": "本地人工整理，依据《长干行·其一》句中语境。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:竹马",
+      "forms": ["竹马"],
+      "definition": "儿童把竹竿当作马来骑的游戏。",
+      "in_context": "指男女主人公幼年一起玩耍，因此后来有‘青梅竹马’的说法。",
+      "category": "童戏",
+      "source_note": "本地人工整理，依据诗句语境与传统词义。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:青梅",
+      "forms": ["青梅"],
+      "definition": "尚未成熟的青色梅子。",
+      "in_context": "写儿童采弄青梅的游戏，也与‘竹马’共同构成幼年相伴的意象。",
+      "category": "植物·童戏",
+      "source_note": "本地人工整理，依据诗句语境与传统词义。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:长干",
+      "forms": ["长干"],
+      "definition": "古地名，在今南京一带。",
+      "in_context": "诗中指男女主人公共同居住的地方。",
+      "category": "地名",
+      "source_note": "本地人工整理，地点范围采用今南京一带的通行解释。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:无嫌猜",
+      "forms": ["无嫌猜"],
+      "definition": "没有猜疑和隔阂。",
+      "in_context": "写两人小时候相处亲近、坦率，没有男女之间的猜忌。",
+      "category": "古义短语",
+      "source_note": "本地人工整理，依据诗句语境。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:抱柱信",
+      "forms": ["抱柱信"],
+      "definition": "守信不渝的誓约，典出尾生抱柱守约的故事。",
+      "in_context": "写女子相信丈夫会守约归来。",
+      "category": "典故",
+      "source_note": "本地人工整理，依据尾生抱柱典故和诗句语境。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:望夫台",
+      "forms": ["望夫台"],
+      "definition": "传说中妻子登高远望丈夫归来的台或山。",
+      "in_context": "诗中借望夫的传说写女子不愿只作苦等丈夫的妇人。",
+      "category": "传说意象",
+      "source_note": "本地人工整理，按诗中典故语境解释。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:瞿塘",
+      "forms": ["瞿塘"],
+      "definition": "瞿塘峡，长江三峡之一。",
+      "in_context": "指丈夫远行将经过的险要峡口。",
+      "category": "地理",
+      "source_note": "本地人工整理，依据长江三峡通行地理名称。",
+      "status": "published"
+    },
+    {
+      "term_id": "gloss:滟滪堆",
+      "forms": ["滟滪堆"],
+      "definition": "瞿塘峡中的险滩礁石，古代行舟视为险处。",
+      "in_context": "写丈夫远行经过三峡险滩，暗含对旅途艰险的担忧。",
+      "category": "地理",
+      "source_note": "本地人工整理，依据瞿塘峡地理语境。",
+      "status": "published"
+    }
+  ]
+}

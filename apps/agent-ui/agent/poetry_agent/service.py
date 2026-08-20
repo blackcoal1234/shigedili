@@ -21,6 +21,7 @@ from .knowledge import (
     KnowledgeValidationError,
     PoetryKnowledgeRepository,
 )
+from .glossary import PoetryGlossary
 from .embeddings import (
     EmbeddingError,
     EmbeddingProviderError,
@@ -171,10 +172,12 @@ class PoetryDataService:
         repository: SnapshotRepository,
         knowledge_repository: PoetryKnowledgeRepository | None = None,
         embedding_repository: PoetryEmbeddingRepository | None = None,
+        glossary: PoetryGlossary | None = None,
     ) -> None:
         self.repository = repository
         self.knowledge_repository = knowledge_repository
         self.embedding_repository = embedding_repository
+        self.glossary = glossary
 
     def _catalog_rows(self) -> tuple[list[dict[str, Any]], dict[str, str]]:
         poems, hashes = self.repository.load_poems()
@@ -556,6 +559,12 @@ class PoetryDataService:
                     method_note="稳定 poemId 在当前知识库版本中不存在，未按标题模糊替代。",
                     payload={"poemId": request.poem_id, "notFound": True},
                 )
+            if self.glossary is not None:
+                glossary_snapshot = self.glossary.snapshot()
+                payload["glossaryVersion"] = glossary_snapshot.version
+                payload["glosses"] = self.glossary.match_lines(payload["lines"])
+                if glossary_snapshot.error:
+                    payload["glossaryError"] = glossary_snapshot.error
             hashes = payload.get("sourceHashes", {}) if isinstance(payload, dict) else {}
             return _base_response(
                 status="ok",

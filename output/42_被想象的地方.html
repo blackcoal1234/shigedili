@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>42 · 被想象的地方 —— 在地书写与身在别处的想象</title>
+<style>
+:root{--paper:#f2f4f0;--ink:#252b27;--cinnabar:#b64b3f;--jade:#26786e;--gold:#a87527;--blue:#426f94;}
+*{box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",sans-serif;line-height:1.7;margin:0;padding:16px;}
+h1,h2,h3,.kai{font-family:KaiTi,STKaiti,"Microsoft YaHei",serif;}
+.wrap{max-width:1080px;margin:0 auto;}
+header{border-bottom:2px solid var(--ink);padding-bottom:10px;}
+h1{margin:0;font-size:30px;letter-spacing:6px;}
+h1 .sub{font-size:16px;color:var(--gold);letter-spacing:2px;margin-left:10px;}
+.lead{margin:6px 0 2px;color:#3c443f;}
+.meta-line{margin:0;font-size:12.5px;color:#6a726c;}
+.meta-line b{color:var(--cinnabar);}
+.panel{background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;padding:12px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(37,43,39,.05);font-size:14px;color:#3c443f;}
+#layout{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;align-items:flex-start;}
+#rankList{flex:1 1 420px;}
+#detail{flex:1 1 420px;position:sticky;top:12px;}
+.rrow{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px;cursor:pointer;}
+.rrow:hover{background:#eef2ed;}
+.rrow.sel{background:#e8efe9;outline:1px solid #bcd3c9;}
+.rname{flex:0 0 72px;font-family:KaiTi,STKaiti,serif;font-size:16px;}
+.rbar{flex:1;height:18px;display:flex;border-radius:4px;overflow:hidden;background:#eceee8;}
+.rbar .c{background:var(--jade);height:100%;}
+.rbar .d{background:var(--cinnabar);height:100%;}
+.rnum{flex:0 0 150px;font-size:12px;color:#4a524c;}
+.rnum b{color:var(--cinnabar);}
+.rtag{flex:0 0 52px;text-align:center;font-size:12px;border-radius:4px;padding:0 4px;}
+.hi{background:#f6e3df;color:var(--cinnabar);border:1px solid #ddb1a9;}
+.lo{background:#e2ece6;color:var(--jade);border:1px solid #bcd3c9;}
+.na{background:#eef1ec;color:#9aa39b;border:1px dashed #cfd6d0;}
+.dh{font-family:KaiTi,STKaiti,serif;font-size:24px;border-bottom:2px solid var(--ink);padding-bottom:6px;}
+.dsub{font-size:13px;color:#6a726c;margin-top:4px;}
+.sec{margin-top:12px;}
+.sec h3{margin:0 0 6px;font-size:15px;border-left:3px solid var(--jade);color:var(--jade);padding-left:8px;}
+.sec h3.d{border-color:var(--cinnabar);color:var(--cinnabar);}
+.ev{border-left:2px solid #cfd6d0;padding:3px 10px;margin:7px 0;font-size:13.5px;}
+.ev .kai{font-size:15px;}
+.ev .where{color:var(--cinnabar);font-size:12.5px;}
+.ev .src{font-size:12px;color:#6a726c;}
+.g{display:inline-block;border-radius:3px;padding:0 5px;font-size:11px;color:#fff;background:var(--jade);margin-right:5px;}
+.g.A{background:var(--blue);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{border:1px solid #cfd6d0;border-radius:12px;padding:1px 10px;font-size:12.5px;background:#fff;}
+.chip.v{border-color:#a9c4ba;color:var(--jade);}
+.chip.n{border-color:#ddb1a9;color:var(--cinnabar);}
+.stat3{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;}
+.stat3>div{flex:1 1 100px;text-align:center;background:#f6f8f4;border:1px solid #e0e5de;border-radius:8px;padding:6px;}
+.stat3 .v{font-size:20px;font-family:KaiTi,STKaiti,serif;}
+.stat3 .k{font-size:11.5px;color:#6a726c;}
+.note{font-size:12px;color:#9aa39b;margin-top:6px;}
+footer{margin-top:16px;border-top:1px solid #dfe4de;padding-top:10px;font-size:12.5px;color:#6a726c;}
+@media (max-width:820px){#detail{position:static;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>被想象的地方<span class="sub">在地书写 × 身在别处的想象（R3）</span></h1>
+  <p class="lead">每个地方被写成的诗里，多少出自亲历，多少出自身在别处的想象？——把「诗歌地域化」翻到背面看。</p>
+  <p class="meta-line">核验诗 <b>122</b> 首 · 入档地方 <b>30</b> 处｜绿＝核验亲历书写，红＝核验「身在别处写此地」｜被想象率＝红/(绿+红)，分母≥2 才输出｜点击行查看证据</p>
+</header>
+
+<div id="layout">
+  <div id="rankList" class="panel">
+    <b>地方排名</b>（按核验书写总量降序）：
+    <div id="rows"></div>
+  </div>
+  <div id="detail" class="panel">点击左侧任一地方，查看亲历与遥想的逐条证据。</div>
+</div>
+
+<div class="panel">
+  <b>方法与口径</b>——核验级：亲历书写＝事实包作地为本地的诗（A/B）；遥想书写＝事实包作地在异地但正文提及本地（「身在别处写此地」有核验作地背书）；被想象率＝遥想/(亲历+遥想)，分母≥2 才输出，样本受限于 124 首核验诗，展示必须附两侧 n。诗人级：六家行旅节点为人工选定的知名节点，无节点≠未到过，只作上界参考，不作结论。
+</div>
+
+<footer>诗行万里 · 被想象的地方（R3 在地率/被想象率）｜生成：tools/build_imagination_index.py + 数据可视化脚本/viz_42_dreamed_places.py</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var DATA = {"meta":{"n_facts_with_place":122,"n_places":30,"min_n":2,"policy":"核验级：亲历书写＝事实包作地为本地的诗（A/B）；遥想书写＝事实包作地在异地但正文提及本地（「身在别处写此地」有核验作地背书）；被想象率＝遥想/(亲历+遥想)，分母≥2 才输出，样本受限于 124 首核验诗，展示必须附两侧 n。诗人级：六家行旅节点为人工选定的知名节点，无节点≠未到过，只作上界参考，不作结论。","generated_by":"tools/build_imagination_index.py"},"places":[{"key":"西安","modern":"西安","province":"陕西","lon":108.95,"lat":34.27,"composed_n":8,"composed":[{"poet":"白居易","title":"观刈麦","dynasty":"唐","year":807,"grade":"B"},{"poet":"白居易","title":"长恨歌","dynasty":"唐","year":806,"grade":"B"},{"poet":"李白","title":"月下独酌·其一","dynasty":"唐","year":744,"grade":"B"},{"poet":"杜甫","title":"春望","dynasty":"唐","year":757,"grade":"B"},{"poet":"王昌龄","title":"夏月花萼楼酺宴应制","dynasty":"唐","year":733,"grade":"B"},{"poet":"李贺","title":"苦昼短","dynasty":"唐","year":810,"grade":"B"},{"poet":"钱起","title":"下第题长安客舍","dynasty":"唐","year":747,"grade":"B"},{"poet":"贾岛","title":"题青龙寺","dynasty":"唐","year":811,"grade":"B"}],"dreamed_n":3,"dreamed":[{"poet":"白居易","title":"琵琶行","dynasty":"唐","year":816,"grade":"B","actual_place":"江州湓浦口","alias":"长安","line":""},{"poet":"李白","title":"登金陵凤凰台","dynasty":"唐","year":747,"grade":"B","actual_place":"金陵凤凰台","alias":"长安","line":"总为浮云能蔽日，长安不见使人愁。"},{"poet":"王勃","title":"始平晚息","dynasty":"唐","year":669,"grade":"B","actual_place":"始平","alias":"长安","line":"观阙长安近，江山蜀路赊。"}],"imagined_rate":0.2727,"six_writers":{"白居易":24,"李白":21,"杜甫":32,"苏轼":8,"陆游":7,"李清照":4},"visited_poets":["李白","杜甫","白居易"],"no_node_poets":["李清照","苏轼","陆游"]},{"key":"洛阳","modern":"洛阳","province":"河南","lon":112.45,"lat":34.62,"composed_n":5,"composed":[{"poet":"白居易","title":"梦微之","dynasty":"唐","year":840,"grade":"B"},{"poet":"白居易","title":"池上","dynasty":"唐","year":835,"grade":"B"},{"poet":"韩愈","title":"送李愿归盘谷序","dynasty":"唐","year":801,"grade":"B"},{"poet":"沈佺期","title":"则天门赦改年","dynasty":"唐","year":689,"grade":"B"},{"poet":"程颢","title":"和尧夫西街之什二首 其一","dynasty":"宋","year":1074,"grade":"B"}],"dreamed_n":3,"dreamed":[{"poet":"杜甫","title":"闻官军收河南河北","dynasty":"唐","year":763,"grade":"B","actual_place":"梓州","alias":"洛阳","line":"即从巴峡穿巫峡，便下襄阳向洛阳。"},{"poet":"陆游","title":"关山月","dynasty":"宋","year":1177,"grade":"B","actual_place":"成都","alias":"中原","line":"中原干戈古亦闻，岂有逆胡传子孙！"},{"poet":"陆游","title":"示儿","dynasty":"宋","year":1209,"grade":"B","actual_place":"山阴","alias":"中原","line":"王师北定中原日，家祭无忘告乃翁。"}],"imagined_rate":0.375,"six_writers":{"杜甫":15,"陆游":14,"李白":10,"白居易":8,"苏轼":5},"visited_poets":[],"no_node_poets":["李白","杜甫","白居易","苏轼","陆游"]},{"key":"南京","modern":"南京","province":"江苏","lon":118.8029,"lat":32.0647,"composed_n":7,"composed":[{"poet":"李白","title":"登金陵凤凰台","dynasty":"唐","year":747,"grade":"B"},{"poet":"李白","title":"金陵酒肆留别","dynasty":"唐","year":726,"grade":"B"},{"poet":"李白","title":"长干行·其一","dynasty":"唐","year":725,"grade":"B"},{"poet":"李煜","title":"书灵筵手巾","dynasty":"唐","year":964,"grade":"B"},{"poet":"王安石","title":"送刘贡甫谪官衡阳","dynasty":"宋","year":1083,"grade":"B"},{"poet":"周邦彦","title":"宿灵仙观","dynasty":"宋","year":1093,"grade":"B"},{"poet":"刘克庄","title":"吴大帝庙","dynasty":"宋","year":1218,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李白":5,"苏轼":3,"李清照":2},"visited_poets":[],"no_node_poets":["李清照","李白","苏轼"]},{"key":"杭州","modern":"杭州","province":"浙江","lon":120.16,"lat":30.29,"composed_n":7,"composed":[{"poet":"白居易","title":"钱塘湖春行","dynasty":"唐","year":823,"grade":"B"},{"poet":"贺知章","title":"回乡偶书","dynasty":"唐","year":744,"grade":"B"},{"poet":"罗隐","title":"感弄猴人赐朱绂","dynasty":"唐","year":896,"grade":"B"},{"poet":"皮日休","title":"天竺寺八月十五日夜桂子","dynasty":"唐","year":870,"grade":"B"},{"poet":"苏轼","title":"饮湖上初晴后雨","dynasty":"宋","year":1073,"grade":"B"},{"poet":"陆游","title":"临安春雨初霁","dynasty":"宋","year":1186,"grade":"B"},{"poet":"李清照","title":"声声慢·寻寻觅觅","dynasty":"宋","year":1147,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"白居易":4,"苏轼":19,"陆游":2},"visited_poets":["白居易","苏轼","陆游"],"no_node_poets":[]},{"key":"成都","modern":"成都","province":"四川","lon":104.0712,"lat":30.5763,"composed_n":6,"composed":[{"poet":"杜甫","title":"客至","dynasty":"唐","year":761,"grade":"B"},{"poet":"杜甫","title":"春夜喜雨","dynasty":"唐","year":761,"grade":"B"},{"poet":"杜甫","title":"茅屋为秋风所破歌","dynasty":"唐","year":761,"grade":"B"},{"poet":"杜甫","title":"蜀相","dynasty":"唐","year":760,"grade":"B"},{"poet":"陆游","title":"关山月","dynasty":"宋","year":1177,"grade":"B"},{"poet":"陆游","title":"病起书怀","dynasty":"宋","year":1176,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李白":3,"杜甫":16,"陆游":12,"白居易":5,"苏轼":6},"visited_poets":["杜甫"],"no_node_poets":["李白","白居易","苏轼","陆游"]},{"key":"绍兴","modern":"绍兴","province":"浙江","lon":120.5884,"lat":29.9952,"composed_n":5,"composed":[{"poet":"陆游","title":"书愤","dynasty":"宋","year":1186,"grade":"B"},{"poet":"陆游","title":"十一月四日风雨大作二首","dynasty":"宋","year":1192,"grade":"B"},{"poet":"陆游","title":"游山西村","dynasty":"宋","year":1167,"grade":"B"},{"poet":"陆游","title":"示儿","dynasty":"宋","year":1209,"grade":"B"},{"poet":"陆游","title":"秋夜将晓出篱门迎凉有感二首","dynasty":"宋","year":1192,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"李白","title":"梦游天姥吟留别","dynasty":"唐","year":745,"grade":"B","actual_place":"东鲁兖州瑕丘","alias":"镜湖","line":"我欲因之梦吴越，一夜飞度镜湖月。"}],"imagined_rate":0.1667,"six_writers":{"李白":13,"苏轼":1,"陆游":3,"李清照":1},"visited_poets":["陆游"],"no_node_poets":["李清照","李白","苏轼"]},{"key":"黄冈","modern":"黄冈","province":"湖北","lon":114.8789,"lat":30.4594,"composed_n":6,"composed":[{"poet":"苏轼","title":"临江仙·夜归临皋","dynasty":"宋","year":1082,"grade":"B"},{"poet":"苏轼","title":"卜算子·黄州定慧院寓居作","dynasty":"宋","year":1080,"grade":"B"},{"poet":"苏轼","title":"定风波·莫听穿林打叶声","dynasty":"宋","year":1082,"grade":"B"},{"poet":"苏轼","title":"念奴娇·赤壁怀古","dynasty":"宋","year":1082,"grade":"B"},{"poet":"苏轼","title":"浣溪沙·游蕲水清泉寺","dynasty":"宋","year":1082,"grade":"B"},{"poet":"苏轼","title":"赤壁赋","dynasty":"宋","year":1082,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"苏轼":10,"陆游":1},"visited_poets":["苏轼"],"no_node_poets":["陆游"]},{"key":"九江","modern":"九江","province":"江西","lon":116.008,"lat":29.7113,"composed_n":5,"composed":[{"poet":"白居易","title":"夜雪","dynasty":"唐","year":816,"grade":"B"},{"poet":"白居易","title":"大林寺桃花","dynasty":"唐","year":817,"grade":"B"},{"poet":"白居易","title":"琵琶行","dynasty":"唐","year":816,"grade":"B"},{"poet":"李白","title":"望庐山瀑布","dynasty":"唐","year":725,"grade":"B"},{"poet":"苏轼","title":"题西林壁","dynasty":"宋","year":1084,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"白居易":14,"苏轼":6,"李白":4,"杜甫":1,"陆游":5},"visited_poets":["白居易","苏轼"],"no_node_poets":["李白","杜甫","陆游"]},{"key":"苏州","modern":"苏州","province":"江苏","lon":120.62,"lat":31.32,"composed_n":4,"composed":[{"poet":"韦应物","title":"登重玄寺阁","dynasty":"唐","year":788,"grade":"B"},{"poet":"范成大","title":"甲辰人日病中吟六言六首以自嘲 其六","dynasty":"宋","year":1184,"grade":"B"},{"poet":"吴文英","title":"思佳客·闰中秋","dynasty":"宋","year":1243,"grade":"B"},{"poet":"范仲淹","title":"江上渔者","dynasty":"宋","year":1034,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"杜甫","title":"登岳阳楼","dynasty":"唐","year":768,"grade":"B","actual_place":"岳阳楼","alias":"吴楚","line":"吴楚东南坼，乾坤日夜浮。"}],"imagined_rate":0.2,"six_writers":{"白居易":14,"杜甫":6,"李白":12,"苏轼":19,"陆游":9,"李清照":3},"visited_poets":["白居易"],"no_node_poets":["李清照","李白","杜甫","苏轼","陆游"]},{"key":"奉节","modern":"奉节","province":"重庆","lon":109.46,"lat":31.02,"composed_n":3,"composed":[{"poet":"李白","title":"早发白帝城","dynasty":"唐","year":759,"grade":"B"},{"poet":"杜甫","title":"登高","dynasty":"唐","year":767,"grade":"B"},{"poet":"杜甫","title":"秋兴八首·其一","dynasty":"唐","year":766,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"李白","title":"长干行·其一","dynasty":"唐","year":725,"grade":"B","actual_place":"金陵长干里","alias":"瞿塘","line":"十六君远行，瞿塘滟滪堆。"}],"imagined_rate":0.25,"six_writers":{"杜甫":17,"李白":8,"陆游":1,"白居易":3},"visited_poets":["李白","杜甫"],"no_node_poets":["白居易","陆游"]},{"key":"开封","modern":"开封","province":"河南","lon":114.3076,"lat":34.7972,"composed_n":4,"composed":[{"poet":"李清照","title":"一剪梅·红藕香残玉簟秋","dynasty":"宋","year":1103,"grade":"B"},{"poet":"李清照","title":"减字木兰花·卖花担上","dynasty":"宋","year":1101,"grade":"B"},{"poet":"柳永","title":"醉蓬莱·渐亭皋叶下","dynasty":"宋","year":1042,"grade":"B"},{"poet":"杨亿","title":"戊申年七夕五绝 其三","dynasty":"宋","year":1008,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"白居易":2},"visited_poets":[],"no_node_poets":["白居易"]},{"key":"扬州","modern":"扬州","province":"江苏","lon":119.42,"lat":32.39,"composed_n":1,"composed":[{"poet":"刘禹锡","title":"酬乐天扬州初逢席上见赠","dynasty":"唐","year":826,"grade":"B"}],"dreamed_n":2,"dreamed":[{"poet":"李白","title":"黄鹤楼送孟浩然之广陵","dynasty":"唐","year":728,"grade":"B","actual_place":"江夏黄鹤楼","alias":"扬州","line":"故人西辞黄鹤楼，烟花三月下扬州。"},{"poet":"韦庄","title":"润州显济阁晓望","dynasty":"唐","year":883,"grade":"B","actual_place":"润州","alias":"扬州","line":"远烟藏海岛，初日照扬州。"}],"imagined_rate":0.6667,"six_writers":{"李白":11,"苏轼":8,"李清照":2,"杜甫":4,"白居易":1,"陆游":5},"visited_poets":[],"no_node_poets":["李清照","李白","杜甫","白居易","苏轼","陆游"]},{"key":"荆州","modern":"荆州","province":"湖北","lon":112.24,"lat":30.33,"composed_n":1,"composed":[{"poet":"温庭筠","title":"渚宫晚春寄秦地友人","dynasty":"唐","year":861,"grade":"B"}],"dreamed_n":2,"dreamed":[{"poet":"李白","title":"早发白帝城","dynasty":"唐","year":759,"grade":"B","actual_place":"夔州白帝城","alias":"江陵","line":"朝辞白帝彩云间，千里江陵一日还。"},{"poet":"苏轼","title":"赤壁赋","dynasty":"宋","year":1082,"grade":"B","actual_place":"黄州赤壁","alias":"江陵","line":""}],"imagined_rate":0.6667,"six_writers":{"李白":3,"苏轼":2,"白居易":7,"李清照":1,"杜甫":1,"陆游":1},"visited_poets":[],"no_node_poets":["李清照","李白","杜甫","白居易","苏轼","陆游"]},{"key":"金华","modern":"金华","province":"浙江","lon":119.649,"lat":29.089,"composed_n":3,"composed":[{"poet":"李清照","title":"武陵春·春晚","dynasty":"宋","year":1135,"grade":"B"},{"poet":"李清照","title":"题八咏楼","dynasty":"宋","year":1134,"grade":"B"},{"poet":"陈亮","title":"蝶恋花 甲辰寿元晦","dynasty":"宋","year":1184,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"马鞍山","modern":"马鞍山","province":"安徽","lon":118.51,"lat":31.69,"composed_n":3,"composed":[{"poet":"杜牧","title":"题乌江亭","dynasty":"唐","year":839,"grade":"B"},{"poet":"李清照","title":"夏日绝句","dynasty":"宋","year":1129,"grade":"B"},{"poet":"贺铸","title":"题诸葛谼田家壁","dynasty":"宋","year":1088,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李白":1},"visited_poets":[],"no_node_poets":["李白"]},{"key":"上饶","modern":"上饶","province":"江西","lon":117.97,"lat":28.46,"composed_n":2,"composed":[{"poet":"辛弃疾","title":"书停云壁","dynasty":"宋","year":1197,"grade":"B"},{"poet":"陆九渊","title":"鹅湖和教授兄韵","dynasty":"宋","year":1175,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"乐山","modern":"乐山","province":"四川","lon":103.7678,"lat":29.5613,"composed_n":2,"composed":[{"poet":"陆游","title":"金错刀行","dynasty":"宋","year":1173,"grade":"B"},{"poet":"苏洵","title":"初发嘉州","dynasty":"宋","year":1059,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"南平","modern":"南平","province":"","lon":null,"lat":null,"composed_n":2,"composed":[{"poet":"朱熹","title":"乙卯八月晦日浮翠亭次叔通韵","dynasty":"宋","year":1195,"grade":"B"},{"poet":"张元干","title":"点绛唇（丙寅秋社前一日溪光亭大雨作）","dynasty":"宋","year":1146,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"吉安","modern":"吉安","province":"江西","lon":114.99,"lat":27.11,"composed_n":2,"composed":[{"poet":"黄庭坚","title":"登快阁","dynasty":"宋","year":1082,"grade":"B"},{"poet":"杨万里","title":"小池","dynasty":"宋","year":1176,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"敦煌","modern":"敦煌","province":"甘肃","lon":94.66,"lat":40.14,"composed_n":0,"composed":[],"dreamed_n":2,"dreamed":[{"poet":"李清照","title":"凤凰台上忆吹箫·香冷金猊","dynasty":"宋","year":1109,"grade":"B","actual_place":"益都（青州）","alias":"阳关","line":"休休，这回去也，千万遍《阳关》，也则难留。"},{"poet":"李清照","title":"蝶恋花·晚止昌乐馆寄姊妹","dynasty":"宋","year":1121,"grade":"B","actual_place":"昌乐","alias":"阳关","line":"泪湿罗衣脂粉满，四叠阳关，唱萧千千遍。"}],"imagined_rate":1.0,"six_writers":{"李清照":2,"李白":1,"白居易":1,"苏轼":4,"陆游":2},"visited_poets":[],"no_node_poets":["李清照","李白","白居易","苏轼","陆游"]},{"key":"武汉","modern":"武汉","province":"湖北","lon":114.3091,"lat":30.5502,"composed_n":1,"composed":[{"poet":"李白","title":"黄鹤楼送孟浩然之广陵","dynasty":"唐","year":728,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"苏轼","title":"赤壁赋","dynasty":"宋","year":1082,"grade":"B","actual_place":"黄州赤壁","alias":"武昌","line":""}],"imagined_rate":0.5,"six_writers":{"李白":8,"苏轼":3,"陆游":2},"visited_poets":["李白"],"no_node_poets":["苏轼","陆游"]},{"key":"济宁","modern":"济宁","province":"山东","lon":116.59,"lat":35.41,"composed_n":2,"composed":[{"poet":"李白","title":"梦游天姥吟留别","dynasty":"唐","year":745,"grade":"B"},{"poet":"石延年","title":"金乡张氏园亭","dynasty":"宋","year":1026,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{},"visited_poets":[],"no_node_poets":[]},{"key":"湖州","modern":"湖州","province":"浙江","lon":120.1,"lat":30.87,"composed_n":2,"composed":[{"poet":"叶梦得","title":"临江仙·乙卯八月九日南山绝项作台新成与客赏月作","dynasty":"宋","year":1135,"grade":"B"},{"poet":"张先","title":"木兰花·乙卯吴兴寒食","dynasty":"宋","year":1075,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李清照":1,"苏轼":1},"visited_poets":[],"no_node_poets":["李清照","苏轼"]},{"key":"潍坊","modern":"潍坊","province":"山东","lon":119.1,"lat":36.71,"composed_n":2,"composed":[{"poet":"苏轼","title":"望江南·超然台作","dynasty":"宋","year":1076,"grade":"B"},{"poet":"苏轼","title":"水调歌头·明月几时有","dynasty":"宋","year":1076,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"苏轼":2},"visited_poets":[],"no_node_poets":["苏轼"]},{"key":"衡阳","modern":"衡阳","province":"湖南","lon":112.62,"lat":26.9,"composed_n":1,"composed":[{"poet":"张孝祥","title":"望江南（南岳铨德观作）","dynasty":"宋","year":1166,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"王安石","title":"送刘贡甫谪官衡阳","dynasty":"宋","year":1083,"grade":"B","actual_place":"南京","alias":"衡阳","line":"万里衡阳雁，寻常到此回。"}],"imagined_rate":0.5,"six_writers":{"杜甫":1,"苏轼":1},"visited_poets":[],"no_node_poets":["杜甫","苏轼"]},{"key":"襄阳","modern":"襄阳","province":"湖北","lon":112.14,"lat":32.04,"composed_n":1,"composed":[{"poet":"孟浩然","title":"与王昌龄宴王道士房","dynasty":"唐","year":736,"grade":"B"}],"dreamed_n":1,"dreamed":[{"poet":"杜甫","title":"闻官军收河南河北","dynasty":"唐","year":763,"grade":"B","actual_place":"梓州","alias":"襄阳","line":"即从巴峡穿巫峡，便下襄阳向洛阳。"}],"imagined_rate":0.5,"six_writers":{"杜甫":2,"陆游":1,"李白":1,"白居易":2},"visited_poets":[],"no_node_poets":["李白","杜甫","白居易","陆游"]},{"key":"赤壁","modern":"赤壁","province":"湖北","lon":113.9,"lat":29.72,"composed_n":0,"composed":[],"dreamed_n":2,"dreamed":[{"poet":"苏轼","title":"念奴娇·赤壁怀古","dynasty":"宋","year":1082,"grade":"B","actual_place":"黄州赤壁","alias":"赤壁","line":"故垒西边，人道是，三国周郎赤壁。"},{"poet":"苏轼","title":"赤壁赋","dynasty":"宋","year":1082,"grade":"B","actual_place":"黄州赤壁","alias":"赤壁","line":"壬戌之秋，七月既望，苏子与客泛舟游于赤壁之下。"}],"imagined_rate":1.0,"six_writers":{"苏轼":3,"李白":2,"陆游":1},"visited_poets":[],"no_node_poets":["李白","苏轼","陆游"]},{"key":"镇江","modern":"镇江","province":"江苏","lon":119.45,"lat":32.2,"composed_n":2,"composed":[{"poet":"韦庄","title":"润州显济阁晓望","dynasty":"唐","year":883,"grade":"B"},{"poet":"许浑","title":"夜归丁卯桥村舍","dynasty":"唐","year":843,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李白":1,"苏轼":3,"陆游":1},"visited_poets":[],"no_node_poets":["李白","苏轼","陆游"]},{"key":"青州","modern":"青州","province":"山东","lon":118.48,"lat":36.69,"composed_n":2,"composed":[{"poet":"李清照","title":"凤凰台上忆吹箫·香冷金猊","dynasty":"宋","year":1109,"grade":"B"},{"poet":"李清照","title":"醉花阴·薄雾浓云愁永昼","dynasty":"宋","year":1108,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":0.0,"six_writers":{"李清照":2,"苏轼":1},"visited_poets":["李清照"],"no_node_poets":["苏轼"]},{"key":"三台","modern":"三台","province":"四川","lon":105.09,"lat":31.09,"composed_n":1,"composed":[{"poet":"杜甫","title":"闻官军收河南河北","dynasty":"唐","year":763,"grade":"B"}],"dreamed_n":0,"dreamed":[],"imagined_rate":null,"six_writers":{"杜甫":1},"visited_poets":[],"no_node_poets":["杜甫"]}]};
+var META = DATA.meta;
+var el = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
+
+var maxTotal = Math.max.apply(null, DATA.places.map(function(p){ return p.composed_n + p.dreamed_n; }));
+
+var rows = [];
+DATA.places.forEach(function(p, i){
+  var total = p.composed_n + p.dreamed_n;
+  var cw = Math.round(p.composed_n / maxTotal * 100), dw = Math.round(p.dreamed_n / maxTotal * 100);
+  var tag;
+  if(p.imagined_rate == null){ tag = '<span class="rtag na">样本不足</span>'; }
+  else {
+    var pct = Math.round(p.imagined_rate * 100);
+    tag = '<span class="rtag ' + (pct >= 50 ? "hi" : "lo") + '">' + pct + '% 遥想</span>';
+  }
+  rows.push('<div class="rrow" data-i="' + i + '">' +
+    '<span class="rname">' + esc(p.modern) + '</span>' +
+    '<span class="rbar"><span class="c" style="width:' + cw + '%"></span><span class="d" style="width:' + dw + '%"></span></span>' +
+    '<span class="rnum">亲历 ' + p.composed_n + ' · <b>遥想 ' + p.dreamed_n + '</b></span>' + tag + '</div>');
+});
+el("rows").innerHTML = rows.join("");
+
+function showDetail(i){
+  var p = DATA.places[i];
+  var h = [];
+  h.push('<div class="dh">' + esc(p.modern) + (p.province ? '（' + esc(p.province) + '）' : '') + '</div>');
+  h.push('<div class="dsub">核验书写 ' + (p.composed_n + p.dreamed_n) + ' 首' +
+    (p.imagined_rate != null ? ' · 被想象率 ' + Math.round(p.imagined_rate*100) + '%（亲历 ' + p.composed_n + ' / 遥想 ' + p.dreamed_n + '）' : ' · 样本不足，不输出率') + '</div>');
+  h.push('<div class="stat3">' +
+    '<div><div class="v">' + p.composed_n + '</div><div class="k">核验亲历书写</div></div>' +
+    '<div><div class="v">' + p.dreamed_n + '</div><div class="k">身在别处写此地</div></div>' +
+    '<div><div class="v">' + Object.keys(p.six_writers || {}).length + '</div><div class="k">六家书写人数</div></div>' +
+    '<div><div class="v">' + (p.visited_poets || []).length + '</div><div class="k">行旅节点到过</div></div></div>');
+  if(p.dreamed.length){
+    h.push('<div class="sec"><h3 class="d">身在别处 · 遥想此地（核验级证据）</h3>');
+    p.dreamed.forEach(function(d){
+      h.push('<div class="ev"><span class="g ' + d.grade + '">' + d.grade + '</span>' +
+        '<span class="kai">' + esc(d.poet) + '《' + esc(d.title) + '》</span>' +
+        '<div class="where">实作于 ' + esc(d.actual_place) + (d.year ? '（约 ' + d.year + ' 年）' : '') + '</div>' +
+        (d.line ? '<div class="kai">「' + esc(d.line) + '」</div>' : '') +
+        '<div class="src">诗中「' + esc(d.alias) + '」指向此地</div></div>');
+    });
+    h.push('</div>');
+  } else {
+    h.push('<div class="sec"><h3 class="d">身在别处 · 遥想此地</h3><div class="note">核验样本中暂无「作地在异地而提及此地」的诗。</div></div>');
+  }
+  if(p.composed.length){
+    h.push('<div class="sec"><h3>亲历 · 写于此地（A/B 级作地）</h3>');
+    p.composed.forEach(function(c){
+      h.push('<div class="ev"><span class="g ' + c.grade + '">' + c.grade + '</span>' +
+        '<span class="kai">' + esc(c.poet) + '《' + esc(c.title) + '》</span>' +
+        (c.year ? '<span class="src">约 ' + c.year + ' 年</span>' : '') + '</div>');
+    });
+    h.push('</div>');
+  }
+  var writers = Object.keys(p.six_writers || {});
+  if(writers.length){
+    h.push('<div class="sec"><h3>六家行旅对照（上界口径）</h3><div class="chips">');
+    writers.forEach(function(w){
+      var v = (p.visited_poets || []).indexOf(w) >= 0;
+      h.push('<span class="chip ' + (v ? "v" : "n") + '">' + esc(w) +
+        (v ? ' · 有行旅节点' : ' · 书写而无节点') + '</span>');
+    });
+    h.push('</div><div class="note">行旅节点为人工选定的知名生平节点，「无节点」≠「未到过」，此口径只作上界参考。</div></div>');
+  }
+  el("detail").innerHTML = h.join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".rrow"), function(r){
+    r.classList.toggle("sel", +r.getAttribute("data-i") === i);
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll(".rrow"), function(r){
+  r.onclick = function(){ showDetail(+r.getAttribute("data-i")); };
+});
+showDetail(0);
+})();
+</script>
+</body>
+</html>

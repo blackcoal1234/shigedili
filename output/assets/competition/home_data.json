@@ -14,7 +14,7 @@
   "n_journey_nodes": 38,
   "n_chrono_reviewed": 41,
   "n_chrono_candidate": 86,
-  "n_dict": 197,
+  "n_dict": 409,
   "hyperbole": {
    "top": {
     "name": "贺知章",
@@ -34,7 +34,93 @@
   "愁苦幽愤": 38,
   "隐逸超脱": 28
  },
- "dict_doc": "双维度意象词典：词→类别+情感簇+情感值+空间尺度。\n\n构建口径\n--------\n1. 本词典在 data/image_dict.py（人工整理的轻量情感词典，约110词条）基础上\n   全部迁移并扩充李白分析核心词而成，是课程项目的人工整理数据，不是外部\n   权威词库或模型输出；情感值沿用原词典的 [-1, 1] 口径，迁移词条保持原值。\n2. 情感簇为五选一：豪情进取 / 纵逸狂放 / 漂泊羁旅 / 愁苦幽愤 / 隐逸超脱。\n   只有在传统赏析口径下与某簇有稳定关联的意象才归簇；语义多歧、随语境\n   摇摆的意象（如 月、风、舟）归簇填 None，但仍保留情感值供染色。\n3. 空间尺度是客观包含关系排序，非主观情感判断：只看该意象所指之物在\n   物理世界中的包含层级与延展范围，与它悲喜与否无关。锚定如下——\n     5 = 宇宙天际（九天、青天、银河、日月、天上）\n     4 = 四海、沧海、万里、山河级（跨越千里的地理延展）\n     3 = 江、山、城、楼等一望可及的远景\n     2 = 庭院、台阁、林木等近景\n     1 = 身体周边与器物（床前、杯、孤舟、白发、镜）\n   例如\"云帆\"意气飞扬但只是舟上一物，尺度记 1；\"浮云\"愁绪漂泊但行于\n   天空，尺度记 5。非空间意象（老、病、愁等）尺度填 None，依据填空串。\n4. 每个有尺度的词条附一句客观的尺度依据，说明其包含层级，便于复核。\n\n数据结构：SPIRIT_DICT = [(词, 类别, 情感簇, 情感值, 空间尺度, 尺度依据), ...]",
+ "glossary": {
+  "version": "1.0.0",
+  "entries": {
+   "gloss:初覆额": {
+    "termId": "gloss:初覆额",
+    "term": "初覆额",
+    "definition": "头发刚刚长到可以遮住额头。",
+    "inContext": "写少女年幼初长发的样子，点出故事开始时的年纪与稚气。",
+    "category": "古义短语",
+    "sourceNote": "本地人工整理，依据《长干行·其一》句中语境。",
+    "sourceUrl": ""
+   },
+   "gloss:竹马": {
+    "termId": "gloss:竹马",
+    "term": "竹马",
+    "definition": "儿童把竹竿当作马来骑的游戏。",
+    "inContext": "指男女主人公幼年一起玩耍，因此后来有‘青梅竹马’的说法。",
+    "category": "童戏",
+    "sourceNote": "本地人工整理，依据诗句语境与传统词义。",
+    "sourceUrl": ""
+   },
+   "gloss:青梅": {
+    "termId": "gloss:青梅",
+    "term": "青梅",
+    "definition": "尚未成熟的青色梅子。",
+    "inContext": "写儿童采弄青梅的游戏，也与‘竹马’共同构成幼年相伴的意象。",
+    "category": "植物·童戏",
+    "sourceNote": "本地人工整理，依据诗句语境与传统词义。",
+    "sourceUrl": ""
+   },
+   "gloss:长干": {
+    "termId": "gloss:长干",
+    "term": "长干",
+    "definition": "古地名，在今南京一带。",
+    "inContext": "诗中指男女主人公共同居住的地方。",
+    "category": "地名",
+    "sourceNote": "本地人工整理，地点范围采用今南京一带的通行解释。",
+    "sourceUrl": ""
+   },
+   "gloss:无嫌猜": {
+    "termId": "gloss:无嫌猜",
+    "term": "无嫌猜",
+    "definition": "没有猜疑和隔阂。",
+    "inContext": "写两人小时候相处亲近、坦率，没有男女之间的猜忌。",
+    "category": "古义短语",
+    "sourceNote": "本地人工整理，依据诗句语境。",
+    "sourceUrl": ""
+   },
+   "gloss:抱柱信": {
+    "termId": "gloss:抱柱信",
+    "term": "抱柱信",
+    "definition": "守信不渝的誓约，典出尾生抱柱守约的故事。",
+    "inContext": "写女子相信丈夫会守约归来。",
+    "category": "典故",
+    "sourceNote": "本地人工整理，依据尾生抱柱典故和诗句语境。",
+    "sourceUrl": ""
+   },
+   "gloss:望夫台": {
+    "termId": "gloss:望夫台",
+    "term": "望夫台",
+    "definition": "传说中妻子登高远望丈夫归来的台或山。",
+    "inContext": "诗中借望夫的传说写女子不愿只作苦等丈夫的妇人。",
+    "category": "传说意象",
+    "sourceNote": "本地人工整理，按诗中典故语境解释。",
+    "sourceUrl": ""
+   },
+   "gloss:瞿塘": {
+    "termId": "gloss:瞿塘",
+    "term": "瞿塘",
+    "definition": "瞿塘峡，长江三峡之一。",
+    "inContext": "指丈夫远行将经过的险要峡口。",
+    "category": "地理",
+    "sourceNote": "本地人工整理，依据长江三峡通行地理名称。",
+    "sourceUrl": ""
+   },
+   "gloss:滟滪堆": {
+    "termId": "gloss:滟滪堆",
+    "term": "滟滪堆",
+    "definition": "瞿塘峡中的险滩礁石，古代行舟视为险处。",
+    "inContext": "写丈夫远行经过三峡险滩，暗含对旅途艰险的担忧。",
+    "category": "地理",
+    "sourceNote": "本地人工整理，依据瞿塘峡地理语境。",
+    "sourceUrl": ""
+   }
+  }
+ },
+ "dict_doc": "双维度意象词典：词→类别+情感簇+情感值+空间尺度。\n\n构建口径\n--------\n1. 本词典在 data/image_dict.py（人工整理的细粒度意象词典）基础上\n   全部迁移并扩充李白分析核心词而成，是课程项目的人工整理数据，不是外部\n   权威词库或模型输出；情感值沿用原词典的 [-1, 1] 口径，迁移词条保持原值。\n2. 情感簇为五选一：豪情进取 / 纵逸狂放 / 漂泊羁旅 / 愁苦幽愤 / 隐逸超脱。\n   只有在传统赏析口径下与某簇有稳定关联的意象才归簇；语义多歧、随语境\n   摇摆的意象（如 月、风、舟）归簇填 None，但仍保留情感值供染色。\n3. 空间尺度是客观包含关系排序，非主观情感判断：只看该意象所指之物在\n   物理世界中的包含层级与延展范围，与它悲喜与否无关。锚定如下——\n     5 = 宇宙天际（九天、青天、银河、日月、天上）\n     4 = 四海、沧海、万里、山河级（跨越千里的地理延展）\n     3 = 江、山、城、楼等一望可及的远景\n     2 = 庭院、台阁、林木等近景\n     1 = 身体周边与器物（床前、杯、孤舟、白发、镜）\n   例如\"云帆\"意气飞扬但只是舟上一物，尺度记 1；\"浮云\"愁绪漂泊但行于\n   天空，尺度记 5。非空间意象（老、病、愁等）尺度填 None，依据填空串。\n4. 每个有尺度的词条附一句客观的尺度依据，说明其包含层级，便于复核。\n\n数据结构：SPIRIT_DICT = [(词, 类别, 情感簇, 情感值, 空间尺度, 尺度依据), ...]",
  "journey_methodology": {
   "scope": "选取李白、杜甫、白居易、苏轼、陆游、李清照的知名生平节点，并与本项目 poems.json 中实际存在的代表作关联。",
   "line_semantics": "地图连线仅表示人工选定节点的时间先后，不代表诗人实际行走的道路、交通方式或完整停留轨迹。",
@@ -121,9 +207,9 @@
       "y0": 726,
       "y1": 741,
       "n_poems": 6,
-      "n_hits": 62,
-      "emotion": -0.145,
-      "scale": 3.122,
+      "n_hits": 67,
+      "emotion": -0.128,
+      "scale": 3.074,
       "cand": 5,
       "rev": 1,
       "poems": [
@@ -143,9 +229,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 14,
-        "emotion": -0.121,
-        "scale": 3.0
+        "hits": 15,
+        "emotion": -0.087,
+        "scale": 2.846
        },
        {
         "title": "金陵酒肆留别",
@@ -154,7 +240,7 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 7,
-        "emotion": -0.243,
+        "emotion": -0.229,
         "scale": 2.25
        },
        {
@@ -173,9 +259,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "disputed",
-        "hits": 26,
-        "emotion": -0.15,
-        "scale": 3.476
+        "hits": 30,
+        "emotion": -0.133,
+        "scale": 3.4
        },
        {
         "title": "客中作",
@@ -195,9 +281,9 @@
       "y0": 742,
       "y1": 744,
       "n_poems": 4,
-      "n_hits": 45,
-      "emotion": 0.111,
-      "scale": 2.969,
+      "n_hits": 46,
+      "emotion": 0.107,
+      "scale": 2.97,
       "cand": 4,
       "rev": 0,
       "poems": [
@@ -208,7 +294,7 @@
         "status": "candidate",
         "precision": "exact",
         "hits": 14,
-        "emotion": 0.064,
+        "emotion": 0.043,
         "scale": 2.167
        },
        {
@@ -217,9 +303,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 5,
-        "emotion": 0.22,
-        "scale": 4.2
+        "hits": 6,
+        "emotion": 0.217,
+        "scale": 4.0
        },
        {
         "title": "月下独酌·其一",
@@ -249,9 +335,9 @@
       "y0": 745,
       "y1": 756,
       "n_poems": 9,
-      "n_hits": 138,
-      "emotion": -0.039,
-      "scale": 2.842,
+      "n_hits": 146,
+      "emotion": -0.017,
+      "scale": 2.899,
       "cand": 8,
       "rev": 1,
       "poems": [
@@ -261,9 +347,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 8,
-        "emotion": -0.088,
-        "scale": 3.286
+        "hits": 10,
+        "emotion": 0.08,
+        "scale": 3.333
        },
        {
         "title": "将进酒",
@@ -281,9 +367,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "disputed",
-        "hits": 31,
-        "emotion": -0.097,
-        "scale": 2.619
+        "hits": 32,
+        "emotion": -0.106,
+        "scale": 2.636
        },
        {
         "title": "梦游天姥吟留别",
@@ -291,9 +377,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 37,
-        "emotion": 0.076,
-        "scale": 3.379
+        "hits": 39,
+        "emotion": 0.095,
+        "scale": 3.387
        },
        {
         "title": "闻王昌龄左迁龙标遥有此寄",
@@ -301,9 +387,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "disputed",
-        "hits": 5,
-        "emotion": -0.42,
-        "scale": 3.0
+        "hits": 6,
+        "emotion": -0.267,
+        "scale": 3.4
        },
        {
         "title": "北风行",
@@ -311,9 +397,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 23,
-        "emotion": -0.113,
-        "scale": 3.062
+        "hits": 25,
+        "emotion": -0.088,
+        "scale": 3.111
        },
        {
         "title": "独坐敬亭山",
@@ -353,9 +439,9 @@
       "y0": 757,
       "y1": 762,
       "n_poems": 7,
-      "n_hits": 84,
-      "emotion": -0.011,
-      "scale": 3.274,
+      "n_hits": 93,
+      "emotion": 0.022,
+      "scale": 3.333,
       "cand": 6,
       "rev": 1,
       "poems": [
@@ -375,9 +461,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 45,
-        "emotion": 0.036,
-        "scale": 3.31
+        "hits": 54,
+        "emotion": 0.078,
+        "scale": 3.4
        },
        {
         "title": "流夜郎赠辛判官",
@@ -386,7 +472,7 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 11,
-        "emotion": -0.182,
+        "emotion": -0.155,
         "scale": 2.444
        },
        {
@@ -434,13 +520,13 @@
     ],
     "d_list": [],
     "params": {
-     "slope": -0.067,
-     "max_drop": -0.52,
-     "rebound": 0.134,
-     "volatility": 0.178,
+     "slope": -0.06,
+     "max_drop": -0.503,
+     "rebound": 0.15,
+     "volatility": 0.169,
      "break_from": 1,
      "break_to": 2,
-     "break_delta": -0.52,
+     "break_delta": -0.503,
      "break_boundary": 726,
      "break_event": "724-726年仗剑去国、辞亲远游：沿江出蜀，览洞庭、金陵，抵扬州",
      "break_matched": true
@@ -459,7 +545,7 @@
      "lat": 31.0354,
      "event": "出蜀后沿长江东下，过荆门进入楚地漫游阶段。",
      "title": "渡荆门送别",
-     "body_html": "渡远荆门外，来从楚国游。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>随平野尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>入大荒流。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>下飞天镜，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>生结<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n仍怜<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">故乡</i>水，<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">万里</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>行<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>。",
+     "body_html": "渡远荆门外，来从楚国游。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>随平野尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>入大荒流。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>下飞天镜，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>生结<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n仍怜<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">故乡</i>水，<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">万里</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">行舟</i>。",
      "valence": 0.48,
      "intensity": 0.73,
      "emo_label": "壮游与恋乡",
@@ -504,10 +590,10 @@
      "lat": 32.06,
      "event": "系年作《长干行·其一》于金陵长干里",
      "title": "长干行·其一",
-     "body_html": "妾发初覆额，折花门前剧。\n郎骑<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>来，绕<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">床</i>弄青<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>。\n同居长干里，两小无嫌猜。\n十四为君妇，羞颜未尝开。\n低头向暗壁，千唤不一回。\n十五始展眉，愿同尘与灰。\n常存抱柱信，岂上望夫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n十六君远行，瞿塘滟滪堆。\n五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>不可触，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿声</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i>哀。\n门前迟行迹，一一生绿苔。\n苔深不能扫，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落叶</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度3\">秋风</i>早。\n八<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>蝴蝶来，双飞西园草。\n感此伤妾心，坐<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>红颜<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>。\n早晚下三巴，预将书报家。\n相迎不道远，直至<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>沙。",
-     "emotion": -0.121,
-     "scale": 3.0,
-     "n_hits": 14,
+     "body_html": "妾发<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:初覆额\" aria-label=\"初覆额\">初覆额</button>，折花门前剧。\n郎骑<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:竹马\" aria-label=\"竹马\">竹马</button>来，绕<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">床</i>弄<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:青梅\" aria-label=\"青梅\">青梅</button>。\n同居<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:长干\" aria-label=\"长干\">长干</button>里，两小<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:无嫌猜\" aria-label=\"无嫌猜\">无嫌猜</button>。\n十四为君妇，羞颜未尝开。\n低头向暗壁，千唤不一回。\n十五始展眉，愿同尘与灰。\n常存<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:抱柱信\" aria-label=\"抱柱信\">抱柱信</button>，岂上<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:望夫台\" aria-label=\"望夫台\">望夫台</button>。\n十六君远行，<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:瞿塘\" aria-label=\"瞿塘\">瞿塘</button><button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:滟滪堆\" aria-label=\"滟滪堆\">滟滪堆</button>。\n五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>不可触，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿声</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i>哀。\n门前迟行迹，一一生绿苔。\n苔深不能扫，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落叶</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度3\">秋风</i>早。\n八<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度1\">蝴蝶</i>来，双飞西园草。\n感此伤妾心，坐<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>红颜<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>。\n早晚下三巴，预将书报家。\n相迎不道远，直至<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>沙。",
+     "emotion": -0.087,
+     "scale": 2.846,
+     "n_hits": 15,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -525,8 +611,8 @@
      "lat": 32.06,
      "event": "系年作《金陵酒肆留别》于金陵",
      "title": "金陵酒肆留别",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>吹<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>花满店香，吴姬压<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>劝<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>尝。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">金陵</i>子弟来相<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>，欲行不行各尽觞。\n请君试问东流水，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>意与之谁短长？",
-     "emotion": -0.243,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>吹<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>花满店香，吴姬压<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>劝<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>尝。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">金陵</i>子弟来相<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>，欲行不行各尽觞。\n请君试问东流水，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>意与之谁短长？",
+     "emotion": -0.229,
      "scale": 2.25,
      "n_hits": 7,
      "grade": "B",
@@ -595,10 +681,10 @@
      "lat": 34.27,
      "event": "系年作《蜀道难》于长安",
      "title": "蜀道难",
-     "body_html": "噫吁嚱，危乎高哉！\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>！\n蚕丛及<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度2\">鱼</i>凫，开国何茫然！\n尔来四万八千岁，不与秦<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>通人<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>。\n西当太白有鸟道，可以横绝<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度3\">峨眉</i>巅。\n地崩<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>摧壮士死，然后天梯石栈相钩连。\n上有六龙回日之高标，下有冲波逆折之回川。\n黄<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度3\">鹤</i>之飞尚不得过，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿</i>猱欲度<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>攀援。\n青泥何盘盘，百步九折萦岩峦。\n扪参历井仰胁息，以手抚膺坐长叹。\n问君西游何时还？畏途巉岩不可攀。\n但见<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i>鸟号古木，雄飞雌从绕林间。\n又闻<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">子规</i>啼夜<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i><i class=\"hw c5\" title=\"隐逸超脱·情感-0.1·尺度3\">空山</i>。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，使人听此凋朱颜！\n连峰去天不盈尺，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">枯</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">松</i>倒挂倚绝壁。\n飞湍瀑流争喧豗，砯崖转石万壑雷。\n其险也如此，嗟尔远道之人胡为乎来哉！\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.3·尺度3\">剑阁</i>峥嵘而崔嵬，一夫当<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，万夫莫开。\n所守或匪亲，化为狼与豺。\n朝避猛虎，夕避长蛇，磨牙吮血，杀人如麻。\n锦<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>虽<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>，不如早还家。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，侧身西望长咨嗟！",
-     "emotion": -0.15,
-     "scale": 3.476,
-     "n_hits": 26,
+     "body_html": "噫吁嚱，危乎高哉！\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>！\n蚕丛及<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度2\">鱼</i>凫，开国何茫然！\n尔来四万八千岁，不与秦<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>通人<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>。\n西当太白有鸟道，可以横绝<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度3\">峨眉</i>巅。\n地崩<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>摧壮士死，然后天梯石栈相钩连。\n上有六<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>回日之高标，下有冲波逆折之回川。\n黄<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度3\">鹤</i>之飞尚不得过，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿</i>猱欲度<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>攀援。\n青泥何盘盘，百步九折萦岩峦。\n扪参历井仰胁息，以手抚膺坐长叹。\n问君西游何时还？畏途巉岩不可攀。\n但见<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i>鸟号古木，雄飞雌从绕林间。\n又闻<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">子规</i>啼夜<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i><i class=\"hw c5\" title=\"隐逸超脱·情感-0.1·尺度3\">空山</i>。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，使人听此凋朱颜！\n连峰去天不盈尺，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">枯</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">松</i>倒挂倚<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">绝壁</i>。\n飞湍瀑流争喧豗，砯崖转石万壑雷。\n其险也如此，嗟尔远道之人胡为乎来哉！\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.3·尺度3\">剑阁</i>峥嵘而崔嵬，一夫当<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，万夫莫开。\n所守或匪亲，化为<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">狼</i>与豺。\n朝避猛<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>，夕避长蛇，磨牙吮血，杀人如麻。\n锦<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>虽<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>，不如早还家。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度4\">蜀道</i>之难，难于上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，侧身西望长咨嗟！",
+     "emotion": -0.133,
+     "scale": 3.4,
+     "n_hits": 30,
      "grade": "B",
      "status": "candidate",
      "precision": "disputed",
@@ -658,7 +744,7 @@
      "lat": 34.3416,
      "event": "奉诏入长安，供奉翰林，进入宫廷文学活动中心。",
      "title": "清平调·其一",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>想衣裳花想容，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>拂槛露华浓。\n若非群玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>头见，会向<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度5\">瑶台</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>下逢。",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>想衣裳花想容，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>拂槛<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">露华</i>浓。\n若非群玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>头见，会向<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度5\">瑶台</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>下逢。",
      "valence": 0.72,
      "intensity": 0.68,
      "emo_label": "华美与欣赏",
@@ -673,8 +759,8 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": 0.22,
-     "scale": 4.2
+     "emotion": 0.217,
+     "scale": 4.0
     },
     {
      "kind": "poem",
@@ -686,8 +772,8 @@
      "lat": 30.92,
      "event": "系年作《南陵别儿童入京》于南陵（宣州南陵）",
      "title": "南陵别儿童入京",
-     "body_html": "白<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>新熟<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>中<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>，黄鸡啄黍<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>肥。\n呼童烹鸡酌白<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，儿女嬉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>牵人衣。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.5\">高歌</i>取<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>欲自慰，起早<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">落日</i>争光辉。\n游说万乘<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i>不早，著鞭跨<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>涉远道。\n会稽愚妇轻买臣，余亦辞家西入秦。\n仰天大<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>出门去，我辈岂是<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度1\">蓬</i>蒿人。",
-     "emotion": 0.064,
+     "body_html": "白<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>新熟<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>中<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>，黄鸡啄黍<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>肥。\n呼童烹鸡酌白<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，儿女嬉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>牵人衣。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.5\">高歌</i>取<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>欲自慰，起早<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度5\">落日</i>争光辉。\n游说万乘<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i>不早，著鞭跨<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>涉远道。\n会稽愚妇轻买臣，余亦辞家西入秦。\n仰天大<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>出门去，我辈岂是<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度1\">蓬</i>蒿人。",
+     "emotion": 0.043,
      "scale": 2.167,
      "n_hits": 14,
      "grade": "B",
@@ -707,7 +793,7 @@
      "lat": 34.3416,
      "event": "离开长安，结束翰林供奉阶段，重新进入漫游生活。",
      "title": "行路难·其一",
-     "body_html": "<i class=\"hw c2\" title=\"纵逸狂放·情感0.4·尺度1\">金樽</i>清<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>十千，玉盘珍羞直万钱。\n停<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>投箸不能食，拔<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>四顾心茫然。\n欲渡<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>冰<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>川，将登太行<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>满<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n闲来垂钓碧<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>上，忽复乘<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>日边。\n行路难，行路难，多歧路，今安在？\n<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>破浪会有时，直挂<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度1\">云帆</i>济<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">沧海</i>。",
+     "body_html": "<i class=\"hw c2\" title=\"纵逸狂放·情感0.4·尺度1\">金樽</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度1\">清酒</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>十千，玉盘珍羞直万钱。\n停<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>投箸不能食，拔<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>四顾心茫然。\n欲渡<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>冰<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>川，将登太行<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>满<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n闲来垂钓碧<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>上，忽复乘<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>日边。\n行路难，行路难，多歧路，今安在？\n<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>破浪会有时，直挂<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度1\">云帆</i>济<i class=\"hw c1\" title=\"豪情进取·情感0.1·尺度4\">沧海</i>。",
      "valence": 0.18,
      "intensity": 0.94,
      "emo_label": "茫然中的坚信",
@@ -756,10 +842,10 @@
      "lat": 34.42,
      "event": "系年作《梁园吟》于梁园（宋州梁园/平台）",
      "title": "梁园吟",
-     "body_html": "我浮<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>去京阙，挂席欲进波连<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n天长水阔厌远涉，访古始及平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>间。\n平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">忧</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>多，对<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>遂作梁园歌。\n却<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度1\">蓬</i>池阮公咏，因吟“渌水扬洪波”。\n洪波浩荡迷旧国，路远西<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>安可得！\n人生达命岂暇<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>，且饮<i class=\"hw c2\" title=\"纵逸狂放·情感0.4·尺度1\">美酒</i>登<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">高楼</i>。\n平头奴子摇大扇，五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>不热疑清<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>。\n玉盘杨<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>为君设，吴盐如花皎白<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>。\n持盐把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>但饮之，莫学夷齐事高洁。\n昔人豪贵信陵君，今人耕种信陵坟。\n荒<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>虚照碧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，古木尽入苍梧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>。\n梁王宫阙今安在？枚<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>先<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>不相待。\n舞影歌声散绿池，空馀汴水东流<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>。\n沉吟此事<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>满衣，黄金买<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>未能<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>。\n连呼五白行六博，分曹赌<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>酣驰晖。\n歌且谣，意方远。\n东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>高卧时起来，欲济苍生未应晚。",
-     "emotion": -0.097,
-     "scale": 2.619,
-     "n_hits": 31,
+     "body_html": "我浮<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>去京阙，挂席欲进波连<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n天长水阔厌远涉，访古始及平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>间。\n平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">忧</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>多，对<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>遂作梁园歌。\n却<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度1\">蓬</i>池阮公咏，因吟“渌水扬洪波”。\n洪波浩荡迷旧国，路远西<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>安可得！\n人生达命岂暇<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>，且饮<i class=\"hw c2\" title=\"纵逸狂放·情感0.4·尺度1\">美酒</i>登<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">高楼</i>。\n平头奴子摇大扇，五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>不热疑清<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>。\n玉盘杨<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>为君设，吴盐如花皎白<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>。\n持盐把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>但饮之，莫学夷齐事高洁。\n昔人豪贵信陵君，今人耕种信陵坟。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">荒城</i>虚照碧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，古木尽入苍梧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>。\n梁王<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">宫阙</i>今安在？枚<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>先<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>不相待。\n舞影歌声散绿池，空馀汴水东流<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>。\n沉吟此事<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>满衣，黄金买<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>未能<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>。\n连呼五白行六博，分曹赌<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>酣驰晖。\n歌且谣，意方远。\n东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>高卧时起来，欲济苍生未应晚。",
+     "emotion": -0.106,
+     "scale": 2.636,
+     "n_hits": 32,
      "grade": "B",
      "status": "candidate",
      "precision": "disputed",
@@ -777,10 +863,10 @@
      "lat": 35.57,
      "event": "系年作《梦游天姥吟留别》于东鲁（兖州瑕丘）",
      "title": "梦游天姥吟留别",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>谈瀛洲，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>涛微茫信难求；\n越人语<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">天姥</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>霞明灭或可睹。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">天姥</i>连天向天横，势拔<i class=\"hw c1\" title=\"豪情进取·情感0.5·尺度4\">五岳</i>掩赤<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>。\n天<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>四万八千丈，对此欲倒东南倾。\n我欲因之<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>吴越，一夜飞度镜<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>照我影，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>我至剡<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4\">谢公</i>宿处今尚在，渌水荡漾清<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿</i>啼。\n脚著<i class=\"hw c5\" title=\"隐逸超脱·情感0.4\">谢公</i>屐，身登<i class=\"hw c1\" title=\"豪情进取·情感0.6·尺度5\">青云</i>梯。\n半壁见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>日，空中闻天鸡。\n千岩万转路不定，迷花倚石忽已暝。\n熊咆龙吟殷岩<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>，栗深林兮惊层巅。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>青青兮欲<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，水澹澹兮生<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>。\n列缺霹雳，丘峦崩摧。\n洞天石扉，訇然中开。\n青冥浩荡不见底，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>照耀金银<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n霓为衣兮<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>为<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>之君兮纷纷而来下。\n虎鼓瑟兮鸾回车，<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>之人兮列如麻。\n忽魂悸以魄动，恍惊起而长嗟。\n惟觉时之枕席，失向来之<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>霞。\n世间行<i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>亦如此，古来万事东流水。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>君去兮何时还？且放<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">白鹿</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">青崖</i>间，须行即骑访名<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n安能摧眉折腰事权贵，使我不得开心颜？",
-     "emotion": 0.076,
-     "scale": 3.379,
-     "n_hits": 37,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>谈瀛洲，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>涛微茫信难求；\n越人语<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">天姥</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>霞明灭或可睹。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">天姥</i>连天向天横，势拔<i class=\"hw c1\" title=\"豪情进取·情感0.5·尺度4\">五岳</i>掩赤<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>。\n天<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>四万八千丈，对此欲倒东南倾。\n我欲因之<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>吴越，一夜飞度镜<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>照我影，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>我至剡<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4\">谢公</i>宿处今尚在，渌水荡漾清<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">猿啼</i>。\n脚著<i class=\"hw c5\" title=\"隐逸超脱·情感0.4\">谢公</i>屐，身登<i class=\"hw c1\" title=\"豪情进取·情感0.6·尺度5\">青云</i>梯。\n半壁见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>日，空中闻天鸡。\n千岩万转路不定，迷花倚石忽已暝。\n熊咆<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>吟殷岩<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>，栗深林兮惊层巅。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>青青兮欲<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，水澹澹兮生<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>。\n列缺霹雳，丘峦崩摧。\n洞天石扉，訇然中开。\n青冥浩荡不见底，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>照耀金银<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n霓为衣兮<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>为<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>之君兮纷纷而来下。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>鼓瑟兮鸾回车，<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>之人兮列如麻。\n忽魂悸以魄动，恍惊起而长嗟。\n惟觉时之枕席，失向来之<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度3\">烟霞</i>。\n世间行<i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>亦如此，古来万事东流水。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>君去兮何时还？且放<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">白鹿</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">青崖</i>间，须行即骑访名<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n安能摧眉折腰事权贵，使我不得开心颜？",
+     "emotion": 0.095,
+     "scale": 3.387,
+     "n_hits": 39,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -798,10 +884,10 @@
      "lat": 32.064735,
      "event": "系年作《登金陵凤凰台》于金陵凤凰台",
      "title": "登金陵凤凰台",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">凤凰台</i>上凤凰游，凤去<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>空<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>自流。\n吴宫花草埋幽径，晋代衣冠成古丘。\n三<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>半落<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>外，二水中分白鹭洲。\n总为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度5\">浮云</i>能蔽日，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">长安</i>不见使人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。",
-     "emotion": -0.088,
-     "scale": 3.286,
-     "n_hits": 8,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">凤凰台</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.8·尺度5\">凤凰</i>游，凤去<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>空<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>自流。\n吴宫花草埋幽径，晋代衣冠成古丘。\n三<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>半落<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>外，二水中分<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">白鹭</i>洲。\n总为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度5\">浮云</i>能蔽日，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">长安</i>不见使人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。",
+     "emotion": 0.08,
+     "scale": 3.333,
+     "n_hits": 10,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -819,10 +905,10 @@
      "lat": 32.39,
      "event": "系年作《闻王昌龄左迁龙标遥有此寄》于扬州一带（一说金陵）",
      "title": "闻王昌龄左迁龙标遥有此寄",
-     "body_html": "杨花落尽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">子规</i>啼，闻道龙标过五<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>。\n我寄<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>心与<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>，随君直到<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度3\">夜郎</i>西。",
-     "emotion": -0.42,
-     "scale": 3.0,
-     "n_hits": 5,
+     "body_html": "杨花落尽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">子规</i>啼，闻道<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>标过五<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i>。\n我寄<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>心与<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>，随君直到<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度3\">夜郎</i>西。",
+     "emotion": -0.267,
+     "scale": 3.4,
+     "n_hits": 6,
      "grade": "B",
      "status": "candidate",
      "precision": "disputed",
@@ -840,10 +926,10 @@
      "lat": 39.9,
      "event": "系年作《北风行》于幽州（范阳郡）",
      "title": "北风行",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度1\">烛</i>龙栖<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>门，光曜犹旦开。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>照之何不及此？惟有北<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>号怒<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i>来。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>花大如席，片片吹落轩辕<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n幽州<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>妇十二<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，停歌罢<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>双蛾摧。\n倚门望行人，念君长<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>良可哀。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时提<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>救边去，遗此虎文金鞞靫。\n中有一双白羽箭，蜘蛛结网生尘埃。\n箭空在，人今战死不复回。\n不忍见此物，焚之已成灰。\n<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>捧土尚可<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>，北<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>难裁。",
-     "emotion": -0.113,
-     "scale": 3.062,
-     "n_hits": 23,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度1\">烛</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>栖<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>门，光曜犹旦开。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>照之何不及此？惟有北<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>号怒<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i>来。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>花大如席，片片吹落轩辕<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n幽州<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>妇十二<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，停歌罢<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>双蛾摧。\n倚门望行人，念君长<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>良可哀。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时提<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>救边去，遗此<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>文金鞞靫。\n中有一双白羽箭，蜘蛛结网生尘埃。\n箭空在，人今战死不复回。\n不忍见此物，焚之已成灰。\n<i class=\"hw c1\" title=\"豪情进取·情感0.2·尺度4\">黄河</i>捧土尚可<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>，北<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>难裁。",
+     "emotion": -0.088,
+     "scale": 3.111,
+     "n_hits": 25,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -948,10 +1034,10 @@
      "lat": 29.71,
      "event": "系年作《永王东巡歌·其一》于永王军中（浔阳至丹阳）",
      "title": "永王东巡歌·其一",
-     "body_html": "永王正<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>东出师，天子遥分龙虎旗。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>船一举<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>波静，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>汉翻为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>鹜池。\n三川北虏乱如麻，<i class=\"hw c1\" title=\"豪情进取·情感0.5·尺度4\">四海</i>南奔似永嘉。\n但用东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>谢安石，为君谈<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>静胡沙。\n雷鼓嘈嘈喧武昌，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>旗猎猎过寻阳。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>毫不犯三吴悦，春日遥看五色光。\n龙盘虎踞帝王州，帝子<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">金陵</i>访故丘。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>试暖昭阳殿，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>还过鳷鹊<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n二帝巡游俱未回，五陵<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">松</i>柏使人哀。\n诸侯不救<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">河</i>南地，更喜贤王远道来。\n丹阳北固是吴<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，画出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>水间。\n千岩<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">烽火</i>连<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">沧海</i>，两岸<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗绕碧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n王出三<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>按五<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>船跨<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>次扬都。\n战舰森森罗虎士，征<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">帆</i>一一引龙驹。\n<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>挂席势难回，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>动<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>倾古<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>摧。\n君看帝子浮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>日，何似龙骧出峡来。\n祖龙浮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>不成桥，汉武寻阳空射蛟。\n我王<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>舰轻秦汉，却似文皇欲渡辽。\n帝宠贤王入楚<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，扫清<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>汉始应还。\n初从<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>开朱邸，更取<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">金陵</i>作小<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n试借君王玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>鞭，指挥戎虏坐琼筵。\n南<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>一扫胡尘静，西入<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">长安</i>到日边。",
-     "emotion": 0.036,
-     "scale": 3.31,
-     "n_hits": 45,
+     "body_html": "永王正<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>东出师，天子遥分<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>旗。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>船一举<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>波静，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>汉翻为<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>鹜池。\n三川北虏乱如麻，<i class=\"hw c1\" title=\"豪情进取·情感0.5·尺度4\">四海</i>南奔似永嘉。\n但用东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>谢安石，为君谈<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>静胡沙。\n雷鼓嘈嘈喧武昌，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>旗猎猎过寻阳。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>毫不犯三吴悦，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5\">春日</i>遥看五色光。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>盘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>踞帝王州，帝子<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">金陵</i>访故丘。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>试暖昭阳殿，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>还过鳷鹊<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n二帝巡游俱未回，五陵<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">松</i>柏使人哀。\n诸侯不救<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">河</i>南地，更喜贤王远道来。\n丹阳北固是吴<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，画出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>水间。\n千岩<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">烽火</i>连<i class=\"hw c1\" title=\"豪情进取·情感0.1·尺度4\">沧海</i>，两岸<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗绕碧<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n王出三<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>按五<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>船跨<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>次扬都。\n战舰森森罗<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>士，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">征帆</i>一一引<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>驹。\n<i class=\"hw c1\" title=\"豪情进取·情感0.7·尺度4\">长风</i>挂席势难回，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>动<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>倾古<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>摧。\n君看帝子浮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>日，何似<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>骧出峡来。\n祖<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>浮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>不成桥，汉武寻阳空射蛟。\n我王<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>舰轻秦汉，却似文皇欲渡辽。\n帝宠贤王入楚<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，扫清<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>汉始应还。\n初从<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>开朱邸，更取<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">金陵</i>作小<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>。\n试借君王玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>鞭，指挥戎虏坐琼筵。\n南<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>一扫胡尘静，西入<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">长安</i>到日边。",
+     "emotion": 0.078,
+     "scale": 3.4,
+     "n_hits": 54,
      "grade": "B",
      "status": "candidate",
      "precision": "exact",
@@ -969,8 +1055,8 @@
      "lat": 30.6,
      "event": "系年作《流夜郎赠辛判官》于流放夜郎途中（江夏一带）",
      "title": "流夜郎赠辛判官",
-     "body_html": "昔在<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">长安</i><i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>花<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，五侯七贵同落<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>。\n气岸遥凌豪士前，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>流肯落他人后？\n夫子红颜我少年，章殿走<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>著金鞭。\n文章献纳麒麟殿，歌舞淹留玳瑁筵。\n与君自谓长如此，宁知草动<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>尘起。\n函谷忽惊<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度3\">胡马</i>来，秦宫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">桃</i>李向明开。\n我<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>远谪<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度3\">夜郎</i>去，何日金鸡放赦回？",
-     "emotion": -0.182,
+     "body_html": "昔在<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">长安</i><i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>花<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，五侯七贵同落<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>。\n气岸遥凌豪士前，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>流肯落他人后？\n夫子红颜我少年，章殿走<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>著金鞭。\n文章献纳麒麟殿，歌舞淹留玳瑁筵。\n与君自谓长如此，宁知草动<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>尘起。\n函谷忽惊<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度3\">胡马</i>来，秦宫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">桃</i>李向明开。\n我<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>远谪<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度3\">夜郎</i>去，何日金鸡放赦回？",
+     "emotion": -0.155,
      "scale": 2.444,
      "n_hits": 11,
      "grade": "B",
@@ -1018,7 +1104,7 @@
      "lat": 31.07,
      "event": "系年作《上三峡》于三峡（瞿塘峡至黄牛峡一带）",
      "title": "上三峡",
-     "body_html": "巫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>夹<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，巴水流若兹。\n巴水忽可尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>无到时。\n三朝上黄牛，三暮行太迟。\n三朝又三暮，不觉鬓成丝。",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">巫山</i>夹<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>，巴水流若兹。\n巴水忽可尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>无到时。\n三朝上黄牛，三暮行太迟。\n三朝又三暮，不觉鬓成丝。",
      "emotion": 0.233,
      "scale": 4.333,
      "n_hits": 3,
@@ -1325,9 +1411,9 @@
       "y0": 760,
       "y1": 765,
       "n_poems": 10,
-      "n_hits": 67,
-      "emotion": -0.088,
-      "scale": 2.961,
+      "n_hits": 71,
+      "emotion": -0.054,
+      "scale": 2.891,
       "cand": 5,
       "rev": 5,
       "poems": [
@@ -1367,8 +1453,8 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 3,
-        "emotion": -0.4,
+        "hits": 4,
+        "emotion": -0.175,
         "scale": 2.0
        },
        {
@@ -1407,9 +1493,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 5,
-        "emotion": -0.06,
-        "scale": 3.5
+        "hits": 7,
+        "emotion": 0.086,
+        "scale": 3.0
        },
        {
         "title": "绝句二首",
@@ -1417,9 +1503,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 7,
-        "emotion": 0.171,
-        "scale": 2.833
+        "hits": 8,
+        "emotion": 0.237,
+        "scale": 2.714
        },
        {
         "title": "旅夜书怀",
@@ -1439,9 +1525,9 @@
       "y0": 766,
       "y1": 770,
       "n_poems": 4,
-      "n_hits": 38,
-      "emotion": -0.247,
-      "scale": 2.536,
+      "n_hits": 37,
+      "emotion": -0.246,
+      "scale": 2.556,
       "cand": 2,
       "rev": 2,
       "poems": [
@@ -1451,9 +1537,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 8,
-        "emotion": -0.237,
-        "scale": 2.5
+        "hits": 7,
+        "emotion": -0.3,
+        "scale": 2.4
        },
        {
         "title": "登高",
@@ -1482,21 +1568,21 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 3,
-        "emotion": -0.233,
-        "scale": 2.667
+        "emotion": -0.067,
+        "scale": 3.0
        }
       ]
      }
     ],
     "d_list": [],
     "params": {
-     "slope": -0.05,
-     "max_drop": -0.182,
-     "rebound": 0.081,
-     "volatility": 0.125,
+     "slope": -0.047,
+     "max_drop": -0.192,
+     "rebound": 0.082,
+     "volatility": 0.129,
      "break_from": 3,
      "break_to": 4,
-     "break_delta": 0.24,
+     "break_delta": 0.274,
      "break_boundary": 760,
      "break_event": "760年春于成都西郊浣花溪畔营建草堂；游武侯祠作《蜀相》",
      "break_matched": true
@@ -1669,10 +1755,10 @@
      "lat": 30.576279,
      "event": "系年作《蜀相》于成都武侯祠",
      "title": "蜀相",
-     "body_html": "丞相祠堂何处寻？锦官<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>外柏森森。\n映阶碧草自春色，隔叶黄鹂空好音。\n三顾频烦天下计，两朝开济<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>臣心。\n出师未捷身先死，长使英雄<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>满襟。",
-     "emotion": -0.4,
+     "body_html": "丞相祠堂何处寻？锦官<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>外柏森森。\n映阶碧草自春色，隔叶<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">黄鹂</i>空好音。\n三顾频烦天下计，两朝开济<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>臣心。\n出师未捷身先死，长使英雄<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>满襟。",
+     "emotion": -0.175,
      "scale": 2.0,
-     "n_hits": 3,
+     "n_hits": 4,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -1823,10 +1909,10 @@
      "lat": 30.576279,
      "event": "系年作《绝句》于成都浣花草堂",
      "title": "绝句",
-     "body_html": "两个黄鹂鸣翠<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，一行白鹭上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>。\n窗含西岭千<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>，门泊东吴<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">万里</i>船。",
-     "emotion": -0.06,
-     "scale": 3.5,
-     "n_hits": 5,
+     "body_html": "两个<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">黄鹂</i>鸣翠<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，一行<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">白鹭</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>。\n窗含西岭千<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>，门泊东吴<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">万里</i>船。",
+     "emotion": 0.086,
+     "scale": 3.0,
+     "n_hits": 7,
      "grade": "B",
      "status": "candidate",
      "precision": "exact",
@@ -1844,10 +1930,10 @@
      "lat": 30.576279,
      "event": "系年作《绝句二首》于成都浣花草堂",
      "title": "绝句二首",
-     "body_html": "迟日<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>丽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>花草香。\n泥融飞<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i>子，沙暖睡鸳鸯。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>碧鸟逾白，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>青花欲燃。\n今春看又过，何日是<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>年。",
-     "emotion": 0.171,
-     "scale": 2.833,
-     "n_hits": 7,
+     "body_html": "迟日<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>丽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>花草香。\n泥融飞<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">燕子</i>，沙暖睡<i class=\"hw c0\" title=\"多义(不归簇)·情感0.6·尺度2\">鸳鸯</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>碧鸟逾白，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>青花欲燃。\n今春看又过，何日是<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>年。",
+     "emotion": 0.237,
+     "scale": 2.714,
+     "n_hits": 8,
      "grade": "B",
      "status": "candidate",
      "precision": "exact",
@@ -1886,7 +1972,7 @@
      "lat": 31.0184,
      "event": "寓居夔州，面对巫山巫峡景观，集中写作《秋兴》等组诗。",
      "title": "秋兴八首·其一",
-     "body_html": "玉露凋伤枫树林，巫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>巫峡气萧森。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>间波浪兼天涌，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>接地阴。\n丛<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度2\">菊</i>两开他日<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>一系<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">故园</i>心。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>衣处处催刀尺，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">白帝</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>高急暮砧。",
+     "body_html": "玉露凋伤枫树林，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">巫山</i>巫峡气萧森。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>间波浪兼天涌，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">塞</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>接地阴。\n丛<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度2\">菊</i>两开他日<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>一系<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">故园</i>心。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>衣处处催刀尺，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">白帝</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>高急暮砧。",
      "valence": -0.79,
      "intensity": 0.9,
      "emo_label": "故园之思",
@@ -1935,7 +2021,7 @@
      "lat": 29.3571,
      "event": "出川漂泊江湘，年末登岳阳楼，此时年老多病且仍忧战事。",
      "title": "登岳阳楼",
-     "body_html": "昔闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">洞庭</i>水，今上岳阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n吴楚东南坼，乾坤日夜浮。\n亲朋无一字，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">病</i>有<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>。\n戎<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>北，凭轩涕泗流。",
+     "body_html": "昔闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">洞庭</i>水，今上岳阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n吴楚东南坼，乾坤日夜浮。\n亲朋无一字，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">病</i>有<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>。\n戎<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度3\">关山</i>北，凭轩涕泗流。",
      "valence": -0.9,
      "intensity": 0.95,
      "emo_label": "孤病与忧时",
@@ -1950,8 +2036,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.237,
-     "scale": 2.5
+     "emotion": -0.3,
+     "scale": 2.4
     },
     {
      "kind": "poem",
@@ -1963,9 +2049,9 @@
      "lat": 28.251769,
      "event": "系年作《江南逢李龟年》于潭州（长沙）",
      "title": "江南逢李龟年",
-     "body_html": "岐王宅里寻常见，崔九堂前几度闻。\n正是<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南好<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落花</i>时节又逢君。",
-     "emotion": -0.233,
-     "scale": 2.667,
+     "body_html": "岐王宅里寻常见，崔九堂前几度闻。\n正是<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i>好<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落花</i>时节又逢君。",
+     "emotion": -0.067,
+     "scale": 3.0,
      "n_hits": 3,
      "grade": "B",
      "status": "candidate",
@@ -2116,9 +2202,9 @@
       "y0": 772,
       "y1": 806,
       "n_poems": 2,
-      "n_hits": 85,
-      "emotion": -0.081,
-      "scale": 3.018,
+      "n_hits": 95,
+      "emotion": -0.04,
+      "scale": 2.833,
       "cand": 1,
       "rev": 1,
       "poems": [
@@ -2128,9 +2214,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 80,
-        "emotion": -0.075,
-        "scale": 3.019
+        "hits": 90,
+        "emotion": -0.026,
+        "scale": 2.828
        },
        {
         "title": "赋得古原草送别",
@@ -2139,7 +2225,7 @@
         "status": "candidate",
         "precision": "disputed",
         "hits": 5,
-        "emotion": -0.18,
+        "emotion": -0.3,
         "scale": 3.0
        }
       ]
@@ -2150,8 +2236,8 @@
       "y0": 807,
       "y1": 814,
       "n_poems": 3,
-      "n_hits": 15,
-      "emotion": -0.273,
+      "n_hits": 16,
+      "emotion": -0.244,
       "scale": 3.444,
       "cand": 2,
       "rev": 1,
@@ -2162,8 +2248,8 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 4,
-        "emotion": -0.325,
+        "hits": 5,
+        "emotion": -0.22,
         "scale": 4.333
        },
        {
@@ -2194,9 +2280,9 @@
       "y0": 815,
       "y1": 819,
       "n_poems": 5,
-      "n_hits": 92,
-      "emotion": -0.076,
-      "scale": 2.685,
+      "n_hits": 109,
+      "emotion": -0.061,
+      "scale": 2.324,
       "cand": 2,
       "rev": 3,
       "poems": [
@@ -2216,9 +2302,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 7,
-        "emotion": -0.014,
-        "scale": 3.2
+        "hits": 8,
+        "emotion": 0.05,
+        "scale": 2.833
        },
        {
         "title": "琵琶行",
@@ -2226,9 +2312,9 @@
         "grade": "A",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 80,
-        "emotion": -0.089,
-        "scale": 2.705
+        "hits": 96,
+        "emotion": -0.075,
+        "scale": 2.3
        },
        {
         "title": "问刘十九",
@@ -2258,8 +2344,8 @@
       "y0": 820,
       "y1": 826,
       "n_poems": 3,
-      "n_hits": 20,
-      "emotion": 0.01,
+      "n_hits": 19,
+      "emotion": 0.026,
       "scale": 3.368,
       "cand": 3,
       "rev": 0,
@@ -2270,8 +2356,8 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 9,
-        "emotion": 0.056,
+        "hits": 8,
+        "emotion": 0.1,
         "scale": 2.625
        },
        {
@@ -2302,9 +2388,9 @@
       "y0": 827,
       "y1": 846,
       "n_poems": 6,
-      "n_hits": 49,
-      "emotion": -0.137,
-      "scale": 2.806,
+      "n_hits": 51,
+      "emotion": -0.069,
+      "scale": 2.939,
       "cand": 6,
       "rev": 0,
       "poems": [
@@ -2325,8 +2411,8 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 6,
-        "emotion": -0.05,
-        "scale": 3.0
+        "emotion": 0.117,
+        "scale": 3.4
        },
        {
         "title": "池上",
@@ -2344,9 +2430,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 8,
-        "emotion": -0.325,
-        "scale": 3.667
+        "hits": 9,
+        "emotion": -0.311,
+        "scale": 3.25
        },
        {
         "title": "忆江南词三首",
@@ -2354,9 +2440,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 20,
-        "emotion": -0.015,
-        "scale": 2.643
+        "hits": 21,
+        "emotion": 0.1,
+        "scale": 2.867
        },
        {
         "title": "浪淘沙·借问江潮与海水",
@@ -2378,19 +2464,19 @@
      }
     ],
     "params": {
-     "slope": 0.017,
-     "max_drop": -0.192,
-     "rebound": 0.136,
-     "volatility": 0.093,
-     "break_from": 2,
-     "break_to": 3,
-     "break_delta": 0.197,
-     "break_boundary": 815,
-     "break_event": "815年因武元衡遇刺案上书被贬江州司马，途中作《放言五首》（古诗文网创作背景+cnkgraph系年815）",
+     "slope": 0.021,
+     "max_drop": -0.204,
+     "rebound": 0.175,
+     "volatility": 0.09,
+     "break_from": 1,
+     "break_to": 2,
+     "break_delta": -0.204,
+     "break_boundary": 807,
+     "break_event": "807年授翰林学士（年谱常识；cnkgraph统计807年西安文37篇）",
      "break_matched": true
     },
-    "type_name": "低谷前移型",
-    "type_desc": "文本最沉痛的不是贬谪江州期，而是更早的谏官讽喻期(-0.27)——新乐府写民生疾苦压低全期均值；最大落差点恰在815贬江州边界，方向却是回升(+0.20)，晚年中隐平缓微降。"
+    "type_name": "谏官低谷回升型",
+    "type_desc": "由应举入仕期(-0.04)转入谏官岁月(-0.24)形成最大下落(-0.20)；新乐府中的民生疾苦压低全期均值。贬谪江州忠州期回升至-0.06，晚年小幅回落。"
    },
    "stations": [
     {
@@ -2403,7 +2489,7 @@
      "lat": 34.3416,
      "event": "进士及第，进入以长安为中心的仕宦与文学生活。",
      "title": "赋得古原草送别",
-     "body_html": "离离原上草，一岁一<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">枯</i>荣。\n野火烧不尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>吹又生。\n远芳侵古道，晴翠接荒<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>。\n又<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>王孙去，萋萋满<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>情。",
+     "body_html": "离离原上草，一岁一<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">枯</i>荣。\n野火烧不尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>吹又生。\n远芳侵古道，晴翠接<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">荒城</i>。\n又<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i>王孙去，萋萋满<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>情。",
      "valence": 0.34,
      "intensity": 0.72,
      "emo_label": "生命韧性与送别",
@@ -2418,7 +2504,7 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": -0.18,
+     "emotion": -0.3,
      "scale": 3.0
     },
     {
@@ -2431,7 +2517,7 @@
      "lat": 34.163,
      "event": "任盩厔县尉期间接触农事与赋税现实，写下关切田家生计的作品。",
      "title": "观刈麦",
-     "body_html": "田家少闲<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>人倍忙。\n夜来食<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>起，小麦覆陇黄。\n妇姑荷箪食，童稚携壶浆。\n相随饷田去，丁天在食冈。\n足蒸暑土气，背灼炎天光。\n力尽不知热，但惜夏日长。\n复有贫妇人，抱子在其旁。\n右手秉遗穗，左臂悬敝筐。\n听其相顾言，闻者为<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i>伤。\n家田输税尽，拾此充饥肠。\n今我何功德？曾不事农桑。\n吏禄三百石，岁晏有余粮。\n念此私自愧，尽日不能忘。",
+     "body_html": "田家少闲<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，五<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>人倍忙。\n夜来食<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>起，小麦覆陇黄。\n妇姑荷箪食，童稚携壶浆。\n相随饷田去，丁天在食冈。\n足蒸暑土气，背灼炎天光。\n力尽不知热，但惜<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2\">夏日</i>长。\n复有贫妇人，抱子在其旁。\n右手秉遗穗，左臂悬敝筐。\n听其相顾言，闻者为<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i>伤。\n家田输税尽，拾此充饥肠。\n今我何功德？曾不事农桑。\n吏禄三百石，岁晏有余粮。\n念此私自愧，尽日不能忘。",
      "valence": -0.72,
      "intensity": 0.89,
      "emo_label": "悲悯与自愧",
@@ -2446,7 +2532,7 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.325,
+     "emotion": -0.22,
      "scale": 4.333
     },
     {
@@ -2459,10 +2545,10 @@
      "lat": 34.169587,
      "event": "系年作《长恨歌》于盩厔仙游寺",
      "title": "长恨歌",
-     "body_html": "汉皇重色<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>倾国，御宇多年求不得。\n杨家有女初长成，养在深闺人未识。\n天生丽质难自弃，一朝选在君王侧。\n回眸一<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>百媚生，六宫粉黛无颜色。\n春<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>赐浴华清池，温<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>水滑洗凝脂。\n侍儿扶起娇无力，始是新承恩泽时。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>鬓花颜金步摇，芙蓉帐暖度春宵。\n春宵<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i>短日高起，从此君王不早朝。\n承<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>侍宴无闲暇，春从春游夜专夜。\n后宫佳丽三千人，三千宠爱在一身。\n金屋妆成娇侍夜，玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>宴罢<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>和春。\n姊妹弟兄皆列土，可怜光彩生门户。\n遂令天下父母心，不重生男重生女。\n骊宫高处入<i class=\"hw c1\" title=\"豪情进取·情感0.6·尺度5\">青云</i>，<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>飘处处闻。\n缓歌慢舞凝丝<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>，尽日君王看不足。\n渔阳鼙鼓动地来，惊破霓裳羽衣曲。\n九重<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>阙<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>尘生，千乘万骑西南行。\n翠华摇摇行复止，西出都门百余里。\n六军不发无奈何，宛转蛾眉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>前死。\n花钿委地无人收，翠翘金雀玉搔头。\n君王掩面救不得，回看血<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>相和流。\n黄埃散漫<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>萧索，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>栈萦纡登<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.3·尺度3\">剑阁</i>。\n峨嵋<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>下少人行，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗无光日色薄。\n蜀<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水碧蜀<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>青，圣主朝朝暮暮情。\n行宫见<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>伤心色，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度2\">夜雨</i>闻铃肠断声。\n天旋地转回龙驭，到此踌躇不能去。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>嵬坡下泥土中，不见玉颜空死处。\n君臣相顾尽沾衣，东望都门信<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>来池苑皆依旧，太液芙蓉未央<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>。\n芙蓉如面<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>如眉，对此如何不<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>垂？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">桃</i>李花开日，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>梧桐叶落时。\n西宫南内多<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>草，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落叶</i>满阶红不扫。\n梨园弟子<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">白发</i>新，椒房阿监青娥<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>。\n夕殿萤飞<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>悄然，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i>灯挑尽未成眠。\n迟迟钟鼓初长夜，耿耿<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">星</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">河</i>欲曙天。\n鸳鸯瓦冷<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度2\">霜</i>华重，翡翠衾<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>谁与共？\n悠悠生死<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>经年，魂魄不曾来入<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>。\n临邛道士<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>都<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，能以精诚致魂魄。\n为感君王辗转<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，遂教方士殷勤觅。\n排空驭气奔如电，升天入地求之遍。\n上穷碧落下黄<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>，两处茫茫皆不见。\n忽闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>上有<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>在虚无缥缈间。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>玲珑五<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>起，其中绰约多<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>子。\n中有一人字太真，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>肤花貌参差是。\n金阙西厢叩玉扃，转教小玉报双成。\n闻道汉家天子使，九华帐里<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>魂惊。\n揽衣推枕起徘徊，珠箔银屏迤逦开。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>鬓半偏新睡觉，花冠不整下堂来。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>吹<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>袂飘飖举，犹似霓裳羽衣舞。\n玉容寂寞<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>阑干，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">梨花</i>一枝春带<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>。\n含情凝睇谢君王，一<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>音容两渺茫。\n昭阳殿里恩爱绝，<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度4\">蓬莱</i>宫中<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>长。\n回头下望人寰处，不见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">长安</i>见尘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i>。\n惟将旧物表深情，钿合金钗寄将去。\n钗留一股合一扇，钗擘黄金合分钿。\n但令心似金钿坚，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>会相见。\n临<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>殷勤重寄词，词中有誓两心知。\n七<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>七日长生殿，夜半无人私语时。\n在天愿作比翼鸟，在地愿为连理枝。\n天长地久有时尽，此<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>绵绵无绝期。",
-     "emotion": -0.075,
-     "scale": 3.019,
-     "n_hits": 80,
+     "body_html": "汉皇重色<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>倾国，御宇多年求不得。\n杨家有女初长成，养在<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">深闺</i>人未识。\n天生丽质难自弃，一朝选在君王侧。\n回眸一<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>百媚生，六宫粉黛无颜色。\n春<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>赐浴华清池，温<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>水滑洗凝脂。\n侍儿扶起娇无力，始是新承恩泽时。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>鬓花颜金步摇，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">芙蓉</i>帐暖度春宵。\n春宵<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i>短日高起，从此君王不早朝。\n承<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>侍宴无闲暇，春从春游夜专夜。\n后宫佳丽三千人，三千宠爱在一身。\n金屋妆成娇侍夜，玉<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>宴罢<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>和春。\n姊妹弟兄皆列土，可怜光彩生门户。\n遂令天下父母心，不重生男重生女。\n骊宫高处入<i class=\"hw c1\" title=\"豪情进取·情感0.6·尺度5\">青云</i>，<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>飘处处闻。\n缓歌慢舞凝丝<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>，尽日君王看不足。\n渔阳鼙鼓动地来，惊破<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度1\">霓裳</i>羽衣曲。\n九重<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>阙<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>尘生，千乘万骑西南行。\n翠华摇摇行复止，西出都门百余里。\n六军不发无奈何，宛转<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度1\">蛾眉</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>前死。\n花钿委地无人收，翠翘金雀玉搔头。\n君王掩面救不得，回看血<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>相和流。\n黄埃散漫<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>萧索，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>栈萦纡登<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.3·尺度3\">剑阁</i>。\n峨嵋<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>下少人行，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗无光日色薄。\n蜀<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水碧蜀<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>青，圣主朝朝暮暮情。\n行宫见<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>伤心色，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度2\">夜雨</i>闻铃肠断声。\n天旋地转回<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度5\">龙</i>驭，到此踌躇不能去。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>嵬坡下泥土中，不见玉颜空死处。\n君臣相顾尽沾衣，东望都门信<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>来池苑皆依旧，太液<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">芙蓉</i>未央<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">芙蓉</i>如面<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>如眉，对此如何不<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>垂？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度2\">桃</i>李花开日，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度3\">秋雨</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度2\">梧桐</i>叶落时。\n西宫南内多<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>草，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度2\">落叶</i>满阶红不扫。\n梨园弟子<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">白发</i>新，椒房阿监青娥<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>。\n夕殿萤飞<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>悄然，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i>灯挑尽未成眠。\n迟迟钟鼓初长夜，耿耿<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">星</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">河</i>欲曙天。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.6·尺度2\">鸳鸯</i>瓦冷<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度2\">霜</i>华重，翡翠衾<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>谁与共？\n悠悠生死<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>经年，魂魄不曾来入<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>。\n临邛道士<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>都<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，能以精诚致魂魄。\n为感君王辗转<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，遂教方士殷勤觅。\n排空驭气奔如电，升天入地求之遍。\n上穷碧落下黄<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>，两处茫茫皆不见。\n忽闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>上有<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>在虚无缥缈间。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>玲珑五<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>起，其中绰约多<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>子。\n中有一人字太真，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>肤花貌参差是。\n金阙西厢叩玉扃，转教小玉报双成。\n闻道汉家天子使，九华帐里<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>魂惊。\n揽衣推枕起徘徊，珠箔银屏迤逦开。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>鬓半偏新睡觉，花冠不整下堂来。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>吹<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>袂飘飖举，犹似<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度1\">霓裳</i>羽衣舞。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度1\">玉容</i>寂寞<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>阑干，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">梨花</i>一枝春带<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>。\n含情凝睇谢君王，一<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>音容两渺茫。\n昭阳殿里恩爱绝，<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度4\">蓬莱</i>宫中<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">日月</i>长。\n回头下望人寰处，不见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">长安</i>见尘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i>。\n惟将旧物表深情，钿合金钗寄将去。\n钗留一股合一扇，钗擘黄金合分钿。\n但令心似金钿坚，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>会相见。\n临<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>殷勤重寄词，词中有誓两心知。\n七<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>七日长生殿，夜半无人私语时。\n在天愿作比翼鸟，在地愿为连理枝。\n天长地久有时尽，此<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>绵绵无绝期。",
+     "emotion": -0.026,
+     "scale": 2.828,
+     "n_hits": 90,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -2501,7 +2587,7 @@
      "lat": 29.7051,
      "event": "贬为江州司马；次年秋在浔阳江头送客，作《琵琶行》。",
      "title": "琵琶行",
-     "body_html": "元和十年，予左迁九<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>郡司<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>。明年<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>湓浦口，闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>中夜弹琵琶者，听其音，铮铮然有京都声。问其人，本<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">长安</i>倡女，尝学琵琶于穆、曹二善才，年长色衰，委身为贾人妇。遂命<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，使快弹数曲。曲罢悯然，自叙少小时<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>事，今漂沦憔悴，转徙于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>间。予出官二年，恬然自安，感斯人言，是夕始觉有迁谪意。因为长句，歌以赠之，凡六百一十六言，命曰《琵琶行》。\n浔阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>头夜<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，枫叶荻花<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>瑟瑟。\n主人下<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>在船，举<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>欲饮无管弦。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>不成<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>惨将<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时茫茫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>浸<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>。\n忽闻水上琵琶声，主人忘<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>不发。\n寻声暗问弹者谁，琵琶声停欲语迟。\n移船相近邀相见，添<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>回灯重开宴。\n千呼万唤始出来，犹抱琵琶半遮面。\n转轴拨弦三两声，未成曲调先有情。\n弦弦掩抑声声<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，似诉平生不得志。\n低眉信手续续弹，说尽心中无限事。\n轻拢慢捻抹复挑，初为《霓裳》后《六幺》。\n大弦嘈嘈如急<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，小弦切切如私语。\n嘈嘈切切错杂弹，大珠小珠落玉盘。\n间<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">莺</i>语花底滑，幽咽<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>流冰下难。\n冰<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>冷涩弦凝绝，凝绝不通声暂歇。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>有幽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>暗<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>生，此时无声胜有声。\n银瓶乍破水浆迸，铁骑突出刀枪鸣。\n曲终收拨当心画，四弦一声如裂帛。\n东船西舫悄无言，唯见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>心<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>白。\n沉吟放拨插弦中，整顿衣裳起敛容。\n自言本是京<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>女，家在虾蟆陵下住。\n十三学得琵琶成，名属教坊第一部。\n曲罢曾教善才服，妆成每被<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>娘妒。\n五陵年少争缠头，一曲红绡不知数。\n钿头银篦击节碎，血色罗裙翻<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>污。\n今年<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>复明年，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>等闲度。\n弟走从军阿姨死，暮去朝来颜色故。\n门前冷落鞍<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>稀，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>大嫁作商人妇。\n商人重利轻<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>离，前<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>浮梁买茶去。\n去来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>口守空船，绕船<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>。\n夜深忽<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>少年事，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>啼妆<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>红阑干。\n我闻琵琶已叹息，又闻此语重唧唧。\n同是<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">天涯</i>沦落人，相逢何必曾相识！\n我从去年辞帝京，谪居卧<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">病</i>浔阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>。\n浔阳地僻无音<i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>，终岁不闻丝<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>声。\n住近湓<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>地低湿，黄芦<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>绕宅生。\n其间旦暮闻何物？<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">杜鹃</i>啼血<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿</i>哀鸣。\n春<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花朝<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>夜，往往取<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>还<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>倾。\n岂无<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>歌与村<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>，呕哑嘲哳难为听。\n今夜闻君琵琶语，如听<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>耳暂明。\n莫辞更坐弹一曲，为君翻作《琵琶行》。\n感我此言良久立，却坐促弦弦转急。\n凄凄不似向前声，满座重闻皆掩泣。\n座中泣下谁最多？<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>州司<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>青衫湿。",
+     "body_html": "元和十年，予左迁九<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>郡司<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>。明年<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>湓浦口，闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>中夜弹<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>者，听其音，铮铮然有京都声。问其人，本<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">长安</i>倡女，尝学<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>于穆、曹二善才，年长色衰，委身为贾人妇。遂命<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，使快弹数曲。曲罢悯然，自叙少小时<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>事，今漂沦憔悴，转徙于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>间。予出官二年，恬然自安，感斯人言，是夕始觉有迁谪意。因为长句，歌以赠之，凡六百一十六言，命曰《<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>行》。\n浔阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>头夜<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">送</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">枫叶</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度2\">荻花</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>瑟瑟。\n主人下<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>在船，举<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>欲饮无管弦。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>不成<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>惨将<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时茫茫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>浸<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>。\n忽闻水上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>声，主人忘<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>不发。\n寻声暗问弹者谁，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>声停欲语迟。\n移船相近邀相见，添<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>回灯重开宴。\n千呼万唤始出来，犹抱<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>半遮面。\n转轴拨弦三两声，未成曲调先有情。\n弦弦掩抑声声<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，似诉平生不得志。\n低眉信手续续弹，说尽心中无限事。\n轻拢慢捻抹复挑，初为《<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度1\">霓裳</i>》后《六幺》。\n大弦嘈嘈如急<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，小弦切切如私语。\n嘈嘈切切错杂弹，大珠小珠落玉盘。\n间<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">莺</i>语花底滑，幽咽<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>流冰下难。\n冰<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>冷涩弦凝绝，凝绝不通声暂歇。\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>有幽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>暗<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>生，此时无声胜有声。\n银瓶乍破水浆迸，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">铁骑</i>突出<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度1\">刀枪</i>鸣。\n曲终收拨当心画，四弦一声如裂帛。\n东船西舫悄无言，唯见<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>心<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>白。\n沉吟放拨插弦中，整顿衣裳起敛容。\n自言本是京<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>女，家在虾蟆陵下住。\n十三学得<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>成，名属教坊第一部。\n曲罢曾教善才服，妆成每被<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>娘妒。\n五陵年少争缠头，一曲红绡不知数。\n钿头银篦击节碎，血色罗裙翻<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>污。\n今年<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>复明年，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>等闲度。\n弟走从军阿姨死，暮去朝来颜色故。\n门前冷落<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度2\">鞍马</i>稀，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>大嫁作商人妇。\n商人重利轻<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>离，前<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>浮梁买茶去。\n去来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>口守空船，绕船<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>。\n夜深忽<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>少年事，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>啼妆<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>红阑干。\n我闻<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>已叹息，又闻此语重唧唧。\n同是<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">天涯</i>沦落人，相逢何必曾相识！\n我从去年辞帝京，谪居卧<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">病</i>浔阳<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>。\n浔阳地僻无音<i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>，终岁不闻丝<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>声。\n住近湓<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>地低湿，黄芦<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">苦</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>绕宅生。\n其间旦暮闻何物？<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度2\">杜鹃</i>啼血<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度3\">猿</i>哀鸣。\n春<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花朝<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>夜，往往取<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>还<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>倾。\n岂无<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>歌与村<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>，呕哑嘲哳难为听。\n今夜闻君<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>语，如听<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>耳暂明。\n莫辞更坐弹一曲，为君翻作《<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度1\">琵琶</i>行》。\n感我此言良久立，却坐促弦弦转急。\n凄凄不似向前声，满座重闻皆掩泣。\n座中泣下谁最多？<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>州司<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">青衫</i>湿。",
      "valence": -0.86,
      "intensity": 0.97,
      "emo_label": "沦落与共情",
@@ -2516,8 +2602,8 @@
      "precision": "year",
      "grade": "A",
      "status": "approved",
-     "emotion": -0.089,
-     "scale": 2.705
+     "emotion": -0.075,
+     "scale": 2.3
     },
     {
      "kind": "poem",
@@ -2550,7 +2636,7 @@
      "lat": 29.556,
      "event": "江州时期游庐山大林寺，从山中物候差异获得诗意。",
      "title": "大林寺桃花",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>四<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>芳菲尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">桃花</i>始盛开。\n长<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>春<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>无觅处，不知转入此中来。",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>四<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度1\">芳菲</i>尽，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">桃花</i>始盛开。\n长<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>春<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>无觅处，不知转入此中来。",
      "valence": 0.74,
      "intensity": 0.71,
      "emo_label": "惊喜与新发现",
@@ -2565,8 +2651,8 @@
      "precision": "approximate",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.014,
-     "scale": 3.2
+     "emotion": 0.05,
+     "scale": 2.833
     },
     {
      "kind": "poem",
@@ -2599,7 +2685,7 @@
      "lat": 30.2741,
      "event": "出任杭州刺史，治理水利并频繁游览西湖地区。",
      "title": "钱塘湖春行",
-     "body_html": "<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i>北贾<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>西，水面初平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>脚低。\n几处早<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">莺</i>争暖树，谁家新<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i>啄春泥。\n乱花渐欲迷人眼，浅草才能没<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>蹄。\n最爱<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>东行不足，绿杨阴里白沙堤。",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">孤山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i>北贾<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>西，水面初平<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>脚低。\n几处早<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">莺</i>争暖树，谁家新<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i>啄春泥。\n乱花渐欲迷人眼，浅草才能没<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>蹄。\n最爱<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>东行不足，绿杨阴里白沙堤。",
      "valence": 0.88,
      "intensity": 0.78,
      "emo_label": "春日欣悦",
@@ -2614,7 +2700,7 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": 0.056,
+     "emotion": 0.1,
      "scale": 2.625
     },
     {
@@ -2627,7 +2713,7 @@
      "lat": 31.2989,
      "event": "出任苏州刺史，延续江南地方仕宦经历，后因病离任。",
      "title": "忆江南",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南好，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景旧曾谙。日出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花红胜火，春来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水绿如蓝。能不<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南？",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i>好，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景旧曾谙。日出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花红胜火，春来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水绿如蓝。能不<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i>？",
      "valence": 0.76,
      "intensity": 0.8,
      "emo_label": "欣赏与怀念",
@@ -2642,8 +2728,8 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": -0.05,
-     "scale": 3.0
+     "emotion": 0.117,
+     "scale": 3.4
     },
     {
      "kind": "poem",
@@ -2718,10 +2804,10 @@
      "lat": 34.62,
      "event": "系年作《忆江南词三首》于洛阳",
      "title": "忆江南词三首",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南好，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景旧曾谙。日出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花红胜火，春来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水绿如蓝。能不<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>，最<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>是杭州。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>中寻桂子，郡<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>枕上看潮头。何日更重游？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>南<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>，其次<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>吴宫。吴<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>一<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>春<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>叶，吴娃双舞<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>芙蓉。早晚复相逢？",
-     "emotion": -0.015,
-     "scale": 2.643,
-     "n_hits": 20,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i>好，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>景旧曾谙。日出<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>花红胜火，春来<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>水绿如蓝。能不<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i>？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>，最<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>是杭州。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i><i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">寺</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>中寻桂子，郡<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>枕上看潮头。何日更重游？\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度4\">江南</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>，其次<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2\">忆</i>吴宫。吴<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>一<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>春<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>叶，吴娃双舞<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">芙蓉</i>。早晚复相逢？",
+     "emotion": 0.1,
+     "scale": 2.867,
+     "n_hits": 21,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -2739,10 +2825,10 @@
      "lat": 34.62,
      "event": "系年作《长相思·汴水流》于洛阳",
      "title": "长相思·汴水流",
-     "body_html": "汴水流，泗水流，流到瓜洲古渡头。吴<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>点点<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>悠悠，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>悠悠，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>到<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>时方始休。<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明人倚<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。",
-     "emotion": -0.325,
-     "scale": 3.667,
-     "n_hits": 8,
+     "body_html": "汴水流，泗水流，流到瓜洲<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度2\">古渡</i>头。吴<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>点点<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>悠悠，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>悠悠，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>到<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>时方始休。<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明人倚<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。",
+     "emotion": -0.311,
+     "scale": 3.25,
+     "n_hits": 9,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -2902,9 +2988,9 @@
       "y0": 1037,
       "y1": 1070,
       "n_poems": 1,
-      "n_hits": 4,
-      "emotion": -0.4,
-      "scale": 3.667,
+      "n_hits": 5,
+      "emotion": -0.32,
+      "scale": 3.25,
       "cand": 1,
       "rev": 0,
       "poems": [
@@ -2914,9 +3000,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 4,
-        "emotion": -0.4,
-        "scale": 3.667
+        "hits": 5,
+        "emotion": -0.32,
+        "scale": 3.25
        }
       ]
      },
@@ -2926,9 +3012,9 @@
       "y0": 1071,
       "y1": 1079,
       "n_poems": 5,
-      "n_hits": 45,
-      "emotion": -0.149,
-      "scale": 2.966,
+      "n_hits": 49,
+      "emotion": -0.118,
+      "scale": 2.909,
       "cand": 2,
       "rev": 3,
       "poems": [
@@ -2939,7 +3025,7 @@
         "status": "approved",
         "precision": "reviewed",
         "hits": 11,
-        "emotion": -0.2,
+        "emotion": -0.164,
         "scale": 2.25
        },
        {
@@ -2948,9 +3034,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 18,
-        "emotion": -0.078,
-        "scale": 3.667
+        "hits": 20,
+        "emotion": -0.02,
+        "scale": 3.545
        },
        {
         "title": "饮湖上初晴后雨",
@@ -2978,9 +3064,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 6,
-        "emotion": -0.217,
-        "scale": 3.2
+        "hits": 8,
+        "emotion": -0.225,
+        "scale": 2.857
        }
       ]
      },
@@ -2990,9 +3076,9 @@
       "y0": 1080,
       "y1": 1085,
       "n_poems": 8,
-      "n_hits": 116,
-      "emotion": -0.016,
-      "scale": 2.955,
+      "n_hits": 121,
+      "emotion": -0.018,
+      "scale": 2.926,
       "cand": 1,
       "rev": 7,
       "poems": [
@@ -3012,9 +3098,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 6,
-        "emotion": -0.483,
-        "scale": 4.5
+        "hits": 7,
+        "emotion": -0.414,
+        "scale": 4.0
        },
        {
         "title": "定风波·莫听穿林打叶声",
@@ -3022,9 +3108,9 @@
         "grade": "A",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 15,
-        "emotion": -0.02,
-        "scale": 2.846
+        "hits": 16,
+        "emotion": -0.044,
+        "scale": 2.786
        },
        {
         "title": "念奴娇·赤壁怀古",
@@ -3052,9 +3138,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 54,
-        "emotion": -0.028,
-        "scale": 3.05
+        "hits": 57,
+        "emotion": -0.026,
+        "scale": 3.0
        },
        {
         "title": "题西林壁",
@@ -3129,7 +3215,7 @@
       "y1": 1101,
       "n_poems": 2,
       "n_hits": 17,
-      "emotion": -0.147,
+      "emotion": -0.094,
       "scale": 3.125,
       "cand": 2,
       "rev": 0,
@@ -3141,7 +3227,7 @@
         "status": "candidate",
         "precision": "disputed",
         "hits": 7,
-        "emotion": 0.086,
+        "emotion": 0.1,
         "scale": 2.75
        },
        {
@@ -3151,7 +3237,7 @@
         "status": "candidate",
         "precision": "disputed",
         "hits": 10,
-        "emotion": -0.31,
+        "emotion": -0.23,
         "scale": 3.5
        }
       ]
@@ -3164,13 +3250,13 @@
      }
     ],
     "params": {
-     "slope": 0.066,
-     "max_drop": -0.15,
-     "rebound": 0.253,
-     "volatility": 0.144,
+     "slope": 0.057,
+     "max_drop": -0.097,
+     "rebound": 0.226,
+     "volatility": 0.115,
      "break_from": 1,
      "break_to": 2,
-     "break_delta": 0.251,
+     "break_delta": 0.202,
      "break_boundary": 1071,
      "break_event": "1071年出任杭州通判",
      "break_matched": true
@@ -3189,7 +3275,7 @@
      "lat": 34.767,
      "event": "赴凤翔签判任途中重经渑池，回忆早年入京时的旅途踪迹。",
      "title": "和子由渑池怀旧",
-     "body_html": "人生到处知何似，应似飞<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>踏<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>泥。\n泥上偶然留指爪，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>飞那复计东西。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>僧已死成新塔，坏壁无由见旧题。\n往日崎岖还记否，路长人困蹇驴嘶。",
+     "body_html": "人生到处知何似，应似飞<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>踏<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i>泥。\n泥上偶然留指爪，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>飞那复计东西。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>僧已死成新塔，坏壁无由见旧题。\n往日崎岖还记否，路长人困蹇<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">驴</i>嘶。",
      "valence": -0.12,
      "intensity": 0.7,
      "emo_label": "人生无常与怀旧",
@@ -3204,8 +3290,8 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": -0.4,
-     "scale": 3.667
+     "emotion": -0.32,
+     "scale": 3.25
     },
     {
      "kind": "journey",
@@ -3245,7 +3331,7 @@
      "lat": 35.9957,
      "event": "知密州，组织出猎并在次年中秋怀念弟弟苏辙。",
      "title": "江城子·密州出猎",
-     "body_html": "<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>夫聊发少年狂，左牵黄，右擎苍，锦帽貂裘，千骑卷平冈。为报倾<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>随太守，亲射虎，看孙郎。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>酣胸胆尚开张。鬓微<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度2\">霜</i>，又何妨！持节<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>中，何日遣冯唐？会挽雕弓如满<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，西北望，射天狼。",
+     "body_html": "<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>夫聊发少年狂，左牵黄，右擎苍，锦帽貂裘，千骑卷平冈。为报倾<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>随太守，亲射<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度2\">虎</i>，看孙郎。\n<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>酣胸胆尚开张。鬓微<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度2\">霜</i>，又何妨！持节<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>中，何日遣冯唐？会挽雕弓如满<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，西北望，射天<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">狼</i>。",
      "valence": 0.81,
      "intensity": 0.92,
      "emo_label": "豪迈与报国志",
@@ -3260,8 +3346,8 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": -0.217,
-     "scale": 3.2
+     "emotion": -0.225,
+     "scale": 2.857
     },
     {
      "kind": "poem",
@@ -3294,8 +3380,8 @@
      "lat": 36.004748,
      "event": "系年作《望江南·超然台作》于密州超然台",
      "title": "望江南·超然台作",
-     "body_html": "春未<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>细<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>斜斜。试上超然<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>上看，半壕春水一<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>花。<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>暗千家。\n<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>食后，<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>醒却咨嗟。休对故人<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>故国，且将新火试新茶。诗<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>趁年华。",
-     "emotion": -0.2,
+     "body_html": "春未<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6\">老</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>细<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>斜斜。试上超然<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>上看，半壕春水一<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>花。<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>暗千家。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">寒食</i>后，<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>醒却咨嗟。休对故人<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>故国，且将新火试新茶。诗<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>趁年华。",
+     "emotion": -0.164,
      "scale": 2.25,
      "n_hits": 11,
      "grade": "B",
@@ -3315,10 +3401,10 @@
      "lat": 36.004748,
      "event": "系年作《水调歌头·明月几时有》于密州超然台",
      "title": "水调歌头·明月几时有",
-     "body_html": "丙辰中<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>饮达旦，大<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>，作此篇，兼怀子由。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>几时有？把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>问<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>。不知<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i>宫阙，今夕是何年。我欲乘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>去，又恐琼<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>玉宇，高处不胜<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>。起舞弄清影，何似在<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>。\n转朱<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>，低绮户，照无眠。不应有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>，何事长向<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时圆？人有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>离合，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
-     "emotion": -0.078,
-     "scale": 3.667,
-     "n_hits": 18,
+     "body_html": "丙辰<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4\">中秋</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>饮达旦，大<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>，作此篇，兼怀子由。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>几时有？把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>问<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度5\">青天</i>。不知<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">天上</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">宫阙</i>，今夕是何年。我欲乘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>去，又恐琼<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>玉宇，高处不胜<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>。起舞弄清影，何似在<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">人间</i>。\n转朱<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>，低绮户，照无眠。不应有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>，何事长向<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>时圆？人有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">欢</i>离合，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>有<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">阴晴</i>圆缺，此事古难全。但愿人长久，千里共婵娟。",
+     "emotion": -0.02,
+     "scale": 3.545,
+     "n_hits": 20,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -3336,7 +3422,7 @@
      "lat": 30.4537,
      "event": "乌台诗案后贬为黄州团练副使，在黄州生活与写作至 1084 年。",
      "title": "定风波·莫听穿林打叶声",
-     "body_html": "三<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>七日，沙<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>道中遇<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>具先去，同行皆狼狈，余<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>不觉。已而遂晴，故作此。\n莫听穿林打叶声，何妨吟啸且徐行。<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>杖芒鞋轻胜<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，谁怕？一蓑<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>任平生。\n料峭<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>吹<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>醒，微冷，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>头斜照却相迎。回首向来萧瑟处，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>去，也无<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>也无晴。",
+     "body_html": "三<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>七日，沙<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">湖</i>道中遇<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>具先去，同行皆<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">狼</i>狈，余<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>不觉。已而遂晴，故作此。\n莫听穿林打叶声，何妨吟啸且徐行。<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度2\">竹</i>杖芒鞋轻胜<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，谁怕？一蓑<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>任平生。\n料峭<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7·尺度3\">春风</i>吹<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>醒，微冷，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>头斜照却相迎。回首向来萧瑟处，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>去，也无<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>也无晴。",
      "valence": 0.52,
      "intensity": 0.91,
      "emo_label": "旷达与自我调适",
@@ -3351,8 +3437,8 @@
      "precision": "year",
      "grade": "A",
      "status": "approved",
-     "emotion": -0.02,
-     "scale": 2.846
+     "emotion": -0.044,
+     "scale": 2.786
     },
     {
      "kind": "poem",
@@ -3364,10 +3450,10 @@
      "lat": 30.459422,
      "event": "系年作《卜算子·黄州定慧院寓居作》于黄州定慧院",
      "title": "卜算子·黄州定慧院寓居作",
-     "body_html": "缺<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>挂疏桐，漏断人初静。谁见幽人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>往来，缥缈<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>影。\n惊起却回头，有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>无人省。拣尽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>枝不肯栖，寂寞沙洲冷。",
-     "emotion": -0.483,
-     "scale": 4.5,
-     "n_hits": 6,
+     "body_html": "缺<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>挂疏桐，漏断人初静。谁见幽人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>往来，缥缈<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>影。\n惊起却回头，有<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>无人省。拣尽<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>枝不肯栖，寂寞<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">沙洲</i>冷。",
+     "emotion": -0.414,
+     "scale": 4.0,
+     "n_hits": 7,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -3448,10 +3534,10 @@
      "lat": 30.459422,
      "event": "系年作《赤壁赋》于黄州赤壁",
      "title": "赤壁赋",
-     "body_html": "壬戌之<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>，七<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>既望，苏子与<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>泛<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>游于赤壁之下。<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">清风</i>徐来，水波不兴。举<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>属<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，诵<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>之诗，歌窈窕之章。少焉，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>出于东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>之上，徘徊于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>牛之间。白露横<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>，水光接天。纵一苇之所如，凌万顷之茫然。浩浩乎如冯虚御<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>，而不知其所止；飘飘乎如遗世<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>立，羽化而登<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>。\n于是饮<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>甚，扣舷而歌之。歌曰：“桂棹兮<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">兰</i>桨，击空明兮溯流光。渺渺兮予怀，望美人兮天一方。”<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>有吹洞<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">箫</i>者，倚歌而和之。其声呜呜然，如怨如慕，如泣如诉；余音袅袅，不绝如缕。舞幽壑之潜蛟，泣<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>之嫠妇。\n苏子愀然，正襟危坐而问<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>曰：“何为其然也？”<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>曰：“‘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">星</i>稀，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度2\">乌</i>鹊南飞’，此非曹孟德之诗乎？西望夏口，东望武昌，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>川相缪，郁乎苍苍，此非孟德之困于周郎者乎？方其破荆州，下<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>陵，顺流而东也，舳舻千里，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗蔽空，酾<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>临<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>，横槊赋诗，固一世之雄也，而今安在哉？况吾与子渔樵于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>渚之上，侣<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度2\">鱼</i>虾而友麋鹿，驾一叶之<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.2·尺度1\">扁舟</i>，举匏<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">樽</i>以相属。寄蜉蝣于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>，渺<i class=\"hw c1\" title=\"豪情进取·情感0.4·尺度4\">沧海</i>之一粟。哀吾生之须臾，羡<i class=\"hw c1\" title=\"豪情进取·情感0.1·尺度4\">长江</i>之无穷。挟飞<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>以遨游，抱<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>而长终。知不可乎骤得，托遗响于<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>。”\n苏子曰：“<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>亦知夫水与<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>乎？逝者如斯，而未尝往也；盈虚者如彼，而卒莫消长也。盖将自其变者而观之，则<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>曾不能以一瞬；自其不变者而观之，则物与我皆无尽也，而又何羡乎！且夫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>之间，物各有主，苟非吾之所有，虽一毫而莫取。惟<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>上之<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">清风</i>，与<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>间之<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>，耳得之而为声，目遇之而成色，取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。”\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>喜而<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>，洗盏更酌。肴核既尽，<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>盘狼籍。相与枕藉乎<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>中，不知东方之既白。",
-     "emotion": -0.028,
-     "scale": 3.05,
-     "n_hits": 54,
+     "body_html": "壬戌之<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>，七<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>既望，苏子与<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>泛<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>游于赤壁之下。<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">清风</i>徐来，水波不兴。举<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>属<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>，诵<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>之诗，歌窈窕之章。少焉，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>出于东<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>之上，徘徊于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>牛之间。白露横<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>，水光接天。纵一苇之所如，凌万顷之茫然。浩浩乎如冯虚御<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>，而不知其所止；飘飘乎如遗世<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>立，羽化而登<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>。\n于是饮<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.8\">乐</i>甚，扣舷而歌之。歌曰：“桂棹兮<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">兰</i>桨，击空明兮溯流光。渺渺兮予怀，望美人兮天一方。”<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>有吹洞<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">箫</i>者，倚歌而和之。其声呜呜然，如怨如慕，如泣如诉；余音袅袅，不绝如缕。舞幽壑之潜蛟，泣<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.6·尺度1\">孤舟</i>之嫠妇。\n苏子愀然，正襟危坐而问<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>曰：“何为其然也？”<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>曰：“‘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>明<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度5\">星</i>稀，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4·尺度2\">乌</i>鹊南飞’，此非曹孟德之诗乎？西望夏口，东望武昌，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>川相缪，郁乎苍苍，此非孟德之困于周郎者乎？方其破荆州，下<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>陵，顺流而东也，舳舻千里，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">旌</i>旗蔽空，酾<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>临<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>，横槊赋诗，固一世之雄也，而今安在哉？况吾与子<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度3\">渔樵</i>于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>渚之上，侣<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度2\">鱼</i>虾而友麋<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">鹿</i>，驾一叶之<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.2·尺度1\">扁舟</i>，举匏<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">樽</i>以相属。寄蜉蝣于<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>，渺<i class=\"hw c1\" title=\"豪情进取·情感0.1·尺度4\">沧海</i>之一粟。哀吾生之须臾，羡<i class=\"hw c1\" title=\"豪情进取·情感0.1·尺度4\">长江</i>之无穷。挟飞<i class=\"hw c5\" title=\"隐逸超脱·情感0.6\">仙</i>以遨游，抱<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>而长终。知不可乎骤得，托遗响于<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">悲</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>。”\n苏子曰：“<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>亦知夫水与<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>乎？逝者如斯，而未尝往也；盈虚者如彼，而卒莫消长也。盖将自其变者而观之，则<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>曾不能以一瞬；自其不变者而观之，则物与我皆无尽也，而又何羡乎！且夫<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度5\">天地</i>之间，物各有主，苟非吾之所有，虽一毫而莫取。惟<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i>上之<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度3\">清风</i>，与<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>间之<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度5\">明月</i>，耳得之而为声，目遇之而成色，取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。”\n<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>喜而<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>，洗盏更酌。肴核既尽，<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>盘<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度2\">狼</i>籍。相与枕藉乎<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>中，不知东方之既白。",
+     "emotion": -0.026,
+     "scale": 3.0,
+     "n_hits": 57,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -3539,7 +3625,7 @@
      "lat": 23.1118,
      "event": "再遭贬谪至惠州，进入晚年岭南贬居阶段。",
      "title": "蝶恋花·春景",
-     "body_html": "花褪残红青杏小，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">燕</i>子飞时，绿涯人家绕。枝上<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>绵吹又少。<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">天涯</i>何处无<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">芳草</i>。\n墙里<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>千墙外道，墙外行人，墙里佳人<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>渐不闻声渐悄。多情却被无情恼。",
+     "body_html": "花褪残红青杏小，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">燕子</i>飞时，绿涯人家绕。枝上<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>绵吹又少。<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">天涯</i>何处无<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度3\">芳草</i>。\n墙里<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>千墙外道，墙外行人，墙里佳人<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>渐不闻声渐悄。多情却被无情恼。",
      "valence": -0.2,
      "intensity": 0.72,
      "emo_label": "旷达语句与失落反差",
@@ -3554,7 +3640,7 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": 0.086,
+     "emotion": 0.1,
      "scale": 2.75
     }
    ],
@@ -3716,9 +3802,9 @@
       "y0": 1170,
       "y1": 1177,
       "n_poems": 4,
-      "n_hits": 22,
-      "emotion": -0.182,
-      "scale": 2.625,
+      "n_hits": 26,
+      "emotion": -0.188,
+      "scale": 2.611,
       "cand": 1,
       "rev": 3,
       "poems": [
@@ -3728,9 +3814,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 7,
-        "emotion": -0.229,
-        "scale": 2.571
+        "hits": 10,
+        "emotion": -0.25,
+        "scale": 2.625
        },
        {
         "title": "剑门道中遇微雨",
@@ -3738,9 +3824,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 3,
-        "emotion": 0.133,
-        "scale": 1.333
+        "hits": 4,
+        "emotion": 0.1,
+        "scale": 1.5
        },
        {
         "title": "金错刀行",
@@ -3770,9 +3856,9 @@
       "y0": 1178,
       "y1": 1189,
       "n_poems": 2,
-      "n_hits": 13,
-      "emotion": -0.154,
-      "scale": 2.833,
+      "n_hits": 15,
+      "emotion": -0.053,
+      "scale": 2.769,
       "cand": 0,
       "rev": 2,
       "poems": [
@@ -3782,9 +3868,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 5,
-        "emotion": -0.14,
-        "scale": 2.75
+        "hits": 7,
+        "emotion": 0.071,
+        "scale": 2.6
        },
        {
         "title": "书愤",
@@ -3804,9 +3890,9 @@
       "y0": 1190,
       "y1": 1210,
       "n_poems": 11,
-      "n_hits": 59,
-      "emotion": -0.102,
-      "scale": 2.778,
+      "n_hits": 61,
+      "emotion": -0.105,
+      "scale": 2.787,
       "cand": 9,
       "rev": 2,
       "poems": [
@@ -3856,9 +3942,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 3,
-        "emotion": -0.1,
-        "scale": 3.0
+        "hits": 4,
+        "emotion": -0.175,
+        "scale": 3.5
        },
        {
         "title": "十一月四日风雨大作·其二",
@@ -3916,9 +4002,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "exact",
-        "hits": 3,
-        "emotion": 0.2,
-        "scale": 2.333
+        "hits": 4,
+        "emotion": 0.15,
+        "scale": 2.0
        }
       ]
      }
@@ -3930,13 +4016,13 @@
      }
     ],
     "params": {
-     "slope": -0.019,
-     "max_drop": -0.154,
-     "rebound": 0.08,
-     "volatility": 0.059,
+     "slope": -0.01,
+     "max_drop": -0.16,
+     "rebound": 0.083,
+     "volatility": 0.061,
      "break_from": 1,
      "break_to": 2,
-     "break_delta": -0.154,
+     "break_delta": -0.16,
      "break_boundary": 1170,
      "break_event": "1170年夏溯长江入蜀，赴夔州（奉节）通判任",
      "break_matched": true
@@ -4011,7 +4097,7 @@
      "lat": 33.067,
      "event": "入四川宣抚使王炎幕府，赴南郑参与西北前线军务，后经剑门入蜀。",
      "title": "剑门道中遇微雨",
-     "body_html": "衣上征尘杂<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>痕，远游无处不消魂。\n此身合是诗人未？<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">细雨</i>骑驴入<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>门。",
+     "body_html": "衣上征尘杂<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>痕，远游无处不消魂。\n此身合是诗人未？<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">细雨</i>骑<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">驴</i>入<i class=\"hw c1\" title=\"豪情进取·情感0.3·尺度1\">剑</i>门。",
      "valence": -0.42,
      "intensity": 0.78,
      "emo_label": "壮志未酬与自嘲",
@@ -4026,8 +4112,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": 0.133,
-     "scale": 1.333
+     "emotion": 0.1,
+     "scale": 1.5
     },
     {
      "kind": "poem",
@@ -4081,10 +4167,10 @@
      "lat": 30.680959,
      "event": "系年作《关山月》于成都",
      "title": "关山月",
-     "body_html": "和戎诏下十五年，将军不战空临边。\n朱门沉沉按歌舞，厩<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>肥死弓断弦。\n戍<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>刁<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>催落<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，三十从军今<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">白发</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>里谁知壮士心，沙头空照征人骨。\n中原干戈古亦闻，岂有逆胡传子孙！\n遗民忍死望恢复，几处今宵垂<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>痕。",
-     "emotion": -0.229,
-     "scale": 2.571,
-     "n_hits": 7,
+     "body_html": "和戎诏下十五年，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2\">将军</i>不战空临边。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">朱门</i>沉沉按歌舞，厩<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>肥死弓断弦。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.6·尺度3\">戍楼</i>刁<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">斗</i>催落<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>，三十从军今<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">白发</i>。\n<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>里谁知壮士心，沙头空照<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5\">征人</i>骨。\n中原干戈古亦闻，岂有逆胡传子孙！\n遗民忍死望恢复，几处今宵垂<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>痕。",
+     "emotion": -0.25,
+     "scale": 2.625,
+     "n_hits": 10,
      "grade": "B",
      "status": "approved",
      "precision": "reviewed",
@@ -4102,7 +4188,7 @@
      "lat": 30.2741,
      "event": "奉诏入临安等候召见，久居京华客舍，后出任严州。",
      "title": "临安春雨初霁",
-     "body_html": "世味年来薄似纱，谁令骑<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>京华。\n小<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>一夜听春<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>，深巷明朝卖杏花。\n矮纸斜行闲作草，晴窗细乳戏分茶。\n素衣莫起<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>尘叹，犹及清明可到家。",
+     "body_html": "世味年来薄似纱，谁令骑<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>京华。\n小<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>一夜听<i class=\"hw c0\" title=\"多义(不归簇)·情感0.5·尺度3\">春雨</i>，深巷明朝卖<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">杏花</i>。\n矮纸斜行闲作草，晴窗细乳戏分茶。\n素衣莫起<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>尘叹，犹及<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1\">清明</i>可到家。",
      "valence": -0.5,
      "intensity": 0.81,
      "emo_label": "疏离与思归",
@@ -4117,8 +4203,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.14,
-     "scale": 2.75
+     "emotion": 0.071,
+     "scale": 2.6
     },
     {
      "kind": "poem",
@@ -4263,7 +4349,7 @@
      "lat": 30.0044,
      "event": "晚年再游沈园，回忆数十年前的人事与旧迹。",
      "title": "沈园二首·其一",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>上斜阳画角哀，沈园非复旧池<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n伤心桥下春波绿，曾是惊<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>照影来。",
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.4·尺度5\">斜阳</i>画角哀，沈园非复旧池<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">台</i>。\n伤心桥下春波绿，曾是惊<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度4\">鸿</i>照影来。",
      "valence": -0.88,
      "intensity": 0.92,
      "emo_label": "哀伤与追忆",
@@ -4278,8 +4364,8 @@
      "precision": "year",
      "grade": "B",
      "status": "candidate",
-     "emotion": -0.1,
-     "scale": 3.0
+     "emotion": -0.175,
+     "scale": 3.5
     },
     {
      "kind": "poem",
@@ -4354,10 +4440,10 @@
      "lat": 29.9952,
      "event": "系年作《十二月二日夜梦游沈氏园亭·其二》于山阴",
      "title": "十二月二日夜梦游沈氏园亭·其二",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>南小陌又逢春，只见<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅花</i>不见人。\n玉骨久成<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>下土，墨痕犹锁壁间尘。",
-     "emotion": 0.2,
-     "scale": 2.333,
-     "n_hits": 3,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>南小陌又逢春，只见<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅花</i>不见人。\n玉骨久成<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">泉</i>下土，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">墨痕</i>犹锁壁间尘。",
+     "emotion": 0.15,
+     "scale": 2.0,
+     "n_hits": 4,
      "grade": "B",
      "status": "candidate",
      "precision": "exact",
@@ -4529,9 +4615,9 @@
       "y0": 1084,
       "y1": 1107,
       "n_poems": 4,
-      "n_hits": 19,
-      "emotion": -0.195,
-      "scale": 2.923,
+      "n_hits": 18,
+      "emotion": -0.2,
+      "scale": 2.833,
       "cand": 3,
       "rev": 1,
       "poems": [
@@ -4541,9 +4627,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 10,
-        "emotion": -0.22,
-        "scale": 3.333
+        "hits": 9,
+        "emotion": -0.267,
+        "scale": 3.6
        },
        {
         "title": "如梦令·昨夜雨疏风骤",
@@ -4552,8 +4638,8 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 4,
-        "emotion": -0.125,
-        "scale": 2.5
+        "emotion": -0.05,
+        "scale": 2.0
        },
        {
         "title": "点绛唇·蹴罢秋千",
@@ -4583,9 +4669,9 @@
       "y0": 1108,
       "y1": 1126,
       "n_poems": 6,
-      "n_hits": 57,
-      "emotion": -0.242,
-      "scale": 2.514,
+      "n_hits": 60,
+      "emotion": -0.205,
+      "scale": 2.459,
       "cand": 3,
       "rev": 3,
       "poems": [
@@ -4605,9 +4691,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 10,
-        "emotion": -0.21,
-        "scale": 2.75
+        "hits": 11,
+        "emotion": -0.173,
+        "scale": 2.556
        },
        {
         "title": "醉花阴·薄雾浓云愁永昼",
@@ -4615,8 +4701,8 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 6,
-        "emotion": -0.2,
+        "hits": 7,
+        "emotion": -0.143,
         "scale": 2.8
        },
        {
@@ -4625,9 +4711,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "disputed",
-        "hits": 5,
-        "emotion": 0.06,
-        "scale": 1.667
+        "hits": 6,
+        "emotion": 0.1,
+        "scale": 1.75
        },
        {
         "title": "鹧鸪天·桂花",
@@ -4636,7 +4722,7 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 4,
-        "emotion": 0.0,
+        "emotion": 0.2,
         "scale": 2.0
        },
        {
@@ -4657,9 +4743,9 @@
       "y0": 1127,
       "y1": 1132,
       "n_poems": 3,
-      "n_hits": 25,
-      "emotion": -0.056,
-      "scale": 3.111,
+      "n_hits": 26,
+      "emotion": -0.038,
+      "scale": 3.053,
       "cand": 3,
       "rev": 0,
       "poems": [
@@ -4689,9 +4775,9 @@
         "grade": "C",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 8,
-        "emotion": -0.2,
-        "scale": 3.2
+        "hits": 9,
+        "emotion": -0.133,
+        "scale": 3.0
        }
       ]
      },
@@ -4702,7 +4788,7 @@
       "y1": 1156,
       "n_poems": 5,
       "n_hits": 46,
-      "emotion": -0.124,
+      "emotion": -0.137,
       "scale": 2.462,
       "cand": 4,
       "rev": 1,
@@ -4713,9 +4799,9 @@
         "grade": "B",
         "status": "approved",
         "precision": "reviewed",
-        "hits": 8,
-        "emotion": -0.263,
-        "scale": 2.2
+        "hits": 9,
+        "emotion": -0.267,
+        "scale": 2.167
        },
        {
         "title": "武陵春·春晚",
@@ -4734,7 +4820,7 @@
         "status": "candidate",
         "precision": "approximate",
         "hits": 15,
-        "emotion": -0.107,
+        "emotion": -0.127,
         "scale": 2.571
        },
        {
@@ -4753,9 +4839,9 @@
         "grade": "B",
         "status": "candidate",
         "precision": "approximate",
-        "hits": 7,
-        "emotion": -0.114,
-        "scale": 3.0
+        "hits": 6,
+        "emotion": -0.133,
+        "scale": 3.2
        }
       ]
      }
@@ -4771,13 +4857,13 @@
      }
     ],
     "params": {
-     "slope": 0.04,
-     "max_drop": -0.068,
-     "rebound": 0.118,
-     "volatility": 0.071,
+     "slope": 0.036,
+     "max_drop": -0.099,
+     "rebound": 0.068,
+     "volatility": 0.067,
      "break_from": 2,
      "break_to": 3,
-     "break_delta": 0.186,
+     "break_delta": 0.167,
      "break_boundary": 1127,
      "break_event": "1127年12月离青州南渡，载书十五车",
      "break_matched": true
@@ -4796,9 +4882,9 @@
      "lat": 34.79,
      "event": "系年作《如梦令·昨夜雨疏风骤》于东京（汴京）",
      "title": "如梦令·昨夜雨疏风骤",
-     "body_html": "昨<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度2\">夜雨</i>疏<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>骤，浓睡不消残<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>。试问卷帘人，却道<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度4\">海</i>棠依旧。知否，知否？应是绿肥红瘦。",
-     "emotion": -0.125,
-     "scale": 2.5,
+     "body_html": "昨<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度2\">夜雨</i>疏<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>骤，浓睡不消残<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>。试问卷帘人，却道<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">海棠</i>依旧。知否，知否？应是绿肥红瘦。",
+     "emotion": -0.05,
+     "scale": 2.0,
      "n_hits": 4,
      "grade": "B",
      "status": "candidate",
@@ -4817,7 +4903,7 @@
      "lat": 34.79,
      "event": "系年作《点绛唇·蹴罢秋千》于东京（汴京）",
      "title": "点绛唇·蹴罢秋千",
-     "body_html": "蹴罢<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>千，起来慵整纤纤手。露袜花瘦，薄汗轻衣透。\n见<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>入来，袜刬金钗溜。和羞走，倚门回首，却把青<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>嗅。",
+     "body_html": "蹴罢<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>千，起来慵整纤纤手。露袜花瘦，薄汗轻衣透。\n见<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4\">客</i>入来，袜刬金钗溜。和羞走，倚门回首，却把<button type=\"button\" class=\"gloss-term hw c0\" data-gloss-id=\"gloss:青梅\" aria-label=\"青梅\">青梅</button>嗅。",
      "emotion": -0.133,
      "scale": 2.0,
      "n_hits": 3,
@@ -4859,7 +4945,7 @@
      "lat": 34.797239,
      "event": "居京期间，赵明诚于七月出游；年谱将《一剪梅》系于此年送别情境。",
      "title": "一剪梅·红藕香残玉簟秋",
-     "body_html": "红藕香残玉簟<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>。轻解罗裳，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>上<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">兰</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>中谁寄锦书来？<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>字回时，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>满西<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n花自飘零水自流。一种相<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，两处闲<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。此情无计可消除，才下眉头，却上心头。",
+     "body_html": "红藕香残玉簟<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>。轻解罗裳，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>上<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度1\">兰舟</i>。<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>中谁寄锦书来？<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>字回时，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">月</i>满西<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>。\n花自飘零水自流。一种相<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，两处闲<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。此情无计可消除，才下眉头，却上心头。",
      "valence": -0.42,
      "intensity": 0.77,
      "emo_label": "相思与闲愁",
@@ -4874,8 +4960,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.22,
-     "scale": 3.333
+     "emotion": -0.267,
+     "scale": 3.6
     },
     {
      "kind": "poem",
@@ -4887,8 +4973,8 @@
      "lat": 36.6846,
      "event": "系年作《鹧鸪天·桂花》于益都（青州）",
      "title": "鹧鸪天·桂花",
-     "body_html": "暗淡轻黄体性柔，情疏迹远只香留。何须浅碧深红色，自是花中第一流。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>定妒，<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度2\">菊</i>应羞。画阑开处冠中<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">秋</i>。骚人可煞无情<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，何事当年不见收。",
-     "emotion": 0.0,
+     "body_html": "暗淡轻黄体性柔，情疏迹远只香留。何须浅碧深红色，自是花中第一流。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i>定妒，<i class=\"hw c5\" title=\"隐逸超脱·情感0.3·尺度2\">菊</i>应羞。画阑开处冠<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4\">中秋</i>。骚人可煞无情<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3\">思</i>，何事当年不见收。",
+     "emotion": 0.2,
      "scale": 2.0,
      "n_hits": 4,
      "grade": "B",
@@ -4908,7 +4994,7 @@
      "lat": 36.6846,
      "event": "屏居青州期间，重阳日赵明诚游仰天山，年谱记李清照作《醉花阴》。",
      "title": "醉花阴·薄雾浓云愁永昼",
-     "body_html": "薄<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i>浓<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>永昼，瑞脑销金兽。佳节又重阳，玉枕纱厨，半夜凉初透。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">东篱</i>把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>黄昏后，有暗香盈袖。莫道不销魂，帘卷<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度3\">西风</i>，人比黄花瘦。",
+     "body_html": "薄<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i>浓<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i><i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>永昼，瑞脑销金兽。佳节又<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2\">重阳</i>，玉枕纱厨，半夜凉初透。\n<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">东篱</i>把<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>黄昏后，有暗香盈袖。莫道不销魂，帘卷<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5·尺度3\">西风</i>，人比黄花瘦。",
      "valence": -0.65,
      "intensity": 0.84,
      "emo_label": "重阳离思",
@@ -4923,7 +5009,7 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.2,
+     "emotion": -0.143,
      "scale": 2.8
     },
     {
@@ -4936,10 +5022,10 @@
      "lat": 36.65,
      "event": "系年作《如梦令·常记溪亭日暮》于济南（历城）",
      "title": "如梦令·常记溪亭日暮",
-     "body_html": "常记<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>日暮，沉<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>不知<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>路。兴尽晚回<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>，误入藕花深处。争渡，争渡，惊起一滩鸥鹭。",
-     "emotion": 0.06,
-     "scale": 1.667,
-     "n_hits": 5,
+     "body_html": "常记<i class=\"hw c5\" title=\"隐逸超脱·情感0.2·尺度2\">溪</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">亭</i>日暮，沉<i class=\"hw c2\" title=\"纵逸狂放·情感0.0\">醉</i>不知<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0\">归</i>路。兴尽晚回<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度1\">舟</i>，误入藕花深处。争渡，争渡，惊起一滩<i class=\"hw c0\" title=\"多义(不归簇)·情感0.3·尺度2\">鸥鹭</i>。",
+     "emotion": 0.1,
+     "scale": 1.75,
+     "n_hits": 6,
      "grade": "B",
      "status": "candidate",
      "precision": "disputed",
@@ -4985,7 +5071,7 @@
      "lat": 36.706774,
      "event": "秋赴莱州途中经过昌乐，宿馆并作词寄姊妹。",
      "title": "蝶恋花·晚止昌乐馆寄姊妹",
-     "body_html": "<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>湿罗衣脂粉满，四叠阳<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，唱萧千千遍。人道<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>长<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>又断，萧萧微<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>闻<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i>馆。\n惜<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>伤离方寸乱，忘了临行，<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>盏深和浅。好把音书凭过<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>，东莱不似<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度4\">蓬莱</i>远。",
+     "body_html": "<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.6·尺度1\">泪</i>湿<i class=\"hw c0\" title=\"多义(不归簇)·情感0.2·尺度1\">罗衣</i>脂粉满，四叠阳<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.3·尺度3\">关</i>，唱萧千千遍。人道<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>长<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>又断，萧萧微<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>闻<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">孤</i>馆。\n惜<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>伤离方寸乱，忘了临行，<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>盏深和浅。好把音书凭过<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>，东莱不似<i class=\"hw c5\" title=\"隐逸超脱·情感0.5·尺度4\">蓬莱</i>远。",
      "valence": -0.56,
      "intensity": 0.78,
      "emo_label": "惜别与旅愁",
@@ -5000,8 +5086,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.21,
-     "scale": 2.75
+     "emotion": -0.173,
+     "scale": 2.556
     },
     {
      "kind": "poem",
@@ -5034,10 +5120,10 @@
      "lat": 32.06,
      "event": "系年作《临江仙·梅》于江宁（建康）",
      "title": "临江仙·梅",
-     "body_html": "庭院深深深几许，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>窗<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>春好。为谁憔悴损芳姿。夜来清<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>好，应是发南枝。\n玉瘦檀轻无限<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>，南<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>羌管休吹。浓香吹尽有谁知。暖<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>好日也，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>到杏花肥。",
-     "emotion": -0.2,
-     "scale": 3.2,
-     "n_hits": 8,
+     "body_html": "庭院深深深几许，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>窗<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度3\">雾</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">阁</i>春好。为谁憔悴损芳姿。夜来清<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1\">梦</i>好，应是发南枝。\n玉瘦檀轻无限<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7\">恨</i>，南<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>羌管休吹。浓香吹尽有谁知。暖<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>好日也，<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5\">别</i>到<i class=\"hw c0\" title=\"多义(不归簇)·情感0.4·尺度2\">杏花</i>肥。",
+     "emotion": -0.133,
+     "scale": 3.0,
+     "n_hits": 9,
      "grade": "C",
      "status": "candidate",
      "precision": "approximate",
@@ -5104,10 +5190,10 @@
      "lat": 29.08,
      "event": "系年作《题八咏楼》于金华（婺州）",
      "title": "题八咏楼",
-     "body_html": "千古<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>流八咏<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>留与后人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。\n水通南国三千里，气压<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">城</i>十四州。",
-     "emotion": -0.114,
-     "scale": 3.0,
-     "n_hits": 7,
+     "body_html": "千古<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>流八咏<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">楼</i>，<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度3\">江</i><i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度3\">山</i>留与后人<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>。\n水通南国三千里，气压<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度4\">江城</i>十四州。",
+     "emotion": -0.133,
+     "scale": 3.2,
+     "n_hits": 6,
      "grade": "B",
      "status": "candidate",
      "precision": "approximate",
@@ -5146,7 +5232,7 @@
      "lat": 30.2741,
      "event": "晚年居临安，年谱将《声声慢》系于1147年。",
      "title": "声声慢·寻寻觅觅",
-     "body_html": "寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>时候，最难将息。三<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>两盏淡<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，怎敌他、晚来<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>急！<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>过也，正伤心，却是旧时相识。\n满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>自怎生得黑？梧桐更兼<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">细雨</i>，到黄昏、点点滴滴。这次第，怎一个<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>字了得！",
+     "body_html": "寻寻觅觅，冷冷清清，凄凄惨惨戚戚。乍暖还<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.5\">寒</i>时候，最难将息。三<i class=\"hw c2\" title=\"纵逸狂放·情感0.1·尺度1\">杯</i>两盏淡<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>，怎敌他、晚来<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>急！<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.5·尺度4\">雁</i>过也，正伤心，却是旧时相识。\n满地黄花堆积，憔悴损，如今有谁堪摘？守着窗儿，<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.4\">独</i>自怎生得黑？<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.3·尺度2\">梧桐</i>更兼<i class=\"hw c0\" title=\"多义(不归簇)·情感0.1·尺度2\">细雨</i>，到黄昏、点点滴滴。这次第，怎一个<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.8\">愁</i>字了得！",
      "valence": -0.92,
      "intensity": 0.98,
      "emo_label": "深愁与孤寂",
@@ -5161,8 +5247,8 @@
      "precision": "year",
      "grade": "B",
      "status": "approved",
-     "emotion": -0.263,
-     "scale": 2.2
+     "emotion": -0.267,
+     "scale": 2.167
     },
     {
      "kind": "poem",
@@ -5174,8 +5260,8 @@
      "lat": 30.2741,
      "event": "系年作《永遇乐·落日熔金》于临安",
      "title": "永遇乐·落日熔金",
-     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度5\">落日</i>熔金，暮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>合璧，人在何处。染<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>浓，吹<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>怨，春意知几许。元宵佳节，融和天气，次第岂无<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>。来相召、香车宝<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，谢他<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>朋诗侣。\n中州盛日，闺门多暇，记得偏重三五。铺翠冠儿，捻金<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，簇带争济楚。如今憔悴，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>鬟<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度1\">霜鬓</i>，怕见夜间出去。不如向、帘儿底下，听人<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>语。",
-     "emotion": -0.107,
+     "body_html": "<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.5·尺度5\">落日</i>熔金，暮<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度5\">云</i>合璧，人在何处。染<i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">烟</i>浓，吹<i class=\"hw c5\" title=\"隐逸超脱·情感0.4·尺度2\">梅</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度1\">笛</i>怨，春意知几许。元宵佳节，融和天气，次第岂无<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i><i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雨</i>。来相召、香车宝<i class=\"hw c0\" title=\"多义(不归簇)·情感0.0·尺度2\">马</i>，谢他<i class=\"hw c2\" title=\"纵逸狂放·情感0.0·尺度1\">酒</i>朋诗侣。\n中州盛日，闺门多暇，记得偏重三五。铺翠冠儿，捻金<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.2·尺度3\">雪</i><i class=\"hw c3\" title=\"漂泊羁旅·情感-0.4·尺度2\">柳</i>，簇带争济楚。如今憔悴，<i class=\"hw c0\" title=\"多义(不归簇)·情感-0.1·尺度3\">风</i>鬟<i class=\"hw c4\" title=\"愁苦幽愤·情感-0.7·尺度1\">霜鬓</i>，怕见夜间出去。不如向、帘儿底下，听人<i class=\"hw c0\" title=\"多义(不归簇)·情感0.7\">笑</i>语。",
+     "emotion": -0.127,
      "scale": 2.571,
      "n_hits": 15,
      "grade": "B",

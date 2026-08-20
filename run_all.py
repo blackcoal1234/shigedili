@@ -27,6 +27,10 @@ THEME_VIZ_SCRIPTS = (
     "viz_37_soundscape.py",
     "viz_38_imagery_tide.py",
     "viz_39_first_person_lives.py",
+    "viz_40_shanhe_quest.py",
+    "viz_41_imagery_geography.py",
+    "viz_42_dreamed_places.py",
+    "viz_43_side_quest.py",
     # 导航页会检查全部参赛展项目标，因此在 30-39 之后生成。
     "viz_29_competition_index.py",
     # 生命痕迹首页收尾，并按 viz_99 的清单统一刷新 manifest。
@@ -94,27 +98,37 @@ def main() -> None:
     args = parse_args()
     poems_json = ROOT / "data" / "poems.json"
 
-    step("Step 1/4  Python 爬虫")
+    step("Step 1/5  Python 爬虫")
     if args.no_crawl or (poems_json.exists() and not args.recrawl):
         print(f"  [skip] 使用已有语料：{poems_json}")
     else:
         run_python(ROOT / "爬虫脚本" / "spider_gushiwen.py")
 
-    step("Step 2/4  MySQL 主题数据")
+    step("Step 2/5  MySQL 主题数据")
     if args.skip_db:
         print("  [skip] 离线构建模式，不连接 MySQL")
     else:
         db_args = ("--reset",) if args.reset_db else ()
         run_python(ROOT / "数据库操作脚本及数据库SQL" / "db_init.py", *db_args)
 
-    step("Step 3/4  清理非主题输出")
+    step("Step 3/5  清理非主题输出")
     if args.keep_legacy_output:
         print("  [skip] 按参数保留旧输出")
     else:
         removed = cleanup_legacy_outputs()
         print(f"  [ok] 移除 {removed} 个旧版输出")
 
-    step("Step 4/4  Python 主题可视化")
+    step("Step 4/5  数据层（情感档案 + 诗格档案 + 题库 + 意象矩阵 + 被想象率 + 开卷槽位）")
+    for tool_name in ("build_emotion_profiles.py", "build_place_profile.py", "build_quiz_bank.py", "build_imagery_region_matrix.py",
+                     "build_imagination_index.py", "build_seedance_slots.py", "build_side_quest_bank.py",
+                     "build_fact_coverage_statement.py"):
+        path = ROOT / "tools" / tool_name
+        if not path.exists():
+            raise FileNotFoundError(f"缺少数据层脚本：{path}")
+        print(f"\n[tool] {tool_name}")
+        run_python(path)
+
+    step("Step 5/5  Python 主题可视化")
     viz_dir = ROOT / "数据可视化脚本"
     for script_name in THEME_VIZ_SCRIPTS:
         path = viz_dir / script_name

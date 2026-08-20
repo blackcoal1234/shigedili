@@ -8,8 +8,8 @@
 口径：
   - 虚岁 = 诗年 - 出生公历年 + 1；诗年取 year_start..year_end 中点（四舍五入）。
   - fact_grade = D 的行不进计算；candidate 编年在 hover 卡内带「候选」徽章。
-  - 意象命中：spirit_image_dict 197 词条，按词长降序贪婪匹配（长词优先、遮蔽防重复计数）。
-  - 情感画像 = 27类多标签情绪 + VAD（愉悦度/唤醒度/掌控感）+ 文学形容词。
+  - 意象命中：spirit_image_dict 当前词条，按词长降序贪婪匹配（长词优先、遮蔽防重复计数）。
+  - 情感画像 = 当前细粒度多标签情绪 + VAD（愉悦度/唤醒度/掌控感）+ 文学形容词。
   - 模型只辅助扩充候选词；发布值由本地词典规则复算，并保留命中证据。
 """
 from __future__ import annotations
@@ -28,6 +28,8 @@ DATA = ROOT / "data"
 CAND = DATA / "candidates"
 OUT = ROOT / "output"
 COMP = OUT / "assets" / "competition"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 # ---------------------------------------------------------------- 基础常量
 POETS = [
@@ -106,6 +108,16 @@ def load_spirit_dict():
     entries = {row[0]: {"cluster": row[2], "sentiment": float(row[3])} for row in mod.SPIRIT_DICT}
     words = sorted(entries, key=len, reverse=True)
     return words, entries
+
+
+def load_emotion_stats():
+    spec = importlib.util.spec_from_file_location(
+        "classical_emotion_lexicon", DATA / "classical_emotion_lexicon.py"
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    stats = mod.validate()
+    return stats["emotions"], stats["keywords"]
 
 
 def load_emotion_profiles():
@@ -219,6 +231,8 @@ def first_line(body: str) -> str:
 # ---------------------------------------------------------------- 主流程
 def build():
     words, entries = load_spirit_dict()
+    emotion_count, emotion_rule_count = load_emotion_stats()
+    spirit_count = len(entries)
     emotion_payload, emotion_profiles = load_emotion_profiles()
     bodies = load_poem_bodies()
     chron = load_chronology_rows()
@@ -295,6 +309,9 @@ def build():
         "emotion_method": emotion_payload.get("method", ""),
         "emotion_method_note": emotion_payload.get("method_note", ""),
         "emotion_ontology": emotion_payload.get("ontology", {}),
+        "emotion_count": emotion_count,
+        "emotion_rule_count": emotion_rule_count,
+        "spirit_count": spirit_count,
         "age_min": age_min, "age_max": age_max, "presets": presets,
         "poets": poets_out,
         "excluded_rows": [{"poet": a, "title": b, "reason": c} for a, b, c in excluded],
@@ -303,7 +320,11 @@ def build():
     (COMP / "age_data.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
 
-    html = HTML_TMPL.replace("__DATA__", json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
+    html = (HTML_TMPL
+            .replace("__DATA__", json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
+            .replace("__EMOTION_COUNT__", str(emotion_count))
+            .replace("__EMOTION_RULE_COUNT__", str(emotion_rule_count))
+            .replace("__SPIRIT_COUNT__", str(spirit_count)))
     (OUT / "36_同龄对齐.html").write_text(html, encoding="utf-8")
 
     # ------------------------------------------------ 控制台：同龄对照戏剧点扫描
@@ -405,7 +426,7 @@ footer.nav a:hover{color:var(--cinnabar);}
 <div class="wrap">
 <header class="top">
   <h1>同龄对齐</h1>
-  <div class="sub">把六位诗人拉回同一条年龄轴——同样的虚岁，各自正写什么<span class="badge">27类情绪 · VAD三维</span></div>
+  <div class="sub">把六位诗人拉回同一条年龄轴——同样的虚岁，各自正写什么<span class="badge">__EMOTION_COUNT__类情绪 · VAD三维</span></div>
 </header>
 
 <section class="panel">
@@ -420,8 +441,8 @@ footer.nav a:hover{color:var(--cinnabar);}
 
 <div class="scroller"><div id="lane"></div></div>
 <div class="legend-row">
-  <span><span class="dotdemo" style="width:7px;height:7px;background:#8d8f88;"></span><span class="dotdemo" style="width:13px;height:13px;background:#8d8f88;"></span>点的大小 = 该诗意象命中数（spirit 词典197词条）</span>
-  <span>点色 = 主情绪 <span class="spectrum"></span>（27类细粒度标签）</span>
+  <span><span class="dotdemo" style="width:7px;height:7px;background:#8d8f88;"></span><span class="dotdemo" style="width:13px;height:13px;background:#8d8f88;"></span>点的大小 = 该诗意象命中数（spirit 词典__SPIRIT_COUNT__词条）</span>
+  <span>点色 = 主情绪 <span class="spectrum"></span>（__EMOTION_COUNT__类细粒度标签）</span>
   <span>底色横带 = 人生分期 · 竖线 = 当前对齐年龄 · 高亮窗口 ±3 岁</span>
 </div>
 
@@ -434,9 +455,9 @@ footer.nav a:hover{color:var(--cinnabar);}
     <li><b>出生年</b>：李白701、杜甫712、白居易772、苏轼1037、李清照1084、陆游1125，均于2026-07-26经 cnkgraph 唐宋文学编年地图开放API在线核实（见 data/candidates/poet_birth_years.json 附URL）。苏轼生于农历丙子年十二月十九（公历1037年1月8日），本页统一用公历1037计虚岁，与按农历丙子年起算的传统虚岁相差1岁。</li>
     <li><b>虚岁口径</b>：虚岁 = 诗年 − 出生公历年 + 1。诗年取候选系年区间（year_start–year_end）的中点四舍五入；区间跨度与系年精度（明确/约略/存疑）在悬停卡中如实展示。</li>
     <li><b>编年来源</b>：六人诗作系年取自 data/candidates/*_spirit_chronology.csv（候选级，B/C为主，来源为 cnkgraph 开放API与古诗文网创作背景互证），<b>未经人工终审</b>，故全页带「候选」徽章；fact_grade=D 与无系年的行不进入任何计算（剔除清单见数据文件 excluded_rows）。</li>
-    <li><b>细粒度情感本体</b>：data/classical_emotion_lexicon.py 将表达扩为27类，包括豪迈昂扬、报国壮志、纵逸狂放、友情酬赠、悼亡怀亲、欢愉明快、闲适恬淡、爱恋缠绵、眷恋怀旧、思乡怀人、离愁惜别、孤寂清冷、漂泊羁旅、悲恸哀伤、悲悯苍生、忧国伤时、幽愤不平、焦灼惊惧、失意无奈、衰老病痛、怀古感时、哲思澄明、归隐超脱等；一首诗允许多标签并存。</li>
+    <li><b>细粒度情感本体</b>：data/classical_emotion_lexicon.py 将表达扩为__EMOTION_COUNT__类，包括豪迈昂扬、报国壮志、纵逸狂放、友情酬赠、悼亡怀亲、欢愉明快、闲适恬淡、爱恋缠绵、眷恋怀旧、思乡怀人、离愁惜别、孤寂清冷、漂泊羁旅、悲恸哀伤、悲悯苍生、忧国伤时、幽愤不平、焦灼惊惧、失意无奈、衰老病痛、怀古感时、哲思澄明、归隐超脱等；一首诗允许多标签并存。</li>
     <li><b>连续指标</b>：VAD 分别表示愉悦度（Valence）、唤醒/激越度（Arousal）与掌控感（Dominance）。三项由命中标签原型按证据权重合成后映射到0–100，仅用于同一规则口径下比较。</li>
-    <li><b>模型与证据</b>：语言模型用于扩充古典诗词候选表达与文学形容词，发布值由本地600余条关键词规则确定性复算；页面展示主/次标签、占比、命中词与置信度。旧五簇只作低权重回退，不再直接充当最终标签。</li>
+    <li><b>模型与证据</b>：语言模型用于扩充古典诗词候选表达与文学形容词，发布值由本地__EMOTION_RULE_COUNT__条关键词规则确定性复算；页面展示主/次标签、占比、命中词与置信度。旧五簇只作低权重回退，不再直接充当最终标签。</li>
     <li><b>局限</b>：每人仅20余首可系年代表作，泳道是抽样而非全集；「同样N岁」对读受系年精度影响，存疑条目请以悬停卡中的区间与出处为准；李清照晚期分期迄年沿用候选分期文件（其卒年本有1151/约1155-1156异说）。</li>
   </ul>
 </details>

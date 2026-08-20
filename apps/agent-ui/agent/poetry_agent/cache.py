@@ -321,14 +321,15 @@ IMAGERY_SPEC = DatasetSpec(
     generator="数据可视化脚本/viz_38_imagery_tide.py",
     dependencies=(
         "data/poems.json",
-        "data/spirit_image_dict.py",
+        "data/imagery_tide_lexicon.py",
         "data/reviewed/poet_journeys.json",
     ),
     validator=validate_imagery_data,
     embedded_hash_path=("meta", "sourceHashes"),
     dependency_hash_keys=(
         ("data/poems.json", "poemsJsonSha256"),
-        ("data/spirit_image_dict.py", "spiritImageDictSha256"),
+        # 字段名保持兼容；来源已切换为38号冻结160词资产。
+        ("data/imagery_tide_lexicon.py", "spiritImageDictSha256"),
         ("data/reviewed/poet_journeys.json", "poetJourneysSha256"),
     ),
 )

@@ -233,8 +233,11 @@ def objective_imagery_terms() -> list[ImageryTerm]:
         and row[4] is not None
         and bool(row[5])
     ]
-    if len(rows) != 160:
-        raise KnowledgeBuildError(f"客观意象词表应为160词，实际{len(rows)}")
+    if not rows:
+        raise KnowledgeBuildError("客观意象词表不能为空")
+    words = [item.word for item in rows]
+    if len(words) != len(set(words)):
+        raise KnowledgeBuildError("客观意象词表包含重复词")
     return sorted(rows, key=lambda item: (-len(item.word), item.word))
 
 
@@ -352,6 +355,7 @@ def _source_hashes(source: Path) -> dict[str, str]:
         if source.is_relative_to(PROJECT_ROOT)
         else str(source): source,
         "data/spirit_image_dict.py": PROJECT_ROOT / "data" / "spirit_image_dict.py",
+        "data/image_dict.py": PROJECT_ROOT / "data" / "image_dict.py",
         "data/classical_emotion_model.py": PROJECT_ROOT / "data" / "classical_emotion_model.py",
         "data/classical_emotion_lexicon.py": PROJECT_ROOT / "data" / "classical_emotion_lexicon.py",
         "apps/agent-ui/agent/poetry_agent/knowledge.py": Path(__file__).with_name("knowledge.py"),
@@ -1050,6 +1054,181 @@ def enrich_with_llm(database_path: Path, *, concurrency: int) -> dict[str, Any]:
     finally:
         connection.close()
 
+
+
+GUIDE_PROMPT_VERSION = "guide-v1"
+GUIDE_PROMPT_TEMPLATE = """你是「诗行万里」展线的驻场向导，为单首诗写一张导读卡。
+讲解只基于诗文本身与给定的已核验事实；「来源与故事」讲通行文学史叙述，
+一律用通说口吻（如「一般认为」），不虚构史料出处、页码或具体日期，不写作者心理定论。
+只输出 JSON 对象：{{"summary":"一句话讲解，30字以内","guide":"讲解正文150-240字，向导口吻，先给画面再点手法","origin":"创作来源与故事80-160字，开头须注明「通说」","confidence":0.0}}
+作品：{dynasty} {poet}《{title}》
+已核验事实：{facts}
+诗文：
+{body}
+"""
+
+
+def _request_guide(config: LlmConfig, poem: dict, facts_text: str) -> dict:
+    prompt = GUIDE_PROMPT_TEMPLATE.format(
+        dynasty=poem.get("dynasty") or "",
+        poet=poem.get("poet") or "",
+        title=poem.get("title") or "",
+        facts=facts_text or "（无核验作年作地，只讲诗本身）",
+        body=poem.get("body") or "",
+    )
+    result = _request_llm(config, prompt)
+    for field, limit in (("summary", 60), ("guide", 400), ("origin", 300)):
+        value = result.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise KnowledgeBuildError(f"poem_guide 缺少 {field}")
+        result[field] = value.strip()[:limit]
+    confidence = result.get("confidence")
+    try:
+        result["confidence"] = max(0.0, min(1.0, float(confidence)))
+    except (TypeError, ValueError):
+        result["confidence"] = 0.3
+    return result
+
+
+def enrich_guides_with_llm(database_path: Path, *, concurrency: int, facts=None) -> dict:
+    """为每首诗生成「讲解/来源/故事」导读卡（method=llm，llm_candidate 待审）。
+
+    facts: (诗人, 诗题) -> 已核验事实描述；缺省视为无核验事实。
+    幂等：job 表按 input_hash 跳过已完成；同诗旧 guide 行先删后插。
+    """
+    config = _llm_config(concurrency)
+    facts = facts or {}
+    connection = sqlite3.connect(database_path)
+    connection.row_factory = sqlite3.Row
+    prompt_hash = stable_hash(GUIDE_PROMPT_TEMPLATE)
+    run_id = "guide-" + stable_hash(config.model, GUIDE_PROMPT_VERSION, prompt_hash, length=24)
+    started_at = utc_now()
+    try:
+        init_schema(connection)
+        connection.execute(
+            "INSERT OR IGNORE INTO analysis_runs(run_id,kind,method,model,prompt_version,prompt_hash,input_hash,status,started_at,completed_at,config_json) "
+            "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+            (
+                run_id, "poem_guide", "llm", config.model,
+                GUIDE_PROMPT_VERSION, prompt_hash, "per-poem", "running",
+                started_at, None,
+                json.dumps({"concurrency": concurrency, "facts": "provided" if facts else "none"}),
+            ),
+        )
+        tasks = []
+        preserved = 0
+        for poem_row in connection.execute("SELECT * FROM poems ORDER BY poem_id"):
+            poem = dict(poem_row)
+            # 保护他方卡片：已有其他模型（如助手手写）的导读时不覆盖
+            existing_guide = connection.execute(
+                "SELECT model FROM analyses WHERE poem_id=? AND kind='poem_guide'",
+                (poem["poem_id"],),
+            ).fetchone()
+            if existing_guide and existing_guide["model"] != config.model:
+                preserved += 1
+                continue
+            facts_text = facts.get((poem.get("poet") or "", poem.get("title") or ""), "")
+            input_hash = stable_hash(
+                json.dumps(
+                    {"poemId": poem["poem_id"], "body": poem.get("body") or "", "facts": facts_text},
+                    ensure_ascii=False, sort_keys=True,
+                )
+            )
+            job_id = "guide-job-" + stable_hash(run_id, poem["poem_id"], length=32)
+            existing = connection.execute(
+                "SELECT status,input_hash FROM analysis_jobs WHERE job_id=?", (job_id,)
+            ).fetchone()
+            if existing and existing["status"] == "completed" and existing["input_hash"] == input_hash:
+                continue
+            connection.execute(
+                "INSERT INTO analysis_jobs(job_id,run_id,poem_id,line_id,input_hash,status,attempts,error,result_json,updated_at) "
+                "VALUES(?,?,?,?,?,'pending',0,NULL,NULL,?) "
+                "ON CONFLICT(job_id) DO UPDATE SET input_hash=excluded.input_hash,status='pending',error=NULL,updated_at=excluded.updated_at",
+                (job_id, run_id, poem["poem_id"], None, input_hash, utc_now()),
+            )
+            tasks.append((poem, facts_text, input_hash, job_id))
+        connection.commit()
+        completed = 0
+        failed = 0
+        futures = {}
+        with ThreadPoolExecutor(max_workers=config.concurrency) as executor:
+            for poem, facts_text, input_hash, job_id in tasks:
+                connection.execute(
+                    "UPDATE analysis_jobs SET status='running',attempts=attempts+1,updated_at=? WHERE job_id=?",
+                    (utc_now(), job_id),
+                )
+                futures[executor.submit(_request_guide, config, poem, facts_text)] = (
+                    poem, facts_text, input_hash, job_id,
+                )
+            connection.commit()
+            for future in as_completed(futures):
+                poem, facts_text, input_hash, job_id = futures[future]
+                connection.execute("SAVEPOINT merge_guide_job")
+                try:
+                    result = future.result()
+                    analysis_id = _analysis_id(poem["poem_id"], "poem", "guide", "llm", run_id)
+                    connection.execute(
+                        "DELETE FROM analyses WHERE poem_id=? AND kind='poem_guide'",
+                        (poem["poem_id"],),
+                    )
+                    connection.execute(
+                        "INSERT INTO analyses(analysis_id,poem_id,line_id,kind,summary,interpretation,method,confidence,model,prompt_hash,input_hash,review_status,evidence_json,payload_json,run_id) "
+                        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                        (
+                            analysis_id, poem["poem_id"], None, "poem_guide",
+                            result["summary"], result["guide"], "llm", result["confidence"],
+                            config.model, prompt_hash, input_hash, "llm_candidate",
+                            json.dumps(
+                                ([{"type": "verified_fact", "text": facts_text}] if facts_text else []),
+                                ensure_ascii=False,
+                            ),
+                            json.dumps(
+                                {
+                                    "origin": result["origin"],
+                                    "promptVersion": GUIDE_PROMPT_VERSION,
+                                    "note": "导读与故事为模型生成的通说叙述（llm_candidate），非人工考据",
+                                },
+                                ensure_ascii=False,
+                            ),
+                            run_id,
+                        ),
+                    )
+                    connection.execute(
+                        "UPDATE analysis_jobs SET status='completed',error=NULL,result_json=?,updated_at=? WHERE job_id=?",
+                        (json.dumps(result, ensure_ascii=False), utc_now(), job_id),
+                    )
+                    connection.execute("RELEASE SAVEPOINT merge_guide_job")
+                    completed += 1
+                except Exception as exc:
+                    try:
+                        connection.execute("ROLLBACK TO SAVEPOINT merge_guide_job")
+                        connection.execute("RELEASE SAVEPOINT merge_guide_job")
+                    except sqlite3.OperationalError:
+                        pass
+                    connection.execute(
+                        "UPDATE analysis_jobs SET status='failed',error=?,updated_at=? WHERE job_id=?",
+                        (f"{type(exc).__name__}: {exc}"[:1000], utc_now(), job_id),
+                    )
+                    failed += 1
+                connection.commit()
+        status = "completed" if failed == 0 else "partial"
+        connection.execute(
+            "UPDATE analysis_runs SET status=?,completed_at=? WHERE run_id=?",
+            (status, utc_now(), run_id),
+        )
+        connection.execute(
+            "INSERT OR REPLACE INTO meta(key,value) VALUES('guide_status',?)", (status,)
+        )
+        connection.execute("DELETE FROM poem_fts")
+        connection.execute(
+            "INSERT INTO poem_fts(poem_id,title,poet,dynasty,body,analysis_text) "
+            "SELECT p.poem_id,p.title,p.poet,p.dynasty,p.body,COALESCE((SELECT group_concat(COALESCE(a.summary,'') || ' ' || COALESCE(a.interpretation,''),' ') FROM analyses a WHERE a.poem_id=p.poem_id),'') FROM poems p"
+        )
+        connection.commit()
+        validate_database(connection)
+        return {"runId": run_id, "status": status, "completedJobs": completed, "failedJobs": failed, "preservedForeignGuides": preserved}
+    finally:
+        connection.close()
 
 def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)

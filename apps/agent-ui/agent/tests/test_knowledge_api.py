@@ -141,6 +141,8 @@ class PoetryKnowledgeApiIntegrationTests(unittest.TestCase):
         self.assertEqual(self.poem_id, poem_body["payload"]["poemId"])
         self.assertEqual("山居秋暝", poem_body["payload"]["title"])
         self.assertEqual(4, len(poem_body["payload"]["lines"]))
+        self.assertEqual("1.0.0", poem_body["payload"]["glossaryVersion"])
+        self.assertEqual([], poem_body["payload"]["glosses"])
 
         encoded_line_id = quote(self.line_id, safe="")
         self.assertNotEqual(self.line_id, encoded_line_id)

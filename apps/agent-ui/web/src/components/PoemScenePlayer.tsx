@@ -10,9 +10,11 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
+import { EmptyState } from "@/components/StateViews";
+import { InteractivePoemText } from "@/components/InteractivePoemText";
+import { PoemKnowledgeSummary } from "@/components/KnowledgeExplorer";
 import type { PoetryScene, ScenePayload } from "@/lib/types";
 import { scenePlaybackDelayMs } from "@/lib/workbench";
-import { EmptyState } from "@/components/StateViews";
 
 interface PoemScenePlayerProps {
   payload: ScenePayload;
@@ -49,7 +51,7 @@ export function PoemScenePlayer({ payload, onSceneChange, onOpenKnowledge }: Poe
   }, [delay, index, payload.scenes.length, playing, scene]);
 
   if (!scene) {
-    return <EmptyState title="没有可播放镜头" detail="当前诗人缺少可系年场景。" />;
+    return <EmptyState title="还没有可放映的画面" detail="这位诗人的场景尚未系年，资料补齐后会自动上新。" />;
   }
 
   const previous = () => {
@@ -85,20 +87,17 @@ export function PoemScenePlayer({ payload, onSceneChange, onOpenKnowledge }: Poe
           <p className="scene-poet">{scene.dynasty} · {scene.poet}</p>
           <h2 id="scene-title">《{scene.poem_title}》</h2>
           <blockquote className="poem-lines" tabIndex={0} aria-label={`${scene.poem_title}完整诗文`}>
-            {scene.poem_lines.map((line, lineIndex) => (
-              <p key={`${scene.id}-${lineIndex}`}>{line}</p>
-            ))}
+            <InteractivePoemText
+              lines={scene.poem_lines}
+              poemId={scene.source_poem_id}
+              ariaLabel={`${scene.poem_title}完整诗文`}
+            />
           </blockquote>
           <p className="scene-event">{scene.event}</p>
-          {scene.source_poem_id && onOpenKnowledge ? (
-            <button
-              type="button"
-              className="inline-knowledge-link"
-              onClick={() => onOpenKnowledge(scene.source_poem_id)}
-            >
-              查看逐句分析
-            </button>
-          ) : null}
+          <PoemKnowledgeSummary
+            poemId={scene.source_poem_id}
+            onOpenKnowledge={onOpenKnowledge}
+          />
         </article>
 
         <aside className="scene-tone">

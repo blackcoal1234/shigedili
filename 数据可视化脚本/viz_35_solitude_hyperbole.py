@@ -8,7 +8,7 @@
   data/stylometry/number_stats.json     数字夸张统计（88人 per_poet + headline）
   data/stylometry/number_dict.py        数字词典（核实"度量组合式"量级冠军）
   data/poems.json                       当前全量语料（万里例句抽取 + 情感均值）
-  data/spirit_image_dict.py             197词条情感词典（散点Y轴）
+  data/spirit_image_dict.py             当前词条情感词典（散点Y轴）
 
 输出：
   output/35_两种孤独与夸张签名.html
@@ -59,6 +59,7 @@ num_stats = load_json(ROOT / "data" / "stylometry" / "number_stats.json")
 poems = load_json(ROOT / "data" / "poems.json")
 N_POEMS = len(poems)
 N_POETS = len({p.get("poet") or p.get("author") for p in poems})
+SPIRIT_COUNT = len(sd.SPIRIT_DICT)
 
 # ------------------------------------------------ 情感均值（spirit_image_dict）
 
@@ -262,13 +263,13 @@ WAN9_EARTH = round(WAN9_KM / EARTH_KM, 2)
 
 DATA = {
     "generated_at": date.today().isoformat(),
-    "note": ("viz_35 两种孤独×夸张签名。孤独密度/夸张密度均为人工词典口径的保守"
-             "统计；密度榜设正文≥300字门槛；情感均值为 spirit_image_dict 197词条"
+    "note": (f"viz_35 两种孤独×夸张签名。孤独密度/夸张密度均为人工词典口径的保守"
+             f"统计；密度榜设正文≥300字门槛；情感均值为 spirit_image_dict {SPIRIT_COUNT}词条"
              "命中情感值的次数加权平均，全体均值整体偏负，'昂扬/低回'相对中位线。"),
     "sources": [
         "data/stylometry/solitude_stats.json（73词条人称孤独词典扫描）",
         "data/stylometry/number_stats.json（137词条数字词典扫描，夸张从严=保守下界）",
-        "data/spirit_image_dict.py（197词条，情感值[-1,1]，人工整理非权威词库）",
+        f"data/spirit_image_dict.py（{SPIRIT_COUNT}词条，情感值[-1,1]，人工整理非权威词库）",
         f"data/poems.json（{N_POEMS}首/{N_POETS}人）",
     ],
     "median_x": med_x, "median_y": med_y, "min_chars": MIN_CHARS,
@@ -438,7 +439,7 @@ details.method li{margin-bottom:5px;}
 
   <div class="panel">
     <h2>四象限：孤独密度 × 情感均值</h2>
-    <div class="cap">X＝每百字孤独词密度（73词条人称孤独词典）｜Y＝全部诗作意象情感均值（197词条 spirit_image_dict，[-1,1]）｜虚线＝正文≥300字的 __POOL_N__ 人中位线，「昂扬/低回」相对中位线而言（词典整体偏负）。六位核心诗人为彩色大点，其余 __BG_N__ 人为灰色背景分布。</div>
+    <div class="cap">X＝每百字孤独词密度（73词条人称孤独词典）｜Y＝全部诗作意象情感均值（__SPIRIT_COUNT__词条 spirit_image_dict，[-1,1]）｜虚线＝正文≥300字的 __POOL_N__ 人中位线，「昂扬/低回」相对中位线而言（词典整体偏负）。六位核心诗人为彩色大点，其余 __BG_N__ 人为灰色背景分布。</div>
     <div id="quadChart" class="chart"></div>
     <div class="chips">__LAND_CHIPS__</div>
     <div class="note">六人的实际象限已列在上方彩色标签中；中位线、排名与落点均由当前全语料重算。象限描述的是词典命中的文本相对位置，不是对诗人心理的诊断。</div>
@@ -549,7 +550,7 @@ details.method li{margin-bottom:5px;}
 <details class="method">
   <summary>方法与数据（口径与局限，点开查看）</summary>
   <ul>
-    <li><b>数据来源</b>：孤独维度 data/stylometry/solitude_stats.json（73词条人称孤独词典）；夸张维度 number_stats.json（137词条数字词典）；情感均值按 data/spirit_image_dict.py（197词条）对每位诗人全部诗作做最长优先贪心匹配后取命中情感值的次数加权平均。三套词典均为本项目<b>人工整理的分析工具，不是权威词库</b>，一切结论只在各自口径内成立。</li>
+    <li><b>数据来源</b>：孤独维度 data/stylometry/solitude_stats.json（73词条人称孤独词典）；夸张维度 number_stats.json（137词条数字词典）；情感均值按 data/spirit_image_dict.py（__SPIRIT_COUNT__词条）对每位诗人全部诗作做最长优先贪心匹配后取命中情感值的次数加权平均。三套词典均为本项目<b>人工整理的分析工具，不是权威词库</b>，一切结论只在各自口径内成立。</li>
     <li><b>孤独密度口径</b>：solitude_per_100_chars 含低权重多义字（「空」0.25、「自」0.15），会略高于真值；按强度加权的 solitude_weighted_per_100_chars 一并写入本页数据文件（李清照 __LQ_WEIGHTED__ / 李白 __LB_WEIGHTED__ / 陆游 __LY_WEIGHTED__）。六人样本为 __SIX_SAMPLE_COUNTS__，密度仍是<b>本库统计而非全集断言</b>。</li>
     <li><b>四象限</b>：中位线取正文≥300字的 __POOL_N__ 位诗人中位数（X=__MED_X__，Y=__MED_Y__）。故Y轴「昂扬/低回」是<b>相对中位线的相对说法</b>，不是绝对褒贬。</li>
     <li><b>夸张密度</b>：夸张标记从严——只标「大数×度量/时间/景物」经典组合与虚指大数，裸数词不标，故密度是<b>保守下界</b>；榜单设正文≥300字门槛（__POOL_HYP_N__/__N_POETS__人），小样本最高者另行附注，不混入主榜。</li>
@@ -783,6 +784,7 @@ repl = {
     "__LY_OTHER__": str(len(wanli_ly) - ly_state),
     "__N_POEMS__": str(N_POEMS),
     "__N_POETS__": str(N_POETS),
+    "__SPIRIT_COUNT__": str(SPIRIT_COUNT),
     "__POOL_N__": str(len(pool)),
     "__BG_N__": str(max(0, len(scatter) - len(SIX))),
     "__POOL_HYP_N__": str(len(hyp_rows)),

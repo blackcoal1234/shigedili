@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>43 · 飞花令 · 加行卷</title>
+<style>
+:root{--paper:#f2f4f0;--ink:#252b27;--cinnabar:#b64b3f;--jade:#26786e;--gold:#a87527;--blue:#426f94;}
+*{box-sizing:border-box;}
+body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",sans-serif;line-height:1.7;margin:0;padding:16px;}
+h1,h2,h3,.kai{font-family:KaiTi,STKaiti,"Microsoft YaHei",serif;}
+.wrap{max-width:880px;margin:0 auto;}
+header{border-bottom:2px solid var(--ink);padding-bottom:10px;}
+h1{margin:0;font-size:30px;letter-spacing:6px;}
+h1 .sub{font-size:16px;color:var(--gold);letter-spacing:2px;margin-left:10px;}
+.lead{margin:6px 0 2px;color:#3c443f;}
+.meta-line{margin:0;font-size:12.5px;color:#6a726c;}
+.meta-line b{color:var(--cinnabar);}
+.panel{background:#fbfcfa;border:1px solid #dfe4de;border-radius:10px;padding:12px 16px;margin-top:14px;box-shadow:0 1px 3px rgba(37,43,39,.05);font-size:14px;color:#3c443f;}
+.qhead{display:flex;gap:14px;align-items:baseline;font-size:13.5px;color:#3c443f;margin-bottom:8px;flex-wrap:wrap;}
+.qhead .qno{font-family:KaiTi,STKaiti,serif;font-size:18px;}
+.qhead .typ{color:var(--gold);font-family:KaiTi,STKaiti,serif;font-size:15px;}
+.badge{display:inline-block;border-radius:4px;padding:0 8px;font-size:12px;line-height:20px;background:#e4ece7;color:var(--jade);border:1px solid #bcd3c9;}
+.prompt{font-family:KaiTi,STKaiti,serif;font-size:21px;margin:6px 0 12px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{cursor:pointer;text-align:left;background:#fbfcfa;border:1px solid #cfd6d0;border-radius:8px;padding:8px 14px;font-size:16px;color:var(--ink);transition:all .15s;font-family:KaiTi,STKaiti,serif;}
+.opt:hover:not(:disabled){border-color:var(--jade);background:#f0f5f2;}
+.opt:disabled{cursor:default;}
+.opt.right{border-color:var(--jade);background:#e9f2ed;color:var(--jade);}
+.opt.wrong{border-color:var(--cinnabar);background:#f8ece9;color:var(--cinnabar);}
+.hintbar{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap;}
+button.act{cursor:pointer;background:var(--jade);color:#fff;border:none;border-radius:8px;padding:7px 18px;font-size:14.5px;font-family:KaiTi,STKaiti,serif;letter-spacing:2px;}
+button.act:disabled{background:#a9b3ad;cursor:not-allowed;}
+button.act.ghost{background:transparent;color:var(--jade);border:1px solid var(--jade);}
+button.act.sm{padding:3px 12px;font-size:12.5px;letter-spacing:1px;}
+.hintext{background:#f6f2e8;border:1px dashed #d8c9a3;border-radius:8px;padding:8px 12px;font-size:13.5px;color:#4a4436;display:none;flex:1 1 260px;}
+.evcard{margin-top:14px;background:#f6f8f4;border:1px solid #e0e5de;border-radius:8px;padding:10px 14px;display:none;}
+.evcard h3{margin:2px 0 6px;font-size:15px;color:var(--blue);border-left:3px solid var(--blue);padding-left:8px;}
+.evrow{margin:5px 0;font-size:13.5px;}
+.evrow b{color:var(--blue);}
+.evrow .lift{color:var(--cinnabar);}
+.src{font-size:12px;color:#6a726c;}
+table.mtab{border-collapse:collapse;width:100%;font-size:13px;margin-top:4px;}
+table.mtab th,table.mtab td{border:1px solid #dfe4de;padding:4px 8px;text-align:left;}
+table.mtab th{background:#eef1ec;font-weight:normal;}
+.lcols{display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;}
+.lcol{flex:1 1 200px;display:flex;flex-direction:column;gap:8px;}
+.ltitle{font-size:13px;color:#6a726c;text-align:center;}
+.litem{cursor:pointer;background:#fbfcfa;border:1px solid #cfd6d0;border-radius:8px;padding:8px 12px;text-align:center;font-family:KaiTi,STKaiti,serif;font-size:18px;transition:all .12s;}
+.litem:hover:not(.lock):not(.sel){border-color:var(--gold);}
+.litem.sel{border-color:var(--blue);background:#e8eef4;box-shadow:0 0 0 1px var(--blue);}
+.litem.lock{border-color:#a9c4ba;background:#e9f2ed;color:var(--jade);cursor:default;}
+.litem.flash{border-color:var(--cinnabar);background:#f8ece9;color:var(--cinnabar);}
+#endArea{display:none;}
+#endArea .rank{font-size:34px;font-family:KaiTi,STKaiti,serif;color:var(--cinnabar);letter-spacing:8px;}
+.stat3{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0;}
+.stat3>div{flex:1 1 120px;text-align:center;background:#f6f8f4;border:1px solid #e0e5de;border-radius:8px;padding:8px;}
+.stat3 .v{font-size:22px;font-family:KaiTi,STKaiti,serif;}
+.stat3 .k{font-size:12px;color:#6a726c;}
+.qian span{display:inline-block;background:#fff;border:1px solid #d8cdb0;border-radius:6px;padding:2px 10px;margin:3px 4px 3px 0;font-size:13px;cursor:pointer;color:#4a4436;}
+.qian span:hover{border-color:var(--gold);color:var(--gold);}
+#resumeBar{display:none;}
+footer{margin-top:16px;border-top:1px solid #dfe4de;padding-top:10px;font-size:12.5px;color:#6a726c;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>飞花令<span class="sub">加行卷 · 山河证道番外</span></h1>
+  <p class="lead">三种加行：读句辨真（飞花令）、看意象识乡（意象归乡）、指古名认今地（连线）——全部题目确定性生成，证据可复核。</p>
+  <p class="meta-line">共 <b>22</b> 题（飞花令 12 / 意象归乡 6 / 连线 4）｜每题基分 <b>800</b>，提示 ×0.5｜总分与段位答完揭晓</p>
+</header>
+
+<div id="resumeBar" class="panel">检测到上次行囊——第 <b id="rQi"></b> 题，得分 <b id="rScore"></b>。
+  <button class="act sm" id="btnResume">继续</button>
+  <button class="act ghost sm" id="btnFresh">重新开始</button>
+</div>
+
+<section id="gameArea">
+  <div class="qhead">
+    <span class="qno" id="qNo">第 1 题</span>
+    <span class="typ" id="qType"></span>
+    <span>得分 <b id="scoreNow" style="color:var(--cinnabar)">0</b></span>
+    <span id="streakNow"></span>
+  </div>
+  <div class="prompt" id="qPrompt"></div>
+  <div id="qBody"></div>
+  <div class="hintbar" id="hintBar">
+    <button class="act ghost sm" id="btnHint">提示 ×0.5</button>
+    <div class="hintext" id="hintText"></div>
+  </div>
+  <div class="evcard" id="evCard"></div>
+</section>
+
+<section id="endArea" class="panel">
+  <h2 class="kai">加行终了</h2>
+  <div class="rank" id="endRank"></div>
+  <div class="stat3">
+    <div><div class="v" id="endScore">0</div><div class="k">总得分 / 满分 17600</div></div>
+    <div><div class="v" id="endAcc">0/0</div><div class="k">答对题数</div></div>
+    <div><div class="v" id="endStreak">0</div><div class="k">最长连对</div></div>
+  </div>
+  <div id="endQuote" class="kai" style="font-size:15px;color:#4a524c;"></div>
+  <h3 style="margin-top:12px;">行囊 · 错题诗签</h3>
+  <div class="qian" id="qianList"></div>
+  <div style="margin-top:12px;">
+    <button class="act" id="btnAgain">再来一轮</button>
+    <button class="act ghost" id="btnReset">清除进度</button>
+  </div>
+</section>
+
+<div class="panel">
+  <b>方法与口径</b>——飞花令干扰句经校验不含令字；意象归乡选项与证据直接来自 R2 意象×地域矩阵（题即论据）；连线取自古地名词典并附备注。全卷确定性生成，重建逐字节一致。 意象归乡的选项与证据来自 <a href="41_意象地理.html" style="color:var(--blue)">41_意象地理</a>（R2 lift 矩阵）；连线词典备注来自古地名词典；本卷不涉及作地核验，与山河证道正卷的 A/B 级考据口径相互独立。
+</div>
+
+<footer>诗行万里 · 飞花令加行卷｜生成：tools/build_side_quest_bank.py + 数据可视化脚本/viz_43_side_quest.py</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var BANK = {"meta":{"n_questions":22,"n_feihualing":12,"n_imagery":6,"n_link":4,"base_points":800,"policy":"飞花令干扰句经校验不含令字；意象归乡选项与证据直接来自 R2 意象×地域矩阵（题即论据）；连线取自古地名词典并附备注。全卷确定性生成，重建逐字节一致。","generated_by":"tools/build_side_quest_bank.py"},"questions":[{"type":"feihualing","id":"F01","char":"月","prompt":"飞花令·「月」——以下哪一句真的含有「月」字？","options":[{"line":"我少君方壮","poet":"欧阳修","title":"答梅圣俞寺丞见寄"},{"line":"失计自怜贫","poet":"张籍","title":"舟行寄李湖州"},{"line":"年年十月来宣州","poet":"白居易","title":"红线毯"},{"line":"此行不负清秋","poet":"叶梦得","title":"临江仙·乙卯八月九日南山绝项作台新成与客赏月作"}],"correct":2,"hint":{"cost":0.5,"text":"真句出自白居易笔下——四句细读，其余三句均不含「月」字。"},"evidence":{"real":{"line":"年年十月来宣州","poet":"白居易","title":"红线毯"},"corpus_hits":5277},"points":800},{"type":"feihualing","id":"F02","char":"花","prompt":"飞花令·「花」——以下哪一句真的含有「花」字？","options":[{"line":"请数系虏事","poet":"杜牧","title":"感怀诗一首"},{"line":"森森边士戟","poet":"李贺","title":"感讽六首"},{"line":"宣城还见杜鹃花","poet":"李白","title":"宣城见杜鹃花"},{"line":"破瑟悲秋已减弦","poet":"李益","title":"古瑟怨"}],"correct":2,"hint":{"cost":0.5,"text":"真句出自李白笔下——四句细读，其余三句均不含「花」字。"},"evidence":{"real":{"line":"宣城还见杜鹃花","poet":"李白","title":"宣城见杜鹃花"},"corpus_hits":5901},"points":800},{"type":"feihualing","id":"F03","char":"风","prompt":"飞花令·「风」——以下哪一句真的含有「风」字？","options":[{"line":"光风灭兰蕙","poet":"李白","title":"古风五十九首"},{"line":"抚掌惊呼相语","poet":"叶梦得","title":"水调歌头·江海渺千里"},{"line":"孤客恋交情","poet":"贾岛","title":"别徐明府"},{"line":"永谢区中姻","poet":"孟郊","title":"寿安西渡奉别郑相公"}],"correct":0,"hint":{"cost":0.5,"text":"真句出自李白笔下——四句细读，其余三句均不含「风」字。"},"evidence":{"real":{"line":"光风灭兰蕙","poet":"李白","title":"古风五十九首"},"corpus_hits":7980},"points":800},{"type":"feihualing","id":"F04","char":"春","prompt":"飞花令·「春」——以下哪一句真的含有「春」字？","options":[{"line":"铙吹发西江","poet":"王维","title":"送宇文太守赴宣城"},{"line":"久之风榛寂","poet":"王昌龄","title":"缑氏尉沈兴宗置酒南溪留赠"},{"line":"聊舒移孤茎","poet":"柳宗元","title":"植灵寿木"},{"line":"行步欹危实怕春","poet":"杜甫","title":"江畔独步寻花七绝句"}],"correct":3,"hint":{"cost":0.5,"text":"真句出自杜甫笔下——四句细读，其余三句均不含「春」字。"},"evidence":{"real":{"line":"行步欹危实怕春","poet":"杜甫","title":"江畔独步寻花七绝句"},"corpus_hits":5570},"points":800},{"type":"feihualing","id":"F05","char":"江","prompt":"飞花令·「江」——以下哪一句真的含有「江」字？","options":[{"line":"低随回风尽","poet":"温庭筠","title":"烧歌"},{"line":"回我神霄辇","poet":"孟郊","title":"列仙文。安度明"},{"line":"不知江柳已摇村","poet":"苏轼","title":"正月二十日往岐亭郡人潘古郭三人送余于女王城东禅庄院"},{"line":"待宾茶灶就岩泥","poet":"杜荀鹤","title":"山居寄同志"}],"correct":2,"hint":{"cost":0.5,"text":"真句出自苏轼笔下——四句细读，其余三句均不含「江」字。"},"evidence":{"real":{"line":"不知江柳已摇村","poet":"苏轼","title":"正月二十日往岐亭郡人潘古郭三人送余于女王城东禅庄院"},"corpus_hits":3680},"points":800},{"type":"link","id":"L01","prompt":"古今地名连线——点左侧古名，再点右侧今地，四对全中即过。","pairs":[{"alias":"夔州","modern":"奉节","province":"重庆","note":"杜甫流寓"},{"alias":"夜郎","modern":"桐梓","province":"贵州","note":"李白流放"},{"alias":"夷陵","modern":"宜昌","province":"湖北","note":"欧阳修贬地"},{"alias":"孤山","modern":"杭州","province":"浙江","note":"林逋隐居"}],"left_order":["夷陵","孤山","夜郎","夔州"],"right_order":["孤山","夜郎","夷陵","夔州"],"points":800},{"type":"feihualing","id":"F06","char":"山","prompt":"飞花令·「山」——以下哪一句真的含有「山」字？","options":[{"line":"众芳委时晦","poet":"陈子昂","title":"感遇诗三十八首·其七"},{"line":"去年射虎南山秋","poet":"陆游","title":"三月十七日夜醉中作"},{"line":"唯馀路旁泪","poet":"罗隐","title":"南康道中"},{"line":"飘萧松桂秋","poet":"杜牧","title":"题扬州禅智寺"}],"correct":1,"hint":{"cost":0.5,"text":"真句出自陆游笔下——四句细读，其余三句均不含「山」字。"},"evidence":{"real":{"line":"去年射虎南山秋","poet":"陆游","title":"三月十七日夜醉中作"},"corpus_hits":7752},"points":800},{"type":"feihualing","id":"F07","char":"水","prompt":"飞花令·「水」——以下哪一句真的含有「水」字？","options":[{"line":"水面初平云脚低","poet":"白居易","title":"钱塘湖春行"},{"line":"晚悟禅心更不流","poet":"叶梦得","title":"蔡子因前韵留别再答二首 其一"},{"line":"名高毁所集","poet":"刘禹锡","title":"萋兮吟"},{"line":"年少王孙何处好","poet":"欧阳炯","title":"春光好"}],"correct":0,"hint":{"cost":0.5,"text":"真句出自白居易笔下——四句细读，其余三句均不含「水」字。"},"evidence":{"real":{"line":"水面初平云脚低","poet":"白居易","title":"钱塘湖春行"},"corpus_hits":5170},"points":800},{"type":"feihualing","id":"F08","char":"夜","prompt":"飞花令·「夜」——以下哪一句真的含有「夜」字？","options":[{"line":"我与化人中共住","poet":"范成大","title":"淳熙四年六月二十七日，登大峨之巅，一名胜"},{"line":"浔阳江头夜送客","poet":"白居易","title":"琵琶行"},{"line":"夫君偏有思","poet":"朱熹","title":"题祝生画呈裴丈二首 其一"},{"line":"共染城壕水","poet":"司空曙","title":"梁城老人怨（一作陈羽诗）"}],"correct":1,"hint":{"cost":0.5,"text":"真句出自白居易笔下——四句细读，其余三句均不含「夜」字。"},"evidence":{"real":{"line":"浔阳江头夜送客","poet":"白居易","title":"琵琶行"},"corpus_hits":3501},"points":800},{"type":"feihualing","id":"F09","char":"秋","prompt":"飞花令·「秋」——以下哪一句真的含有「秋」字？","options":[{"line":"秋风霜满青青鬓","poet":"陆游","title":"桃源忆故人·题华山图"},{"line":"闻知剩有闲风月","poet":"张元干","title":"题企疏堂"},{"line":"发断锯长麻","poet":"李贺","title":"马诗二十三首·其六"},{"line":"云光岚彩四面合","poet":"杜牧","title":"商山麻涧"}],"correct":0,"hint":{"cost":0.5,"text":"真句出自陆游笔下——四句细读，其余三句均不含「秋」字。"},"evidence":{"real":{"line":"秋风霜满青青鬓","poet":"陆游","title":"桃源忆故人·题华山图"},"corpus_hits":3597},"points":800},{"type":"feihualing","id":"F10","char":"雪","prompt":"飞花令·「雪」——以下哪一句真的含有「雪」字？","options":[{"line":"公子眼花乱发","poet":"苏轼","title":"西江月·真觉赏瑞香二首"},{"line":"意所欲说辄见之","poet":"苏洵","title":"与可许惠所画舒景以诗督之"},{"line":"天子可使尘常蒙","poet":"陈与义","title":"雷行雨"},{"line":"其若杨花似雪何","poet":"李白","title":"忆旧游寄谯郡元参军"}],"correct":3,"hint":{"cost":0.5,"text":"真句出自李白笔下——四句细读，其余三句均不含「雪」字。"},"evidence":{"real":{"line":"其若杨花似雪何","poet":"李白","title":"忆旧游寄谯郡元参军"},"corpus_hits":1994},"points":800},{"type":"link","id":"L02","prompt":"古今地名连线——点左侧古名，再点右侧今地，四对全中即过。","pairs":[{"alias":"京兆","modern":"西安","province":"陕西","note":"长安别称"},{"alias":"京口","modern":"镇江","province":"江苏","note":"辛弃疾登北固"},{"alias":"信州","modern":"上饶","province":"江西","note":"辛弃疾居地"},{"alias":"儋州","modern":"儋州","province":"海南","note":"苏轼远贬"}],"left_order":["儋州","京兆","京口","信州"],"right_order":["京兆","儋州","京口","信州"],"points":800},{"type":"feihualing","id":"F11","char":"酒","prompt":"飞花令·「酒」——以下哪一句真的含有「酒」字？","options":[{"line":"像佛再经始","poet":"叶梦得","title":"明日复游石头城清凉寺再用前韵"},{"line":"白酒新熟山中归","poet":"李白","title":"南陵别儿童入京"},{"line":"夜归萧寺月光斜","poet":"许浑","title":"夜归孤山寺却寄卢郎中"},{"line":"一去又轻年","poet":"朱淑真","title":"中秋玩月"}],"correct":1,"hint":{"cost":0.5,"text":"真句出自李白笔下——四句细读，其余三句均不含「酒」字。"},"evidence":{"real":{"line":"白酒新熟山中归","poet":"李白","title":"南陵别儿童入京"},"corpus_hits":2882},"points":800},{"type":"feihualing","id":"F12","char":"舟","prompt":"飞花令·「舟」——以下哪一句真的含有「舟」字？","options":[{"line":"无来孰为去","poet":"苏辙","title":"和子瞻和陶渊明杂诗十一首"},{"line":"而强之使东","poet":"苏辙","title":"东坡先生墓志铭"},{"line":"木兰之枻沙棠舟","poet":"李白","title":"江上吟"},{"line":"渔利入江湖","poet":"梅尧臣","title":"杂兴 其一"}],"correct":2,"hint":{"cost":0.5,"text":"真句出自李白笔下——四句细读，其余三句均不含「舟」字。"},"evidence":{"real":{"line":"木兰之枻沙棠舟","poet":"李白","title":"江上吟"},"corpus_hits":1182},"points":800},{"type":"imagery_home","id":"I01","prompt":"意象归乡——「莺、马、旌」这一组意象，最可能落在哪个分区？","options":[{"region":"两京·中原"},{"region":"西北边塞"},{"region":"燕赵·朔方"},{"region":"齐鲁"}],"correct":0,"clue_words":["莺","马","旌"],"hint":{"cost":0.5,"text":"其中「莺」在正确分区的 lift 为 1.468×（含它的诗落在此区的倍率）。"},"evidence":{"kind":"lift_table","rows":[{"region":"两京·中原","hits":"「莺」1.468×、「马」1.305×、「旌」1.294×"},{"region":"西北边塞","hits":"「旌」1.614×"},{"region":"燕赵·朔方","hits":"「马」1.916×"},{"region":"齐鲁","hits":"「马」1.56×"}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"imagery_home","id":"I02","prompt":"意象归乡——「塞、秋风、雁」这一组意象，最可能落在哪个分区？","options":[{"region":"西北边塞"},{"region":"齐鲁"},{"region":"燕赵·朔方"},{"region":"两京·中原"}],"correct":2,"clue_words":["塞","秋风","雁"],"hint":{"cost":0.5,"text":"其中「塞」在正确分区的 lift 为 4.59×（含它的诗落在此区的倍率）。"},"evidence":{"kind":"lift_table","rows":[{"region":"西北边塞","hits":"「塞」1.822×"},{"region":"齐鲁","hits":"（无过表征）"},{"region":"燕赵·朔方","hits":"「塞」4.59×、「秋风」2.43×、「雁」2.316×"},{"region":"两京·中原","hits":"（无过表征）"}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"imagery_home","id":"I03","prompt":"意象归乡——「寺、独、别」这一组意象，最可能落在哪个分区？","options":[{"region":"两京·中原"},{"region":"西北边塞"},{"region":"燕赵·朔方"},{"region":"齐鲁"}],"correct":3,"clue_words":["寺","独","别"],"hint":{"cost":0.5,"text":"其中「寺」在正确分区的 lift 为 5.221×（含它的诗落在此区的倍率）。"},"evidence":{"kind":"lift_table","rows":[{"region":"两京·中原","hits":"（无过表征）"},{"region":"西北边塞","hits":"（无过表征）"},{"region":"燕赵·朔方","hits":"（无过表征）"},{"region":"齐鲁","hits":"「寺」5.221×、「独」2.326×、「别」1.87×"}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"link","id":"L03","prompt":"古今地名连线——点左侧古名，再点右侧今地，四对全中即过。","pairs":[{"alias":"柳州","modern":"柳州","province":"广西","note":"柳宗元终地"},{"alias":"樊川","modern":"西安","province":"陕西","note":"杜牧"},{"alias":"永州","modern":"永州","province":"湖南","note":"柳宗元贬地"},{"alias":"江南","modern":"苏州","province":"江苏","note":"泛称"}],"left_order":["柳州","永州","江南","樊川"],"right_order":["樊川","永州","柳州","江南"],"points":800},{"type":"imagery_home","id":"I04","prompt":"意象归乡——「关、东风、枯」这一组意象，最可能落在哪个分区？","options":[{"region":"两京·中原"},{"region":"西北边塞"},{"region":"齐鲁"},{"region":"燕赵·朔方"}],"correct":1,"clue_words":["关","东风","枯"],"hint":{"cost":0.5,"text":"其中「关」在正确分区的 lift 为 6.116×（含它的诗落在此区的倍率）。"},"evidence":{"kind":"lift_table","rows":[{"region":"两京·中原","hits":"（无过表征）"},{"region":"西北边塞","hits":"「关」6.116×、「东风」2.184×、「枯」2.116×"},{"region":"齐鲁","hits":"（无过表征）"},{"region":"燕赵·朔方","hits":"「关」2.132×、「枯」1.839×"}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"imagery_home","id":"I05","prompt":"意象归属——在「两京·中原」分区，最过表征（lift 最高）的意象是？","options":[{"word":"莺"},{"word":"湖"},{"word":"塞"},{"word":"溪"}],"correct":0,"region":"两京·中原","hint":{"cost":0.5,"text":"正确答案的 lift 为 1.468×，样本 33/83 首。"},"evidence":{"kind":"top_words","region":"两京·中原","words":[{"word":"莺","lift":1.468,"n_wr":33,"n_w":83},{"word":"马","lift":1.305,"n_wr":229,"n_w":648},{"word":"旌","lift":1.294,"n_wr":34,"n_w":97},{"word":"蝉","lift":1.28,"n_wr":26,"n_w":75},{"word":"阁","lift":1.264,"n_wr":63,"n_w":184}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"imagery_home","id":"I07","prompt":"意象归属——在「齐鲁」分区，最过表征（lift 最高）的意象是？","options":[{"word":"舟"},{"word":"寺"},{"word":"关"},{"word":"湖"}],"correct":1,"region":"齐鲁","hint":{"cost":0.5,"text":"正确答案的 lift 为 5.221×，样本 5/121 首。"},"evidence":{"kind":"top_words","region":"齐鲁","words":[{"word":"寺","lift":5.221,"n_wr":5,"n_w":121},{"word":"独","lift":2.326,"n_wr":9,"n_w":489},{"word":"别","lift":1.87,"n_wr":7,"n_w":473},{"word":"台","lift":1.608,"n_wr":5,"n_w":393},{"word":"马","lift":1.56,"n_wr":8,"n_w":648}],"source":"41_意象地理.html（R2 意象×地域矩阵）"},"points":800},{"type":"link","id":"L04","prompt":"古今地名连线——点左侧古名，再点右侧今地，四对全中即过。","pairs":[{"alias":"江南","modern":"苏州","province":"江苏","note":"泛称"},{"alias":"江州","modern":"九江","province":"江西","note":"白居易贬地"},{"alias":"汴京","modern":"开封","province":"河南","note":"北宋都"},{"alias":"洛阳","modern":"洛阳","province":"河南","note":"东都"}],"left_order":["江州","汴京","江南","洛阳"],"right_order":["汴京","江南","洛阳","江州"],"points":800}]};
+var QS = BANK.questions;
+var MAX = QS.length * 800;
+var SAVE_KEY = "shxw43_v1";
+var el = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
+function loadSave(){ try{ return JSON.parse(localStorage.getItem(SAVE_KEY) || "null"); }catch(e){ return null; } }
+function writeSave(s){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(s)); }catch(e){} }
+function clearSave(){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} }
+
+var S = {qi:0, score:0, correct:0, streak:0, best:0, wrong:[]};
+var cur = null, hintUsed = false, answered = false;
+var linkState = null;
+
+function typeName(t){
+  return {feihualing:"飞花令", imagery_home:"意象归乡", link:"古今连线"}[t] || t;
+}
+
+function showQ(){
+  cur = QS[S.qi]; hintUsed = false; answered = false; linkState = null;
+  el("qNo").textContent = "第 " + (S.qi+1) + " / " + QS.length + " 题";
+  el("qType").textContent = "· " + typeName(cur.type) + " ·";
+  el("scoreNow").textContent = S.score;
+  el("streakNow").textContent = S.streak > 1 ? "连对 " + S.streak : "";
+  el("qPrompt").textContent = cur.prompt;
+  el("hintText").style.display = "none";
+  el("evCard").style.display = "none";
+  el("evCard").innerHTML = "";
+  var hasHint = cur.type !== "link";
+  el("hintBar").style.display = hasHint ? "flex" : "none";
+  el("btnHint").disabled = false;
+  renderBody();
+}
+
+function renderBody(){
+  var b = el("qBody");
+  if(cur.type === "link"){ renderLink(b); return; }
+  var html = ['<div class="opts">'];
+  cur.options.forEach(function(o, i){
+    var label = o.line !== undefined ? esc(o.line) : (o.region !== undefined ? esc(o.region) : esc(o.word));
+    html.push('<button class="opt" data-i="' + i + '">' + label + '</button>');
+  });
+  html.push('</div>');
+  b.innerHTML = html.join("");
+  Array.prototype.forEach.call(b.querySelectorAll(".opt"), function(btn){
+    btn.onclick = function(){ if(answered) return; pick(+btn.getAttribute("data-i")); };
+  });
+}
+
+function pick(i){
+  answered = true;
+  var right = i === cur.correct;
+  var mult = hintUsed ? 0.5 : 1;
+  var pts = 0;
+  var btns = el("qBody").querySelectorAll(".opt");
+  btns[cur.correct].classList.add("right");
+  btns[cur.correct].disabled = true;
+  if(!right){ btns[i].classList.add("wrong"); btns[i].disabled = true; }
+  Array.prototype.forEach.call(btns, function(x){ x.disabled = true; });
+  if(right){ pts = Math.round(800 * mult); S.correct++; S.streak++; S.best = Math.max(S.best, S.streak); }
+  else { S.streak = 0; S.wrong.push({qi:S.qi}); }
+  S.score += pts;
+  el("scoreNow").textContent = S.score;
+  el("streakNow").textContent = S.streak > 1 ? "连对 " + S.streak : "";
+  showEvCard(pts, right);
+  saveAndNext();
+}
+
+/* ---------- 连线 ---------- */
+function renderLink(b){
+  var left = cur.left_order.slice();
+  var right = cur.right_order.slice();
+  linkState = {sel:null, matched:0, wrongTries:0, lock:{}};
+  var byAlias = {};
+  cur.pairs.forEach(function(p){ byAlias[p.alias] = p; });
+  var html = ['<div class="lcols"><div class="lcol"><div class="ltitle">古名</div>'];
+  left.forEach(function(a){ html.push('<div class="litem" data-side="L" data-v="' + esc(a) + '">' + esc(a) + '</div>'); });
+  html.push('</div><div class="lcol"><div class="ltitle">今地（点左侧古名后再点）</div>');
+  right.forEach(function(a){ html.push('<div class="litem" data-side="R" data-v="' + esc(byAlias[a].modern) + '" data-alias="' + esc(a) + '">' + esc(byAlias[a].modern) + '</div>'); });
+  html.push('</div></div><div style="margin-top:8px;font-size:13px;color:#6a726c" id="linkTip">先点一个古名，再点它对应的今地。</div>');
+  b.innerHTML = html.join("");
+  Array.prototype.forEach.call(b.querySelectorAll(".litem"), function(item){
+    item.onclick = function(){ onLinkClick(item); };
+  });
+}
+function onLinkClick(item){
+  if(answered || item.classList.contains("lock")) return;
+  var side = item.getAttribute("data-side");
+  if(side === "L"){
+    var prev = el("qBody").querySelector(".litem.sel");
+    if(prev) prev.classList.remove("sel");
+    item.classList.add("sel");
+    linkState.sel = item.getAttribute("data-v");
+    el("linkTip").textContent = "「" + linkState.sel + "」——再点右侧它对应的今地。";
+    return;
+  }
+  if(!linkState.sel){
+    item.classList.add("flash");
+    setTimeout(function(){ item.classList.remove("flash"); }, 400);
+    el("linkTip").textContent = "先点左侧一个古名。";
+    return;
+  }
+  var wantModern = null;
+  cur.pairs.forEach(function(p){ if(p.alias === linkState.sel) wantModern = p.modern; });
+  if(item.getAttribute("data-v") === wantModern){
+    item.classList.add("lock");
+    item.textContent = wantModern + "（" + linkState.sel + "）";
+    var lsel = el("qBody").querySelector(".litem.sel");
+    lsel.classList.remove("sel");
+    lsel.classList.add("lock");
+    linkState.matched++;
+    linkState.sel = null;
+    el("linkTip").textContent = "对上了。还剩 " + (4 - linkState.matched) + " 对。";
+    if(linkState.matched === 4){
+      answered = true;
+      var pts = Math.max(200, Math.round(800 * 4 / (4 + linkState.wrongTries)));
+      S.score += pts;
+      if(linkState.wrongTries === 0){ S.correct++; S.streak++; S.best = Math.max(S.best, S.streak); }
+      else { S.streak = 0; S.wrong.push({qi:S.qi}); }
+      el("scoreNow").textContent = S.score;
+      el("streakNow").textContent = S.streak > 1 ? "连对 " + S.streak : "";
+      showEvCard(pts, linkState.wrongTries === 0);
+      saveAndNext();
+    }
+  } else {
+    linkState.wrongTries++;
+    item.classList.add("flash");
+    setTimeout(function(){ item.classList.remove("flash"); }, 400);
+    el("linkTip").textContent = "不对——「" + linkState.sel + "」不在那里。再试（错选会扣分）。";
+  }
+}
+
+/* ---------- 证据卡 ---------- */
+function showEvCard(pts, right){
+  var h = ['<h3>' + (right ? "✓ 对了" : "✗ 错了") + ' · 本题 +' + pts + ' 分</h3>'];
+  if(cur.type === "feihualing"){
+    var r = cur.evidence.real;
+    h.push('<div class="evrow">真句：<b class="kai">「' + esc(r.line) + '」</b>——' + esc(r.poet) + '《' + esc(r.title) + '》</div>');
+    h.push('<div class="evrow">语料中含「' + esc(cur.char) + '」的诗句共 <b>' + cur.evidence.corpus_hits + '</b> 句；其余三项均不含该字。</div>');
+  } else if(cur.type === "imagery_home"){
+    if(cur.evidence.kind === "lift_table"){
+      h.push('<div class="evrow">各分区对线索词的 lift（&gt;1 为过表征）：</div><table class="mtab"><tr><th>分区</th><th>线索词命中</th></tr>');
+      cur.evidence.rows.forEach(function(row){
+        h.push('<tr><td>' + esc(row.region) + '</td><td class="kai">' + esc(row.hits) + '</td></tr>');
+      });
+      h.push('</table>');
+    } else {
+      h.push('<div class="evrow">「' + esc(cur.evidence.region) + '」的过表征意象：</div>');
+      cur.evidence.words.forEach(function(w){
+        h.push('<div class="evrow"><span class="lift kai">' + w.lift + '×</span> <b class="kai">' + esc(w.word) + '</b>（' + w.n_wr + '/' + w.n_w + ' 首）</div>');
+      });
+    }
+    h.push('<div class="src">来源：<a href="' + esc(cur.evidence.source.split("（")[0]) + '" target="_blank">' + esc(cur.evidence.source) + '</a></div>');
+  } else {
+    h.push('<table class="mtab"><tr><th>古名</th><th>今地</th><th>词典备注</th></tr>');
+    cur.pairs.forEach(function(p){
+      h.push('<tr><td class="kai">「' + esc(p.alias) + '」</td><td>' + esc(p.modern) + '</td><td>' + esc(p.note) + '</td></tr>');
+    });
+    h.push('</table><div class="src">共错选 ' + linkState.wrongTries + ' 次，得分 800 × 4/(4+' + linkState.wrongTries + ')。</div>');
+  }
+  el("evCard").innerHTML = h.join("");
+  el("evCard").style.display = "block";
+}
+
+function saveAndNext(){
+  S.qi += 1;
+  writeSave({qi:S.qi, score:S.score, correct:S.correct, best:S.best, wrong:S.wrong, done:S.qi >= QS.length});
+  var nx = document.createElement("button");
+  nx.className = "act";
+  nx.id = "btnNext";
+  nx.textContent = S.qi >= QS.length ? "加行终了 →" : "下一题 →";
+  nx.onclick = function(){ if(S.qi >= QS.length) endGame(); else showQ(); };
+  var bar = el("evCard");
+  bar.appendChild(document.createElement("hr"));
+  bar.appendChild(nx);
+}
+
+/* ---------- 提示 / 终局 ---------- */
+el("btnHint").onclick = function(){
+  if(answered || cur.type === "link") return;
+  hintUsed = true;
+  el("hintText").textContent = "【提示】" + cur.hint.text;
+  el("hintText").style.display = "block";
+  el("btnHint").disabled = true;
+};
+function rankOf(pct){
+  if(pct >= 0.85) return ["酒中仙","飞花摘叶皆可入令——语料在你手里成了酒器。"];
+  if(pct >= 0.70) return ["飞花手","令出即应，意象与地名都已入囊。"];
+  if(pct >= 0.50) return ["行令人","渐入佳境——错题诗签里的证据句值得再读一遍。"];
+  return ["投壶手","初学行令——每一枚诗签都是下一轮的令字。"];
+}
+function endGame(){
+  el("gameArea").style.display = "none";
+  el("endArea").style.display = "block";
+  var pct = S.score / MAX;
+  var rk = rankOf(pct);
+  el("endRank").textContent = rk[0];
+  el("endQuote").textContent = rk[1];
+  el("endScore").textContent = S.score;
+  el("endAcc").textContent = S.correct + "/" + QS.length;
+  el("endStreak").textContent = S.best;
+  el("qianList").innerHTML = S.wrong.length ? S.wrong.map(function(w){
+    var q = QS[w.qi];
+    return "<span data-qi=\"" + w.qi + "\">" + esc(typeName(q.type)) + " · " + esc(q.prompt.slice(0, 24)) + "…</span>";
+  }).join("") : "（无错题——行囊空空，诗句满襟。）";
+  Array.prototype.forEach.call(el("qianList").children, function(sp){
+    sp.onclick = function(){ review(+sp.getAttribute("data-qi")); };
+  });
+}
+function review(qi){
+  var q = QS[qi];
+  var b = el("qBody");
+  el("endArea").style.display = "none";
+  el("gameArea").style.display = "block";
+  if(q.type === "link"){
+    renderLink(b);
+    Array.prototype.forEach.call(b.querySelectorAll(".litem"), function(it){
+      it.classList.add("lock");
+      it.onclick = null;
+    });
+  } else {
+    var html = ['<div class="opts">'];
+    q.options.forEach(function(o, i){
+      var label = o.line !== undefined ? esc(o.line) : (o.region !== undefined ? esc(o.region) : esc(o.word));
+      html.push('<button class="opt' + (i === q.correct ? " right" : "") + '" disabled>' + label + '</button>');
+    });
+    html.push('</div>');
+    b.innerHTML = html.join("");
+  }
+  el("qNo").textContent = "诗签复读";
+  el("qType").textContent = "· " + typeName(q.type) + " ·";
+  el("qPrompt").textContent = q.prompt;
+  el("hintBar").style.display = "none";
+  var keepCur = cur, keepLink = linkState, keepAnswered = answered;
+  cur = q; answered = true; linkState = {wrongTries: 0};
+  showEvCard(0, false);
+  cur = keepCur; linkState = keepLink; answered = keepAnswered;
+  var back = document.createElement("button");
+  back.className = "act ghost";
+  back.textContent = "返回终局 ←";
+  back.onclick = function(){
+    el("evCard").style.display = "none";
+    el("gameArea").style.display = "none";
+    el("endArea").style.display = "block";
+  };
+  el("evCard").appendChild(document.createElement("hr"));
+  el("evCard").appendChild(back);
+}
+
+el("btnAgain").onclick = function(){ clearSave(); S = {qi:0, score:0, correct:0, streak:0, best:0, wrong:[]};
+  el("endArea").style.display = "none"; el("gameArea").style.display = "block"; showQ(); };
+el("btnReset").onclick = function(){ clearSave(); location.reload(); };
+
+/* ---------- 启动 ---------- */
+(function boot(){
+  var sv = loadSave();
+  if(sv && sv.qi > 0 && sv.qi < QS.length && !sv.done){
+    el("resumeBar").style.display = "block";
+    el("rQi").textContent = sv.qi + 1;
+    el("rScore").textContent = sv.score;
+    el("btnResume").onclick = function(){
+      el("resumeBar").style.display = "none";
+      S = {qi:sv.qi, score:sv.score, correct:sv.correct||0, streak:0, best:sv.best||0, wrong:sv.wrong||[]};
+      showQ();
+    };
+    el("btnFresh").onclick = function(){
+      el("resumeBar").style.display = "none";
+      clearSave();
+      showQ();
+    };
+  } else {
+    showQ();
+  }
+})();
+})();
+</script>
+</body>
+</html>

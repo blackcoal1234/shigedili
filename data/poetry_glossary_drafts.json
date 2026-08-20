@@ -1,0 +1,145 @@
+{
+  "drafts": [
+    {
+      "draftId": "gloss-draft-50a62e0d4c3466df36bc40a7",
+      "request": {
+        "dynasty": "唐",
+        "endOffset": 5,
+        "line": "十五始展眉，愿同尘与灰。",
+        "lineNo": 6,
+        "mode": "model",
+        "poemId": "2d0368e3fb76",
+        "poet": "李白",
+        "startOffset": 0,
+        "term": "十五始展眉",
+        "title": "长干行·其一"
+      },
+      "result": {
+        "category": "人物情感/婚姻生活",
+        "definition": "指女子十五岁嫁人后才舒展眉头，不再害羞。",
+        "draftId": "gloss-draft-50a62e0d4c3466df36bc40a7",
+        "inContext": "这句诗表现女子婚后与丈夫逐渐熟悉，情感融洽，眉头得以舒展。",
+        "method": "llm",
+        "model": "deepseek-v4-flash",
+        "reused": false,
+        "reviewStatus": "draft",
+        "sourceNote": "模型生成，待人工审核",
+        "sources": [],
+        "term": "十五始展眉"
+      }
+    },
+    {
+      "draftId": "gloss-draft-56363b04ae9db87b17b72031",
+      "request": {
+        "dynasty": "唐",
+        "endOffset": 2,
+        "line": "日照香炉生紫烟，遥看瀑布挂前川。",
+        "lineNo": 1,
+        "mode": "model",
+        "poemId": "62802abab937",
+        "poet": "李白",
+        "startOffset": 0,
+        "term": "日照",
+        "title": "望庐山瀑布"
+      },
+      "result": {
+        "category": "自然景象",
+        "definition": "阳光照射",
+        "draftId": "gloss-draft-56363b04ae9db87b17b72031",
+        "inContext": "太阳照耀着香炉峰，升起紫色的烟霞",
+        "method": "llm",
+        "model": "deepseek-v4-flash",
+        "reused": false,
+        "reviewStatus": "draft",
+        "sourceNote": "模型生成，待人工审核",
+        "sources": [],
+        "term": "日照"
+      }
+    },
+    {
+      "draftId": "gloss-draft-7553d6a08f3f400ad1fecdc6",
+      "request": {
+        "dynasty": "唐",
+        "endOffset": 8,
+        "line": "妾发初覆额，折花门前剧。",
+        "lineNo": 1,
+        "mode": "model",
+        "poemId": "2d0368e3fb76",
+        "poet": "李白",
+        "startOffset": 6,
+        "term": "折花",
+        "title": "长干行·其一"
+      },
+      "result": {
+        "category": "动作",
+        "definition": "折取花朵",
+        "draftId": "gloss-draft-7553d6a08f3f400ad1fecdc6",
+        "inContext": "回忆童年时在门前折花玩耍的情景",
+        "method": "llm",
+        "model": "deepseek-v4-flash",
+        "reused": false,
+        "reviewStatus": "draft",
+        "sourceNote": "模型生成，待人工审核",
+        "sources": [],
+        "term": "折花"
+      }
+    },
+    {
+      "draftId": "gloss-draft-8194d11f0afd7f4d43639b06",
+      "request": {
+        "dynasty": "唐",
+        "endOffset": 5,
+        "line": "十四为君妇，羞颜未尝开。",
+        "lineNo": 4,
+        "mode": "model",
+        "poemId": "2d0368e3fb76",
+        "poet": "李白",
+        "startOffset": 0,
+        "term": "十四为君妇",
+        "title": "长干行·其一"
+      },
+      "result": {
+        "category": "诗句释义",
+        "definition": "指女子十四岁就嫁给了丈夫，成为他的妻子。",
+        "draftId": "gloss-draft-8194d11f0afd7f4d43639b06",
+        "inContext": "在这句诗中，诗人以女子口吻回忆自己十四岁嫁为人妇，那时害羞得未曾展颜欢笑。",
+        "method": "llm",
+        "model": "deepseek-v4-flash",
+        "reused": false,
+        "reviewStatus": "draft",
+        "sourceNote": "模型生成，待人工审核",
+        "sources": [],
+        "term": "十四为君妇"
+      }
+    },
+    {
+      "draftId": "gloss-draft-b13e732c5f8b8d3c9cbc3c09",
+      "request": {
+        "dynasty": "唐",
+        "endOffset": 10,
+        "line": "感此伤妾心，坐愁红颜老。",
+        "lineNo": 13,
+        "mode": "model",
+        "poemId": "2d0368e3fb76",
+        "poet": "李白",
+        "startOffset": 8,
+        "term": "红颜",
+        "title": "长干行·其一"
+      },
+      "result": {
+        "category": "人物",
+        "definition": "指年轻女子的容颜，代指美女。",
+        "draftId": "gloss-draft-b13e732c5f8b8d3c9cbc3c09",
+        "inContext": "在诗句“坐愁红颜老”中，指女子自己青春美丽的容颜，因忧愁而逝去。",
+        "method": "llm",
+        "model": "deepseek-v4-flash",
+        "reused": false,
+        "reviewStatus": "draft",
+        "sourceNote": "模型生成，待人工审核",
+        "sources": [],
+        "term": "红颜"
+      }
+    }
+  ],
+  "version": "1.0"
+}

@@ -122,7 +122,7 @@ export function PoetryWorkbench() {
       <CopilotPopup
         labels={{
           title: "诗史问答",
-          initial: "请选择一位诗人，或直接询问行迹、逐幕诗篇与唐宋意象。",
+          initial: "先挑一位诗人吧——他的行迹、某首诗的逐幕画面、唐宋意象的差别，都可以直接问我。",
           placeholder: "询问诗人、诗篇或意象…",
         }}
         clickOutsideToClose
@@ -410,7 +410,7 @@ function WorkbenchBody({
                 <ErrorState message={toolState.error} onRetry={retryTool} />
               ) : null}
               {toolState.phase === "idle" ? (
-                <EmptyState title="尚未调用数据工具" detail="选择模式以读取对应证据。" />
+                <EmptyState title="还没动用任何数据工具" detail="选一个模式，我来调对应的证据。" />
               ) : null}
               {toolState.phase === "success" && toolState.response ? (
                 <WorkbenchResult
