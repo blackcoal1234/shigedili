@@ -87,6 +87,7 @@ prepare_release() {
 
 prepare_release "$WEB_ARCHIVE" "$NEW_WEB" "server.js"
 prepare_release "$API_ARCHIVE" "$NEW_API" "poetry-agent.pex"
+test -s "$NEW_API/knowledge-source-hashes.json"
 prepare_release "$STATIC_ARCHIVE" "$NEW_STATIC" "29_参赛导航.html"
 cmp -s "$NEW_STATIC/index.html" "$NEW_STATIC/29_参赛导航.html"
 
