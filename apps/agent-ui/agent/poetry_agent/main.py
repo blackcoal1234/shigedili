@@ -61,7 +61,8 @@ def create_app(
         "data/image_dict.py",
         "data/classical_emotion_model.py",
         "data/classical_emotion_lexicon.py",
-        "apps/agent-ui/agent/poetry_agent/knowledge.py",
+        # The repository implementation reads an already-built snapshot. Its
+        # runtime-only changes must not invalidate the snapshot contents.
         "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
     )
     expected_knowledge_sources = {

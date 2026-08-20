@@ -80,6 +80,13 @@ class FastApiToolEndpointTests(unittest.TestCase):
         self.assertIn(body["status"], {"ok", "degraded"})
         self.assertIn("knowledgeBase", body["sources"])
 
+    def test_runtime_repository_code_is_not_a_snapshot_content_source(self) -> None:
+        expected = self.app.state.knowledge_repository.expected_sources
+        self.assertNotIn("apps/agent-ui/agent/poetry_agent/knowledge.py", expected)
+        self.assertIn(
+            "apps/agent-ui/agent/poetry_agent/knowledge_builder.py", expected
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
