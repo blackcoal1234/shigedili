@@ -5,7 +5,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from poetry_agent.cache import DatasetSpec, SnapshotRepository, SourceDataError, sha256_file
+from poetry_agent.cache import (
+    DatasetSpec,
+    SnapshotRepository,
+    SourceDataError,
+    sha256_file,
+    sha256_source_file,
+)
 
 
 def validate_fixture(data):
@@ -14,6 +20,16 @@ def validate_fixture(data):
 
 
 class SnapshotRepositoryTests(unittest.TestCase):
+    def test_source_hash_is_stable_across_lf_and_crlf(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source.txt"
+            source.write_bytes(b"first\nsecond\n")
+            lf_hash = sha256_source_file(source)
+            source.write_bytes(b"first\r\nsecond\r\n")
+
+            self.assertEqual(lf_hash, sha256_source_file(source))
+            self.assertNotEqual(sha256_file(source), sha256_source_file(source))
+
     def make_fixture(self, directory: str):
         root = Path(directory) / "project"
         cache = Path(directory) / "cache"

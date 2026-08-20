@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from .agent import AGENT_DESCRIPTION, AGENT_NAME, build_agent_graph
-from .cache import SnapshotRepository, sha256_file
+from .cache import SnapshotRepository, sha256_source_file
 from .config import Settings
 from .health import health_payload
 from .knowledge import PoetryKnowledgeRepository
@@ -65,7 +65,7 @@ def create_app(
         "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
     )
     expected_knowledge_sources = {
-        relative: sha256_file(settings.project_root / relative)
+        relative: sha256_source_file(settings.project_root / relative)
         for relative in knowledge_source_paths
         if (settings.project_root / relative).is_file()
     }

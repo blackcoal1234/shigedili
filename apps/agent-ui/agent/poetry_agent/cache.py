@@ -37,6 +37,15 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def sha256_source_file(path: Path) -> str:
+    """Hash a text source consistently across LF and CRLF checkouts."""
+    try:
+        content = path.read_bytes()
+    except OSError as exc:
+        raise SourceDataError(f"文件哈希读取失败: {path}: {exc}") from exc
+    return hashlib.sha256(content.replace(b"\r\n", b"\n")).hexdigest()
+
+
 def _normalized_source_sha256(path: Path) -> str:
     """Hash text dependencies after normalizing LF and CRLF line endings."""
     try:
@@ -426,6 +435,8 @@ class SnapshotRepository:
             if expected == dependencies[relative]:
                 continue
             if expected == _normalized_source_sha256(self.project_root / relative):
+                continue
+            if expected == sha256_source_file(self.project_root / relative):
                 continue
             mismatches.append(relative)
         if mismatches:

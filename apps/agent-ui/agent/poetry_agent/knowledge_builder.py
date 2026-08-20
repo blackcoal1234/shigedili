@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any, Iterable, Iterator, Mapping
 from urllib import error, request
 
+from .cache import sha256_source_file
 from .knowledge import (
     SCHEMA_VERSION,
     init_schema,
@@ -361,7 +362,11 @@ def _source_hashes(source: Path) -> dict[str, str]:
         "apps/agent-ui/agent/poetry_agent/knowledge.py": Path(__file__).with_name("knowledge.py"),
         "apps/agent-ui/agent/poetry_agent/knowledge_builder.py": Path(__file__),
     }
-    return {name: sha256_path(path) for name, path in paths.items() if path.is_file()}
+    return {
+        name: sha256_source_file(path)
+        for name, path in paths.items()
+        if path.is_file()
+    }
 
 
 def _load_records(source: Path, *, poet: str | None, limit: int | None) -> list[dict[str, Any]]:

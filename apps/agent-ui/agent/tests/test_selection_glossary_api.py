@@ -9,6 +9,7 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
+from poetry_agent.cache import sha256_source_file
 from poetry_agent.config import Settings, discover_project_root
 from poetry_agent.knowledge import init_schema, manifest_path_for, sha256_path
 from poetry_agent.main import create_app
@@ -75,9 +76,7 @@ class SelectionGlossaryApiIntegrationTests(unittest.TestCase):
             "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
         )
         source_hashes = {
-            relative: hashlib.sha256(
-                (cls.project_root / relative).read_bytes()
-            ).hexdigest()
+            relative: sha256_source_file(cls.project_root / relative)
             for relative in source_paths
             if (cls.project_root / relative).is_file()
         }

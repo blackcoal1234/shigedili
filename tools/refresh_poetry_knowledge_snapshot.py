@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 AGENT_DIR = ROOT / "apps" / "agent-ui" / "agent"
 sys.path.insert(0, str(AGENT_DIR))
 
+from poetry_agent.cache import sha256_source_file  # noqa: E402
 from poetry_agent.knowledge import (  # noqa: E402
     SCHEMA_VERSION,
     manifest_path_for,
@@ -76,11 +77,23 @@ def publish_snapshot(
             for key in set(stored_hashes) | set(current_hashes)
             if stored_hashes.get(key) != current_hashes.get(key)
         )
-        if changed:
-            if not allow_builder_hash_update or changed != [BUILDER_SOURCE]:
-                raise SnapshotPublishError(
-                    "源哈希变化超出允许边界: " + ", ".join(changed)
-                )
+        disallowed = []
+        for key in changed:
+            path = ROOT / key
+            eol_only_migration = (
+                path.is_file()
+                and stored_hashes.get(key) == sha256_path(path)
+                and current_hashes.get(key) == sha256_source_file(path)
+            )
+            if eol_only_migration:
+                continue
+            if allow_builder_hash_update and key == BUILDER_SOURCE:
+                continue
+            disallowed.append(key)
+        if disallowed:
+            raise SnapshotPublishError(
+                "源哈希变化超出允许边界: " + ", ".join(disallowed)
+            )
 
         filters = json.loads(meta.get("build_filters", "{}"))
         build_id = meta.get("build_id")
