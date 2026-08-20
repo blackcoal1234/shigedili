@@ -10,6 +10,9 @@ STATIC_BASE="/var/www/shixing-wanli-releases"
 STATIC_LINK="/var/www/shixing-wanli"
 PERSISTENT_SOURCE="/opt/shixing-wanli-source/诗行万里"
 PERSISTENT_KNOWLEDGE="$PERSISTENT_SOURCE/output/assets/knowledge"
+KNOWLEDGE_CANDIDATE_BASE="/opt/shixing-knowledge-candidates"
+KNOWLEDGE_CANDIDATE="$KNOWLEDGE_CANDIDATE_BASE/$VERSION"
+RELEASE_KNOWLEDGE="$PERSISTENT_KNOWLEDGE"
 API_DROPIN_DIR="/etc/systemd/system/shixing-agent-api.service.d"
 API_DROPIN="$API_DROPIN_DIR/release.conf"
 WEB_DROPIN_DIR="/etc/systemd/system/shixing-agent-web.service.d"
@@ -40,7 +43,11 @@ flock -n 9 || { echo "another deployment is running" >&2; exit 1; }
 for file in "$WEB_ARCHIVE" "$API_ARCHIVE" "$STATIC_ARCHIVE" "$CHECKSUMS"; do
   test -s "$file" || { echo "missing release file: $file" >&2; exit 1; }
 done
-test -d "$PERSISTENT_KNOWLEDGE"
+if [ -d "$KNOWLEDGE_CANDIDATE" ]; then
+  RELEASE_KNOWLEDGE="$KNOWLEDGE_CANDIDATE"
+fi
+test -s "$RELEASE_KNOWLEDGE/poetry_knowledge.sqlite3"
+test -s "$RELEASE_KNOWLEDGE/poetry_knowledge.manifest.json"
 test -x /usr/bin/python3
 /usr/bin/python3 - <<'PY'
 import sys
@@ -85,14 +92,15 @@ cmp -s "$NEW_STATIC/index.html" "$NEW_STATIC/29_参赛导航.html"
 
 chmod 755 "$NEW_API/poetry-agent.pex"
 mkdir -p "$NEW_API/output/assets" "$NEW_API/apps/agent-ui"
-ln -sfn "$PERSISTENT_KNOWLEDGE" "$NEW_API/output/assets/knowledge"
+ln -sfn "$RELEASE_KNOWLEDGE" "$NEW_API/output/assets/knowledge"
 ln -sfn "$API_BASE/cache" "$NEW_API/apps/agent-ui/.cache"
 
 check_json() {
   local url="$1"
   local kind="$2"
+  local max_time="${3:-30}"
   local payload="$INCOMING_DIR/check-$kind.json"
-  curl -fsS --max-time 30 "$url" -o "$payload" || return 1
+  curl -fsS --max-time "$max_time" "$url" -o "$payload" || return 1
   /usr/bin/python3 - "$kind" "$payload" <<'PY'
 import json
 import sys
@@ -122,6 +130,17 @@ raise SystemExit(0 if good else 1)
 PY
 }
 
+wait_for_api() {
+  local url="$1"
+  local attempts="${2:-30}"
+  local attempt
+  for attempt in $(seq 1 "$attempts"); do
+    curl -fsS --max-time 5 "$url" >/dev/null && return 0
+    sleep 4
+  done
+  return 1
+}
+
 cleanup_preflight() {
   if [ -n "$PRE_PID" ]; then
     kill "$PRE_PID" 2>/dev/null || true
@@ -144,19 +163,14 @@ fi
     /usr/bin/python3 "$NEW_API/poetry-agent.pex"
 ) >"$INCOMING_DIR/api-preflight.log" 2>&1 &
 PRE_PID=$!
-for attempt in $(seq 1 8); do
-  if check_json http://127.0.0.1:18123/health health \
-    && check_json http://127.0.0.1:18123/catalog/poets catalog \
-    && check_json http://127.0.0.1:18123/knowledge/status knowledge; then
-    break
-  fi
-  if [ "$attempt" -eq 8 ]; then
-    cat "$INCOMING_DIR/api-preflight.log" >&2
-    cleanup_preflight
-    exit 1
-  fi
-  sleep 4
-done
+if ! wait_for_api http://127.0.0.1:18123/openapi.json \
+  || ! check_json http://127.0.0.1:18123/health health 120 \
+  || ! check_json http://127.0.0.1:18123/catalog/poets catalog \
+  || ! check_json http://127.0.0.1:18123/knowledge/status knowledge 120; then
+  cat "$INCOMING_DIR/api-preflight.log" >&2
+  cleanup_preflight
+  exit 1
+fi
 cleanup_preflight
 
 mkdir -p "$API_DROPIN_DIR" "$WEB_DROPIN_DIR"
@@ -266,10 +280,11 @@ systemctl daemon-reload
 systemctl restart "$API_SERVICE"
 systemctl restart "$WEB_SERVICE"
 
+wait_for_api http://127.0.0.1:8123/openapi.json
 for attempt in $(seq 1 8); do
-  if check_json http://127.0.0.1:8123/health health \
+  if check_json http://127.0.0.1:8123/health health 120 \
     && check_json http://127.0.0.1:8123/catalog/poets catalog \
-    && check_json http://127.0.0.1:8123/knowledge/status knowledge \
+    && check_json http://127.0.0.1:8123/knowledge/status knowledge 120 \
     && curl -fsS --max-time 15 http://127.0.0.1:3000/ >/dev/null \
     && curl -fsS --max-time 15 http://127.0.0.1:3000/api/backend/catalog >/dev/null \
     && curl -fsS --max-time 15 http://127.0.0.1:3000/api/backend/knowledge/status >/dev/null \
