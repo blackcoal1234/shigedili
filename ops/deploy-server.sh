@@ -163,10 +163,11 @@ fi
     /usr/bin/python3 "$NEW_API/poetry-agent.pex"
 ) >"$INCOMING_DIR/api-preflight.log" 2>&1 &
 PRE_PID=$!
+# Health already verifies the source set and knowledge availability. Defer the
+# catalog/detail probes until after the live API switch so this small host does
+# not warm the same large knowledge database in two API processes at once.
 if ! wait_for_api http://127.0.0.1:18123/openapi.json \
-  || ! check_json http://127.0.0.1:18123/health health 120 \
-  || ! check_json http://127.0.0.1:18123/catalog/poets catalog \
-  || ! check_json http://127.0.0.1:18123/knowledge/status knowledge 120; then
+  || ! check_json http://127.0.0.1:18123/health health 120; then
   cat "$INCOMING_DIR/api-preflight.log" >&2
   cleanup_preflight
   exit 1
