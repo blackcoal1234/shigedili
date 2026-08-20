@@ -92,6 +92,29 @@ jobs:
             | tar --null -T - -cf - \
             | tar -C release/api -xf -
           mv release/poetry-agent.pex release/api/poetry-agent.pex
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path("release/api")
+          paths = (
+              "data/poems.json",
+              "data/spirit_image_dict.py",
+              "data/image_dict.py",
+              "data/classical_emotion_model.py",
+              "data/classical_emotion_lexicon.py",
+              "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
+          )
+          hashes = {}
+          for relative in paths:
+              content = (root / relative).read_bytes().replace(b"\r\n", b"\n")
+              hashes[relative] = hashlib.sha256(content).hexdigest()
+          (root / "knowledge-source-hashes.json").write_text(
+              json.dumps({"sourceHashes": hashes}, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
           tar -C release/api -czf release/api-release.tar.gz .
 
           mkdir -p release/static

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,7 +8,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from poetry_agent.config import Settings, discover_project_root
-from poetry_agent.main import create_app
+from poetry_agent.main import _expected_knowledge_sources, create_app
 
 
 class FastApiToolEndpointTests(unittest.TestCase):
@@ -86,6 +87,18 @@ class FastApiToolEndpointTests(unittest.TestCase):
         self.assertIn(
             "apps/agent-ui/agent/poetry_agent/knowledge_builder.py", expected
         )
+
+    def test_source_hash_manifest_avoids_runtime_rescan(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = root / "knowledge-source-hashes.json"
+            manifest.write_text(
+                json.dumps({"sourceHashes": {"data/poems.json": "cached"}}),
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                {"data/poems.json": "cached"}, _expected_knowledge_sources(root)
+            )
 
 
 if __name__ == "__main__":

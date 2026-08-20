@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+import json
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +47,35 @@ from .service import PoetryDataService
 from .tools import build_copilot_actions, build_langchain_tools
 
 
+KNOWLEDGE_SOURCE_PATHS = (
+    "data/poems.json",
+    "data/spirit_image_dict.py",
+    "data/image_dict.py",
+    "data/classical_emotion_model.py",
+    "data/classical_emotion_lexicon.py",
+    "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
+)
+
+
+def _expected_knowledge_sources(project_root: Path) -> dict[str, str]:
+    manifest_path = project_root / "knowledge-source-hashes.json"
+    try:
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        hashes = payload.get("sourceHashes")
+        if isinstance(hashes, dict) and all(
+            isinstance(key, str) and isinstance(value, str)
+            for key, value in hashes.items()
+        ):
+            return {key: value for key, value in hashes.items()}
+    except (OSError, UnicodeError, json.JSONDecodeError, AttributeError):
+        pass
+    return {
+        relative: sha256_source_file(project_root / relative)
+        for relative in KNOWLEDGE_SOURCE_PATHS
+        if (project_root / relative).is_file()
+    }
+
+
 def create_app(
     settings: Settings | None = None,
     *,
@@ -55,21 +85,7 @@ def create_app(
 ) -> FastAPI:
     settings = settings or Settings.from_env()
     repository = SnapshotRepository(settings.project_root, settings.cache_dir)
-    knowledge_source_paths = (
-        "data/poems.json",
-        "data/spirit_image_dict.py",
-        "data/image_dict.py",
-        "data/classical_emotion_model.py",
-        "data/classical_emotion_lexicon.py",
-        # The repository implementation reads an already-built snapshot. Its
-        # runtime-only changes must not invalidate the snapshot contents.
-        "apps/agent-ui/agent/poetry_agent/knowledge_builder.py",
-    )
-    expected_knowledge_sources = {
-        relative: sha256_source_file(settings.project_root / relative)
-        for relative in knowledge_source_paths
-        if (settings.project_root / relative).is_file()
-    }
+    expected_knowledge_sources = _expected_knowledge_sources(settings.project_root)
     knowledge_repository = PoetryKnowledgeRepository(
         settings.resolved_knowledge_base_path,
         expected_sources=expected_knowledge_sources,
