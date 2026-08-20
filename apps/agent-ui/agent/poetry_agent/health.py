@@ -93,7 +93,7 @@ def health_payload(
         }
     else:
         try:
-            vector_status = embedding_repository.status()
+            vector_status = embedding_repository.quick_status()
             vector_status["configured"] = settings.embedding_configured
             vector_status["ready"] = bool(
                 settings.embedding_configured and vector_status.get("available")

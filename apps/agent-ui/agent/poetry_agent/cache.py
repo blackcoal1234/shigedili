@@ -536,6 +536,26 @@ class SnapshotRepository:
             hashes[spec.generated_json] = cached_hash
             return DatasetSnapshot(data, hashes, data_path, True)
 
+    def load_generated_dataset(self, spec: DatasetSpec) -> DatasetSnapshot:
+        """Read a packaged snapshot without re-hashing its large dependencies."""
+
+        source = self._authoritative_path(spec)
+        content, data = self._read_authoritative(spec, source)
+        embedded: Any = data
+        for key in spec.embedded_hash_path:
+            if not isinstance(embedded, dict):
+                raise self._offline_generator_error(spec, "生成快照内置源哈希路径无效")
+            embedded = embedded.get(key)
+        if not isinstance(embedded, dict):
+            raise self._offline_generator_error(spec, "生成快照内置源哈希不是对象")
+        hashes = {
+            relative: embedded_value
+            for relative, embedded_key in spec.dependency_hash_keys
+            if isinstance((embedded_value := embedded.get(embedded_key)), str)
+        }
+        hashes[spec.generated_json] = hashlib.sha256(content).hexdigest()
+        return DatasetSnapshot(data, hashes, source, False)
+
     def load_poems(self) -> tuple[list[dict[str, Any]], dict[str, str]]:
         source = self.project_root / "data" / "poems.json"
         if not source.is_file():

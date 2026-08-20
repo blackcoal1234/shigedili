@@ -633,6 +633,43 @@ class PoetryEmbeddingRepository:
             "queryConfigured": self.client is not None,
         }
 
+    def quick_status(self) -> dict[str, Any]:
+        """Read pointer and manifest metadata without activating or hashing files."""
+
+        pointer = _read_json(self.pointer_path)
+        if pointer.get("schemaVersion") != POINTER_SCHEMA_VERSION:
+            raise EmbeddingUnavailableError("向量 current.json schemaVersion 无效")
+        relative = pointer.get("artifact")
+        if not isinstance(relative, str) or not relative.strip():
+            raise EmbeddingUnavailableError("向量 current.json 缺少 artifact")
+        artifact = (self.root / relative).resolve()
+        if not _inside(artifact, self.root) or not artifact.is_dir():
+            raise EmbeddingUnavailableError("向量 artifact 路径越界或不存在")
+        manifest = _read_json(artifact / "manifest.json")
+        if manifest.get("schemaVersion") != EMBEDDING_SCHEMA_VERSION:
+            raise EmbeddingUnavailableError("向量 manifest schemaVersion 无效")
+        if manifest.get("status", "ready") != "ready":
+            raise EmbeddingUnavailableError("向量索引不是完整 ready 状态")
+        return {
+            "available": True,
+            "stale": False,
+            "root": str(self.root),
+            "artifact": str(artifact),
+            "schemaVersion": manifest["schemaVersion"],
+            "provider": manifest.get("provider"),
+            "model": manifest.get("model"),
+            "dimension": manifest.get("dimension"),
+            "dtype": manifest.get("dtype"),
+            "metric": manifest.get("metric"),
+            "normalized": manifest.get("normalized"),
+            "textVersion": manifest.get("textVersion"),
+            "counts": manifest.get("counts", {}),
+            "knowledge": manifest.get("knowledge", {}),
+            "buildId": manifest.get("buildId"),
+            "generatedAt": manifest.get("generatedAt"),
+            "queryConfigured": self.client is not None,
+        }
+
     def _query_vector(self, query: str, model: str) -> list[float]:
         key = (model, text_hash(query))
         with self._cache_lock:

@@ -212,7 +212,10 @@ class PoetryDataService:
     def catalog_poets(self) -> dict[str, Any]:
         try:
             rows, poem_hashes = self._catalog_rows()
-            year_snapshot = self.repository.ensure_dataset(YEAR_SPEC)
+            if isinstance(self.repository, SnapshotRepository):
+                year_snapshot = self.repository.load_generated_dataset(YEAR_SPEC)
+            else:
+                year_snapshot = self.repository.ensure_dataset(YEAR_SPEC)
             stories = {
                 story["poet"]: story
                 for story in year_snapshot.data["stories"]
@@ -342,7 +345,7 @@ class PoetryDataService:
                 "queryConfigured": False,
             }
         try:
-            status = self.embedding_repository.status()
+            status = self.embedding_repository.quick_status()
             counts = status.get("counts", {})
             available = bool(status.get("available"))
             return {
