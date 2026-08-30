@@ -225,7 +225,7 @@ jobs:
         run: |
           curl --retry 10 --retry-delay 3 --retry-connrefused --max-time 30 -fsS \
             "http://$DEPLOY_HOST/" \
-            | grep -F '参赛导航' >/dev/null
+            | grep -F '作品目录' >/dev/null
           curl --retry 10 --retry-delay 3 --retry-connrefused --max-time 30 -fsS \
             "http://$DEPLOY_HOST:3000/" >/dev/null
           curl --retry 10 --retry-delay 3 --retry-connrefused --max-time 30 -fsS \
