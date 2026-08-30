@@ -91,6 +91,38 @@ prepare_release() {
 prepare_release "$WEB_ARCHIVE" "$NEW_WEB" "server.js"
 prepare_release "$API_ARCHIVE" "$NEW_API" "poetry-agent.pex"
 test -s "$NEW_API/knowledge-source-hashes.json"
+
+# Static-only releases do not need a duplicate 1+ GiB knowledge candidate.
+# Reuse the currently deployed, versioned database only when every source hash
+# required by the new API release matches its manifest. An exact-version
+# candidate still takes precedence when one has been staged explicitly.
+if [ "$RELEASE_KNOWLEDGE" = "$PERSISTENT_KNOWLEDGE" ] && [ -n "$OLD_API" ]; then
+  CURRENT_KNOWLEDGE="$(readlink -f "$OLD_API/output/assets/knowledge" 2>/dev/null || true)"
+  if [ -n "$CURRENT_KNOWLEDGE" ] \
+    && [ -s "$CURRENT_KNOWLEDGE/poetry_knowledge.sqlite3" ] \
+    && [ -s "$CURRENT_KNOWLEDGE/poetry_knowledge.manifest.json" ] \
+    && /usr/bin/python3 - \
+      "$NEW_API/knowledge-source-hashes.json" \
+      "$CURRENT_KNOWLEDGE/poetry_knowledge.manifest.json" <<'PY'
+import json
+import sys
+
+release_path, manifest_path = sys.argv[1:]
+with open(release_path, encoding="utf-8") as handle:
+    required = (json.load(handle).get("sourceHashes") or {})
+with open(manifest_path, encoding="utf-8") as handle:
+    available = (json.load(handle).get("sourceHashes") or {})
+
+good = bool(required) and all(available.get(path) == digest for path, digest in required.items())
+raise SystemExit(0 if good else 1)
+PY
+  then
+    RELEASE_KNOWLEDGE="$CURRENT_KNOWLEDGE"
+    echo "reusing validated knowledge candidate: $RELEASE_KNOWLEDGE"
+  fi
+fi
+test -s "$RELEASE_KNOWLEDGE/poetry_knowledge.sqlite3"
+test -s "$RELEASE_KNOWLEDGE/poetry_knowledge.manifest.json"
 prepare_release "$STATIC_ARCHIVE" "$NEW_STATIC" "29_参赛导航.html"
 cmp -s "$NEW_STATIC/index.html" "$NEW_STATIC/29_参赛导航.html"
 
