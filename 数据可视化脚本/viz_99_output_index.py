@@ -15,6 +15,7 @@ POEMS_JSON = ROOT / "data" / "poems.json"
 JOURNEYS_JSON = ROOT / "data" / "reviewed" / "poet_journeys.json"
 CONTEXTS_CSV = ROOT / "data" / "reviewed" / "verified_poem_contexts.csv"
 POEM_PAGE_DATA_ASSET = "assets/poem_page/poem_page_data.js"
+TEXT_OUTPUT_SUFFIXES = {".css", ".csv", ".html", ".js", ".json", ".svg", ".txt"}
 
 
 @dataclass(frozen=True)
@@ -234,12 +235,15 @@ MANIFEST_ASSETS = (
 )
 
 
+def release_bytes(path: Path) -> bytes:
+    payload = path.read_bytes()
+    if path.suffix.lower() in TEXT_OUTPUT_SUFFIXES:
+        return payload.replace(b"\r\n", b"\n")
+    return payload
+
+
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(release_bytes(path)).hexdigest()
 
 
 def human_size(size: int) -> str:
@@ -320,7 +324,7 @@ def write_manifest() -> None:
         row.update(
             {
                 "exists": path.exists(),
-                "bytes": path.stat().st_size if path.exists() else 0,
+                "bytes": len(release_bytes(path)) if path.exists() else 0,
                 "sha256": sha256(path) if path.exists() else "",
                 "modified_at": (
                     datetime.fromtimestamp(path.stat().st_mtime)

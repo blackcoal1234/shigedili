@@ -1,7 +1,7 @@
 {
   "project": "诗行万里·唐宋诗词时空与意象情感",
   "version": "theme-v1",
-  "generated_at": "2026-08-30T15:29:21+08:00",
+  "generated_at": "2026-08-30T16:12:59+08:00",
   "outputs": [
     {
       "title": "诗人行旅与生命情感",
@@ -11,8 +11,8 @@
       "note": "六位诗人的到访节点、生平处境与诗词文本情感分层呈现。",
       "source_script": "数据可视化脚本/viz_15_journey_emotion.py",
       "exists": true,
-      "bytes": 838694,
-      "sha256": "91ca0930e5de484a9d1593433c00634088d9c17e2cc867cf6d400dbdb194418f",
+      "bytes": 834249,
+      "sha256": "bc739d691a9282f2a451403c739746b6dea56b0007fbe981a0ad77ee4d10b3de",
       "modified_at": "2026-08-30T15:27:15+08:00"
     },
     {
@@ -23,8 +23,8 @@
       "note": "只使用审核后的创作地点，展示当前精细样本中的创作活动分布。",
       "source_script": "数据可视化脚本/viz_16_literary_centers.py",
       "exists": true,
-      "bytes": 207323,
-      "sha256": "2cd7614d43e7d1bdfdbb0407bc50d5f05e366557a45168b2591762faab591ea6",
+      "bytes": 203265,
+      "sha256": "84f7a8671744e8985a60f545442010e6d4aac46b8d45bc1cc922e6fac5c3f364",
       "modified_at": "2026-08-30T15:27:16+08:00"
     },
     {
@@ -35,8 +35,8 @@
       "note": "比较月、酒、舟、雁、雨在六位诗人作品中的语境情感与提升度。",
       "source_script": "数据可视化脚本/viz_17_imagery_emotion_compare.py",
       "exists": true,
-      "bytes": 872976,
-      "sha256": "1949fed41795e5c13672b990b77a4501cc85d564cb112919a47964ec12b960df",
+      "bytes": 870459,
+      "sha256": "a75e1cf1bc80a7e6faee003a83c47f32f1c40f8110e888b6cf9a5cd2556b6f95",
       "modified_at": "2026-08-30T15:27:22+08:00"
     },
     {
@@ -47,8 +47,8 @@
       "note": "李白编年诗的意象情感值与空间尺度五分期漂移；候选编年 B 级实证与 C 级推定分样式展示。",
       "source_script": "数据可视化脚本/viz_20_spirit_terrain.py",
       "exists": true,
-      "bytes": 155119,
-      "sha256": "b73f209631362d6caa418813dad12c664d614e5039fc8abf74e114abc9d64018",
+      "bytes": 154694,
+      "sha256": "8cc2bbd429ecb88224c76fad2097077782f7e852556586b56e72e5cd0277a265",
       "modified_at": "2026-08-30T15:27:23+08:00"
     },
     {
@@ -73,7 +73,7 @@
       "exists": true,
       "bytes": 388678,
       "sha256": "5049df391fc7789136a6859c109375c8feab6dce6fad117d2165aae8af5f9608",
-      "modified_at": "2026-08-30T15:27:24+08:00"
+      "modified_at": "2026-08-30T15:31:30+08:00"
     },
     {
       "title": "凝望罗盘",
@@ -83,8 +83,8 @@
       "note": "扫描方位凝望并按方向、句级情感和原句证据展开。",
       "source_script": "数据可视化脚本/viz_31_gaze_compass.py",
       "exists": true,
-      "bytes": 562047,
-      "sha256": "ef5837efd48c3dae233b53a9e39354eb18adedf7abbe2fcbdd2982c198a23dc3",
+      "bytes": 561548,
+      "sha256": "27ffd5c3942c049b95d6bc45165c2ba9db7219c35d8bb7642f58006288585f1f",
       "modified_at": "2026-08-30T15:27:26+08:00"
     },
     {
@@ -95,8 +95,8 @@
       "note": "联动对照审核行旅节点与诗中遥想地名。",
       "source_script": "数据可视化脚本/viz_32_dual_map.py",
       "exists": true,
-      "bytes": 1978441,
-      "sha256": "14de1615d185d663f8c412d862e23462e0e951913434e50c1417ea60872ae701",
+      "bytes": 1977966,
+      "sha256": "4ff454e9d348521f5d60497aba800628180c1047c66345fff46296f78126ca1a",
       "modified_at": "2026-08-30T15:27:29+08:00"
     },
     {
@@ -119,8 +119,8 @@
       "note": "以字符级统计签名呈现六位诗人的区别性用字。",
       "source_script": "数据可视化脚本/viz_34_char_fingerprint.py",
       "exists": true,
-      "bytes": 356109,
-      "sha256": "d4c05e0c1d7eb6e6eea26122294852e2caa3d6d36c0dd7c3efa2c787aa0f9697",
+      "bytes": 355805,
+      "sha256": "b4832d04199c9ed186028c92af22d74dda4b919cd9a5921ae71b12bef5fb1f75",
       "modified_at": "2026-08-30T15:27:36+08:00"
     },
     {
@@ -131,8 +131,8 @@
       "note": "比较孤独语境光谱与数字夸张的诗人签名。",
       "source_script": "数据可视化脚本/viz_35_solitude_hyperbole.py",
       "exists": true,
-      "bytes": 469211,
-      "sha256": "356298e8cc9c5f73c0b154c490fb75d02735a9dab6b41567b5b5ffab8009db27",
+      "bytes": 468275,
+      "sha256": "2adbbfa4f75655c075a0b342b5f5b856ff2ce485af997613bdb15eea820be4da",
       "modified_at": "2026-08-30T15:27:39+08:00"
     },
     {
@@ -167,8 +167,8 @@
       "note": "以每万正文汉字率比较唐宋客观意象，并按审核节点五章显影。",
       "source_script": "数据可视化脚本/viz_38_imagery_tide.py",
       "exists": true,
-      "bytes": 942738,
-      "sha256": "b0c0b8ad179c9a900a983235e45041674a90618de3c66ba47e90759d9317d14b",
+      "bytes": 941684,
+      "sha256": "b1e0739b86e5a8a0550cd017e7fc78705084a27542d71dcf74d4a22047f8049d",
       "modified_at": "2026-08-30T15:27:51+08:00"
     },
     {
@@ -179,8 +179,8 @@
       "note": "88 位诗人分四轮推进；首轮 22 位以第一视角重构、诗篇证据与情感曲线展开。",
       "source_script": "数据可视化脚本/viz_39_first_person_lives.py",
       "exists": true,
-      "bytes": 390115,
-      "sha256": "7579e998e63302faaada70547e3adb3e5565fd4cfe1b8606762908ff5583ec4b",
+      "bytes": 390017,
+      "sha256": "a925e83ad338d6fbdc553ac07473261afeb77ebbcd248993b7543837fee39978",
       "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
@@ -191,8 +191,8 @@
       "note": "依据审核作地设计四章地图闯关，并以提示、学习卡与诗印串联考据证据。",
       "source_script": "数据可视化脚本/viz_40_shanhe_quest.py",
       "exists": true,
-      "bytes": 141264,
-      "sha256": "bdd7115f3cd16ef5840927591a7f8b394c7ab933f23b5a7addc10e665dc69862",
+      "bytes": 140526,
+      "sha256": "71f5f1b3113a8dfde62d65e5ae0ddf21f1736da15c3e56066be7b68ba50173c4",
       "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
@@ -203,8 +203,8 @@
       "note": "以文化地理分区和意象提升度矩阵展示地域差异，并下钻到原句证据。",
       "source_script": "数据可视化脚本/viz_41_imagery_geography.py",
       "exists": true,
-      "bytes": 59761,
-      "sha256": "08e18db80d69688674b48bce839ec1c8c46e83485f66c48b14aebb03e63cf21a",
+      "bytes": 59520,
+      "sha256": "375954c21987f0bb3e7773dc416fe7a643e3cd80e86242c61dca8e29d548f08e",
       "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
@@ -215,8 +215,8 @@
       "note": "对照审核作地与正文地名，区分亲历书写和身在别处的想象。",
       "source_script": "数据可视化脚本/viz_42_dreamed_places.py",
       "exists": true,
-      "bytes": 30569,
-      "sha256": "982e96c5b07f91314c0aa3eb63c263ee208af047cdac9ad9164c8618beac6216",
+      "bytes": 30396,
+      "sha256": "14f521e14e531236775679fd0b751c7b1eb29d34e7412411d77c923b3dcaad5a",
       "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
@@ -227,8 +227,8 @@
       "note": "通过地名飞花令、意象归乡与古今地名连线复习项目证据。",
       "source_script": "数据可视化脚本/viz_43_side_quest.py",
       "exists": true,
-      "bytes": 36878,
-      "sha256": "cf5262b0af362944a1ad052c7d688841d8e7931d39bee75a6604bcfc94f584e8",
+      "bytes": 36468,
+      "sha256": "8d85cdca771ddf63640275462d9f07c5491f4a69300a1fb705730a7500ea8027",
       "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
@@ -239,8 +239,8 @@
       "note": "公开基础语料、精细考证、来源等级和缺失数据的覆盖情况。",
       "source_script": "数据可视化脚本/viz_18_data_quality.py",
       "exists": true,
-      "bytes": 47794,
-      "sha256": "5d466e764002ca1fb1ce4699dc0c45d3be63d7b0d0a2f4320d5c8089afe7db37",
+      "bytes": 46347,
+      "sha256": "8d6d508c1f0148b3784216a17c6b191ae1743fea0050e11d1ab862f9fa696610",
       "modified_at": "2026-08-30T15:27:23+08:00"
     },
     {
@@ -251,8 +251,8 @@
       "note": "按作者、朝代和关键词返回原诗，作为图表结论的文本下钻入口。",
       "source_script": "数据可视化脚本/viz_08_poem_browser.py",
       "exists": true,
-      "bytes": 9573092,
-      "sha256": "0bef1f320358b64437768fdbb334b8077b825bff4aea8698fffc0b5fd0d3d9a4",
+      "bytes": 9572206,
+      "sha256": "d8c4348ac640ecec0f22ebc1402208ea3395f2a75adda4f45c4acf28b2706ff0",
       "modified_at": "2026-08-30T15:27:13+08:00"
     },
     {
@@ -275,8 +275,8 @@
       "note": "核对古今地名、意象词和实际命中诗句。",
       "source_script": "数据可视化脚本/viz_09_dictionary_browser.py",
       "exists": true,
-      "bytes": 757656,
-      "sha256": "e3e8672068b54a626d1a29d5d43d6a4f4cd3b36fc5c9de5541d3d37f5cd48f6d",
+      "bytes": 756915,
+      "sha256": "f2e0111094f696fefeb53859d4a8607743bbecc3d56aa0fe5308d1efda008915",
       "modified_at": "2026-08-30T15:27:15+08:00"
     },
     {
@@ -301,7 +301,7 @@
       "exists": true,
       "bytes": 20257139,
       "sha256": "8183aa77aa17b107f9e3f67afcf360b406d83fcc4d90526dcd852d209c168d9b",
-      "modified_at": "2026-08-30T15:25:28+08:00"
+      "modified_at": "2026-08-30T16:02:02+08:00"
     }
   ]
 }

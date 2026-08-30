@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = ROOT / "output"
+TEXT_OUTPUT_SUFFIXES = {".css", ".csv", ".html", ".js", ".json", ".svg", ".txt"}
 
 CORE_OUTPUTS = (
     "00_主题数据库ER图.png",
@@ -75,9 +76,15 @@ def require(condition: bool, message: str) -> None:
         raise AssertionError(message)
 
 
+def release_bytes(path: Path) -> bytes:
+    payload = path.read_bytes()
+    if path.suffix.lower() in TEXT_OUTPUT_SUFFIXES:
+        return payload.replace(b"\r\n", b"\n")
+    return payload
+
+
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256(path.read_bytes())
-    return digest.hexdigest()
+    return hashlib.sha256(release_bytes(path)).hexdigest()
 
 
 def check_files() -> None:
@@ -168,7 +175,7 @@ def check_manifest() -> None:
         path = OUTPUT_DIR / name
         require(rows[name].get("exists") is True, f"manifest 标记未生成：{name}")
         require(
-            rows[name].get("bytes") == path.stat().st_size,
+            rows[name].get("bytes") == len(release_bytes(path)),
             f"manifest 字节数不一致：{name}",
         )
         require(rows[name].get("sha256") == sha256(path), f"manifest 哈希不一致：{name}")

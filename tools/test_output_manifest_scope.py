@@ -48,7 +48,7 @@ def test_manifest_writer_covers_pages_and_poem_page_asset(tmp_path, monkeypatch)
     assert EXPECTED_PAGES <= rows.keys()
     asset_path = tmp_path / POEM_PAGE_ASSET
     assert rows[POEM_PAGE_ASSET]["exists"] is True
-    assert rows[POEM_PAGE_ASSET]["bytes"] == asset_path.stat().st_size
+    assert rows[POEM_PAGE_ASSET]["bytes"] == len(module.release_bytes(asset_path))
     assert rows[POEM_PAGE_ASSET]["sha256"] == hashlib.sha256(
         asset_path.read_bytes()
     ).hexdigest()
@@ -68,7 +68,7 @@ def test_theme_checker_rejects_asset_byte_or_hash_drift(tmp_path, monkeypatch) -
     row = {
         "href": POEM_PAGE_ASSET,
         "exists": True,
-        "bytes": asset_path.stat().st_size,
+        "bytes": len(module.release_bytes(asset_path)),
         "sha256": module.sha256(asset_path),
     }
     (tmp_path / "manifest.json").write_text(
@@ -85,7 +85,7 @@ def test_theme_checker_rejects_asset_byte_or_hash_drift(tmp_path, monkeypatch) -
     with pytest.raises(AssertionError, match="字节数不一致"):
         module.check_manifest()
 
-    row["bytes"] = asset_path.stat().st_size
+    row["bytes"] = len(module.release_bytes(asset_path))
     row["sha256"] = "0" * 64
     (tmp_path / "manifest.json").write_text(
         json.dumps({"outputs": [row]}),
@@ -93,3 +93,21 @@ def test_theme_checker_rejects_asset_byte_or_hash_drift(tmp_path, monkeypatch) -
     )
     with pytest.raises(AssertionError, match="哈希不一致"):
         module.check_manifest()
+
+
+def test_manifest_text_fingerprint_ignores_checkout_line_endings(tmp_path) -> None:
+    generator = load_module(
+        "viz_99_output_index_line_endings_test",
+        ROOT / "数据可视化脚本" / "viz_99_output_index.py",
+    )
+    checker = load_module(
+        "check_theme_outputs_line_endings_test",
+        ROOT / "tools" / "check_theme_outputs.py",
+    )
+    text_path = tmp_path / "page.html"
+    text_path.write_bytes(b"first\r\nsecond\r\n")
+    crlf_size = len(generator.release_bytes(text_path))
+    crlf_hash = generator.sha256(text_path)
+    text_path.write_bytes(b"first\nsecond\n")
+    assert len(checker.release_bytes(text_path)) == crlf_size
+    assert checker.sha256(text_path) == crlf_hash
