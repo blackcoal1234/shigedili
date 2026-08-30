@@ -35,7 +35,9 @@ UPSTREAM_REPO_URL = "https://github.com/chinese-poetry/chinese-poetry"
 UPSTREAM_LICENSE = "MIT"
 
 HASH_DEFINITION = {
-    "canonical_sha256": "SHA-256 of the canonical file bytes",
+    "canonical_sha256": (
+        "SHA-256 of the canonical file bytes after CRLF-to-LF normalization"
+    ),
     "output_sha256": "SHA-256 of the deterministic gzip file bytes",
     "normalized_body_hash": (
         "SHA-256 of normalized canonical display body for canonical-matched records; "
@@ -132,6 +134,12 @@ def normalize_text(value: Any) -> str:
 
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def _canonical_sha256_bytes(value: bytes) -> str:
+    """Hash canonical JSON independently of Git's checkout line endings."""
+
+    return _sha256_bytes(value.replace(b"\r\n", b"\n"))
 
 
 def _sha256_text(value: str) -> str:
@@ -701,7 +709,7 @@ def build_corpus(
             source_url=normalize_text(raw.get("source_url")),
             source_dataset="canonical",
             source_file=_path_label(canonical_path),
-            source_revision=_sha256_bytes(canonical_bytes),
+            source_revision=_canonical_sha256_bytes(canonical_bytes),
             source_work_id=source_work_id,
             canonical_id=canonical_id,
             body_hash_value=raw["body_hash"] if "body_hash" in raw else _sha256_text(body_original),
@@ -802,7 +810,7 @@ def build_corpus(
         },
         "canonical_count": canonical_count,
         "accepted_input_count": accepted_inputs,
-        "canonical_sha256": _sha256_bytes(canonical_bytes),
+        "canonical_sha256": _canonical_sha256_bytes(canonical_bytes),
         "counts": _record_counts(rows),
         "deduplicated_count": accepted_inputs - len(rows),
         "empty_skipped": empty_skipped,
@@ -928,7 +936,7 @@ def check_corpus(
         matched_files = matched_files if isinstance(matched_files, list) and all(isinstance(path, str) for path in matched_files) else []
     if any(not _valid_matched_file(path) for path in matched_files):
         errors.append("manifest matched_files 含非 numeric 数据文件")
-    if manifest.get("canonical_sha256") != _sha256_bytes(canonical_bytes):
+    if manifest.get("canonical_sha256") != _canonical_sha256_bytes(canonical_bytes):
         errors.append("canonical_sha256 不匹配")
     try:
         output_bytes = output_path.read_bytes()
@@ -941,7 +949,7 @@ def check_corpus(
     except (OSError, EOFError, gzip.BadGzipFile, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         return errors + [f"gzip JSONL 无法读取: {exc}"]
 
-    canonical_revision = _sha256_bytes(canonical_bytes)
+    canonical_revision = _canonical_sha256_bytes(canonical_bytes)
     expected_canonical_sources: Counter[tuple[Any, ...]] = Counter()
     expected_canonical_identities: dict[str, dict[str, str]] = {}
     for canonical_index, raw in enumerate(canonical_rows):
@@ -1365,7 +1373,15 @@ def load_analysis_poems(
         canonical_sha256 = manifest.get("canonical_sha256")
         if not isinstance(canonical_sha256, str):
             raise RuntimeError("analysis_full manifest 缺少 canonical_sha256")
-        if file_sha256(canonical_path) != canonical_sha256:
+        try:
+            actual_canonical_sha256 = _canonical_sha256_bytes(
+                canonical_path.read_bytes()
+            )
+        except OSError as exc:
+            raise RuntimeError(
+                f"analysis_full 校验文件无法读取: {canonical_path}: {exc}"
+            ) from exc
+        if actual_canonical_sha256 != canonical_sha256:
             raise RuntimeError(
                 "analysis_full canonical_sha256 不匹配；canonical 已更新，请重建全集"
             )

@@ -70,13 +70,13 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "归",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -157,13 +157,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "龙",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
-     "word": "龙",
-     "sentiment": 0.5,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -220,13 +220,13 @@
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -249,13 +249,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -355,13 +355,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "芦花",
-     "sentiment": -0.1,
+     "word": "白鹭",
+     "sentiment": 0.4,
      "cluster": null
     },
     {
-     "word": "白鹭",
-     "sentiment": 0.4,
+     "word": "芦花",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
@@ -423,14 +423,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "愁",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "愁",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -515,11 +515,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "松",
      "sentiment": 0.5,
      "cluster": "隐逸超脱"
@@ -527,6 +522,11 @@
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -612,14 +612,14 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "寒",
-     "sentiment": -0.5,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "寒",
+     "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -680,8 +680,8 @@
      "cluster": null
     },
     {
-     "word": "琴",
-     "sentiment": 0.2,
+     "word": "松",
+     "sentiment": 0.5,
      "cluster": "隐逸超脱"
     },
     {
@@ -690,8 +690,8 @@
      "cluster": "纵逸狂放"
     },
     {
-     "word": "松",
-     "sentiment": 0.5,
+     "word": "琴",
+     "sentiment": 0.2,
      "cluster": "隐逸超脱"
     }
    ],
@@ -714,23 +714,23 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "金陵",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "长安",
      "sentiment": 0.3,
      "cluster": null
     },
     {
-     "word": "虎",
-     "sentiment": -0.1,
+     "word": "金陵",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "龙",
      "sentiment": 0.5,
+     "cluster": null
+    },
+    {
+     "word": "虎",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -835,11 +835,6 @@
      "cluster": null
     },
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "苦",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
@@ -848,6 +843,11 @@
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_b12f5b4193fd.aspx"
@@ -927,14 +927,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "青天",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "蜀道",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "青天",
+     "sentiment": 0.3,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.1000.json"
@@ -985,14 +985,14 @@
      "cluster": null
     },
     {
-     "word": "悲",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "悲",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -1043,14 +1043,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_f1ad949fed22.aspx"
@@ -1106,16 +1106,6 @@
      "cluster": null
     },
     {
-     "word": "舟",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "忆",
      "sentiment": -0.2,
      "cluster": null
@@ -1124,6 +1114,16 @@
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "舟",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_bec0f7d48ce7.aspx"
@@ -1174,12 +1174,12 @@
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -1237,12 +1237,12 @@
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -1295,13 +1295,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -1411,16 +1411,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "月",
      "sentiment": -0.2,
      "cluster": null
@@ -1428,6 +1418,16 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -1450,14 +1450,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "青天",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "蜀道",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "青天",
+     "sentiment": 0.3,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_d59ec5d6c91c.aspx"
@@ -1536,24 +1536,24 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "高楼",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "金陵",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "高楼",
-     "sentiment": -0.2,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
      "word": "独",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "风",
-     "sentiment": -0.1,
-     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -1782,24 +1782,24 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "高楼",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "金陵",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "高楼",
-     "sentiment": -0.2,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
      "word": "独",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "风",
-     "sentiment": -0.1,
-     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_73ff86a3d623.aspx"
@@ -1884,14 +1884,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.1000.json"
@@ -2000,17 +2000,17 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "亭",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "湖",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -2099,14 +2099,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "青天",
-     "sentiment": 0.3,
-     "cluster": null
-    },
-    {
      "word": "蜀道",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "青天",
+     "sentiment": 0.3,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.7000.json"
@@ -2276,14 +2276,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "烟",
      "sentiment": -0.2,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_1f96fd00af54.aspx"
@@ -2305,13 +2305,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -2358,14 +2358,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "马",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "马",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -2392,12 +2392,12 @@
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "楼",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "楼",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -2563,14 +2563,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "悲",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "悲",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.10000.json"
@@ -2610,24 +2610,24 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "塞",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
-     "cluster": null
+     "word": "塞",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "马",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.10000.json"
@@ -2649,12 +2649,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "病",
+     "word": "老",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "老",
+     "word": "病",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
     }
@@ -2775,12 +2775,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
+     "word": "阁",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "阁",
+     "word": "山",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -2804,14 +2804,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "孤",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "孤",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -2904,13 +2904,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "泪",
-     "sentiment": -0.6,
+     "word": "秋",
+     "sentiment": -0.4,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "秋",
-     "sentiment": -0.4,
+     "word": "泪",
+     "sentiment": -0.6,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -2943,12 +2943,12 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "马",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -3083,14 +3083,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "台",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -3356,13 +3356,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "台",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "台",
-     "sentiment": 0.1,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -3532,14 +3532,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "落日",
-     "sentiment": -0.5,
-     "cluster": null
-    },
-    {
      "word": "孤城",
      "sentiment": -0.7,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "落日",
+     "sentiment": -0.5,
+     "cluster": null
     },
     {
      "word": "斗",
@@ -3584,12 +3584,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "归",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -3618,13 +3618,13 @@
      "cluster": null
     },
     {
-     "word": "马",
-     "sentiment": 0.0,
+     "word": "龙",
+     "sentiment": 0.5,
      "cluster": null
     },
     {
-     "word": "龙",
-     "sentiment": 0.5,
+     "word": "马",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -3647,14 +3647,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "落日",
-     "sentiment": -0.5,
-     "cluster": null
-    },
-    {
      "word": "孤城",
      "sentiment": -0.7,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "落日",
+     "sentiment": -0.5,
+     "cluster": null
     },
     {
      "word": "斗",
@@ -3705,14 +3705,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "悲",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "悲",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -3739,11 +3739,6 @@
      "cluster": null
     },
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "星",
      "sentiment": 0.1,
      "cluster": null
@@ -3762,6 +3757,11 @@
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -3897,14 +3897,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -3950,13 +3950,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -4002,19 +4002,19 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
+    },
+    {
      "word": "月",
      "sentiment": -0.2,
      "cluster": null
-    },
-    {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -4101,11 +4101,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "乌",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
@@ -4113,6 +4108,11 @@
     {
      "word": "月",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -4140,13 +4140,13 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -4193,13 +4193,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鹿",
-     "sentiment": 0.4,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "鹿",
+     "sentiment": 0.4,
      "cluster": null
     }
    ],
@@ -4264,14 +4264,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "醉",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
-    },
-    {
      "word": "欢",
      "sentiment": 0.7,
      "cluster": null
+    },
+    {
+     "word": "醉",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -4293,14 +4293,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -4322,12 +4322,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "马",
+     "word": "归",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "归",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -4398,14 +4398,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "愁",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "愁",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -4723,13 +4723,13 @@
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -4752,11 +4752,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -4764,6 +4759,11 @@
     {
      "word": "海",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -4786,11 +4786,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -4798,6 +4793,11 @@
     {
      "word": "海",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -4825,14 +4825,14 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5060,14 +5060,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "寺",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "龙",
      "sentiment": 0.5,
      "cluster": null
+    },
+    {
+     "word": "寺",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.24000.json"
@@ -5089,11 +5089,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -5102,6 +5097,11 @@
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -5170,6 +5170,11 @@
      "cluster": "隐逸超脱"
     },
     {
+     "word": "云",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "醉",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
@@ -5178,11 +5183,6 @@
      "word": "杯",
      "sentiment": 0.1,
      "cluster": "纵逸狂放"
-    },
-    {
-     "word": "云",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5209,13 +5209,13 @@
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -5238,24 +5238,24 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "松",
+     "sentiment": 0.5,
+     "cluster": "隐逸超脱"
+    },
+    {
      "word": "雪",
      "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
      "word": "溪",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
-    },
-    {
-     "word": "松",
-     "sentiment": 0.5,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "云",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5277,14 +5277,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "别",
-     "sentiment": -0.5,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "悲",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "别",
+     "sentiment": -0.5,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "秋",
@@ -5435,14 +5435,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "溪",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "恨",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "溪",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5464,14 +5464,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "归",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5618,11 +5618,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -5630,6 +5625,11 @@
     {
      "word": "海",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -5652,14 +5652,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "乐",
      "sentiment": 0.8,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.21000.json"
@@ -5705,17 +5705,17 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "云",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "别",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
     },
     {
      "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -5781,13 +5781,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "楼",
-     "sentiment": 0.0,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -5810,8 +5810,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -5820,8 +5820,8 @@
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "湖",
+     "sentiment": 0.1,
      "cluster": null
     }
    ],
@@ -5915,14 +5915,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "寺",
      "sentiment": 0.2,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -5967,14 +5967,14 @@
      "cluster": null
     },
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -6083,14 +6083,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "愁",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_4783e5acc9d6.aspx"
@@ -6112,9 +6112,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
+     "word": "台",
+     "sentiment": 0.1,
+     "cluster": null
     },
     {
      "word": "愁",
@@ -6122,9 +6122,9 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "台",
-     "sentiment": 0.1,
-     "cluster": null
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -6242,12 +6242,12 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "马",
+     "word": "归",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "归",
+     "word": "马",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -6300,14 +6300,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "苦",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "苦",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.24000.json"
@@ -6415,13 +6415,13 @@
      "cluster": null
     },
     {
-     "word": "愁",
-     "sentiment": -0.8,
+     "word": "秋",
+     "sentiment": -0.4,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "秋",
-     "sentiment": -0.4,
+     "word": "愁",
+     "sentiment": -0.8,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -6516,14 +6516,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "琴",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "琴",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
+     "word": "酒",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     },
     {
      "word": "山",
@@ -6531,9 +6526,14 @@
      "cluster": null
     },
     {
-     "word": "酒",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
+     "word": "琴",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
+    },
+    {
+     "word": "琴",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_3b8ac5c7401b.aspx"
@@ -6608,14 +6608,14 @@
      "cluster": "纵逸狂放"
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_59711d84d055.aspx"
@@ -6854,14 +6854,14 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "鹿",
-     "sentiment": 0.4,
-     "cluster": null
-    },
-    {
      "word": "梅",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "鹿",
+     "sentiment": 0.4,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -6941,9 +6941,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "愁",
@@ -6951,9 +6951,9 @@
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -6980,13 +6980,13 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -7014,6 +7014,11 @@
      "cluster": "漂泊羁旅"
     },
     {
+     "word": "云",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "忆",
      "sentiment": -0.2,
      "cluster": null
@@ -7022,11 +7027,6 @@
      "word": "泪",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "云",
-     "sentiment": 0.0,
-     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.44000.json"
@@ -7224,14 +7224,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "清风",
-     "sentiment": 0.3,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "明月",
      "sentiment": -0.1,
      "cluster": null
+    },
+    {
+     "word": "清风",
+     "sentiment": 0.3,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%AE%8B%E8%AF%8D/ci.song.1000.json"
@@ -7287,11 +7287,6 @@
      "cluster": null
     },
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "送",
      "sentiment": -0.3,
      "cluster": null
@@ -7300,6 +7295,11 @@
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -7344,24 +7344,24 @@
      "cluster": null
     },
     {
-     "word": "樽",
-     "sentiment": 0.1,
-     "cluster": "纵逸狂放"
-    },
-    {
      "word": "雪",
      "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "山",
+     "word": "樽",
      "sentiment": 0.1,
-     "cluster": null
+     "cluster": "纵逸狂放"
     },
     {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "山",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -7388,11 +7388,6 @@
      "cluster": null
     },
     {
-     "word": "醉",
-     "sentiment": 0.0,
-     "cluster": "纵逸狂放"
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
@@ -7401,6 +7396,11 @@
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "醉",
+     "sentiment": 0.0,
+     "cluster": "纵逸狂放"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -7422,14 +7422,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "孤",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "孤",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "城",
@@ -7456,11 +7456,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
@@ -7474,6 +7469,11 @@
      "word": "鹤",
      "sentiment": 0.4,
      "cluster": "隐逸超脱"
+    },
+    {
+     "word": "独",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -7661,17 +7661,17 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "湖",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -7695,17 +7695,17 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
      "word": "海",
+     "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "湖",
      "sentiment": 0.1,
      "cluster": null
     }
@@ -7824,14 +7824,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "湖",
-     "sentiment": 0.1,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "湖",
+     "sentiment": 0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -7871,24 +7871,24 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "故园",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "天涯",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
+     "word": "故园",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_94f5f106e888.aspx"
@@ -7933,12 +7933,12 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "归",
+     "word": "云",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
+     "word": "归",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -7980,14 +7980,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "关",
-     "sentiment": -0.3,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "剑",
      "sentiment": 0.3,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "关",
+     "sentiment": -0.3,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -8167,24 +8167,24 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "落日",
-     "sentiment": -0.5,
-     "cluster": null
-    },
-    {
      "word": "孤云",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "归",
-     "sentiment": 0.0,
+     "word": "落日",
+     "sentiment": -0.5,
      "cluster": null
     },
     {
      "word": "鸦",
      "sentiment": -0.5,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -8335,13 +8335,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "狼",
+     "sentiment": -0.4,
      "cluster": null
     },
     {
-     "word": "狼",
-     "sentiment": -0.4,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -8593,18 +8593,13 @@
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "乐",
      "sentiment": 0.8,
+     "cluster": null
+    },
+    {
+     "word": "楼",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
@@ -8613,7 +8608,12 @@
      "cluster": null
     },
     {
-     "word": "楼",
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
+    },
+    {
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -8666,13 +8666,13 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "云",
+     "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "云",
-     "sentiment": 0.0,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -8724,14 +8724,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "孤",
-     "sentiment": -0.7,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "孤",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "城",
@@ -8782,24 +8782,24 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "故园",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "天涯",
      "sentiment": -0.5,
      "cluster": "漂泊羁旅"
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
-     "cluster": null
+     "word": "故园",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     },
     {
      "word": "酒",
      "sentiment": 0.0,
      "cluster": "纵逸狂放"
+    },
+    {
+     "word": "梦",
+     "sentiment": -0.1,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%AE%8B%E8%AF%8D/ci.song.1000.json"
@@ -8879,14 +8879,14 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "鹿",
-     "sentiment": 0.4,
-     "cluster": null
-    },
-    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "鹿",
+     "sentiment": 0.4,
+     "cluster": null
     },
     {
      "word": "城",
@@ -8913,13 +8913,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "狼",
+     "sentiment": -0.4,
      "cluster": null
     },
     {
-     "word": "狼",
-     "sentiment": -0.4,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -9241,6 +9241,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "烟",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
@@ -9248,11 +9253,6 @@
     {
      "word": "归",
      "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "烟",
-     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -9386,14 +9386,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "泪",
-     "sentiment": -0.6,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "城",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "泪",
+     "sentiment": -0.6,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.44000.json"
@@ -9562,12 +9562,12 @@
      "cluster": null
     },
     {
-     "word": "江",
+     "word": "楼",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "楼",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     },
@@ -9696,14 +9696,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鸿",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "鸿",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_f72a2fa7066f.aspx"
@@ -9888,14 +9888,14 @@
      "cluster": null
     },
     {
-     "word": "鹤",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "鹤",
+     "sentiment": 0.4,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_c7cb7428a452.aspx"
@@ -10518,14 +10518,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "斜阳",
-     "sentiment": -0.4,
-     "cluster": null
-    },
-    {
      "word": "落叶",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "斜阳",
+     "sentiment": -0.4,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.134000.json"
@@ -10571,23 +10571,23 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "枯",
-     "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "忧",
      "sentiment": -0.6,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
+     "word": "枯",
+     "sentiment": -0.8,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "云",
      "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -10836,12 +10836,12 @@
      "cluster": "隐逸超脱"
     },
     {
-     "word": "江",
+     "word": "城",
      "sentiment": 0.0,
      "cluster": null
     },
     {
-     "word": "城",
+     "word": "江",
      "sentiment": 0.0,
      "cluster": null
     }
@@ -11041,9 +11041,9 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "老",
-     "sentiment": -0.6,
-     "cluster": "愁苦幽愤"
+     "word": "欢",
+     "sentiment": 0.7,
+     "cluster": null
     },
     {
      "word": "山",
@@ -11051,9 +11051,9 @@
      "cluster": null
     },
     {
-     "word": "欢",
-     "sentiment": 0.7,
-     "cluster": null
+     "word": "老",
+     "sentiment": -0.6,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.133000.json"
@@ -11075,14 +11075,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "鹤",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "海",
      "sentiment": 0.1,
      "cluster": null
+    },
+    {
+     "word": "鹤",
+     "sentiment": 0.4,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.131000.json"
@@ -11122,14 +11122,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "归",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "鸦",
      "sentiment": -0.5,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.127000.json"
@@ -11199,16 +11199,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -11217,6 +11207,16 @@
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.127000.json"
@@ -11311,11 +11311,6 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
@@ -11324,6 +11319,11 @@
      "word": "悲",
      "sentiment": -0.8,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -11393,14 +11393,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.134000.json"
@@ -11480,14 +11480,14 @@
      "cluster": "豪情进取"
     },
     {
-     "word": "寒",
-     "sentiment": -0.5,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "剑",
      "sentiment": 0.3,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "寒",
+     "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -11533,24 +11533,24 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "寒",
-     "sentiment": -0.5,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
+     "word": "寒",
+     "sentiment": -0.5,
+     "cluster": "愁苦幽愤"
     },
     {
      "word": "秋",
      "sentiment": -0.4,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.129000.json"
@@ -11572,6 +11572,11 @@
    "neutral": false,
    "spirit_words": [
     {
+     "word": "归",
+     "sentiment": 0.0,
+     "cluster": null
+    },
+    {
      "word": "湖",
      "sentiment": 0.1,
      "cluster": null
@@ -11579,11 +11584,6 @@
     {
      "word": "雨",
      "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "归",
-     "sentiment": 0.0,
      "cluster": null
     }
    ],
@@ -11835,18 +11835,13 @@
      "cluster": null
     },
     {
+     "word": "烟",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
      "word": "山",
      "sentiment": 0.1,
-     "cluster": null
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
-     "word": "雨",
-     "sentiment": -0.2,
      "cluster": null
     },
     {
@@ -11860,7 +11855,12 @@
      "cluster": null
     },
     {
-     "word": "烟",
+     "word": "雨",
+     "sentiment": -0.2,
+     "cluster": null
+    },
+    {
+     "word": "雨",
      "sentiment": -0.2,
      "cluster": null
     }
@@ -11889,14 +11889,14 @@
      "cluster": null
     },
     {
-     "word": "秋",
-     "sentiment": -0.4,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "秋",
+     "sentiment": -0.4,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.135000.json"
@@ -11923,11 +11923,6 @@
      "cluster": null
     },
     {
-     "word": "寺",
-     "sentiment": 0.2,
-     "cluster": "隐逸超脱"
-    },
-    {
      "word": "送",
      "sentiment": -0.3,
      "cluster": null
@@ -11936,6 +11931,11 @@
      "word": "楼",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "寺",
+     "sentiment": 0.2,
+     "cluster": "隐逸超脱"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.133000.json"
@@ -12116,14 +12116,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "客",
-     "sentiment": -0.4,
-     "cluster": "漂泊羁旅"
-    },
-    {
      "word": "云",
      "sentiment": 0.0,
      "cluster": null
+    },
+    {
+     "word": "客",
+     "sentiment": -0.4,
+     "cluster": "漂泊羁旅"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -12174,13 +12174,13 @@
      "cluster": null
     },
     {
-     "word": "梦",
-     "sentiment": -0.1,
+     "word": "山",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "山",
-     "sentiment": 0.1,
+     "word": "梦",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -12290,6 +12290,11 @@
      "cluster": null
     },
     {
+     "word": "恨",
+     "sentiment": -0.7,
+     "cluster": "愁苦幽愤"
+    },
+    {
      "word": "塞",
      "sentiment": -0.3,
      "cluster": "漂泊羁旅"
@@ -12297,11 +12302,6 @@
     {
      "word": "愁",
      "sentiment": -0.8,
-     "cluster": "愁苦幽愤"
-    },
-    {
-     "word": "恨",
-     "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -12595,14 +12595,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "万里",
-     "sentiment": 0.4,
-     "cluster": "豪情进取"
-    },
-    {
      "word": "长安",
      "sentiment": 0.3,
      "cluster": null
+    },
+    {
+     "word": "万里",
+     "sentiment": 0.4,
+     "cluster": "豪情进取"
     },
     {
      "word": "城",
@@ -12757,23 +12757,23 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "兰",
-     "sentiment": 0.4,
-     "cluster": "隐逸超脱"
-    },
-    {
-     "word": "月",
-     "sentiment": -0.2,
-     "cluster": null
-    },
-    {
      "word": "亭",
      "sentiment": 0.1,
      "cluster": null
     },
     {
+     "word": "兰",
+     "sentiment": 0.4,
+     "cluster": "隐逸超脱"
+    },
+    {
      "word": "风",
      "sentiment": -0.1,
+     "cluster": null
+    },
+    {
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -12843,14 +12843,14 @@
      "cluster": null
     },
     {
-     "word": "病",
-     "sentiment": -0.6,
-     "cluster": "愁苦幽愤"
-    },
-    {
      "word": "剑",
      "sentiment": 0.3,
      "cluster": "豪情进取"
+    },
+    {
+     "word": "病",
+     "sentiment": -0.6,
+     "cluster": "愁苦幽愤"
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.130000.json"
@@ -13206,13 +13206,13 @@
      "cluster": null
     },
     {
-     "word": "月",
-     "sentiment": -0.2,
+     "word": "风",
+     "sentiment": -0.1,
      "cluster": null
     },
     {
-     "word": "风",
-     "sentiment": -0.1,
+     "word": "月",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -13364,13 +13364,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "梦",
-     "sentiment": -0.1,
+     "word": "烟",
+     "sentiment": -0.2,
      "cluster": null
     },
     {
-     "word": "烟",
-     "sentiment": -0.2,
+     "word": "梦",
+     "sentiment": -0.1,
      "cluster": null
     }
    ],
@@ -13441,13 +13441,13 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "忆",
-     "sentiment": -0.2,
+     "word": "亭",
+     "sentiment": 0.1,
      "cluster": null
     },
     {
-     "word": "亭",
-     "sentiment": 0.1,
+     "word": "忆",
+     "sentiment": -0.2,
      "cluster": null
     }
    ],
@@ -13504,14 +13504,14 @@
      "cluster": null
     },
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "孤",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.131000.json"
@@ -13691,12 +13691,12 @@
      "cluster": null
     },
     {
-     "word": "苦",
+     "word": "恨",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     },
     {
-     "word": "恨",
+     "word": "苦",
      "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     }
@@ -13955,11 +13955,6 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "雾",
-     "sentiment": -0.3,
-     "cluster": null
-    },
-    {
      "word": "山",
      "sentiment": 0.1,
      "cluster": null
@@ -13967,6 +13962,11 @@
     {
      "word": "海",
      "sentiment": 0.1,
+     "cluster": null
+    },
+    {
+     "word": "雾",
+     "sentiment": -0.3,
      "cluster": null
     }
    ],
@@ -14085,8 +14085,8 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "独",
-     "sentiment": -0.4,
+     "word": "恨",
+     "sentiment": -0.7,
      "cluster": "愁苦幽愤"
     },
     {
@@ -14095,8 +14095,8 @@
      "cluster": null
     },
     {
-     "word": "恨",
-     "sentiment": -0.7,
+     "word": "独",
+     "sentiment": -0.4,
      "cluster": "愁苦幽愤"
     }
    ],
@@ -14119,14 +14119,14 @@
    "neutral": false,
    "spirit_words": [
     {
-     "word": "江",
-     "sentiment": 0.0,
-     "cluster": null
-    },
-    {
      "word": "柳",
      "sentiment": -0.4,
      "cluster": "漂泊羁旅"
+    },
+    {
+     "word": "江",
+     "sentiment": 0.0,
+     "cluster": null
     }
    ],
    "source_url": "https://www.gushiwen.cn/shiwenv_68dc0e3d5f68.aspx"
@@ -14282,13 +14282,13 @@
        "cluster": null
       },
       {
-       "word": "马",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "马",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -14311,13 +14311,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -14417,13 +14417,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "芦花",
-       "sentiment": -0.1,
+       "word": "白鹭",
+       "sentiment": 0.4,
        "cluster": null
       },
       {
-       "word": "白鹭",
-       "sentiment": 0.4,
+       "word": "芦花",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
@@ -14485,14 +14485,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "愁",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "海",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "愁",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -14577,11 +14577,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "松",
        "sentiment": 0.5,
        "cluster": "隐逸超脱"
@@ -14589,6 +14584,11 @@
       {
        "word": "云",
        "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -14674,14 +14674,14 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "寒",
-       "sentiment": -0.5,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "寒",
+       "sentiment": -0.5,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -14742,8 +14742,8 @@
        "cluster": null
       },
       {
-       "word": "琴",
-       "sentiment": 0.2,
+       "word": "松",
+       "sentiment": 0.5,
        "cluster": "隐逸超脱"
       },
       {
@@ -14752,8 +14752,8 @@
        "cluster": "纵逸狂放"
       },
       {
-       "word": "松",
-       "sentiment": 0.5,
+       "word": "琴",
+       "sentiment": 0.2,
        "cluster": "隐逸超脱"
       }
      ],
@@ -14776,23 +14776,23 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "金陵",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "长安",
        "sentiment": 0.3,
        "cluster": null
       },
       {
-       "word": "虎",
-       "sentiment": -0.1,
+       "word": "金陵",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
        "word": "龙",
        "sentiment": 0.5,
+       "cluster": null
+      },
+      {
+       "word": "虎",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -14897,11 +14897,6 @@
        "cluster": null
       },
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "苦",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
@@ -14910,6 +14905,11 @@
        "word": "归",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_b12f5b4193fd.aspx"
@@ -14989,14 +14989,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "青天",
-       "sentiment": 0.3,
-       "cluster": null
-      },
-      {
        "word": "蜀道",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "青天",
+       "sentiment": 0.3,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.1000.json"
@@ -15047,14 +15047,14 @@
        "cluster": null
       },
       {
-       "word": "悲",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "海",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "悲",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -15105,14 +15105,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_f1ad949fed22.aspx"
@@ -15168,16 +15168,6 @@
        "cluster": null
       },
       {
-       "word": "舟",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "忆",
        "sentiment": -0.2,
        "cluster": null
@@ -15186,6 +15176,16 @@
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "舟",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_bec0f7d48ce7.aspx"
@@ -15236,12 +15236,12 @@
        "cluster": null
       },
       {
-       "word": "江",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -15299,12 +15299,12 @@
        "cluster": null
       },
       {
-       "word": "江",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -15357,13 +15357,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -15473,16 +15473,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "月",
        "sentiment": -0.2,
        "cluster": null
@@ -15490,6 +15480,16 @@
       {
        "word": "月",
        "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -15512,14 +15512,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "青天",
-       "sentiment": 0.3,
-       "cluster": null
-      },
-      {
        "word": "蜀道",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "青天",
+       "sentiment": 0.3,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_d59ec5d6c91c.aspx"
@@ -15598,24 +15598,24 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "高楼",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "金陵",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "高楼",
-       "sentiment": -0.2,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
        "word": "独",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
-      },
-      {
-       "word": "风",
-       "sentiment": -0.1,
-       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.8000.json"
@@ -15844,24 +15844,24 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "高楼",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "金陵",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "高楼",
-       "sentiment": -0.2,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
        "word": "独",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
-      },
-      {
-       "word": "风",
-       "sentiment": -0.1,
-       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_73ff86a3d623.aspx"
@@ -15946,14 +15946,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.1000.json"
@@ -16062,17 +16062,17 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "湖",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
       },
       {
        "word": "亭",
+       "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "湖",
        "sentiment": 0.1,
        "cluster": null
       }
@@ -16161,14 +16161,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "青天",
-       "sentiment": 0.3,
-       "cluster": null
-      },
-      {
        "word": "蜀道",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "青天",
+       "sentiment": 0.3,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.7000.json"
@@ -16390,14 +16390,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "烟",
        "sentiment": -0.2,
        "cluster": null
+      },
+      {
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_1f96fd00af54.aspx"
@@ -16419,13 +16419,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
+       "word": "台",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "台",
-       "sentiment": 0.1,
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -16472,14 +16472,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "马",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "马",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -16506,12 +16506,12 @@
        "cluster": null
       },
       {
-       "word": "江",
+       "word": "楼",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "楼",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -16677,14 +16677,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "悲",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "悲",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.10000.json"
@@ -16724,24 +16724,24 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "塞",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "马",
-       "sentiment": 0.0,
-       "cluster": null
+       "word": "塞",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "马",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.10000.json"
@@ -16763,12 +16763,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "病",
+       "word": "老",
        "sentiment": -0.6,
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "老",
+       "word": "病",
        "sentiment": -0.6,
        "cluster": "愁苦幽愤"
       }
@@ -16889,12 +16889,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
+       "word": "阁",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "阁",
+       "word": "山",
        "sentiment": 0.1,
        "cluster": null
       }
@@ -16918,14 +16918,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "孤",
-       "sentiment": -0.7,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "孤",
+       "sentiment": -0.7,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -17018,13 +17018,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "泪",
-       "sentiment": -0.6,
+       "word": "秋",
+       "sentiment": -0.4,
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "秋",
-       "sentiment": -0.4,
+       "word": "泪",
+       "sentiment": -0.6,
        "cluster": "愁苦幽愤"
       }
      ],
@@ -17057,12 +17057,12 @@
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "马",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "马",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -17197,14 +17197,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "台",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -17470,13 +17470,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
+       "word": "台",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "台",
-       "sentiment": 0.1,
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -17646,14 +17646,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "落日",
-       "sentiment": -0.5,
-       "cluster": null
-      },
-      {
        "word": "孤城",
        "sentiment": -0.7,
        "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "落日",
+       "sentiment": -0.5,
+       "cluster": null
       },
       {
        "word": "斗",
@@ -17698,12 +17698,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "归",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "归",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -17732,13 +17732,13 @@
        "cluster": null
       },
       {
-       "word": "马",
-       "sentiment": 0.0,
+       "word": "龙",
+       "sentiment": 0.5,
        "cluster": null
       },
       {
-       "word": "龙",
-       "sentiment": 0.5,
+       "word": "马",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -17761,14 +17761,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "落日",
-       "sentiment": -0.5,
-       "cluster": null
-      },
-      {
        "word": "孤城",
        "sentiment": -0.7,
        "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "落日",
+       "sentiment": -0.5,
+       "cluster": null
       },
       {
        "word": "斗",
@@ -17819,14 +17819,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "悲",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "悲",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -17853,11 +17853,6 @@
        "cluster": null
       },
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "星",
        "sentiment": 0.1,
        "cluster": null
@@ -17876,6 +17871,11 @@
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.11000.json"
@@ -18106,14 +18106,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -18159,13 +18159,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "楼",
-       "sentiment": 0.0,
+       "word": "烟",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "烟",
-       "sentiment": -0.2,
+       "word": "楼",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
@@ -18211,19 +18211,19 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "关",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "关",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
+      },
+      {
        "word": "月",
        "sentiment": -0.2,
        "cluster": null
-      },
-      {
-       "word": "关",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
-      },
-      {
-       "word": "关",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -18310,11 +18310,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "乌",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
@@ -18322,6 +18317,11 @@
       {
        "word": "月",
        "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -18349,13 +18349,13 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "江",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -18402,13 +18402,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "鹿",
-       "sentiment": 0.4,
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "鹿",
+       "sentiment": 0.4,
        "cluster": null
       }
      ],
@@ -18473,14 +18473,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "醉",
-       "sentiment": 0.0,
-       "cluster": "纵逸狂放"
-      },
-      {
        "word": "欢",
        "sentiment": 0.7,
        "cluster": null
+      },
+      {
+       "word": "醉",
+       "sentiment": 0.0,
+       "cluster": "纵逸狂放"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -18502,14 +18502,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -18531,12 +18531,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "马",
+       "word": "归",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "归",
+       "word": "马",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -18607,14 +18607,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "愁",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "愁",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -18932,13 +18932,13 @@
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -18961,11 +18961,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -18973,6 +18968,11 @@
       {
        "word": "海",
        "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -18995,11 +18995,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -19007,6 +19002,11 @@
       {
        "word": "海",
        "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -19034,14 +19034,14 @@
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -19269,14 +19269,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "寺",
-       "sentiment": 0.2,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "龙",
        "sentiment": 0.5,
        "cluster": null
+      },
+      {
+       "word": "寺",
+       "sentiment": 0.2,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.24000.json"
@@ -19298,11 +19298,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -19311,6 +19306,11 @@
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.23000.json"
@@ -19379,6 +19379,11 @@
        "cluster": "隐逸超脱"
       },
       {
+       "word": "云",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
        "word": "醉",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
@@ -19387,11 +19392,6 @@
        "word": "杯",
        "sentiment": 0.1,
        "cluster": "纵逸狂放"
-      },
-      {
-       "word": "云",
-       "sentiment": 0.0,
-       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -19418,13 +19418,13 @@
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -19447,24 +19447,24 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "松",
+       "sentiment": 0.5,
+       "cluster": "隐逸超脱"
+      },
+      {
        "word": "雪",
        "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
        "word": "溪",
        "sentiment": 0.2,
        "cluster": "隐逸超脱"
-      },
-      {
-       "word": "松",
-       "sentiment": 0.5,
-       "cluster": "隐逸超脱"
-      },
-      {
-       "word": "云",
-       "sentiment": 0.0,
-       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -19486,14 +19486,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "别",
-       "sentiment": -0.5,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "悲",
        "sentiment": -0.8,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "别",
+       "sentiment": -0.5,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "秋",
@@ -19644,14 +19644,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "溪",
-       "sentiment": 0.2,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "恨",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "溪",
+       "sentiment": 0.2,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -19673,14 +19673,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "归",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -19827,11 +19827,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -19839,6 +19834,11 @@
       {
        "word": "海",
        "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -19861,14 +19861,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "乐",
        "sentiment": 0.8,
        "cluster": null
+      },
+      {
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.21000.json"
@@ -19914,17 +19914,17 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "云",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
        "word": "别",
        "sentiment": -0.5,
        "cluster": "漂泊羁旅"
       },
       {
        "word": "归",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
-       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -19990,13 +19990,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "楼",
-       "sentiment": 0.0,
+       "word": "烟",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "烟",
-       "sentiment": -0.2,
+       "word": "楼",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -20019,8 +20019,8 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "湖",
-       "sentiment": 0.1,
+       "word": "烟",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
@@ -20029,8 +20029,8 @@
        "cluster": null
       },
       {
-       "word": "烟",
-       "sentiment": -0.2,
+       "word": "湖",
+       "sentiment": 0.1,
        "cluster": null
       }
      ],
@@ -20124,14 +20124,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "寺",
        "sentiment": 0.2,
        "cluster": "隐逸超脱"
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -20176,14 +20176,14 @@
        "cluster": null
       },
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -20292,14 +20292,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "愁",
        "sentiment": -0.8,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_4783e5acc9d6.aspx"
@@ -20321,9 +20321,9 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
+       "word": "台",
+       "sentiment": 0.1,
+       "cluster": null
       },
       {
        "word": "愁",
@@ -20331,9 +20331,9 @@
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "台",
-       "sentiment": 0.1,
-       "cluster": null
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.22000.json"
@@ -20451,12 +20451,12 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "马",
+       "word": "归",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "归",
+       "word": "马",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -20509,14 +20509,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "苦",
-       "sentiment": -0.7,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "苦",
+       "sentiment": -0.7,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.tang.24000.json"
@@ -20624,13 +20624,13 @@
        "cluster": null
       },
       {
-       "word": "愁",
-       "sentiment": -0.8,
+       "word": "秋",
+       "sentiment": -0.4,
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "秋",
-       "sentiment": -0.4,
+       "word": "愁",
+       "sentiment": -0.8,
        "cluster": "愁苦幽愤"
       }
      ],
@@ -20725,14 +20725,9 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "琴",
-       "sentiment": 0.2,
-       "cluster": "隐逸超脱"
-      },
-      {
-       "word": "琴",
-       "sentiment": 0.2,
-       "cluster": "隐逸超脱"
+       "word": "酒",
+       "sentiment": 0.0,
+       "cluster": "纵逸狂放"
       },
       {
        "word": "山",
@@ -20740,9 +20735,14 @@
        "cluster": null
       },
       {
-       "word": "酒",
-       "sentiment": 0.0,
-       "cluster": "纵逸狂放"
+       "word": "琴",
+       "sentiment": 0.2,
+       "cluster": "隐逸超脱"
+      },
+      {
+       "word": "琴",
+       "sentiment": 0.2,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_3b8ac5c7401b.aspx"
@@ -20817,14 +20817,14 @@
        "cluster": "纵逸狂放"
       },
       {
-       "word": "山",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_59711d84d055.aspx"
@@ -21130,14 +21130,14 @@
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "鹿",
-       "sentiment": 0.4,
-       "cluster": null
-      },
-      {
        "word": "梅",
        "sentiment": 0.4,
        "cluster": "隐逸超脱"
+      },
+      {
+       "word": "鹿",
+       "sentiment": 0.4,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -21217,9 +21217,9 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "梦",
-       "sentiment": -0.1,
-       "cluster": null
+       "word": "关",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "愁",
@@ -21227,9 +21227,9 @@
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "关",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
+       "word": "梦",
+       "sentiment": -0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -21256,13 +21256,13 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -21290,6 +21290,11 @@
        "cluster": "漂泊羁旅"
       },
       {
+       "word": "云",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
        "word": "忆",
        "sentiment": -0.2,
        "cluster": null
@@ -21298,11 +21303,6 @@
        "word": "泪",
        "sentiment": -0.6,
        "cluster": "愁苦幽愤"
-      },
-      {
-       "word": "云",
-       "sentiment": 0.0,
-       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.44000.json"
@@ -21500,14 +21500,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "清风",
-       "sentiment": 0.3,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "明月",
        "sentiment": -0.1,
        "cluster": null
+      },
+      {
+       "word": "清风",
+       "sentiment": 0.3,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%AE%8B%E8%AF%8D/ci.song.1000.json"
@@ -21563,11 +21563,6 @@
        "cluster": null
       },
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "送",
        "sentiment": -0.3,
        "cluster": null
@@ -21576,6 +21571,11 @@
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -21620,24 +21620,24 @@
        "cluster": null
       },
       {
-       "word": "樽",
-       "sentiment": 0.1,
-       "cluster": "纵逸狂放"
-      },
-      {
        "word": "雪",
        "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "山",
+       "word": "樽",
        "sentiment": 0.1,
-       "cluster": null
+       "cluster": "纵逸狂放"
       },
       {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "山",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.45000.json"
@@ -21664,11 +21664,6 @@
        "cluster": null
       },
       {
-       "word": "醉",
-       "sentiment": 0.0,
-       "cluster": "纵逸狂放"
-      },
-      {
        "word": "海",
        "sentiment": 0.1,
        "cluster": null
@@ -21677,6 +21672,11 @@
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "醉",
+       "sentiment": 0.0,
+       "cluster": "纵逸狂放"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -21698,14 +21698,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "孤",
-       "sentiment": -0.7,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "孤",
+       "sentiment": -0.7,
+       "cluster": "愁苦幽愤"
       },
       {
        "word": "城",
@@ -21732,11 +21732,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
@@ -21750,6 +21745,11 @@
        "word": "鹤",
        "sentiment": 0.4,
        "cluster": "隐逸超脱"
+      },
+      {
+       "word": "独",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -21937,17 +21937,17 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "湖",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
       },
       {
        "word": "海",
+       "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "湖",
        "sentiment": 0.1,
        "cluster": null
       }
@@ -21971,17 +21971,17 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "湖",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
       },
       {
        "word": "海",
+       "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "湖",
        "sentiment": 0.1,
        "cluster": null
       }
@@ -22100,14 +22100,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "湖",
-       "sentiment": 0.1,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "湖",
+       "sentiment": 0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -22147,24 +22147,24 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "故园",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "天涯",
        "sentiment": -0.5,
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "梦",
-       "sentiment": -0.1,
-       "cluster": null
+       "word": "故园",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "梦",
+       "sentiment": -0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_94f5f106e888.aspx"
@@ -22209,12 +22209,12 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "归",
+       "word": "云",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
+       "word": "归",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -22256,14 +22256,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "关",
-       "sentiment": -0.3,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "剑",
        "sentiment": 0.3,
        "cluster": "豪情进取"
+      },
+      {
+       "word": "关",
+       "sentiment": -0.3,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -22443,24 +22443,24 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "落日",
-       "sentiment": -0.5,
-       "cluster": null
-      },
-      {
        "word": "孤云",
        "sentiment": -0.5,
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "归",
-       "sentiment": 0.0,
+       "word": "落日",
+       "sentiment": -0.5,
        "cluster": null
       },
       {
        "word": "鸦",
        "sentiment": -0.5,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "归",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.46000.json"
@@ -22611,13 +22611,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "狼",
+       "sentiment": -0.4,
        "cluster": null
       },
       {
-       "word": "狼",
-       "sentiment": -0.4,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -22869,18 +22869,13 @@
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "梦",
-       "sentiment": -0.1,
-       "cluster": null
-      },
-      {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "乐",
        "sentiment": 0.8,
+       "cluster": null
+      },
+      {
+       "word": "楼",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
@@ -22889,7 +22884,12 @@
        "cluster": null
       },
       {
-       "word": "楼",
+       "word": "梦",
+       "sentiment": -0.1,
+       "cluster": null
+      },
+      {
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -22942,13 +22942,13 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "云",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "云",
-       "sentiment": 0.0,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -23000,14 +23000,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "孤",
-       "sentiment": -0.7,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "孤",
+       "sentiment": -0.7,
+       "cluster": "愁苦幽愤"
       },
       {
        "word": "城",
@@ -23058,24 +23058,24 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "故园",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "天涯",
        "sentiment": -0.5,
        "cluster": "漂泊羁旅"
       },
       {
-       "word": "梦",
-       "sentiment": -0.1,
-       "cluster": null
+       "word": "故园",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       },
       {
        "word": "酒",
        "sentiment": 0.0,
        "cluster": "纵逸狂放"
+      },
+      {
+       "word": "梦",
+       "sentiment": -0.1,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%AE%8B%E8%AF%8D/ci.song.1000.json"
@@ -23155,14 +23155,14 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "鹿",
-       "sentiment": 0.4,
-       "cluster": null
-      },
-      {
        "word": "孤",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "鹿",
+       "sentiment": 0.4,
+       "cluster": null
       },
       {
        "word": "城",
@@ -23189,13 +23189,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "狼",
+       "sentiment": -0.4,
        "cluster": null
       },
       {
-       "word": "狼",
-       "sentiment": -0.4,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -23517,6 +23517,11 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "烟",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "孤",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
@@ -23524,11 +23529,6 @@
       {
        "word": "归",
        "sentiment": 0.0,
-       "cluster": null
-      },
-      {
-       "word": "烟",
-       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -23662,14 +23662,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "泪",
-       "sentiment": -0.6,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "城",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "泪",
+       "sentiment": -0.6,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.44000.json"
@@ -23838,12 +23838,12 @@
        "cluster": null
       },
       {
-       "word": "江",
+       "word": "楼",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "楼",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       },
@@ -23972,14 +23972,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "鸿",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "鸿",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_f72a2fa7066f.aspx"
@@ -24164,14 +24164,14 @@
        "cluster": null
       },
       {
-       "word": "鹤",
-       "sentiment": 0.4,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "鹤",
+       "sentiment": 0.4,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_c7cb7428a452.aspx"
@@ -24904,14 +24904,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "斜阳",
-       "sentiment": -0.4,
-       "cluster": null
-      },
-      {
        "word": "落叶",
        "sentiment": -0.6,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "斜阳",
+       "sentiment": -0.4,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.134000.json"
@@ -24957,23 +24957,23 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "枯",
-       "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "忧",
        "sentiment": -0.6,
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
+       "word": "枯",
+       "sentiment": -0.8,
+       "cluster": "愁苦幽愤"
       },
       {
        "word": "云",
        "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "雨",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -25222,12 +25222,12 @@
        "cluster": "隐逸超脱"
       },
       {
-       "word": "江",
+       "word": "城",
        "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "城",
+       "word": "江",
        "sentiment": 0.0,
        "cluster": null
       }
@@ -25427,9 +25427,9 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "老",
-       "sentiment": -0.6,
-       "cluster": "愁苦幽愤"
+       "word": "欢",
+       "sentiment": 0.7,
+       "cluster": null
       },
       {
        "word": "山",
@@ -25437,9 +25437,9 @@
        "cluster": null
       },
       {
-       "word": "欢",
-       "sentiment": 0.7,
-       "cluster": null
+       "word": "老",
+       "sentiment": -0.6,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.133000.json"
@@ -25461,14 +25461,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "鹤",
-       "sentiment": 0.4,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "海",
        "sentiment": 0.1,
        "cluster": null
+      },
+      {
+       "word": "鹤",
+       "sentiment": 0.4,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.131000.json"
@@ -25508,14 +25508,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "归",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "鸦",
        "sentiment": -0.5,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "归",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.127000.json"
@@ -25585,16 +25585,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -25603,6 +25593,16 @@
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.127000.json"
@@ -25697,11 +25697,6 @@
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
@@ -25710,6 +25705,11 @@
        "word": "悲",
        "sentiment": -0.8,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -25779,14 +25779,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "雨",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.134000.json"
@@ -25866,14 +25866,14 @@
        "cluster": "豪情进取"
       },
       {
-       "word": "寒",
-       "sentiment": -0.5,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "剑",
        "sentiment": 0.3,
        "cluster": "豪情进取"
+      },
+      {
+       "word": "寒",
+       "sentiment": -0.5,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -25919,24 +25919,24 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "寒",
-       "sentiment": -0.5,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
+       "word": "寒",
+       "sentiment": -0.5,
+       "cluster": "愁苦幽愤"
       },
       {
        "word": "秋",
        "sentiment": -0.4,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "雨",
+       "sentiment": -0.2,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.129000.json"
@@ -25958,6 +25958,11 @@
      "neutral": false,
      "spirit_words": [
       {
+       "word": "归",
+       "sentiment": 0.0,
+       "cluster": null
+      },
+      {
        "word": "湖",
        "sentiment": 0.1,
        "cluster": null
@@ -25965,11 +25970,6 @@
       {
        "word": "雨",
        "sentiment": -0.2,
-       "cluster": null
-      },
-      {
-       "word": "归",
-       "sentiment": 0.0,
        "cluster": null
       }
      ],
@@ -26221,18 +26221,13 @@
        "cluster": null
       },
       {
+       "word": "烟",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
        "word": "山",
        "sentiment": 0.1,
-       "cluster": null
-      },
-      {
-       "word": "雨",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
-       "word": "雨",
-       "sentiment": -0.2,
        "cluster": null
       },
       {
@@ -26246,7 +26241,12 @@
        "cluster": null
       },
       {
-       "word": "烟",
+       "word": "雨",
+       "sentiment": -0.2,
+       "cluster": null
+      },
+      {
+       "word": "雨",
        "sentiment": -0.2,
        "cluster": null
       }
@@ -26275,14 +26275,14 @@
        "cluster": null
       },
       {
-       "word": "秋",
-       "sentiment": -0.4,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "秋",
+       "sentiment": -0.4,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.135000.json"
@@ -26309,11 +26309,6 @@
        "cluster": null
       },
       {
-       "word": "寺",
-       "sentiment": 0.2,
-       "cluster": "隐逸超脱"
-      },
-      {
        "word": "送",
        "sentiment": -0.3,
        "cluster": null
@@ -26322,6 +26317,11 @@
        "word": "楼",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "寺",
+       "sentiment": 0.2,
+       "cluster": "隐逸超脱"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.133000.json"
@@ -26502,14 +26502,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "客",
-       "sentiment": -0.4,
-       "cluster": "漂泊羁旅"
-      },
-      {
        "word": "云",
        "sentiment": 0.0,
        "cluster": null
+      },
+      {
+       "word": "客",
+       "sentiment": -0.4,
+       "cluster": "漂泊羁旅"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.128000.json"
@@ -26560,13 +26560,13 @@
        "cluster": null
       },
       {
-       "word": "梦",
-       "sentiment": -0.1,
+       "word": "山",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "山",
-       "sentiment": 0.1,
+       "word": "梦",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -26676,6 +26676,11 @@
        "cluster": null
       },
       {
+       "word": "恨",
+       "sentiment": -0.7,
+       "cluster": "愁苦幽愤"
+      },
+      {
        "word": "塞",
        "sentiment": -0.3,
        "cluster": "漂泊羁旅"
@@ -26683,11 +26688,6 @@
       {
        "word": "愁",
        "sentiment": -0.8,
-       "cluster": "愁苦幽愤"
-      },
-      {
-       "word": "恨",
-       "sentiment": -0.7,
        "cluster": "愁苦幽愤"
       }
      ],
@@ -26981,14 +26981,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "万里",
-       "sentiment": 0.4,
-       "cluster": "豪情进取"
-      },
-      {
        "word": "长安",
        "sentiment": 0.3,
        "cluster": null
+      },
+      {
+       "word": "万里",
+       "sentiment": 0.4,
+       "cluster": "豪情进取"
       },
       {
        "word": "城",
@@ -27143,23 +27143,23 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "兰",
-       "sentiment": 0.4,
-       "cluster": "隐逸超脱"
-      },
-      {
-       "word": "月",
-       "sentiment": -0.2,
-       "cluster": null
-      },
-      {
        "word": "亭",
        "sentiment": 0.1,
        "cluster": null
       },
       {
+       "word": "兰",
+       "sentiment": 0.4,
+       "cluster": "隐逸超脱"
+      },
+      {
        "word": "风",
        "sentiment": -0.1,
+       "cluster": null
+      },
+      {
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -27229,14 +27229,14 @@
        "cluster": null
       },
       {
-       "word": "病",
-       "sentiment": -0.6,
-       "cluster": "愁苦幽愤"
-      },
-      {
        "word": "剑",
        "sentiment": 0.3,
        "cluster": "豪情进取"
+      },
+      {
+       "word": "病",
+       "sentiment": -0.6,
+       "cluster": "愁苦幽愤"
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.130000.json"
@@ -27592,13 +27592,13 @@
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "风",
+       "sentiment": -0.1,
        "cluster": null
       },
       {
-       "word": "风",
-       "sentiment": -0.1,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -27750,13 +27750,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "梦",
-       "sentiment": -0.1,
+       "word": "烟",
+       "sentiment": -0.2,
        "cluster": null
       },
       {
-       "word": "烟",
-       "sentiment": -0.2,
+       "word": "梦",
+       "sentiment": -0.1,
        "cluster": null
       }
      ],
@@ -27827,13 +27827,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "忆",
-       "sentiment": -0.2,
+       "word": "亭",
+       "sentiment": 0.1,
        "cluster": null
       },
       {
-       "word": "亭",
-       "sentiment": 0.1,
+       "word": "忆",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -27890,14 +27890,14 @@
        "cluster": null
       },
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "孤",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97/poet.song.131000.json"
@@ -28077,12 +28077,12 @@
        "cluster": null
       },
       {
-       "word": "苦",
+       "word": "恨",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
       },
       {
-       "word": "恨",
+       "word": "苦",
        "sentiment": -0.7,
        "cluster": "愁苦幽愤"
       }
@@ -28341,11 +28341,6 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "雾",
-       "sentiment": -0.3,
-       "cluster": null
-      },
-      {
        "word": "山",
        "sentiment": 0.1,
        "cluster": null
@@ -28353,6 +28348,11 @@
       {
        "word": "海",
        "sentiment": 0.1,
+       "cluster": null
+      },
+      {
+       "word": "雾",
+       "sentiment": -0.3,
        "cluster": null
       }
      ],
@@ -28471,8 +28471,8 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "独",
-       "sentiment": -0.4,
+       "word": "恨",
+       "sentiment": -0.7,
        "cluster": "愁苦幽愤"
       },
       {
@@ -28481,8 +28481,8 @@
        "cluster": null
       },
       {
-       "word": "恨",
-       "sentiment": -0.7,
+       "word": "独",
+       "sentiment": -0.4,
        "cluster": "愁苦幽愤"
       }
      ],
@@ -28505,14 +28505,14 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "江",
-       "sentiment": 0.0,
-       "cluster": null
-      },
-      {
        "word": "柳",
        "sentiment": -0.4,
        "cluster": "漂泊羁旅"
+      },
+      {
+       "word": "江",
+       "sentiment": 0.0,
+       "cluster": null
       }
      ],
      "source_url": "https://www.gushiwen.cn/shiwenv_68dc0e3d5f68.aspx"
@@ -28608,13 +28608,13 @@
        "cluster": null
       },
       {
-       "word": "月",
-       "sentiment": -0.2,
+       "word": "归",
+       "sentiment": 0.0,
        "cluster": null
       },
       {
-       "word": "归",
-       "sentiment": 0.0,
+       "word": "月",
+       "sentiment": -0.2,
        "cluster": null
       }
      ],
@@ -28695,13 +28695,13 @@
      "neutral": false,
      "spirit_words": [
       {
-       "word": "马",
-       "sentiment": 0.0,
+       "word": "龙",
+       "sentiment": 0.5,
        "cluster": null
       },
       {
-       "word": "龙",
-       "sentiment": 0.5,
+       "word": "马",
+       "sentiment": 0.0,
        "cluster": null
       }
      ],

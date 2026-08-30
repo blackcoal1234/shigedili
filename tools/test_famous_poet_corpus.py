@@ -392,6 +392,34 @@ def test_loader_rejects_stale_canonical(tmp_path):
         )
 
 
+def test_loader_accepts_equivalent_canonical_line_endings(tmp_path):
+    canonical, source, output, manifest = _build(tmp_path)
+    canonical_rows = json.loads(canonical.read_text(encoding="utf-8"))
+    canonical.write_text(
+        json.dumps(canonical_rows, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+        newline="\r\n",
+    )
+    corpus.build_corpus(
+        canonical,
+        source,
+        output,
+        manifest,
+        "rev-test",
+        converter=FakeConverter(),
+    )
+
+    canonical.write_bytes(canonical.read_bytes().replace(b"\r\n", b"\n"))
+
+    rows, source_kind = corpus.load_analysis_poems(
+        output,
+        canonical,
+        manifest_path=manifest,
+    )
+    assert source_kind == "analysis_full"
+    assert rows
+
+
 def test_loader_rejects_damaged_full_corpus(tmp_path):
     canonical, source, output, manifest = _build(tmp_path)
     corpus.build_corpus(canonical, source, output, manifest, "rev-test", converter=FakeConverter())

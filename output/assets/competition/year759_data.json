@@ -22,7 +22,7 @@
     "input_sha256": {
       "poems.json": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
       "verified_poem_contexts.csv": "be035c7719d100cb3dd2520a16944f89a4186cd70e3d2a3f19e0c95ab834647d",
-      "emotion_profiles.json": "1532dca30bf8ed55379a39e82afc08f5949b875de88bca54817d11d78fe6bc9a",
+      "emotion_profiles.json": "58ee35199a6ebdb1748ba8a15678c1a0b932cd7683bf9bc0f87e73feecb346a9",
       "libai_spirit_chronology.csv": "2978b1627d3387ef28d11427a09d983821f5cadd921b97256373df1fc3111041",
       "dufu_spirit_chronology.csv": "12f96db8b79da0244bfa5aa06d8ca1bdcb4db0b7a627b3106716947be213c884",
       "baijuyi_spirit_chronology.csv": "30cfb2cb7a6f1a9c563e0275bd8350a7721efb78eb631920e61d646a54a8b8d8",

@@ -1,7 +1,7 @@
 {
   "project": "诗行万里·唐宋诗词时空与意象情感",
   "version": "theme-v1",
-  "generated_at": "2026-08-30T14:47:30+08:00",
+  "generated_at": "2026-08-30T15:29:21+08:00",
   "outputs": [
     {
       "title": "诗人行旅与生命情感",
@@ -13,7 +13,7 @@
       "exists": true,
       "bytes": 838694,
       "sha256": "91ca0930e5de484a9d1593433c00634088d9c17e2cc867cf6d400dbdb194418f",
-      "modified_at": "2026-08-22T21:29:02+08:00"
+      "modified_at": "2026-08-30T15:27:15+08:00"
     },
     {
       "title": "唐宋诗歌创作活动中心迁移",
@@ -24,8 +24,8 @@
       "source_script": "数据可视化脚本/viz_16_literary_centers.py",
       "exists": true,
       "bytes": 207323,
-      "sha256": "2dc547c5174ba1df094f24a18efde225ad558ecdcff5f8d13cae05d26e2a05ba",
-      "modified_at": "2026-08-22T21:29:02+08:00"
+      "sha256": "2cd7614d43e7d1bdfdbb0407bc50d5f05e366557a45168b2591762faab591ea6",
+      "modified_at": "2026-08-30T15:27:16+08:00"
     },
     {
       "title": "同一意象的诗人情感差异",
@@ -36,8 +36,8 @@
       "source_script": "数据可视化脚本/viz_17_imagery_emotion_compare.py",
       "exists": true,
       "bytes": 872976,
-      "sha256": "0d75bce8ea6f4b796d4dd40fbd52e82c33fc92d538ca8405625304e8d118806e",
-      "modified_at": "2026-08-24T02:20:58+08:00"
+      "sha256": "1949fed41795e5c13672b990b77a4501cc85d564cb112919a47964ec12b960df",
+      "modified_at": "2026-08-30T15:27:22+08:00"
     },
     {
       "title": "诗人精神地形图",
@@ -48,8 +48,8 @@
       "source_script": "数据可视化脚本/viz_20_spirit_terrain.py",
       "exists": true,
       "bytes": 155119,
-      "sha256": "4befac54dd4ef8af79eaf115d7dbccdf8ac00c7b544634ff21651a51a73c4bba",
-      "modified_at": "2026-08-22T21:29:03+08:00"
+      "sha256": "b73f209631362d6caa418813dad12c664d614e5039fc8abf74e114abc9d64018",
+      "modified_at": "2026-08-30T15:27:23+08:00"
     },
     {
       "title": "参赛导航",
@@ -61,7 +61,7 @@
       "exists": true,
       "bytes": 34480,
       "sha256": "b1c5a947049db18c02d02412fd125326b34925dea0c38b93c52fa3f7c8074db1",
-      "modified_at": "2026-08-28T18:03:18+08:00"
+      "modified_at": "2026-08-30T15:27:57+08:00"
     },
     {
       "title": "诗行万里 · 参赛版总入口",
@@ -73,7 +73,7 @@
       "exists": true,
       "bytes": 388678,
       "sha256": "5049df391fc7789136a6859c109375c8feab6dce6fad117d2165aae8af5f9608",
-      "modified_at": "2026-08-30T12:14:09+08:00"
+      "modified_at": "2026-08-30T15:27:24+08:00"
     },
     {
       "title": "凝望罗盘",
@@ -83,9 +83,9 @@
       "note": "扫描方位凝望并按方向、句级情感和原句证据展开。",
       "source_script": "数据可视化脚本/viz_31_gaze_compass.py",
       "exists": true,
-      "bytes": 562037,
-      "sha256": "1a52adbad4cbfa41638e4a1d0dfcb0e68cc84ef6530816d06659b64ca20c189c",
-      "modified_at": "2026-08-30T12:14:09+08:00"
+      "bytes": 562047,
+      "sha256": "ef5837efd48c3dae233b53a9e39354eb18adedf7abbe2fcbdd2982c198a23dc3",
+      "modified_at": "2026-08-30T15:27:26+08:00"
     },
     {
       "title": "身与心双层地图",
@@ -95,9 +95,9 @@
       "note": "联动对照审核行旅节点与诗中遥想地名。",
       "source_script": "数据可视化脚本/viz_32_dual_map.py",
       "exists": true,
-      "bytes": 1978423,
-      "sha256": "3455c55ba1846617be7683887642058eb746f46a88496df586b95d76eac997e4",
-      "modified_at": "2026-08-30T12:14:09+08:00"
+      "bytes": 1978441,
+      "sha256": "14de1615d185d663f8c412d862e23462e0e951913434e50c1417ea60872ae701",
+      "modified_at": "2026-08-30T15:27:29+08:00"
     },
     {
       "title": "平行时空 759",
@@ -108,8 +108,8 @@
       "source_script": "数据可视化脚本/viz_33_year759.py",
       "exists": true,
       "bytes": 532193,
-      "sha256": "996464770765eb6f6bec1dbac89ba96fcf4402d476ac84b4820e9604dc02b48f",
-      "modified_at": "2026-08-29T11:29:06+08:00"
+      "sha256": "fb1cae8e0a775c17674bb005e208e57144f7366e73b59701e0ec2ac3cef9166d",
+      "modified_at": "2026-08-30T15:27:31+08:00"
     },
     {
       "title": "一字识诗人",
@@ -119,9 +119,9 @@
       "note": "以字符级统计签名呈现六位诗人的区别性用字。",
       "source_script": "数据可视化脚本/viz_34_char_fingerprint.py",
       "exists": true,
-      "bytes": 356097,
-      "sha256": "c07a3150c0367df71c5d3aaea8f21e21e9bcb15c9bcd9f61d2a386876af04bf1",
-      "modified_at": "2026-08-30T12:14:09+08:00"
+      "bytes": 356109,
+      "sha256": "d4c05e0c1d7eb6e6eea26122294852e2caa3d6d36c0dd7c3efa2c787aa0f9697",
+      "modified_at": "2026-08-30T15:27:36+08:00"
     },
     {
       "title": "两种孤独与夸张签名",
@@ -131,9 +131,9 @@
       "note": "比较孤独语境光谱与数字夸张的诗人签名。",
       "source_script": "数据可视化脚本/viz_35_solitude_hyperbole.py",
       "exists": true,
-      "bytes": 469199,
-      "sha256": "9ddb3d4099eccf039994fba32eac831b766b6ef1dc10417b4fcd5c70c416df01",
-      "modified_at": "2026-08-30T12:14:09+08:00"
+      "bytes": 469211,
+      "sha256": "356298e8cc9c5f73c0b154c490fb75d02735a9dab6b41567b5b5ffab8009db27",
+      "modified_at": "2026-08-30T15:27:39+08:00"
     },
     {
       "title": "同龄对齐",
@@ -145,7 +145,7 @@
       "exists": true,
       "bytes": 191711,
       "sha256": "f5e4569e97bd36b5e95fa09a91ae198950a5140c1f683115f1df6d119710ccc5",
-      "modified_at": "2026-08-30T12:15:15+08:00"
+      "modified_at": "2026-08-30T15:27:41+08:00"
     },
     {
       "title": "可听的诗",
@@ -155,9 +155,9 @@
       "note": "统计诗中明写的声音意象并形成诗人声景。",
       "source_script": "数据可视化脚本/viz_37_soundscape.py",
       "exists": true,
-      "bytes": 1510281,
-      "sha256": "e2f4b3a19df62367e9b4c01f843bcd319c31728c88834fc8b6b53d9dce56f2ac",
-      "modified_at": "2026-08-30T12:15:25+08:00"
+      "bytes": 1510342,
+      "sha256": "36727ce790fc4bd80fa4e2df3889478f7c34fa2e4f576bcbac9043554207fcf0",
+      "modified_at": "2026-08-30T15:27:42+08:00"
     },
     {
       "title": "意象潮汐",
@@ -167,9 +167,9 @@
       "note": "以每万正文汉字率比较唐宋客观意象，并按审核节点五章显影。",
       "source_script": "数据可视化脚本/viz_38_imagery_tide.py",
       "exists": true,
-      "bytes": 942723,
-      "sha256": "3a1fc414bfff48218f890cbeccdc2317b74e2d76b2509f4fa2c8ee95b44aa379",
-      "modified_at": "2026-08-30T12:15:36+08:00"
+      "bytes": 942738,
+      "sha256": "b0c0b8ad179c9a900a983235e45041674a90618de3c66ba47e90759d9317d14b",
+      "modified_at": "2026-08-30T15:27:51+08:00"
     },
     {
       "title": "诗人自述生命卷",
@@ -179,9 +179,9 @@
       "note": "88 位诗人分四轮推进；首轮 22 位以第一视角重构、诗篇证据与情感曲线展开。",
       "source_script": "数据可视化脚本/viz_39_first_person_lives.py",
       "exists": true,
-      "bytes": 390105,
-      "sha256": "5e68b73ba1d9456ed2685bada13a7b2b71b5c2a730eb58fadae7c672bfd94ed1",
-      "modified_at": "2026-08-30T12:16:06+08:00"
+      "bytes": 390115,
+      "sha256": "7579e998e63302faaada70547e3adb3e5565fd4cfe1b8606762908ff5583ec4b",
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "山河证道",
@@ -191,9 +191,9 @@
       "note": "依据审核作地设计四章地图闯关，并以提示、学习卡与诗印串联考据证据。",
       "source_script": "数据可视化脚本/viz_40_shanhe_quest.py",
       "exists": true,
-      "bytes": 141109,
-      "sha256": "a6101d369647fd65f20653af281493c2178bbaad709e5aeb200061d375519e95",
-      "modified_at": "2026-08-30T12:15:20+08:00"
+      "bytes": 141264,
+      "sha256": "bdd7115f3cd16ef5840927591a7f8b394c7ab933f23b5a7addc10e665dc69862",
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "意象地理",
@@ -205,7 +205,7 @@
       "exists": true,
       "bytes": 59761,
       "sha256": "08e18db80d69688674b48bce839ec1c8c46e83485f66c48b14aebb03e63cf21a",
-      "modified_at": "2026-08-30T12:15:20+08:00"
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "被想象的地方",
@@ -215,9 +215,9 @@
       "note": "对照审核作地与正文地名，区分亲历书写和身在别处的想象。",
       "source_script": "数据可视化脚本/viz_42_dreamed_places.py",
       "exists": true,
-      "bytes": 30552,
-      "sha256": "440a8b162098a89f2b7aea659e415b5f97e79ae892885dbae0479aef606fdf65",
-      "modified_at": "2026-08-30T12:15:20+08:00"
+      "bytes": 30569,
+      "sha256": "982e96c5b07f91314c0aa3eb63c263ee208af047cdac9ad9164c8618beac6216",
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "飞花令·加行卷",
@@ -229,7 +229,7 @@
       "exists": true,
       "bytes": 36878,
       "sha256": "cf5262b0af362944a1ad052c7d688841d8e7931d39bee75a6604bcfc94f584e8",
-      "modified_at": "2026-08-30T12:15:20+08:00"
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "数据质量与来源覆盖",
@@ -240,8 +240,8 @@
       "source_script": "数据可视化脚本/viz_18_data_quality.py",
       "exists": true,
       "bytes": 47794,
-      "sha256": "478d7d0ae3f05c762042be8d7ac9fa642220b95f8dbd7c06230e61f56c7337cc",
-      "modified_at": "2026-08-22T21:29:03+08:00"
+      "sha256": "5d466e764002ca1fb1ce4699dc0c45d3be63d7b0d0a2f4320d5c8089afe7db37",
+      "modified_at": "2026-08-30T15:27:23+08:00"
     },
     {
       "title": "诗作检索",
@@ -251,9 +251,9 @@
       "note": "按作者、朝代和关键词返回原诗，作为图表结论的文本下钻入口。",
       "source_script": "数据可视化脚本/viz_08_poem_browser.py",
       "exists": true,
-      "bytes": 9573080,
-      "sha256": "b51a7406d86e4f9bd20571d77e1825673358441ef5942392902f64485808ddf8",
-      "modified_at": "2026-08-22T21:28:59+08:00"
+      "bytes": 9573092,
+      "sha256": "0bef1f320358b64437768fdbb334b8077b825bff4aea8698fffc0b5fd0d3d9a4",
+      "modified_at": "2026-08-30T15:27:13+08:00"
     },
     {
       "title": "赏析诗页",
@@ -265,7 +265,7 @@
       "exists": true,
       "bytes": 33268,
       "sha256": "a34b71a5ce91294b5b4277c1f1d231a0110e46c91f8958f25f1b5287edaf415e",
-      "modified_at": "2026-08-30T12:15:20+08:00"
+      "modified_at": "2026-08-30T15:27:56+08:00"
     },
     {
       "title": "古地名与意象词典",
@@ -275,9 +275,9 @@
       "note": "核对古今地名、意象词和实际命中诗句。",
       "source_script": "数据可视化脚本/viz_09_dictionary_browser.py",
       "exists": true,
-      "bytes": 758055,
-      "sha256": "564dc397bc636fd5df04f9096e3a9f7fbbeaa2dff3c83b982a92622843f3fd7b",
-      "modified_at": "2026-08-22T21:29:01+08:00"
+      "bytes": 757656,
+      "sha256": "e3e8672068b54a626d1a29d5d43d6a4f4cd3b36fc5c9de5541d3d37f5cd48f6d",
+      "modified_at": "2026-08-30T15:27:15+08:00"
     },
     {
       "title": "主题数据库 ER 图",
@@ -289,7 +289,7 @@
       "exists": true,
       "bytes": 247616,
       "sha256": "f9eeb8e83fa44894d1678fa735166019268bcd003bda1f1ab8b27a733fbe8981",
-      "modified_at": "2026-08-22T21:28:57+08:00"
+      "modified_at": "2026-08-30T15:27:10+08:00"
     },
     {
       "title": "诗页数据资产",
@@ -301,7 +301,7 @@
       "exists": true,
       "bytes": 20257139,
       "sha256": "8183aa77aa17b107f9e3f67afcf360b406d83fcc4d90526dcd852d209c168d9b",
-      "modified_at": "2026-08-30T14:41:19+08:00"
+      "modified_at": "2026-08-30T15:25:28+08:00"
     }
   ]
 }

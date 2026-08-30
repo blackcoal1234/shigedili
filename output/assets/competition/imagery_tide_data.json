@@ -19,12 +19,12 @@
     "canonicalIdentityHashFallbacks": 0,
     "analysisByCanonicalIdEntries": 20437,
     "sourceHashes": {
-      "fullCorpusSha256": "c792434f4ef84193dfe0ded7fd248b47844cb8abfcddc8b85a31a2edd9c45053",
+      "fullCorpusSha256": "12632bb6c723f6be9e17f4c1c3a5762a8bb3c30585aa6fc594006ccbc25585ba",
       "poemsJsonSha256": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
       "spiritImageDictSha256": "1880f23412d78dd87d0bd37fc58477a4285561a6dc0f3669da580d78e6a3f763",
       "poetJourneysSha256": "6750fed8c7cbe4f0f314bb78a8d39c4b5e32ef4b86f45048f39859a024ce233b"
     },
-    "corpusSha256": "c792434f4ef84193dfe0ded7fd248b47844cb8abfcddc8b85a31a2edd9c45053",
+    "corpusSha256": "12632bb6c723f6be9e17f4c1c3a5762a8bb3c30585aa6fc594006ccbc25585ba",
     "corpusLatestValidation": "2026-07-29T09:25:09.753001+00:00",
     "journeysUpdatedAt": "2026-07-22",
     "dynastyCounts": {
@@ -43543,7 +43543,7 @@
       }
     ],
     "sourceHashes": {
-      "data/analysis/famous_poets_full.jsonl.gz": "c792434f4ef84193dfe0ded7fd248b47844cb8abfcddc8b85a31a2edd9c45053",
+      "data/analysis/famous_poets_full.jsonl.gz": "12632bb6c723f6be9e17f4c1c3a5762a8bb3c30585aa6fc594006ccbc25585ba",
       "data/poems.json": "d27484a3a98415e1a376fedb8e602fb7c1ff20f3f6eb75d514c3d97f9924e44e",
       "data/imagery_tide_lexicon.py": "1880f23412d78dd87d0bd37fc58477a4285561a6dc0f3669da580d78e6a3f763",
       "data/reviewed/poet_journeys.json": "6750fed8c7cbe4f0f314bb78a8d39c4b5e32ef4b86f45048f39859a024ce233b",

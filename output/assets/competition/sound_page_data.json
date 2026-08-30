@@ -7,7 +7,7 @@
   "dictSize": 88,
   "corpusPoems": 80893,
   "corpusPoets": 88,
-  "corpusHits": 44515,
+  "corpusHits": 44525,
   "excludeCount": 7
  },
  "cats": [
@@ -417,7 +417,7 @@
   ],
   [
    "鼓",
-   2107
+   2117
   ],
   [
    "琴",
@@ -10816,15 +10816,15 @@
    "name": "杜甫",
    "color": "#7a5c3d",
    "poems": 1725,
-   "hits": 1087,
-   "per100": 0.83,
+   "hits": 1089,
+   "per100": 0.831,
    "chars": 131028,
    "quietN": 1059,
    "quietRatio": 0.6139,
    "catCounts": {
     "兽鸣": 36,
     "鸟啼": 211,
-    "器乐": 190,
+    "器乐": 192,
     "钟磬": 36,
     "自然声": 150,
     "人声": 464
@@ -11417,6 +11417,30 @@
      ]
     },
     {
+     "work_id": "fw_1f6742cc4e7198c474f501b3",
+     "canonical_gushiwen_id": "f36d338e1fc5",
+     "body_hash": "68211407156c532485c4b1c880c1f941e56376a9fa60f99098e9fdeef0dc1fe8",
+     "title": "阁夜",
+     "hits": [
+      [
+       "哭",
+       1
+      ],
+      [
+       "歌",
+       1
+      ],
+      [
+       "角声",
+       1
+      ],
+      [
+       "鼓",
+       1
+      ]
+     ]
+    },
+    {
      "work_id": "fw_e504ce5c7e6db01cae01a128",
      "canonical_gushiwen_id": null,
      "body_hash": "701eba2d9dcf040981801331a81f3996e6ae841863b92077a088db0ae9aaeca1",
@@ -11544,6 +11568,30 @@
       ],
       [
        "歌",
+       1
+      ]
+     ]
+    },
+    {
+     "work_id": "fw_84d6d5cd31c03aa7b1c0a386",
+     "canonical_gushiwen_id": null,
+     "body_hash": "94f74912b0a5ab69fa6f02db9d98ffe9d0b6e0ed54e92303e7185250036d8da3",
+     "title": "阁夜",
+     "hits": [
+      [
+       "哭",
+       1
+      ],
+      [
+       "歌",
+       1
+      ],
+      [
+       "角声",
+       1
+      ],
+      [
+       "鼓",
        1
       ]
      ]
@@ -12261,26 +12309,6 @@
      ]
     },
     {
-     "work_id": "fw_1f6742cc4e7198c474f501b3",
-     "canonical_gushiwen_id": "f36d338e1fc5",
-     "body_hash": "68211407156c532485c4b1c880c1f941e56376a9fa60f99098e9fdeef0dc1fe8",
-     "title": "阁夜",
-     "hits": [
-      [
-       "哭",
-       1
-      ],
-      [
-       "歌",
-       1
-      ],
-      [
-       "鼓角",
-       1
-      ]
-     ]
-    },
-    {
      "work_id": "fw_06d8c88478087976232fa085",
      "canonical_gushiwen_id": null,
      "body_hash": "6bd22bee69a0837586c4d30a9d6569b74065c301ba859641348697d790100ce7",
@@ -12512,26 +12540,6 @@
       ],
       [
        "鸣",
-       1
-      ]
-     ]
-    },
-    {
-     "work_id": "fw_84d6d5cd31c03aa7b1c0a386",
-     "canonical_gushiwen_id": null,
-     "body_hash": "94f74912b0a5ab69fa6f02db9d98ffe9d0b6e0ed54e92303e7185250036d8da3",
-     "title": "阁夜",
-     "hits": [
-      [
-       "哭",
-       1
-      ],
-      [
-       "歌",
-       1
-      ],
-      [
-       "鼓角",
        1
       ]
      ]
@@ -39189,11 +39197,11 @@
      "title": "次韵答参寥",
      "hits": [
       [
-       "歌",
+       "棹歌",
        1
       ],
       [
-       "歌声",
+       "歌",
        1
       ],
       [
@@ -51949,15 +51957,15 @@
    "name": "陆游",
    "color": "#8a3b2f",
    "poems": 9618,
-   "hits": 4398,
-   "per100": 0.902,
+   "hits": 4402,
+   "per100": 0.903,
    "chars": 487368,
    "quietN": 6298,
    "quietRatio": 0.6548,
    "catCounts": {
     "兽鸣": 331,
     "鸟啼": 752,
-    "器乐": 842,
+    "器乐": 846,
     "钟磬": 315,
     "自然声": 806,
     "人声": 1352
@@ -51985,7 +51993,7 @@
     ],
     [
      "鼓",
-     255
+     259
     ]
    ],
    "audible": [
@@ -52981,6 +52989,26 @@
       ],
       [
        "歌",
+       1
+      ],
+      [
+       "鼓",
+       1
+      ]
+     ]
+    },
+    {
+     "work_id": "fw_77ee49855854e9622b68c915",
+     "canonical_gushiwen_id": null,
+     "body_hash": "08c369f84fecd2ac9dd0540c9dd009dcdc0efbff91d58cba0111fc6cf6d1dd25",
+     "title": "梦中游禹祠",
+     "hits": [
+      [
+       "歌",
+       1
+      ],
+      [
+       "角声",
        1
       ],
       [
@@ -55866,22 +55894,6 @@
      ]
     },
     {
-     "work_id": "fw_77ee49855854e9622b68c915",
-     "canonical_gushiwen_id": null,
-     "body_hash": "08c369f84fecd2ac9dd0540c9dd009dcdc0efbff91d58cba0111fc6cf6d1dd25",
-     "title": "梦中游禹祠",
-     "hits": [
-      [
-       "歌",
-       1
-      ],
-      [
-       "鼓角",
-       1
-      ]
-     ]
-    },
-    {
      "work_id": "fw_e0b7d6a0002d117185eff81d",
      "canonical_gushiwen_id": null,
      "body_hash": "08d6ebe62c85fd19c121391d204f749027fccfa5cf4f8f290dbe4ef5b3a6abe1",
@@ -55936,7 +55948,7 @@
      "title": "秋风曲",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ],
       [
@@ -57938,6 +57950,22 @@
      ]
     },
     {
+     "work_id": "fw_1d084c47ae55e224f22b9198",
+     "canonical_gushiwen_id": null,
+     "body_hash": "398e7d3a369108f7e1e62fa958709c0d09ed4aceba27400bd1458fe4e7edc469",
+     "title": "五月十一日夜且半梦从大驾亲征尽复汉唐故地见城邑人物繁丽云西凉府也喜甚马上作长句未终篇而觉乃足成之",
+     "hits": [
+      [
+       "角声",
+       1
+      ],
+      [
+       "鼓",
+       1
+      ]
+     ]
+    },
+    {
      "work_id": "fw_4df6b322b9bbf82a719db78d",
      "canonical_gushiwen_id": null,
      "body_hash": "39a929b9141abc99297d56cd816b40fefe331014eb12ebf78172ae1046183ed0",
@@ -58133,6 +58161,22 @@
       ],
       [
        "滴",
+       1
+      ]
+     ]
+    },
+    {
+     "work_id": "fw_b12cd2e175fde3ee23b319fe",
+     "canonical_gushiwen_id": null,
+     "body_hash": "3e1797700a33cdc7c052ebdbeecd07c617ae46d6decae0450550bb6552dbacac",
+     "title": "乌龙庙",
+     "hits": [
+      [
+       "角声",
+       1
+      ],
+      [
+       "鼓",
        1
       ]
      ]
@@ -60181,6 +60225,22 @@
       ],
       [
        "蝉",
+       1
+      ]
+     ]
+    },
+    {
+     "work_id": "fw_8e042d6aac1908ba718f8d0c",
+     "canonical_gushiwen_id": "dd5ccc8784a2",
+     "body_hash": "6ab153106d5605ce7857c4539eea9ee6762ad1c0a05ff328d21cda7b7aaf1091",
+     "title": "五月十一日夜且半梦从大驾亲征尽复汉唐故地",
+     "hits": [
+      [
+       "角声",
+       1
+      ],
+      [
+       "鼓",
        1
       ]
      ]
@@ -64900,7 +64960,7 @@
        1
       ],
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -73550,18 +73610,6 @@
      ]
     },
     {
-     "work_id": "fw_1d084c47ae55e224f22b9198",
-     "canonical_gushiwen_id": null,
-     "body_hash": "398e7d3a369108f7e1e62fa958709c0d09ed4aceba27400bd1458fe4e7edc469",
-     "title": "五月十一日夜且半梦从大驾亲征尽复汉唐故地见城邑人物繁丽云西凉府也喜甚马上作长句未终篇而觉乃足成之",
-     "hits": [
-      [
-       "鼓角",
-       1
-      ]
-     ]
-    },
-    {
      "work_id": "fw_f948a7c8b9e9cf7b0393e152",
      "canonical_gushiwen_id": null,
      "body_hash": "398eb99b53905c8f8d10881d82f39d6342776ae2ed1a7a5b5e3713ea9ee7d82f",
@@ -73580,7 +73628,7 @@
      "title": "新滩舟中作",
      "hits": [
       [
-       "歌声",
+       "棹歌",
        1
       ]
      ]
@@ -74049,18 +74097,6 @@
      "hits": [
       [
        "钟",
-       1
-      ]
-     ]
-    },
-    {
-     "work_id": "fw_b12cd2e175fde3ee23b319fe",
-     "canonical_gushiwen_id": null,
-     "body_hash": "3e1797700a33cdc7c052ebdbeecd07c617ae46d6decae0450550bb6552dbacac",
-     "title": "乌龙庙",
-     "hits": [
-      [
-       "鼓角",
        1
       ]
      ]
@@ -78626,18 +78662,6 @@
      ]
     },
     {
-     "work_id": "fw_8e042d6aac1908ba718f8d0c",
-     "canonical_gushiwen_id": "dd5ccc8784a2",
-     "body_hash": "6ab153106d5605ce7857c4539eea9ee6762ad1c0a05ff328d21cda7b7aaf1091",
-     "title": "五月十一日夜且半梦从大驾亲征尽复汉唐故地",
-     "hits": [
-      [
-       "鼓角",
-       1
-      ]
-     ]
-    },
-    {
      "work_id": "fw_f06ee8a19cf51d76fa2726aa",
      "canonical_gushiwen_id": null,
      "body_hash": "6af61c611a74d6b9304fdbbd040f160e6dd6d16cbaa381914cb5367dc557a080",
@@ -78908,7 +78932,7 @@
      "title": "晚出偏门",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -80972,7 +80996,7 @@
      "title": "乙丑夏秋之交小舟早夜往来湖中戏成绝句十二首  其一○",
      "hits": [
       [
-       "歌声",
+       "棹歌",
        1
       ]
      ]
@@ -83264,7 +83288,7 @@
      "title": "夏夜起坐南亭达晓不复寐",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -84764,7 +84788,7 @@
      "title": "自合江亭涉江至赵园",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -86384,7 +86408,7 @@
      "title": "晚晴闻角有感",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -86876,7 +86900,7 @@
      "title": "闻角",
      "hits": [
       [
-       "角声",
+       "画角",
        1
       ]
      ]
@@ -97288,13 +97312,13 @@
    "dufu": {
     "name": "杜甫",
     "color": "#7a5c3d",
-    "hits": 1087,
+    "hits": 1089,
     "chars": 131028,
     "poemCount": 1725,
     "cats": {
      "兽鸣": 36,
      "鸟啼": 211,
-     "器乐": 190,
+     "器乐": 192,
      "钟磬": 36,
      "自然声": 150,
      "人声": 464
@@ -97594,7 +97618,7 @@
    },
    "reading": [
     "扩容后本库收录杜甫 1725 首/131028 字、高适 484 首/40578 字；下图比较两人全库六类声音构成，上方原文只选三首作证据入口。",
-    "杜甫全库人声 464 次，其中哭与泣合计 104 次（哭×70、泣×34）；器乐类共 190 次。",
+    "杜甫全库人声 464 次，其中哭与泣合计 104 次（哭×70、泣×34）；器乐类共 192 次。",
     "高适全库人声 117 次，其中「歌」70 次；器乐类共 53 次。",
     "这些差异是词典口径下的文本声景构成，可用于提出对读问题；具体时代阐释仍需回到上方原句与作品语境。"
    ]
