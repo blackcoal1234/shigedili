@@ -209,6 +209,19 @@ def main() -> None:
             require(sources, f"诗页 ag 标记经审核参考但没有来源：{pid}")
         else:
             require(not sources, f"诗页 ag 非审核参考模式却携带来源：{pid}")
+        if args.packaged:
+            story = str(ag.get("story") or "")
+            notes = ag.get("notes") or []
+            annotations = [annotation for note in notes for annotation in (note.get("annotations") or [])]
+            appreciation = [point for point in (ag.get("ap") or []) if point]
+            require(100 <= len(story) <= 260, f"诗页 ag story 长度异常：{pid} {len(story)}")
+            require(len(notes) >= 2, f"诗页 ag 逐句条目不足 2 组：{pid}")
+            for note in notes:
+                original = str(note.get("original") or "").strip()
+                require(original and original in bodies.get(pid, ""), f"诗页 ag 逐句原文与正文不一致：{pid}")
+                require(str(note.get("translation") or "").strip(), f"诗页 ag 逐句缺译文：{pid}")
+            require(len(annotations) >= 2, f"诗页 ag 注释不足 2 条：{pid}")
+            require(appreciation, f"诗页 ag 赏析要点不足 1 条：{pid}")
     batch_files = [(p, "hand") for p in (sorted(ASSISTANT_RICH_DIR.glob("batch_*.json")) if ASSISTANT_RICH_DIR.exists() else [])]
     batch_files += [(p, "llm") for p in (sorted(LLM_RICH_DIR.glob("batch_*.json")) if LLM_RICH_DIR.exists() else [])]
     source_hand_ids: set[str] = set()
@@ -244,9 +257,14 @@ def main() -> None:
                 anchor.get("tier") in {"verified", "rule", "ai", "none"},
                 f"{bf.name} {title} anchor 层级非法：{anchor.get('tier')}",
             )
-    require(meta.get("rich_hand") == len(source_hand_ids), "rich_hand 计数与手写批次不一致")
-    require(meta.get("rich_llm") == len(source_llm_ids), "rich_llm 计数与 LLM 批次不一致")
-    require(len(ag_poems) == len(source_hand_ids | source_llm_ids), "ag 条数与批次并集不一致")
+    if args.packaged:
+        rich_hand = sum(1 for ag in ag_by_id.values() if ag.get("hw"))
+        require(meta.get("rich_hand") == rich_hand, "rich_hand 计数与发布包反算不一致")
+        require(meta.get("rich_llm") == len(ag_poems) - rich_hand, "rich_llm 计数与发布包反算不一致")
+    else:
+        require(meta.get("rich_hand") == len(source_hand_ids), "rich_hand 计数与手写批次不一致")
+        require(meta.get("rich_llm") == len(source_llm_ids), "rich_llm 计数与 LLM 批次不一致")
+        require(len(ag_poems) == len(source_hand_ids | source_llm_ids), "ag 条数与批次并集不一致")
     # ag 必须带批次与待复核口径
     require("助手续写" in html and "待人工复核" in html, "44_诗页.html 缺少助手续写层的诚实标注")
     require(
