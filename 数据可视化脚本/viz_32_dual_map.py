@@ -530,7 +530,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
-<title>身与心的双层地图 · 诗行万里参赛版</title>
+<title>身与心的双层地图 · 诗行万里</title>
 <script src="assets/pyecharts/v6/echarts.min.js"></script>
 <script src="assets/pyecharts/v6/maps/china.js"></script>
 <style>
@@ -706,7 +706,7 @@ th{background:rgba(238,243,239,.12);}
 </details>
 
 <footer class="navbar">
- <a href="29_参赛导航.html">29 参赛导航</a>
+    <a href="29_参赛导航.html">29 作品目录</a>
  <a class="home" href="30_诗行万里_参赛版.html">30 总入口</a>
  <a href="31_凝望罗盘.html">31 凝望罗盘</a>
  <span class="cur">32 身与心双层地图</span>

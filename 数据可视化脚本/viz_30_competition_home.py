@@ -947,9 +947,9 @@ main,footer{position:relative;z-index:1}
 </main>
 
 <footer><div class="wrap">
-  <div class="kai" style="font-size:18px;color:#fff">继续探索 · 参赛版系列页面</div>
+  <div class="kai" style="font-size:18px;color:#fff">继续探索 · 系列页面</div>
   <div class="links">
-    <a href="29_参赛导航.html">29 参赛导航</a>
+    <a href="29_参赛导航.html">29 作品目录</a>
     <a href="30_诗行万里_参赛版.html" class="cur" aria-current="page">30 总入口（本页）</a>
     <a href="31_凝望罗盘.html">31 凝望罗盘</a>
     <a href="32_身与心双层地图.html">32 身与心双层地图</a>
@@ -961,7 +961,7 @@ main,footer{position:relative;z-index:1}
     <a href="38_唐宋意象潮汐.html">38 意象潮汐</a>
     <a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
   </div>
-  <div class="tiny">诗行万里 · 数媒可视化参赛版 · 数据来源：cnkgraph 唐宋文学编年地图开放 API、古诗文网创作背景（逐条 URL 见第五章） · 本页由脚本生成，可复跑复核</div>
+  <div class="tiny">诗行万里 · 唐宋诗歌数字可视化 · 数据来源：cnkgraph 唐宋文学编年地图开放 API、古诗文网创作背景（逐条 URL 见第五章） · 本页由脚本生成，可复跑复核</div>
 </div></footer>
 
 <script id="home-data" type="application/json">__DATA__</script>

@@ -1086,7 +1086,7 @@ HTML_TEMPLATE = r'''<!doctype html>
       <article id="reader" class="reader" aria-live="polite"></article>
     </section>
     <footer class="page-foot">诗行万里 · 39 号展项 · 本页离线生成，每章均可展开证据来源。
-      <div class="navlinks"><a href="29_参赛导航.html">29 参赛导航</a><a href="30_诗行万里_参赛版.html">30 总入口</a><a href="31_凝望罗盘.html">31 凝望罗盘</a><a href="32_身与心双层地图.html">32 双层地图</a><a href="33_平行时空759.html">33 平行时空</a><a href="34_一字识诗人.html">34 一字识诗人</a><a href="35_两种孤独与夸张签名.html">35 孤独与夸张</a><a href="36_同龄对齐.html">36 同龄对齐</a><a href="37_可听的诗.html">37 可听的诗</a><a href="38_唐宋意象潮汐.html">38 意象潮汐</a><a href="39_诗人自述生命卷.html" class="cur" aria-current="page">39 生命卷</a></div>
+<div class="navlinks"><a href="29_参赛导航.html">29 作品目录</a><a href="30_诗行万里_参赛版.html">30 总入口</a><a href="31_凝望罗盘.html">31 凝望罗盘</a><a href="32_身与心双层地图.html">32 双层地图</a><a href="33_平行时空759.html">33 平行时空</a><a href="34_一字识诗人.html">34 一字识诗人</a><a href="35_两种孤独与夸张签名.html">35 孤独与夸张</a><a href="36_同龄对齐.html">36 同龄对齐</a><a href="37_可听的诗.html">37 可听的诗</a><a href="38_唐宋意象潮汐.html">38 意象潮汐</a><a href="39_诗人自述生命卷.html" class="cur" aria-current="page">39 生命卷</a></div>
     </footer>
   </main>
   <script id="life-data" type="application/json">__DATA__</script>

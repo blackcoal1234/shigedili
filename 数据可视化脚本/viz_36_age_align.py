@@ -641,7 +641,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;back
 </details>
 
 <footer class="nav">
-  <a href="29_参赛导航.html">29 参赛导航</a><a href="30_诗行万里_参赛版.html">30 总入口</a><a href="31_凝望罗盘.html">31 凝望罗盘</a><a href="32_身与心双层地图.html">32 身与心双层地图</a><a href="33_平行时空759.html">33 平行时空759</a><a href="34_一字识诗人.html">34 一字识诗人</a><a href="35_两种孤独与夸张签名.html">35 两种孤独与夸张签名</a><a href="36_同龄对齐.html" style="color:var(--cinnabar);">36 同龄对齐</a><a href="37_可听的诗.html">37 可听的诗</a><a href="38_唐宋意象潮汐.html">38 意象潮汐</a><a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
+    <a href="29_参赛导航.html">29 作品目录</a><a href="30_诗行万里_参赛版.html">30 总入口</a><a href="31_凝望罗盘.html">31 凝望罗盘</a><a href="32_身与心双层地图.html">32 身与心双层地图</a><a href="33_平行时空759.html">33 平行时空759</a><a href="34_一字识诗人.html">34 一字识诗人</a><a href="35_两种孤独与夸张签名.html">35 两种孤独与夸张签名</a><a href="36_同龄对齐.html" style="color:var(--cinnabar);">36 同龄对齐</a><a href="37_可听的诗.html">37 可听的诗</a><a href="38_唐宋意象潮汐.html">38 意象潮汐</a><a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
 </footer>
 </div>
 

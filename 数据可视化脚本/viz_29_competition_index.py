@@ -89,7 +89,7 @@ HTML_TMPL = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>29 · 参赛导航 —— 诗行万里 · 数媒可视化参赛版作品目录</title>
+<title>29 · 作品目录 —— 诗行万里 · 唐宋诗歌数字可视化</title>
 <link rel="icon" href="data:,">
 <meta name="theme-color" content="#090a09">
 <style>
@@ -558,7 +558,7 @@ footer.page-foot{{
 <div class="fold-rule fold-rule--34" aria-hidden="true"></div>
 
 <header class="hero">
-  <div class="kicker">数媒可视化参赛版 · 作品目录</div>
+      <div class="kicker">唐宋诗歌数字可视化 · 作品目录</div>
   <h1>诗行万里</h1>
   <div class="tagline">给每首课本诗一个人生坐标 —— 六位唐宋诗人的生命情感与精神地形</div>
   <hr class="rule">
@@ -566,7 +566,7 @@ footer.page-foot{{
     演示建议自 <span class="seal">__FIRST_EXHIBIT__ 总入口</span> 起步，依次浏览至 __LAST_EXHIBIT__ 赏析诗页，共 __N_EXHIBITS__ 个展项；
     全站纯 Python 脚本生成、本地离线运行，每个数字都可展开证据句复核。
   </p>
-  <dl class="stats" aria-label="参赛版数据概览">
+      <dl class="stats" aria-label="作品数据概览">
     <div class="stat"><dt>__FIRST_EXHIBIT__ — __LAST_EXHIBIT__</dt><dd>展项范围</dd></div>
     <div class="stat"><dt>__N_POEMS__</dt><dd>canonical 展示证据</dd></div>
     <div class="stat"><dt>__N_ANALYSIS__</dt><dd>首代表层作品</dd></div>
@@ -574,12 +574,12 @@ footer.page-foot{{
   </dl>
 </header>
 
-<section class="directory" aria-label="参赛作品目录">
+    <section class="directory" aria-label="作品目录">
 {cards}
 </section>
 
 <footer class="page-foot">
-  <span>诗行万里 · 数媒可视化参赛系列 29 号 · 参赛导航</span>
+      <span>诗行万里 · 唐宋诗歌数字可视化 29 号 · 作品目录</span>
   <span>本页由脚本生成，可复跑复核：数据可视化脚本/viz_29_competition_index.py ·
   <a href="index.html">返回课程主站</a>
   </span>
@@ -611,7 +611,7 @@ footer.page-foot{{
 CARD_TMPL = """  <a class="card{entry}" href="{href}" data-card="{num}" style="--delay:{delay}ms">
     <div class="card-index" aria-hidden="true">{num}</div>
     <div class="card-copy">
-      <div class="num">参赛版 · {num} 号</div>
+          <div class="num">作品 · {num} 号</div>
       <h2>{title}</h2>
       <p class="hook">{hook}</p>
       <p class="desc">{desc}</p>

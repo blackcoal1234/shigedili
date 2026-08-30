@@ -817,7 +817,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
     <h1>凝望罗盘</h1>
     <div class="sub">唐宋诗词方位凝望的文本地理 —— 谁在望，望向哪个方向，望见了什么</div>
   </div>
-  <div class="crumb">诗行万里 · 数媒可视化参赛系列 <b>31</b></div>
+    <div class="crumb">诗行万里 · 唐宋诗歌数字可视化 <b>31</b></div>
 </header>
 
 <section id="s-overview">
@@ -933,7 +933,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </details>
 
 <nav class="sibling">
-  <a href="29_参赛导航.html">29 参赛导航</a>
+    <a href="29_参赛导航.html">29 作品目录</a>
   <a class="home" href="30_诗行万里_参赛版.html">30 总入口</a>
   <span class="cur">31 凝望罗盘</span>
   <a href="32_身与心双层地图.html">32 身与心双层地图</a>
@@ -945,7 +945,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
   <a href="38_唐宋意象潮汐.html">38 意象潮汐</a>
   <a href="39_诗人自述生命卷.html">39 诗人自述生命卷</a>
 </nav>
-<footer>诗行万里 · 数媒可视化参赛系列 31 号 · 凝望罗盘 —— 图表描述作品文本特征，不断言诗人真实心理；
+<footer>诗行万里 · 唐宋诗歌数字可视化 31 号 · 凝望罗盘 —— 图表描述作品文本特征，不断言诗人真实心理；
 候选编年均以徽章标注。生成脚本：数据可视化脚本/viz_31_gaze_compass.py</footer>
 </div>
 
