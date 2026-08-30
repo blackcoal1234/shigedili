@@ -32,25 +32,6 @@ h1 .accent{color:var(--cinnabar);}
   font-size:13px; color:var(--muted);}
 .meta-strip b{color:var(--ink); font-size:17px; font-family:KaiTi,STKaiti,serif;}
 
-/* ── 声音开关条 ── */
-.audio-bar{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
-  margin:16px 0 20px; padding:10px 14px; background:var(--card);
-  border:1px solid var(--line); border-radius:10px;}
-#audioToggle{font-family:KaiTi,STKaiti,serif; font-size:15px; cursor:pointer;
-  padding:6px 16px; border-radius:20px; border:1.5px solid var(--ink);
-  background:transparent; color:var(--ink); transition:all .2s;}
-#audioToggle.on{background:var(--cinnabar); border-color:var(--cinnabar); color:#fff;}
-#audioToggle:disabled{opacity:.45; cursor:not-allowed;}
-.audio-note{font-size:12.5px; color:var(--muted);}
-.cat-legend{display:flex; flex-wrap:wrap; gap:8px; width:100%;}
-.cat-pill{display:inline-flex; align-items:center; gap:6px; font-size:13px;
-  padding:4px 10px 4px 8px; border-radius:16px; border:1px solid var(--line);
-  background:#fff; cursor:pointer; user-select:none; transition:transform .15s;}
-.cat-pill:hover{transform:translateY(-1px);}
-.cat-pill .dot{width:10px; height:10px; border-radius:50%; flex:none;}
-.cat-pill small{color:var(--muted); font-size:11px;}
-.cat-pill .play{font-size:10px; color:var(--muted);}
-
 /* ── 区块 ── */
 section{margin:38px 0;}
 .sec-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
@@ -71,9 +52,7 @@ section{margin:38px 0;}
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px;}
 .chip{display:inline-flex; align-items:center; gap:4px; font-size:13px;
   font-family:KaiTi,STKaiti,serif; padding:2px 9px; border-radius:5px;
-  border:1px solid transparent; cursor:pointer; background:#fff;
-  border-left-width:4px; transition:transform .12s;}
-.chip:hover{transform:translateY(-1px);}
+  border:1px solid transparent; background:#fff; border-left-width:4px;}
 .chip .n{font-size:11px; color:var(--muted); font-family:"Microsoft YaHei";}
 .quiet-row{display:flex; align-items:center; gap:10px; margin:10px 0 4px; font-size:12.5px;}
 .quiet-bar{flex:1; height:8px; border-radius:4px; background:#e3e7e1; overflow:hidden;}
@@ -89,7 +68,7 @@ details.plist li{padding:3px 0; border-top:1px dashed #e4e8e2; display:flex;
   flex-wrap:wrap; gap:4px 8px; align-items:center;}
 details.plist li .t{font-family:KaiTi,STKaiti,serif; min-width:0;}
 .mini-chip{font-size:11.5px; padding:0 6px; border-radius:4px; border-left:3px solid;
-  background:#fff; font-family:KaiTi,STKaiti,serif; cursor:pointer;}
+  background:#fff; font-family:KaiTi,STKaiti,serif;}
 .mut{color:var(--muted); font-size:12px;}
 
 /* ── 明星案例 ── */
@@ -104,7 +83,7 @@ details.plist li .t{font-family:KaiTi,STKaiti,serif; min-width:0;}
   padding:16px 18px; font-family:KaiTi,STKaiti,serif; font-size:16.5px;
   line-height:2.15; white-space:pre-wrap; max-height:430px; overflow-y:auto;}
 .poem-box.small{max-height:none; font-size:16px; padding:12px 14px;}
-.hit{padding:0 2px; border-radius:4px; border-bottom:2px solid; cursor:pointer;}
+.hit{padding:0 2px; border-radius:4px; border-bottom:2px solid;}
 .excl{border-bottom:2px dotted #9aa39c; color:#8a938c;}
 .facts{list-style:none; font-size:13.5px;}
 .facts li{padding:8px 0 8px 14px; border-top:1px dashed #e2e6e0; position:relative;}
@@ -147,12 +126,7 @@ details.method table td,details.method table th{border:1px solid var(--line);
   padding:4px 12px; text-align:left;}
 details.method table th{background:#eef1ec; font-weight:normal;}
 
-/* ── 提示浮层 / 页脚 ── */
-#toast{position:fixed; left:50%; bottom:34px; transform:translateX(-50%) translateY(20px);
-  background:var(--ink); color:#f2f4f0; font-size:13px; padding:8px 18px;
-  border-radius:20px; opacity:0; pointer-events:none; transition:all .3s; z-index:50;
-  max-width:86vw;}
-#toast.show{opacity:.94; transform:translateX(-50%) translateY(0);}
+/* ── 页脚 ── */
 footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
   font-size:13px; color:var(--muted);}
 .site-nav{display:flex; flex-wrap:wrap; gap:6px 16px; margin-bottom:10px;}
@@ -175,8 +149,8 @@ body::after{content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
   background:rgba(242,244,240,.13);}
 body>header,body>.wrap{position:relative; z-index:1;}
 header{background:linear-gradient(180deg,rgba(238,241,236,.92),rgba(242,244,240,.82));}
-.audio-bar,.card,.star-block,details.method{background:rgba(251,252,250,.91); backdrop-filter:blur(1px);}
-.cat-pill,.chip,.mini-chip,.poem-box,.pcard,.border-col{background:rgba(255,255,255,.89);}
+.card,.star-block,details.method{background:rgba(251,252,250,.91); backdrop-filter:blur(1px);}
+.chip,.mini-chip,.poem-box,.pcard,.border-col{background:rgba(255,255,255,.89);}
 </style>
 </head>
 <body>
@@ -189,11 +163,6 @@ header{background:linear-gradient(180deg,rgba(238,241,236,.92),rgba(242,244,240,
     <p class="sub">给状态层 80893 首全作品做一次「录音」：只统计<b>被听见的声音</b>——猿声、砧杵、琵琶、戍鼓、松风、人语。
       六类声音、八十八个词条，扫出每位诗人独有的声景指纹；明星案例则回到证据层 20437 首规范作品，逐字点亮《琵琶行》的一夜、王维的空山、盛唐的两种边声。</p>
     <div class="meta-strip" id="metaStrip"></div>
-    <div class="audio-bar">
-      <button id="audioToggle" aria-pressed="false">♪ 声音：关</button>
-      <span class="audio-note">可听化为 Web Audio 合成的抽象音色（振荡器＋噪声＋包络，非真实录音），默认静音；开启后点击任意声音词/芯片即可试听 1–2 秒。音频不可用时自动降级，不影响任何视觉内容。</span>
-      <div class="cat-legend" id="catLegend"></div>
-    </div>
   </div>
 </header>
 
@@ -271,8 +240,6 @@ header{background:linear-gradient(180deg,rgba(238,241,236,.92),rgba(242,244,240,
     <li>「咽」归自然声（泉声咽），也覆盖人声呜咽（《石壕吏》「泣幽咽」）；「萧萧」归自然声，也覆盖马鸣（《兵车行》「马萧萧」）。</li>
     <li>《琵琶行》「秋瑟瑟」按词典计自然声（风声义），而《暮江吟》「半江瑟瑟」为碧色义、已被排除表挖除——同字不同义，逐处人工核对。</li>
   </ul>
-  <h4>可听化说明</h4>
-  <p>六类音色全部由浏览器 Web Audio API 现场合成（振荡器、噪声缓冲与增益包络的抽象化音效），页面不加载任何音频文件，也不请求任何远程资源；不支持 Web Audio 的环境中开关自动禁用，全部视觉功能不受影响。</p>
   <h4>数据文件</h4>
   <p>本页数据快照：<code>output/assets/competition/sound_page_data.json</code>；上游统计：<code>data/stylometry/sound_stats.json</code>（schema v1，覆盖 88 位诗人 / 80893 篇）。生成脚本 <code>数据可视化脚本/viz_37_soundscape.py</code> 零参数可复跑。</p>
 </details>
@@ -298,8 +265,6 @@ header{background:linear-gradient(180deg,rgba(238,241,236,.92),rgba(242,244,240,
   </div>
 </footer>
 
-<div id="toast" role="status"></div>
-
 <script>
 (function(){
 "use strict";
@@ -322,182 +287,12 @@ function el(tag, cls, text){
   return e;
 }
 
-/* ───────── 音频（默认关，优雅降级） ───────── */
-var AC = window.AudioContext || window.webkitAudioContext;
-var audioOn = false, actx = null, master = null, noiseBuf = null, hinted = false;
-var toggleBtn = document.getElementById("audioToggle");
-function toast(msg){
-  var t = document.getElementById("toast");
-  t.textContent = msg; t.classList.add("show");
-  clearTimeout(toast._h);
-  toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2400);
-}
-if (!AC){
-  toggleBtn.disabled = true;
-  toggleBtn.textContent = "♪ 此浏览器不支持 Web Audio";
-  toggleBtn.title = "音频不可用；全部视觉功能不受影响";
-}
-toggleBtn.addEventListener("click", function(){
-  if (toggleBtn.disabled) return;
-  if (!audioOn){
-    try{
-      if (!actx){
-        actx = new AC();
-        master = actx.createGain();
-        master.gain.value = 0.28;
-        master.connect(actx.destination);
-      }
-      if (actx.state === "suspended") actx.resume();
-      audioOn = true;
-      toggleBtn.classList.add("on");
-      toggleBtn.setAttribute("aria-pressed","true");
-      toggleBtn.textContent = "♪ 声音：开";
-      toast("已开启合成音效——点击任意声音词试听");
-    }catch(e){
-      toggleBtn.disabled = true;
-      toggleBtn.textContent = "♪ 音频初始化失败";
-      toast("音频不可用；视觉内容不受影响");
-    }
-  } else {
-    audioOn = false;
-    toggleBtn.classList.remove("on");
-    toggleBtn.setAttribute("aria-pressed","false");
-    toggleBtn.textContent = "♪ 声音：关";
-  }
-});
-function getNoise(){
-  if (!noiseBuf){
-    var sr = actx.sampleRate, len = Math.floor(sr * 2);
-    noiseBuf = actx.createBuffer(1, len, sr);
-    var d = noiseBuf.getChannelData(0);
-    for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
-  }
-  return noiseBuf;
-}
-function tone(type, f0, t, dur, peak, glideTo){
-  var o = actx.createOscillator(), g = actx.createGain();
-  o.type = type; o.frequency.setValueAtTime(f0, t);
-  if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur);
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(peak, t + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.connect(g); g.connect(master);
-  o.start(t); o.stop(t + dur + 0.05);
-  return o;
-}
-var SYNTH = {
-  bell: function(t){           // 钟磬：非谐分音长衰减
-    [[1,0.55],[2.01,0.24],[2.98,0.16],[4.16,0.09]].forEach(function(p){
-      var o = actx.createOscillator(), g = actx.createGain();
-      o.type = "sine"; o.frequency.value = 196 * p[0];
-      g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(p[1], t + 0.015);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.9);
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + 2);
-    });
-  },
-  bird: function(t){           // 鸟啼：三声上扬滑音啁啾
-    for (var i = 0; i < 3; i++){
-      var st = t + i * 0.22;
-      var o = actx.createOscillator(), g = actx.createGain();
-      o.type = "sine";
-      o.frequency.setValueAtTime(2200 + i * 160, st);
-      o.frequency.exponentialRampToValueAtTime(3400, st + 0.07);
-      o.frequency.exponentialRampToValueAtTime(1900, st + 0.15);
-      g.gain.setValueAtTime(0.0001, st);
-      g.gain.exponentialRampToValueAtTime(0.3, st + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, st + 0.17);
-      o.connect(g); g.connect(master); o.start(st); o.stop(st + 0.2);
-    }
-  },
-  beast: function(t){          // 兽鸣：下行哀啸带颤音
-    var o = actx.createOscillator(), g = actx.createGain(), f = actx.createBiquadFilter();
-    o.type = "sawtooth";
-    o.frequency.setValueAtTime(640, t);
-    o.frequency.exponentialRampToValueAtTime(290, t + 1.1);
-    f.type = "lowpass"; f.frequency.value = 950;
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.22, t + 0.12);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.25);
-    var lfo = actx.createOscillator(), lg = actx.createGain();
-    lfo.frequency.value = 5.6; lg.gain.value = 0.08;
-    lfo.connect(lg); lg.connect(g.gain);
-    o.connect(f); f.connect(g); g.connect(master);
-    o.start(t); o.stop(t + 1.3); lfo.start(t); lfo.stop(t + 1.3);
-  },
-  strings: function(t){        // 器乐：四声拨弦（琵琶轮指的抽象）
-    [[0,294],[0.14,392],[0.28,440],[0.44,587]].forEach(function(p){
-      var st = t + p[0];
-      tone("triangle", p[1], st, 0.5, 0.3);
-      var n = actx.createBufferSource(), ng = actx.createGain(), hp = actx.createBiquadFilter();
-      n.buffer = getNoise(); hp.type = "highpass"; hp.frequency.value = 2500;
-      ng.gain.setValueAtTime(0.12, st);
-      ng.gain.exponentialRampToValueAtTime(0.0001, st + 0.03);
-      n.connect(hp); hp.connect(ng); ng.connect(master);
-      n.start(st); n.stop(st + 0.05);
-    });
-  },
-  nature: function(t){         // 自然声：滤噪雨幕＋三滴清响
-    var n = actx.createBufferSource(), lp = actx.createBiquadFilter(), g = actx.createGain();
-    n.buffer = getNoise(); n.loop = true;
-    lp.type = "lowpass"; lp.frequency.value = 1050;
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.24, t + 0.2);
-    g.gain.setValueAtTime(0.24, t + 1.1);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.7);
-    n.connect(lp); lp.connect(g); g.connect(master);
-    n.start(t); n.stop(t + 1.8);
-    [0.5, 0.9, 1.3].forEach(function(dt, i){
-      tone("sine", 1500 + i * 260, t + dt, 0.09, 0.16);
-    });
-  },
-  human: function(t){          // 人声：带颤音的低吟滑腔
-    var o = actx.createOscillator(), g = actx.createGain();
-    o.type = "sine";
-    o.frequency.setValueAtTime(196, t);
-    o.frequency.exponentialRampToValueAtTime(262, t + 0.5);
-    o.frequency.exponentialRampToValueAtTime(175, t + 1.5);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.26, t + 0.25);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
-    var v = actx.createOscillator(), vg = actx.createGain();
-    v.frequency.value = 5.2; vg.gain.value = 5;
-    v.connect(vg); vg.connect(o.frequency);
-    var h = actx.createOscillator(), hg = actx.createGain();
-    h.type = "sine"; h.frequency.setValueAtTime(392, t);
-    h.frequency.exponentialRampToValueAtTime(350, t + 1.5);
-    hg.gain.setValueAtTime(0.0001, t);
-    hg.gain.exponentialRampToValueAtTime(0.07, t + 0.3);
-    hg.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
-    o.connect(g); g.connect(master); h.connect(hg); hg.connect(master);
-    o.start(t); o.stop(t + 1.7); v.start(t); v.stop(t + 1.7);
-    h.start(t); h.stop(t + 1.7);
-  }
-};
-function playCat(catName){
-  if (!AC) return;
-  if (!audioOn){
-    if (!hinted){ toast("先开启页面顶部的「♪ 声音」开关，即可试听合成音色"); hinted = true; }
-    else toast("声音开关未开启（页面顶部）");
-    return;
-  }
-  try{
-    var c = CAT_BY_NAME[catName];
-    if (c && SYNTH[c.id]) SYNTH[c.id](actx.currentTime + 0.02);
-  }catch(e){ /* 音频失败不影响视觉 */ }
-}
-document.addEventListener("click", function(ev){
-  var n = ev.target.closest("[data-cat]");
-  if (n) playCat(n.getAttribute("data-cat"));
-});
-
 /* ───────── 通用渲染部件 ───────── */
 function chipNode(w, n, cls){
   var c = catOf(w), col = catColor(c);
-  var b = el("button", cls || "chip");
-  b.setAttribute("data-cat", c);
+  var b = el("span", cls || "chip");
   b.title = w + " · " + c + " · 情感" + (sentOf(w) >= 0 ? "+" : "") + sentOf(w) +
-            (n ? " · 出现" + n + "次" : "") + " · 点击试听该类音色";
+            (n ? " · 出现" + n + "次" : "");
   b.style.borderLeftColor = col;
   b.style.background = tint(col, 0.10);
   b.appendChild(document.createTextNode(w));
@@ -509,8 +304,7 @@ function renderSegs(container, segs){
     if (sg[1] === 1){
       var c = catOf(sg[0]), col = catColor(c);
       var sp = el("span", "hit", sg[0]);
-      sp.setAttribute("data-cat", c);
-      sp.title = sg[0] + " · " + c + " · 点击试听";
+      sp.title = sg[0] + " · " + c;
       sp.style.background = tint(col, 0.16);
       sp.style.borderBottomColor = col;
       container.appendChild(sp);
@@ -524,7 +318,7 @@ function renderSegs(container, segs){
   });
 }
 
-/* ───────── 页眉数据条 / 类别图例 ───────── */
+/* ───────── 页眉数据条 ───────── */
 (function(){
   var m = D.meta, ms = document.getElementById("metaStrip");
   [["状态层", fmt(m.analysis_count) + " 首 · " + fmt(m.corpusPoets) + " 位诗人"],
@@ -535,18 +329,6 @@ function renderSegs(container, segs){
     var d = el("span"); d.appendChild(el("b", "", kv[1]));
     d.appendChild(document.createTextNode(" " + kv[0]));
     ms.appendChild(d);
-  });
-  var lg = document.getElementById("catLegend");
-  D.cats.forEach(function(c){
-    var p = el("span", "cat-pill");
-    p.setAttribute("data-cat", c.name);
-    p.title = "点击试听「" + c.name + "」类合成音色";
-    var dot = el("i", "dot"); dot.style.background = c.color;
-    p.appendChild(dot);
-    p.appendChild(el("span", "", c.name));
-    var sm = el("small", "", c.desc); p.appendChild(sm);
-    p.appendChild(el("span", "play", "▶"));
-    lg.appendChild(p);
   });
 })();
 
@@ -624,10 +406,9 @@ var baseText = { color:"#252b27", fontFamily:'"Microsoft YaHei",sans-serif' };
       var li = el("li");
       li.appendChild(el("span", "t kai", "《" + a.title + "》"));
       a.hits.forEach(function(hn){
-        var mc = el("button", "mini-chip", hn[0] + (hn[1] > 1 ? "×" + hn[1] : ""));
+        var mc = el("span", "mini-chip", hn[0] + (hn[1] > 1 ? "×" + hn[1] : ""));
         var col = catColor(catOf(hn[0]));
         mc.style.borderLeftColor = col;
-        mc.setAttribute("data-cat", catOf(hn[0]));
         mc.title = hn[0] + " · " + catOf(hn[0]);
         li.appendChild(mc);
       });
