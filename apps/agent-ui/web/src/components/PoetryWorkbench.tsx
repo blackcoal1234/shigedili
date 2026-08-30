@@ -26,6 +26,10 @@ import { EvidencePanel } from "@/components/EvidencePanel";
 import { GenerativeExplanation } from "@/components/GenerativeExplanation";
 import { ImageryComparison } from "@/components/ImageryComparison";
 import { KnowledgeExplorer } from "@/components/KnowledgeExplorer";
+import {
+  PoemAppreciationDrawer,
+  type AppreciationTarget,
+} from "@/components/PoemAppreciationDrawer";
 import { PoemScenePlayer } from "@/components/PoemScenePlayer";
 import { PoetRouteMap } from "@/components/PoetRouteMap";
 import { PoetSelector } from "@/components/PoetSelector";
@@ -152,6 +156,7 @@ function WorkbenchBody({
   const [knowledgeOpen, setKnowledgeOpen] = useState(false);
   const [knowledgePoemId, setKnowledgePoemId] = useState<string | null>(null);
   const [knowledgeLineId, setKnowledgeLineId] = useState<string | null>(null);
+  const [appreciationTarget, setAppreciationTarget] = useState<AppreciationTarget | null>(null);
   const catalogAbort = useRef<AbortController | null>(null);
   const toolAbort = useRef<AbortController | null>(null);
   const requestSequence = useRef(0);
@@ -265,6 +270,15 @@ function WorkbenchBody({
     window.history.replaceState(window.history.state, "", url);
   }, []);
 
+  const openAppreciation = useCallback((target: AppreciationTarget) => {
+    setKnowledgeOpen(false);
+    setAppreciationTarget(target);
+  }, []);
+
+  const closeAppreciation = useCallback(() => {
+    setAppreciationTarget(null);
+  }, []);
+
   const selectedCatalogRow = catalog?.payload.poets.find((row) => row.poet === selectedPoet);
   const imageryEvidenceCount = useMemo(() => {
     const payload = toolState.response?.payload;
@@ -301,6 +315,7 @@ function WorkbenchBody({
             type="button"
             className="knowledge-command"
             onClick={() => {
+              setAppreciationTarget(null);
               setKnowledgeOpen(true);
               updateKnowledgeSelection(null, null);
             }}
@@ -419,11 +434,13 @@ function WorkbenchBody({
                   activeScene={activeScene}
                   onSceneChange={setActiveScene}
                   onOpenKnowledge={(poemId) => {
+                    setAppreciationTarget(null);
                     setKnowledgePoemId(poemId);
                     setKnowledgeLineId(null);
                     setKnowledgeOpen(true);
                     updateKnowledgeSelection(poemId, null);
                   }}
+                  onOpenAppreciation={openAppreciation}
                 />
               ) : null}
             </div>
@@ -456,6 +473,11 @@ function WorkbenchBody({
         onSelectionChange={updateKnowledgeSelection}
         returnFocusRef={knowledgeButtonRef}
       />
+      <PoemAppreciationDrawer
+        open={Boolean(appreciationTarget)}
+        target={appreciationTarget}
+        onClose={closeAppreciation}
+      />
     </main>
   );
 }
@@ -466,12 +488,14 @@ function WorkbenchResult({
   activeScene,
   onSceneChange,
   onOpenKnowledge,
+  onOpenAppreciation,
 }: {
   mode: WorkbenchMode;
   response: ToolResponse<WorkbenchPayload>;
   activeScene?: PoetryScene;
   onSceneChange: (scene: PoetryScene) => void;
   onOpenKnowledge: (poemId: string) => void;
+  onOpenAppreciation: (target: AppreciationTarget) => void;
 }) {
   const payload = response.payload;
   if (response.status === "insufficient_evidence") {
@@ -488,6 +512,7 @@ function WorkbenchResult({
         selectedSceneId={activeScene?.id}
         onSelectScene={onSceneChange}
         onOpenKnowledge={onOpenKnowledge}
+        onOpenAppreciation={onOpenAppreciation}
       />
     );
   }
@@ -499,6 +524,7 @@ function WorkbenchResult({
         payload={payload}
         onSceneChange={onSceneChange}
         onOpenKnowledge={onOpenKnowledge}
+        onOpenAppreciation={onOpenAppreciation}
       />
     );
   }

@@ -28,6 +28,8 @@ DATA = ROOT / "data"
 CAND = DATA / "candidates"
 OUT = ROOT / "output"
 COMP = OUT / "assets" / "competition"
+CANONICAL_JSON = DATA / "poems.json"
+FULL_MANIFEST_JSON = DATA / "analysis" / "famous_poets_full_manifest.json"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -120,22 +122,76 @@ def load_emotion_stats():
     return stats["emotions"], stats["keywords"]
 
 
+def index_emotion_profiles(rows):
+    """按 canonical ID/work ID 索引，并保留哈希碰撞候选。"""
+    indexes = {
+        "by_canonical_id": {},
+        "by_work_id": {},
+        "by_body_hash": defaultdict(list),
+    }
+    for row in rows:
+        profile = {
+            field: value for field, value in row.items()
+            if field not in {
+                "poet", "title", "body_hash", "work_id", "canonical_gushiwen_id"
+            }
+        }
+        entry = {"row": row, "profile": profile}
+        work_id = row.get("work_id")
+        if work_id:
+            if work_id in indexes["by_work_id"]:
+                raise ValueError(f"情感档案 work_id 重复: {work_id}")
+            indexes["by_work_id"][work_id] = entry
+        canonical_id = row.get("canonical_gushiwen_id")
+        if canonical_id:
+            key = (row["poet"], canonical_id)
+            if key in indexes["by_canonical_id"]:
+                raise ValueError(f"情感档案 canonical ID 重复: {key}")
+            indexes["by_canonical_id"][key] = entry
+        indexes["by_body_hash"][(row["poet"], row["body_hash"])].append(entry)
+    return indexes
+
+
 def load_emotion_profiles():
-    """读取全语料细粒度情感档案，按作者+诗题索引。"""
+    """读取全语料细粒度情感档案，建立稳定身份索引。"""
     path = DATA / "stylometry" / "emotion_profiles.json"
     if not path.exists():
         raise FileNotFoundError(
             "缺少 emotion_profiles.json，请先运行 python tools/build_emotion_profiles.py"
         )
     payload = json.loads(path.read_text(encoding="utf-8"))
-    profiles = {
-        (row["poet"], row["title"]): {
-            key: value for key, value in row.items()
-            if key not in {"poet", "title", "body_hash"}
-        }
-        for row in payload["profiles"]
+    return payload, index_emotion_profiles(payload["profiles"])
+
+
+def load_dual_corpus_metadata(analysis_payload, analysis_record_count, canonical_count):
+    """从已构建产物读取动态双层口径，并拒绝陈旧或降级后的状态数据。"""
+    manifest = json.loads(FULL_MANIFEST_JSON.read_text(encoding="utf-8"))
+    analysis_count = manifest.get("record_count")
+    canonical_evidence_count = manifest.get("canonical_count")
+    if analysis_count != analysis_record_count:
+        raise ValueError(
+            "情感状态档案与 full manifest 数量不一致: "
+            f"profiles={analysis_record_count}, manifest={analysis_count}"
+        )
+    if analysis_payload.get("corpus_size") != analysis_count:
+        raise ValueError("情感状态档案 corpus_size 与 full manifest 不一致")
+    if canonical_evidence_count != canonical_count:
+        raise ValueError(
+            "canonical 证据库与 full manifest 数量不一致: "
+            f"poems={canonical_count}, manifest={canonical_evidence_count}"
+        )
+    corpus_source = str(analysis_payload.get("corpus_source") or "")
+    corpus_path = str(analysis_payload.get("corpus_path") or "")
+    if corpus_source != "analysis_full" or not corpus_path:
+        raise ValueError(
+            "viz36 状态层必须来自 analysis_full，且必须公开 corpus_path"
+        )
+    return {
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
+        "analysis_count": analysis_count,
+        "canonical_evidence_count": canonical_evidence_count,
     }
-    return payload, profiles
 
 
 def count_hits(body: str, words, entries):
@@ -162,9 +218,95 @@ def count_hits(body: str, words, entries):
 
 
 # ---------------------------------------------------------------- 载入数据
-def load_poem_bodies():
-    poems = json.loads((DATA / "poems.json").read_text(encoding="utf-8"))
-    return {(p["author"], p["title"]): p["body"] for p in poems}
+def index_canonical_poems(poems):
+    """保留同题异文候选，禁止用输入顺序隐式决定正文。"""
+    indexed = defaultdict(list)
+    for poem in poems:
+        indexed[(poem["author"], poem["title"])].append(poem)
+    return dict(indexed)
+
+
+def select_canonical_poem(indexed, poet, title, chronology_row):
+    candidates = indexed.get((poet, title), [])
+    if len(candidates) == 1:
+        return candidates[0]
+    references = " ".join(
+        str(chronology_row.get(field) or "")
+        for field in ("source_url", "source_note")
+    )
+    matched = [
+        poem for poem in candidates
+        if poem.get("source_url") and poem["source_url"] in references
+    ]
+    if len(matched) == 1:
+        return matched[0]
+    raise ValueError(
+        f"canonical 诗作无法唯一定位: {(poet, title)}，"
+        f"候选={len(candidates)}，来源匹配={len(matched)}"
+    )
+
+
+def analysis_entry_for_canonical(indexes, poem):
+    poet = poem["author"]
+    canonical_id = poem.get("source_poem_id")
+    if canonical_id:
+        entry = indexes["by_canonical_id"].get((poet, canonical_id))
+        if entry is None:
+            raise KeyError(f"情感档案缺少 canonical ID: {(poet, canonical_id)}")
+        return entry
+    work_id = poem.get("work_id")
+    if work_id:
+        entry = indexes["by_work_id"].get(work_id)
+        if entry is None:
+            raise KeyError(f"情感档案缺少 work_id: {work_id}")
+        return entry
+    candidates = indexes["by_body_hash"].get((poet, poem.get("body_hash")), [])
+    if len(candidates) > 1:
+        raise ValueError(
+            f"情感档案 body_hash 非唯一，禁止回退: {(poet, poem.get('body_hash'))}"
+        )
+    return candidates[0] if candidates else None
+
+
+def emotion_for_canonical(indexes, poem):
+    entry = analysis_entry_for_canonical(indexes, poem)
+    return entry["profile"] if entry else None
+
+
+def published_identity(entry, canonical_poem):
+    if entry is None:
+        raise KeyError(
+            "canonical 证据作品无法回配 analysis_full 身份: "
+            f"{(canonical_poem['author'], canonical_poem['title'])}"
+        )
+    row = entry["row"]
+    work_id = str(row.get("work_id") or "").strip()
+    body_hash = str(row.get("body_hash") or "").strip()
+    if not work_id or not body_hash:
+        raise ValueError("analysis_full 作品缺少 work_id/body_hash")
+    canonical_id = row.get("canonical_gushiwen_id") or canonical_poem.get(
+        "source_poem_id"
+    )
+    expected_canonical_id = canonical_poem.get("source_poem_id")
+    if (
+        expected_canonical_id
+        and canonical_id
+        and canonical_id != expected_canonical_id
+    ):
+        raise ValueError("情感档案与 canonical 证据的作品 ID 不一致")
+    expected_body_hash = canonical_poem.get("body_hash")
+    if expected_body_hash and body_hash != expected_body_hash:
+        raise ValueError("情感档案与 canonical 证据的 body_hash 不一致")
+    return {
+        "work_id": work_id,
+        "canonical_gushiwen_id": canonical_id or None,
+        "body_hash": body_hash,
+    }
+
+
+def load_canonical_poems():
+    poems = json.loads(CANONICAL_JSON.read_text(encoding="utf-8"))
+    return index_canonical_poems(poems)
 
 
 def load_chronology_rows():
@@ -234,7 +376,12 @@ def build():
     emotion_count, emotion_rule_count = load_emotion_stats()
     spirit_count = len(entries)
     emotion_payload, emotion_profiles = load_emotion_profiles()
-    bodies = load_poem_bodies()
+    canonical_poems = load_canonical_poems()
+    corpus_meta = load_dual_corpus_metadata(
+        emotion_payload,
+        len(emotion_payload["profiles"]),
+        sum(len(poems) for poems in canonical_poems.values()),
+    )
     chron = load_chronology_rows()
     stages = load_stages()
 
@@ -244,7 +391,10 @@ def build():
             "generated_at": "2026-07-26", "status": "verified-online",
             "note": "六人出生公历年，viz_36 同龄对齐用。虚岁=诗年-出生年+1。",
             "records": BIRTH_RECORDS,
-        }, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
+        }, ensure_ascii=False, indent=2, allow_nan=False),
+        encoding="utf-8",
+        newline="\n",
+    )
 
     poets_out = []
     excluded = []
@@ -261,17 +411,24 @@ def build():
             y_mid = (y0 + y1 + 1) // 2  # 中点四舍五入
             age = y_mid - birth + 1
             canonical_title = ALT_TITLES.get((name, title), title)
-            body = bodies.get((name, canonical_title), "")
+            canonical_poem = select_canonical_poem(
+                canonical_poems, name, canonical_title, r
+            )
+            body = canonical_poem["body"]
             hits, senti, dom, top = count_hits(body, words, entries)
-            emotion = emotion_profiles.get((name, canonical_title), {
+            analysis_entry = analysis_entry_for_canonical(
+                emotion_profiles, canonical_poem
+            )
+            emotion = (analysis_entry or {}).get("profile") or {
                 "primary": None, "primary_label": "情绪未定", "family": "未定",
                 "color": "#8d8f88", "top_emotions": [],
                 "adjectives": ["含混", "待考"], "summary": "词典信号不足，保留为待考",
                 "valence": 0.0, "arousal": 0.35, "dominance": 0.0,
                 "confidence": 0.12, "confidence_label": "低", "mixed": False,
                 "rule_hits": 0, "evidence": [],
-            })
+            }
             poems.append({
+                **published_identity(analysis_entry, canonical_poem),
                 "title": title, "year_start": y0, "year_end": y1, "year": y_mid,
                 "age": age, "precision": PRECISION_LABEL.get(r.get("year_precision", ""), r.get("year_precision", "")),
                 "period": period_label(name, r, stages), "grade": grade,
@@ -304,7 +461,8 @@ def build():
 
     payload = {
         "generated_at": "2026-07-26",
-        "note": "viz_36 同龄对齐数据。虚岁=诗年-出生公历年+1，诗年取候选系年区间中点；fact_grade=D 不进计算。",
+        "note": "viz_36 同龄对齐数据。情感状态来自全作品分析层；泳道作品来自 canonical 证据层的候选编年。虚岁=诗年-出生公历年+1，诗年取候选系年区间中点；fact_grade=D 不进计算。",
+        **corpus_meta,
         "birth_source": "data/candidates/poet_birth_years.json（cnkgraph 2026-07-26 在线核实）",
         "emotion_method": emotion_payload.get("method", ""),
         "emotion_method_note": emotion_payload.get("method_note", ""),
@@ -318,14 +476,24 @@ def build():
     }
     COMP.mkdir(parents=True, exist_ok=True)
     (COMP / "age_data.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
+        json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False),
+        encoding="utf-8",
+        newline="\n",
+    )
 
     html = (HTML_TMPL
             .replace("__DATA__", json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
             .replace("__EMOTION_COUNT__", str(emotion_count))
             .replace("__EMOTION_RULE_COUNT__", str(emotion_rule_count))
-            .replace("__SPIRIT_COUNT__", str(spirit_count)))
-    (OUT / "36_同龄对齐.html").write_text(html, encoding="utf-8")
+            .replace("__SPIRIT_COUNT__", str(spirit_count))
+            .replace("__ANALYSIS_COUNT__", str(corpus_meta["analysis_count"]))
+            .replace(
+                "__CANONICAL_EVIDENCE_COUNT__",
+                str(corpus_meta["canonical_evidence_count"]),
+            ))
+    (OUT / "36_同龄对齐.html").write_text(
+        html, encoding="utf-8", newline="\n"
+    )
 
     # ------------------------------------------------ 控制台：同龄对照戏剧点扫描
     out = sys.stdout
@@ -420,6 +588,14 @@ footer.nav a{color:var(--blue);text-decoration:none;margin:0 9px;white-space:now
 footer.nav a:hover{color:var(--cinnabar);}
 @media (max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:560px){header.top h1{font-size:26px;letter-spacing:3px;}.ctrl .age-read{font-size:21px;}.cards{grid-template-columns:1fr;}.vad{grid-template-columns:repeat(3,minmax(70px,1fr));overflow-x:auto;}}
+/* 固定画幅背景：浅纸白表面保留图表与正文的阅读对比。 */
+body{position:relative;min-height:100vh;background:transparent;}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("assets/generated/remaining_pages_20260830/36_age_alignment_v1.png") center center / cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:rgba(242,244,240,.14);}
+.wrap{position:relative;z-index:1;}
+.panel,.scroller,.card,details.method{background:rgba(251,252,250,.90);backdrop-filter:blur(1px);}
+.ontology-note{background:rgba(245,242,233,.90);}
+.emotion-pill{background:rgba(255,255,255,.88);}
 </style>
 </head>
 <body>
@@ -427,6 +603,7 @@ footer.nav a:hover{color:var(--cinnabar);}
 <header class="top">
   <h1>同龄对齐</h1>
   <div class="sub">把六位诗人拉回同一条年龄轴——同样的虚岁，各自正写什么<span class="badge">__EMOTION_COUNT__类情绪 · VAD三维</span></div>
+  <div class="sub">状态层 __ANALYSIS_COUNT__ 首全作品 · 证据层 __CANONICAL_EVIDENCE_COUNT__ 首规范作品；本页只发布能稳定回配作品 ID 的候选编年点</div>
 </header>
 
 <section class="panel">
@@ -452,6 +629,7 @@ footer.nav a:hover{color:var(--cinnabar);}
 <details class="method">
   <summary>方法与数据（口径与局限）</summary>
   <ul>
+    <li><b>双层语料</b>：情感状态层来自 <code>analysis_full</code> 全作品语料（__ANALYSIS_COUNT__ 首）；编年、原句与页面泳道使用 canonical 证据层（__CANONICAL_EVIDENCE_COUNT__ 首）精确回配。每个发布点均保留 <code>work_id</code>、<code>canonical_gushiwen_id</code> 与 <code>body_hash</code>，不按同名诗题串联。</li>
     <li><b>出生年</b>：李白701、杜甫712、白居易772、苏轼1037、李清照1084、陆游1125，均于2026-07-26经 cnkgraph 唐宋文学编年地图开放API在线核实（见 data/candidates/poet_birth_years.json 附URL）。苏轼生于农历丙子年十二月十九（公历1037年1月8日），本页统一用公历1037计虚岁，与按农历丙子年起算的传统虚岁相差1岁。</li>
     <li><b>虚岁口径</b>：虚岁 = 诗年 − 出生公历年 + 1。诗年取候选系年区间（year_start–year_end）的中点四舍五入；区间跨度与系年精度（明确/约略/存疑）在悬停卡中如实展示。</li>
     <li><b>编年来源</b>：六人诗作系年取自 data/candidates/*_spirit_chronology.csv（候选级，B/C为主，来源为 cnkgraph 开放API与古诗文网创作背景互证），<b>未经人工终审</b>，故全页带「候选」徽章；fact_grade=D 与无系年的行不进入任何计算（剔除清单见数据文件 excluded_rows）。</li>

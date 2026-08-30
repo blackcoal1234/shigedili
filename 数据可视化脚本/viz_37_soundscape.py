@@ -37,6 +37,7 @@ import sound_dict  # noqa: E402
 
 STATS_JSON = STYLO / "sound_stats.json"
 POEMS_JSON = ROOT / "data" / "poems.json"
+FULL_MANIFEST_JSON = ROOT / "data" / "analysis" / "famous_poets_full_manifest.json"
 OUT_HTML = ROOT / "output" / "37_可听的诗.html"
 OUT_DATA = ROOT / "output" / "assets" / "competition" / "sound_page_data.json"
 
@@ -116,6 +117,154 @@ def scan_positions(body: str, words_desc):
     return segs, hits, marks
 
 
+def index_canonical_poems(poems):
+    indexed = {}
+    for poem in poems:
+        key = (poem["author"], poem["title"])
+        candidates = indexed.get(key)
+        if candidates is None:
+            indexed[key] = [poem]
+        else:
+            candidates.append(poem)
+    return indexed
+
+
+def select_canonical_poem(indexed, poet, title):
+    candidates = indexed.get((poet, title), [])
+    if len(candidates) != 1:
+        raise ValueError(
+            f"canonical 明星案例无法唯一定位: {(poet, title)}，候选={len(candidates)}"
+        )
+    return candidates[0]
+
+
+def index_sound_records(records):
+    indexes = {
+        "by_canonical_id": {},
+        "by_work_id": {},
+        "by_body_hash": {},
+    }
+    for record in records:
+        work_id = record.get("work_id")
+        if work_id:
+            if work_id in indexes["by_work_id"]:
+                raise ValueError(f"sound per_poem work_id 重复: {work_id}")
+            indexes["by_work_id"][work_id] = record
+        canonical_id = record.get("canonical_gushiwen_id")
+        if canonical_id:
+            key = (record["poet"], canonical_id)
+            if key in indexes["by_canonical_id"]:
+                raise ValueError(f"sound per_poem canonical ID 重复: {key}")
+            indexes["by_canonical_id"][key] = record
+        hash_key = (record["poet"], record["body_hash"])
+        candidates = indexes["by_body_hash"].get(hash_key)
+        if candidates is None:
+            indexes["by_body_hash"][hash_key] = [record]
+        else:
+            candidates.append(record)
+    return indexes
+
+
+def load_dual_corpus_metadata(stats, analysis_record_count, canonical_count):
+    """从上游统计与 manifest 动态读取双层语料口径。"""
+    manifest = json.loads(FULL_MANIFEST_JSON.read_text(encoding="utf-8"))
+    analysis_count = manifest.get("record_count")
+    canonical_evidence_count = manifest.get("canonical_count")
+    if analysis_count != analysis_record_count:
+        raise ValueError(
+            "sound per_poem 与 full manifest 数量不一致: "
+            f"per_poem={analysis_record_count}, manifest={analysis_count}"
+        )
+    if stats.get("generated_from_poems") != analysis_count:
+        raise ValueError("sound_stats generated_from_poems 与 full manifest 不一致")
+    if canonical_evidence_count != canonical_count:
+        raise ValueError(
+            "canonical 证据库与 full manifest 数量不一致: "
+            f"poems={canonical_count}, manifest={canonical_evidence_count}"
+        )
+    corpus_source = str(stats.get("corpus_source") or "")
+    corpus_path = str(stats.get("corpus_path") or "")
+    if corpus_source != "analysis_full" or not corpus_path:
+        raise ValueError(
+            "viz37 状态层必须来自 analysis_full，且必须公开 corpus_path"
+        )
+    return {
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
+        "analysis_count": analysis_count,
+        "canonical_evidence_count": canonical_evidence_count,
+    }
+
+
+def published_identity(record, canonical_poem=None):
+    work_id = str(record.get("work_id") or "").strip()
+    body_hash = str(record.get("body_hash") or "").strip()
+    if not work_id or not body_hash:
+        raise ValueError("sound per_poem 作品缺少 work_id/body_hash")
+    canonical_id = record.get("canonical_gushiwen_id") or None
+    if canonical_poem is not None:
+        expected_canonical_id = canonical_poem.get("source_poem_id") or None
+        expected_body_hash = canonical_poem.get("body_hash")
+        if expected_canonical_id and canonical_id != expected_canonical_id:
+            raise ValueError("sound per_poem 与 canonical 证据的作品 ID 不一致")
+        if expected_body_hash and body_hash != expected_body_hash:
+            raise ValueError("sound per_poem 与 canonical 证据的 body_hash 不一致")
+    return {
+        "work_id": work_id,
+        "canonical_gushiwen_id": canonical_id,
+        "body_hash": body_hash,
+    }
+
+
+def sound_record_for_canonical(indexes, poem):
+    poet = poem["author"]
+    canonical_id = poem.get("source_poem_id")
+    if canonical_id:
+        record = indexes["by_canonical_id"].get((poet, canonical_id))
+        if record is None:
+            raise KeyError(f"sound per_poem 缺少 canonical ID: {(poet, canonical_id)}")
+        return record
+    work_id = poem.get("work_id")
+    if work_id:
+        record = indexes["by_work_id"].get(work_id)
+        if record is None:
+            raise KeyError(f"sound per_poem 缺少 work_id: {work_id}")
+        return record
+    hash_key = (poet, poem.get("body_hash"))
+    candidates = indexes["by_body_hash"].get(hash_key, [])
+    if len(candidates) > 1:
+        raise ValueError(f"sound per_poem body_hash 非唯一，禁止回退: {hash_key}")
+    if not candidates:
+        raise KeyError(f"sound per_poem 缺少 canonical 正文: {hash_key}")
+    return candidates[0]
+
+
+def rank_for_canonical(ranked, indexes, poem):
+    target = sound_record_for_canonical(indexes, poem)
+    if target.get("work_id"):
+        matches = [
+            index for index, record in enumerate(ranked, 1)
+            if record.get("work_id") == target["work_id"]
+        ]
+    elif target.get("canonical_gushiwen_id"):
+        matches = [
+            index for index, record in enumerate(ranked, 1)
+            if record["poet"] == target["poet"]
+            and record.get("canonical_gushiwen_id")
+            == target["canonical_gushiwen_id"]
+        ]
+    else:
+        matches = [
+            index for index, record in enumerate(ranked, 1) if record is target
+        ]
+    if len(matches) != 1:
+        raise ValueError(
+            f"canonical 诗作排名无法唯一定位: "
+            f"{(poem['author'], poem['title'], poem['body_hash'])}"
+        )
+    return matches[0]
+
+
 def main() -> None:
     stats = json.loads(STATS_JSON.read_text(encoding="utf-8"))
     poems = json.loads(POEMS_JSON.read_text(encoding="utf-8"))
@@ -125,9 +274,9 @@ def main() -> None:
 
     per_poet = stats["per_poet"]
     per_poem = stats["per_poem"]
-    body_of = {}
-    for p in poems:
-        body_of.setdefault((p["author"], p["title"]), p["body"])
+    canonical_poems = index_canonical_poems(poems)
+    sound_records = index_sound_records(per_poem)
+    corpus_meta = load_dual_corpus_metadata(stats, len(per_poem), len(poems))
 
     # —— 全语料词频（证据句用）——
     corpus_words = Counter()
@@ -142,14 +291,18 @@ def main() -> None:
 
     # —— 最响篇目榜（含散文，如实标注体裁）——
     ranked = sorted(per_poem, key=lambda r: (-sum(n for _, n in r["hits"]), r["title"]))
-    top_poems = [[r["title"], r["poet"], sum(n for _, n in r["hits"]),
-                  GENRE_NOTE.get(r["title"], "诗")] for r in ranked[:6]]
+    top_poems = [
+        {
+            **published_identity(record),
+            "title": record["title"],
+            "poet": record["poet"],
+            "total": sum(n for _, n in record["hits"]),
+            "genre": GENRE_NOTE.get(record["title"], "诗"),
+        }
+        for record in ranked[:6]
+    ]
 
     # —— 六人卡片数据 ——
-    poem_rec = {}
-    for rec in per_poem:
-        poem_rec.setdefault((rec["poet"], rec["title"]), rec)
-
     poets_out = []
     for name in SIX_POETS:
         pp = per_poet[name]
@@ -159,7 +312,11 @@ def main() -> None:
             if rec["poet"] != name:
                 continue
             if rec["hits"]:
-                audible.append({"title": rec["title"], "hits": rec["hits"]})
+                audible.append({
+                    **published_identity(rec),
+                    "title": rec["title"],
+                    "hits": rec["hits"],
+                })
                 for w, n in rec["hits"]:
                     cat_counts[cat_of[w]] += n
         assert sum(cat_counts.values()) == pp["hits_total"], name
@@ -185,21 +342,23 @@ def main() -> None:
 
     # —— 明星案例：原文高亮（与统计逐词断言一致）——
     def build_poem(poet, title):
-        body = body_of[(poet, title)]
+        canonical_poem = select_canonical_poem(canonical_poems, poet, title)
+        body = canonical_poem["body"]
         segs, hits, marks = scan_positions(body, words_desc)
-        rec = poem_rec[(poet, title)]
+        rec = sound_record_for_canonical(sound_records, canonical_poem)
         assert hits == Counter(dict((w, n) for w, n in rec["hits"])), \
             "命中重算与 sound_stats 不一致: {} {}".format(poet, title)
-        out = {"title": title, "poet": poet,
+        out = {**published_identity(rec, canonical_poem),
+               "title": title, "poet": poet,
                "total": sum(hits.values()), "segs": segs,
                "hits": sorted(hits.items(), key=lambda kv: (-kv[1], kv[0]))}
         note = POEM_NOTES.get((poet, title))
         if note:
             out["note"] = note
-        return out, marks
+        return out, marks, canonical_poem
 
-    pipa, pipa_marks = build_poem("白居易", "琵琶行")
-    pipa_body = body_of[("白居易", "琵琶行")]
+    pipa, pipa_marks, pipa_canonical = build_poem("白居易", "琵琶行")
+    pipa_body = pipa_canonical["body"]
     preface_len = pipa_body.find("\n")
     pipa_pref_pp = sum(1 for s, e, w, k in pipa_marks
                       if k == "hit" and w == "琵琶" and s < preface_len)
@@ -209,8 +368,7 @@ def main() -> None:
     if li >= 0:
         line_hits = sum(1 for s, e, w, k in pipa_marks
                         if k == "hit" and li <= s < li + 7)
-    pipa_rank = next(i + 1 for i, rec in enumerate(ranked)
-                     if rec["poet"] == "白居易" and rec["title"] == "琵琶行")
+    pipa_rank = rank_for_canonical(ranked, sound_records, pipa_canonical)
     leader = ranked[0]
     leader_total = sum(n for _, n in leader["hits"])
     pipa_hit_map = dict(pipa["hits"])
@@ -229,7 +387,7 @@ def main() -> None:
     wangwei_pp = per_poet["王维"]
     ww_poems = []
     for poet, title in STAR_POEMS["wangwei"]:
-        po, _ = build_poem(poet, title)
+        po, _, _ = build_poem(poet, title)
         ww_poems.append(po)
     ww_total = sum(p["total"] for p in ww_poems)
     assert ww_total <= wangwei_pp["hits_total"], "王维精选案例命中不应超过全库命中"
@@ -255,7 +413,7 @@ def main() -> None:
                     cat_counts[cat_of[w]] += n
         ps = []
         for poet, title in STAR_POEMS[key]:
-            po, _ = build_poem(poet, title)
+            po, _, _ = build_poem(poet, title)
             ps.append(po)
         return {"name": name, "color": POET_COLORS[name],
                 "hits": pp["hits_total"], "chars": pp["chars_total"],
@@ -297,6 +455,7 @@ def main() -> None:
 
     data = {
         "meta": {
+            **corpus_meta,
             "dictSize": stats["dict_size"],
             "corpusPoems": stats["generated_from_poems"],
             "corpusPoets": len(per_poet),
@@ -317,13 +476,21 @@ def main() -> None:
     }
 
     OUT_DATA.parent.mkdir(parents=True, exist_ok=True)
-    OUT_DATA.write_text(json.dumps(data, ensure_ascii=False, indent=1),
-                        encoding="utf-8")
+    OUT_DATA.write_text(
+        json.dumps(data, ensure_ascii=False, indent=1),
+        encoding="utf-8",
+        newline="\n",
+    )
 
     data_js = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     six_counts = "、".join("{} {}首".format(p, per_poet[p]["poem_count"]) for p in SIX_POETS)
     html = (TEMPLATE.replace("__DATA__", data_js)
             .replace("__CORPUS_POEMS__", str(stats["generated_from_poems"]))
+            .replace("__ANALYSIS_COUNT__", str(corpus_meta["analysis_count"]))
+            .replace(
+                "__CANONICAL_EVIDENCE_COUNT__",
+                str(corpus_meta["canonical_evidence_count"]),
+            )
             .replace("__CORPUS_POETS__", str(len(per_poet)))
             .replace("__SIX_COUNTS__", six_counts)
             .replace("__PIPA_TOTAL__", str(pipa["total"]))
@@ -341,7 +508,7 @@ def main() -> None:
     assert 'name="viewport"' in html, "缺 viewport"
     assert "http://" not in html and "https://" not in html, "出现远程地址"
     assert '<script src="assets/pyecharts/v6/echarts.min.js"></script>' in html
-    OUT_HTML.write_text(html, encoding="utf-8")
+    OUT_HTML.write_text(html, encoding="utf-8", newline="\n")
     size = OUT_HTML.stat().st_size
     assert size >= 5000, "页面过小"
     print("[viz_37] OK  html={} bytes  data={} bytes  corpus_hits={}".format(
@@ -517,6 +684,16 @@ footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
   .wrap{padding:0 12px;}
   .poem-box{font-size:15px; padding:12px;}
 }
+/* 固定画幅背景：使用克制的音景方案，不改变既有内容布局。 */
+body{position:relative; min-height:100vh; background:transparent;}
+body::before{content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:url("assets/generated/remaining_pages_20260830/37_soundscape_v1.png") center center / cover no-repeat;}
+body::after{content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:rgba(242,244,240,.13);}
+body>header,body>.wrap{position:relative; z-index:1;}
+header{background:linear-gradient(180deg,rgba(238,241,236,.92),rgba(242,244,240,.82));}
+.audio-bar,.card,.star-block,details.method{background:rgba(251,252,250,.91); backdrop-filter:blur(1px);}
+.cat-pill,.chip,.mini-chip,.poem-box,.pcard,.border-col{background:rgba(255,255,255,.89);}
 </style>
 </head>
 <body>
@@ -526,8 +703,8 @@ footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
   <div class="wrap">
     <div class="eyebrow">诗行万里 · 参赛版 · 37</div>
     <h1>可听的诗<span class="accent">。</span></h1>
-    <p class="sub">给 __CORPUS_POEMS__ 首诗文做一次「录音」：只统计<b>被听见的声音</b>——猿声、砧杵、琵琶、戍鼓、松风、人语。
-      六类声音、八十八个词条，扫出每位诗人独有的声景指纹；再走进三间录音室，听《琵琶行》的一夜、王维的空山、盛唐的两种边声。</p>
+    <p class="sub">给状态层 __ANALYSIS_COUNT__ 首全作品做一次「录音」：只统计<b>被听见的声音</b>——猿声、砧杵、琵琶、戍鼓、松风、人语。
+      六类声音、八十八个词条，扫出每位诗人独有的声景指纹；明星案例则回到证据层 __CANONICAL_EVIDENCE_COUNT__ 首规范作品，逐字点亮《琵琶行》的一夜、王维的空山、盛唐的两种边声。</p>
     <div class="meta-strip" id="metaStrip"></div>
     <div class="audio-bar">
       <button id="audioToggle" aria-pressed="false">♪ 声音：关</button>
@@ -540,7 +717,7 @@ footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
 <div class="wrap">
 
 <section id="sec-corpus">
-  <div class="sec-head"><h2>全语料声音榜</h2><span class="tag">88 词条 · 六类 · 最长优先不重叠匹配</span></div>
+  <div class="sec-head"><h2>状态层 · 全作品声音榜</h2><span class="tag">88 词条 · 六类 · 最长优先不重叠匹配</span></div>
   <p class="sec-note">整个语料里最常被写下的声音。「歌」遥遥领先——古人写声音，首先写的是人自己发出的声音；其次才是鸣、啼这些自然的喉咙。条色即声音类别。</p>
   <div class="card"><div id="corpusChart" class="chart-wide"></div></div>
 </section>
@@ -553,7 +730,7 @@ footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
 </section>
 
 <section id="sec-star">
-  <div class="sec-head"><h2>明星案例 · 三间录音室</h2><span class="tag">原文命中逐词点亮，亮的即统计里算的</span></div>
+  <div class="sec-head"><h2>证据层 · 明星案例三间录音室</h2><span class="tag">稳定 ID 回配原文；亮的即统计里算的</span></div>
 
   <div class="star-block" id="starPipa">
     <h3>一、《琵琶行》：一首诗铺开的音墙 <span class="who">白居易 · __PIPA_TOTAL__ 次命中 · 全库第 __PIPA_RANK__</span></h3>
@@ -599,7 +776,9 @@ footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 34px;
   <p>语料 __CORPUS_POEMS__ 篇中混有散文、赋、传奇与组诗合刊。当前单篇命中榜首为 __TOP_AUTHOR__《__TOP_TITLE__》（__TOP_TOTAL__ 次）；议论复沓、合刊篇幅与听觉场景并非同一概念，因此榜单逐项标注体裁。全语料统计数字（含声音榜的「鸣」__MING_TOTAL__ 次）不做体裁剔除，如实保留。</p>
   <h4>语料与样本口径</h4>
   <ul>
-    <li>当前语料覆盖 __CORPUS_POETS__ 位诗人、__CORPUS_POEMS__ 篇；六人样本为 __SIX_COUNTS__。所有占比、密度、无声诗占比只在本语料口径内成立。</li>
+    <li><b>状态层</b>来自 <code>analysis_full</code>，覆盖 __CORPUS_POETS__ 位诗人、__ANALYSIS_COUNT__ 首全作品；声音总量、密度与无声诗占比均由这一层计算。</li>
+    <li><b>证据层</b>为 __CANONICAL_EVIDENCE_COUNT__ 首 canonical 规范作品，仅用于明星案例原文与可核证据。每条发布作品均保留 <code>work_id</code>、可空的 <code>canonical_gushiwen_id</code> 与 <code>body_hash</code>，不按同名标题串联。</li>
+    <li>六人状态样本为 __SIX_COUNTS__。所有占比、密度、无声诗占比只在本语料口径内成立。</li>
     <li>单篇长诗、组诗合刊或散文仍可能显著主导总命中，页面同时给出篇数、字数、密度与无声占比，避免只看一个总数。</li>
     <li>「无声诗占比」＝整首未出现词典内声音词的诗占比，是词典口径下的近似，不等于真实世界的无声。</li>
   </ul>
@@ -865,7 +1044,8 @@ function renderSegs(container, segs){
 /* ───────── 页眉数据条 / 类别图例 ───────── */
 (function(){
   var m = D.meta, ms = document.getElementById("metaStrip");
-  [["语料", fmt(m.corpusPoems) + " 篇 · " + fmt(m.corpusPoets) + " 位诗人"],
+  [["状态层", fmt(m.analysis_count) + " 首 · " + fmt(m.corpusPoets) + " 位诗人"],
+   ["证据层", fmt(m.canonical_evidence_count) + " 首规范作品"],
    ["声音词典", fmt(m.dictSize) + " 词条 · 六类"],
    ["全语料命中", fmt(m.corpusHits) + " 次"],
    ["排除表", fmt(m.excludeCount) + " 个已知误报片段"]].forEach(function(kv){
@@ -974,7 +1154,11 @@ var baseText = { color:"#252b27", fontFamily:'"Microsoft YaHei",sans-serif' };
     det.appendChild(el("div", "mut", "其余 " + p.quietN + " 首整首未出现词典内声音词。"));
     card.appendChild(det);
     grid.appendChild(card);
-    var ch = mkChart(rose);
+    pending.push({ rose:rose, poet:p });
+  });
+  pending.forEach(function(item){
+    var p = item.poet;
+    var ch = mkChart(item.rose);
     if (ch){
       var data = D.cats.map(function(c){
         return { name:c.name, value:p.catCounts[c.name], itemStyle:{ color:c.color } };
@@ -1011,10 +1195,10 @@ var baseText = { color:"#252b27", fontFamily:'"Microsoft YaHei",sans-serif' };
   tbl.appendChild(thead);
   D.topPoems.forEach(function(r){
     var tr = el("tr");
-    tr.appendChild(el("td", "kai", "《" + r[0] + "》"));
-    tr.appendChild(el("td", "", r[1]));
-    tr.appendChild(el("td", "", String(r[2])));
-    var g = el("td", (r[3] === "散文" || r[3] === "骈文") ? "genre-prose" : "", r[3]);
+    tr.appendChild(el("td", "kai", "《" + r.title + "》"));
+    tr.appendChild(el("td", "", r.poet));
+    tr.appendChild(el("td", "", String(r.total)));
+    var g = el("td", (r.genre === "散文" || r.genre === "骈文") ? "genre-prose" : "", r.genre);
     tr.appendChild(g);
     tbl.appendChild(tr);
   });

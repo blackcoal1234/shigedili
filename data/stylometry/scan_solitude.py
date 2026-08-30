@@ -1,8 +1,7 @@
 """扫描语料：人称与孤独感维度（stylometry）。
 
 流程：
-1. 把 data/poems.json 复制为本目录快照 poems_snapshot_solitude.json 再解析
-   （另一工作流可能正在写 poems.json；解析失败等 5 秒重新复制重试）。
+1. 通过统一 loader 严格读取全作品分析语料；缺失或 manifest 失配即失败。
 2. 用 solitude_dict.py 按"最长优先、不重叠"贪心匹配全部诗歌正文。
 3. 输出 solitude_stats.json（统一结构 schema_version=1）。
 
@@ -18,45 +17,23 @@ per_poet 维度特有字段：
 用法：python scan_solitude.py
 """
 
-import hashlib
-import json
 import os
 import re
-import shutil
 import sys
-import time
 from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
-POEMS_PATH = os.path.join(ROOT, "data", "poems.json")
-SNAPSHOT_PATH = os.path.join(HERE, "poems_snapshot_solitude.json")
 OUT_PATH = os.path.join(HERE, "solitude_stats.json")
 
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(ROOT, "tools"))
 import solitude_dict  # noqa: E402
+from famous_poet_corpus import atomic_dump_json, load_analysis_poems  # noqa: E402
 
 CORE_POETS = ["李白", "杜甫", "白居易", "苏轼", "陆游", "李清照"]
 CJK_RE = re.compile(r"[一-鿿]")
 LINE_SPLIT_RE = re.compile(r"[，。！？；：、,.!?;:\s]+")
-
-
-def load_poems(max_attempts: int = 6) -> list[dict]:
-    """复制快照后解析；失败等 5 秒重新复制重试（并发写保护）。"""
-    last_err = None
-    for attempt in range(1, max_attempts + 1):
-        try:
-            shutil.copyfile(POEMS_PATH, SNAPSHOT_PATH)
-            with open(SNAPSHOT_PATH, encoding="utf-8") as f:
-                data = json.load(f)
-            if isinstance(data, list) and data:
-                return data
-            raise ValueError("快照不是非空列表")
-        except (OSError, ValueError, UnicodeDecodeError, json.JSONDecodeError) as e:
-            last_err = e
-            print(f"[scan_solitude] 第 {attempt} 次读取快照失败: {e}；5 秒后重试")
-            time.sleep(5)
-    raise RuntimeError(f"连续 {max_attempts} 次无法解析 poems.json: {last_err}")
 
 
 def build_matcher():
@@ -93,7 +70,18 @@ def main() -> None:
     except Exception:
         pass
 
-    poems = load_poems()
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        forbidden_fallback = "data/poems.json"
+        raise RuntimeError(
+            f"状态统计必须使用全作品语料，实际来源：{corpus_source}；"
+            f"禁止回退 {forbidden_fallback}"
+        )
+    corpus_path = (
+        "data/analysis/famous_poets_full.jsonl.gz"
+        if corpus_source == "analysis_full"
+        else "data/poems.json"
+    )
     entries, max_len = build_matcher()
 
     per_poem_out = []
@@ -103,9 +91,7 @@ def main() -> None:
         poet = poem.get("poet") or poem.get("author") or "佚名"
         title = poem.get("title", "")
         body = poem.get("body", "") or ""
-        body_hash = poem.get("body_hash") or hashlib.sha256(
-            body.encode("utf-8")
-        ).hexdigest()
+        body_hash = poem.get("body_hash", "")
 
         hits = match_text(body, entries, max_len)
         chars = cjk_count(body)
@@ -156,6 +142,8 @@ def main() -> None:
             {
                 "title": title,
                 "poet": poet,
+                "work_id": poem.get("work_id"),
+                "canonical_gushiwen_id": poem.get("canonical_gushiwen_id"),
                 "body_hash": body_hash,
                 "hits": sorted(hits.items(), key=lambda kv: (-kv[1], kv[0])),
             }
@@ -194,14 +182,15 @@ def main() -> None:
 
     out = {
         "schema_version": 1,
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
         "dict_size": len(solitude_dict.SOLITUDE_DICT),
         "generated_from_poems": len(poems),
         "dimension": "人称与孤独感",
         "per_poet": per_poet_out,
         "per_poem": per_poem_out,
     }
-    with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=1)
+    atomic_dump_json(OUT_PATH, out)
 
     print(f"[scan_solitude] 已写出 {OUT_PATH}")
     print(f"  语料 {len(poems)} 首 / 诗人 {len(per_poet_out)} 位 / 词典 {out['dict_size']} 条")

@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "source_policy": {
+    "wikisource": {
+      "allowed_domains": ["wikisource.org"],
+      "claim_types": ["original_text", "version"],
+      "constraint_level": "primary_text_only",
+      "reuse_rule": "original text/version checks only"
+    },
+    "souyun": {
+      "allowed_domains": ["sou-yun.cn", "souyun.cn"],
+      "claim_types": ["annotation", "allusion", "prosody", "provenance"],
+      "constraint_level": "reviewed_summary_only",
+      "reuse_rule": "rephrase reviewed summaries only"
+    },
+    "ctext": {
+      "allowed_domains": ["ctext.org"],
+      "claim_types": ["classical_source", "allusion", "provenance"],
+      "constraint_level": "primary_text_summary_only",
+      "reuse_rule": "use reviewed classical-source summaries only"
+    },
+    "gushiwen": {
+      "allowed_domains": ["gushiwen.cn"],
+      "claim_types": ["manual_comparison", "soft_reference"],
+      "constraint_level": "soft_reference_no_copy",
+      "reuse_rule": "manual comparison only; never copy modern translation or appreciation"
+    }
+  },
+  "note": "Initial entries are Codex-reviewed prompt evidence, not human publication sign-off. Approval only permits the short paraphrased summary to constrain generation; it never permits copying a site's modern translation or appreciation.",
+  "items": [
+    {
+      "reference_id": "R_GSW_DFF32E2D7FE6_01",
+      "poem_key": {
+        "poem_id": "dff32e2d7fe6",
+        "title": "从驾闾山咏马",
+        "poet": "上官仪",
+        "body_hash": "70e42f157637ad5b8949c8417a58720fc05b543f9bab18623b737d0082bfdcc5"
+      },
+      "source_key": "gushiwen",
+      "source_name": "古文岛（原古诗文网）",
+      "source_url": "https://www.gushiwen.cn/shiwenv_dff32e2d7fe6.aspx",
+      "claim_types": ["manual_comparison", "soft_reference"],
+      "evidence_summary": "页面收录原文与注释，可供人工交叉核对：前两句把马饰香气、丝练形影置于征尘与月光中，后两句并置马的行止受制和塞翁之叹。仅作软参考，不复制其现代译文或赏析。",
+      "status": "approved",
+      "approval_scope": "prompt_evidence_only_not_human_publication_review",
+      "reviewer": "codex-assisted-source-review",
+      "reviewed_at": "2026-08-23"
+    },
+    {
+      "reference_id": "R_GSW_CDE6015C58E0_01",
+      "poem_key": {
+        "poem_id": "cde6015c58e0",
+        "title": "入朝洛堤步月",
+        "poet": "上官仪",
+        "body_hash": "88b630de8a43a6e00989c18df31ca3527c23c8faaf7aa9ef4ba09f42e00223f7"
+      },
+      "source_key": "gushiwen",
+      "source_name": "古文岛（原古诗文网）",
+      "source_url": "https://www.gushiwen.cn/shiwenv_cde6015c58e0.aspx",
+      "claim_types": ["manual_comparison", "soft_reference"],
+      "evidence_summary": "页面收录原文、注释及背景，可供人工交叉核对：前两句写洛水与驱马行经长洲，后两句以山月将曙、鹊飞、蝉噪和秋风组织清晨景象；页面另将作品置于入朝候朝语境。仅作软参考，不复制现代译赏。",
+      "status": "approved",
+      "approval_scope": "prompt_evidence_only_not_human_publication_review",
+      "reviewer": "codex-assisted-source-review",
+      "reviewed_at": "2026-08-23"
+    }
+  ]
+}

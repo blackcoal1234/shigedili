@@ -7,7 +7,7 @@
 
 口径（与页面"方法与数据"折叠区一致）：
 - 身层：data/reviewed/poet_journeys.json 人工审核节点按年连线。
-- 心层：扫描 poems.json 中该诗人全部诗正文，用 data/place_dict.py（仅取
+- 心层：扫描 analysis_full 中该诗人全部作品正文，用 data/place_dict.py（仅取
   两字及以上古名，剔除单字古称防误匹配）做最长匹配，提取"诗中提及地"；
   与创作地同城（县级归一后比较）的提及不入心层，单独计数。
 - 弧线：有编年创作地（reviewed 已审核优先，candidates 候选次之，D 级剔除）
@@ -33,10 +33,16 @@ import json
 import math
 import os
 import re
+import sys
 from collections import OrderedDict
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+from tools.famous_poet_corpus import load_analysis_poems
+
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
 
 POETS = OrderedDict([
     ("李白", "#426f94"),
@@ -156,6 +162,15 @@ def split_sentences(body):
     return [s.strip() for s in re.split(r"[。！？；\n]+", body) if s.strip()]
 
 
+def index_exact_canonical_by_title(poems):
+    """仅索引诗人/诗题下唯一的 exact canonical 行，歧义题不挂编年。"""
+    grouped = {}
+    for poem in poems:
+        if poem.get("canonical_match") and poem.get("canonical_gushiwen_id"):
+            grouped.setdefault((poem["poet"], poem["title"]), []).append(poem)
+    return {key: rows[0] for key, rows in grouped.items() if len(rows) == 1}
+
+
 def main():
     place_mod = load_module("pd32", "data/place_dict.py")
     spirit_mod = load_module("sd32", "data/spirit_image_dict.py")
@@ -190,14 +205,16 @@ def main():
         return sum(vals) / len(vals)
 
     # ---- 诗集 ----
-    poems = json.load(open(os.path.join(ROOT, "data/poems.json"), encoding="utf-8"))
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    poems = [pm for pm in poems if pm["poet"] in POETS]
+    exact_canonical = index_exact_canonical_by_title(poems)
     poems_by_poet = {p: [] for p in POETS}
     for pm in poems:
-        if pm["author"] in poems_by_poet:
-            poems_by_poet[pm["author"]].append(pm)
+        if pm["poet"] in poems_by_poet:
+            poems_by_poet[pm["poet"]].append(pm)
 
     # ---- 编年创作地：reviewed 优先，candidates 兜底，D 级剔除 ----
-    comp = {}           # (poet, title) -> dict
+    comp = {}           # canonical_gushiwen_id -> dict
     d_dropped = {p: 0 for p in POETS}
 
     def year_label(r):
@@ -213,7 +230,10 @@ def main():
         if poet not in POETS:
             return
         title = TITLE_ALIASES.get((poet, r["title"].strip()), r["title"].strip())
-        key = (poet, title)
+        canonical = exact_canonical.get((poet, title))
+        if not canonical:
+            return
+        key = canonical["canonical_gushiwen_id"]
         if key in comp:
             return
         try:
@@ -226,6 +246,10 @@ def main():
             "lon": lon, "lat": lat,
             "year": year_label(r),
             "badge": badge + "·" + (r.get("fact_grade") or "?").strip(),
+            "work_id": canonical["work_id"],
+            "body_hash": canonical.get("body_hash", ""),
+            "canonical_gushiwen_id": key,
+            "canonical_match": True,
         }
 
     with open(os.path.join(ROOT, "data/reviewed/verified_poem_contexts.csv"),
@@ -276,8 +300,7 @@ def main():
         stopped = 0
         seen_sent = set()      # (地名, 句) 句级去重：同句重复与异文重出只计一次
         for pm in plist:
-            key = (poet, pm["title"])
-            cp = comp.get(key)
+            cp = comp.get(pm.get("canonical_gushiwen_id")) if pm.get("canonical_match") else None
             for sent in split_sentences(pm["body"]):
                 hits = list(place_re.finditer(sent))
                 if not hits:
@@ -293,9 +316,9 @@ def main():
                         stop_applied.append({"poet": poet, "t": pm["title"],
                                              "m": name, "s": sent, "r": reason})
                         continue
-                    if (name, sent) in seen_sent:
+                    if (pm["work_id"], name, sent) in seen_sent:
                         continue
-                    seen_sent.add((name, sent))
+                    seen_sent.add((pm["work_id"], name, sent))
                     info = place_info[name]
                     tgt_norm = norm_city(info["modern"])
                     if cp and same_city(info["modern"], cp["city"]):
@@ -314,6 +337,10 @@ def main():
                         rec["old"].append(name)
                     rec["ev"].append({
                         "t": pm["title"], "m": name, "s": sent, "v": v,
+                        "work_id": pm["work_id"], "body_hash": pm.get("body_hash", ""),
+                        "canonical_gushiwen_id": pm.get("canonical_gushiwen_id"),
+                        "canonical_match": bool(pm.get("canonical_match")),
+                        "source_url": pm.get("source_url", ""),
                         "b": cp["badge"] if cp else "", "y": cp["year"] if cp else ""})
                     if cp:
                         akey = (norm_city(cp["city"]), tgt_norm)
@@ -326,6 +353,10 @@ def main():
                         arec["vals"].append(v)
                         arec["ev"].append({
                             "t": pm["title"], "m": name, "s": sent, "v": v,
+                            "work_id": pm["work_id"], "body_hash": pm.get("body_hash", ""),
+                            "canonical_gushiwen_id": pm.get("canonical_gushiwen_id"),
+                            "canonical_match": True,
+                            "source_url": pm.get("source_url", ""),
                             "b": cp["badge"], "y": cp["year"]})
 
         mention_list = sorted(mentions.values(), key=lambda r: -r["count"])
@@ -359,12 +390,18 @@ def main():
                         stop_applied.append({"poet": poet, "t": pm["title"],
                                              "m": name, "s": sent, "r": reason})
                         continue
-                    if (name, sent) in sky_seen:
+                    if (pm["work_id"], name, sent) in sky_seen:
                         continue
-                    sky_seen.add((name, sent))
+                    sky_seen.add((pm["work_id"], name, sent))
                     cnt += 1
                     if len(ev) < 30:
-                        ev.append({"t": pm["title"], "s": sent})
+                        ev.append({
+                            "t": pm["title"], "s": sent,
+                            "work_id": pm["work_id"], "body_hash": pm.get("body_hash", ""),
+                            "canonical_gushiwen_id": pm.get("canonical_gushiwen_id"),
+                            "canonical_match": bool(pm.get("canonical_match")),
+                            "source_url": pm.get("source_url", ""),
+                        })
             if cnt:
                 sky.append({"name": name, "note": note, "count": cnt, "ev": ev})
         sky.sort(key=lambda s: -s["count"])
@@ -385,7 +422,10 @@ def main():
         else:
             coef = round(area_h / area_b, 2)
 
-        dated = sum(1 for pm in plist if (poet, pm["title"]) in comp)
+        dated = sum(
+            1 for pm in plist
+            if pm.get("canonical_match") and pm.get("canonical_gushiwen_id") in comp
+        )
         out_poets.append({
             "name": poet, "color": color,
             "journey": journey_by_poet.get(poet, []),
@@ -407,6 +447,13 @@ def main():
 
     data = {
         "generated_at": date.today().isoformat(),
+        "corpus_source": corpus_source,
+        "corpus_path": CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+        "analysis_count": len(poems),
+        "canonical_evidence_count": sum(
+            1 for poet in out_poets for mention in poet["mentions"]
+            for evidence in mention["ev"] if evidence["canonical_match"]
+        ),
         "method_brief": ("身层=审核行旅节点连线；心层=诗中地名最长匹配散点（排除与创作地同城提及）；"
                          "弧=编年创作地→提及地，宽为频次、色为句情感值；系数=心层凸包面积/身层凸包面积"
                          "（正弦等积投影+鞋带公式，球面近似）。"),
@@ -545,6 +592,21 @@ footer.navbar a{color:var(--blue);text-decoration:none;}
 footer.navbar a:hover{text-decoration:underline;}
 footer.navbar .cur{color:var(--cinnabar);font-weight:700;}
 footer.navbar .home{font-weight:700;}
+/* ---- 固定主题背景：山河星河（用户选定 A） ---- */
+html{background:#10171d;}
+body{position:relative;isolation:isolate;background:transparent;color:#eef2ed;}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:url("assets/generated/page32_body_mind_candidates_20260829_v1/A_山河星河.png") center center/cover no-repeat;}
+.wrap{position:relative;z-index:1;}
+:root{--paper:#10171d;--ink:#eef2ed;--muted:#c2cbc6;--line:rgba(226,235,230,.24);}
+.card,details.method{background:rgba(13,22,28,.86);box-shadow:0 8px 24px rgba(0,0,0,.24);}
+.mapcard{background:rgba(244,247,243,.91);color:#252b27;--ink:#252b27;--muted:#626b67;--line:#c9d0ca;}
+.sky{background:linear-gradient(180deg,rgba(226,233,240,.94),rgba(241,244,240,.91));}
+.coefchip{background:rgba(251,252,250,.91);color:#252b27;}
+.layers button{background:rgba(255,255,255,.88);color:#626b67;}
+.layers button.on{background:#eef1ec;color:#252b27;border-color:#252b27;}
+.ev .s{color:#e1e7e3;}
+th{background:rgba(238,243,239,.12);}
 @media (max-width:980px){
  .grid{grid-template-columns:minmax(0,1fr);}
  #map{height:430px;}
@@ -603,13 +665,14 @@ footer.navbar .home{font-weight:700;}
  <h4>数据来源</h4>
  <ul>
   <li>身层：data/reviewed/poet_journeys.json 六诗人 38 个人工审核行旅节点（A/B/C 分级），连线只表示节点时间先后，不代表实际路线。</li>
-  <li>心层：data/poems.json 六诗人全部入库诗作正文；地名匹配用 data/place_dict.py 最长匹配。__DICT_NOTE__</li>
+  <li>心层：data/analysis/famous_poets_full.jsonl.gz 六诗人全作品正文；地名匹配用 data/place_dict.py 最长匹配。__DICT_NOTE__</li>
+  <li>双层数据：心层地名、凸包与天界带使用 analysis_full；编年、创作地与弧线只附在 data/poems.json 的 exact canonical match 行，同题上游异文不继承事实。</li>
   <li>编年创作地：data/reviewed/verified_poem_contexts.csv（已审核）优先，data/candidates/ 六人编年候选表（候选/推定，页面弧线证据带徽章）兜底；<b>D 级一律不入计算</b>。</li>
   <li>句情感值：data/spirit_image_dict.py __SPIRIT_COUNT__ 词条（人工整理词典，非模型输出），句内命中意象词情感值取均值，无命中记 0（灰）。</li>
  </ul>
  <h4>心层与弧线口径</h4>
  <ul>
-  <li>频次按"句"计：同一句内同一地名重复出现、以及完全相同的句子被重复收录（同题异文、组诗与选本重出，如《忆江南》与《忆江南词三首》首句）只计一次。</li>
+  <li>频次按“work_id—句”计：同一作品同一句内同一地名重复只计一次；不同稳定作品行均参与全作品聚合。</li>
   <li>与创作地同城（行政名取县级归一后比较）的提及不入心层——写当地不算"心的远行"；排除次数见下表。</li>
   <li>只有具备编年创作地的诗才画 创作地→提及地 弧线；弧宽=该城市对的提及频次，弧色=提及句情感值（红=愁、绿=豪、灰=中性）。</li>
   <li>无编年创作地的诗，其提及地仍画半透明散点（无法画弧）。</li>

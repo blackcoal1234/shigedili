@@ -8,7 +8,7 @@
 算法口径：
   - Monroe, Colaresi & Quinn (2008) "Fightin' Words" 的
     log-odds with informative Dirichlet prior，以单字（字符级）为统计单元。
-  - 对比组：六核心诗人各自语料 vs poems.json 当前全量背景语料（背景含其本人，任务给定口径，
+  - 对比组：六核心诗人各自全作品 vs analysis_full 全量背景语料（背景含其本人，
     这会略微压低 z、结论偏保守，方法区如实说明）。
   - 先验：alpha_w = ALPHA0 * 背景频率(w)，ALPHA0 = 1000。
   - 去一切非汉字字符；自建停用字表（STOP_CHARS，方法区逐字列出）；
@@ -26,7 +26,11 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-POEMS_PATH = ROOT / "data" / "poems.json"
+sys.path.insert(0, str(ROOT))
+from tools.famous_poet_corpus import load_analysis_poems
+
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
 OUT_HTML = ROOT / "output" / "34_一字识诗人.html"
 OUT_JSON = ROOT / "output" / "assets" / "competition" / "fingerprint_data.json"
 
@@ -70,8 +74,7 @@ def split_display_lines(body: str):
 
 
 def load_corpora():
-    with open(POEMS_PATH, encoding="utf-8") as f:
-        poems = json.load(f)
+    poems, corpus_source = load_analysis_poems(fallback=False)
     bg_counter = Counter()
     bg_chars = 0
     per_poet = {k: [] for k, _, _ in POETS}
@@ -83,7 +86,7 @@ def load_corpora():
         bg_chars += len(text)
         if who in name2key:
             per_poet[name2key[who]].append(p)
-    return poems, per_poet, bg_counter, bg_chars
+    return poems, per_poet, bg_counter, bg_chars, corpus_source
 
 
 # ---------------------------------------------------------------- log-odds
@@ -119,18 +122,29 @@ def center_out_order(n: int):
 def collect_examples(poet_poems, ch: str):
     """该字原句：先每诗取首个命中句保证诗目多样，再补第二命中句，至多 MAX_EXAMPLES。"""
     first_pass, second_pass = [], []
-    for p in poet_poems:
+    ordered = sorted(
+        poet_poems,
+        key=lambda p: (not bool(p.get("canonical_match")), str(p.get("work_id") or "")),
+    )
+    for p in ordered:
         hits = [ln for ln in split_display_lines(p["body"]) if ch in ln]
         if hits:
-            first_pass.append({"l": hits[0], "t": p["title"]})
+            identity = {
+                "l": hits[0], "t": p["title"], "work_id": p.get("work_id"),
+                "body_hash": p.get("body_hash", ""),
+                "canonical_gushiwen_id": p.get("canonical_gushiwen_id"),
+                "canonical_match": bool(p.get("canonical_match")),
+                "source_url": p.get("source_url", ""),
+            }
+            first_pass.append(identity)
             for extra in hits[1:]:
-                second_pass.append({"l": extra, "t": p["title"]})
+                second_pass.append({**identity, "l": extra})
     return (first_pass + second_pass)[:MAX_EXAMPLES]
 
 
 # ---------------------------------------------------------------- 构建
 def build():
-    poems, per_poet, bg_counter, n_bg = load_corpora()
+    poems, per_poet, bg_counter, n_bg, corpus_source = load_corpora()
     rng = random.Random(3407)
 
     poets_out = []
@@ -181,14 +195,19 @@ def build():
             rng.shuffle(chars)
             quiz.append({
                 "a": key,
-                "chars": [{"c": c,
-                           "l": example_of[key][c]["l"],
-                           "t": example_of[key][c]["t"]} for c in chars],
+                "chars": [{"c": c, **example_of[key][c]} for c in chars],
             })
     rng.shuffle(quiz)
     assert len(quiz) >= 10
 
     data = {
+        "corpus_source": corpus_source,
+        "corpus_path": CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+        "analysis_count": len(poems),
+        "canonical_evidence_count": sum(
+            1 for poet in poets_out for item in poet["top"]
+            for example in item["ex"] if example["canonical_match"]
+        ),
         "meta": {
             "page": "34_一字识诗人",
             "method": "char-level log-odds with informative Dirichlet prior (Monroe et al. 2008)",
@@ -198,6 +217,13 @@ def build():
             "stop_chars": STOP_STR,
             "n_bg_poems": len(poems),
             "n_bg_chars": n_bg,
+            "corpus_source": corpus_source,
+            "corpus_path": CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+            "analysis_count": len(poems),
+            "canonical_evidence_count": sum(
+                1 for poet in poets_out for item in poet["top"]
+                for example in item["ex"] if example["canonical_match"]
+            ),
             "note": "背景语料含六人本人诗作（任务给定口径，z 偏保守）；z 仅作各诗人内部排序，不跨诗人比较。",
         },
         "poets": poets_out,
@@ -273,6 +299,15 @@ details.method code{background:#eef1ec;border-radius:4px;padding:0 4px;font-size
 footer.nav{margin-top:34px;border-top:1px solid #d8ddd6;padding:16px 8px 30px;text-align:center;font-size:13px;}
 footer.nav a{color:var(--blue);text-decoration:none;margin:0 9px;white-space:nowrap;line-height:2;}
 footer.nav a:hover{color:var(--cinnabar);}
+/* ---- 固定主题背景：字纹指印 ---- */
+html{background:#e9e7df;}
+body{position:relative;isolation:isolate;background:transparent;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+ background:url("assets/generated/remaining_pages_20260830/34_character_fingerprint_v1.png") center center/cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:rgba(248,247,241,.25);}
+.wrap{position:relative;z-index:1;}
+.panel,.fcard,details.method{background:rgba(251,252,250,.89);}
+.qchar,.opt{background:rgba(251,252,250,.92);}
 @media (max-width:480px){
   header.top h1{font-size:26px;letter-spacing:3px;}
   .qchar{width:62px;height:62px;font-size:38px;}
@@ -328,7 +363,7 @@ footer.nav a:hover{color:var(--cinnabar);}
     <li><b>样本差异声明</b>：六人实时样本为 __STATLINE__。语料越大，同等偏差的 |z| 越大，因此 <b>z 只用于各诗人内部排序与字号映射，不做跨诗人比较</b>；六张卡片之间的字号大小亦不可横向对比。</li>
     <li><b>证据句</b>：点击任意签名字即展开该字在其诗中的原句（至多 8 句，优先每诗取一句保证诗目多样，命中字以朱色高亮，附诗题）；卡片角标的篇数/字数即统计分母，可与方法区公式互核。</li>
     <li><b>竞猜题库</b>：构建时预生成 12 题（每人 2 题），每题 4 字取自该诗人 top-10 且尽量避开与他人 top-20 重合的字；页面内作答顺序随机打乱；纯本地 JS，无外部依赖。</li>
-    <li><b>局限</b>：每人语料是代表作抽样而非全集（如白居易含《长恨歌》《琵琶行》两首长篇，叙事用字权重被放大）；李清照为词体，与诗体的文体差异也会进入签名字。本页不涉及编年推断，无候选/推定分级问题。</li>
+    <li><b>局限</b>：本页使用 analysis_full 全作品，仍受上游收录边界、异文合并和规则词表限制；李清照为词体，与诗体的文体差异也会进入签名字。本页不涉及编年推断。</li>
   </ul>
 </details>
 
@@ -399,7 +434,8 @@ function openModal(key, idx){
     'z='+t.z.toFixed(1)+' · 在其诗中出现 '+t.cnt+' 次（每千字 '+t.fp+'）· 背景每千字 '+t.fb;
   var htm = '';
   t.ex.forEach(function(e){
-    htm += '<div class="exline">「'+hl(e.l, t.ch)+'」<span class="src">——《'+esc(e.t)+'》</span></div>';
+    var title = e.source_url ? '<a href="'+esc(e.source_url)+'" target="_blank" rel="noopener">《'+esc(e.t)+'》</a>' : '《'+esc(e.t)+'》';
+    htm += '<div class="exline">「'+hl(e.l, t.ch)+'」<span class="src">——'+title+'</span></div>';
   });
   document.getElementById('mBody').innerHTML = htm;
   mask.classList.add('on');
@@ -466,7 +502,7 @@ function answer(key, btn){
   htm += '<div class="qsrc">';
   q.chars.forEach(function(c){
     htm += '<div class="exline"><b style="color:'+po.color+'">'+c.c+'</b> · 「'+hl(c.l, c.c)+
-      '」<span class="src">——《'+esc(c.t)+'》</span></div>';
+      '」<span class="src">——'+(c.source_url ? '<a href="'+esc(c.source_url)+'" target="_blank" rel="noopener">《'+esc(c.t)+'》</a>' : '《'+esc(c.t)+'》')+'</span></div>';
   });
   htm += '</div>';
   document.getElementById('qrBody').innerHTML = htm;

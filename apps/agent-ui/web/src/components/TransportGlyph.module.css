@@ -1,10 +1,10 @@
 .glyph {
-  --cut-ink: #2e3531;
-  --cut-indigo: #395f78;
-  --cut-cinnabar: #a74637;
-  --cut-jade: #5d7767;
-  --cut-gold: #927b56;
-  --cut-paper: rgba(255, 250, 239, 0.92);
+  --cut-ink: #efcb7d;
+  --cut-indigo: #9cc4e8;
+  --cut-cinnabar: #e89b8d;
+  --cut-jade: #9fd4bb;
+  --cut-gold: #d9a84e;
+  --cut-paper: rgba(10, 14, 22, 0.9);
   display: block;
   width: 36px;
   height: 42px;
@@ -52,7 +52,7 @@
 
 .arrivalRing {
   fill: none;
-  stroke: var(--cut-cinnabar);
+  stroke: var(--cut-gold);
   stroke-width: 1.3px;
   opacity: 0;
   transform-box: fill-box;

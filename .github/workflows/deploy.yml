@@ -67,6 +67,14 @@ jobs:
             --entry-point poetry_agent.main:run \
             --output-file release/poetry-agent.pex
 
+      - name: Verify static release artifacts
+        run: |
+          python tools/famous_poet_corpus.py check --no-source-verify
+          sed -i 's/\r$//' output/assets/poem_page/poem_page_data.js
+          python tools/check_poem_page_data.py
+          python tools/check_output_index.py
+          python tools/check_theme_outputs.py
+
       - name: Package releases
         shell: bash
         run: |
@@ -85,6 +93,8 @@ jobs:
             apps/agent-ui/agent/poetry_agent \
             apps/agent-ui/agent/pyproject.toml \
             apps/agent-ui/agent/requirements.lock \
+            tools/build_rich_guides_llm.py \
+            tools/build_poem_page_data.py \
             data \
             output/assets/competition \
             "数据可视化脚本/viz_33_year759.py" \
@@ -116,6 +126,44 @@ jobs:
           )
           PY
           tar -C release/api -czf release/api-release.tar.gz .
+          (
+            cd release/api
+            env \
+              -u AGENT_LLM_BASE_URL \
+              -u AGENT_LLM_API_KEY \
+              -u AGENT_LLM_MODEL \
+              python -I - <<'PY'
+          import sys
+          from pathlib import Path
+
+          root = Path.cwd().resolve()
+          tools_dir = root / "tools"
+          sys.path.insert(0, str(tools_dir))
+
+          import build_rich_guides_llm as rich_guides
+
+          expected_paths = {
+              "build_rich_guides_llm": tools_dir / "build_rich_guides_llm.py",
+              "build_poem_page_data": tools_dir / "build_poem_page_data.py",
+          }
+          actual_paths = {
+              "build_rich_guides_llm": Path(rich_guides.__file__).resolve(),
+              "build_poem_page_data": Path(rich_guides.ppd.__file__).resolve(),
+          }
+          if actual_paths != expected_paths:
+              raise RuntimeError(f"API release imported unexpected modules: {actual_paths}")
+
+          required_ppd_api = ("load_approved_backgrounds", "load_promoted_facts")
+          missing = [name for name in required_ppd_api if not callable(getattr(rich_guides.ppd, name, None))]
+          if missing:
+              raise RuntimeError(f"build_poem_page_data API missing: {missing}")
+          if rich_guides.ppd.load_promoted_facts(
+              root / "__release_import_smoke_missing__.jsonl", "rule"
+          ) != {}:
+              raise RuntimeError("build_poem_page_data smoke returned unexpected data")
+          print("API release rich-guide import smoke passed")
+          PY
+          )
 
           mkdir -p release/static
           git ls-files -z -- output \

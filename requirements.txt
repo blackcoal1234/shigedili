@@ -6,3 +6,4 @@ pyecharts
 PyMySQL
 playwright
 requests
+opencc-python-reimplemented==0.1.7

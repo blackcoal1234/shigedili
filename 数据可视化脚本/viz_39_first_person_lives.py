@@ -17,12 +17,16 @@ import json
 import hashlib
 import math
 import re
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+from famous_poet_corpus import load_analysis_poems  # noqa: E402
+
 DATA_DIR = ROOT / "data"
 CANDIDATE_DIR = DATA_DIR / "candidates"
 OUT_HTML = ROOT / "output" / "39_诗人自述生命卷.html"
@@ -117,22 +121,56 @@ def load_corpus() -> tuple[
     list[dict[str, Any]],
     dict[str, list[dict[str, Any]]],
     dict[tuple[str, str], dict[str, Any]],
+    list[dict[str, Any]],
+    str,
 ]:
-    rows = read_json(DATA_DIR / "poems.json")
-    if not isinstance(rows, list):
+    rows, corpus_source = load_analysis_poems()
+    canonical_rows = read_json(DATA_DIR / "poems.json")
+    if not isinstance(canonical_rows, list):
         raise TypeError("data/poems.json 必须是数组")
     by_poet: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    by_hash: dict[tuple[str, str], dict[str, Any]] = {}
+    canonical_by_hash: dict[tuple[str, str], dict[str, Any]] = {}
+    analysis_by_canonical_id: dict[tuple[str, str], dict[str, Any]] = {}
     for row in rows:
+        poet = str(row.get("poet") or row.get("author") or "").strip()
+        work_id = str(row.get("work_id") or "").strip()
+        if not poet or not work_id:
+            continue
+        by_poet[poet].append(row)
+        canonical_ids = [row.get("canonical_gushiwen_id")]
+        canonical_ids.extend(row.get("canonical_gushiwen_ids") or [])
+        canonical_ids.extend(
+            source.get("source_work_id")
+            for source in row.get("sources", [])
+            if source.get("source_dataset") == "canonical"
+        )
+        for raw_id in dict.fromkeys(canonical_ids):
+            canonical_id = str(raw_id or "")
+            if not canonical_id:
+                continue
+            key = (poet, canonical_id)
+            if key in analysis_by_canonical_id:
+                raise ValueError(f"全作品语料 canonical ID 重复：{key}")
+            analysis_by_canonical_id[key] = row
+    if len(by_poet) != 88:
+        raise AssertionError(f"语料应含 88 位诗人，实际 {len(by_poet)}")
+    for raw_row in canonical_rows:
+        row = dict(raw_row)
         poet = str(row.get("poet") or row.get("author") or "").strip()
         body_hash = str(row.get("body_hash") or "").strip()
         if not poet or not body_hash:
             continue
-        by_poet[poet].append(row)
-        by_hash[(poet, body_hash)] = row
-    if len(by_poet) != 88:
-        raise AssertionError(f"语料应含 88 位诗人，实际 {len(by_poet)}")
-    return rows, dict(by_poet), by_hash
+        canonical_id = str(row.get("source_poem_id") or "")
+        analysis_match = analysis_by_canonical_id.get((poet, canonical_id))
+        if analysis_match is None:
+            raise KeyError(f"规范诗作缺少全作品稳定身份：{(poet, canonical_id)}")
+        row["work_id"] = analysis_match["work_id"]
+        row["canonical_gushiwen_id"] = canonical_id
+        key = (poet, body_hash)
+        if key in canonical_by_hash:
+            raise ValueError(f"canonical poems.json 存在重复作者/body_hash：{key}")
+        canonical_by_hash[key] = row
+    return rows, dict(by_poet), canonical_by_hash, canonical_rows, corpus_source
 
 
 def normalize_rounds(round_config: dict[str, Any], corpus_poets: set[str]) -> tuple[list[dict[str, Any]], dict[str, int]]:
@@ -173,16 +211,64 @@ def normalize_rounds(round_config: dict[str, Any], corpus_poets: set[str]) -> tu
     return rounds, membership
 
 
-def load_profiles() -> dict[tuple[str, str], dict[str, Any]]:
+def load_profiles() -> tuple[dict[str, Any], dict[str, dict]]:
     payload = read_json(DATA_DIR / "stylometry" / "emotion_profiles.json")
     rows = payload.get("profiles", []) if isinstance(payload, dict) else payload
-    profiles: dict[tuple[str, str], dict[str, Any]] = {}
+    profiles: dict[str, dict] = {
+        "by_work_id": {},
+        "by_canonical_id": {},
+        "by_body_hash": defaultdict(list),
+    }
     for row in rows:
         poet = str(row.get("poet") or "")
         body_hash = str(row.get("body_hash") or "")
+        work_id = str(row.get("work_id") or "")
+        canonical_id = str(row.get("canonical_gushiwen_id") or "")
+        if work_id:
+            if work_id in profiles["by_work_id"]:
+                raise ValueError(f"情感档案 work_id 重复：{work_id}")
+            profiles["by_work_id"][work_id] = row
+        if poet and canonical_id:
+            key = (poet, canonical_id)
+            if key in profiles["by_canonical_id"]:
+                raise ValueError(f"情感档案 canonical ID 重复：{key}")
+            profiles["by_canonical_id"][key] = row
         if poet and body_hash:
-            profiles[(poet, body_hash)] = row
-    return profiles
+            profiles["by_body_hash"][(poet, body_hash)].append(row)
+    return payload, profiles
+
+
+def profile_for_analysis_row(indexes: dict[str, dict], row: dict[str, Any]) -> dict[str, Any] | None:
+    work_id = str(row.get("work_id") or "")
+    if work_id:
+        profile = indexes["by_work_id"].get(work_id)
+        if profile is None:
+            raise KeyError(f"情感档案缺少 work_id：{work_id}")
+        return profile
+    poet = str(row.get("poet") or row.get("author") or "")
+    candidates = indexes["by_body_hash"].get((poet, str(row.get("body_hash") or "")), [])
+    if len(candidates) > 1:
+        raise ValueError(f"情感档案 body_hash 非唯一，禁止回退：{(poet, row.get('body_hash'))}")
+    return candidates[0] if candidates else None
+
+
+def profile_for_canonical(indexes: dict[str, dict], poem: dict[str, Any]) -> dict[str, Any] | None:
+    poet = str(poem.get("poet") or poem.get("author") or "")
+    canonical_id = str(poem.get("source_poem_id") or "")
+    if canonical_id:
+        profile = indexes["by_canonical_id"].get((poet, canonical_id))
+        if profile is not None:
+            return profile
+    work_id = str(poem.get("work_id") or "")
+    if work_id:
+        profile = indexes["by_work_id"].get(work_id)
+        if profile is None:
+            raise KeyError(f"情感档案缺少 work_id：{work_id}")
+        return profile
+    candidates = indexes["by_body_hash"].get((poet, str(poem.get("body_hash") or "")), [])
+    if len(candidates) > 1:
+        raise ValueError(f"情感档案 body_hash 非唯一，禁止回退：{(poet, poem.get('body_hash'))}")
+    return candidates[0] if candidates else None
 
 
 def load_readiness() -> dict[str, dict[str, Any]]:
@@ -414,17 +500,17 @@ def emotion_dimensions(profile: dict[str, Any] | None) -> dict[str, float | None
 def build_text_portrait(
     poet: str,
     corpus_rows: list[dict[str, Any]],
-    profiles: dict[tuple[str, str], dict[str, Any]],
+    profiles: dict[str, dict],
     chapters: list[dict[str, Any]],
 ) -> dict[str, Any]:
     """把「他是怎样的人」收紧为可证伪的「作品文本人格」。
 
-    不从一首诗推断人格，只聚合该诗人在本地全语料的规则模型信号。
+    不从一首诗推断人格，只聚合该诗人的名家全作品规则模型信号。
     """
     local_profiles = [
-        profiles[(poet, str(row.get("body_hash") or ""))]
+        profile
         for row in corpus_rows
-        if (poet, str(row.get("body_hash") or "")) in profiles
+        if (profile := profile_for_analysis_row(profiles, row)) is not None
     ]
     primary_counts: Counter[str] = Counter()
     adjective_counts: Counter[str] = Counter()
@@ -483,15 +569,18 @@ def build_text_portrait(
         curve_reading = "已生成章节尚无足够的可连接作品，不绘制人生起伏结论。"
 
     anger_examples = []
-    title_by_hash = {
-        str(row.get("body_hash") or ""): str(row.get("title") or "")
+    title_by_work_id = {
+        str(row.get("work_id") or ""): str(row.get("title") or "")
         for row in corpus_rows
     }
     for score, profile in sorted(anger_rows, key=lambda item: (-item[0], str(item[1].get("title") or "")))[:3]:
         body_hash = str(profile.get("body_hash") or "")
+        work_id = str(profile.get("work_id") or "")
         anger_examples.append(
             {
-                "title": title_by_hash.get(body_hash) or str(profile.get("title") or ""),
+                "title": title_by_work_id.get(work_id) or str(profile.get("title") or ""),
+                "work_id": work_id,
+                "canonical_gushiwen_id": str(profile.get("canonical_gushiwen_id") or ""),
                 "body_hash": body_hash,
                 "signal": round(score, 3),
             }
@@ -511,7 +600,7 @@ def build_text_portrait(
         "textual_traits": traits,
         "emotional_center": center,
         "summary": (
-            f"在本地收录的 {len(local_profiles)} 首作品中，{poet}的反复文本倾向为「{emotion_text}」，"
+            f"在名家全作品语料收录的 {len(local_profiles)} 首作品中，{poet}的反复文本倾向为「{emotion_text}」，"
             f"聚合形容词为「{trait_text}」。这是作品中的言说方式，不是对历史人格的诊断。"
         ),
         "curve_reading": curve_reading,
@@ -601,7 +690,7 @@ def build_chapters(
     events: list[dict[str, Any]],
     works: list[dict[str, Any]],
     corpus_by_hash: dict[tuple[str, str], dict[str, Any]],
-    profiles: dict[tuple[str, str], dict[str, Any]],
+    profiles: dict[str, dict],
     sources: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     targets = chapter_targets(span, events, works)
@@ -685,13 +774,16 @@ def build_chapters(
         if work:
             body_hash = str(work.get("body_hash") or "")
             poem = corpus_by_hash[(poet, body_hash)]
-            profile = profiles.get((poet, body_hash))
+            profile = profile_for_canonical(profiles, poem)
             work_sid = record_source(work, sources, "work", "work_chronology_candidate")
             source_ids.extend([work_sid, "poems-corpus", "emotion-profiles-v1"])
             quote = exact_quote(str(poem.get("body") or ""), profile)
             work_view = {
                 "title": str(poem.get("title") or work.get("poem_title") or ""),
                 "body_hash": body_hash,
+                "work_id": str((profile or {}).get("work_id") or ""),
+                "canonical_gushiwen_id": str(poem.get("source_poem_id") or ""),
+                "profile_canonical_gushiwen_id": str((profile or {}).get("canonical_gushiwen_id") or ""),
                 "year": int(work["year_start"]),
                 "quote": quote,
                 "emotion_summary": compact_text((profile or {}).get("summary"), 80) or "文本情绪信号不足",
@@ -793,7 +885,7 @@ def build_chapters(
 
 
 def build_payload() -> dict[str, Any]:
-    _, corpus_by_poet, corpus_by_hash = load_corpus()
+    analysis_rows, corpus_by_poet, corpus_by_hash, canonical_rows, corpus_source = load_corpus()
     round_config = read_json(ROUNDS_PATH)
     rounds, membership = normalize_rounds(round_config, set(corpus_by_poet))
     active_round = int(round_config.get("active_round", 1))
@@ -803,7 +895,11 @@ def build_payload() -> dict[str, Any]:
         if int(row["round"]) <= active_round
         for poet in row["poets"]
     }
-    profiles = load_profiles()
+    profile_payload, profiles = load_profiles()
+    if profile_payload.get("corpus_source") != corpus_source:
+        raise AssertionError("emotion_profiles 与全作品分析语料来源不一致")
+    if len(profile_payload.get("profiles", [])) != len(analysis_rows):
+        raise AssertionError("emotion_profiles 与全作品分析语料篇数不一致")
     summary_by_poet = load_readiness()
     sources: dict[str, dict[str, Any]] = {}
     register_source(
@@ -813,7 +909,16 @@ def build_payload() -> dict[str, Any]:
         name="data/poems.json",
         grade="A",
         status="local_canonical",
-        note="本项目 20,437 首本地诗歌语料；引句逐字回查。",
+        note=f"本项目 {len(canonical_rows):,} 首规范诗歌语料；引句逐字回查。",
+    )
+    register_source(
+        sources,
+        "analysis-corpus",
+        kind="full_famous_poet_analysis_corpus",
+        name="data/analysis/famous_poets_full.jsonl.gz",
+        grade="method",
+        status=corpus_source,
+        note=f"精选 88 位名家的 {len(analysis_rows):,} 首完整作品；仅用于文本状态聚合。",
     )
     register_source(
         sources,
@@ -822,7 +927,7 @@ def build_payload() -> dict[str, Any]:
         name="data/stylometry/emotion_profiles.json",
         grade="method",
         status="model_output",
-        note="古典诗歌规则模型的 VAD/情绪文本信号；不等于作者真实心理。",
+        note=f"基于 {len(analysis_rows):,} 首名家全作品的 VAD/情绪文本信号；不等于作者真实心理。",
     )
     spans = load_lifespans(generated_names, sources)
     events_by_poet, works_by_poet = load_active_records(generated_names, corpus_by_hash)
@@ -831,7 +936,7 @@ def build_payload() -> dict[str, Any]:
     for round_row in rounds:
         for poet in round_row["poets"]:
             corpus_rows = corpus_by_poet[poet]
-            dynasty_counts = Counter(str(row.get("dynasty") or "") for row in corpus_rows)
+            dynasty_counts = Counter(str(row.get("person_period") or row.get("dynasty") or "") for row in corpus_rows)
             dynasty = dynasty_counts.most_common(1)[0][0]
             summary = summary_by_poet.get(poet, {})
             readiness = readiness_view(summary)
@@ -909,9 +1014,12 @@ def build_payload() -> dict[str, Any]:
             "timeline_poets": sum(bool(row["chapters"]) for row in poet_rows),
             "evidence_gap_poets": sum(row["status"].endswith("evidence_gap") for row in poet_rows),
             "corpus_poems": sum(len(rows) for rows in corpus_by_poet.values()),
+            "canonical_evidence_poems": len(canonical_rows),
+            "corpus_source": corpus_source,
+            "corpus_path": profile_payload.get("corpus_path", "data/analysis/famous_poets_full.jsonl.gz"),
             "narrative_mode": "editorial_first_person_reconstruction",
             "disclosure": "页面中的「我」是编辑性第一人称重构，不是诗人原话，不等于史实；只用于组织可回查的候选史料、诗句和文本情绪信号。",
-            "method_note": f"第 1–{active_round} 轮在证据足够时每人五章；无法建立时间轴者输出正式证据缺口结果。事件/作品编年仍为 needs_review 候选层，不伪装成已核定史实。",
+            "method_note": f"文本画像聚合 {len(analysis_rows):,} 首名家全作品；原文引句与作品编年只绑定 {len(canonical_rows):,} 首规范证据。第 1–{active_round} 轮在证据足够时每人五章；无法建立时间轴者输出正式证据缺口结果。事件/作品编年仍为 needs_review 候选层，不伪装成已核定史实。",
         },
         "rounds": rounds,
         "poets": poet_rows,
@@ -952,6 +1060,14 @@ HTML_TEMPLATE = r'''<!doctype html>
     @media(max-width:900px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(4,1fr)}.workspace{grid-template-columns:1fr}.catalog{position:static;max-height:none}.poet-list{max-height:340px}.poet-hero{grid-template-columns:1fr}.chapter{grid-template-columns:1fr}.chapter-time{border-right:0;border-bottom:1px solid var(--line);padding:12px 18px}.chart{height:260px}}
     @media(max-width:560px){.shell{padding:18px 12px 36px}.topbar-inner{padding-inline:12px}.topbar .scope{display:none}.stats{grid-template-columns:repeat(2,1fr)}.meta-grid,.portrait-grid{grid-template-columns:1fr}.poet-hero,.chapter-body,.portrait-panel{padding:18px}.ready-row{grid-template-columns:105px 1fr auto}.chart-wrap{padding-inline:8px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    /* 固定画幅背景：生命卷内容覆以轻纸白表面，滚动时画面持续可见。 */
+    body{position:relative;min-height:100vh;background:transparent}
+    body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("assets/generated/remaining_pages_20260830/39_life_scroll_v1.png") center center / cover no-repeat}
+    body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:rgba(242,244,240,.13)}
+    .topbar{z-index:10}.shell{position:relative;z-index:1}
+    .catalog,.poet-hero,.portrait-panel,.chart-wrap,.chapter,.scheduled{background:rgba(255,255,255,.92);backdrop-filter:blur(1px)}
+    .disclosure{background:rgba(255,250,240,.91)}
+    .search,.meta-cell,.portrait-cell,.method-line,.chapter-time,.voice,.reading,.navlinks a{background-color:rgba(255,255,255,.89)}
   </style>
 </head>
 <body>
@@ -1005,7 +1121,7 @@ HTML_TEMPLATE = r'''<!doctype html>
     function readinessHTML(p){const r=p.readiness,items=[["人物事件候选",r.person_event_candidates],["可定位候选",r.locatable_candidates],["作品编年候选",r.work_chronology_candidates]];const max=Math.max(1,...items.map(x=>x[1]));const isGap=p.status.endsWith("evidence_gap");const title=isGap?`第 ${p.round} 轮 · 证据不足（正式结果）`:`已排入第 ${p.round} 轮`;const note=isGap?`${p.name}已经进入本轮处理，但现有生卒、事件与作品编年不足以建立时间轴。这里保留空白，不虚构连续人生。`:`${p.name}已进入 88 人总册。本轮先公布语料规模、轮次与候选证据准备度，不提前生成未复核的第一人称经历。`;return `<section class="scheduled"><h3>${title}</h3><p>${esc(note)}</p><div class="readiness-bars">${items.map(([label,value])=>`<div class="ready-row"><span>${label}</span><span class="track"><span class="fill" style="width:${Math.max(2,Math.round(value/max*100))}%"></span></span><b>${value}</b></div>`).join("")}</div><p><small>${esc(r.boundary)}</small></p></section>`;}
     function portraitHTML(p){const x=p.portrait;if(!x)return "";const c=x.emotional_center;const top=x.dominant_emotions.map(item=>`<span class="chip">${esc(item.label)} ${Math.round(item.share*100)}%</span>`).join("");const works=x.anger.representative_works.map(item=>`《${esc(item.title)}》 ${Math.round(item.signal*100)}%`).join("、")||"无高置信代表作";return `<section class="portrait-panel"><h3>作品里的这个人：先给可证伪的答案</h3><p>${esc(x.summary)}</p><div class="chips">${top}${x.textual_traits.slice(0,4).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div><div class="portrait-grid"><div class="portrait-cell"><b>${c.valence??"—"}</b><span>全语料平均效价</span></div><div class="portrait-cell"><b>${c.arousal??"—"}</b><span>全语料平均唤醒</span></div><div class="portrait-cell"><b>${c.dominance??"—"}</b><span>全语料平均掌控</span></div></div><p class="reading"><b>曲线读法：</b>${esc(x.curve_reading)}</p><p class="reading anger-reading"><b>幽愤/讽刺词典信号：</b>${esc(x.anger.reading)} <small>词典高信号样本：${works}</small></p></section>`;}
     function drawChart(p){if(chart){chart.dispose();chart=null;}if(!p.chapters.length)return;const node=document.getElementById("lifeChart");chart=echarts.init(node,null,{renderer:"canvas"});const dims=[["valence","效价", "#b64b3f"],["arousal","唤醒", "#a87527"],["dominance","掌控", "#26786e"],["anger_signal","幽愤/讽刺词典信号", "#7d4d63"],["confidence","文本画像置信度", "#426f94"]];chart.setOption({animation:false,grid:{left:48,right:20,top:56,bottom:44},legend:{top:4,textStyle:{color:"#59615b"}},tooltip:{trigger:"axis",valueFormatter:v=>v===null?"无作品文本信号":Number(v).toFixed(3)},xAxis:{type:"category",data:p.chapters.map(c=>c.work?String(c.work.year):(c.year_end!==c.year_start?`${c.year_start}–${c.year_end}`:String(c.year_start))),axisLine:{lineStyle:{color:"#aeb7af"}}},yAxis:{type:"value",min:-1,max:1,splitLine:{lineStyle:{color:"#e5e9e3"}}},series:dims.map(([key,name,color])=>({name,type:"line",connectNulls:false,symbol:"circle",symbolSize:8,lineStyle:{width:2,color},itemStyle:{color},data:p.chapters.map(c=>c.dimensions[key])}))});}
-    function renderReader(){const p=byName[selected];const life=p.lifespan?.label||"生卒待考";const state=p.status==="scheduled"?"已排期":p.status.endsWith("evidence_gap")?"证据不足":p.round===DATA.project.active_round?"本轮已生成":"已生成";reader.innerHTML=`<header class="poet-hero"><div><div class="eyebrow">第 ${p.round} 轮 · ${state}</div><h2>${esc(p.name)}</h2><div class="poet-sub">${esc(p.dynasty)} · ${esc(life)}</div></div><div class="meta-grid"><div class="meta-cell"><b>${p.corpus_poems}</b><span>本地诗作</span></div><div class="meta-cell"><b>${p.readiness.score}</b><span>证据准备度</span></div><div class="meta-cell"><b>${p.chapters.length}</b><span>已生成生命章</span></div></div></header><p class="method-line">生命曲线不是一条「一路上升/下降」的传记定论；它展示不同编年候选作品的文本信号，允许数据反驳成见。</p>${p.chapters.length?`${portraitHTML(p)}<section class="chart-wrap"><div class="chart-head"><h3>作品文本情绪曲线</h3><span class="chart-note">-1 至 1 · 空点表示该章无可连接作品</span></div><div id="lifeChart" class="chart" role="img" aria-label="${esc(p.name)}作品文本情绪曲线"></div></section><div class="chapters">${p.chapters.map(chapterHTML).join("")}</div>`:readinessHTML(p)}`;drawChart(p);}
+    function renderReader(){const p=byName[selected];const life=p.lifespan?.label||"生卒待考";const state=p.status==="scheduled"?"已排期":p.status.endsWith("evidence_gap")?"证据不足":p.round===DATA.project.active_round?"本轮已生成":"已生成";reader.innerHTML=`<header class="poet-hero"><div><div class="eyebrow">第 ${p.round} 轮 · ${state}</div><h2>${esc(p.name)}</h2><div class="poet-sub">${esc(p.dynasty)} · ${esc(life)}</div></div><div class="meta-grid"><div class="meta-cell"><b>${p.corpus_poems}</b><span>全作品状态语料</span></div><div class="meta-cell"><b>${p.readiness.score}</b><span>证据准备度</span></div><div class="meta-cell"><b>${p.chapters.length}</b><span>已生成生命章</span></div></div></header><p class="method-line">文本画像使用名家全作品；生命曲线只连接规范诗作的编年候选。它不是一条「一路上升/下降」的传记定论，允许数据反驳成见。</p>${p.chapters.length?`${portraitHTML(p)}<section class="chart-wrap"><div class="chart-head"><h3>作品文本情绪曲线</h3><span class="chart-note">-1 至 1 · 空点表示该章无可连接作品</span></div><div id="lifeChart" class="chart" role="img" aria-label="${esc(p.name)}作品文本情绪曲线"></div></section><div class="chapters">${p.chapters.map(chapterHTML).join("")}</div>`:readinessHTML(p)}`;drawChart(p);}
     search.addEventListener("input",renderList);document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{roundFilter=btn.dataset.round;document.querySelectorAll(".filter").forEach(x=>{const on=x===btn;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on));});renderList();}));window.addEventListener("resize",()=>chart&&chart.resize());renderList();renderReader();
   </script>
 </body>

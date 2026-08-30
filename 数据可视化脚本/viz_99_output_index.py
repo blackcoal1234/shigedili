@@ -14,6 +14,7 @@ OUTPUT_DIR = ROOT / "output"
 POEMS_JSON = ROOT / "data" / "poems.json"
 JOURNEYS_JSON = ROOT / "data" / "reviewed" / "poet_journeys.json"
 CONTEXTS_CSV = ROOT / "data" / "reviewed" / "verified_poem_contexts.csv"
+POEM_PAGE_DATA_ASSET = "assets/poem_page/poem_page_data.js"
 
 
 @dataclass(frozen=True)
@@ -64,7 +65,7 @@ OUTPUTS = (
         "29_参赛导航.html",
         "作品导航",
         "参赛作品",
-        "汇总参赛版 30-39 号页面，作为现场演示与展项切换入口。",
+        "汇总参赛版 30-44 号页面，作为现场演示与展项切换入口。",
         "数据可视化脚本/viz_29_competition_index.py",
     ),
     OutputItem(
@@ -148,6 +149,38 @@ OUTPUTS = (
         "数据可视化脚本/viz_39_first_person_lives.py",
     ),
     OutputItem(
+        "山河证道",
+        "40_山河证道.html",
+        "地图闯关 / 证据学习",
+        "参赛作品",
+        "依据审核作地设计四章地图闯关，并以提示、学习卡与诗印串联考据证据。",
+        "数据可视化脚本/viz_40_shanhe_quest.py",
+    ),
+    OutputItem(
+        "意象地理",
+        "41_意象地理.html",
+        "区域矩阵 / 原句证据",
+        "参赛作品",
+        "以文化地理分区和意象提升度矩阵展示地域差异，并下钻到原句证据。",
+        "数据可视化脚本/viz_41_imagery_geography.py",
+    ),
+    OutputItem(
+        "被想象的地方",
+        "42_被想象的地方.html",
+        "亲历 / 想象对照",
+        "参赛作品",
+        "对照审核作地与正文地名，区分亲历书写和身在别处的想象。",
+        "数据可视化脚本/viz_42_dreamed_places.py",
+    ),
+    OutputItem(
+        "飞花令·加行卷",
+        "43_飞花令加行.html",
+        "支线题库 / 互动学习",
+        "参赛作品",
+        "通过地名飞花令、意象归乡与古今地名连线复习项目证据。",
+        "数据可视化脚本/viz_43_side_quest.py",
+    ),
+    OutputItem(
         "数据质量与来源覆盖",
         "18_数据质量与来源覆盖.html",
         "质量看板",
@@ -164,6 +197,14 @@ OUTPUTS = (
         "数据可视化脚本/viz_08_poem_browser.py",
     ),
     OutputItem(
+        "赏析诗页",
+        "44_诗页.html",
+        "赏析 / 深链下钻",
+        "证据工具",
+        "一首诗一页：原诗意象高亮、导读卡、审核背景与三层层级作年作地，全部展项可下钻到 #poem= 深链。",
+        "数据可视化脚本/viz_44_poem_page.py",
+    ),
+    OutputItem(
         "古地名与意象词典",
         "09_词典浏览.html",
         "词典",
@@ -178,6 +219,17 @@ OUTPUTS = (
         "方法与质量",
         "展示基础诗词、创作时空、行旅、生平事件、多标签情感与来源证据表。",
         "数据可视化脚本/viz_00_er_diagram.py",
+    ),
+)
+
+MANIFEST_ASSETS = (
+    OutputItem(
+        "诗页数据资产",
+        POEM_PAGE_DATA_ASSET,
+        "离线数据",
+        "运行资产",
+        "44 号赏析诗页依赖的完整离线数据。",
+        "tools/build_poem_page_data.py",
     ),
 )
 
@@ -262,7 +314,7 @@ def item_card(item: OutputItem) -> str:
 def write_manifest() -> None:
     generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
     rows = []
-    for item in OUTPUTS:
+    for item in (*OUTPUTS, *MANIFEST_ASSETS):
         path = OUTPUT_DIR / item.href
         row = asdict(item)
         row.update(
@@ -289,6 +341,7 @@ def write_manifest() -> None:
     (OUTPUT_DIR / "manifest.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=2),
         encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -446,7 +499,11 @@ def render() -> None:
 </body>
 </html>
 """
-    (OUTPUT_DIR / "index.html").write_text(html, encoding="utf-8")
+    (OUTPUT_DIR / "index.html").write_text(
+        html,
+        encoding="utf-8",
+        newline="\n",
+    )
     write_manifest()
     print(f"  [ok] saved {OUTPUT_DIR / 'index.html'}")
     print(f"  [ok] saved {OUTPUT_DIR / 'manifest.json'}")

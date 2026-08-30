@@ -141,6 +141,18 @@ class GetPoemKnowledgeInput(StrictToolInput):
         return value
 
 
+class RichGuideInput(StrictToolInput):
+    poem_id: str = Field(min_length=1, max_length=160, description="按需生成译注赏析的诗篇 ID")
+
+    @field_validator("poem_id")
+    @classmethod
+    def normalize_poem_id(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("poem_id 不能为空")
+        return value
+
+
 class GetLineKnowledgeInput(StrictToolInput):
     line_id: str = Field(min_length=1, max_length=200, description="知识库稳定诗句 ID")
 

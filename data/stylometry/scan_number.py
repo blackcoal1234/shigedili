@@ -1,12 +1,10 @@
-"""数字与夸张扫描：读语料快照，输出 number_stats.json（"李白夸张系数"维度）。
+"""数字与夸张扫描：读取分析语料，输出 number_stats.json（"李白夸张系数"维度）。
 
 用法：
     python data/stylometry/scan_number.py
 
 流程与口径：
-  1. 先把 data/poems.json 复制为本目录下 poems_snapshot.json 快照再解析
-     （另有工作流可能正在写 poems.json；解析失败等 5 秒重新复制重试，最多 5 次）。
-     脚本可复跑：语料更新后重跑即刷新统计。
+  1. 通过统一 loader 严格读取全作品分析语料；缺失或 manifest 失配即失败。
   2. 匹配：用 number_dict.NUMBER_DICT，按词长从长到短贪心匹配，每个字符
      至多归入一个词条（"三千丈"优先于"三千"/"千"）。
   3. 计数口径：
@@ -25,47 +23,24 @@
 输出 JSON 结构见项目统一约定（schema_version=1）。
 """
 
-import hashlib
-import json
 import re
-import shutil
 import statistics
 import sys
-import time
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parents[1]
-POEMS_PATH = PROJECT_ROOT / "data" / "poems.json"
-SNAPSHOT_PATH = SCRIPT_DIR / "poems_snapshot.json"
 OUT_PATH = SCRIPT_DIR / "number_stats.json"
 
 sys.path.insert(0, str(SCRIPT_DIR))
+sys.path.insert(0, str(PROJECT_ROOT / "tools"))
 import number_dict  # noqa: E402
+from famous_poet_corpus import atomic_dump_json, load_analysis_poems  # noqa: E402
 
 CJK_RE = re.compile(r"[一-鿿]")
 SENT_SPLIT_RE = re.compile(r"[。！？；\n]+")
-
-
-def load_snapshot(max_attempts: int = 5, wait_seconds: float = 5.0) -> list:
-    """复制 poems.json 为快照后解析；失败（并发写入）则等待重试。"""
-    last_err = None
-    for attempt in range(1, max_attempts + 1):
-        try:
-            shutil.copyfile(POEMS_PATH, SNAPSHOT_PATH)
-            with open(SNAPSHOT_PATH, encoding="utf-8") as f:
-                data = json.load(f)
-            if not isinstance(data, list) or not data:
-                raise ValueError("快照不是非空列表")
-            return data
-        except (OSError, ValueError, json.JSONDecodeError) as e:
-            last_err = e
-            print(f"[scan_number] 快照读取失败(第{attempt}次): {e}；"
-                  f"{wait_seconds}s 后重试", file=sys.stderr)
-            time.sleep(wait_seconds)
-    raise RuntimeError(f"读取语料失败（重试{max_attempts}次）: {last_err}")
 
 
 def match_sentence(sent: str, table: dict, max_len: int):
@@ -88,7 +63,18 @@ def match_sentence(sent: str, table: dict, max_len: int):
 
 
 def scan():
-    poems = load_snapshot()
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        forbidden_fallback = "data/poems.json"
+        raise RuntimeError(
+            f"状态统计必须使用全作品语料，实际来源：{corpus_source}；"
+            f"禁止回退 {forbidden_fallback}"
+        )
+    corpus_path = (
+        "data/analysis/famous_poets_full.jsonl.gz"
+        if corpus_source == "analysis_full"
+        else "data/poems.json"
+    )
     table = number_dict.as_table()
     max_len = max(len(w) for w in table)
     counted_kinds = number_dict.COUNTED_KINDS
@@ -106,8 +92,7 @@ def scan():
         poet = poem.get("poet") or poem.get("author") or "佚名"
         title = poem.get("title", "")
         body = poem.get("body", "") or ""
-        body_hash = poem.get("body_hash") or hashlib.sha256(
-            body.encode("utf-8")).hexdigest()
+        body_hash = poem.get("body_hash", "")
         chars = len(CJK_RE.findall(body))
 
         counter = Counter()
@@ -135,6 +120,8 @@ def scan():
         per_poem.append({
             "title": title,
             "poet": poet,
+            "work_id": poem.get("work_id"),
+            "canonical_gushiwen_id": poem.get("canonical_gushiwen_id"),
             "body_hash": body_hash,
             "hits": sorted(counter.items(), key=lambda kv: (-kv[1], kv[0])),
         })
@@ -184,6 +171,8 @@ def scan():
 
     stats = {
         "schema_version": 1,
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
         "dict_size": len(number_dict.NUMBER_DICT),
         "generated_from_poems": len(poems),
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -192,8 +181,7 @@ def scan():
         "per_poet": per_poet,
         "per_poem": per_poem,
     }
-    with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(stats, f, ensure_ascii=False, indent=1)
+    atomic_dump_json(OUT_PATH, stats)
     print(f"[scan_number] 完成: {len(poems)} 首 / {len(per_poet)} 位诗人 "
           f"-> {OUT_PATH}")
     print(f"[scan_number] headline: {headline}")

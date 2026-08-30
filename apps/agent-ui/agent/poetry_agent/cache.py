@@ -241,7 +241,10 @@ def validate_imagery_data(data: Any) -> None:
         raise SourceDataError("imagery_tide_data 顶层必须是对象")
     meta = data.get("meta")
     words = data.get("wordStats")
-    if not isinstance(meta, dict) or meta.get("schemaVersion") != SCHEMA_VERSION:
+    if not isinstance(meta, dict) or meta.get("schemaVersion") not in {
+        SCHEMA_VERSION,
+        "2.0",
+    }:
         raise SourceDataError("imagery_tide_data schemaVersion 不受支持")
     if not isinstance(meta.get("sourceHashes"), dict):
         raise SourceDataError("imagery_tide_data.meta.sourceHashes 缺失")
@@ -329,6 +332,7 @@ IMAGERY_SPEC = DatasetSpec(
     generated_json="output/assets/competition/imagery_tide_data.json",
     generator="数据可视化脚本/viz_38_imagery_tide.py",
     dependencies=(
+        "data/analysis/famous_poets_full.jsonl.gz",
         "data/poems.json",
         "data/imagery_tide_lexicon.py",
         "data/reviewed/poet_journeys.json",
@@ -336,6 +340,10 @@ IMAGERY_SPEC = DatasetSpec(
     validator=validate_imagery_data,
     embedded_hash_path=("meta", "sourceHashes"),
     dependency_hash_keys=(
+        (
+            "data/analysis/famous_poets_full.jsonl.gz",
+            "fullCorpusSha256",
+        ),
         ("data/poems.json", "poemsJsonSha256"),
         # 字段名保持兼容；来源已切换为38号冻结160词资产。
         ("data/imagery_tide_lexicon.py", "spiritImageDictSha256"),

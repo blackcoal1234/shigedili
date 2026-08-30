@@ -10,6 +10,8 @@ STATIC_BASE="/var/www/shixing-wanli-releases"
 STATIC_LINK="/var/www/shixing-wanli"
 PERSISTENT_SOURCE="/opt/shixing-wanli-source/诗行万里"
 PERSISTENT_KNOWLEDGE="$PERSISTENT_SOURCE/output/assets/knowledge"
+PERSISTENT_RICH_GUIDES="$API_BASE/data/llm_rich_backgrounds"
+PERSISTENT_AUTO_BATCH="$PERSISTENT_RICH_GUIDES/batch_auto_001.json"
 KNOWLEDGE_CANDIDATE_BASE="/opt/shixing-knowledge-candidates"
 KNOWLEDGE_CANDIDATE="$KNOWLEDGE_CANDIDATE_BASE/$VERSION"
 RELEASE_KNOWLEDGE="$PERSISTENT_KNOWLEDGE"
@@ -66,6 +68,7 @@ mkdir -p \
   "$API_BASE/releases" \
   "$API_BASE/cache" \
   "$API_BASE/pex-cache" \
+  "$PERSISTENT_RICH_GUIDES" \
   "$STATIC_BASE"
 
 prepare_release() {
@@ -167,6 +170,7 @@ fi
   cd "$NEW_API/apps/agent-ui/agent"
   AGENT_HOST=127.0.0.1 \
   AGENT_PORT=18123 \
+  AGENT_RICH_GUIDE_DIR="$PERSISTENT_RICH_GUIDES" \
   PEX_ROOT="$API_BASE/pex-cache" \
     /usr/bin/python3 "$NEW_API/poetry-agent.pex"
 ) >"$INCOMING_DIR/api-preflight.log" 2>&1 &
@@ -249,6 +253,7 @@ WorkingDirectory=$API_BASE/current/apps/agent-ui/agent
 ExecStart=
 ExecStart=/usr/bin/python3 $API_BASE/current/poetry-agent.pex
 Environment=PEX_ROOT=$API_BASE/pex-cache
+Environment=AGENT_RICH_GUIDE_DIR=$PERSISTENT_RICH_GUIDES
 EOF
 chmod 644 "$API_DROPIN.next"
 mv -f "$API_DROPIN.next" "$API_DROPIN"
@@ -265,6 +270,18 @@ Environment=POETRY_AGENT_BACKEND_URL=http://127.0.0.1:8123
 EOF
 chmod 644 "$WEB_DROPIN.next"
 mv -f "$WEB_DROPIN.next" "$WEB_DROPIN"
+
+# Seed the persistent runtime archive from the pre-fix current release once.
+# The file lock matches RichGuideService so the copied JSON is always complete.
+if [ ! -e "$PERSISTENT_AUTO_BATCH" ] && [ -n "$OLD_API" ]; then
+  LEGACY_AUTO_BATCH="$OLD_API/data/llm_rich_backgrounds/batch_auto_001.json"
+  if [ -s "$LEGACY_AUTO_BATCH" ]; then
+    (
+      flock -x 8
+      [ -e "$PERSISTENT_AUTO_BATCH" ] || cp -a "$LEGACY_AUTO_BATCH" "$PERSISTENT_AUTO_BATCH"
+    ) 8>"$LEGACY_AUTO_BATCH.lock"
+  fi
+fi
 
 SWITCHED=1
 ln -sfn "$NEW_WEB" "$WEB_BASE/current.next"

@@ -34,6 +34,7 @@ data/candidates/*_poems_snapshot*.json
 data/stylometry/*poems_snapshot*.json
 data/poems_backup*.json
 data/geojson_cache/
+data/llm_rich_backgrounds/*.lock
 
 # Runtime knowledge indexes and generated deployment bundles stay on the server.
 output/assets/knowledge/

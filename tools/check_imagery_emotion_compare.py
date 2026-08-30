@@ -19,6 +19,7 @@ from data.imagery_emotion_rules import (
     matched_aliases,
     sample_level,
 )
+from tools.famous_poet_corpus import load_analysis_poems
 
 
 SCRIPT = ROOT / "数据可视化脚本" / "viz_17_imagery_emotion_compare.py"
@@ -87,14 +88,21 @@ def check_payload(payload: dict[str, object]) -> None:
     if payload["emotions"] != list(EMOTIONS):
         raise AssertionError("情感标签集合不符合规则模块")
 
-    # 拍板口径（2026-07）：viz_17 固定截取每位诗人语料前 20 首作为可比样本；
-    # 语料扩容（李白 55 首）不改变本页样本量，因此 20/120 仍是精确断言。
+    analysis_rows, corpus_source = load_analysis_poems(fallback=False)
+    expected_totals = {
+        poet: sum(1 for row in analysis_rows if row.get("poet") == poet)
+        for poet in TARGET_POETS
+    }
     totals = payload["poem_totals"]
-    if any(int(totals[poet]) != 20 for poet in TARGET_POETS):
-        raise AssertionError(f"六位诗人必须各取 20 首固定样本，实际为：{totals}")
-    expected_poem_count = len(TARGET_POETS) * 20
+    if {poet: int(totals[poet]) for poet in TARGET_POETS} != expected_totals:
+        raise AssertionError(f"六位诗人计数与 loader 不一致：{totals} != {expected_totals}")
+    expected_poem_count = sum(expected_totals.values())
     if int(payload["summary"]["poem_count"]) != expected_poem_count:
-        raise AssertionError(f"固定可比样本总量应为 {expected_poem_count} 首")
+        raise AssertionError(f"全作品聚合总量应为 {expected_poem_count} 首")
+    if payload["summary"]["corpus_source"] != corpus_source:
+        raise AssertionError("语料来源标记与 loader 不一致")
+    if int(payload["summary"]["analysis_count"]) != expected_poem_count:
+        raise AssertionError("analysis_count 与 loader 六人总量不一致")
 
     has_multilabel_record = False
     distinct_profile_found = False
@@ -116,8 +124,14 @@ def check_payload(payload: dict[str, object]) -> None:
             poem_ids = [record["poem_id"] for record in row["records"]]
             if len(poem_ids) != len(set(poem_ids)):
                 raise AssertionError(f"{imagery}/{poet} 同一诗作被重复计数")
-            if len(poem_ids) != sample_count:
-                raise AssertionError(f"{imagery}/{poet} 样本数与记录数不一致")
+            if int(row["matched_record_count"]) != sample_count:
+                raise AssertionError(f"{imagery}/{poet} 命中计数与样本数不一致")
+            if len(poem_ids) != int(row["evidence_record_count"]):
+                raise AssertionError(f"{imagery}/{poet} 证据计数与展示记录不一致")
+            if len(poem_ids) > 24:
+                raise AssertionError(f"{imagery}/{poet} 证据超过 24 条")
+            if bool(row["truncated"]) != (sample_count > len(poem_ids)):
+                raise AssertionError(f"{imagery}/{poet} truncated 标记错误")
 
             conditional_profile: list[int] = []
             for record in row["records"]:
@@ -139,12 +153,12 @@ def check_payload(payload: dict[str, object]) -> None:
                 baseline_denominator = int(cell["baseline_denominator"])
                 if conditional_denominator != sample_count:
                     raise AssertionError(f"{imagery}/{poet}/{emotion} 条件概率分母错误")
-                if baseline_denominator != 20:
-                    raise AssertionError(f"{imagery}/{poet}/{emotion} 基线分母必须为 20")
+                if baseline_denominator != expected_totals[poet]:
+                    raise AssertionError(f"{imagery}/{poet}/{emotion} 基线分母与 loader 不一致")
                 expected_conditional = (
                     round(conditional_count / sample_count, 6) if sample_count else 0.0
                 )
-                expected_baseline = round(baseline_count / 20, 6)
+                expected_baseline = round(baseline_count / expected_totals[poet], 6)
                 assert_close(
                     float(cell["conditional"]),
                     expected_conditional,
@@ -185,8 +199,12 @@ def check_html() -> None:
     html = OUTPUT_HTML.read_text(encoding="utf-8")
     if '<meta name="viewport"' not in html:
         raise AssertionError("页面缺少响应式 viewport")
-    if re.search(r"https?://", html, flags=re.IGNORECASE):
-        raise AssertionError("页面包含远程 URL，不能保证离线使用")
+    if re.search(
+        r"<(?:script|link)\b[^>]+(?:src|href)=[\"']https?://",
+        html,
+        flags=re.IGNORECASE,
+    ):
+        raise AssertionError("页面包含远程资源依赖，不能保证离线使用")
     if 'src="assets/pyecharts/v6/echarts.min.js"' not in html:
         raise AssertionError("页面未引用本地 Pyecharts/ECharts 资源")
     for element_id in REQUIRED_IDS:

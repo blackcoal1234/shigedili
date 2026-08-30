@@ -11,10 +11,13 @@
     "generated_poets": 22,
     "timeline_poets": 22,
     "evidence_gap_poets": 0,
-    "corpus_poems": 20437,
+    "corpus_poems": 80893,
+    "canonical_evidence_poems": 20437,
+    "corpus_source": "analysis_full",
+    "corpus_path": "data/analysis/famous_poets_full.jsonl.gz",
     "narrative_mode": "editorial_first_person_reconstruction",
     "disclosure": "页面中的「我」是编辑性第一人称重构，不是诗人原话，不等于史实；只用于组织可回查的候选史料、诗句和文本情绪信号。",
-    "method_note": "第 1–1 轮在证据足够时每人五章；无法建立时间轴者输出正式证据缺口结果。事件/作品编年仍为 needs_review 候选层，不伪装成已核定史实。"
+    "method_note": "文本画像聚合 80,893 首名家全作品；原文引句与作品编年只绑定 20,437 首规范证据。第 1–1 轮在证据足够时每人五章；无法建立时间轴者输出正式证据缺口结果。事件/作品编年仍为 needs_review 候选层，不伪装成已核定史实。"
   },
   "rounds": [
     {
@@ -140,7 +143,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 1386,
       "readiness": {
         "score": 94,
         "biography_records": 1,
@@ -174,68 +177,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 1386,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 62,
-            "share": 0.207
-          },
-          {
-            "label": "豪迈昂扬",
-            "count": 38,
-            "share": 0.127
+            "count": 267,
+            "share": 0.193
           },
           {
             "label": "归隐超脱",
-            "count": 33,
-            "share": 0.11
+            "count": 221,
+            "share": 0.159
           },
           {
-            "label": "纵逸狂放",
-            "count": 27,
-            "share": 0.09
+            "label": "豪迈昂扬",
+            "count": 121,
+            "share": 0.087
           },
           {
             "label": "漂泊羁旅",
-            "count": 20,
-            "share": 0.067
+            "count": 97,
+            "share": 0.07
+          },
+          {
+            "label": "纵逸狂放",
+            "count": 95,
+            "share": 0.069
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
           "凄切",
-          "慷慨",
           "苍茫",
+          "清远",
           "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.026,
-          "arousal": 0.561,
-          "dominance": 0.048
+          "valence": -0.058,
+          "arousal": 0.536,
+          "dominance": 0.035
         },
-        "summary": "在本地收录的 300 首作品中，李白的反复文本倾向为「悲恸哀伤、豪迈昂扬、归隐超脱」，聚合形容词为「悲恸、超逸、凄切、慷慨」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1386 首作品中，李白的反复文本倾向为「悲恸哀伤、归隐超脱、豪迈昂扬」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 737 年作品所在的「行路与转折」（0.03），高点对应 762 年作品所在的「晚境与记录末端」（0.701）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 3,
-          "signal_rate": 0.01,
-          "reading": "在 300 首有效文本画像中，3 首触发「激愤/讽刺」规则信号（1.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 28,
+          "signal_rate": 0.02,
+          "reading": "在 1386 首有效文本画像中，28 首触发「激愤/讽刺」规则信号（2.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "玉阶怨",
-              "body_hash": "731417b1db7abae0300c911e81be4ceb8b2606ad43d88a6fb56fd2356a9acffe",
-              "signal": 0.468
+              "title": "古风 二十九",
+              "work_id": "fw_4bc81cb151f46e30a1fcc0a1",
+              "canonical_gushiwen_id": "",
+              "body_hash": "6fb6a7555f42f649c6434e12b4e9427ac3197860268ec5da956c79287e021718",
+              "signal": 1.0
             },
             {
-              "title": "怨情",
-              "body_hash": "84d15f896bbd55d7823b1b65b0f5509fac5f2be2449a26715bd47feebf7ce657",
-              "signal": 0.408
+              "title": "题楼山石笋",
+              "work_id": "fw_0899913f7f2b1b8dff5fd243",
+              "canonical_gushiwen_id": "",
+              "body_hash": "a1a080d6656977daeb3085849302ce88c44e890c0889ec7232ae4ed6a0da39a2",
+              "signal": 1.0
             },
             {
-              "title": "古风·大雅久不作",
-              "body_hash": "f84767ad68b11de8995470bb732f065e34e5f67770f572f1d223d6913b9cb9c4",
-              "signal": 0.276
+              "title": "宣州九日闻崔四侍御与宇文太守游敬亭余时登响山不同此赏醉后寄崔侍御二首 二",
+              "work_id": "fw_99b6bdd15c615d8b405c80ff",
+              "canonical_gushiwen_id": "",
+              "body_hash": "fdec5b1c53ae38c1b9b086ae5086062364bf0b7abc1fc8234bb743eaa1487ad2",
+              "signal": 0.568
             }
           ]
         }
@@ -307,6 +316,9 @@
           "work": {
             "title": "别匡山",
             "body_hash": "3d9a24b5c45b2da7ab70b10ce21c1e661f04e103713f78ae19594d85b58d89f0",
+            "work_id": "fw_28e41d50c3aeda71a45353cc",
+            "canonical_gushiwen_id": "1f58604d4b47",
+            "profile_canonical_gushiwen_id": "1f58604d4b47",
             "year": 724,
             "quote": "莫怪无心恋清境，已将书剑许明时。",
             "emotion_summary": "超逸、清远、苍茫；兼有漂泊羁旅（复合情绪）",
@@ -364,6 +376,9 @@
           "work": {
             "title": "春夜宴从弟桃花园序",
             "body_hash": "f88b082ec62096efa3ca26fecccfd38d3bd258f1f8a3b4fb2fbb5591969c7c16",
+            "work_id": "fw_ea99a64d209d1aff2b7de234",
+            "canonical_gushiwen_id": "7ae587439291",
+            "profile_canonical_gushiwen_id": "7ae587439291",
             "year": 737,
             "quote": "夫天地者，万物之逆旅也；",
             "emotion_summary": "澄明、通透、苍凉；兼有怀古感时（复合情绪）",
@@ -421,6 +436,9 @@
           "work": {
             "title": "忆旧游寄谯郡元参军",
             "body_hash": "7fbd85f67ec85eaf61103cd05774a9d218f39b7f82eaf2583570f6e32425d7a1",
+            "work_id": "fw_aa0d3d4455440052ad7e42db",
+            "canonical_gushiwen_id": "34ee87b054ef",
+            "profile_canonical_gushiwen_id": "34ee87b054ef",
             "year": 751,
             "quote": "忆昔洛阳董糟丘，为余天津桥醉造酒楼。",
             "emotion_summary": "疏狂、豪纵、超逸；兼有归隐超脱（复合情绪）",
@@ -478,6 +496,9 @@
           "work": {
             "title": "田园言怀",
             "body_hash": "1962db4f463b83926d989b41860c7c8a691f5fe1c2b9614e3dc08a988089f84a",
+            "work_id": "fw_74ecfcf7c5fc46db82dbbb9f",
+            "canonical_gushiwen_id": "cee303801ab8",
+            "profile_canonical_gushiwen_id": "cee303801ab8",
             "year": 762,
             "quote": "贾谊三年谪，班超万里侯。",
             "emotion_summary": "慷慨、昂扬、恬淡；兼有闲适恬淡",
@@ -515,7 +536,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 1725,
       "readiness": {
         "score": 97,
         "biography_records": 1,
@@ -549,32 +570,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 1725,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 86,
-            "share": 0.287
-          },
-          {
-            "label": "豪迈昂扬",
-            "count": 27,
-            "share": 0.09
+            "count": 486,
+            "share": 0.282
           },
           {
             "label": "衰老病痛",
-            "count": 25,
-            "share": 0.083
-          },
-          {
-            "label": "漂泊羁旅",
-            "count": 23,
-            "share": 0.077
+            "count": 182,
+            "share": 0.106
           },
           {
             "label": "归隐超脱",
-            "count": 23,
-            "share": 0.077
+            "count": 149,
+            "share": 0.086
+          },
+          {
+            "label": "漂泊羁旅",
+            "count": 144,
+            "share": 0.083
+          },
+          {
+            "label": "豪迈昂扬",
+            "count": 114,
+            "share": 0.066
           }
         ],
         "textual_traits": [
@@ -583,34 +604,40 @@
           "衰飒",
           "苍茫",
           "超逸",
-          "慷慨"
+          "迟暮"
         ],
         "emotional_center": {
-          "valence": -0.244,
-          "arousal": 0.546,
-          "dominance": -0.144
+          "valence": -0.267,
+          "arousal": 0.537,
+          "dominance": -0.163
         },
-        "summary": "在本地收录的 300 首作品中，杜甫的反复文本倾向为「悲恸哀伤、豪迈昂扬、衰老病痛」，聚合形容词为「悲恸、凄切、衰飒、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1725 首作品中，杜甫的反复文本倾向为「悲恸哀伤、衰老病痛、归隐超脱」，聚合形容词为「悲恸、凄切、衰飒、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 736 年作品所在的「初涉世事」（-0.629），高点对应 758 年作品所在的「中岁回望」（-0.297）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 6,
-          "signal_rate": 0.02,
-          "reading": "在 300 首有效文本画像中，6 首触发「激愤/讽刺」规则信号（2.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 43,
+          "signal_rate": 0.025,
+          "reading": "在 1725 首有效文本画像中，43 首触发「激愤/讽刺」规则信号（2.5%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "八阵图",
-              "body_hash": "37301d6a6550fde85cbd61adb927ad586bd83ff14a4feef2e00b479f23882bfb",
-              "signal": 0.27
+              "title": "遣愤",
+              "work_id": "fw_b8bdf9dee68b5a2ad8a7980e",
+              "canonical_gushiwen_id": "",
+              "body_hash": "c90ee5d9532ecf3dc7af974c1490caeb47b8d34018ea4ea8a456b49bcec30e0a",
+              "signal": 1.0
             },
             {
-              "title": "咏怀古迹五首·其三",
-              "body_hash": "861597e32c94c9e185b5d6c637ed3252b326968ec58868136b905a6cae54c5ea",
-              "signal": 0.267
+              "title": "不归",
+              "work_id": "fw_ed2b9d660122b6a2947ba120",
+              "canonical_gushiwen_id": "",
+              "body_hash": "95c3cfca78d42581d14f13cb73fa5bc118a5f01292b48a63f9203705b0cbc0c2",
+              "signal": 0.532
             },
             {
-              "title": "负薪行",
-              "body_hash": "0c9185bad572c4b0daf5052598722368d189fa797bd01512a0d918c80b1c75a5",
-              "signal": 0.258
+              "title": "遣兴五首 三",
+              "work_id": "fw_326e4c24552ee1ddfac2c016",
+              "canonical_gushiwen_id": "",
+              "body_hash": "a91480852b8f146407957c998ae077006d0e71795bfbc379d03021d3a79d8ec1",
+              "signal": 0.444
             }
           ]
         }
@@ -682,6 +709,9 @@
           "work": {
             "title": "登兖州城楼",
             "body_hash": "ed9d27b86ec4af5828ef127b721e5988860a1c11b74e255ec5f1a3c5d09998d7",
+            "work_id": "fw_6ce3728245c7e69d35e3984a",
+            "canonical_gushiwen_id": "15094d5bf256",
+            "profile_canonical_gushiwen_id": "15094d5bf256",
             "year": 736,
             "quote": "孤嶂秦碑在，荒城鲁殿馀。",
             "emotion_summary": "孤清、冷寂、悲恸；兼有悲恸哀伤",
@@ -737,6 +767,9 @@
           "work": {
             "title": "冬日有怀李白",
             "body_hash": "cf252aac8e4c4dd8231b6217a46addf35b6c899cba13bc20aff39bc0b04121e7",
+            "work_id": "fw_d659efc0554e3deb2411f33a",
+            "canonical_gushiwen_id": "fd9d1fdab9f0",
+            "profile_canonical_gushiwen_id": "fd9d1fdab9f0",
             "year": 745,
             "quote": "寂寞书斋里，终朝独尔思。",
             "emotion_summary": "孤清、冷寂、悲恸；兼有悲恸哀伤",
@@ -791,6 +824,9 @@
           "work": {
             "title": "九日蓝田崔氏庄",
             "body_hash": "1e1961a6ca01d71ad75bb84ebaf2fc1ea6777316ff4dbae2868eb2984eb76b11",
+            "work_id": "fw_82bcfe5ad77a0e99072ff9f0",
+            "canonical_gushiwen_id": "9743682062eb",
+            "profile_canonical_gushiwen_id": "9743682062eb",
             "year": 758,
             "quote": "老去悲秋强自宽，兴来今日尽人欢。",
             "emotion_summary": "悲恸、凄切、悲秋；兼有悲秋迟暮（复合情绪）",
@@ -861,7 +897,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 3186,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -895,68 +931,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 3186,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 69,
-            "share": 0.231
+            "count": 572,
+            "share": 0.18
           },
           {
             "label": "归隐超脱",
-            "count": 38,
-            "share": 0.127
+            "count": 418,
+            "share": 0.131
+          },
+          {
+            "label": "衰老病痛",
+            "count": 370,
+            "share": 0.116
           },
           {
             "label": "情绪未定",
-            "count": 27,
-            "share": 0.09
+            "count": 269,
+            "share": 0.084
           },
           {
-            "label": "孤寂清冷",
-            "count": 21,
-            "share": 0.07
-          },
-          {
-            "label": "漂泊羁旅",
-            "count": 19,
-            "share": 0.064
+            "label": "纵逸狂放",
+            "count": 233,
+            "share": 0.073
           }
         ],
         "textual_traits": [
           "悲恸",
-          "凄切",
-          "超逸",
           "衰飒",
-          "清远",
-          "苍茫"
+          "超逸",
+          "凄切",
+          "疏狂",
+          "清远"
         ],
         "emotional_center": {
-          "valence": -0.211,
-          "arousal": 0.503,
-          "dominance": -0.116
+          "valence": -0.193,
+          "arousal": 0.511,
+          "dominance": -0.108
         },
-        "summary": "在本地收录的 299 首作品中，白居易的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、凄切、超逸、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 3186 首作品中，白居易的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、衰飒、超逸、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 813 年作品所在的「行路与转折」（-0.464），高点对应 794 年作品所在的「初涉世事」（0.3）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 18,
-          "signal_rate": 0.06,
-          "reading": "在 299 首有效文本画像中，18 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 95,
+          "signal_rate": 0.03,
+          "reading": "在 3186 首有效文本画像中，95 首触发「激愤/讽刺」规则信号（3.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "采地黄者",
-              "body_hash": "e9fa67f546219b84f32d8abc9d816543a4b3c29d98a1dd5f49912b84b2c6b450",
-              "signal": 0.625
+              "title": "新乐府 采诗官\t监前王乱亡之由也",
+              "work_id": "fw_4866e591cedc20b78ccbe030",
+              "canonical_gushiwen_id": "",
+              "body_hash": "d1d95f3adee64233f366f707555df3be65061dd6623db37d6a1b93bd4b4968a4",
+              "signal": 1.0
             },
             {
-              "title": "大林寺桃花",
-              "body_hash": "e4982966ba041fe900e82b975fc92a0d5d4c30cdaafa7906a52c93b3ce22215b",
-              "signal": 0.485
+              "title": "相和歌辞 怨诗",
+              "work_id": "fw_1eadeba30f3b21cb6aa56a61",
+              "canonical_gushiwen_id": "",
+              "body_hash": "96692524fba563f9bcd267154fc32cb18295da4ee6d163f5faaaae6aafa0c310",
+              "signal": 1.0
             },
             {
-              "title": "编集拙诗成一十五卷因题卷末戏赠元九李二十",
-              "body_hash": "f514b486dd479e1efcc140e7824de428704805b35840313a188d84225d777c57",
-              "signal": 0.42
+              "title": "禽虫十二章 九",
+              "work_id": "fw_3319371ee391e5272c02efac",
+              "canonical_gushiwen_id": "",
+              "body_hash": "9c9be7e05a2dc06dd0337104e5d686c1591ab656152f6c7324883aceb6223a21",
+              "signal": 1.0
             }
           ]
         }
@@ -1028,6 +1070,9 @@
           "work": {
             "title": "游襄阳怀孟浩然",
             "body_hash": "26f321c3301b0e4ef9b292e53021e4d6c8377501e058624fbb8263478466f642",
+            "work_id": "fw_623bcf11651c20fd5c6dc1d2",
+            "canonical_gushiwen_id": "9efa3d1d8d2a",
+            "profile_canonical_gushiwen_id": "9efa3d1d8d2a",
             "year": 794,
             "quote": "清风无人继，日暮空襄阳。",
             "emotion_summary": "超逸、清远、低回",
@@ -1081,6 +1126,9 @@
           "work": {
             "title": "村居苦寒",
             "body_hash": "6f0de203efd4cd08d3e52d514f7552acd3ef76d2f2035b12f2d1de0675be9fb3",
+            "work_id": "fw_b61d3e7e426a68ae4fb31c9e",
+            "canonical_gushiwen_id": "649b872fb3d7",
+            "profile_canonical_gushiwen_id": "649b872fb3d7",
             "year": 813,
             "quote": "唯烧蒿棘火，愁坐夜待晨。",
             "emotion_summary": "悲恸、凄切、悲悯；兼有悲悯苍生（复合情绪）",
@@ -1137,6 +1185,9 @@
           "work": {
             "title": "中隐",
             "body_hash": "e1789571c5ae5708e4d6189535eadbf786a09a765e1de5091fabba0857316287",
+            "work_id": "fw_780773409ffbe60398be0baa",
+            "canonical_gushiwen_id": "3967f224e083",
+            "profile_canonical_gushiwen_id": "3967f224e083",
             "year": 829,
             "quote": "大隐住朝市，小隐入丘樊。",
             "emotion_summary": "进退两难、仕隐、悲恸；兼有悲恸哀伤",
@@ -1215,7 +1266,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 582,
       "readiness": {
         "score": 85,
         "biography_records": 1,
@@ -1248,68 +1299,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 582,
         "dominant_emotions": [
           {
             "label": "归隐超脱",
-            "count": 53,
-            "share": 0.177
+            "count": 101,
+            "share": 0.174
           },
           {
             "label": "悲恸哀伤",
-            "count": 45,
-            "share": 0.15
+            "count": 96,
+            "share": 0.165
           },
           {
             "label": "情绪未定",
-            "count": 23,
-            "share": 0.077
+            "count": 49,
+            "share": 0.084
           },
           {
             "label": "漂泊羁旅",
-            "count": 20,
-            "share": 0.067
+            "count": 42,
+            "share": 0.072
           },
           {
             "label": "衰老病痛",
-            "count": 19,
-            "share": 0.063
+            "count": 38,
+            "share": 0.065
           }
         ],
         "textual_traits": [
           "超逸",
           "悲恸",
           "清远",
-          "苍茫",
           "凄切",
+          "苍茫",
           "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.143,
-          "arousal": 0.471,
-          "dominance": -0.046
+          "valence": -0.154,
+          "arousal": 0.473,
+          "dominance": -0.06
         },
-        "summary": "在本地收录的 300 首作品中，王维的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、悲恸、清远、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 582 首作品中，王维的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、悲恸、清远、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 734 年作品所在的「行路与转折」（-0.588），高点对应 759 年作品所在的「晚境与记录末端」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 5,
+          "signal_poems": 10,
           "signal_rate": 0.017,
-          "reading": "在 300 首有效文本画像中，5 首触发「激愤/讽刺」规则信号（1.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "reading": "在 582 首有效文本画像中，10 首触发「激愤/讽刺」规则信号（1.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "句",
+              "work_id": "fw_ab97b7b8494500714fc2c08b",
+              "canonical_gushiwen_id": "d34dfb216769",
               "body_hash": "e4b813c87fa637e4fa6e5adf9f3b3e28eef56f44e1368353f681214a0becdf26",
               "signal": 0.425
             },
             {
-              "title": "送崔兴宗",
-              "body_hash": "e54331a0f1aaaedd3613faca0814d9ebb54538675484db0a085b74ae5575765e",
-              "signal": 0.312
+              "title": "寓言二首 二",
+              "work_id": "fw_fcf0d50dde88c54c2734ece3",
+              "canonical_gushiwen_id": "",
+              "body_hash": "96460d31d3bc00804387aa1ff6466f0064250bb2ff36a678cf7a5e7d682a817c",
+              "signal": 0.336
             },
             {
-              "title": "赋得秋日悬清光",
-              "body_hash": "d5798753d620684f69035d0cd9339d9c017ee60fb9e8f83f24a5ed72420fe78d",
-              "signal": 0.308
+              "title": "送崔兴宗",
+              "work_id": "fw_de30b0c4466d4fdf7b805398",
+              "canonical_gushiwen_id": "",
+              "body_hash": "310a59bf8f5f7e80e24bf97f065b86358a9c3937219014f59909e01d126c0767",
+              "signal": 0.312
             }
           ]
         }
@@ -1372,6 +1429,9 @@
           "work": {
             "title": "千塔主人",
             "body_hash": "72d643c4cd8054571fd1500c21ad4cbd81ec2f2f00aaca2b776af9632597dcea",
+            "work_id": "fw_e97c0beb89e14b99dfcba582",
+            "canonical_gushiwen_id": "07ea03f4b2d5",
+            "profile_canonical_gushiwen_id": "07ea03f4b2d5",
             "year": 721,
             "quote": "逆旅逢佳节，征帆未可前。",
             "emotion_summary": "苍茫、漂泊",
@@ -1425,6 +1485,9 @@
           "work": {
             "title": "归嵩山作",
             "body_hash": "4a70b5cbc76491c01d63cc9baf18790ae8fd52ac66dbd09a576723bffeca55a0",
+            "work_id": "fw_cc5b744b58b68211906ba0ac",
+            "canonical_gushiwen_id": "a496667a51c2",
+            "profile_canonical_gushiwen_id": "a496667a51c2",
             "year": 734,
             "quote": "迢递嵩高下，归来且闭关。",
             "emotion_summary": "苍茫、漂泊、悲恸；兼有悲恸哀伤",
@@ -1479,6 +1542,9 @@
           "work": {
             "title": "重酬苑郎中",
             "body_hash": "4a01ba181da0cec8438be20974e4b69af47704431ca24d055978caf9acaf24c1",
+            "work_id": "fw_e2d74fd44c5b781b9e6b2ddb",
+            "canonical_gushiwen_id": "f8e6a965dc62",
+            "profile_canonical_gushiwen_id": "f8e6a965dc62",
             "year": 747,
             "quote": "草木尽能酬雨露，荣枯安敢问乾坤。",
             "emotion_summary": "悲恸、凄切、衰飒；兼有衰老病痛（复合情绪）",
@@ -1534,6 +1600,9 @@
           "work": {
             "title": "春夜竹亭赠钱少府归蓝田",
             "body_hash": "2098997f580429b00887679354f1b54455f97528c233f9c87c784a9404e8b967",
+            "work_id": "fw_83e42bcb305d4b579f95bb96",
+            "canonical_gushiwen_id": "b48e252383ad",
+            "profile_canonical_gushiwen_id": "b48e252383ad",
             "year": 759,
             "quote": "夜静群动息，时闻隔林犬。",
             "emotion_summary": "词典信号不足，保留为待考",
@@ -1567,7 +1636,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 688,
       "readiness": {
         "score": 94,
         "biography_records": 2,
@@ -1600,32 +1669,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 688,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 89,
-            "share": 0.297
-          },
-          {
-            "label": "失意无奈",
-            "count": 28,
-            "share": 0.093
+            "count": 205,
+            "share": 0.298
           },
           {
             "label": "情绪未定",
-            "count": 27,
-            "share": 0.09
+            "count": 83,
+            "share": 0.121
+          },
+          {
+            "label": "失意无奈",
+            "count": 55,
+            "share": 0.08
           },
           {
             "label": "归隐超脱",
-            "count": 21,
-            "share": 0.07
+            "count": 54,
+            "share": 0.078
           },
           {
             "label": "漂泊羁旅",
-            "count": 18,
-            "share": 0.06
+            "count": 42,
+            "share": 0.061
           }
         ],
         "textual_traits": [
@@ -1633,35 +1702,41 @@
           "凄切",
           "苍茫",
           "超逸",
-          "失落",
-          "惊惧"
+          "含混",
+          "待考"
         ],
         "emotional_center": {
-          "valence": -0.265,
-          "arousal": 0.546,
-          "dominance": -0.179
+          "valence": -0.254,
+          "arousal": 0.534,
+          "dominance": -0.172
         },
-        "summary": "在本地收录的 300 首作品中，韩愈的反复文本倾向为「悲恸哀伤、失意无奈、情绪未定」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 688 首作品中，韩愈的反复文本倾向为「悲恸哀伤、情绪未定、失意无奈」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 812 年作品所在的「中岁回望」（-0.591），高点对应 785 年作品所在的「初涉世事」（0.695）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 8,
-          "signal_rate": 0.027,
-          "reading": "在 300 首有效文本画像中，8 首触发「激愤/讽刺」规则信号（2.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 15,
+          "signal_rate": 0.022,
+          "reading": "在 688 首有效文本画像中，15 首触发「激愤/讽刺」规则信号（2.2%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "游城南十六首。题于宾客庄",
+              "work_id": "fw_09cdeca6344cc102bb7fda59",
+              "canonical_gushiwen_id": "837fb50343e6",
               "body_hash": "476040d9c7ceca82a615b2dfae9cde0576bd73abf5d9536c9157ef190fa9e225",
               "signal": 1.0
             },
             {
               "title": "初南食贻元十八协律",
+              "work_id": "fw_b7ee3786b28765bd04963f4c",
+              "canonical_gushiwen_id": "f9664b1d637b",
               "body_hash": "479f9549efd372d6a0c1bfae6a5777fa1d06471ea6f70f618302d12e8b312a21",
               "signal": 0.755
             },
             {
-              "title": "崔山君传",
-              "body_hash": "89a7db06b6226a090c1a8c4053e6c8d61b166d4e4479fae075473cc11824e1d6",
-              "signal": 0.716
+              "title": "初南食贻元十八协律",
+              "work_id": "fw_86f1afe02ef7c76722c61735",
+              "canonical_gushiwen_id": "",
+              "body_hash": "dbf0374f288e1b1f98e3961c4c73d26186c3fae8ce806199ed7072f44a89624f",
+              "signal": 0.755
             }
           ]
         }
@@ -1732,6 +1807,9 @@
           "work": {
             "title": "芍药歌（一本作王司马红芍药歌）",
             "body_hash": "e2a6e2a6e75f7ac176f94fd24934f863b8e80867660aaf18e55c05f9fa6ade1f",
+            "work_id": "fw_e404f4928db6040b46ab55af",
+            "canonical_gushiwen_id": "eb723b2b8702",
+            "profile_canonical_gushiwen_id": "eb723b2b8702",
             "year": 785,
             "quote": "一尊春酒甘若饴，丈人此乐无人知。",
             "emotion_summary": "疏狂、豪纵、欣悦；兼有欢愉明快",
@@ -1787,6 +1865,9 @@
           "work": {
             "title": "上张仆射书",
             "body_hash": "3cec592eea4a9936f6f245218b892e52db34f2ae29a84b0cc340d336dcf23a32",
+            "work_id": "fw_5acf61f523f761812878461e",
+            "canonical_gushiwen_id": "7f1bdc35f1a2",
+            "profile_canonical_gushiwen_id": "7f1bdc35f1a2",
             "year": 799,
             "quote": "苟如是，虽日受千金之赐，一歳九迁其官，感恩则有之矣，将以称于天下曰知己知己则未也。",
             "emotion_summary": "真挚、温厚、感念；兼有酬赠感激（复合情绪）",
@@ -1844,6 +1925,9 @@
           "work": {
             "title": "寄崔二十六立之",
             "body_hash": "3f17d50cdf654db4ed1c363cc680ec79abe34bd8d92c057685e7fc1212dc5704",
+            "work_id": "fw_27f00abe0dc9d0de474fbc49",
+            "canonical_gushiwen_id": "b47fc7ad578a",
+            "profile_canonical_gushiwen_id": "b47fc7ad578a",
             "year": 812,
             "quote": "无能食国惠，岂异哀癃罢。",
             "emotion_summary": "悲恸、凄切、衰飒；兼有衰老病痛",
@@ -1921,7 +2005,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 242,
+      "corpus_poems": 407,
       "readiness": {
         "score": 92,
         "biography_records": 1,
@@ -1954,68 +2038,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 242,
+        "sample_poems": 407,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 53,
-            "share": 0.219
-          },
-          {
-            "label": "归隐超脱",
-            "count": 25,
-            "share": 0.103
-          },
-          {
-            "label": "衰老病痛",
-            "count": 17,
-            "share": 0.07
+            "count": 80,
+            "share": 0.197
           },
           {
             "label": "情绪未定",
-            "count": 17,
-            "share": 0.07
+            "count": 50,
+            "share": 0.123
           },
           {
-            "label": "失意无奈",
-            "count": 16,
-            "share": 0.066
+            "label": "归隐超脱",
+            "count": 34,
+            "share": 0.084
+          },
+          {
+            "label": "漂泊羁旅",
+            "count": 28,
+            "share": 0.069
+          },
+          {
+            "label": "衰老病痛",
+            "count": 26,
+            "share": 0.064
           }
         ],
         "textual_traits": [
           "悲恸",
           "凄切",
-          "超逸",
           "苍茫",
-          "孤清",
-          "衰飒"
+          "超逸",
+          "含混",
+          "待考"
         ],
         "emotional_center": {
-          "valence": -0.25,
-          "arousal": 0.528,
-          "dominance": -0.166
+          "valence": -0.245,
+          "arousal": 0.524,
+          "dominance": -0.165
         },
-        "summary": "在本地收录的 242 首作品中，柳宗元的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 407 首作品中，柳宗元的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 809 年作品所在的「中岁回望」（-0.651），高点对应 790 年作品所在的「初涉世事」（0.78）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 10,
-          "signal_rate": 0.041,
-          "reading": "在 242 首有效文本画像中，10 首触发「激愤/讽刺」规则信号（4.1%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 13,
+          "signal_rate": 0.032,
+          "reading": "在 407 首有效文本画像中，13 首触发「激愤/讽刺」规则信号（3.2%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "咏荆轲",
+              "work_id": "fw_c372d016ed7481a8f3052871",
+              "canonical_gushiwen_id": "",
+              "body_hash": "a77909dd107c06374a303db09bd18b54ff7967ed5b3f50ee5ee863fe5e647d19",
+              "signal": 0.532
+            },
+            {
+              "title": "咏荆轲",
+              "work_id": "fw_b5c525921b5ddb6dc763cae3",
+              "canonical_gushiwen_id": "b102e124cb1e",
               "body_hash": "f8fb48c6642bca5baea95de18b222b79719cdf9b1834e82395d4a055cc988468",
               "signal": 0.468
             },
             {
               "title": "咏史",
-              "body_hash": "b833458341cd01ebe5f8bd71e4c77a980734162cae5153cfed1f0f9d0062d37d",
+              "work_id": "fw_2315860115b06515ded1ef4b",
+              "canonical_gushiwen_id": "",
+              "body_hash": "1bd4f641e6ceddcc16aaaf0b1e1a8b46302ba753534450d7b23a85fd5bdf5df8",
               "signal": 0.364
-            },
-            {
-              "title": "与崔策登西山",
-              "body_hash": "62e1ba051b86e6cb2461be86b64902c88a7be7f1b5643967ce055a50e501bf2c",
-              "signal": 0.362
             }
           ]
         }
@@ -2086,6 +2176,9 @@
           "work": {
             "title": "省试观庆云图诗",
             "body_hash": "241c9d105897f3625591aa46a19948c7f3e885ab0189d40dd788af160c41baba",
+            "work_id": "fw_6c6f8b3fa384392ac958d43d",
+            "canonical_gushiwen_id": "8784e2429686",
+            "profile_canonical_gushiwen_id": "8784e2429686",
             "year": 790,
             "quote": "九天开秘祉，百辟赞嘉谟。",
             "emotion_summary": "慷慨、昂扬、激越",
@@ -2139,6 +2232,9 @@
           "work": {
             "title": "种树郭橐驼传",
             "body_hash": "8c0627bd42a75650861ad4082246a0a1962ddd5e8fecda0ddde23bacde0b3ac5",
+            "work_id": "fw_624c29c1f98f543341f7bbe1",
+            "canonical_gushiwen_id": "0595b5ed9fb4",
+            "profile_canonical_gushiwen_id": "0595b5ed9fb4",
             "year": 805,
             "quote": "甚者，爪其肤以验其生枯，摇其本以观其疏密，而木之性日以离矣。",
             "emotion_summary": "悲恸、凄切、失落；兼有失意无奈",
@@ -2196,6 +2292,9 @@
           "work": {
             "title": "湘口馆潇湘二水所会",
             "body_hash": "91796eb860305feeff9d523c0ee4d92fc621d1e89ecf855281f67262155e0f6b",
+            "work_id": "fw_5ea70040d49953b63a1ec6e8",
+            "canonical_gushiwen_id": "59760cf63d31",
+            "profile_canonical_gushiwen_id": "59760cf63d31",
             "year": 809,
             "quote": "杳杳渔父吟，叫叫羁鸿哀。",
             "emotion_summary": "悲恸、凄切、苍茫；兼有漂泊羁旅",
@@ -2250,6 +2349,9 @@
           "work": {
             "title": "柳州峒氓",
             "body_hash": "3d1f203a49647152666debab7db8445f1f8748727220b9b36e90b78f4763ff73",
+            "work_id": "fw_f551e771c1a185b654148e4d",
+            "canonical_gushiwen_id": "764d42f66982",
+            "profile_canonical_gushiwen_id": "764d42f66982",
             "year": 819,
             "quote": "愁向公庭问重译，欲投章甫作文身。",
             "emotion_summary": "沉郁、忧患、苍茫；兼有漂泊羁旅",
@@ -2286,7 +2388,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 1059,
       "readiness": {
         "score": 96,
         "biography_records": 1,
@@ -2319,68 +2421,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 1059,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 63,
-            "share": 0.211
+            "count": 183,
+            "share": 0.173
           },
           {
             "label": "归隐超脱",
-            "count": 40,
-            "share": 0.134
+            "count": 158,
+            "share": 0.149
           },
           {
             "label": "情绪未定",
-            "count": 30,
-            "share": 0.1
+            "count": 116,
+            "share": 0.11
           },
           {
             "label": "漂泊羁旅",
-            "count": 26,
-            "share": 0.087
+            "count": 88,
+            "share": 0.083
           },
           {
-            "label": "纵逸狂放",
-            "count": 19,
-            "share": 0.064
+            "label": "欢愉明快",
+            "count": 69,
+            "share": 0.065
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
-          "凄切",
           "苍茫",
+          "凄切",
           "清远",
-          "疏狂"
+          "含混"
         ],
         "emotional_center": {
-          "valence": -0.144,
-          "arousal": 0.518,
-          "dominance": -0.044
+          "valence": -0.138,
+          "arousal": 0.513,
+          "dominance": -0.046
         },
-        "summary": "在本地收录的 299 首作品中，刘禹锡的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1059 首作品中，刘禹锡的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、苍茫、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 814 年作品所在的「行路与转折」（-0.671），高点对应 801 年作品所在的「初涉世事」（0.62）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 20,
-          "signal_rate": 0.067,
-          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 62,
+          "signal_rate": 0.059,
+          "reading": "在 1059 首有效文本画像中，62 首触发「激愤/讽刺」规则信号（5.9%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "相和歌辞。阿娇怨",
-              "body_hash": "a88fdcd3b3be5936cb987f1103666f56c90f7d313d16640ab0fd0fde672911da",
+              "title": "吴方之见示听江西故吏朱幼恭歌三篇颇有怀故林之想吟讽不足因而和之",
+              "work_id": "fw_db1257d564dcdb7bb278151d",
+              "canonical_gushiwen_id": "",
+              "body_hash": "405f3bd81b3b8729611f008f3c4fb3c4e145efa3c66532f4975e77eade3fda33",
               "signal": 1.0
             },
             {
-              "title": "竹枝词九首·其七",
-              "body_hash": "f21c888cbdec7c1acf9be2a88b2fb213912121f429611b7098682aaadba8a0af",
-              "signal": 0.769
+              "title": "和浙西尚书闻常州杨给事制新楼因寄之作",
+              "work_id": "fw_204b18d512f9b6806eb161ad",
+              "canonical_gushiwen_id": "",
+              "body_hash": "3009f0825186abef1f589ec8181c9d1296af9f0027a6a8a8d0dd432fe98687fa",
+              "signal": 1.0
             },
             {
-              "title": "视刀环歌",
-              "body_hash": "9e401bc9d2879c4ac187d09a78460609d937784db8de5828f5eccb53e7b260a3",
-              "signal": 0.615
+              "title": "相和歌辞 三阁词四首 四",
+              "work_id": "fw_8703e23d485e086ea7970873",
+              "canonical_gushiwen_id": "",
+              "body_hash": "476dc545332dcb752f7125d9ae818b82c8dab309ca2c6608a8d184de27898ad2",
+              "signal": 1.0
             }
           ]
         }
@@ -2451,6 +2559,9 @@
           "work": {
             "title": "柳絮",
             "body_hash": "ceee0b753c19682cacbb8bc2dab146ef49f043568ddec914d6cfb9e715b1b9a0",
+            "work_id": "fw_2885f3e7704c3447054580a2",
+            "canonical_gushiwen_id": "9947fdfdb81d",
+            "profile_canonical_gushiwen_id": "9947fdfdb81d",
             "year": 801,
             "quote": "萦回谢女题诗笔，点缀陶公漉酒巾。",
             "emotion_summary": "疏狂、豪纵、激越",
@@ -2504,6 +2615,9 @@
           "work": {
             "title": "视刀环歌",
             "body_hash": "9e401bc9d2879c4ac187d09a78460609d937784db8de5828f5eccb53e7b260a3",
+            "work_id": "fw_0c4c56d32d78c4f39ab15a74",
+            "canonical_gushiwen_id": "5b70d1d88538",
+            "profile_canonical_gushiwen_id": "5b70d1d88538",
             "year": 814,
             "quote": "常恨言语浅，不如人意深。",
             "emotion_summary": "幽愤、激切、悲恸；兼有悲恸哀伤",
@@ -2557,6 +2671,9 @@
           "work": {
             "title": "与歌者何戡",
             "body_hash": "4c14f2ab4503e713f0049a12674e95961dbee47e24704982341a729ce645f5de",
+            "work_id": "fw_1b68373b8d2681a8562a9773",
+            "canonical_gushiwen_id": "9c4002dc71c5",
+            "profile_canonical_gushiwen_id": "9c4002dc71c5",
             "year": 828,
             "quote": "二十余年别帝京，重闻天乐不胜情。",
             "emotion_summary": "苍茫、漂泊",
@@ -2610,6 +2727,9 @@
           "work": {
             "title": "早秋雨后寄乐天",
             "body_hash": "7c88a68994174e25f90f551e918fa248a75ca4805f134bbc1d35f6439c17e5d1",
+            "work_id": "fw_06d21445a2f25ca33da46918",
+            "canonical_gushiwen_id": "8f797a6a7ad2",
+            "profile_canonical_gushiwen_id": "8f797a6a7ad2",
             "year": 842,
             "quote": "且喜炎前别，安能怀寸阴。",
             "emotion_summary": "欣悦、明快、超逸；兼有归隐超脱（复合情绪）",
@@ -2647,7 +2767,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 1127,
       "readiness": {
         "score": 96,
         "biography_records": 1,
@@ -2680,32 +2800,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 1127,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 72,
-            "share": 0.241
+            "count": 256,
+            "share": 0.227
           },
           {
             "label": "情绪未定",
-            "count": 32,
-            "share": 0.107
+            "count": 142,
+            "share": 0.126
           },
           {
             "label": "归隐超脱",
-            "count": 29,
-            "share": 0.097
+            "count": 124,
+            "share": 0.11
           },
           {
             "label": "漂泊羁旅",
-            "count": 19,
-            "share": 0.064
+            "count": 76,
+            "share": 0.067
           },
           {
-            "label": "失意无奈",
-            "count": 17,
-            "share": 0.057
+            "label": "衰老病痛",
+            "count": 68,
+            "share": 0.06
           }
         ],
         "textual_traits": [
@@ -2717,31 +2837,37 @@
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.213,
-          "arousal": 0.534,
-          "dominance": -0.126
+          "valence": -0.216,
+          "arousal": 0.523,
+          "dominance": -0.131
         },
-        "summary": "在本地收录的 299 首作品中，元稹的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1127 首作品中，元稹的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、超逸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 794 年作品所在的「初涉世事」（-0.366），高点对应 819 年作品所在的「中岁回望」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 20,
-          "signal_rate": 0.067,
-          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 57,
+          "signal_rate": 0.051,
+          "reading": "在 1127 首有效文本画像中，57 首触发「激愤/讽刺」规则信号（5.1%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
+              "title": "楚歌十首 十",
+              "work_id": "fw_c860d2e7039c823cea7603d3",
+              "canonical_gushiwen_id": "",
+              "body_hash": "e904125cb0519eff585f3e1ed3dd9c31c61c8154ccb35eba224f04d0c0099595",
+              "signal": 0.649
+            },
+            {
+              "title": "荥阳郑公以稹寓居严茅有池塘之胜寄诗四首因有意献",
+              "work_id": "fw_5bcd80c004dbeb489c727132",
+              "canonical_gushiwen_id": "",
+              "body_hash": "47520b259ca2f885a9f8ac1c9e48c20c4e105bfc25d9ef45d453fc7ac09c5b94",
+              "signal": 0.615
+            },
+            {
               "title": "以州宅夸于乐天",
+              "work_id": "fw_57f54836c08babd00d384a39",
+              "canonical_gushiwen_id": "80e7c067d154",
               "body_hash": "68e9785ed461e4cce7b028b518ce2cea8ad26116bfb340c446afdfc1f7772ee0",
               "signal": 0.538
-            },
-            {
-              "title": "春蝉",
-              "body_hash": "2316467dbcefb3669e9a91938e9b68b33a4734f12b4992b9766ba128aa3feef2",
-              "signal": 0.439
-            },
-            {
-              "title": "筝",
-              "body_hash": "b122ba075966554cc77f4b3fae5542fc8654197f650dece7c4ad20b87b18bc7b",
-              "signal": 0.375
             }
           ]
         }
@@ -2812,6 +2938,9 @@
           "work": {
             "title": "代曲江老人百韵·年十六时作",
             "body_hash": "369c813b8317c89a3b7a8b98c13cbe2afef6baa7623456e77ee47cbed872bc9f",
+            "work_id": "fw_ee832f04316d8090e8bc7fd6",
+            "canonical_gushiwen_id": "84aa7ec8ebf7",
+            "profile_canonical_gushiwen_id": "84aa7ec8ebf7",
             "year": 794,
             "quote": "何事花前泣，曾逢旧日春。",
             "emotion_summary": "悲恸、凄切、超逸；兼有归隐超脱（复合情绪）",
@@ -2869,6 +2998,9 @@
           "work": {
             "title": "赋得九月尽（秋字）",
             "body_hash": "18190bcb5ccfc2cc213201b515f260d0ab61eaba98dfc60f30d6c0bbacbbf7ec",
+            "work_id": "fw_0fb01a29e2fc16da24e0863c",
+            "canonical_gushiwen_id": "623a1e7823fa",
+            "profile_canonical_gushiwen_id": "623a1e7823fa",
             "year": 806,
             "quote": "半夜灰移琯，明朝帝御裘。",
             "emotion_summary": "憧憬、明朗、悲恸；兼有悲恸哀伤（复合情绪）",
@@ -2924,6 +3056,9 @@
           "work": {
             "title": "酬知退",
             "body_hash": "ee7489d106ae4c5d179bba15e238d6914c409778ed9530c2af6afd9790270e5c",
+            "work_id": "fw_ded1de818215102acfd50ebc",
+            "canonical_gushiwen_id": "0d73b0997de9",
+            "profile_canonical_gushiwen_id": "0d73b0997de9",
             "year": 819,
             "quote": "终须修到无修处，闻尽声闻始不闻。",
             "emotion_summary": "词典信号不足，保留为待考",
@@ -2995,7 +3130,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 796,
       "readiness": {
         "score": 88,
         "biography_records": 1,
@@ -3022,68 +3157,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 796,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 59,
-            "share": 0.197
+            "count": 154,
+            "share": 0.193
           },
           {
             "label": "情绪未定",
-            "count": 35,
-            "share": 0.117
+            "count": 92,
+            "share": 0.116
           },
           {
             "label": "归隐超脱",
-            "count": 27,
-            "share": 0.09
+            "count": 89,
+            "share": 0.112
           },
           {
             "label": "漂泊羁旅",
-            "count": 25,
-            "share": 0.084
+            "count": 76,
+            "share": 0.095
           },
           {
             "label": "豪迈昂扬",
-            "count": 18,
-            "share": 0.06
+            "count": 45,
+            "share": 0.057
           }
         ],
         "textual_traits": [
           "悲恸",
-          "凄切",
           "苍茫",
+          "凄切",
           "超逸",
           "含混",
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.184,
-          "arousal": 0.533,
-          "dominance": -0.098
+          "valence": -0.177,
+          "arousal": 0.53,
+          "dominance": -0.088
         },
-        "summary": "在本地收录的 299 首作品中，李商隐的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、苍茫、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 796 首作品中，李商隐的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、苍茫、凄切、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 847 年作品所在的「中岁回望」（-0.506），高点对应 837 年作品所在的「行路与转折」（-0.127）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 20,
-          "signal_rate": 0.067,
-          "reading": "在 299 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 50,
+          "signal_rate": 0.063,
+          "reading": "在 796 首有效文本画像中，50 首触发「激愤/讽刺」规则信号（6.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
+              "title": "柳枝五首 二",
+              "work_id": "fw_2f814fd3e6e36b4f27a6c163",
+              "canonical_gushiwen_id": "",
+              "body_hash": "154f5e12a160a89e63f645def1fcf08abadbd377a192b178c01046def2d796d4",
+              "signal": 1.0
+            },
+            {
               "title": "无题",
-              "body_hash": "58cc8e30326a836f141955e27ab25dac35902c98d4378d1a8669f851685b1954",
+              "work_id": "fw_cd45e3bae4de93c512c29e9a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "531d7173da778935fb53423d18b038026277f8b321f92b143563941b5763a8b9",
               "signal": 0.831
             },
             {
-              "title": "楚宫二首",
-              "body_hash": "9c1d940fdbde73e78b0e8d1a8932505bc0358625bf01b40b989b77d50ddc9fa8",
-              "signal": 0.444
-            },
-            {
-              "title": "筹笔驿",
-              "body_hash": "297e1a0809d2ca4f9b95725267637ba58904dccd17fb8957b6ba82913728cd88",
-              "signal": 0.414
+              "title": "无题",
+              "work_id": "fw_e09395f1e44b702dc4c0e8dd",
+              "canonical_gushiwen_id": "9ed6cb119799",
+              "body_hash": "58cc8e30326a836f141955e27ab25dac35902c98d4378d1a8669f851685b1954",
+              "signal": 0.831
             }
           ]
         }
@@ -3147,6 +3288,9 @@
           "work": {
             "title": "富平少侯",
             "body_hash": "b7cc3c351df89a9f7d4348b0cf644bdafff05d9cb937e4e8b248e5775b01cc0f",
+            "work_id": "fw_2eb19cd86234d29acd52b0c7",
+            "canonical_gushiwen_id": "59345ef325ed",
+            "profile_canonical_gushiwen_id": "59345ef325ed",
             "year": 826,
             "quote": "当关不报侵晨客，新得佳人字莫愁。",
             "emotion_summary": "缠绵、温柔、苍茫；兼有漂泊羁旅（复合情绪）",
@@ -3201,6 +3345,9 @@
           "work": {
             "title": "韩同年新居饯韩西迎家室戏赠",
             "body_hash": "a843e9a828074b179232d8ce363850e613a3e55f3560ddb81728c0b3ddefab2c",
+            "work_id": "fw_e33b06f67b722a44e7080f28",
+            "canonical_gushiwen_id": "7d8edf5a70cb",
+            "profile_canonical_gushiwen_id": "7d8edf5a70cb",
             "year": 837,
             "quote": "南朝禁脔无人近，瘦尽琼枝咏四愁。",
             "emotion_summary": "沉郁、忧患、欣悦；兼有欢愉明快（复合情绪）",
@@ -3252,6 +3399,9 @@
           "work": {
             "title": "海上谣",
             "body_hash": "35e5253cf40741bfacbbf6744b815a04e9b1aadf118dbc93dfb5c54e47fcb87a",
+            "work_id": "fw_9531c0d25d16166caa9ae691",
+            "canonical_gushiwen_id": "e3dc8f59d9fe",
+            "profile_canonical_gushiwen_id": "e3dc8f59d9fe",
             "year": 847,
             "quote": "桂水寒于江，玉兔秋冷咽。",
             "emotion_summary": "悲恸、凄切、超逸；兼有归隐超脱（复合情绪）",
@@ -3305,6 +3455,9 @@
           "work": {
             "title": "井泥四十韵",
             "body_hash": "98a31ee583a79292cff994cbdef5751784e4dcf63f126f511262c05973ba9719",
+            "work_id": "fw_9947a56149ce11dd9286cf61",
+            "canonical_gushiwen_id": "cf6705d05bff",
+            "profile_canonical_gushiwen_id": "cf6705d05bff",
             "year": 858,
             "quote": "待得孤月上，如与佳人来。",
             "emotion_summary": "悲恸、凄切、激越；兼有报国壮志（复合情绪）",
@@ -3343,7 +3496,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 746,
       "readiness": {
         "score": 88,
         "biography_records": 1,
@@ -3376,32 +3529,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 746,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 55,
-            "share": 0.183
+            "count": 139,
+            "share": 0.186
           },
           {
             "label": "归隐超脱",
-            "count": 32,
-            "share": 0.107
-          },
-          {
-            "label": "衰老病痛",
-            "count": 22,
-            "share": 0.073
+            "count": 103,
+            "share": 0.138
           },
           {
             "label": "漂泊羁旅",
-            "count": 20,
+            "count": 50,
             "share": 0.067
           },
           {
             "label": "情绪未定",
-            "count": 18,
-            "share": 0.06
+            "count": 48,
+            "share": 0.064
+          },
+          {
+            "label": "衰老病痛",
+            "count": 41,
+            "share": 0.055
           }
         ],
         "textual_traits": [
@@ -3410,34 +3563,40 @@
           "凄切",
           "苍茫",
           "清远",
-          "衰飒"
+          "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.198,
-          "arousal": 0.522,
-          "dominance": -0.097
+          "valence": -0.189,
+          "arousal": 0.515,
+          "dominance": -0.084
         },
-        "summary": "在本地收录的 300 首作品中，杜牧的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 746 首作品中，杜牧的反复文本倾向为「悲恸哀伤、归隐超脱、漂泊羁旅」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 825 年作品所在的「初涉世事」（-0.59），高点对应 841 年作品所在的「中岁回望」（-0.014）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 20,
-          "signal_rate": 0.067,
-          "reading": "在 300 首有效文本画像中，20 首触发「激愤/讽刺」规则信号（6.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 44,
+          "signal_rate": 0.059,
+          "reading": "在 746 首有效文本画像中，44 首触发「激愤/讽刺」规则信号（5.9%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "叹花",
+              "work_id": "fw_51a3af9c350c03b9f8210ee6",
+              "canonical_gushiwen_id": "fd3db6710b79",
               "body_hash": "af3e3efe3abb20f3f471c4269a62c99008145f0c944b0d32686fa768e7308ac3",
               "signal": 0.615
             },
             {
-              "title": "杜鹃",
-              "body_hash": "b568d9a13c1a1b61a558a6ff42690a5b74fa15941ed2f9c691628aff0305d699",
+              "title": "春晚题韦家亭子",
+              "work_id": "fw_1f72330fc96f755c608b19ee",
+              "canonical_gushiwen_id": "",
+              "body_hash": "7a3998a1c35ef2bb2e84e3c2c6bb24ecacce275adfb9bcd5d3a30a0db76273d4",
               "signal": 0.615
             },
             {
-              "title": "七夕",
-              "body_hash": "259b4794ceecab9df7bf9a2730196f3bd364be9497b848c081f99962ae428d19",
-              "signal": 0.327
+              "title": "杜鹃",
+              "work_id": "fw_21aa53b4da74509e9b390119",
+              "canonical_gushiwen_id": "6c78cdc95fdf",
+              "body_hash": "b568d9a13c1a1b61a558a6ff42690a5b74fa15941ed2f9c691628aff0305d699",
+              "signal": 0.615
             }
           ]
         }
@@ -3508,6 +3667,9 @@
           "work": {
             "title": "阿房宫赋",
             "body_hash": "ad00f111a84f3868bb3def419e5159e3d7f9517ed5f4d8bd622cffd24db27f9c",
+            "work_id": "fw_6316792bbc2b16572cbc562e",
+            "canonical_gushiwen_id": "0456af8aceec",
+            "profile_canonical_gushiwen_id": "0456af8aceec",
             "year": 825,
             "quote": "秦人不暇自哀，而后人哀之；",
             "emotion_summary": "悲恸、凄切、失落；兼有失意无奈",
@@ -3564,6 +3726,9 @@
           "work": {
             "title": "寄牛相公",
             "body_hash": "e2702e20d838ac24e67be3c9a6dd18dbaf858052c38db376c0999ace6ffb0559",
+            "work_id": "fw_c7ccda5fd3f30525f991730a",
+            "canonical_gushiwen_id": "b34527dd6a56",
+            "profile_canonical_gushiwen_id": "b34527dd6a56",
             "year": 830,
             "quote": "汉水横冲蜀浪分，危楼点的拂孤云。",
             "emotion_summary": "苍茫、漂泊、孤清；兼有孤寂清冷",
@@ -3619,6 +3784,9 @@
           "work": {
             "title": "题青云馆",
             "body_hash": "f49d3a11e4c8ceb34a80678d5c1033f8a8d1998d0da29c75c3a259a5c8d04d5c",
+            "work_id": "fw_06676a5c7b89703dcbe94a10",
+            "canonical_gushiwen_id": "83cc53fe224a",
+            "profile_canonical_gushiwen_id": "83cc53fe224a",
             "year": 841,
             "quote": "云连帐影萝阴合，枕绕泉声客梦凉。",
             "emotion_summary": "进退两难、仕隐、超逸；兼有归隐超脱（复合情绪）",
@@ -3686,7 +3854,7 @@
       "dynasty": "唐",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 652,
       "readiness": {
         "score": 88,
         "biography_records": 1,
@@ -3719,32 +3887,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 652,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 51,
+            "count": 111,
             "share": 0.17
           },
           {
-            "label": "漂泊羁旅",
-            "count": 37,
-            "share": 0.123
+            "label": "归隐超脱",
+            "count": 77,
+            "share": 0.118
           },
           {
-            "label": "归隐超脱",
-            "count": 30,
-            "share": 0.1
+            "label": "漂泊羁旅",
+            "count": 75,
+            "share": 0.115
           },
           {
             "label": "纵逸狂放",
-            "count": 27,
-            "share": 0.09
+            "count": 61,
+            "share": 0.094
           },
           {
             "label": "豪迈昂扬",
-            "count": 26,
-            "share": 0.087
+            "count": 47,
+            "share": 0.072
           }
         ],
         "textual_traits": [
@@ -3753,34 +3921,40 @@
           "超逸",
           "凄切",
           "疏狂",
-          "慷慨"
+          "清远"
         ],
         "emotional_center": {
-          "valence": -0.136,
-          "arousal": 0.54,
-          "dominance": -0.053
+          "valence": -0.143,
+          "arousal": 0.533,
+          "dominance": -0.057
         },
-        "summary": "在本地收录的 300 首作品中，岑参的反复文本倾向为「悲恸哀伤、漂泊羁旅、归隐超脱」，聚合形容词为「悲恸、苍茫、超逸、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 652 首作品中，岑参的反复文本倾向为「悲恸哀伤、归隐超脱、漂泊羁旅」，聚合形容词为「悲恸、苍茫、超逸、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 741 年作品所在的「初涉世事」（-0.333），高点对应 760 年作品所在的「中岁回望」（-0.022）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 4,
-          "signal_rate": 0.013,
-          "reading": "在 300 首有效文本画像中，4 首触发「激愤/讽刺」规则信号（1.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 6,
+          "signal_rate": 0.009,
+          "reading": "在 652 首有效文本画像中，6 首触发「激愤/讽刺」规则信号（0.9%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "精卫",
+              "work_id": "fw_ad8b0067656342d39623cd6a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "99d1336ed6cbde959cf7cac464cd4f31dcd428f4fc9969d0f29c3446074aeb8c",
+              "signal": 1.0
+            },
+            {
+              "title": "精卫",
+              "work_id": "fw_f05b9c5b6c4ec03cf90470a2",
+              "canonical_gushiwen_id": "af51be50d2fc",
               "body_hash": "834b1fef508a0769e014ee1df6c659cd368e494c785bd2fbed2bc8ba33f9ed6b",
               "signal": 0.558
             },
             {
               "title": "秦筝歌送外甥萧正归京",
+              "work_id": "fw_aae7f790202998ec66281906",
+              "canonical_gushiwen_id": "9ee11f1abac2",
               "body_hash": "c165d8cf995e3f0049e3f63525c4985a3998cf324a36b9881c222cfded61c07a",
               "signal": 0.155
-            },
-            {
-              "title": "送张秘书充刘相公通汴河判官，便赴江外觐省",
-              "body_hash": "f05af058dd68f1111ed0d36e0e702fd8862b7ea745262f255fae12b2d3e03f8f",
-              "signal": 0.15
             }
           ]
         }
@@ -3843,6 +4017,9 @@
           "work": {
             "title": "送崔全被放归都觐省",
             "body_hash": "50518b32c5c2380dd68ba6d7100c8fbcbcca2a186b7f008c1a0194672fc37d16",
+            "work_id": "fw_a18edd3d470ddf378b562145",
+            "canonical_gushiwen_id": "3b60b1a856e5",
+            "profile_canonical_gushiwen_id": "3b60b1a856e5",
             "year": 741,
             "quote": "来倾阮氏酒，去著老莱衣。",
             "emotion_summary": "衰飒、迟暮、疏狂；兼有纵逸狂放（复合情绪）",
@@ -3898,6 +4075,9 @@
           "work": {
             "title": "赠酒泉韩太守",
             "body_hash": "8968183176b30707f3474548944f9204c222e2fc4482e3d3992050a66ce0bc62",
+            "work_id": "fw_b3309419126b9c95deb8ba13",
+            "canonical_gushiwen_id": "dd83a395cf41",
+            "profile_canonical_gushiwen_id": "dd83a395cf41",
             "year": 751,
             "quote": "辞君走马归长安，",
             "emotion_summary": "惜别、依依、苍凉；兼有怀古感时",
@@ -3954,6 +4134,9 @@
           "work": {
             "title": "原头送范侍御（得山字）",
             "body_hash": "1f0040f8f46455079972224e58ef95564aaaa04b1668a218455bb5c0e24b3fb3",
+            "work_id": "fw_fa0b6cc2f7c9340a9b67c93f",
+            "canonical_gushiwen_id": "dea5cf4f420f",
+            "profile_canonical_gushiwen_id": "dea5cf4f420f",
             "year": 760,
             "quote": "别君只有相思梦，遮莫千山与万山。",
             "emotion_summary": "惜别、依依、缠绵；兼有爱恋缠绵（复合情绪）",
@@ -4021,7 +4204,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 3461,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -4055,68 +4238,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 3461,
         "dominant_emotions": [
           {
-            "label": "归隐超脱",
-            "count": 51,
-            "share": 0.17
+            "label": "悲恸哀伤",
+            "count": 547,
+            "share": 0.158
           },
           {
-            "label": "悲恸哀伤",
-            "count": 46,
-            "share": 0.153
+            "label": "归隐超脱",
+            "count": 509,
+            "share": 0.147
+          },
+          {
+            "label": "情绪未定",
+            "count": 364,
+            "share": 0.105
           },
           {
             "label": "衰老病痛",
-            "count": 21,
-            "share": 0.07
+            "count": 340,
+            "share": 0.098
           },
           {
             "label": "纵逸狂放",
-            "count": 21,
-            "share": 0.07
-          },
-          {
-            "label": "爱恋缠绵",
-            "count": 20,
+            "count": 233,
             "share": 0.067
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
+          "衰飒",
+          "凄切",
           "清远",
-          "疏狂",
-          "苍茫",
-          "凄切"
+          "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.086,
-          "arousal": 0.521,
-          "dominance": -0.001
+          "valence": -0.132,
+          "arousal": 0.504,
+          "dominance": -0.053
         },
-        "summary": "在本地收录的 300 首作品中，苏轼的反复文本倾向为「归隐超脱、悲恸哀伤、衰老病痛」，聚合形容词为「悲恸、超逸、清远、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 3461 首作品中，苏轼的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、衰飒、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1070 年作品所在的「行路与转折」（-0.53），高点对应 1085 年作品所在的「中岁回望」（0.009）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 12,
-          "signal_rate": 0.04,
-          "reading": "在 300 首有效文本画像中，12 首触发「激愤/讽刺」规则信号（4.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 94,
+          "signal_rate": 0.027,
+          "reading": "在 3461 首有效文本画像中，94 首触发「激愤/讽刺」规则信号（2.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "南歌子·感旧",
-              "body_hash": "ee41721661932fe74ae7fe4f39b830a92833e3004140dc9a468ea0ca0deb0c9b",
-              "signal": 0.615
+              "title": "九日舟中望见有美堂上鲁少卿饮以诗戏之二首  其二",
+              "work_id": "fw_9060055cec2e2b7b200a8e2b",
+              "canonical_gushiwen_id": "",
+              "body_hash": "5ff6dd2878f07d7a8b0e1d44d392ad29683a83cc345a86892b19fdce6802dc2a",
+              "signal": 1.0
             },
             {
-              "title": "菩萨蛮·回文",
-              "body_hash": "20ff46a514d925ab529f1505fea963c1a31feaa6736dde2f59d190b893a478e3",
-              "signal": 0.615
+              "title": "听僧昭素琴",
+              "work_id": "fw_2786660ec89f3c42995f081f",
+              "canonical_gushiwen_id": "",
+              "body_hash": "5f4d7b80f378a6a7c8f40a1f401ef9c97f2952eaa3158ad60dfcadd89196277c",
+              "signal": 1.0
             },
             {
-              "title": "临江仙·夜归临皋",
-              "body_hash": "88eea147b1e61403a653cc542174d2da83a8926532e93904bb81270100c98d8f",
-              "signal": 0.595
+              "title": "和陶劝农六首  其一",
+              "work_id": "fw_0a49bd0fafd87d30af27f2c5",
+              "canonical_gushiwen_id": "",
+              "body_hash": "2e538eb95e527015edf23bf9489ea6bd589e962f114bdf1fac7506f1d4405811",
+              "signal": 1.0
             }
           ]
         }
@@ -4188,6 +4377,9 @@
           "work": {
             "title": "上梅直讲书",
             "body_hash": "799f87ae233b62adbf0aef4d03eba132157b2ca4588646463ad94826f431d7ec",
+            "work_id": "fw_fbd353bd8d0900b89ebe2194",
+            "canonical_gushiwen_id": "5baaed125077",
+            "profile_canonical_gushiwen_id": "5baaed125077",
             "year": 1057,
             "quote": "轼每读《诗》至《鸱鸮》，读《书》至《君奭》，常窃悲周公之不遇。",
             "emotion_summary": "失落、无奈、悲恸；兼有悲恸哀伤（复合情绪）",
@@ -4245,6 +4437,9 @@
           "work": {
             "title": "送安惇秀才失解西归",
             "body_hash": "c25c77b3a146f55d2952563493a4e045f0d766794a973ce4d06f3601c52ad8f4",
+            "work_id": "fw_6257a8f179cf27d555a22999",
+            "canonical_gushiwen_id": "09fb10e71236",
+            "profile_canonical_gushiwen_id": "09fb10e71236",
             "year": 1070,
             "quote": "狂谋谬算百不遂，惟有霜鬓来如期。",
             "emotion_summary": "衰飒、迟暮、惜别；兼有离愁惜别",
@@ -4300,6 +4495,9 @@
           "work": {
             "title": "寄吴德仁兼简陈季常",
             "body_hash": "048140da3e334423938e4c7ed783fb80cb97775c3529adbaffae58709597a059",
+            "work_id": "fw_553f248655e1db8d369c6fdd",
+            "canonical_gushiwen_id": "533580f80e8c",
+            "profile_canonical_gushiwen_id": "533580f80e8c",
             "year": 1085,
             "quote": "门前罢亚十顷田，清溪绕屋花连天。",
             "emotion_summary": "超逸、清远、疏狂；兼有纵逸狂放（复合情绪）",
@@ -4357,6 +4555,9 @@
           "work": {
             "title": "自题金山画像",
             "body_hash": "792c47d58431530ee34d6baf35cfd4ba0ebab33df3f0939613bbe3e89f8407af",
+            "work_id": "fw_16a8b5c9b66835eb2729f0cd",
+            "canonical_gushiwen_id": "297110355712",
+            "profile_canonical_gushiwen_id": "297110355712",
             "year": 1101,
             "quote": "心似已灰之木，身如不系之舟。",
             "emotion_summary": "词典信号不足，保留为待考",
@@ -4391,7 +4592,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 9618,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -4425,68 +4626,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 9618,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 55,
-            "share": 0.183
+            "count": 1781,
+            "share": 0.185
           },
           {
             "label": "衰老病痛",
-            "count": 37,
-            "share": 0.123
-          },
-          {
-            "label": "豪迈昂扬",
-            "count": 27,
-            "share": 0.09
+            "count": 1552,
+            "share": 0.161
           },
           {
             "label": "归隐超脱",
-            "count": 27,
-            "share": 0.09
+            "count": 950,
+            "share": 0.099
           },
           {
-            "label": "漂泊羁旅",
-            "count": 23,
-            "share": 0.077
+            "label": "情绪未定",
+            "count": 679,
+            "share": 0.071
+          },
+          {
+            "label": "欢愉明快",
+            "count": 604,
+            "share": 0.063
           }
         ],
         "textual_traits": [
           "悲恸",
           "衰飒",
           "凄切",
-          "苍茫",
           "超逸",
-          "激越"
+          "迟暮",
+          "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.133,
-          "arousal": 0.557,
-          "dominance": -0.029
+          "valence": -0.184,
+          "arousal": 0.526,
+          "dominance": -0.098
         },
-        "summary": "在本地收录的 300 首作品中，陆游的反复文本倾向为「悲恸哀伤、衰老病痛、豪迈昂扬」，聚合形容词为「悲恸、衰飒、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 9618 首作品中，陆游的反复文本倾向为「悲恸哀伤、衰老病痛、归隐超脱」，聚合形容词为「悲恸、衰飒、凄切、超逸」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1151 年作品所在的「初涉世事」（-0.86），高点对应 1189 年作品所在的「中岁回望」（-0.152）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 18,
-          "signal_rate": 0.06,
-          "reading": "在 300 首有效文本画像中，18 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 368,
+          "signal_rate": 0.038,
+          "reading": "在 9618 首有效文本画像中，368 首触发「激愤/讽刺」规则信号（3.8%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "宝剑吟",
-              "body_hash": "f695ebeb1289f7ec81ae0af21526ba622446be55817ff61ceb8a6eb71a0a3fed",
-              "signal": 0.632
+              "title": "和曾待制游两山三首 题天章山更幽亭且以未到玲珑为恨",
+              "work_id": "fw_09fb6932f30b320eea9c370f",
+              "canonical_gushiwen_id": "",
+              "body_hash": "b0ba42e8c625ba86163fb413bb5f74924493d59052ab7cf21ecc72c02ca5fd2d",
+              "signal": 1.0
             },
             {
-              "title": "示子遹",
-              "body_hash": "05e16f41964982d0da3b3a5cb470e00401f36dbe9cd94760359a032d54cc33a5",
-              "signal": 0.615
+              "title": "次韵范文渊",
+              "work_id": "fw_08b7eff49609726ace12999a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "2d59a0ad713218eeb99e35f5c5f63b4c91eb2cb43522947c351d4b0882393a05",
+              "signal": 1.0
             },
             {
-              "title": "成都大阅",
-              "body_hash": "f3b978bf0f6605de6299953385c0856909c3db8be320434c4a772883ccad6e36",
-              "signal": 0.414
+              "title": "物外杂题八首  其七",
+              "work_id": "fw_96167794fa487404336c795a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "a56227817946f4cb24c9bffb1f8a5b979842ba26e328727e0292639eda78f7ce",
+              "signal": 1.0
             }
           ]
         }
@@ -4558,6 +4765,9 @@
           "work": {
             "title": "送仲高兄宫学秩满赴行在",
             "body_hash": "7aa34619e48e621f759ba2fb0635c84d4eb97c37204ba842caca863b78209901",
+            "work_id": "fw_5d5e3376a891b039fdb98ed9",
+            "canonical_gushiwen_id": "f936bff080de",
+            "profile_canonical_gushiwen_id": "f936bff080de",
             "year": 1151,
             "quote": "莫忧持橐晚，姑记乞身归。",
             "emotion_summary": "悲恸、凄切",
@@ -4612,6 +4822,9 @@
           "work": {
             "title": "闻雨",
             "body_hash": "b7451524d8c2363a889cfaff684c839973e86706c8b3df993c96534b4278aa40",
+            "work_id": "fw_5c01bd0b3be0b9e38b3175f7",
+            "canonical_gushiwen_id": "643e6773fe40",
+            "profile_canonical_gushiwen_id": "643e6773fe40",
             "year": 1168,
             "quote": "慷慨心犹壮，蹉跎鬓已秋。",
             "emotion_summary": "悲恸、凄切",
@@ -4665,6 +4878,9 @@
           "work": {
             "title": "己酉元日",
             "body_hash": "35fd1fe592b959e78bbea52c6c753724915bd3e1eb91b35f1085f88f586e402f",
+            "work_id": "fw_0b20fd97291374e76ea35e9b",
+            "canonical_gushiwen_id": "3b7c49f7dbcc",
+            "profile_canonical_gushiwen_id": "3b7c49f7dbcc",
             "year": 1189,
             "quote": "桃符呵笔写，椒酒过花斟。",
             "emotion_summary": "疏狂、豪纵、苍茫；兼有漂泊羁旅（复合情绪）",
@@ -4733,7 +4949,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 83,
+      "corpus_poems": 160,
       "readiness": {
         "score": 63,
         "biography_records": 1,
@@ -4763,68 +4979,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 83,
+        "sample_poems": 160,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 18,
-            "share": 0.217
+            "count": 35,
+            "share": 0.219
           },
           {
             "label": "情绪未定",
-            "count": 8,
-            "share": 0.096
-          },
-          {
-            "label": "归隐超脱",
-            "count": 6,
-            "share": 0.072
+            "count": 23,
+            "share": 0.144
           },
           {
             "label": "衰老病痛",
-            "count": 6,
-            "share": 0.072
+            "count": 12,
+            "share": 0.075
           },
           {
             "label": "漂泊羁旅",
-            "count": 6,
-            "share": 0.072
+            "count": 11,
+            "share": 0.069
+          },
+          {
+            "label": "纵逸狂放",
+            "count": 9,
+            "share": 0.056
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
           "凄切",
-          "苍茫",
-          "疏狂",
-          "含混"
+          "含混",
+          "待考",
+          "苍茫"
         ],
         "emotional_center": {
-          "valence": -0.223,
-          "arousal": 0.545,
-          "dominance": -0.116
+          "valence": -0.231,
+          "arousal": 0.538,
+          "dominance": -0.121
         },
-        "summary": "在本地收录的 83 首作品中，李清照的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 160 首作品中，李清照的反复文本倾向为「悲恸哀伤、情绪未定、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、含混」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1135 年作品所在的「中岁回望」（-0.71），高点对应 1116 年作品所在的「行路与转折」（-0.527）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 5,
-          "signal_rate": 0.06,
-          "reading": "在 83 首有效文本画像中，5 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 11,
+          "signal_rate": 0.069,
+          "reading": "在 160 首有效文本画像中，11 首触发「激愤/讽刺」规则信号（6.9%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "浣溪沙·闺情",
-              "body_hash": "bcfcb3596af0ab63b52084b6ed99733d8e5998ad7eb5c2cf266d19d989cad5c8",
+              "title": "句  其一三",
+              "work_id": "fw_76294c8cd18edcc31facfebd",
+              "canonical_gushiwen_id": "",
+              "body_hash": "3fbf2674d6f916bf3b31dfa62054a5639ee40729ed417c539cbe4b4d7e1ca9b9",
+              "signal": 0.615
+            },
+            {
+              "title": "浣溪沙",
+              "work_id": "fw_67fe780090c2647431808d6b",
+              "canonical_gushiwen_id": "",
+              "body_hash": "a045639f736efc5362734b51bca11d26780b44412ecd26085678fd6d77ef0c1d",
               "signal": 0.381
             },
             {
-              "title": "怨王孙·春暮",
-              "body_hash": "64129f1e8146582157a20e5ac8983217cc2916bcc56b40a92c41a32f3ac09560",
-              "signal": 0.273
-            },
-            {
-              "title": "临江仙·梅",
-              "body_hash": "e80b3e94a74652729b9c710b38f0d8fb266378e11939fd46216f50e445dd79cb",
-              "signal": 0.222
+              "title": "浣溪沙·闺情",
+              "work_id": "fw_dec01002da6ecfc5cc0cebb2",
+              "canonical_gushiwen_id": "f3dcdc98faa6",
+              "body_hash": "bcfcb3596af0ab63b52084b6ed99733d8e5998ad7eb5c2cf266d19d989cad5c8",
+              "signal": 0.381
             }
           ]
         }
@@ -4895,6 +5117,9 @@
           "work": {
             "title": "春残",
             "body_hash": "ad5e4bc14175743ba67ed1eed39bc204625a2bdfaef7bd079049ea88fc50783f",
+            "work_id": "fw_d6acf68ee4b38a5c0f81c8f5",
+            "canonical_gushiwen_id": "f55387f993de",
+            "profile_canonical_gushiwen_id": "f55387f993de",
             "year": 1098,
             "quote": "春残何事苦思乡，病里梳头恨最长。",
             "emotion_summary": "乡愁、念远、悲恸；兼有悲恸哀伤",
@@ -4951,6 +5176,9 @@
           "work": {
             "title": "点绛唇·闺思",
             "body_hash": "d9d4ec118e7a6a6921ba79af7d2566cf4b33034aa0d79da5d70f0d1fc53fe120",
+            "work_id": "fw_a398699d367745adafbc119f",
+            "canonical_gushiwen_id": "c2e1b3f8f8c5",
+            "profile_canonical_gushiwen_id": "c2e1b3f8f8c5",
             "year": 1116,
             "quote": "人何处，连天衰草，望断归来路。",
             "emotion_summary": "悲秋、迟暮、孤清；兼有孤寂清冷",
@@ -5006,6 +5234,9 @@
           "work": {
             "title": "武陵春·春晚",
             "body_hash": "e43268bd4678cc159d38843c164f3a8f7fb83cf729c644a9935ad4aa86d5d261",
+            "work_id": "fw_736917c91c6a9191bd99271d",
+            "canonical_gushiwen_id": "cd236de1e210",
+            "profile_canonical_gushiwen_id": "cd236de1e210",
             "year": 1135,
             "quote": "物是人非事事休，欲语泪先流。",
             "emotion_summary": "悲恸、凄切、超逸；兼有归隐超脱",
@@ -5082,7 +5313,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 1077,
       "readiness": {
         "score": 80,
         "biography_records": 1,
@@ -5107,32 +5338,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 1077,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 63,
-            "share": 0.21
+            "count": 210,
+            "share": 0.195
           },
           {
             "label": "归隐超脱",
-            "count": 43,
-            "share": 0.143
+            "count": 183,
+            "share": 0.17
           },
           {
             "label": "衰老病痛",
-            "count": 27,
-            "share": 0.09
-          },
-          {
-            "label": "欢愉明快",
-            "count": 23,
-            "share": 0.077
+            "count": 94,
+            "share": 0.087
           },
           {
             "label": "纵逸狂放",
-            "count": 21,
-            "share": 0.07
+            "count": 77,
+            "share": 0.071
+          },
+          {
+            "label": "欢愉明快",
+            "count": 76,
+            "share": 0.071
           }
         ],
         "textual_traits": [
@@ -5140,35 +5371,41 @@
           "超逸",
           "凄切",
           "衰飒",
-          "疏狂",
-          "清远"
+          "清远",
+          "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.087,
-          "arousal": 0.551,
-          "dominance": 0.025
+          "valence": -0.074,
+          "arousal": 0.536,
+          "dominance": 0.032
         },
-        "summary": "在本地收录的 300 首作品中，辛弃疾的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1077 首作品中，辛弃疾的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1207 年作品所在的「现存记录末端」（-0.469），高点对应 1194 年作品所在的「中岁回望」（0.82）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 24,
-          "signal_rate": 0.08,
-          "reading": "在 300 首有效文本画像中，24 首触发「激愤/讽刺」规则信号（8.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 68,
+          "signal_rate": 0.063,
+          "reading": "在 1077 首有效文本画像中，68 首触发「激愤/讽刺」规则信号（6.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
+              "title": "重叶梅  其二",
+              "work_id": "fw_8f937185fb1aa3e5e5675116",
+              "canonical_gushiwen_id": "",
+              "body_hash": "81ccbe9bb4a25939a72df6402efa0289fd9cae4c990f60b08cc6eb7b3c19bb52",
+              "signal": 1.0
+            },
+            {
               "title": "南歌子·万万千千恨",
+              "work_id": "fw_c870c216747ffd0fa010708e",
+              "canonical_gushiwen_id": "00e4aa7ae1a5",
               "body_hash": "e8e4f2131bf81edf28a816fbd266a739d91a7a7b99c2a8640e796369736a0f55",
               "signal": 0.713
             },
             {
-              "title": "行香子·三山作",
-              "body_hash": "66413a2f768d815507a5dd389026ee65a2c65012b2692bb48a71926cf38435d0",
+              "title": "南歌子",
+              "work_id": "fw_7ffaada2f245347f77b94513",
+              "canonical_gushiwen_id": "",
+              "body_hash": "bbce7f47bed7c7a90795eb07743e5516b13cc962dc12e880ce96ee338da3e392",
               "signal": 0.615
-            },
-            {
-              "title": "兰陵王·恨之极",
-              "body_hash": "fc4a413095732690338dd12765074aac1dca2ff2ba9aee2e3c9c7c481d42972d",
-              "signal": 0.485
             }
           ]
         }
@@ -5232,6 +5469,9 @@
           "work": {
             "title": "千秋岁·为金陵史致道留守寿",
             "body_hash": "1d7eed6b0552e346ded84091e3a02e026d9470dc7479e37040a5e6927cf43c04",
+            "work_id": "fw_0315ff082117cf3d716843c2",
+            "canonical_gushiwen_id": "a418116a2541",
+            "profile_canonical_gushiwen_id": "a418116a2541",
             "year": 1169,
             "quote": "尊俎上，笑雄表。",
             "emotion_summary": "欣悦、明快、悲恸；兼有悲恸哀伤（复合情绪）",
@@ -5284,6 +5524,9 @@
           "work": {
             "title": "忆李白",
             "body_hash": "97d0de106310bb71d8b8098bb1757847782958a133c081436eaf4a1ad10f4d31",
+            "work_id": "fw_23a7ed75ddf5b8d1faa1b19a",
+            "canonical_gushiwen_id": "687059eb5029",
+            "profile_canonical_gushiwen_id": "687059eb5029",
             "year": 1178,
             "quote": "当年宫殿赋昭阳，岂信人间过骨郎。",
             "emotion_summary": "温存、眷恋、超逸；兼有归隐超脱",
@@ -5335,6 +5578,9 @@
           "work": {
             "title": "柳梢青·三山归途代白鸥见嘲",
             "body_hash": "cfffd80d8e424e2f5802d67b20f7a23300790f38e7709a30829d1a194e87229e",
+            "work_id": "fw_7446b43b8d524b4962107e6e",
+            "canonical_gushiwen_id": "e6897631d3fb",
+            "profile_canonical_gushiwen_id": "e6897631d3fb",
             "year": 1194,
             "quote": "白鸟相迎，相怜相笑，满面尘埃。",
             "emotion_summary": "欣悦、明快",
@@ -5385,6 +5631,9 @@
           "work": {
             "title": "归朝欢（丁卯岁寄题眉山李参政石林）",
             "body_hash": "d155747685d33e77052c2c95a9ce5a2080cef5f06c8658241add231fcc8796c3",
+            "work_id": "fw_c2109979e769452503f4d81b",
+            "canonical_gushiwen_id": "9f14ff051e0c",
+            "profile_canonical_gushiwen_id": "9f14ff051e0c",
             "year": 1207,
             "quote": "野老时逢山鬼泣。",
             "emotion_summary": "悲恸、凄切、苍凉；兼有怀古感时",
@@ -5422,7 +5671,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 1466,
       "readiness": {
         "score": 99,
         "biography_records": 1,
@@ -5455,68 +5704,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 1466,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 59,
-            "share": 0.197
+            "count": 261,
+            "share": 0.178
           },
           {
-            "label": "纵逸狂放",
-            "count": 26,
+            "label": "归隐超脱",
+            "count": 156,
+            "share": 0.106
+          },
+          {
+            "label": "衰老病痛",
+            "count": 127,
             "share": 0.087
           },
           {
             "label": "漂泊羁旅",
-            "count": 23,
-            "share": 0.077
+            "count": 108,
+            "share": 0.074
           },
           {
-            "label": "归隐超脱",
-            "count": 21,
-            "share": 0.07
-          },
-          {
-            "label": "欢愉明快",
-            "count": 18,
-            "share": 0.06
+            "label": "情绪未定",
+            "count": 99,
+            "share": 0.068
           }
         ],
         "textual_traits": [
           "悲恸",
-          "凄切",
-          "苍茫",
-          "疏狂",
           "超逸",
-          "衰飒"
+          "凄切",
+          "衰飒",
+          "苍茫",
+          "疏狂"
         ],
         "emotional_center": {
-          "valence": -0.133,
-          "arousal": 0.553,
-          "dominance": -0.062
+          "valence": -0.15,
+          "arousal": 0.533,
+          "dominance": -0.071
         },
-        "summary": "在本地收录的 300 首作品中，欧阳修的反复文本倾向为「悲恸哀伤、纵逸狂放、漂泊羁旅」，聚合形容词为「悲恸、凄切、苍茫、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1466 首作品中，欧阳修的反复文本倾向为「悲恸哀伤、归隐超脱、衰老病痛」，聚合形容词为「悲恸、超逸、凄切、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1057 年作品所在的「中岁回望」（-0.75），高点对应 1027 年作品所在的「初涉世事」（-0.38）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 24,
-          "signal_rate": 0.08,
-          "reading": "在 300 首有效文本画像中，24 首触发「激愤/讽刺」规则信号（8.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 72,
+          "signal_rate": 0.049,
+          "reading": "在 1466 首有效文本画像中，72 首触发「激愤/讽刺」规则信号（4.9%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "玉楼春",
+              "work_id": "fw_67609dd4726a32db2e69b362",
+              "canonical_gushiwen_id": "076390072a3a",
               "body_hash": "8ca1bc8e5949318bfe32bedfe15af88adee1450b5692bcb852324a5b95f13898",
               "signal": 0.615
             },
             {
-              "title": "答许发运见寄",
-              "body_hash": "dea2c898a0aa6fc45b8ebd7277940e8e25a5aef22ad48959723f2cbe52321ced",
-              "signal": 0.558
+              "title": "玉楼春",
+              "work_id": "fw_5a965b153f857be5f77d7d54",
+              "canonical_gushiwen_id": "",
+              "body_hash": "c5ca1a0117279f77bc78a1af06dae45dc03740ea199b1a5dc466ac3e9d69f353",
+              "signal": 0.615
             },
             {
-              "title": "少年游",
-              "body_hash": "c33a3de9c1f1510152ffee1038374be252e8a2ab42fa621133043ac485d1589e",
-              "signal": 0.414
+              "title": "答许发运见寄",
+              "work_id": "fw_d7eaa16c0537bc41673e8ad7",
+              "canonical_gushiwen_id": "66ea2cb88940",
+              "body_hash": "dea2c898a0aa6fc45b8ebd7277940e8e25a5aef22ad48959723f2cbe52321ced",
+              "signal": 0.558
             }
           ]
         }
@@ -5587,6 +5842,9 @@
           "work": {
             "title": "宿云梦馆",
             "body_hash": "98eec8b55ce4d6f27f9530627aac6771908d7b06c1ee947463d30686510dd67b",
+            "work_id": "fw_0e9ba47c6952bfb967a86125",
+            "canonical_gushiwen_id": "6e66f4798321",
+            "profile_canonical_gushiwen_id": "6e66f4798321",
             "year": 1027,
             "quote": "北雁来时岁欲昏，私书归梦杳难分。",
             "emotion_summary": "苍茫、漂泊",
@@ -5640,6 +5898,9 @@
           "work": {
             "title": "南阳县君谢氏墓志铭",
             "body_hash": "08b577212c386b35f50729d986348bb12e95a6484abaf670f574ba061ca8eaa3",
+            "work_id": "fw_c85e3b59259426a4b6b49b3d",
+            "canonical_gushiwen_id": "d8a0a3f397f7",
+            "profile_canonical_gushiwen_id": "d8a0a3f397f7",
             "year": 1044,
             "quote": "庆历四年秋，予友宛陵梅圣俞来自吴兴，出其哭内之诗而悲曰：“吾妻谢氏亡矣。",
             "emotion_summary": "悲恸、凄切、苍茫；兼有漂泊羁旅（复合情绪）",
@@ -5697,6 +5958,9 @@
           "work": {
             "title": "礼部贡院阅进士就试",
             "body_hash": "f5550951ec5a71e24394e07e194d6df8f613b36a222c05606bf1e20b3bc70f0a",
+            "work_id": "fw_bf1826f04e626d2ad436d4f5",
+            "canonical_gushiwen_id": "f5f6bfa977b1",
+            "profile_canonical_gushiwen_id": "f5f6bfa977b1",
             "year": 1057,
             "quote": "自惭衰病心神耗，赖有群公鉴裁精。",
             "emotion_summary": "衰飒、迟暮、悲恸；兼有悲恸哀伤",
@@ -5751,6 +6015,9 @@
           "work": {
             "title": "绝句",
             "body_hash": "bdd0e00960e54c36436f7cfb76d3be8add98cf961ae98fec4d7bd75145094ade",
+            "work_id": "fw_1510a4ff1580cc338274a8a5",
+            "canonical_gushiwen_id": "ad0b116732cd",
+            "profile_canonical_gushiwen_id": "ad0b116732cd",
             "year": 1072,
             "quote": "冷雨涨焦陂，人去陂寂寞。",
             "emotion_summary": "孤清、冷寂、低回",
@@ -5786,7 +6053,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 1934,
       "readiness": {
         "score": 98,
         "biography_records": 1,
@@ -5819,68 +6086,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 1934,
         "dominant_emotions": [
           {
-            "label": "情绪未定",
-            "count": 56,
-            "share": 0.187
+            "label": "悲恸哀伤",
+            "count": 343,
+            "share": 0.177
           },
           {
-            "label": "悲恸哀伤",
-            "count": 49,
-            "share": 0.163
+            "label": "情绪未定",
+            "count": 290,
+            "share": 0.15
           },
           {
             "label": "归隐超脱",
-            "count": 31,
-            "share": 0.103
-          },
-          {
-            "label": "希望向往",
-            "count": 22,
-            "share": 0.073
+            "count": 190,
+            "share": 0.098
           },
           {
             "label": "衰老病痛",
-            "count": 21,
-            "share": 0.07
+            "count": 160,
+            "share": 0.083
+          },
+          {
+            "label": "漂泊羁旅",
+            "count": 125,
+            "share": 0.065
           }
         ],
         "textual_traits": [
           "悲恸",
-          "含混",
-          "待考",
           "凄切",
           "超逸",
-          "衰飒"
+          "衰飒",
+          "含混",
+          "待考"
         ],
         "emotional_center": {
-          "valence": -0.117,
-          "arousal": 0.492,
-          "dominance": -0.041
+          "valence": -0.186,
+          "arousal": 0.498,
+          "dominance": -0.106
         },
-        "summary": "在本地收录的 300 首作品中，王安石的反复文本倾向为「情绪未定、悲恸哀伤、归隐超脱」，聚合形容词为「悲恸、含混、待考、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1934 首作品中，王安石的反复文本倾向为「悲恸哀伤、情绪未定、归隐超脱」，聚合形容词为「悲恸、凄切、超逸、衰飒」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1054 年作品所在的「行路与转折」（-0.383），高点对应 1035 年作品所在的「初涉世事」（-0.118）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 6,
-          "signal_rate": 0.02,
-          "reading": "在 300 首有效文本画像中，6 首触发「激愤/讽刺」规则信号（2.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 43,
+          "signal_rate": 0.022,
+          "reading": "在 1934 首有效文本画像中，43 首触发「激愤/讽刺」规则信号（2.2%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "司马迁",
+              "work_id": "fw_81ca9d4fd6c07683f5e207d6",
+              "canonical_gushiwen_id": "56cc2cd28b46",
               "body_hash": "a62dde187b4a4b556785df78dbf6ddd6bff5bd7cba532259f47a006eb8caa729",
               "signal": 1.0
             },
             {
-              "title": "答司马谏议书",
-              "body_hash": "3dd280f5a5786dbee7d6ca17b40774eaf41a7cf9d18cba46f8be1c14189f4fa9",
-              "signal": 0.565
+              "title": "春怨",
+              "work_id": "fw_005b8fbf7bfa2e09549d23a4",
+              "canonical_gushiwen_id": "",
+              "body_hash": "bb007c94d6db3d7749384529f7afb1361f13eb1e1f82bd1b6c271f066066a2f5",
+              "signal": 1.0
             },
             {
-              "title": "次韵平甫金山会宿寄亲友",
-              "body_hash": "c12d45cd8d904e1863044cfee92e55e085b8c98f749962edcc7e7320cbf025b8",
-              "signal": 0.414
+              "title": "相国寺启同天节道场行香院观戏者",
+              "work_id": "fw_1df7f5d610a2b632b2514893",
+              "canonical_gushiwen_id": "",
+              "body_hash": "d97ee87005f2752b4e790ca13a384a1f5d1123d898a89c58567f0d9ffbd9de0b",
+              "signal": 1.0
             }
           ]
         }
@@ -5951,6 +6224,9 @@
           "work": {
             "title": "闲居遣兴",
             "body_hash": "d1d7f1ed993b1f21d2205a858064f2c3a6b92394836805bb45782dba221b0128",
+            "work_id": "fw_d6442220e58870cdd80d07a4",
+            "canonical_gushiwen_id": "ec285e6fd104",
+            "profile_canonical_gushiwen_id": "ec285e6fd104",
             "year": 1035,
             "quote": "愁消日月忘身世，静对溪山忆酒樽。",
             "emotion_summary": "沉郁、忧患、澄明；兼有哲思澄明（复合情绪）",
@@ -6008,6 +6284,9 @@
           "work": {
             "title": "杜甫画像",
             "body_hash": "77dba53f31adb268f7803d1dc06add5f6ca226994ab9bc17f40a3baa6fda065b",
+            "work_id": "fw_47b6c6c5a5691e6777bb3624",
+            "canonical_gushiwen_id": "129c0ec5cbc4",
+            "profile_canonical_gushiwen_id": "129c0ec5cbc4",
             "year": 1054,
             "quote": "宁令吾庐独破受冻死，不忍四海赤子寒飕飗。",
             "emotion_summary": "悲恸、凄切、悲悯；兼有悲悯苍生（复合情绪）",
@@ -6065,6 +6344,9 @@
           "work": {
             "title": "答司马谏议书",
             "body_hash": "3dd280f5a5786dbee7d6ca17b40774eaf41a7cf9d18cba46f8be1c14189f4fa9",
+            "work_id": "fw_2afb23fd666358a8e280f2e8",
+            "canonical_gushiwen_id": "b09aa5c9b747",
+            "profile_canonical_gushiwen_id": "b09aa5c9b747",
             "year": 1070,
             "quote": "今君实所以见教者，以为侵官、生事、征利、拒谏，以致天下怨谤也。",
             "emotion_summary": "幽愤、激切、憧憬；兼有希望向往（复合情绪）",
@@ -6132,7 +6414,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 492,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -6165,68 +6447,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 492,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 50,
-            "share": 0.167
+            "count": 77,
+            "share": 0.157
           },
           {
             "label": "归隐超脱",
-            "count": 43,
-            "share": 0.143
-          },
-          {
-            "label": "漂泊羁旅",
-            "count": 26,
-            "share": 0.087
-          },
-          {
-            "label": "衰老病痛",
-            "count": 24,
-            "share": 0.08
+            "count": 65,
+            "share": 0.132
           },
           {
             "label": "纵逸狂放",
-            "count": 22,
-            "share": 0.073
+            "count": 43,
+            "share": 0.087
+          },
+          {
+            "label": "漂泊羁旅",
+            "count": 41,
+            "share": 0.083
+          },
+          {
+            "label": "衰老病痛",
+            "count": 38,
+            "share": 0.077
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
-          "凄切",
           "疏狂",
           "苍茫",
+          "凄切",
           "衰飒"
         ],
         "emotional_center": {
-          "valence": -0.101,
-          "arousal": 0.529,
+          "valence": -0.094,
+          "arousal": 0.539,
           "dominance": -0.016
         },
-        "summary": "在本地收录的 300 首作品中，黄庭坚的反复文本倾向为「悲恸哀伤、归隐超脱、漂泊羁旅」，聚合形容词为「悲恸、超逸、凄切、疏狂」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 492 首作品中，黄庭坚的反复文本倾向为「悲恸哀伤、归隐超脱、纵逸狂放」，聚合形容词为「悲恸、超逸、疏狂、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1089 年作品所在的「中岁回望」（-0.425），高点对应 1078 年作品所在的「行路与转折」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 9,
+          "signal_poems": 15,
           "signal_rate": 0.03,
-          "reading": "在 300 首有效文本画像中，9 首触发「激愤/讽刺」规则信号（3.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "reading": "在 492 首有效文本画像中，15 首触发「激愤/讽刺」规则信号（3.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "谪居黔南十首",
+              "work_id": "fw_409c15416bcc61f18e85e132",
+              "canonical_gushiwen_id": "9636e3508dc9",
               "body_hash": "39e7eb79a426973aec96d603f39c365b7924d76831862f0cd4273a8f2aa9d86e",
               "signal": 0.285
             },
             {
               "title": "诉衷情",
+              "work_id": "fw_670cdad891969269115201e3",
+              "canonical_gushiwen_id": "2882b6143934",
               "body_hash": "1a66b58a4635c90e37224f3678a58eb44d6582cd51c2dba0ad6921e1067b33c1",
               "signal": 0.281
             },
             {
-              "title": "次元明韵寄子由",
-              "body_hash": "bddff9defe7200613a2a0580a8fecc1b754733741a7cd22e6bad30dcd8f1113f",
-              "signal": 0.27
+              "title": "诉衷情",
+              "work_id": "fw_3cf0774d46217964aba19c72",
+              "canonical_gushiwen_id": "",
+              "body_hash": "fc708e1d192b9ba51e1d3c10f0ee54ad5b99b757468e8b62ab1587e4b1e26080",
+              "signal": 0.281
             }
           ]
         }
@@ -6297,6 +6585,9 @@
           "work": {
             "title": "韩信",
             "body_hash": "9b10449fb16245310a3f6538217b03f77507a70edc84547f7146030f63bb327f",
+            "work_id": "fw_050fb27cecf8609070fed822",
+            "canonical_gushiwen_id": "5ecc824593d1",
+            "profile_canonical_gushiwen_id": "5ecc824593d1",
             "year": 1066,
             "quote": "功名邂逅轩天地，万事当观失意时。",
             "emotion_summary": "失落、无奈、澄明；兼有哲思澄明",
@@ -6353,6 +6644,9 @@
           "work": {
             "title": "和师厚接花",
             "body_hash": "691b4ff4c56335485e2a4535be49a173d02eb01ac61caa3a1b0afc33f0e2726d",
+            "work_id": "fw_571d347342da8aac46792e07",
+            "canonical_gushiwen_id": "f3c6145831b9",
+            "profile_canonical_gushiwen_id": "f3c6145831b9",
             "year": 1078,
             "quote": "妙手从心得，接花如有神。",
             "emotion_summary": "词典信号不足，保留为待考",
@@ -6404,6 +6698,9 @@
           "work": {
             "title": "六月十七日昼寝",
             "body_hash": "60158c8d4bd20e1de06d7a8bad63dd15570424346f3170dcd05940a948786a93",
+            "work_id": "fw_5e334f5183b9c8167cea86ab",
+            "canonical_gushiwen_id": "476fdb32d065",
+            "profile_canonical_gushiwen_id": "476fdb32d065",
             "year": 1089,
             "quote": "马齕枯萁喧午枕，梦成风雨浪翻江。",
             "emotion_summary": "悲恸、凄切、超逸；兼有归隐超脱（复合情绪）",
@@ -6459,6 +6756,9 @@
           "work": {
             "title": "宜阳别元明用觞字韵",
             "body_hash": "7001e2124571b493fb30c71aae96c98c616d27640a1749d6b8e25137ac018cf4",
+            "work_id": "fw_b3b591d24e05f0f51c5cf8e4",
+            "canonical_gushiwen_id": "a91aa5b36dd6",
+            "profile_canonical_gushiwen_id": "a91aa5b36dd6",
             "year": 1105,
             "quote": "千林风雨莺求友，万里云天雁断行。",
             "emotion_summary": "慷慨、昂扬、苍茫；兼有漂泊羁旅（复合情绪）",
@@ -6498,7 +6798,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 4455,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -6531,68 +6831,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 4455,
         "dominant_emotions": [
           {
-            "label": "归隐超脱",
-            "count": 52,
-            "share": 0.173
+            "label": "悲恸哀伤",
+            "count": 766,
+            "share": 0.172
           },
           {
-            "label": "悲恸哀伤",
-            "count": 52,
-            "share": 0.173
+            "label": "归隐超脱",
+            "count": 764,
+            "share": 0.171
           },
           {
             "label": "情绪未定",
-            "count": 46,
-            "share": 0.153
+            "count": 729,
+            "share": 0.164
           },
           {
-            "label": "欢愉明快",
-            "count": 22,
-            "share": 0.073
+            "label": "衰老病痛",
+            "count": 329,
+            "share": 0.074
           },
           {
-            "label": "希望向往",
-            "count": 21,
-            "share": 0.07
+            "label": "漂泊羁旅",
+            "count": 262,
+            "share": 0.059
           }
         ],
         "textual_traits": [
           "悲恸",
           "超逸",
-          "清远",
           "凄切",
+          "清远",
           "含混",
           "待考"
         ],
         "emotional_center": {
-          "valence": -0.12,
-          "arousal": 0.496,
-          "dominance": -0.035
+          "valence": -0.16,
+          "arousal": 0.493,
+          "dominance": -0.062
         },
-        "summary": "在本地收录的 300 首作品中，杨万里的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「悲恸、超逸、清远、凄切」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 4455 首作品中，杨万里的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、清远」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1188 年作品所在的「中岁回望」（-0.764），高点对应 1162 年作品所在的「初涉世事」（-0.273）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 4,
-          "signal_rate": 0.013,
-          "reading": "在 300 首有效文本画像中，4 首触发「激愤/讽刺」规则信号（1.3%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 116,
+          "signal_rate": 0.026,
+          "reading": "在 4455 首有效文本画像中，116 首触发「激愤/讽刺」规则信号（2.6%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "跋陆务观剑南诗稿二首",
-              "body_hash": "2d2aac6bc21d3fa73129a0e9187b48a2afa5854af0fcd00ca5667e05bc0d311b",
-              "signal": 0.387
+              "title": "不寐四首  其三",
+              "work_id": "fw_2fbf61da87e4369718ae3fd4",
+              "canonical_gushiwen_id": "",
+              "body_hash": "72218d1acc6bba99d2819dbc3ece6186431a855539a491f48129f4fe0310d50d",
+              "signal": 1.0
             },
             {
-              "title": "昭君怨·咏荷上雨",
-              "body_hash": "c16afe8c2684df0450afbba79406929d3013a943c3169e41d2c4bd58fc315373",
-              "signal": 0.235
+              "title": "五月一日过贵溪舟中苦热",
+              "work_id": "fw_8d971abb93484c310bf2a330",
+              "canonical_gushiwen_id": "",
+              "body_hash": "f41b59cccc8cc5514156597fdbe7012df698b18dc3095077e9e943d87b890a9a",
+              "signal": 1.0
             },
             {
-              "title": "明发房溪二首",
-              "body_hash": "cd2b7aad221025fea1b97ea59afb458c2b6d5c57fc25adc653d8aa131a4aeb13",
-              "signal": 0.222
+              "title": "出真阳峡十首  其一○",
+              "work_id": "fw_54342367cef0dc8aecc8d8db",
+              "canonical_gushiwen_id": "",
+              "body_hash": "8505166afad524483889f4e36b25dadca8a668beb2309548512f2d9e98434479",
+              "signal": 1.0
             }
           ]
         }
@@ -6663,6 +6969,9 @@
           "work": {
             "title": "普明寺见梅",
             "body_hash": "b775cec7f90169f670a20326ac300ccf2fc27be8a37ab92acf91eb71e2726294",
+            "work_id": "fw_4246450034ddde9cabea3277",
+            "canonical_gushiwen_id": "32a5d4d93611",
+            "profile_canonical_gushiwen_id": "32a5d4d93611",
             "year": 1162,
             "quote": "今冬不雪何关事，作伴孤芳却欠伊。",
             "emotion_summary": "孤清、冷寂、悲恸；兼有悲恸哀伤（复合情绪）",
@@ -6718,6 +7027,9 @@
           "work": {
             "title": "立秋后一日雨天欲暮小立问月亭",
             "body_hash": "eeb03ade0b52189b2dab1bac864c124e5f7a8fa5de86b8597a70810f3b332bf5",
+            "work_id": "fw_b62db2e52a60e56f9efbf861",
+            "canonical_gushiwen_id": "e992a269821f",
+            "profile_canonical_gushiwen_id": "e992a269821f",
             "year": 1170,
             "quote": "雨后林中别样凉，意行幽径不知长。",
             "emotion_summary": "苍茫、漂泊、悲恸；兼有悲恸哀伤",
@@ -6772,6 +7084,9 @@
           "work": {
             "title": "嘲稚子",
             "body_hash": "6e6822f4b2570b9feadefd2db34f8bc2bac9ba7935fe24fc5d8b94e4d88b4c2d",
+            "work_id": "fw_dd1f23c228f6f689adb64fbc",
+            "canonical_gushiwen_id": "4d87a253d308",
+            "profile_canonical_gushiwen_id": "4d87a253d308",
             "year": 1188,
             "quote": "雨里船中不自由，无愁稚子亦成愁。",
             "emotion_summary": "悲恸、凄切、沉郁；兼有忧国伤时",
@@ -6845,7 +7160,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 300,
+      "corpus_poems": 2274,
       "readiness": {
         "score": 94,
         "biography_records": 1,
@@ -6878,32 +7193,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 300,
+        "sample_poems": 2274,
         "dominant_emotions": [
           {
             "label": "悲恸哀伤",
-            "count": 45,
-            "share": 0.15
+            "count": 347,
+            "share": 0.153
           },
           {
             "label": "归隐超脱",
-            "count": 38,
-            "share": 0.127
+            "count": 316,
+            "share": 0.139
           },
           {
             "label": "情绪未定",
-            "count": 27,
-            "share": 0.09
+            "count": 275,
+            "share": 0.121
           },
           {
             "label": "漂泊羁旅",
-            "count": 22,
-            "share": 0.073
+            "count": 182,
+            "share": 0.08
           },
           {
-            "label": "闲适恬淡",
-            "count": 21,
-            "share": 0.07
+            "label": "衰老病痛",
+            "count": 178,
+            "share": 0.078
           }
         ],
         "textual_traits": [
@@ -6911,35 +7226,41 @@
           "超逸",
           "凄切",
           "苍茫",
-          "清远",
-          "疏狂"
+          "衰飒",
+          "清远"
         ],
         "emotional_center": {
-          "valence": -0.083,
-          "arousal": 0.513,
-          "dominance": 0.009
+          "valence": -0.125,
+          "arousal": 0.5,
+          "dominance": -0.048
         },
-        "summary": "在本地收录的 300 首作品中，范成大的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 2274 首作品中，范成大的反复文本倾向为「悲恸哀伤、归隐超脱、情绪未定」，聚合形容词为「悲恸、超逸、凄切、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1193 年作品所在的「晚境与记录末端」（-0.147），高点对应 1150 年作品所在的「初涉世事」（0.695）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 18,
-          "signal_rate": 0.06,
-          "reading": "在 300 首有效文本画像中，18 首触发「激愤/讽刺」规则信号（6.0%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 54,
+          "signal_rate": 0.024,
+          "reading": "在 2274 首有效文本画像中，54 首触发「激愤/讽刺」规则信号（2.4%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
               "title": "咏河市歌者",
+              "work_id": "fw_2fddd7526c35483502dc6290",
+              "canonical_gushiwen_id": "f6c873f67bcc",
               "body_hash": "88b6082432a8d71fe917070486f9f8e80e4776661b46398f564714fcd04a2b2e",
               "signal": 1.0
             },
             {
-              "title": "续长恨歌",
-              "body_hash": "52d4d04c36ff59e4519eb6415342a5c5e49e6f3c2432ffd594e295b37110d3c8",
+              "title": "有会而作",
+              "work_id": "fw_0b75b97b1c77eb3f146b695f",
+              "canonical_gushiwen_id": "",
+              "body_hash": "ff76ebc4a58bacb1d597a1c24daddbabef6f9f36edfd7ab409b85696fe35cb94",
               "signal": 1.0
             },
             {
-              "title": "题夫差庙",
-              "body_hash": "657b44c3b69ba0b90bcdd543dcab7e708e26e0d0c3648b90975990bd83dec278",
-              "signal": 0.615
+              "title": "续长恨歌",
+              "work_id": "fw_5c2dcae80a0fcac6843a7ff9",
+              "canonical_gushiwen_id": "241ce4a0725e",
+              "body_hash": "52d4d04c36ff59e4519eb6415342a5c5e49e6f3c2432ffd594e295b37110d3c8",
+              "signal": 1.0
             }
           ]
         }
@@ -7010,6 +7331,9 @@
           "work": {
             "title": "催租行",
             "body_hash": "91342d569e655e15dd0d0a7f464fb913e762d06e7b443e21ab4f72ff77e9f252",
+            "work_id": "fw_b414657f508cc4d9e42c3cd4",
+            "canonical_gushiwen_id": "963afc3018fe",
+            "profile_canonical_gushiwen_id": "963afc3018fe",
             "year": 1150,
             "quote": "手持文书杂嗔喜，我亦来营醉归耳！",
             "emotion_summary": "疏狂、豪纵、欣悦；兼有欢愉明快",
@@ -7064,6 +7388,9 @@
           "work": {
             "title": "四月五日集陈园照山堂",
             "body_hash": "a940b9d436ead4db2bdfd9b49babaaf5ec41f71a755b32d943a3b0fcdbdd578d",
+            "work_id": "fw_370e80648783a91d3277f15c",
+            "canonical_gushiwen_id": "e5e59b70ffca",
+            "profile_canonical_gushiwen_id": "e5e59b70ffca",
             "year": 1164,
             "quote": "尽卷帘旌延竹色，深斟杯酒纳山光。",
             "emotion_summary": "疏狂、豪纵、超逸；兼有归隐超脱",
@@ -7119,6 +7446,9 @@
           "work": {
             "title": "水调歌头",
             "body_hash": "2b3725d369ef54f317a0d29cbe7ae117bcbf5295b7a0f9ad887b5d3a87fb052e",
+            "work_id": "fw_36252bbcfc61e93dfed38891",
+            "canonical_gushiwen_id": "303d8f120325",
+            "profile_canonical_gushiwen_id": "303d8f120325",
             "year": 1179,
             "quote": "万里筹边处，形胜压坤维。",
             "emotion_summary": "慷慨、昂扬、苍凉；兼有怀古感时（复合情绪）",
@@ -7175,6 +7505,9 @@
           "work": {
             "title": "寄题毛君先生莲华峰庵",
             "body_hash": "27296a17d661d46db048ca0a978710da44d2f9a9b79cbde79b965254c3fe5091",
+            "work_id": "fw_197bfb66c670763f9695d9c0",
+            "canonical_gushiwen_id": "6c58fac86b9f",
+            "profile_canonical_gushiwen_id": "6c58fac86b9f",
             "year": 1193,
             "quote": "清晨石上一炉香，此时天地皆欣合。",
             "emotion_summary": "澄明、通透、悲恸；兼有悲恸哀伤（复合情绪）",
@@ -7213,7 +7546,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 513,
       "readiness": {
         "score": 93,
         "biography_records": 1,
@@ -7246,68 +7579,74 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 513,
         "dominant_emotions": [
           {
             "label": "归隐超脱",
-            "count": 73,
-            "share": 0.244
+            "count": 124,
+            "share": 0.242
           },
           {
             "label": "悲恸哀伤",
-            "count": 33,
-            "share": 0.11
+            "count": 54,
+            "share": 0.105
           },
           {
             "label": "情绪未定",
-            "count": 30,
-            "share": 0.1
+            "count": 51,
+            "share": 0.099
           },
           {
             "label": "豪迈昂扬",
-            "count": 25,
-            "share": 0.084
+            "count": 42,
+            "share": 0.082
           },
           {
             "label": "衰老病痛",
-            "count": 23,
-            "share": 0.077
+            "count": 38,
+            "share": 0.074
           }
         ],
         "textual_traits": [
           "超逸",
           "清远",
           "悲恸",
-          "低回",
           "苍茫",
-          "凄切"
+          "低回",
+          "慷慨"
         ],
         "emotional_center": {
-          "valence": -0.073,
-          "arousal": 0.471,
-          "dominance": 0.051
+          "valence": -0.068,
+          "arousal": 0.472,
+          "dominance": 0.057
         },
-        "summary": "在本地收录的 299 首作品中，范仲淹的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、清远、悲恸、低回」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 513 首作品中，范仲淹的反复文本倾向为「归隐超脱、悲恸哀伤、情绪未定」，聚合形容词为「超逸、清远、悲恸、苍茫」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1052 年作品所在的「晚境与记录末端」（-0.584），高点对应 1023 年作品所在的「行路与转折」（0.0）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 14,
+          "signal_poems": 24,
           "signal_rate": 0.047,
-          "reading": "在 299 首有效文本画像中，14 首触发「激愤/讽刺」规则信号（4.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "reading": "在 513 首有效文本画像中，24 首触发「激愤/讽刺」规则信号（4.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
+              "title": "苏州十咏 伍相庙",
+              "work_id": "fw_09baf6486ea9fc8b060b56e4",
+              "canonical_gushiwen_id": "",
+              "body_hash": "3fb8fe9343f854230b7a0c99c9f713ee339f0529aa6dbee63245c67b1622dac9",
+              "signal": 1.0
+            },
+            {
               "title": "苏州十咏其八·伍相庙",
+              "work_id": "fw_caaef87428705cf05dd96f33",
+              "canonical_gushiwen_id": "afebdeaac3bb",
               "body_hash": "7ea6376204c0dd331815d80507c4e5e546d20752a58e5b192833b000d5740219",
               "signal": 1.0
             },
             {
               "title": "鹦鹉",
+              "work_id": "fw_2e5674189d63281def0585a6",
+              "canonical_gushiwen_id": "c6c767d264b3",
               "body_hash": "eafecc9c290870b80f0488310002b4fc23f9729606235e6a216f790d09b57390",
               "signal": 0.442
-            },
-            {
-              "title": "赠吴秀才",
-              "body_hash": "f6af1d78e5a9b302a5fca1a8610eb55b6fea518f0e38c4baaa27a6f7f9788aaa",
-              "signal": 0.407
             }
           ]
         }
@@ -7378,6 +7717,9 @@
           "work": {
             "title": "睢阳学舍书怀",
             "body_hash": "0a03895de122588f9d6004900b9cdf2a5597fc3b9e8d939f714dda7172e3b2e1",
+            "work_id": "fw_e2a9b99e4e863feea067a78c",
+            "canonical_gushiwen_id": "4c29a53ceba2",
+            "profile_canonical_gushiwen_id": "4c29a53ceba2",
             "year": 1014,
             "quote": "白云无赖帝乡遥，汉苑谁人奏可箫。",
             "emotion_summary": "超逸、清远、幽愤；兼有幽愤不平（复合情绪）",
@@ -7435,6 +7777,9 @@
           "work": {
             "title": "射阳湖",
             "body_hash": "fadc55893b3726878b67c93c59b1cc8594616e69877f4d2519019076dec741d4",
+            "work_id": "fw_16ea50542cb5ba81bf23f5a1",
+            "canonical_gushiwen_id": "2b4556044c8e",
+            "profile_canonical_gushiwen_id": "2b4556044c8e",
             "year": 1023,
             "quote": "渺渺指平湖，烟波极望初。",
             "emotion_summary": "词典信号不足，保留为待考",
@@ -7486,6 +7831,9 @@
           "work": {
             "title": "移丹阳郡先游茅山作",
             "body_hash": "774287e48b81686fe71e55492f395c4ebb7da956154ab2ff3f27f4076f1a8ab3",
+            "work_id": "fw_6430ad455297a9870d20a275",
+            "canonical_gushiwen_id": "a568d313f4a2",
+            "profile_canonical_gushiwen_id": "a568d313f4a2",
             "year": 1038,
             "quote": "不更從人问通塞，天教吏隐接山居。",
             "emotion_summary": "苍茫、漂泊",
@@ -7540,6 +7888,9 @@
           "work": {
             "title": "遗表",
             "body_hash": "3465dd125befe3e069b7cf1b530e5ef61623270689ae55884ea6321cde63fdc4",
+            "work_id": "fw_6a75a9478a5dcfb3eff27c8a",
+            "canonical_gushiwen_id": "6849b54f024c",
+            "profile_canonical_gushiwen_id": "6849b54f024c",
             "year": 1052,
             "quote": "辄忍须臾之期，少舒迫切之恳，痛靡孤觉，辞皆不伦。",
             "emotion_summary": "孤清、冷寂、悲恸；兼有悲恸哀伤",
@@ -7577,7 +7928,7 @@
       "dynasty": "宋",
       "round": 1,
       "status": "active_round_generated",
-      "corpus_poems": 299,
+      "corpus_poems": 1754,
       "readiness": {
         "score": 99,
         "biography_records": 1,
@@ -7610,32 +7961,32 @@
       },
       "portrait": {
         "scope": "corpus_textual_persona_not_personality_diagnosis",
-        "sample_poems": 299,
+        "sample_poems": 1754,
         "dominant_emotions": [
           {
             "label": "情绪未定",
-            "count": 61,
-            "share": 0.204
+            "count": 323,
+            "share": 0.184
           },
           {
             "label": "悲恸哀伤",
-            "count": 49,
-            "share": 0.164
+            "count": 318,
+            "share": 0.181
           },
           {
             "label": "归隐超脱",
-            "count": 42,
-            "share": 0.14
-          },
-          {
-            "label": "孤寂清冷",
-            "count": 24,
-            "share": 0.08
+            "count": 225,
+            "share": 0.128
           },
           {
             "label": "欢愉明快",
-            "count": 13,
-            "share": 0.043
+            "count": 95,
+            "share": 0.054
+          },
+          {
+            "label": "孤寂清冷",
+            "count": 94,
+            "share": 0.054
           }
         ],
         "textual_traits": [
@@ -7647,31 +7998,37 @@
           "清远"
         ],
         "emotional_center": {
-          "valence": -0.149,
-          "arousal": 0.48,
-          "dominance": -0.067
+          "valence": -0.141,
+          "arousal": 0.486,
+          "dominance": -0.058
         },
-        "summary": "在本地收录的 299 首作品中，朱熹的反复文本倾向为「情绪未定、悲恸哀伤、归隐超脱」，聚合形容词为「悲恸、超逸、含混、待考」。这是作品中的言说方式，不是对历史人格的诊断。",
+        "summary": "在名家全作品语料收录的 1754 首作品中，朱熹的反复文本倾向为「情绪未定、悲恸哀伤、归隐超脱」，聚合形容词为「悲恸、超逸、含混、待考」。这是作品中的言说方式，不是对历史人格的诊断。",
         "curve_reading": "已生成编年候选章节中，效价低点对应 1165 年作品所在的「行路与转折」（-0.249），高点对应 1182 年作品所在的「中岁回望」（0.125）；这条线不应被读成单向上升或衰落。",
         "anger": {
-          "signal_poems": 5,
-          "signal_rate": 0.017,
-          "reading": "在 299 首有效文本画像中，5 首触发「激愤/讽刺」规则信号（1.7%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
+          "signal_poems": 44,
+          "signal_rate": 0.025,
+          "reading": "在 1754 首有效文本画像中，44 首触发「激愤/讽刺」规则信号（2.5%）。这表示作品文本的幽愤/讽刺词典线索，可能只来自题名或单一「怨/恨」字；不是对诗人真实愤怒的判定。",
           "representative_works": [
             {
-              "title": "训蒙绝句 其二",
-              "body_hash": "b3857e2ab84ae4538ee48ee49d66610ac09f8d468537ab8ebbe476242be88be5",
-              "signal": 0.324
+              "title": "斋居感兴二十首  其二○",
+              "work_id": "fw_686a991d01afc7b7ccedd77a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "71cd88855c0517eaa873ff3d3f4018a57d9d1f29cf24374a07b43613e44c1d34",
+              "signal": 1.0
             },
             {
-              "title": "柚花",
-              "body_hash": "bfad49a7bb04fb3e9125f81fab7dd9a1b3cb5e9f79729b396ad3ecbea879bae0",
-              "signal": 0.308
+              "title": "次刘秀野蔬食十三诗韵 𬊳菜",
+              "work_id": "fw_f4b7e811b0c45c738472f2d0",
+              "canonical_gushiwen_id": "",
+              "body_hash": "ccdc91593efb75ea9d59ca9b18019fe297a2556263b122de5956755c680f59ce",
+              "signal": 0.615
             },
             {
-              "title": "登芦峰",
-              "body_hash": "04ced2196ad95da1613d6653a6e27c5cbfc52eb93d059cc77650995e05bd9bb9",
-              "signal": 0.308
+              "title": "伏读秀野刘丈闲居十五咏谨次高韵率易拜呈伏乞痛加绳削是所愿望 积芳圃",
+              "work_id": "fw_428af00a3740452b6cc42d1a",
+              "canonical_gushiwen_id": "",
+              "body_hash": "be95bd7c28acc613649692cc5b5ee8d70ba2ab15a7d08cd6f7acde020e647844",
+              "signal": 0.518
             }
           ]
         }
@@ -7742,6 +8099,9 @@
           "work": {
             "title": "远游篇",
             "body_hash": "0a140ad15a91824923657a8d5f992569891ca578605e7cad77b3edaeabfd9ad6",
+            "work_id": "fw_5bfae5b87cf1fae3b2e1e4e8",
+            "canonical_gushiwen_id": "1de264bfdafb",
+            "profile_canonical_gushiwen_id": "1de264bfdafb",
             "year": 1148,
             "quote": "举坐且停酒，听我歌远游。",
             "emotion_summary": "苍茫、漂泊、激越；兼有报国壮志（复合情绪）",
@@ -7799,6 +8159,9 @@
           "work": {
             "title": "次秀野韵五首 其一",
             "body_hash": "875239d89b6d00f3a14a1b0872962668993db9d8675b02f204e21556f9a4492f",
+            "work_id": "fw_1d84fde1537943335d82a6af",
+            "canonical_gushiwen_id": "9e02d5d93cce",
+            "profile_canonical_gushiwen_id": "9e02d5d93cce",
             "year": 1165,
             "quote": "史君帘阁对脩筠，起看名园雨酒春。",
             "emotion_summary": "疏狂、豪纵、衰飒；兼有衰老病痛（复合情绪）",
@@ -7854,6 +8217,9 @@
           "work": {
             "title": "五禽言和王仲衡尚书 其一",
             "body_hash": "03a028a734afbf030e232f5de02065aa33051462c0a897ea3c6a6a95c22203ef",
+            "work_id": "fw_b5cebecb3b5ae6b77c1deb85",
+            "canonical_gushiwen_id": "0aedb6ab047f",
+            "profile_canonical_gushiwen_id": "0aedb6ab047f",
             "year": 1182,
             "quote": "提胡芦，沽美酒，春风浩荡吹花柳。",
             "emotion_summary": "疏狂、豪纵、憧憬；兼有希望向往（复合情绪）",
@@ -7922,7 +8288,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 221,
+      "corpus_poems": 421,
       "readiness": {
         "score": 90,
         "biography_records": 1,
@@ -7953,7 +8319,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 796,
       "readiness": {
         "score": 86,
         "biography_records": 1,
@@ -7984,7 +8350,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 746,
       "readiness": {
         "score": 87,
         "biography_records": 1,
@@ -8015,7 +8381,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 247,
+      "corpus_poems": 484,
       "readiness": {
         "score": 71,
         "biography_records": 1,
@@ -8046,7 +8412,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 710,
       "readiness": {
         "score": 85,
         "biography_records": 1,
@@ -8077,7 +8443,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 704,
       "readiness": {
         "score": 83,
         "biography_records": 1,
@@ -8108,7 +8474,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 251,
+      "corpus_poems": 489,
       "readiness": {
         "score": 83,
         "biography_records": 1,
@@ -8139,7 +8505,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 168,
+      "corpus_poems": 260,
       "readiness": {
         "score": 85,
         "biography_records": 1,
@@ -8170,7 +8536,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 526,
       "readiness": {
         "score": 82,
         "biography_records": 1,
@@ -8201,7 +8567,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 210,
+      "corpus_poems": 361,
       "readiness": {
         "score": 79,
         "biography_records": 1,
@@ -8232,7 +8598,7 @@
       "dynasty": "唐",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 22,
+      "corpus_poems": 40,
       "readiness": {
         "score": 27,
         "biography_records": 1,
@@ -8263,7 +8629,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 2066,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -8294,7 +8660,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 3107,
       "readiness": {
         "score": 100,
         "biography_records": 1,
@@ -8325,7 +8691,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 655,
       "readiness": {
         "score": 81,
         "biography_records": 1,
@@ -8356,7 +8722,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 792,
       "readiness": {
         "score": 90,
         "biography_records": 1,
@@ -8387,7 +8753,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 1146,
       "readiness": {
         "score": 75,
         "biography_records": 1,
@@ -8418,7 +8784,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 1110,
       "readiness": {
         "score": 88,
         "biography_records": 1,
@@ -8449,7 +8815,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 796,
       "readiness": {
         "score": 73,
         "biography_records": 1,
@@ -8480,7 +8846,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 298,
+      "corpus_poems": 515,
       "readiness": {
         "score": 81,
         "biography_records": 1,
@@ -8511,7 +8877,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 283,
+      "corpus_poems": 587,
       "readiness": {
         "score": 79,
         "biography_records": 1,
@@ -8542,7 +8908,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 624,
       "readiness": {
         "score": 12,
         "biography_records": 1,
@@ -8573,7 +8939,7 @@
       "dynasty": "宋",
       "round": 2,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 1498,
       "readiness": {
         "score": 28,
         "biography_records": 1,
@@ -8604,7 +8970,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 210,
+      "corpus_poems": 427,
       "readiness": {
         "score": 84,
         "biography_records": 1,
@@ -8635,7 +9001,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 599,
       "readiness": {
         "score": 23,
         "biography_records": 1,
@@ -8666,7 +9032,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 162,
+      "corpus_poems": 333,
       "readiness": {
         "score": 81,
         "biography_records": 1,
@@ -8697,7 +9063,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 117,
+      "corpus_poems": 209,
       "readiness": {
         "score": 78,
         "biography_records": 1,
@@ -8725,10 +9091,10 @@
     },
     {
       "name": "韦庄",
-      "dynasty": "唐",
+      "dynasty": "唐末·前蜀",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 624,
       "readiness": {
         "score": 78,
         "biography_records": 1,
@@ -8759,7 +9125,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 142,
+      "corpus_poems": 262,
       "readiness": {
         "score": 77,
         "biography_records": 1,
@@ -8790,7 +9156,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 640,
       "readiness": {
         "score": 77,
         "biography_records": 1,
@@ -8821,7 +9187,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 63,
+      "corpus_poems": 106,
       "readiness": {
         "score": 27,
         "biography_records": 1,
@@ -8852,7 +9218,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 824,
       "readiness": {
         "score": 77,
         "biography_records": 1,
@@ -8883,7 +9249,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 39,
+      "corpus_poems": 75,
       "readiness": {
         "score": 27,
         "biography_records": 1,
@@ -8911,10 +9277,10 @@
     },
     {
       "name": "李煜",
-      "dynasty": "唐",
+      "dynasty": "五代·南唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 69,
+      "corpus_poems": 85,
       "readiness": {
         "score": 71,
         "biography_records": 1,
@@ -8945,7 +9311,7 @@
       "dynasty": "唐",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 176,
+      "corpus_poems": 312,
       "readiness": {
         "score": 40,
         "biography_records": 1,
@@ -8976,7 +9342,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 735,
       "readiness": {
         "score": 89,
         "biography_records": 1,
@@ -9007,7 +9373,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 256,
+      "corpus_poems": 499,
       "readiness": {
         "score": 87,
         "biography_records": 1,
@@ -9038,7 +9404,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 946,
       "readiness": {
         "score": 86,
         "biography_records": 1,
@@ -9069,7 +9435,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 102,
+      "corpus_poems": 156,
       "readiness": {
         "score": 29,
         "biography_records": 1,
@@ -9100,7 +9466,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 84,
+      "corpus_poems": 131,
       "readiness": {
         "score": 84,
         "biography_records": 1,
@@ -9131,7 +9497,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 140,
+      "corpus_poems": 227,
       "readiness": {
         "score": 74,
         "biography_records": 1,
@@ -9162,7 +9528,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 81,
+      "corpus_poems": 123,
       "readiness": {
         "score": 72,
         "biography_records": 1,
@@ -9193,7 +9559,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 32,
+      "corpus_poems": 46,
       "readiness": {
         "score": 77,
         "biography_records": 1,
@@ -9224,7 +9590,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 234,
+      "corpus_poems": 451,
       "readiness": {
         "score": 58,
         "biography_records": 1,
@@ -9255,7 +9621,7 @@
       "dynasty": "宋",
       "round": 3,
       "status": "scheduled",
-      "corpus_poems": 68,
+      "corpus_poems": 122,
       "readiness": {
         "score": 12,
         "biography_records": 1,
@@ -9286,7 +9652,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 21,
+      "corpus_poems": 49,
       "readiness": {
         "score": 27,
         "biography_records": 1,
@@ -9317,7 +9683,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 169,
+      "corpus_poems": 324,
       "readiness": {
         "score": 36,
         "biography_records": 1,
@@ -9348,7 +9714,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 11,
+      "corpus_poems": 22,
       "readiness": {
         "score": 12,
         "biography_records": 1,
@@ -9379,7 +9745,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 50,
+      "corpus_poems": 91,
       "readiness": {
         "score": 27,
         "biography_records": 1,
@@ -9407,10 +9773,10 @@
     },
     {
       "name": "欧阳炯",
-      "dynasty": "唐",
+      "dynasty": "五代·前后蜀",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 48,
+      "corpus_poems": 105,
       "readiness": {
         "score": 20,
         "biography_records": 1,
@@ -9441,7 +9807,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 6,
+      "corpus_poems": 10,
       "readiness": {
         "score": 45,
         "biography_records": 1,
@@ -9472,7 +9838,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 31,
+      "corpus_poems": 70,
       "readiness": {
         "score": 12,
         "biography_records": 1,
@@ -9503,7 +9869,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 813,
       "readiness": {
         "score": 72,
         "biography_records": 1,
@@ -9534,7 +9900,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 790,
       "readiness": {
         "score": 87,
         "biography_records": 1,
@@ -9565,7 +9931,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 785,
       "readiness": {
         "score": 81,
         "biography_records": 1,
@@ -9596,7 +9962,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 689,
       "readiness": {
         "score": 77,
         "biography_records": 1,
@@ -9627,7 +9993,7 @@
       "dynasty": "唐",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 588,
       "readiness": {
         "score": 71,
         "biography_records": 1,
@@ -9658,7 +10024,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 640,
       "readiness": {
         "score": 42,
         "biography_records": 0,
@@ -9689,7 +10055,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 206,
+      "corpus_poems": 387,
       "readiness": {
         "score": 61,
         "biography_records": 1,
@@ -9720,7 +10086,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 603,
       "readiness": {
         "score": 55,
         "biography_records": 1,
@@ -9751,7 +10117,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 288,
+      "corpus_poems": 557,
       "readiness": {
         "score": 38,
         "biography_records": 1,
@@ -9782,7 +10148,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 294,
+      "corpus_poems": 465,
       "readiness": {
         "score": 71,
         "biography_records": 1,
@@ -9813,7 +10179,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 70,
+      "corpus_poems": 138,
       "readiness": {
         "score": 62,
         "biography_records": 1,
@@ -9844,7 +10210,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 5035,
       "readiness": {
         "score": 95,
         "biography_records": 1,
@@ -9875,7 +10241,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 300,
+      "corpus_poems": 1663,
       "readiness": {
         "score": 94,
         "biography_records": 1,
@@ -9906,7 +10272,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 299,
+      "corpus_poems": 662,
       "readiness": {
         "score": 70,
         "biography_records": 1,
@@ -9937,7 +10303,7 @@
       "dynasty": "宋",
       "round": 4,
       "status": "scheduled",
-      "corpus_poems": 259,
+      "corpus_poems": 484,
       "readiness": {
         "score": 72,
         "biography_records": 1,
@@ -9972,7 +10338,16 @@
       "url": "",
       "grade": "A",
       "status": "local_canonical",
-      "note": "本项目 20,437 首本地诗歌语料；引句逐字回查。"
+      "note": "本项目 20,437 首规范诗歌语料；引句逐字回查。"
+    },
+    "analysis-corpus": {
+      "id": "analysis-corpus",
+      "kind": "full_famous_poet_analysis_corpus",
+      "name": "data/analysis/famous_poets_full.jsonl.gz",
+      "url": "",
+      "grade": "method",
+      "status": "analysis_full",
+      "note": "精选 88 位名家的 80,893 首完整作品；仅用于文本状态聚合。"
     },
     "emotion-profiles-v1": {
       "id": "emotion-profiles-v1",
@@ -9981,7 +10356,7 @@
       "url": "",
       "grade": "method",
       "status": "model_output",
-      "note": "古典诗歌规则模型的 VAD/情绪文本信号；不等于作者真实心理。"
+      "note": "基于 80,893 首名家全作品的 VAD/情绪文本信号；不等于作者真实心理。"
     },
     "dila-ed10a2e7fdab16b0782d50b41eba218ba36f-52dd1bafdae6": {
       "id": "dila-ed10a2e7fdab16b0782d50b41eba218ba36f-52dd1bafdae6",

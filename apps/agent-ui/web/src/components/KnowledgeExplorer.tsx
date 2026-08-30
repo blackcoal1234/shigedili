@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BookOpen, ChevronDown, RotateCw, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, RotateCw, Search, SlidersHorizontal, Sparkles, X } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -581,6 +581,7 @@ function KnowledgeTags({ values }: { values: string[] }) {
 interface PoemKnowledgeSummaryProps {
   poemId?: string | null;
   onOpenKnowledge?: (poemId: string) => void;
+  onOpenAppreciation?: (poemId: string) => void;
   compact?: boolean;
 }
 
@@ -675,7 +676,12 @@ function findPoemGuide(payload: KnowledgePoemPayload): KnowledgeAnalysis | undef
   ));
 }
 
-export function PoemKnowledgeSummary({ poemId, onOpenKnowledge, compact = false }: PoemKnowledgeSummaryProps) {
+export function PoemKnowledgeSummary({
+  poemId,
+  onOpenKnowledge,
+  onOpenAppreciation,
+  compact = false,
+}: PoemKnowledgeSummaryProps) {
   const { phase, payload, error, retry } = usePoemKnowledge(poemId);
 
   if (!poemId) return null;
@@ -699,9 +705,20 @@ export function PoemKnowledgeSummary({ poemId, onOpenKnowledge, compact = false 
     return (
       <div className="poem-knowledge-summary is-empty" role="status">
         <span><BookOpen size={15} aria-hidden="true" /> 这首诗的亲笔导读还在整理中</span>
-        {onOpenKnowledge ? (
-          <button type="button" onClick={() => onOpenKnowledge(poemId)}>查看原诗条目</button>
-        ) : null}
+        <div className="poem-knowledge-actions">
+          {onOpenAppreciation ? (
+            <button
+              type="button"
+              className="is-appreciation"
+              onClick={() => onOpenAppreciation(poemId)}
+            >
+              <Sparkles size={13} aria-hidden="true" /> 译注赏析
+            </button>
+          ) : null}
+          {onOpenKnowledge ? (
+            <button type="button" onClick={() => onOpenKnowledge(poemId)}>查看原诗条目</button>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -713,11 +730,22 @@ export function PoemKnowledgeSummary({ poemId, onOpenKnowledge, compact = false 
     >
       <div className="poem-knowledge-summary-heading">
         <span><BookOpen size={15} aria-hidden="true" /> 读到这里</span>
-        {onOpenKnowledge ? (
-          <button type="button" onClick={() => onOpenKnowledge(poemId)}>
-            打开完整导读
-          </button>
-        ) : null}
+        <div className="poem-knowledge-actions">
+          {onOpenAppreciation ? (
+            <button
+              type="button"
+              className="is-appreciation"
+              onClick={() => onOpenAppreciation(poemId)}
+            >
+              <Sparkles size={13} aria-hidden="true" /> 译注赏析
+            </button>
+          ) : null}
+          {onOpenKnowledge ? (
+            <button type="button" onClick={() => onOpenKnowledge(poemId)}>
+              完整导读
+            </button>
+          ) : null}
+        </div>
       </div>
       {guide.summary ? <h3 id={`poem-guide-${poemId}`}>{guide.summary}</h3> : null}
       {!compact && guide.interpretation ? <p>{guide.interpretation}</p> : null}

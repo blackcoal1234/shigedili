@@ -223,6 +223,14 @@ footer{margin-top:18px;border-top:1px solid #dfe4de;padding-top:10px;font-size:1
 .itheme{color:#4a524c;font-size:15px;margin-top:4px;}
 .ikai{font-family:KaiTi,STKaiti,serif;font-size:17px;color:var(--blue);margin-top:10px;}
 .iscene{font-size:12px;color:#9aa39b;margin:8px 0 14px;}
+/* ---- 固定画卷背景与纸白可读性表面 ---- */
+body{background:transparent;position:relative;isolation:isolate;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("assets/generated/remaining_pages_20260830/40_43_mountain_game_v1.png") center center/cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(248,246,238,.52);pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+.panel,.chcard,#journey,#mapWrap,.poemcard,.mbox{background:rgba(251,252,250,.90);}
+#journey,#mapWrap{background:rgba(251,252,250,.94);}
+.kitem,.placeRow,.chip,.qian span,.lc-poem,.stat3>div{background-color:rgba(251,252,250,.92);}
 @media (prefers-reduced-motion:reduce){.iseal{animation:none !important;}}
 @media (max-width:900px){#mapWrap{height:420px;}}
 </style>

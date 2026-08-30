@@ -1,11 +1,9 @@
 """可视化 17：同一意象的跨诗人情感差异。
 
-数据口径：六位核心诗人（李白、杜甫、白居易、苏轼、陆游、李清照）
-各取 poems.json 中该诗人的前 20 首，作为跨诗人可比的固定样本；
-李白语料已扩充至 55 首（用于精神地形图专题），超出的部分不进入本页
-样本，以保持六人样本量一致、基线可比。目标意象为月、酒、舟、雁、雨。
-每首诗对同一意象最多计一次，情感来自意象所在分句及相邻分句的多标签
-语境规则，并与诗人的 20 首固定样本情感基线比较。
+数据口径：六位核心诗人在 data/analysis/famous_poets_full.jsonl.gz
+中的全部作品参与聚合。目标意象为月、酒、舟、雁、雨。每首诗对同一意象
+最多计一次，情感来自意象所在分句及相邻分句的多标签语境规则，并与诗人的
+全作品情感基线比较。证据展示可截断，聚合计数不截断。
 """
 from __future__ import annotations
 
@@ -38,14 +36,14 @@ from data.imagery_emotion_rules import (
     sample_level,
 )
 from viz_assets import inject_index_backlink, localize_pyecharts_assets
+from tools.famous_poet_corpus import load_analysis_poems
 
 
-POEMS_JSON = ROOT / "data" / "poems.json"
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
 OUTPUT_HTML = OUTPUT_DIR / "17_同一意象的诗人情感差异.html"
 CHART_ID = "imagery_emotion_heatmap"
-# 拍板口径（2026-07）：每位诗人固定取语料前 20 首，保证六人样本量一致可比；
-# 李白扩充语料（55 首）只服务精神地形图专题，不改变本页样本构成。
-POEMS_PER_POET = 20
+MAX_EVIDENCE_RECORDS = 24
 
 
 HEATMAP_TOOLTIP = JsCode(
@@ -81,33 +79,13 @@ HEATMAP_TOOLTIP = JsCode(
 )
 
 
-def load_target_poems() -> list[dict[str, object]]:
-    """读取六位诗人各 20 首，并保留原始顺序作为稳定样本编号。"""
-    rows = json.loads(POEMS_JSON.read_text(encoding="utf-8"))
-    grouped: dict[str, list[dict[str, object]]] = {poet: [] for poet in TARGET_POETS}
-    for source_index, row in enumerate(rows):
-        poet = str(row.get("author") or row.get("poet") or "")
-        if poet not in grouped or len(grouped[poet]) >= POEMS_PER_POET:
-            continue
-        grouped[poet].append(
-            {
-                "poem_id": f"{poet}-{source_index}",
-                "source_index": source_index,
-                "title": str(row.get("title") or "无题"),
-                "poet": poet,
-                "dynasty": str(row.get("dynasty") or ""),
-                "body": str(row.get("body") or ""),
-            }
-        )
-
-    shortages = {
-        poet: len(poems)
-        for poet, poems in grouped.items()
-        if len(poems) != POEMS_PER_POET
-    }
-    if shortages:
-        raise RuntimeError(f"目标诗人样本不足 20 首：{shortages}")
-    return [poem for poet in TARGET_POETS for poem in grouped[poet]]
+def load_target_poems() -> tuple[list[dict[str, object]], str]:
+    """读取全作品分析语料，保留 loader 提供的稳定身份。"""
+    rows, corpus_source = load_analysis_poems(fallback=False)
+    return (
+        [row for row in rows if str(row.get("poet") or "") in TARGET_POETS],
+        corpus_source,
+    )
 
 
 def _unique_evidence_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
@@ -133,7 +111,7 @@ def _round_probability(numerator: int, denominator: int) -> float:
 
 
 def build_payload() -> dict[str, object]:
-    poems = load_target_poems()
+    poems, corpus_source = load_target_poems()
     poem_totals = Counter(str(poem["poet"]) for poem in poems)
     baseline_counts: dict[str, Counter[str]] = {
         poet: Counter() for poet in TARGET_POETS
@@ -160,7 +138,12 @@ def build_payload() -> dict[str, object]:
             )
             raw_records[imagery][poet].append(
                 {
-                    "poem_id": poem["poem_id"],
+                    "poem_id": poem["work_id"],
+                    "work_id": poem["work_id"],
+                    "body_hash": poem.get("body_hash", ""),
+                    "canonical_gushiwen_id": poem.get("canonical_gushiwen_id"),
+                    "canonical_match": bool(poem.get("canonical_match")),
+                    "source_url": poem.get("source_url", ""),
                     "title": poem["title"],
                     "dynasty": poem["dynasty"],
                     "evidence": _unique_evidence_rows(context_rows),
@@ -178,14 +161,21 @@ def build_payload() -> dict[str, object]:
         cells: list[dict[str, object]] = []
         finite_lifts: list[float] = []
         for poet in TARGET_POETS:
-            records = raw_records[imagery][poet]
-            sample_count = len(records)
+            aggregate_records = raw_records[imagery][poet]
+            sample_count = len(aggregate_records)
             total_imagery_poem_hits += sample_count
+            records = sorted(
+                aggregate_records,
+                key=lambda row: (
+                    not bool(row["canonical_match"]),
+                    str(row["work_id"]),
+                ),
+            )[:MAX_EVIDENCE_RECORDS]
             total_evidence_lines += sum(len(row["evidence"]) for row in records)
             level = sample_level(sample_count)
             conditional_counts: Counter[str] = Counter()
             companion_counts: Counter[str] = Counter()
-            for record in records:
+            for record in aggregate_records:
                 conditional_counts.update(set(record["emotions"]))
                 companion_counts.update(set(record["companions"]))
 
@@ -235,6 +225,9 @@ def build_payload() -> dict[str, object]:
             poet_rows[poet] = {
                 "poet": poet,
                 "sample_count": sample_count,
+                "matched_record_count": sample_count,
+                "evidence_record_count": len(records),
+                "truncated": sample_count > len(records),
                 "level": level,
                 "poem_total": int(poem_totals[poet]),
                 "emotions": nonzero_emotions,
@@ -254,16 +247,30 @@ def build_payload() -> dict[str, object]:
             ),
         }
 
+    canonical_evidence_count = sum(
+        1
+        for view in views.values()
+        for row in view["poets"].values()
+        for record in row["records"]
+        if record["canonical_match"]
+    )
     return {
+        "corpus_source": corpus_source,
+        "corpus_path": CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+        "analysis_count": len(poems),
+        "canonical_evidence_count": canonical_evidence_count,
         "poets": list(TARGET_POETS),
         "imagery": list(TARGET_IMAGERY),
         "emotions": list(EMOTIONS),
         "poem_totals": {poet: int(poem_totals[poet]) for poet in TARGET_POETS},
         "views": views,
         "summary": {
+            "corpus_source": corpus_source,
+            "corpus_path": CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+            "analysis_count": len(poems),
+            "canonical_evidence_count": canonical_evidence_count,
             "poet_count": len(TARGET_POETS),
             "poem_count": len(poems),
-            "poems_per_poet": POEMS_PER_POET,
             "imagery_count": len(TARGET_IMAGERY),
             "emotion_count": len(EMOTIONS),
             "imagery_poem_hits": total_imagery_poem_hits,
@@ -411,7 +418,7 @@ def _page_header(payload: dict[str, object]) -> str:
             <h1>同象异情：诗人如何写同一个意象</h1>
             <p>以月、酒、舟、雁、雨为观察入口，比较李白、杜甫、白居易、苏轼、陆游、李清照的局部语境情感。意象不预设固定情感，所有标签均由证据分句及其相邻语境触发。</p>
             <div class="metrics" aria-label="样本摘要">
-                <div><span>精细样本</span><strong>{summary['poem_count']} 首</strong></div>
+                <div><span>分析作品</span><strong>{summary['poem_count']} 首</strong></div>
                 <div><span>代表诗人</span><strong>{summary['poet_count']} 位</strong></div>
                 <div><span>目标意象</span><strong>{summary['imagery_count']} 类</strong></div>
                 <div><span>意象诗次</span><strong>{summary['imagery_poem_hits']} 次</strong></div>
@@ -458,7 +465,7 @@ def _lower_sections() -> str:
                 <div>
                     <span class="section-kicker">语境审计</span>
                     <h2 id="evidenceTitle">伴随意象与证据诗句</h2>
-                    <p>样本量、伴随意象、情感标签和原文证据使用同一统计口径。</p>
+                    <p>聚合样本量来自全作品；下方原文证据为 canonical 优先的有限展示集。</p>
                 </div>
             </div>
             <div id="evidenceTable" class="evidence-table-wrap"></div>
@@ -479,8 +486,8 @@ def _lower_sections() -> str:
                 </article>
                 <article>
                     <span>诗人情感基线</span>
-                    <strong>P(e|p) = N(e,p) / 20</strong>
-                    <p>该诗人 20 首固定样本中命中情感 e 的比例，用来区分“诗人本来常写”与“该意象特别强化”。</p>
+                    <strong>P(e|p) = N(e,p) / N(p)</strong>
+                    <p>该诗人全作品中命中情感 e 的比例，分母随 loader 实际收录量动态计算。</p>
                 </article>
                 <article>
                     <span>意象情感提升度</span>
@@ -490,7 +497,7 @@ def _lower_sections() -> str:
             </div>
             <div class="method-notes">
                 <p><strong>语境窗口：</strong>意象所在分句及前后各一个分句。每首诗对同一意象、同一标签最多计一次。</p>
-                <p><strong>样本等级：</strong>&lt;10 仅展示证据、不参与排名；10–29 为探索结果；≥30 才可作为正式比较。本页每位诗人固定取语料中前 20 首作为可比样本（扩充语料不进入本页），因此不会出现“正式”等级。</p>
+                <p><strong>样本等级：</strong>&lt;10 仅展示证据、不参与排名；10–29 为探索结果；≥30 才可作为正式比较。聚合使用全作品；证据列每人每意象最多展示 24 首，canonical 精确匹配优先，截断不改变样本数。</p>
                 <p><strong>解释边界：</strong>规则分析反映当前样本中的文本语境，不等同于诗人的真实心理，也不能替代作品注释和文学史研究。</p>
             </div>
         </section>
@@ -700,11 +707,13 @@ PAGE_SCRIPT = """
     }
     function evidenceDetails(row) {
         if (!row.records.length) return '<span class="empty">当前样本无此意象</span>';
-        return '<details><summary>' + row.records.length + ' 首诗 / 展开证据</summary><div class="evidence-list">' +
+        const suffix = row.truncated ? '（展示 ' + row.evidence_record_count + ' / 命中 ' + row.matched_record_count + '）' : '';
+        return '<details><summary>' + row.records.length + ' 首诗 / 展开证据' + suffix + '</summary><div class="evidence-list">' +
             row.records.map(function (record) {
                 const quote = record.evidence.map(function (e) { return e.line; }).join(' / ');
                 const labels = record.emotions.length ? record.emotions.join('、') : '语境未判定';
-                return '<div class="evidence-item"><strong>《' + esc(record.title) + '》</strong>' +
+                const title = record.source_url ? '<a href="' + esc(record.source_url) + '" target="_blank" rel="noopener">《' + esc(record.title) + '》</a>' : '《' + esc(record.title) + '》';
+                return '<div class="evidence-item"><strong>' + title + '</strong>' +
                     '<q>' + esc(quote) + '</q><small>标签：' + esc(labels) + '</small></div>';
             }).join('') + '</div></details>';
     }

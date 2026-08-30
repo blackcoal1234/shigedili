@@ -31,6 +31,7 @@ THEME_VIZ_SCRIPTS = (
     "viz_41_imagery_geography.py",
     "viz_42_dreamed_places.py",
     "viz_43_side_quest.py",
+    "viz_44_poem_page.py",
     # 导航页会检查全部参赛展项目标，因此在 30-39 之后生成。
     "viz_29_competition_index.py",
     # 生命痕迹首页收尾，并按 viz_99 的清单统一刷新 manifest。
@@ -118,10 +119,29 @@ def main() -> None:
         removed = cleanup_legacy_outputs()
         print(f"  [ok] 移除 {removed} 个旧版输出")
 
-    step("Step 4/5  数据层（情感档案 + 诗格档案 + 题库 + 意象矩阵 + 被想象率 + 开卷槽位）")
+    step("Step 4/5  数据层（全作品状态扫描 + 情感档案 + 诗格档案 + 题库 + 意象矩阵 + 被想象率 + 开卷槽位 + 诗页数据）")
+    full_corpus_check = ROOT / "tools" / "famous_poet_corpus.py"
+    if not full_corpus_check.exists():
+        raise FileNotFoundError(f"缺少全作品语料门禁脚本：{full_corpus_check}")
+    print("\n[gate] 校验本地全作品语料与 manifest")
+    run_python(full_corpus_check, "check", "--no-source-verify")
+
+    stylometry_dir = ROOT / "data" / "stylometry"
+    for script_name in (
+        "scan_color.py",
+        "scan_number.py",
+        "scan_solitude.py",
+        "scan_sound.py",
+    ):
+        path = stylometry_dir / script_name
+        if not path.exists():
+            raise FileNotFoundError(f"缺少全作品状态扫描脚本：{path}")
+        print(f"\n[scan] {script_name}")
+        run_python(path)
+
     for tool_name in ("build_emotion_profiles.py", "build_place_profile.py", "build_quiz_bank.py", "build_imagery_region_matrix.py",
                      "build_imagination_index.py", "build_seedance_slots.py", "build_side_quest_bank.py",
-                     "build_fact_coverage_statement.py"):
+                     "build_fact_coverage_statement.py", "build_poem_page_data.py"):
         path = ROOT / "tools" / tool_name
         if not path.exists():
             raise FileNotFoundError(f"缺少数据层脚本：{path}")

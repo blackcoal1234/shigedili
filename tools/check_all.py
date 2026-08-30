@@ -45,6 +45,7 @@ CHECKS = (
     Check("CBDB事件坐标回填", py("tools/check_cbdb_coordinate_backfill.py")),
     Check("史料缺口与人工补证", py("tools/check_manual_source_evidence.py")),
     Check("88人史料候选汇总", py("tools/check_poet_history_collection_summary.py")),
+    Check("赏析诗页", py("tools/check_poem_page_data.py")),
     Check("主题数据", py("tools/check_theme_data.py")),
     Check("诗人行旅", py("tools/check_journey_emotion.py")),
     Check("创作活动中心", py("tools/check_literary_centers.py")),

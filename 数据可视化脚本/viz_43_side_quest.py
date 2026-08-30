@@ -86,6 +86,16 @@ table.mtab th{background:#eef1ec;font-weight:normal;}
 .qian span:hover{border-color:var(--gold);color:var(--gold);}
 #resumeBar{display:none;}
 footer{margin-top:16px;border-top:1px solid #dfe4de;padding-top:10px;font-size:12.5px;color:#6a726c;}
+/* ---- 固定画卷背景与纸白可读性表面 ---- */
+body{background:transparent;position:relative;isolation:isolate;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("assets/generated/remaining_pages_20260830/40_43_mountain_game_v1.png") center center/cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(248,246,238,.52);pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+.panel{background:rgba(251,252,250,.90);}
+.opt,.litem,.hintext,.evcard,.stat3>div,.qian span{background-color:rgba(251,252,250,.92);}
+.opt.right,.litem.lock{background:#e9f2ed;}
+.opt.wrong,.litem.flash{background:#f8ece9;}
+.litem.sel{background:#e8eef4;}
 </style>
 </head>
 <body>

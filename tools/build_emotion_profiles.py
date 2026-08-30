@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import importlib.util
-import json
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -16,6 +15,7 @@ sys.path.insert(0, str(DATA))
 
 from classical_emotion_lexicon import EMOTION_SPECS, validate  # noqa: E402
 from classical_emotion_model import classify_text  # noqa: E402
+from famous_poet_corpus import atomic_dump_json, load_analysis_poems  # noqa: E402
 
 
 def load_spirit():
@@ -32,7 +32,18 @@ def load_spirit():
 
 def build() -> dict[str, object]:
     ontology = validate()
-    poems = json.loads((DATA / "poems.json").read_text(encoding="utf-8"))
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        forbidden_fallback = "data/poems.json"
+        raise RuntimeError(
+            f"状态统计必须使用全作品语料，实际来源：{corpus_source}；"
+            f"禁止回退 {forbidden_fallback}"
+        )
+    corpus_path = (
+        "data/analysis/famous_poets_full.jsonl.gz"
+        if corpus_source == "analysis_full"
+        else "data/poems.json"
+    )
     spirit_entries, spirit_words = load_spirit()
     rows = []
     labels: Counter[str] = Counter()
@@ -50,6 +61,8 @@ def build() -> dict[str, object]:
         rows.append({
             "poet": poem["author"],
             "title": poem["title"],
+            "work_id": poem.get("work_id"),
+            "canonical_gushiwen_id": poem.get("canonical_gushiwen_id"),
             "body_hash": poem.get("body_hash", ""),
             **profile,
         })
@@ -62,6 +75,8 @@ def build() -> dict[str, object]:
             "模型用于扩充候选情感词与文学形容词；发布值由本地规则复算。"
             "标签描述文本特征，不等同于作者心理诊断。"
         ),
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
         "corpus_size": len(poems),
         "ontology": {
             **ontology,
@@ -75,11 +90,7 @@ def build() -> dict[str, object]:
         },
         "profiles": rows,
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False),
-        encoding="utf-8",
-    )
+    atomic_dump_json(OUT, payload)
     return payload
 
 

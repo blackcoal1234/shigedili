@@ -93,6 +93,11 @@ python -m poetry_agent.main
 
 默认监听 `127.0.0.1:8123`。模型变量缺失时服务仍可启动，`/health` 返回 `degraded`，目录和直接数据 Actions 仍可工作；AG-UI对话图只报告配置缺口。
 
+`output/44_诗页.html` 可用 `file://` 完整离线浏览，但浏览器此时发送的
+`Origin: null` 不在默认 CORS 允许范围，不能在线生成。需要在线译注时，先在项目根目录运行
+`python tools/serve_output.py`，再用显示的本地 HTTP 地址打开页面，并把该页面的确切 origin
+（例如 `http://127.0.0.1:8000`）加入 `AGENT_ALLOWED_ORIGINS`；不要放宽为通配符。
+
 ## HTTP 接口
 
 - `POST /`：原生 AG-UI 流式 Agent 端点
@@ -106,6 +111,8 @@ python -m poetry_agent.main
 - `GET /knowledge/status`：知识库版本、计数和源哈希
 - `GET /knowledge/search`：页面快速检索
 - `GET /knowledge/poems/{poem_id}` / `lines/{line_id}`：页面详情
+- `GET /knowledge/rich-guide/{poem_id}`：查询已有译注赏析
+- `POST /knowledge/rich-guide`：返回已有译注或按需生成；要求上述 HTTP origin/CORS 配置，未配置 `AGENT_LLM_*` Key 时以 HTTP 503 降级，不影响只读页面
 - `/copilotkit/`：CopilotKit Python 发现、Agent 和 Action 兼容入口
 - `/docs`：FastAPI OpenAPI 文档
 

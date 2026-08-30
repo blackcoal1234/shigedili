@@ -68,6 +68,14 @@ table.mtab{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:4px;}
 table.mtab th,table.mtab td{border:1px solid #dfe4de;padding:3px 8px;text-align:left;}
 table.mtab th{background:#eef1ec;font-weight:normal;}
 footer{margin-top:16px;border-top:1px solid #dfe4de;padding-top:10px;font-size:12.5px;color:#6a726c;}
+/* ---- 固定画卷背景与纸白可读性表面 ---- */
+body{background:transparent;position:relative;isolation:isolate;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("assets/generated/remaining_pages_20260830/41_imagery_geography_v1.png") center center/cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(248,246,238,.52);pointer-events:none;}
+.wrap{position:relative;z-index:1;}
+.panel,.rcard,.mbox{background:rgba(251,252,250,.90);}
+#heatWrap{background:rgba(251,252,250,.94);}
+.chip{background-color:rgba(251,252,250,.92);}
 @media (max-width:900px){#heat{height:420px;}}
 </style>
 </head>

@@ -6,7 +6,7 @@
   output/assets/competition/gaze_data.json
 
 口径（与页面"方法与数据"折叠区一致）：
-1. 对 poems.json 当前全语料扫描凝望表达：
+1. 对 analysis_full 六位诗人全作品扫描凝望表达：
    - 方位凝望：[东南西北/四隅]+望、望+[方位]、南顾/北顾；
    - 无方向凝望：回望/怅望/遥望/极目，以及 望+宾语（宾语取望后1-3字，
      经 place_dict 269 条古地名与手工常见名词表最长匹配过滤）。
@@ -36,9 +36,11 @@ from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "data"))
+sys.path.insert(0, ROOT)
 
 import place_dict as PD  # noqa: E402
 import spirit_image_dict as SD  # noqa: E402
+from tools.famous_poet_corpus import load_analysis_poems  # noqa: E402
 
 OUT_HTML = os.path.join(ROOT, "output", "31_凝望罗盘.html")
 OUT_JSON = os.path.join(ROOT, "output", "assets", "competition", "gaze_data.json")
@@ -78,6 +80,8 @@ SPIRIT_WORDS = SD.words()  # 已按长度降序
 SPIRIT_COUNT = len(SD.SPIRIT_DICT)
 
 CJK = re.compile(r"[一-鿿]")
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
 
 
 def cjk_len(text: str) -> int:
@@ -175,6 +179,15 @@ def extract_from_text(text: str, source: str):
     return out
 
 
+def index_exact_canonical_by_title(poems):
+    """仅返回诗人/诗题下唯一的 exact canonical 行；歧义题不挂事实。"""
+    grouped = defaultdict(list)
+    for poem in poems:
+        if poem.get("canonical_match") and poem.get("canonical_gushiwen_id"):
+            grouped[(poem["poet"], poem["title"])].append(poem)
+    return {key: rows[0] for key, rows in grouped.items() if len(rows) == 1}
+
+
 def load_chronology(poems_by_key):
     """六人编年：candidates CSV + verified 覆盖。返回 poet -> [row]。"""
     verified = {}
@@ -207,7 +220,14 @@ def load_chronology(poems_by_key):
                                fact_grade=v["fact_grade"].strip() or row["fact_grade"],
                                status="verified",
                                source_name=v["source_name"].strip() or row["source_name"])
-                row["body"] = poems_by_key.get((poet, r["title"]), {}).get("body", "")
+                canonical = poems_by_key.get((poet, r["title"]))
+                row["body"] = canonical.get("body", "") if canonical else ""
+                row["work_id"] = canonical.get("work_id") if canonical else None
+                row["canonical_gushiwen_id"] = (
+                    canonical.get("canonical_gushiwen_id") if canonical else None
+                )
+                row["body_hash"] = canonical.get("body_hash", "") if canonical else ""
+                row["canonical_match"] = bool(canonical)
                 chron[poet].append(row)
     return chron
 
@@ -228,23 +248,26 @@ def bearing_dir8(lon0, lat0, lon1, lat1):
 
 
 def main():
-    with open(os.path.join(ROOT, "data", "poems.json"), encoding="utf-8") as f:
-        poems = json.load(f)
-    poems_by_key = {(p["author"], p["title"]): p for p in poems}
-    six_counts = Counter(p["author"] for p in poems if p["author"] in SIX)
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    poems = [p for p in poems if p["poet"] in SIX]
+    poems_by_key = index_exact_canonical_by_title(poems)
+    six_counts = Counter(p["poet"] for p in poems)
 
     # ---------- 1. 全语料凝望扫描 ----------
     all_hits = []
-    seen_clause = set()  # (author, sentence, verb) 去重：组诗合刊与单首并存
+    seen_clause = set()  # 同一稳定作品内的同句同动词去重
     for p in poems:
         for h in extract_from_text(p["body"], "body"):
-            key = (p["author"], h["sentence"], h["verb"])
+            key = (p["work_id"], h["sentence"], h["verb"])
             if key in seen_clause:
                 continue
             seen_clause.add(key)
             senti, words = sentiment_of(h["sentence"])
             all_hits.append(dict(
-                poet=p["author"], title=p["title"], dynasty=p["dynasty"],
+                poet=p["poet"], title=p["title"], dynasty=p["dynasty"],
+                work_id=p["work_id"], body_hash=p.get("body_hash", ""),
+                canonical_gushiwen_id=p.get("canonical_gushiwen_id"),
+                canonical_match=bool(p.get("canonical_match")),
                 sentence=h["sentence"], unit=h["unit"], verb=h["verb"],
                 direction=h["direction"],
                 obj=h["obj"], sentiment=senti, neutral=(not words),
@@ -253,12 +276,10 @@ def main():
     # 六人诗题之望（词牌名排除）
     title_gazes = defaultdict(list)
     for p in poems:
-        if p["author"] not in SIX:
-            continue
         if any(p["title"].startswith(c) for c in TITLE_CIPAI_BLOCK):
             continue
-        if "望" in p["title"] and p["title"] not in title_gazes[p["author"]]:
-            title_gazes[p["author"]].append(p["title"])
+        if "望" in p["title"]:
+            title_gazes[p["poet"]].append(p["title"])
 
     dir_hits = [h for h in all_hits if h["direction"]]
     nodir_hits = [h for h in all_hits if not h["direction"]]
@@ -373,9 +394,9 @@ def main():
         blk["label"] = LB_STAGE[idx]
         blk["period"] = idx
         lb_periods.append(blk)
-    lb_all_changan = sum(p["body"].count("长安") for p in poems if p["author"] == "李白")
+    lb_all_changan = sum(p["body"].count("长安") for p in poems if p["poet"] == "李白")
     lb_all_titles = sorted({p["title"] for p in poems
-                            if p["author"] == "李白" and "长安" in p["body"]})
+                            if p["poet"] == "李白" and "长安" in p["body"]})
 
     # ---------- 3. 地理验证 ----------
     geo_cases = []
@@ -383,11 +404,14 @@ def main():
     for poet in SIX:
         for r in chron[poet]:
             if r["lon"] and r["lat"]:
-                chron_lookup[(poet, r["title"])] = r
+                if r["canonical_gushiwen_id"]:
+                    chron_lookup[r["canonical_gushiwen_id"]] = r
     for h in dir_hits:
         if h["poet"] not in SIX:
             continue
-        r = chron_lookup.get((h["poet"], h["title"]))
+        if not h["canonical_match"]:
+            continue
+        r = chron_lookup.get(h["canonical_gushiwen_id"])
         if not r:
             continue
         # 目标地：直接宾语为地名，否则在含凝望动词的分析单元内扫 place_dict / 补充映射
@@ -414,6 +438,8 @@ def main():
         match = (claimed == sector) or (len(claimed) == 1 and claimed in sector)
         geo_cases.append(dict(
             poet=h["poet"], title=h["title"], sentence=h["sentence"], verb=h["verb"],
+            work_id=h["work_id"], body_hash=h["body_hash"],
+            canonical_gushiwen_id=h["canonical_gushiwen_id"], canonical_match=True,
             claimed=claimed, place_from=f"{r['modern_city']}", from_badge=badge_of(r),
             from_grade=r["fact_grade"], year=r["year_start"],
             target=target, target_mapped=tname, computed=sector, angle=ang,
@@ -424,7 +450,11 @@ def main():
     # ---------- 4. 数据落盘 ----------
     payload = dict(
         generated_by="viz_31_gaze_compass.py",
-        corpus=dict(n_poems=len(poems), n_poets=len({p["author"] for p in poems}),
+        corpus_source=corpus_source,
+        corpus_path=CORPUS_PATH if corpus_source == "analysis_full" else CANONICAL_PATH,
+        analysis_count=len(poems),
+        canonical_evidence_count=sum(1 for hit in all_hits if hit["canonical_match"]),
+        corpus=dict(n_poems=len(poems), n_poets=len({p["poet"] for p in poems}),
                     six_counts={p: six_counts[p] for p in SIX},
                     n_hits=len(all_hits), n_dir=len(dir_hits),
                     n_nodir=len(nodir_hits), dir_count={d: corpus_dir_count.get(d, 0) for d in DIR8},
@@ -768,6 +798,14 @@ nav.sibling a:hover{text-decoration:underline}
 nav.sibling .cur{color:var(--cinnabar);font-weight:700}
 nav.sibling .home{font-weight:700}
 footer{margin-top:14px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+/* ---- 固定主题背景：凝望罗盘 ---- */
+html{background:#e8e7df}
+body{position:relative;isolation:isolate;background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:url("assets/generated/remaining_pages_20260830/31_gaze_compass_v1.png") center center/cover no-repeat}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:rgba(248,247,241,.27)}
+.wrap{position:relative;z-index:1}
+:root{--surface:rgba(255,255,252,.90);--surface-soft:rgba(248,248,245,.87)}
 </style>
 </head>
 <body>
@@ -864,18 +902,18 @@ footer{margin-top:14px;color:var(--muted);font-size:12px;border-top:1px solid va
   <summary>方法与数据（口径 · 等级 · 局限）</summary>
   <div class="body">
     <h4>凝望表达的抽取口径</h4>
-    <p>语料为 data/poems.json（__N_CORPUS__ 首 · __N_CORPUS_POETS__ 位诗人）。以。！？；与换行切句、句内以逗号顿号切分析单元后匹配：
+    <p>状态聚合语料为 data/analysis/famous_poets_full.jsonl.gz（六人 __N_CORPUS__ 首）。规范诗页、编年与地理证据仍以 data/poems.json 的 exact canonical match 为准。以。！？；与换行切句、句内以逗号顿号切分析单元后匹配：
     ①方位凝望：四正（东/西/南/北）与四隅（东北/东南/西北/西南）+"望"、"望"+方位、南顾/北顾；
     ②无方向凝望：回望/怅望/遥望/极目，以及"望+宾语"——宾语取"望"后 1–3 字，
     经 place_dict（269 条古地名）与手工常见名词表（明月/故乡/中原/王师/美人/都门等 48 词）最长匹配过滤。
     "相望/瞻望/希望/名望"等按前字黑名单排除；"三顾/相顾"不计入南北之顾。
-    同一作者完全相同的句子只计一次（语料存在组诗合刊与单首并存）。词牌名含"望"者（望江南等）不计入诗题之望。</p>
+    同一 work_id 内完全相同的句子只计一次。词牌名含"望"者（望江南等）不计入诗题之望。</p>
     <h4>情感值</h4>
     <p>对命中所在句以 spirit_image_dict（__SPIRIT_COUNT__ 词条人工词典）做最长匹配，取命中词情感值（-1~1）均值；
     无命中记 0 并标"中性"。该数值描述<b>作品文本的意象情感特征</b>，不断言诗人真实心理；
     不同诗人之间不做心理强弱排名（遵守项目 external_pressure 只做同人内部纵向比较的红线）。</p>
     <h4>编年与证据等级</h4>
-    <p>故都回望指数使用 data/candidates/*_spirit_chronology.csv（六人各 20–23 首，B 级为主）：
+    <p>故都回望指数使用 data/candidates/*_spirit_chronology.csv（六人 canonical 编年子集，B 级为主）：
     status=candidate 一律标注<span class="badge b-cand">候选/推定</span>；
     status=superseded_by_verified 者以 data/reviewed/verified_poem_contexts.csv 的人工审核记录覆盖并标
     <span class="badge b-ver">已审核</span>。fact_grade：A 史料直接系年 / B 权威年谱推定 / C 间接推定 / D 无法系年——
@@ -889,7 +927,7 @@ footer{margin-top:14px;color:var(--muted);font-size:12px;border-top:1px solid va
     其余方向均为文本自述；⑤"望+宾语"依赖名词表，未收录的宾语（如具体人名）会漏计。</p>
     <h4>数据文件</h4>
     <p>本页全部中间数据见 assets/competition/gaze_data.json（命中明细、六人汇总、故都指数、地理验证）。
-    数据资产：poems.json __N_CORPUS__ 首 / spirit_image_dict __SPIRIT_COUNT__ 词条 / place_dict 269 条古地名 /
+    数据资产：analysis_full 六人 __N_CORPUS__ 首 / canonical poems.json 仅用于诗页与事实证据 / spirit_image_dict __SPIRIT_COUNT__ 词条 / place_dict 269 条古地名 /
     六人精神编年候选 CSV / verified_poem_contexts.csv 41 条人工审核系年。</p>
   </div>
 </details>

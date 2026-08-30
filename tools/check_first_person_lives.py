@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import sys
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -11,6 +12,9 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+from famous_poet_corpus import load_analysis_poems  # noqa: E402
+
 POEMS_PATH = ROOT / "data" / "poems.json"
 DATA_PATH = (
     ROOT / "output" / "assets" / "competition" / "first_person_lives_data.json"
@@ -48,13 +52,20 @@ def finite_number(value: Any) -> bool:
     )
 
 
-def load_corpus() -> tuple[list[dict[str, Any]], set[str], Counter[str], dict[str, str]]:
+def load_corpus() -> tuple[
+    list[dict[str, Any]],
+    set[str],
+    Counter[str],
+    dict[str, str],
+    int,
+    str,
+]:
     raw = load_json(POEMS_PATH, "诗歌语料")
     rows = raw if isinstance(raw, list) else raw.get("poems") if isinstance(raw, dict) else None
     require(isinstance(rows, list), "data/poems.json 顶层必须是数组或含 poems 数组")
 
     poets: set[str] = set()
-    counts: Counter[str] = Counter()
+    canonical_counts: Counter[str] = Counter()
     bodies: dict[str, str] = {}
     for index, row in enumerate(rows):
         require(isinstance(row, dict), f"诗歌语料第 {index + 1} 行不是对象")
@@ -72,10 +83,20 @@ def load_corpus() -> tuple[list[dict[str, Any]], set[str], Counter[str], dict[st
             raise AssertionError(f"同一诗人/题名/body_hash 对应不同正文：{poet}《{title}》")
         bodies[key] = body
         poets.add(poet)
-        counts[poet] += 1
+        canonical_counts[poet] += 1
 
     require(len(poets) == 88, f"data/poems.json 诗人集合应为 88 人，实际 {len(poets)} 人")
-    return rows, poets, counts, bodies
+    analysis_rows, corpus_source = load_analysis_poems()
+    analysis_counts: Counter[str] = Counter(
+        str(row.get("poet") or row.get("author") or "") for row in analysis_rows
+    )
+    analysis_counts.pop("", None)
+    require(set(analysis_counts) == poets, missing_extra_message("全作品分析诗人集合", set(analysis_counts), poets))
+    work_ids = [str(row.get("work_id") or "") for row in analysis_rows]
+    require(all(work_ids), "全作品分析语料存在空 work_id")
+    require(len(work_ids) == len(set(work_ids)), "全作品分析语料 work_id 不唯一")
+    require(all(analysis_counts[name] >= canonical_counts[name] for name in poets), "全作品篇数不得少于规范展示篇数")
+    return rows, poets, analysis_counts, bodies, len(analysis_rows), corpus_source
 
 
 def corpus_key(poet: str, title: str, body_hash: str) -> str:
@@ -259,6 +280,8 @@ def check_chapter(
         work_year = work.get("year")
         require(finite_number(work_year), f"{label}.work.year 必须是有限数字")
         require(year_start <= work_year <= year_end, f"{label} 不得把 {work_year} 年作品画到 {year_start}–{year_end} 年")
+        require(nonempty_text(work.get("work_id")), f"{label}.work.work_id 不能为空")
+        require(nonempty_text(work.get("canonical_gushiwen_id")), f"{label}.work.canonical_gushiwen_id 不能为空")
     if isinstance(work, dict) and work.get("quote") not in (None, ""):
         quote = work["quote"]
         title = work.get("title")
@@ -296,6 +319,14 @@ def check_poets(
     for source_key, source in sources.items():
         require(isinstance(source, dict), f"sources[{source_key}] 必须是对象")
         require(source.get("id") == source_key, f"sources[{source_key}].id 与字典键不一致")
+    require(
+        (sources.get("analysis-corpus") or {}).get("kind") == "full_famous_poet_analysis_corpus",
+        "sources 缺少名家全作品分析语料声明",
+    )
+    require(
+        (sources.get("poems-corpus") or {}).get("kind") == "canonical_poem_corpus",
+        "sources 缺少规范诗页证据语料声明",
+    )
     verified_birth_sources = [
         source
         for source in sources.values()
@@ -349,6 +380,7 @@ def check_poets(
             require(nonempty_text(portrait.get("summary")), f"{name}.portrait.summary 不得为空")
             require(nonempty_text(portrait.get("curve_reading")), f"{name}.portrait.curve_reading 不得为空")
             require(isinstance(portrait.get("anger"), dict) and nonempty_text(portrait["anger"].get("reading")), f"{name}.portrait.anger 必须提供幽愤/讽刺文本信号读法")
+            require(portrait.get("sample_poems") == corpus_counts[name], f"{name}.portrait.sample_poems 未覆盖全作品")
         else:
             require(poet_row["status"] == "scheduled", f"后续轮次诗人 {name}.status 必须为 scheduled")
             require(chapters == [], f"后续轮次诗人 {name}.chapters 必须为空数组")
@@ -427,7 +459,11 @@ def main() -> None:
     payload = load_json(DATA_PATH, "第一人称生命卷数据")
     require(isinstance(payload, dict), "第一人称生命卷 JSON 顶层必须是对象")
 
-    _, corpus_poets, corpus_counts, corpus_bodies = load_corpus()
+    canonical_rows, corpus_poets, corpus_counts, corpus_bodies, analysis_count, corpus_source = load_corpus()
+    project = payload.get("project") or {}
+    require(project.get("corpus_source") == corpus_source == "analysis_full", "生命卷未声明 analysis_full 来源")
+    require(project.get("corpus_poems") == analysis_count, "生命卷全作品总数与 loader 不一致")
+    require(project.get("canonical_evidence_poems") == len(canonical_rows), "生命卷规范证据总数不一致")
     membership, active_round = check_project_and_rounds(payload, corpus_poets)
     generated_count, chapter_count = check_poets(
         payload,

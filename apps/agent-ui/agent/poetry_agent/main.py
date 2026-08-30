@@ -34,12 +34,14 @@ from .embeddings import (
     PoetryEmbeddingRepository,
     SiliconFlowEmbeddingClient,
 )
+from .rich_guide import RichGuideError, RichGuideService
 from .schemas import (
     CompareImageryInput,
     ExplainGlossarySelectionInput,
     GeneratePoetRouteInput,
     GetLineKnowledgeInput,
     GetPoemKnowledgeInput,
+    RichGuideInput,
     PlayPoemScenesInput,
     SearchPoetryKnowledgeInput,
 )
@@ -82,6 +84,7 @@ def create_app(
     glossary_model_client: GlossaryModelClient | None = None,
     glossary_draft_path: Path | None = None,
     glossary_quota: GlossaryQuota | None = None,
+    rich_guide_service: RichGuideService | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_env()
     repository = SnapshotRepository(settings.project_root, settings.cache_dir)
@@ -157,6 +160,14 @@ def create_app(
     app.state.embedding_repository = embedding_repository
     app.state.embedding_client = embedding_client
     app.state.service = service
+    rich_guide_service = rich_guide_service or RichGuideService(
+        settings.project_root,
+        base_url=settings.llm_base_url,
+        api_key=settings.llm_api_key,
+        model=settings.llm_model,
+        kb_path=settings.resolved_knowledge_base_path,
+    )
+    app.state.rich_guide_service = rich_guide_service
     app.state.glossary_selection_service = glossary_selection_service
     app.state.glossary_quota = glossary_selection_service.quota
     app.state.agent_engine = agent_engine
@@ -253,6 +264,22 @@ def create_app(
     def knowledge_poem(poem_id: str) -> dict[str, Any]:
         return service.get_poem_knowledge(poem_id)
 
+    @app.get("/knowledge/rich-guide/{poem_id}")
+    def rich_guide_lookup(poem_id: str) -> dict[str, Any]:
+        """查询一首诗已有的译注赏析（手写/LLM 层），不触发生成。"""
+        result = rich_guide_service.find_existing(poem_id)
+        if result is None:
+            return {"status": "absent", "poem_id": poem_id}
+        return result
+
+    @app.post("/knowledge/rich-guide")
+    def rich_guide_generate(payload: RichGuideInput) -> dict[str, Any]:
+        """按需生成一首诗的译注赏析：已有则返回，没有则生成并留档。"""
+        try:
+            return rich_guide_service.generate(payload.poem_id)
+        except RichGuideError as exc:
+            return JSONResponse(status_code=exc.status_code, content=exc.payload)
+
     @app.get("/knowledge/lines/{line_id}")
     def knowledge_line(line_id: str) -> dict[str, Any]:
         return service.get_line_knowledge(line_id)
@@ -294,6 +321,10 @@ def create_app(
                 "status": "/knowledge/status",
                 "search": "/knowledge/search",
                 "poem": "/knowledge/poems/{poem_id}",
+                "richGuide": {
+                    "lookup": "/knowledge/rich-guide/{poem_id}",
+                    "generate": "POST /knowledge/rich-guide",
+                },
                 "line": "/knowledge/lines/{line_id}",
                 "glossSelection": "/knowledge/glosses/selection",
                 "glossStatus": "/knowledge/glosses/status",

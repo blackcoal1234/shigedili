@@ -25,6 +25,7 @@ import {
 import { EmptyState } from "@/components/StateViews";
 import { InteractivePoemText } from "@/components/InteractivePoemText";
 import { PoemKnowledgeSummary } from "@/components/KnowledgeExplorer";
+import type { AppreciationTarget } from "@/components/PoemAppreciationDrawer";
 import { TransportGlyph } from "@/components/TransportGlyph";
 import {
   clampSceneIndex,
@@ -46,6 +47,7 @@ interface PoetRouteMapProps {
   selectedSceneId?: string;
   onSelectScene: (scene: PoetryScene) => void;
   onOpenKnowledge?: (poemId: string) => void;
+  onOpenAppreciation?: (target: AppreciationTarget) => void;
 }
 
 interface MapPoint {
@@ -100,7 +102,13 @@ function travelDuration(segment: JourneyLeg): number {
   return Math.round(Math.max(3200, Math.min(5500, 3000 + distance * 88)));
 }
 
-export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKnowledge }: PoetRouteMapProps) {
+export function PoetRouteMap({
+  payload,
+  selectedSceneId,
+  onSelectScene,
+  onOpenKnowledge,
+  onOpenAppreciation,
+}: PoetRouteMapProps) {
   const mappedScenes = useMemo(
     () => payload.scenes.filter(
       (scene) => scene.map_eligible && typeof scene.lon === "number" && typeof scene.lat === "number",
@@ -370,10 +378,11 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
       tooltip: {
         trigger: "item",
         confine: true,
-        backgroundColor: "rgba(255,253,247,.97)",
-        borderColor: "rgba(37,43,39,.22)",
+        backgroundColor: "rgba(13,19,30,.96)",
+        borderColor: "rgba(217,168,78,.45)",
         padding: [9, 11],
-        textStyle: { color: "#252b27", fontFamily: "Microsoft YaHei", fontSize: 12 },
+        textStyle: { color: "#e9e6da", fontFamily: "Microsoft YaHei", fontSize: 12 },
+        extraCssText: "backdrop-filter:blur(8px);box-shadow:0 10px 26px rgba(4,7,13,.5);",
         formatter: (params: unknown) => {
           const point = (params as { data?: MapPoint }).data;
           if (!point?.scene) return "史料路线或路径未载的镜头转场";
@@ -388,11 +397,11 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
         zoom,
         scaleLimit: { min: 0.85, max: 6 },
         itemStyle: {
-          areaColor: "#edf0e9",
-          borderColor: "#cbd1ca",
+          areaColor: "#162033",
+          borderColor: "#2e4064",
           borderWidth: 0.75,
         },
-        emphasis: { itemStyle: { areaColor: "#e7ebe5" }, label: { show: false } },
+        emphasis: { itemStyle: { areaColor: "#1d2b47" }, label: { show: false } },
         select: { disabled: true },
         label: { show: false },
       },
@@ -404,7 +413,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           silent: true,
           polyline: true,
           z: 2,
-          lineStyle: { color: "#315f7d", width: 2.4, type: "solid", opacity: 0.78 },
+          lineStyle: { color: "#5b86ad", width: 2.4, type: "solid", opacity: 0.8 },
           data: historicalGuides,
         },
         {
@@ -414,7 +423,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           silent: true,
           polyline: true,
           z: 2,
-          lineStyle: { color: "#93846b", width: 1.7, type: "dashed", opacity: 0.62 },
+          lineStyle: { color: "#8a7346", width: 1.7, type: "dashed", opacity: 0.66 },
           data: visualGuides,
         },
         {
@@ -424,7 +433,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           silent: true,
           polyline: true,
           z: 3,
-          lineStyle: { color: payload.color ?? "#426f94", width: 3, opacity: 0.82 },
+          lineStyle: { color: payload.color ?? "#b98f45", width: 3, opacity: 0.88 },
           data: completedGuides,
         },
         {
@@ -434,7 +443,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           silent: true,
           polyline: true,
           z: 4,
-          lineStyle: { color: "#fff5e6", width: 7, opacity: 0.9 },
+          lineStyle: { color: "rgba(239,203,125,.28)", width: 9, opacity: 0.9 },
           data: activeRoute,
         },
         {
@@ -444,7 +453,7 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           silent: true,
           polyline: true,
           z: 5,
-          lineStyle: { color: "#b64b3f", width: 5, opacity: 0.96 },
+          lineStyle: { color: "#efcb7d", width: 5, opacity: 0.98 },
           data: activeRoute,
         },
         {
@@ -457,9 +466,11 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
             show: true,
             position: "right",
             distance: 8,
-            color: "#4b514c",
+            color: "#c9c2ad",
             fontFamily: "Microsoft YaHei",
             fontSize: 10,
+            textShadowColor: "rgba(5,8,14,.9)",
+            textShadowBlur: 4,
             formatter: (params: unknown) => {
               const point = (params as { data?: MapPoint }).data;
               return point?.sceneIndex === sceneIndex
@@ -473,14 +484,14 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
             symbolSize: point.sceneIndex === sceneIndex ? 16 : point.sceneIndex < sceneIndex ? 9 : 7,
             itemStyle: {
               color: point.sceneIndex === sceneIndex
-                ? "#b64b3f"
+                ? "#efcb7d"
                 : point.sceneIndex < sceneIndex
-                  ? payload.color ?? "#426f94"
-                  : "#fffdf7",
-              borderColor: point.sceneIndex === sceneIndex ? "#fffdf7" : payload.color ?? "#426f94",
+                  ? payload.color ?? "#b98f45"
+                  : "#131b2a",
+              borderColor: point.sceneIndex === sceneIndex ? "#0a0e16" : payload.color ?? "#b98f45",
               borderWidth: 2,
-              shadowBlur: point.sceneIndex === sceneIndex ? 12 : 0,
-              shadowColor: "rgba(182,75,63,.28)",
+              shadowBlur: point.sceneIndex === sceneIndex ? 14 : 0,
+              shadowColor: "rgba(239,203,125,.4)",
             },
           })),
         },
@@ -630,6 +641,15 @@ export function PoetRouteMap({ payload, selectedSceneId, onSelectScene, onOpenKn
           <PoemKnowledgeSummary
             poemId={scene.source_poem_id}
             onOpenKnowledge={onOpenKnowledge}
+            onOpenAppreciation={onOpenAppreciation ? () => {
+              setPaused(true);
+              onOpenAppreciation({
+                poemId: scene.source_poem_id,
+                title: scene.poem_title,
+                poet: scene.poet,
+                dynasty: scene.dynasty,
+              });
+            } : undefined}
             compact
           />
         </article>

@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import { EmptyState } from "@/components/StateViews";
 import { InteractivePoemText } from "@/components/InteractivePoemText";
 import { PoemKnowledgeSummary } from "@/components/KnowledgeExplorer";
+import type { AppreciationTarget } from "@/components/PoemAppreciationDrawer";
 import type { PoetryScene, ScenePayload } from "@/lib/types";
 import { scenePlaybackDelayMs } from "@/lib/workbench";
 
@@ -20,9 +21,15 @@ interface PoemScenePlayerProps {
   payload: ScenePayload;
   onSceneChange: (scene: PoetryScene) => void;
   onOpenKnowledge?: (poemId: string) => void;
+  onOpenAppreciation?: (target: AppreciationTarget) => void;
 }
 
-export function PoemScenePlayer({ payload, onSceneChange, onOpenKnowledge }: PoemScenePlayerProps) {
+export function PoemScenePlayer({
+  payload,
+  onSceneChange,
+  onOpenKnowledge,
+  onOpenAppreciation,
+}: PoemScenePlayerProps) {
   const initialIndex = Math.min(payload.startIndex ?? 0, Math.max(payload.scenes.length - 1, 0));
   const [index, setIndex] = useState(initialIndex);
   const [playing, setPlaying] = useState(false);
@@ -97,6 +104,15 @@ export function PoemScenePlayer({ payload, onSceneChange, onOpenKnowledge }: Poe
           <PoemKnowledgeSummary
             poemId={scene.source_poem_id}
             onOpenKnowledge={onOpenKnowledge}
+            onOpenAppreciation={onOpenAppreciation ? () => {
+              setPlaying(false);
+              onOpenAppreciation({
+                poemId: scene.source_poem_id,
+                title: scene.poem_title,
+                poet: scene.poet,
+                dynasty: scene.dynasty,
+              });
+            } : undefined}
           />
         </article>
 

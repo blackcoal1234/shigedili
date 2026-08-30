@@ -1,8 +1,21 @@
 # data/stylometry/ — 风格计量（stylometry）四维度
 
-对 `data/poems.json` 语料（当前 1772 首 / 88 位诗人）做四个维度的文体统计：
+对著名诗人语料做四个维度的文体统计：
 色彩、数字夸张、人称孤独、声音。每个维度三件套：人工词典（`.py`）、
 扫描脚本（`scan_*.py`）、统计结果（`*_stats.json`）。
+
+统计采用双语料层：默认优先读取 `analysis_full`（
+`data/analysis/famous_poets_full.jsonl.gz`）作为全作品分析层；文件缺失时自动
+回退 `canonical`（`data/poems.json`）。语料规模由每次 loader 返回结果动态决定，
+输出中的 `generated_from_poems` 是实际扫描首数，不应写死。页面展示、事实卡与
+赏析内容仍使用 canonical 语料，不随统计分析层切换。
+
+身份规则与展示文本一致：canonical 正文已经是规范文本，只做换行、NFC 与首尾
+空白规范化后生成 `normalized_body_hash` / `work_id`；不得再次经过 OpenCC。
+上游繁简文本仍以 OpenCC `t2s` 结果作为分析正文，并用独立的
+`dedupe_body_hash` 查找去重候选。即使多个 canonical 正文被 OpenCC 折叠为同一
+候选键，也会保留各自的 `source_poem_id`、`canonical_gushiwen_id` 与 `work_id`，
+不会据此合并真实作品。loader 当前返回物化后的 `list`，尚未改为流式接口。
 
 > 诚实边界：四套词典均为本课程项目**人工整理的分析工具**，词条取舍口径写在
 > 各词典文件 docstring 里；不是权威词库，一切统计结论只在各自口径内成立。
@@ -15,9 +28,6 @@
 | 数字夸张（李白夸张系数） | `number_dict.py` | 137 | `scan_number.py` | `number_stats.json` |
 | 人称孤独（独白/对话型） | `solitude_dict.py` | 73 | `scan_solitude.py` | `solitude_stats.json` |
 | 声音（可听见的诗） | `sound_dict.py` | 88（另 7 个屏蔽片段） | `scan_sound.py` | `sound_stats.json` |
-
-`poems_snapshot*.json` / `_poems_snapshot_sound.json` 是扫描时自动生成的语料
-快照（见"复跑方法"），可随时删除，重跑会重新生成。
 
 ## 四套词典口径（摘要，详见各文件 docstring）
 
@@ -50,9 +60,11 @@
 ```jsonc
 {
   "schema_version": 1,
+  "corpus_source": "analysis_full", // 或 "canonical"
+  "corpus_path": "data/analysis/famous_poets_full.jsonl.gz",
   "dict_size": 61,                  // 该维度词典词条数
-  "generated_from_poems": 1772,     // 本次扫描的语料诗歌数
-  "per_poet": {                     // 覆盖语料内全部 88 位诗人
+  "generated_from_poems": 80893,    // 当前示例；以实际动态规模为准
+  "per_poet": {                     // 覆盖本次语料内全部诗人
     "李白": {
       "poem_count": 55,
       "hits_total": 131,
@@ -63,6 +75,7 @@
   },
   "per_poem": [                     // 每首诗的命中明细
     {"title": "望庐山瀑布", "poet": "李白",
+     "work_id": "fw_…", "canonical_gushiwen_id": "…",
      "body_hash": "…", "hits": [["紫", 1], ["银", 1]]}
   ]
 }
@@ -86,18 +99,19 @@
 
 ## 复跑方法
 
-语料更新后（例如 poems.json 加了新诗），在项目根目录逐个重跑即可刷新统计：
+语料更新后，在项目根目录逐个重跑即可刷新统计与情感档案：
 
 ```
 python data/stylometry/scan_color.py
 python data/stylometry/scan_number.py
 python data/stylometry/scan_solitude.py
 python data/stylometry/scan_sound.py
+python tools/build_emotion_profiles.py
 ```
 
-- **并发安全**：另一工作流可能正在写 poems.json。每个扫描脚本都先把
-  poems.json 复制成本目录快照再解析；解析失败（拷到写了一半的文件）等
-  5 秒重新复制重试，最多 5~6 次。
+- **语料选择**：上述命令统一调用 `load_analysis_poems()`；全作品文件存在时
+  使用 `analysis_full`，否则自动使用 `canonical`。实际来源和路径记录在输出的
+  `corpus_source` / `corpus_path`。
 - **幂等**：同一语料重跑输出逐字节一致（`number_stats.json` 仅
   `generated_at` 时间戳会变化），已实测验证。
 - 词典自检：`python data/stylometry/color_dict.py`（其余三个同理），
@@ -128,14 +142,18 @@ python data/stylometry/scan_sound.py
 
 ## 质检记录（2026-07-26）
 
+- 2026-08-24：将 canonical 身份输入从 OpenCC `t2s` 结果改为规范展示正文；
+  20,437 个 `source_poem_id` 均能在 full 中唯一回配相同 `work_id`。原先被
+  OpenCC 折叠的 19 组 canonical 正文现分别保留；当前分析层为 80,893 条。
+
 - 修复 `color_dict.py` 自检在 Windows GBK 控制台因"✓"字符崩溃的问题
   （改为 stdout 重配 UTF-8 + ASCII 结语）。
 - 发现并修复系统性误匹配：正文中的人名"李白"（韩愈《送孟东野序》、程颢
   《秋日偶成》、李白《赠汪伦》共 3 处）、"白傅""杨朱""朱亥"被"白/朱"
   当作色彩词命中；金属义"金石"被"金"命中。均已加入 `EXCLUDE_WORDS`
   并重新生成 `color_stats.json`。
-- 四份 stats JSON 结构校验通过（schema_version=1，per_poet 均覆盖 88 位
-  诗人，per_poem 与语料 1772 首一一对应）；四个词典自检通过；四个扫描
+- 四份 stats JSON 结构校验通过（schema_version=1，per_poet 覆盖本次语料内
+  全部诗人，per_poem 与动态语料规模一一对应）；四个词典自检通过；四个扫描
   脚本重跑验证幂等。
 - 每维度抽 3 首名篇人工核对命中与原文一致（如《暮江吟》"半江瑟瑟"未被
   声音维度误计乐器"瑟"、《早发白帝城》"白帝"未被计入色彩）。

@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT))
 
 from data.image_dict import IMAGE_DICT
 from data.imagery_emotion_rules import emotion_matches
+from tools.famous_poet_corpus import load_analysis_poems
 from viz_99_output_index import write_manifest
 
 
@@ -26,7 +27,54 @@ OUT_HTML = OUTPUT_DIR / "index.html"
 POEMS_JSON = ROOT / "data" / "poems.json"
 JOURNEYS_JSON = ROOT / "data" / "reviewed" / "poet_journeys.json"
 CONTEXTS_CSV = ROOT / "data" / "reviewed" / "verified_poem_contexts.csv"
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
 TARGET_POETS = ("李白", "杜甫", "白居易", "苏轼", "陆游", "李清照")
+
+# 行旅数据早于 canonical 稳定身份字段建立，节点本身只有诗题。这里把每个
+# 审核节点一次性钉到 data/poems.json 的 source_poem_id；运行时只按该 ID
+# 取原诗，并进一步回配 analysis_full 的 work_id。诗题仅用于发现映射过期，
+# 绝不作为取诗或同题合并键。
+JOURNEY_CANONICAL_IDS = {
+    "libai-0725-jingmen": "d50eb19399e6",
+    "libai-0728-wuhan": "d3f231047aef",
+    "libai-0742-changan": "170df91879a2",
+    "libai-0744-changan-departure": "870828ca8aaa",
+    "libai-0753-xuancheng": "731e2a19594e",
+    "libai-0759-baidi": "0f81015a040c",
+    "dufu-0735-taian": "efec283b31e0",
+    "dufu-0751-changan": "977076fa07f4",
+    "dufu-0757-changan": "89d3a63c6d7f",
+    "dufu-0759-qinzhou": "ad6f7cfa10c2",
+    "dufu-0761-chengdu": "8e9ecc95d6a4",
+    "dufu-0766-kuizhou": "3fd388b378db",
+    "dufu-0768-yueyang": "c05fb9a17f71",
+    "baijuyi-0800-changan": "b7820a12ebaa",
+    "baijuyi-0805-zhouzhi": "796882166eaf",
+    "baijuyi-0815-jiangzhou": "0581b0ba8bb4",
+    "baijuyi-0817-lushan": "5e26797704a7",
+    "baijuyi-0822-hangzhou": "af218ed70405",
+    "baijuyi-0825-suzhou": "6ad0636b01a9",
+    "sushi-1061-mianchi": "31bc973d596d",
+    "sushi-1071-hangzhou": "8949464433f0",
+    "sushi-1075-mizhou": "85b8792a66ac",
+    "sushi-1080-huangzhou": "6b30455fdd3c",
+    "sushi-1084-lushan": "f2f5469a6044",
+    "sushi-1094-huizhou": "69a11cbab0b4",
+    "luyou-1155-shenyuan": "d5ac0bd52789",
+    "luyou-1167-shanyin": "09294abb5f67",
+    "luyou-1172-nanzheng": "bf183dbd63bc",
+    "luyou-1186-linan": "0ccd54b5b58a",
+    "luyou-1192-shanyin": "beab5faf1894",
+    "luyou-1199-shenyuan": "c69e5720e858",
+    "luyou-1210-shanyin": "966c8a76211f",
+    "liqingzhao-1103-kaifeng": "b7f6fef5bb0b",
+    "liqingzhao-1108-yidu": "324219410b89",
+    "liqingzhao-1109-yidu": "96689ee0c664",
+    "liqingzhao-1121-changle": "ba87db9a6f2b",
+    "liqingzhao-1129-wujiang": "e4cd80aceb52",
+    "liqingzhao-1147-linan": "f82821b9d569",
+}
 
 PROFILE_NOTES = {
     "李白": "开阔想象与强烈自我表达并存；受挫节点中的诗句仍常保留转折性的昂扬力量。",
@@ -56,6 +104,8 @@ def load_poems() -> list[dict[str, str]]:
             "body": str(row.get("body") or ""),
             "dynasty": str(row.get("dynasty") or ""),
             "school": str(row.get("school") or "未标注"),
+            "source_poem_id": str(row.get("source_poem_id") or ""),
+            "body_hash": str(row.get("body_hash") or ""),
         }
         for row in rows
     ]
@@ -82,6 +132,109 @@ def load_contexts() -> dict[tuple[str, str], dict[str, str]]:
         }
         for row in rows
     }
+
+
+def analysis_canonical_ids(row: dict[str, object]) -> tuple[str, ...]:
+    """Return canonical aliases carried by one analysis record, in stable order."""
+    raw_ids: list[object] = [row.get("canonical_gushiwen_id")]
+    raw_ids.extend(row.get("canonical_gushiwen_ids") or [])
+    raw_ids.extend(
+        source.get("source_work_id")
+        for source in row.get("sources", [])
+        if isinstance(source, dict) and source.get("source_dataset") == "canonical"
+    )
+    return tuple(dict.fromkeys(str(value or "").strip() for value in raw_ids if value))
+
+
+def build_identity_indexes(
+    canonical_rows: list[dict[str, str]],
+    analysis_rows: list[dict[str, object]],
+) -> tuple[
+    dict[tuple[str, str], dict[str, str]],
+    dict[tuple[str, str], dict[str, object]],
+]:
+    """Index both layers by exact canonical ID; titles never participate."""
+    canonical_by_id: dict[tuple[str, str], dict[str, str]] = {}
+    for row in canonical_rows:
+        poet = str(row.get("poet") or row.get("author") or "").strip()
+        canonical_id = str(row.get("source_poem_id") or "").strip()
+        if not poet or not canonical_id:
+            raise ValueError("canonical 诗作缺少 poet/source_poem_id")
+        key = (poet, canonical_id)
+        if key in canonical_by_id:
+            raise ValueError(f"canonical 稳定身份重复：{key}")
+        canonical_by_id[key] = row
+
+    analysis_by_canonical_id: dict[tuple[str, str], dict[str, object]] = {}
+    for row in analysis_rows:
+        poet = str(row.get("poet") or row.get("author") or "").strip()
+        work_id = str(row.get("work_id") or "").strip()
+        if not poet or not work_id:
+            raise ValueError("analysis_full 诗作缺少 poet/work_id")
+        for canonical_id in analysis_canonical_ids(row):
+            key = (poet, canonical_id)
+            existing = analysis_by_canonical_id.get(key)
+            if existing is not None and existing.get("work_id") != work_id:
+                raise ValueError(f"canonical ID 串联到多个全作品身份：{key}")
+            analysis_by_canonical_id[key] = row
+    return canonical_by_id, analysis_by_canonical_id
+
+
+def bind_contexts_to_canonical_ids(
+    contexts: dict[tuple[str, str], dict[str, str]],
+    journey_groups: dict[str, dict[str, object]],
+    identity_map: dict[str, str] = JOURNEY_CANONICAL_IDS,
+) -> dict[tuple[str, str], dict[str, str]]:
+    """Bind legacy context rows to the node's audited canonical ID once."""
+    nodes_by_label: dict[tuple[str, str], list[str]] = {}
+    for poet, group in journey_groups.items():
+        for node in group.get("nodes", []):
+            label = (poet, str(node.get("linked_poem", {}).get("title") or ""))
+            nodes_by_label.setdefault(label, []).append(str(node.get("id") or ""))
+
+    bound: dict[tuple[str, str], dict[str, str]] = {}
+    for label, context in contexts.items():
+        node_ids = nodes_by_label.get(label, [])
+        if not node_ids:
+            continue
+        if len(node_ids) != 1:
+            raise ValueError(f"创作背景无法唯一绑定审核节点：{label} -> {node_ids}")
+        canonical_id = identity_map.get(node_ids[0])
+        if not canonical_id:
+            raise KeyError(f"审核节点缺少 canonical 稳定身份：{node_ids[0]}")
+        key = (label[0], canonical_id)
+        if key in bound:
+            raise ValueError(f"canonical 创作背景重复：{key}")
+        bound[key] = context
+    return bound
+
+
+def resolve_node_poem(
+    poet: str,
+    node: dict[str, object],
+    canonical_by_id: dict[tuple[str, str], dict[str, str]],
+    analysis_by_canonical_id: dict[tuple[str, str], dict[str, object]],
+    identity_map: dict[str, str] = JOURNEY_CANONICAL_IDS,
+) -> tuple[dict[str, str], dict[str, object]]:
+    """Resolve one journey node without any title-based fallback."""
+    node_id = str(node.get("id") or "")
+    canonical_id = identity_map.get(node_id)
+    if not canonical_id:
+        raise KeyError(f"审核节点缺少 canonical 稳定身份：{node_id}")
+    key = (poet, canonical_id)
+    canonical = canonical_by_id.get(key)
+    if canonical is None:
+        raise KeyError(f"审核节点引用未知 canonical 身份：{key}")
+    analysis = analysis_by_canonical_id.get(key)
+    if analysis is None:
+        raise KeyError(f"canonical 身份未回配 analysis_full work_id：{key}")
+    linked_title = str(node.get("linked_poem", {}).get("title") or "")
+    if canonical["title"] != linked_title:
+        raise ValueError(
+            f"审核节点 canonical 映射已过期：{node_id} "
+            f"期望《{linked_title}》，实际《{canonical['title']}》"
+        )
+    return canonical, analysis
 
 
 def imagery_counts(poems: list[dict[str, str]], limit: int = 10) -> list[dict[str, object]]:
@@ -163,32 +316,61 @@ def life_summary(
         f"审核轨迹从{first['life_context']['label']}延伸到{last['life_context']['label']}；"
         f"处境指数最高的节点位于{pressure_peak['year_label']}的{pressure_peak['place_historical']}，"
         f"关联作品中情感倾向最低的节点是《{low_emotion['linked_poem']['title']}》。"
-        f"当前 {poem_count} 首语料的高频意象为{top_words}。"
+        f"当前 {poem_count} 首全作品状态语料的高频意象为{top_words}。"
     )
 
 
 def build_payload() -> dict[str, object]:
-    poem_rows = load_poems()
-    contexts = load_contexts()
+    analysis_rows, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        raise AssertionError(f"viz19 状态层必须使用 analysis_full，实际 {corpus_source}")
+    canonical_rows = load_poems()
     journey_payload = json.loads(JOURNEYS_JSON.read_text(encoding="utf-8-sig"))
     journey_groups = {
         str(group.get("poet") or ""): group
         for group in journey_payload.get("poets", [])
     }
-    poem_index = {(row["poet"], row["title"]): row for row in poem_rows}
+    canonical_by_id, analysis_by_canonical_id = build_identity_indexes(
+        canonical_rows, analysis_rows
+    )
+    contexts_by_canonical_id = bind_contexts_to_canonical_ids(
+        load_contexts(), journey_groups
+    )
+    analysis_by_poet = {
+        poet: [row for row in analysis_rows if str(row.get("poet") or "") == poet]
+        for poet in TARGET_POETS
+    }
+    canonical_by_poet = {
+        poet: [row for row in canonical_rows if row["poet"] == poet]
+        for poet in TARGET_POETS
+    }
     poet_payload: dict[str, object] = {}
 
     for poet in TARGET_POETS:
-        poems = [row for row in poem_rows if row["poet"] == poet]
+        poems = analysis_by_poet[poet]
+        evidence_poems = canonical_by_poet[poet]
+        if not poems or not evidence_poems:
+            raise AssertionError(f"重点诗人双层语料为空：{poet}")
         group = journey_groups[poet]
         nodes = []
         for raw in sorted(group.get("nodes", []), key=lambda row: int(row["route_order"])):
             node = json.loads(json.dumps(raw, ensure_ascii=False))
-            title = str(node["linked_poem"]["title"])
-            poem = poem_index[(poet, title)]
+            poem, analysis_match = resolve_node_poem(
+                poet, node, canonical_by_id, analysis_by_canonical_id
+            )
+            canonical_id = poem["source_poem_id"]
+            work_id = str(analysis_match["work_id"])
+            node["canonical_poem_id"] = canonical_id
+            node["work_id"] = work_id
+            node["evidence_layer"] = "canonical"
+            node["poem_page_href"] = f"44_诗页.html#poem={canonical_id}"
+            node["linked_poem"]["canonical_poem_id"] = canonical_id
+            node["linked_poem"]["work_id"] = work_id
             node["poem_body"] = poem["body"]
             node["poem_imagery"] = poem_imagery_matches(poem["body"])
-            node["composition_context"] = contexts.get((poet, title))
+            node["composition_context"] = contexts_by_canonical_id.get(
+                (poet, canonical_id)
+            )
             nodes.append(node)
 
         imagery = imagery_counts(poems)
@@ -196,11 +378,15 @@ def build_payload() -> dict[str, object]:
         source_counts = Counter(str(node["source_level"]) for node in nodes)
         poet_payload[poet] = {
             "name": poet,
-            "dynasty": str(group.get("dynasty") or poems[0]["dynasty"]),
-            "school": poems[0]["school"] if poems else "未标注",
+            "dynasty": str(group.get("dynasty") or evidence_poems[0]["dynasty"]),
+            "school": evidence_poems[0]["school"],
             "poem_count": len(poems),
+            "analysis_count": len(poems),
+            "canonical_evidence_count": len(evidence_poems),
             "node_count": len(nodes),
-            "reviewed_context_count": sum((poet, row["title"]) in contexts for row in poems),
+            "reviewed_context_count": sum(
+                node["composition_context"] is not None for node in nodes
+            ),
             "profile_note": PROFILE_NOTES[poet],
             "profile_tag": PROFILE_TAGS[poet],
             "life_summary": life_summary(poet, nodes, imagery, len(poems)),
@@ -210,17 +396,39 @@ def build_payload() -> dict[str, object]:
             "nodes": nodes,
         }
 
-    dynasty_counts = Counter(row["dynasty"] for row in poem_rows)
+    dynasty_counts = Counter(
+        str(row.get("person_period") or row.get("dynasty") or "")
+        for row in analysis_rows
+    )
+    canonical_evidence_count = len(canonical_rows)
     return {
+        "corpus_source": corpus_source,
+        "corpus_path": CORPUS_PATH,
+        "analysis_count": len(analysis_rows),
+        "canonical_evidence_count": canonical_evidence_count,
         "poets": list(TARGET_POETS),
         "profiles": poet_payload,
         "corpus": {
-            "poems": len(poem_rows),
-            "poets": len({row["poet"] for row in poem_rows}),
+            "corpus_source": corpus_source,
+            "corpus_path": CORPUS_PATH,
+            "canonical_path": CANONICAL_PATH,
+            "analysis_count": len(analysis_rows),
+            "canonical_evidence_count": canonical_evidence_count,
+            "poems": len(analysis_rows),
+            "canonical_poems": canonical_evidence_count,
+            "poets": len(
+                {
+                    str(row.get("poet") or row.get("author") or "")
+                    for row in analysis_rows
+                }
+            ),
             "tang": dynasty_counts.get("唐", 0),
             "song": dynasty_counts.get("宋", 0),
+            "transition": len(analysis_rows)
+            - dynasty_counts.get("唐", 0)
+            - dynasty_counts.get("宋", 0),
             "reviewed_nodes": sum(len(group.get("nodes", [])) for group in journey_payload.get("poets", [])),
-            "reviewed_contexts": len(contexts),
+            "reviewed_contexts": len(contexts_by_canonical_id),
         },
         "methodology": journey_payload.get("methodology", {}),
         "updated_at": str(journey_payload.get("updated_at") or ""),
@@ -467,11 +675,12 @@ APP_TEMPLATE = r"""<!doctype html>
         <a class="nav-item" href="08_诗作检索.html"><span class="nav-index">04</span><span>诗作检索</span></a>
         <a class="nav-item" href="18_数据质量与来源覆盖.html"><span class="nav-index">05</span><span>数据质量</span></a>
         <a class="nav-item" href="20_诗人精神地形图.html"><span class="nav-index">06</span><span>精神地形</span></a>
+        <a class="nav-item" href="44_诗页.html"><span class="nav-index">07</span><span>赏析诗页</span></a>
       </nav>
       <div class="side-meta">
         当前语料
         <strong><span id="sidePoets">--</span> 位诗人 · <span id="sidePoems">--</span> 首作品</strong>
-        唐宋代表作平衡语料
+        全作品状态 · 精选证据分层
         <div class="side-links">
           <a href="15_诗人行旅与生命情感.html">审核明细</a>
           <a href="29_参赛导航.html">参赛版作品集</a>
@@ -494,9 +703,9 @@ APP_TEMPLATE = r"""<!doctype html>
           <div>
             <div class="eyebrow">LIFE TRACE · REVIEWED EVIDENCE</div>
             <h1>从行旅、诗作与意象读一位诗人的一生</h1>
-            <p class="page-intro">地图呈现审核到访节点，时间曲线区分外部处境与文本情感；作品背景、原诗证据和来源等级始终随节点联动。</p>
+            <p class="page-intro">文本画像聚合精选名家的全部作品；地图、编年、创作背景与原诗引句只使用可追溯的 canonical 精选证据，并随节点联动。</p>
           </div>
-          <span class="quality-badge">审核数据 · 可追溯</span>
+          <span class="quality-badge">全作品状态 · 精选证据</span>
         </section>
 
         <section class="profile-banner" aria-label="当前诗人画像">
@@ -505,7 +714,7 @@ APP_TEMPLATE = r"""<!doctype html>
             <p id="profileNote" class="poet-thesis">--</p>
           </div>
           <div class="profile-score">
-            <div class="score-cell"><div id="metricPoems" class="score-value">--</div><div class="score-label">爬取作品</div></div>
+            <div class="score-cell"><div id="metricPoems" class="score-value">--</div><div class="score-label">全作品状态</div></div>
             <div class="score-cell"><div id="metricNodes" class="score-value">--</div><div class="score-label">审核节点</div></div>
             <div class="score-cell"><div id="metricContexts" class="score-value">--</div><div class="score-label">创作背景</div></div>
             <div class="score-cell"><div id="metricGrades" class="score-value">--</div><div class="score-label">A/B 级节点</div></div>
@@ -549,7 +758,7 @@ APP_TEMPLATE = r"""<!doctype html>
             <div id="emotionTrend" class="chart medium" role="img" aria-label="生平处境与文本情感变化曲线"></div>
           </article>
           <aside class="panel">
-            <div class="panel-head"><div><div class="panel-title">文本表现概括</div><div id="textProfileMeta" class="panel-meta">当前语料的词典与规则命中</div></div></div>
+            <div class="panel-head"><div><div class="panel-title">全作品文本表现概括</div><div id="textProfileMeta" class="panel-meta">全作品状态的词典与规则命中</div></div></div>
             <div class="insight-body">
               <p id="lifeSummary" class="life-summary">--</p>
               <div class="subhead">高频意象</div>
@@ -560,7 +769,7 @@ APP_TEMPLATE = r"""<!doctype html>
           </aside>
         </section>
 
-        <div class="method-note"><strong>处境指数：</strong>项目根据战乱、贬谪、囚禁、贫病、丧亲和仕途受挫等已审核事件人工编码为 0–100；数值越高，只表示该诗人在所选节点中的处境越艰难。它不是心理测量，也不能用于诗人之间排名。</div>
+        <div class="method-note"><strong>双层口径：</strong>每位诗人的篇数、意象与情感规则统计来自全作品状态语料；审核行旅、编年、创作背景和原句来自 canonical 精选证据，并按稳定诗作 ID 精确链接。<br><strong>处境指数：</strong>项目根据战乱、贬谪、囚禁、贫病、丧亲和仕途受挫等已审核事件人工编码为 0–100；数值越高，只表示该诗人在所选节点中的处境越艰难。它不是心理测量，也不能用于诗人之间排名。</div>
 
         <section class="support-band" aria-label="辅助研究">
           <a class="support-link" href="17_同一意象的诗人情感差异.html"><strong>同一意象，跨诗人比较</strong><span>比较月、酒、舟、雁、雨在六位诗人作品中的局部语境差异。</span></a>
@@ -677,7 +886,7 @@ APP_TEMPLATE = r"""<!doctype html>
         document.getElementById("profileName").textContent = row.name;
         document.getElementById("profileTags").textContent = row.dynasty + " · " + row.school + " · " + row.profile_tag;
         document.getElementById("profileNote").textContent = row.profile_note;
-        document.getElementById("metricPoems").textContent = row.poem_count;
+        document.getElementById("metricPoems").textContent = Number(row.poem_count).toLocaleString("zh-CN");
         document.getElementById("metricNodes").textContent = row.node_count;
         document.getElementById("metricContexts").textContent = row.reviewed_context_count;
         document.getElementById("metricGrades").textContent = ab;
@@ -802,7 +1011,7 @@ APP_TEMPLATE = r"""<!doctype html>
           '<blockquote class="poem-evidence">' + esc(emotion.evidence) + '</blockquote>' +
           '<div class="background-note"><strong>指数依据：</strong>' + esc(node.life_context.reason) + '</div>' +
           background +
-          '<div class="source-row"><span class="grade grade-' + esc(node.source_level) + '">' + esc(node.source_level) + '</span><span>' + esc(node.source_name) + '</span><a href="' + esc(node.source_url) + '" target="_blank" rel="noopener noreferrer">节点来源</a>' + contextSource + '</div>' +
+          '<div class="source-row"><span class="grade grade-' + esc(node.source_level) + '">' + esc(node.source_level) + '</span><span>' + esc(node.source_name) + '</span><a href="' + esc(node.source_url) + '" target="_blank" rel="noopener noreferrer">节点来源</a>' + contextSource + '<a href="' + esc(node.poem_page_href) + '">译注赏析</a></div>' +
           '<details class="poem-full"><summary>查看收录原诗</summary><p class="poem-body">' + esc(node.poem_body) + '</p></details>';
       }
 
@@ -841,7 +1050,7 @@ APP_TEMPLATE = r"""<!doctype html>
 
       function renderTextProfile() {
         const row = profile();
-        document.getElementById("textProfileMeta").textContent = row.poem_count + " 首语料的词典与规则命中";
+        document.getElementById("textProfileMeta").textContent = Number(row.poem_count).toLocaleString("zh-CN") + " 首全作品状态的词典与规则命中";
         document.getElementById("lifeSummary").textContent = row.life_summary + row.profile_note;
         document.getElementById("imageryTokens").innerHTML = row.imagery.map(function (item) {
           return '<span class="token" title="' + esc(item.category) + '">' + esc(item.word) + '<b>' + item.count + '</b></span>';
@@ -895,7 +1104,7 @@ def render() -> None:
         .replace("__GENERATED_AT__", generated_at)
         .replace("__DATA_UPDATED__", str(payload.get("updated_at") or "未标注"))
     )
-    OUT_HTML.write_text(html, encoding="utf-8")
+    OUT_HTML.write_text(html, encoding="utf-8", newline="\n")
     write_manifest()
     print(
         f"  [ok] saved {OUT_HTML}  "

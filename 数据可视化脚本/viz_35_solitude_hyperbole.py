@@ -7,7 +7,8 @@
   data/stylometry/solitude_stats.json   人称孤独统计（88人 per_poet）
   data/stylometry/number_stats.json     数字夸张统计（88人 per_poet + headline）
   data/stylometry/number_dict.py        数字词典（核实"度量组合式"量级冠军）
-  data/poems.json                       当前全量语料（万里例句抽取 + 情感均值）
+  data/analysis/famous_poets_full.jsonl.gz  全作品语料（万里例句 + 情感均值）
+  data/poems.json                       canonical 诗页与可点证据层
   data/spirit_image_dict.py             当前词条情感词典（散点Y轴）
 
 输出：
@@ -33,9 +34,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "data"))
 sys.path.insert(0, str(ROOT / "data" / "stylometry"))
+sys.path.insert(0, str(ROOT))
 
 import spirit_image_dict as sd  # noqa: E402
 import number_dict as nd        # noqa: E402
+from tools.famous_poet_corpus import load_analysis_poems  # noqa: E402
 
 OUT_HTML = ROOT / "output" / "35_两种孤独与夸张签名.html"
 OUT_JSON = ROOT / "output" / "assets" / "competition" / "solhyp_data.json"
@@ -56,10 +59,18 @@ def load_json(p: Path):
 
 sol_stats = load_json(ROOT / "data" / "stylometry" / "solitude_stats.json")
 num_stats = load_json(ROOT / "data" / "stylometry" / "number_stats.json")
-poems = load_json(ROOT / "data" / "poems.json")
+poems, CORPUS_SOURCE = load_analysis_poems(fallback=False)
 N_POEMS = len(poems)
 N_POETS = len({p.get("poet") or p.get("author") for p in poems})
 SPIRIT_COUNT = len(sd.SPIRIT_DICT)
+CORPUS_PATH = "data/analysis/famous_poets_full.jsonl.gz"
+CANONICAL_PATH = "data/poems.json"
+
+for stats_name, stats in (("solitude_stats", sol_stats), ("number_stats", num_stats)):
+    if stats.get("corpus_source") != CORPUS_SOURCE:
+        raise RuntimeError(f"{stats_name} corpus_source 与 loader 不一致")
+    if int(stats.get("generated_from_poems", -1)) != N_POEMS:
+        raise RuntimeError(f"{stats_name} 诗作数与 loader 不一致")
 
 # ------------------------------------------------ 情感均值（spirit_image_dict）
 
@@ -237,6 +248,11 @@ def extract_wanli(poet: str) -> list[dict]:
                 note = WANLI_NOTE.get(ln) or infer_wanli_note(poet, ln)
                 out.append({
                     "line": ln, "title": p["title"],
+                    "work_id": p.get("work_id"),
+                    "body_hash": p.get("body_hash", ""),
+                    "canonical_gushiwen_id": p.get("canonical_gushiwen_id"),
+                    "canonical_match": bool(p.get("canonical_match")),
+                    "source_url": p.get("source_url", ""),
                     "object": note[0],
                     "tag": TAG_LABEL[note[1]],
                 })
@@ -263,6 +279,12 @@ WAN9_EARTH = round(WAN9_KM / EARTH_KM, 2)
 
 DATA = {
     "generated_at": date.today().isoformat(),
+    "corpus_source": CORPUS_SOURCE,
+    "corpus_path": CORPUS_PATH if CORPUS_SOURCE == "analysis_full" else CANONICAL_PATH,
+    "analysis_count": N_POEMS,
+    "canonical_evidence_count": sum(
+        1 for row in wanli_lb + wanli_ly if row["canonical_match"]
+    ),
     "note": (f"viz_35 两种孤独×夸张签名。孤独密度/夸张密度均为人工词典口径的保守"
              f"统计；密度榜设正文≥300字门槛；情感均值为 spirit_image_dict {SPIRIT_COUNT}词条"
              "命中情感值的次数加权平均，全体均值整体偏负，'昂扬/低回'相对中位线。"),
@@ -270,7 +292,8 @@ DATA = {
         "data/stylometry/solitude_stats.json（73词条人称孤独词典扫描）",
         "data/stylometry/number_stats.json（137词条数字词典扫描，夸张从严=保守下界）",
         f"data/spirit_image_dict.py（{SPIRIT_COUNT}词条，情感值[-1,1]，人工整理非权威词库）",
-        f"data/poems.json（{N_POEMS}首/{N_POETS}人）",
+        f"{CORPUS_PATH}（{N_POEMS}首/{N_POETS}人，状态聚合层）",
+        f"{CANONICAL_PATH}（规范诗页/证据层，本页 canonical 例证 {sum(1 for row in wanli_lb + wanli_ly if row['canonical_match'])} 条）",
     ],
     "median_x": med_x, "median_y": med_y, "min_chars": MIN_CHARS,
     "pool_size": len(pool),
@@ -313,11 +336,13 @@ ly = six_sol["陆游"]
 lb = six_sol["李白"]
 
 wanli_rows_lb = "\n".join(
-    f'<tr><td class="kai vline">{r["line"]}</td><td class="src">《{r["title"]}》</td>'
+    f'<tr><td class="kai vline">{r["line"]}</td><td class="src">'
+    f'<a href="{r["source_url"]}" target="_blank" rel="noopener">《{r["title"]}》</a></td>'
     f'<td>{r["object"]}</td><td><span class="tag t-{"sky" if r["tag"] in ("天空·仙界", "登览") else "road"}">{r["tag"]}</span></td></tr>'
     for r in wanli_lb)
 wanli_rows_ly = "\n".join(
-    f'<tr><td class="kai vline">{r["line"]}</td><td class="src">《{r["title"]}》</td>'
+    f'<tr><td class="kai vline">{r["line"]}</td><td class="src">'
+    f'<a href="{r["source_url"]}" target="_blank" rel="noopener">《{r["title"]}》</a></td>'
     f'<td>{r["object"]}</td><td><span class="tag t-{"state" if r["tag"] == "家国·报国" else "road"}">{r["tag"]}</span></td></tr>'
     for r in wanli_ly)
 
@@ -423,6 +448,15 @@ details.method summary{cursor:pointer;font-family:KaiTi,STKaiti,serif;font-size:
 details.method ul{margin:8px 0 0 18px;}
 details.method li{margin-bottom:5px;}
 .note{font-size:12.5px;color:#5a615c;margin-top:8px;}
+/* ---- 固定主题背景：孤独签名 ---- */
+html{background:#e8e7df;}
+body{position:relative;isolation:isolate;background:transparent;}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+ background:url("assets/generated/remaining_pages_20260830/35_solitude_signature_v1.png") center center/cover no-repeat;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:rgba(248,247,241,.28);}
+.wrap{position:relative;z-index:1;}
+.panel,.card{background:rgba(251,252,250,.89);}
+.chip{background:rgba(255,255,252,.91);}
 </style>
 </head>
 <body>
@@ -556,7 +590,8 @@ details.method li{margin-bottom:5px;}
     <li><b>夸张密度</b>：夸张标记从严——只标「大数×度量/时间/景物」经典组合与虚指大数，裸数词不标，故密度是<b>保守下界</b>；榜单设正文≥300字门槛（__POOL_HYP_N__/__N_POETS__人），小样本最高者另行附注，不混入主榜。</li>
     <li><b>「九万里」量级冠军的边界</b>：仅在「数字×度量单位」（measure）类内成立（程序核实词典内该类最高即 4.95）；虚指大数「亿」（log₁₀=8.0，如陆游「化身千亿」）、「千万」（7.0）量级更高，页面已如实注明。</li>
     <li><b>换算口径</b>：唐大尺≈30.7cm，三千尺≈921米（若按小尺24.6cm则≈738米，同样远超实测）；唐里≈531米，九万里≈4.78万公里。庐山瀑布「约155米」取秀峰瀑布常见实测口径，为约值。换算只为直观感受量级，不是考据结论。</li>
-    <li><b>万里例句</b>：由脚本从 data/poems.json 逐句抽取（含「万里」即收，重复句去重），旧核心句沿用人工标注，扩容新增句按页面声明的关键词规则做粗分类；共 __LB_WL__+__LY_WL__ 句全部展示、无筛选，可逐句复核。</li>
+    <li><b>万里例句</b>：由脚本从 analysis_full 全作品逐句抽取（含「万里」即收，重复句去重），旧核心句沿用人工标注，新增句按关键词规则做粗分类；链接优先指向 canonical 诗页，其余回退到上游来源。</li>
+    <li><b>双层口径</b>：状态、情感与万里聚合使用 <code>data/analysis/famous_poets_full.jsonl.gz</code>；规范诗页与可点证据仍以 <code>data/poems.json</code> 的 exact canonical match 为准，两层数量分开标注。</li>
     <li><b>本页数据文件</b>：output/assets/competition/solhyp_data.json，脚本 数据可视化脚本/viz_35_solitude_hyperbole.py 零参数可复跑。</li>
   </ul>
 </details>

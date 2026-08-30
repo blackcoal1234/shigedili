@@ -1,11 +1,7 @@
-"""声音意象扫描：读取语料快照，输出 sound_stats.json。
+"""声音意象扫描：读取分析语料，输出 sound_stats.json。
 
 用法（可独立复跑，语料更新后重跑即刷新统计）：
     python scan_sound.py
-
-并发安全：另有工作流可能正在写 data/poems.json，故本脚本
-先把 poems.json 复制为快照 _poems_snapshot_sound.json 再解析；
-若解析失败（可能拷到写入一半的文件），等 5 秒重新复制重试，最多 5 次。
 
 匹配算法：先挖除 EXCLUDE_PATTERNS 已知误报片段，再按词长降序
 最长优先匹配，命中即以占位符抹除，避免"猿声"同时计入"猿"与"声"。
@@ -19,42 +15,21 @@ per_poet 特有字段：
 - quiet_ratio: 全诗无任何声音词的诗占比（"无声诗人"指数）
 """
 
-import json
-import shutil
 import sys
-import time
 from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent          # .../data/stylometry
 DATA_DIR = HERE.parent                          # .../data
-POEMS_JSON = DATA_DIR / "poems.json"
-SNAPSHOT = HERE / "_poems_snapshot_sound.json"
+ROOT = DATA_DIR.parent
 OUT_JSON = HERE / "sound_stats.json"
 
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(ROOT / "tools"))
 import sound_dict  # noqa: E402
+from famous_poet_corpus import atomic_dump_json, load_analysis_poems  # noqa: E402
 
 PLACEHOLDER = "□"  # □，与任何词条都不匹配
-
-
-def load_corpus_snapshot(max_retries: int = 5, wait_s: float = 5.0) -> list:
-    """复制 poems.json 为快照后解析；解析失败等待后重新复制重试。"""
-    last_err = None
-    for attempt in range(1, max_retries + 1):
-        try:
-            shutil.copyfile(POEMS_JSON, SNAPSHOT)
-            with open(SNAPSHOT, encoding="utf-8") as f:
-                data = json.load(f)
-            if not isinstance(data, list) or not data:
-                raise ValueError("快照内容不是非空列表")
-            return data
-        except (json.JSONDecodeError, ValueError, OSError) as e:
-            last_err = e
-            print(f"[scan_sound] 第 {attempt} 次读取快照失败：{e}；"
-                  f"{wait_s} 秒后重试", file=sys.stderr)
-            time.sleep(wait_s)
-    raise RuntimeError(f"连续 {max_retries} 次无法获得可解析的语料快照：{last_err}")
 
 
 def cjk_len(text: str) -> int:
@@ -77,7 +52,18 @@ def scan_body(body: str, words_desc: list[str]) -> Counter:
 
 
 def main() -> None:
-    poems = load_corpus_snapshot()
+    poems, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        forbidden_fallback = "data/poems.json"
+        raise RuntimeError(
+            f"状态统计必须使用全作品语料，实际来源：{corpus_source}；"
+            f"禁止回退 {forbidden_fallback}"
+        )
+    corpus_path = (
+        "data/analysis/famous_poets_full.jsonl.gz"
+        if corpus_source == "analysis_full"
+        else "data/poems.json"
+    )
     words_desc = sound_dict.words()
     cat_of = {row[0]: row[1] for row in sound_dict.SOUND_DICT}
 
@@ -99,6 +85,8 @@ def main() -> None:
         per_poem_out.append({
             "title": p.get("title", ""),
             "poet": poet,
+            "work_id": p.get("work_id"),
+            "canonical_gushiwen_id": p.get("canonical_gushiwen_id"),
             "body_hash": p.get("body_hash", ""),
             "hits": sorted(hits.items(), key=lambda kv: (-kv[1], kv[0])),
         })
@@ -155,6 +143,8 @@ def main() -> None:
 
     stats = {
         "schema_version": 1,
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
         "dict_size": len(sound_dict.SOUND_DICT),
         "generated_from_poems": len(poems),
         "corpus_top_words": [[w, n] for w, n in corpus_hits.most_common(20)],
@@ -162,8 +152,7 @@ def main() -> None:
                                 key=lambda kv: -kv[1]["hits_total"])),
         "per_poem": per_poem_out,
     }
-    with open(OUT_JSON, "w", encoding="utf-8") as f:
-        json.dump(stats, f, ensure_ascii=False, indent=1)
+    atomic_dump_json(OUT_JSON, stats)
     print(f"[scan_sound] 扫描 {len(poems)} 首 / {len(per_poet)} 位诗人，"
           f"词典 {stats['dict_size']} 词条，总命中 {corpus_total}，"
           f"已写出 {OUT_JSON}")

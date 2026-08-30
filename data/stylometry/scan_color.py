@@ -1,11 +1,7 @@
-"""色彩词扫描：读语料快照 → 输出 color_stats.json（每位诗人的"人生调色盘"）。
+"""色彩词扫描：读取分析语料并输出 color_stats.json（每位诗人的"人生调色盘"）。
 
 用法（可独立复跑，语料更新后重跑即刷新统计）：
     python data/stylometry/scan_color.py
-
-并发安全：poems.json 可能正被其他工作流写入。本脚本每次先把 poems.json
-复制成快照 poems_snapshot_color.json 再解析；解析失败等 5 秒重新复制重试，
-最多 MAX_RETRY 次。
 
 匹配算法：先把 EXCLUDE_WORDS（高频歧义词，见 color_dict docstring）用占位符
 遮蔽，再按"长词优先"做非重叠最长匹配（如"金黄"优先于"金"/"黄"，
@@ -21,49 +17,26 @@
   headline: 全语料最有趣的一条发现（规则法自动生成）
 """
 
-import json
 import re
-import shutil
 import sys
-import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(ROOT / "tools"))
 
 from color_dict import COLOR_DICT, EXCLUDE_WORDS, FAMILIES, lookup, words  # noqa: E402
+from famous_poet_corpus import atomic_dump_json, load_analysis_poems  # noqa: E402
 
-POEMS_PATH = HERE.parent / "poems.json"          # <root>/data/poems.json
-SNAPSHOT_PATH = HERE / "poems_snapshot_color.json"
 OUT_PATH = HERE / "color_stats.json"
-
-MAX_RETRY = 5
-RETRY_WAIT_SEC = 5
 
 CJK_RE = re.compile(r"[一-鿿]")
 PLACEHOLDER = "□"  # □ 非汉字占位符，等长替换已匹配/已屏蔽片段
 
 INFO = {row[0]: dict(family=row[1], hex=row[2], brightness=row[3]) for row in COLOR_DICT}
 SCAN_WORDS = words()  # 长词优先
-
-
-def load_snapshot() -> list[dict]:
-    """复制 poems.json 为快照后解析；失败等 5 秒重新复制重试。"""
-    last_err = None
-    for attempt in range(1, MAX_RETRY + 1):
-        try:
-            shutil.copyfile(POEMS_PATH, SNAPSHOT_PATH)
-            with open(SNAPSHOT_PATH, encoding="utf-8") as f:
-                data = json.load(f)
-            if not isinstance(data, list) or not data:
-                raise ValueError(f"快照不是非空列表: {type(data)}")
-            return data
-        except (OSError, ValueError, json.JSONDecodeError) as e:
-            last_err = e
-            print(f"[warn] 第{attempt}次读取快照失败: {e}；{RETRY_WAIT_SEC}s 后重试")
-            time.sleep(RETRY_WAIT_SEC)
-    raise SystemExit(f"读取语料失败（重试{MAX_RETRY}次）: {last_err}")
 
 
 def scan_body(body: str) -> Counter:
@@ -159,7 +132,18 @@ def make_headline(per_poet: dict) -> str:
 
 
 def main() -> None:
-    data = load_snapshot()
+    data, corpus_source = load_analysis_poems(fallback=False)
+    if corpus_source != "analysis_full":
+        forbidden_fallback = "data/poems.json"
+        raise RuntimeError(
+            f"状态统计必须使用全作品语料，实际来源：{corpus_source}；"
+            f"禁止回退 {forbidden_fallback}"
+        )
+    corpus_path = (
+        "data/analysis/famous_poets_full.jsonl.gz"
+        if corpus_source == "analysis_full"
+        else "data/poems.json"
+    )
     by_poet = defaultdict(list)
     per_poem = []
     poet_hits = defaultdict(list)
@@ -171,6 +155,8 @@ def main() -> None:
         per_poem.append({
             "title": p.get("title", ""),
             "poet": poet,
+            "work_id": p.get("work_id"),
+            "canonical_gushiwen_id": p.get("canonical_gushiwen_id"),
             "body_hash": p.get("body_hash", ""),
             "hits": [[w, n] for w, n in sorted(hits.items(), key=lambda kv: (-kv[1], kv[0]))],
         })
@@ -180,14 +166,15 @@ def main() -> None:
 
     out = {
         "schema_version": 1,
+        "corpus_source": corpus_source,
+        "corpus_path": corpus_path,
         "dict_size": len(COLOR_DICT),
         "generated_from_poems": len(data),
         "headline": make_headline(per_poet),
         "per_poet": per_poet,
         "per_poem": per_poem,
     }
-    with open(OUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=1)
+    atomic_dump_json(OUT_PATH, out)
     print(f"诗人数: {len(per_poet)}  诗歌数: {len(data)}  词典: {len(COLOR_DICT)} 词条")
     print(f"headline: {out['headline']}")
     print(f"已写出: {OUT_PATH}")

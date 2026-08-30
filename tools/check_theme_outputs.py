@@ -32,11 +32,25 @@ COMPETITION_OUTPUTS = (
     "37_可听的诗.html",
     "38_唐宋意象潮汐.html",
     "39_诗人自述生命卷.html",
+    "40_山河证道.html",
+    "41_意象地理.html",
+    "42_被想象的地方.html",
+    "43_飞花令加行.html",
+    "44_诗页.html",
+)
+
+# 29—39 号页沿用统一的全互链导航；40—44 号页由 29 号参赛导航
+# 汇总进入，页面自身采用各自的任务/证据导航，不强制套用旧导航模板。
+CROSS_NAV_OUTPUTS = COMPETITION_OUTPUTS[:11]
+
+REQUIRED_ASSETS = (
+    "assets/poem_page/poem_page_data.js",
 )
 
 REQUIRED = (
     *CORE_OUTPUTS,
     *COMPETITION_OUTPUTS,
+    *REQUIRED_ASSETS,
     "index.html",
     "manifest.json",
 )
@@ -96,13 +110,13 @@ def check_html() -> None:
     for name in COMPETITION_OUTPUTS[1:]:
         require(name in competition_index, f"参赛导航缺少链接：{name}")
 
-    for name in COMPETITION_OUTPUTS:
+    for name in CROSS_NAV_OUTPUTS:
         html = (OUTPUT_DIR / name).read_text(encoding="utf-8")
         require(
             'rel="icon" href="data:' in html,
             f"参赛页缺少内嵌 favicon：{name}",
         )
-        for target in COMPETITION_OUTPUTS:
+        for target in CROSS_NAV_OUTPUTS:
             if target == name:
                 continue
             require(target in html, f"参赛页导航缺少 {target}：{name}")
@@ -153,6 +167,10 @@ def check_manifest() -> None:
         require(name in rows, f"manifest 缺少：{name}")
         path = OUTPUT_DIR / name
         require(rows[name].get("exists") is True, f"manifest 标记未生成：{name}")
+        require(
+            rows[name].get("bytes") == path.stat().st_size,
+            f"manifest 字节数不一致：{name}",
+        )
         require(rows[name].get("sha256") == sha256(path), f"manifest 哈希不一致：{name}")
 
 

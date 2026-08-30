@@ -79,13 +79,57 @@ def r3(x):
 
 # ---------------------------------------------------------------- 语料
 poems_raw = json.load(open(ROOT / "data" / "poems.json", encoding="utf-8"))
-BODY = {}
+CANONICAL_BY_ID = {}
+CANONICAL_IDS_BY_TITLE = {}
 for p in poems_raw:
-    BODY.setdefault((p["author"], norm_title(p["title"])), p["body"])
+    poet = str(p.get("author") or p.get("poet") or "")
+    canonical_id = str(p.get("source_poem_id") or "")
+    if not poet or not canonical_id:
+        raise AssertionError("canonical 诗作缺少 author/source_poem_id")
+    identity = (poet, canonical_id)
+    if identity in CANONICAL_BY_ID:
+        raise AssertionError(f"canonical 稳定身份重复：{identity}")
+    CANONICAL_BY_ID[identity] = p
+    CANONICAL_IDS_BY_TITLE.setdefault((poet, norm_title(p["title"])), []).append(
+        canonical_id
+    )
+
+
+def resolve_canonical(poet, title, *source_evidence):
+    """Resolve canonical text by an explicit source ID or an actually unique title."""
+    explicit_ids = {
+        match
+        for text in source_evidence
+        for match in re.findall(r"shiwenv_([0-9a-f]{12})\.aspx", str(text or ""))
+        if (poet, match) in CANONICAL_BY_ID
+        and norm_title(CANONICAL_BY_ID[(poet, match)]["title"]) == norm_title(title)
+    }
+    if len(explicit_ids) > 1:
+        raise ValueError(f"{poet}《{title}》来源指向多个 canonical ID：{sorted(explicit_ids)}")
+    if explicit_ids:
+        return CANONICAL_BY_ID[(poet, next(iter(explicit_ids)))]
+    candidates = CANONICAL_IDS_BY_TITLE.get((poet, norm_title(title)), [])
+    if len(candidates) == 1:
+        return CANONICAL_BY_ID[(poet, candidates[0])]
+    return None
+
+
+def canonical_for_entry(poet, entry):
+    canonical_id = str(entry.get("canonical_id") or "")
+    return CANONICAL_BY_ID.get((poet, canonical_id)) if canonical_id else None
+
+
 SIX_COUNTS = {zh: sum(1 for p in poems_raw if p["author"] == zh) for zh, _, _ in POETS}
 N_POEMS = len(poems_raw)
 N_POETS = len({p["author"] for p in poems_raw})
 NUMBER_STATS = json.load(open(ROOT / "data" / "stylometry" / "number_stats.json", encoding="utf-8"))
+if NUMBER_STATS.get("corpus_source") != "analysis_full":
+    raise AssertionError("number_stats.json 必须由名家全作品分析语料生成")
+N_ANALYSIS_POEMS = int(NUMBER_STATS.get("generated_from_poems") or 0)
+ANALYSIS_SIX_COUNTS = {
+    zh: int(NUMBER_STATS["per_poet"][zh]["poem_count"])
+    for zh, _, _ in POETS
+}
 
 
 def hyperbole_snapshot():
@@ -222,7 +266,7 @@ def period_of(zh, year):
 # ---------------------------------------------------------------- 编年合并(审核层优先, 候选层补充)
 def load_chronology():
     entries = {zh: [] for zh, _, _ in POETS}
-    seen = set()
+    seen = {}
     with open(ROOT / "data" / "reviewed" / "verified_poem_contexts.csv", encoding="utf-8-sig") as f:
         for r in csv.DictReader(f):
             zh = r["poet"]
@@ -231,8 +275,10 @@ def load_chronology():
             key = (zh, norm_title(r["title"]))
             if key in seen:
                 continue
-            seen.add(key)
-            entries[zh].append({
+            canonical = resolve_canonical(
+                zh, r["title"], r.get("source_url"), r.get("source_note")
+            )
+            entry = {
                 "title": r["title"], "year": int(r["year_start"]),
                 "year_end": int(r["year_end"] or r["year_start"]),
                 "precision": "reviewed", "period": None,
@@ -241,16 +287,37 @@ def load_chronology():
                 "source_name": r["source_name"], "source_url": r["source_url"],
                 "source_note": r["source_note"], "grade": r["fact_grade"],
                 "status": "approved",
-            })
+                "canonical_id": (
+                    str(canonical.get("source_poem_id") or "") if canonical else None
+                ),
+            }
+            seen[key] = entry
+            entries[zh].append(entry)
     for zh, en, _ in POETS:
         with open(ROOT / "data" / "candidates" / f"{en}_spirit_chronology.csv", encoding="utf-8-sig") as f:
             for r in csv.DictReader(f):
                 key = (zh, norm_title(r["title"]))
+                canonical = resolve_canonical(
+                    zh, r["title"], r.get("source_url"), r.get("source_note")
+                )
+                canonical_id = (
+                    str(canonical.get("source_poem_id") or "") if canonical else None
+                )
                 if key in seen:
+                    existing = seen[key]
+                    if (
+                        existing.get("canonical_id")
+                        and canonical_id
+                        and existing["canonical_id"] != canonical_id
+                    ):
+                        raise ValueError(
+                            f"{zh}《{r['title']}》审核层与候选层 canonical ID 冲突"
+                        )
+                    if not existing.get("canonical_id") and canonical_id:
+                        existing["canonical_id"] = canonical_id
                     continue
-                seen.add(key)
                 ys = r["year_start"].strip()
-                entries[zh].append({
+                entry = {
                     "title": r["title"], "year": int(ys) if ys else None,
                     "year_end": int(r["year_end"]) if r["year_end"].strip() else None,
                     "precision": r["year_precision"],
@@ -261,7 +328,10 @@ def load_chronology():
                     "source_name": r["source_name"], "source_url": r["source_url"],
                     "source_note": r["source_note"], "grade": r["fact_grade"],
                     "status": r["status"],
-                })
+                    "canonical_id": canonical_id,
+                }
+                seen[key] = entry
+                entries[zh].append(entry)
     return entries
 
 
@@ -305,7 +375,8 @@ def build_curve(zh):
                 d_list.append({"title": e["title"], "note": e["source_note"][:120]})
             continue
         pid = e["period"] if e["period"] in per else period_of(zh, e["year"])
-        body = BODY.get((zh, norm_title(e["title"])))
+        canonical = canonical_for_entry(zh, e)
+        body = canonical["body"] if canonical else None
         hits = match_hits(body) if body else []
         sent = [h[3] for h in hits if h[3] is not None]
         scal = [h[4] for h in hits if h[4] is not None]
@@ -314,6 +385,10 @@ def build_curve(zh):
         per[pid]["poems"].append({
             "title": e["title"], "year": e["year"], "grade": e["grade"],
             "status": e["status"], "precision": e["precision"],
+            "canonical_gushiwen_id": (
+                canonical.get("source_poem_id") if canonical else None
+            ),
+            "body_hash": canonical.get("body_hash") if canonical else None,
             "hits": len(sent), "emotion": pemo, "scale": psca,
         })
         per[pid]["sent"] += sent
@@ -389,7 +464,8 @@ JNODES = {p["poet"]: p["nodes"] for p in journeys["poets"]}
 
 
 def poem_station(zh, e):
-    body = BODY.get((zh, norm_title(e["title"])))
+    canonical = canonical_for_entry(zh, e)
+    body = canonical["body"] if canonical else None
     hits = match_hits(body) if body else []
     sent = [h[3] for h in hits if h[3] is not None]
     scal = [h[4] for h in hits if h[4] is not None]
@@ -401,6 +477,10 @@ def poem_station(zh, e):
         "lon": e["lon"], "lat": e["lat"],
         "event": f"系年作《{e['title']}》于{e['place_hist']}",
         "title": e["title"],
+        "canonical_gushiwen_id": (
+            canonical.get("source_poem_id") if canonical else None
+        ),
+        "body_hash": canonical.get("body_hash") if canonical else None,
         "body_html": highlight_html(body) if body else None,
         "emotion": r3(statistics.mean(sent)) if sent else None,
         "scale": r3(statistics.mean(scal)) if scal else None,
@@ -414,19 +494,36 @@ def poem_station(zh, e):
 def build_stations(zh):
     stations = []
     used = set()
-    chrono_by_title = {norm_title(e["title"]): e for e in CHRONO[zh]}
+    chrono_by_canonical_id = {}
+    for entry in CHRONO[zh]:
+        canonical_id = entry.get("canonical_id")
+        if not canonical_id:
+            continue
+        if canonical_id in chrono_by_canonical_id:
+            raise ValueError(f"{zh} canonical 编年身份重复：{canonical_id}")
+        chrono_by_canonical_id[canonical_id] = entry
     for nd in JNODES[zh]:
         lp = nd.get("linked_poem") or {}
         te = lp.get("text_emotion") or {}
         lc = nd.get("life_context") or {}
         title = lp.get("title")
-        ce = chrono_by_title.get(norm_title(title)) if title else None
-        body = BODY.get((zh, norm_title(title))) if title else None
+        canonical = (
+            resolve_canonical(zh, title, nd.get("source_url"), nd.get("note"))
+            if title
+            else None
+        )
+        canonical_id = (
+            str(canonical.get("source_poem_id") or "") if canonical else None
+        )
+        ce = chrono_by_canonical_id.get(canonical_id) if canonical_id else None
+        body = canonical["body"] if canonical else None
         st = {
             "kind": "journey", "year": nd["year"], "year_label": nd["year_label"],
             "place": nd["place_modern"], "place_hist": nd["place_historical"],
             "lon": nd["longitude"], "lat": nd["latitude"],
             "event": nd["event"], "title": title,
+            "canonical_gushiwen_id": canonical_id,
+            "body_hash": canonical.get("body_hash") if canonical else None,
             "body_html": highlight_html(body) if body else None,
             "valence": te.get("valence"), "intensity": te.get("intensity"),
             "emo_label": te.get("label"), "evidence": te.get("evidence"),
@@ -437,8 +534,8 @@ def build_stations(zh):
             "source_note": nd.get("note"),
             "precision": nd.get("year_precision"),
         }
-        if ce:  # 合并同题编年条目, 避免同诗双站
-            used.add(norm_title(title))
+        if ce:  # 仅在 canonical ID 相同的情况下合并，避免同诗双站
+            used.add(canonical_id)
             st["grade"] = ce["grade"]
             st["status"] = ce["status"]
             hits = match_hits(body) if body else []
@@ -448,7 +545,11 @@ def build_stations(zh):
             st["scale"] = r3(statistics.mean(scal)) if scal else None
         stations.append(st)
     for e in CHRONO[zh]:
-        if e["year"] is None or e["lon"] is None or norm_title(e["title"]) in used:
+        if (
+            e["year"] is None
+            or e["lon"] is None
+            or (e.get("canonical_id") and e["canonical_id"] in used)
+        ):
             continue
         stations.append(poem_station(zh, e))
     stations.sort(key=lambda s: (s["year"], 0 if s["kind"] == "journey" else 1, s.get("title") or ""))
@@ -490,11 +591,19 @@ def build_adversity(zh):
     rho = r3(spearman(eps, vals))
     pts = []
     for n, e, v in zip(nodes, eps, vals):
+        linked = n.get("linked_poem") or {}
+        canonical = resolve_canonical(
+            zh, linked.get("title"), n.get("source_url"), n.get("note")
+        )
         pts.append({
             "year": n["year"], "place": n["place_modern"],
             "ep": r3(e * 100), "valence": r3(v), "divergence": r3(v + e),
-            "event": n["event"], "title": n["linked_poem"]["title"],
-            "evidence": n["linked_poem"]["text_emotion"].get("evidence"),
+            "event": n["event"], "title": linked["title"],
+            "canonical_gushiwen_id": (
+                canonical.get("source_poem_id") if canonical else None
+            ),
+            "body_hash": canonical.get("body_hash") if canonical else None,
+            "evidence": linked["text_emotion"].get("evidence"),
             "source_level": n.get("source_level"),
         })
     breakout = max(pts, key=lambda p: p["divergence"])
@@ -517,6 +626,7 @@ def build_data():
         poets.append({
             "name": zh, "key": en, "color": color,
             "n_corpus": SIX_COUNTS[zh],
+            "n_analysis": ANALYSIS_SIX_COUNTS[zh],
             "stages": STAGES[zh],
             "curve": curve,
             "stations": build_stations(zh),
@@ -531,11 +641,16 @@ def build_data():
             cand_sources.append({
                 "poet": zh, "title": e["title"], "grade": e["grade"], "status": e["status"],
                 "precision": e["precision"], "url": e["source_url"], "name": e["source_name"],
+                "canonical_gushiwen_id": e.get("canonical_id"),
             })
     hyperbole = hyperbole_snapshot()
     return {
         "generated_note": "由 数据可视化脚本/viz_30_competition_home.py 生成，可复跑",
         "corpus": {"n_poems": N_POEMS, "n_poets": N_POETS, "six_counts": SIX_COUNTS,
+                   "analysis_poems": N_ANALYSIS_POEMS,
+                   "analysis_six_counts": ANALYSIS_SIX_COUNTS,
+                   "analysis_source": NUMBER_STATS.get("corpus_source"),
+                   "analysis_path": NUMBER_STATS.get("corpus_path"),
                    "n_journey_nodes": sum(len(v) for v in JNODES.values()),
                    "n_chrono_reviewed": n_rev, "n_chrono_candidate": n_cand,
                    "n_dict": len(WORDS), "hyperbole": hyperbole},
@@ -737,6 +852,15 @@ footer a{color:#e8eae6;text-decoration:none;border:1px solid #465049;border-radi
 footer a:hover{border-color:#8f978f}
 footer .tiny{font-size:11px;color:#8f978f;margin-top:16px}
 footer a.cur{border-color:var(--cinnabar);color:#fff;background:#3a2f2c;cursor:default}
+/* ---- 固定主题背景：生命行旅 ---- */
+html{background:#e9e8df}
+body{position:relative;isolation:isolate;background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:url("assets/generated/remaining_pages_20260830/30_life_journey_v1.png") center center/cover no-repeat}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:rgba(248,247,241,.30)}
+main,footer{position:relative;z-index:1}
+:root{--surface:rgba(255,255,252,.90);--soft:rgba(248,248,245,.88)}
+.detail,.poem-box{background:rgba(255,255,252,.91)}
 </style>
 </head>
 <body>
@@ -753,8 +877,8 @@ footer a.cur{border-color:var(--cinnabar);color:#fff;background:#3a2f2c;cursor:d
 <section class="hero" id="ch1"><div class="wrap">
   <h1>诗行万里</h1>
   <div class="sub">给每首课本诗一个人生坐标 —— 六位唐宋诗人的生命情感与精神地形</div>
-  <p class="intro">课本里的诗常常只是一页纸，我们把它放回诗人的一生里：基于
-    <b>__N_POEMS__ 首</b>诗歌语料、<b>__N_JOURNEY_NODES__ 个</b>人工审核的生平行旅节点与 <b>A/B/C 三级证据体系</b>，
+  <p class="intro">课本里的诗常常只是一页纸，我们把它放回诗人的一生里：以
+    <b>__N_ANALYSIS_POEMS__ 首</b>名家全作品做状态统计，以 <b>__N_POEMS__ 首</b>规范诗页作原文与系年证据，结合 <b>__N_JOURNEY_NODES__ 个</b>人工审核的生平行旅节点与 <b>A/B/C 三级证据体系</b>，
     用一部 __N_DICT__ 词条的双维度意象词典（情感值 × 空间尺度），为李白、杜甫、白居易、苏轼、陆游、李清照
     画出各自的人生情感曲线——每一个数字都能点开看到证据与来源。</p>
   <div class="stats" id="hero-stats"></div>
@@ -862,13 +986,13 @@ var charts=[];
 /* ---------- Hero ---------- */
 (function(){
   var c=DATA.corpus;
-  var stats=[[c.n_poems,"首诗歌语料"],[c.n_poets,"位诗人"],[c.n_journey_nodes,"个审核行旅节点"],
+  var stats=[[c.analysis_poems,"首全作品分析"],[c.n_poems,"首规范展示语料"],[c.n_poets,"位精选名家"],[c.n_journey_nodes,"个审核行旅节点"],
              [c.n_chrono_reviewed+"+"+c.n_chrono_candidate,"条审核+候选编年"],[c.n_dict,"词条意象词典"]];
   var s=document.getElementById("hero-stats");
   stats.forEach(function(x){ s.appendChild(el('<div class="stat"><div class="num">'+x[0]+'</div><div class="lab">'+x[1]+'</div></div>')); });
   var pp=document.getElementById("hero-poets");
   DATA.poets.forEach(function(p){
-    pp.appendChild(el('<span style="background:'+p.color+'">'+p.name+' · '+p.n_corpus+'首</span>'));
+    pp.appendChild(el('<span style="background:'+p.color+'">'+p.name+' · 状态 '+p.n_analysis+' / 展示 '+p.n_corpus+' 首</span>'));
   });
 })();
 
@@ -1106,10 +1230,10 @@ selectPoet("libai");
     m.appendChild(d);
   }
   sec("语料与统计口径",
-    '<p>语料为项目自建 poems.json：'+c.n_poems+' 首、'+c.n_poets+' 位诗人。本页六位诗人在语料中的篇目：'+
-    DATA.poets.map(function(p){return p.name+" "+p.n_corpus+"首";}).join("，")+
-    '。曲线只统计<b>已编年</b>（A/B/C 级）诗作；同一诗以审核层（reviewed）为准，候选层同题条目不重复计入。'+
-    '所有情感/尺度数值来自词典命中词的均值，不做任何模型推断。</p>');
+    '<p>本项目采用双层语料：状态与风格统计使用 '+c.analysis_path+' 的 '+c.analysis_poems+' 首名家全作品；原文展示、诗页与编年绑定使用 poems.json 的 '+c.n_poems+' 首规范记录、'+c.n_poets+' 位精选名家。本页六位诗人的“状态 / 展示”篇目：'+
+    DATA.poets.map(function(p){return p.name+" "+p.n_analysis+" / "+p.n_corpus+"首";}).join("，")+
+    '。人生曲线仍只统计<b>已编年</b>（A/B/C 级）规范诗作；同一诗以审核层（reviewed）为准，候选层同题条目不重复计入。'+
+    '全作品统计与规范证据不混作同一分母；所有情感/尺度数值来自词典命中词的均值，不做任何模型推断。</p>');
   sec("意象词典构建口径（__N_DICT__ 词条）",
     '<p>五个情感簇词量：'+Object.keys(DATA.cluster_words).map(function(k){return k+" "+DATA.cluster_words[k];}).join("，")+
     '（其余为多义不归簇词条，仅保留情感值）。以下节选自 data/spirit_image_dict.py 模块文档：</p>'+
@@ -1158,10 +1282,15 @@ def main():
     data = build_data()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     data_json = json.dumps(data, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
-    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, allow_nan=False, indent=1), encoding="utf-8")
+    OUT_JSON.write_text(
+        json.dumps(data, ensure_ascii=False, allow_nan=False, indent=1),
+        encoding="utf-8",
+        newline="\n",
+    )
 
     html = (HTML_TEMPLATE
             .replace("__DATA__", data_json.replace("</", "<\\/"))
+            .replace("__N_ANALYSIS_POEMS__", str(data["corpus"]["analysis_poems"]))
             .replace("__N_POEMS__", str(data["corpus"]["n_poems"]))
             .replace("__N_JOURNEY_NODES__", str(data["corpus"]["n_journey_nodes"]))
             .replace("__N_DICT__", str(data["corpus"]["n_dict"]))
@@ -1175,7 +1304,7 @@ def main():
                     script_id="competition-home-gloss-script",
                 ),
             ))
-    OUT_HTML.write_text(html, encoding="utf-8")
+    OUT_HTML.write_text(html, encoding="utf-8", newline="\n")
 
     # ---- 自检 ----
     text = OUT_HTML.read_text(encoding="utf-8")

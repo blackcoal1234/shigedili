@@ -20,7 +20,7 @@ import hashlib
 import json
 import re
 import zlib
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 
@@ -96,6 +96,51 @@ def load_poems() -> tuple[list[dict], dict[tuple[str, str], list[dict]]]:
     for rows in lookup.values():
         rows.sort(key=lambda p: (p.get("source_poem_id") or "", p.get("body_hash") or ""))
     return poems, lookup
+
+
+def index_emotion_profiles(rows: list[dict]) -> dict[str, dict]:
+    """建立稳定身份索引；旧 body_hash 只保留候选集，绝不覆盖碰撞行。"""
+    indexes: dict[str, dict] = {
+        "by_canonical_id": {},
+        "by_work_id": {},
+        "by_body_hash": defaultdict(list),
+    }
+    for row in rows:
+        poet = row.get("poet") or row.get("author")
+        work_id = row.get("work_id")
+        canonical_id = row.get("canonical_gushiwen_id")
+        if work_id:
+            if work_id in indexes["by_work_id"]:
+                raise ValueError(f"情感档案 work_id 重复：{work_id}")
+            indexes["by_work_id"][work_id] = row
+        if canonical_id:
+            key = (poet, canonical_id)
+            if key in indexes["by_canonical_id"]:
+                raise ValueError(f"情感档案 canonical ID 重复：{key}")
+            indexes["by_canonical_id"][key] = row
+        indexes["by_body_hash"][(poet, row.get("body_hash"))].append(row)
+    return indexes
+
+
+def emotion_for_poem(indexes: dict[str, dict], poem: dict) -> dict:
+    """canonical ID 优先；body_hash 仅在唯一候选时允许兼容回退。"""
+    poet = poem.get("poet") or poem.get("author")
+    canonical_id = poem.get("source_poem_id")
+    if canonical_id:
+        profile = indexes["by_canonical_id"].get((poet, canonical_id))
+        if profile is None:
+            raise KeyError(f"情感档案缺少 canonical ID：{(poet, canonical_id)}")
+        return profile
+    work_id = poem.get("work_id")
+    if work_id:
+        profile = indexes["by_work_id"].get(work_id)
+        if profile is None:
+            raise KeyError(f"情感档案缺少 work_id：{work_id}")
+        return profile
+    candidates = indexes["by_body_hash"].get((poet, poem.get("body_hash")), [])
+    if len(candidates) > 1:
+        raise ValueError(f"情感档案 body_hash 非唯一，禁止回退：{(poet, poem.get('body_hash'))}")
+    return candidates[0] if candidates else {}
 
 
 def find_poem(lookup: dict[tuple[str, str], list[dict]], context: dict) -> dict:
@@ -322,7 +367,12 @@ def build_data() -> tuple[dict, dict]:
     poems, poem_lookup = load_poems()
     contexts, superseded = load_contexts()
     emotion_payload = json.loads(EMOTION_PATH.read_text(encoding="utf-8"))
-    emotion_by_hash = {row["body_hash"]: row for row in emotion_payload["profiles"]}
+    emotion_corpus_source = emotion_payload.get("corpus_source", "unknown")
+    emotion_corpus_path = emotion_payload.get("corpus_path", "")
+    assert emotion_corpus_source == "analysis_full", (
+        f"情感画像必须来自 analysis_full 全作品层，实际为 {emotion_corpus_source!r}"
+    )
+    emotion_profiles = index_emotion_profiles(emotion_payload["profiles"])
     stories: list[dict] = []
     all_scenes: list[dict] = []
     unresolved: list[dict] = []
@@ -360,7 +410,7 @@ def build_data() -> tuple[dict, dict]:
         scenes: list[dict] = []
         previous_end: int | None = None
         for idx, (row, poem) in enumerate(dated):
-            profile = emotion_by_hash.get(poem.get("body_hash")) or {}
+            profile = emotion_for_poem(emotion_profiles, poem)
             evidence_words = profile.get("evidence") or []
             lines = scene_excerpt(poem.get("body", ""), evidence_words[0] if evidence_words else "")
             lon = optional_float(row.get("lon"))
@@ -406,6 +456,8 @@ def build_data() -> tuple[dict, dict]:
                 ),
                 "poem_title": poem["title"],
                 "source_poem_id": poem.get("source_poem_id") or "",
+                "canonical_gushiwen_id": profile.get("canonical_gushiwen_id") or "",
+                "work_id": profile.get("work_id") or "",
                 "body_hash": poem.get("body_hash") or "",
                 "poem_lines": lines,
                 "poem_chars": han_count(poem.get("body", "")),
@@ -422,7 +474,10 @@ def build_data() -> tuple[dict, dict]:
                 "valence": profile.get("valence"),
                 "intensity": profile.get("arousal"),
                 "emotion_evidence": "、".join(evidence_words[:4]),
-                "relation": "同作者、同题记录与语料原文绑定",
+                "relation": (
+                    "编年记录与 canonical 展示/编年证据层原文绑定，"
+                    "情感画像按稳定作品 ID 关联"
+                ),
                 "relation_grade": grade,
                 "read_seconds": max(9, min(24, 7 + chars // 3)),
             }
@@ -557,7 +612,14 @@ def build_data() -> tuple[dict, dict]:
         "meta": {
             "page": "33_史料自动成片",
             "generator_version": "auto-story/3.0",
-            "corpus_poems": len(poems),
+            "canonical_evidence_poems": len(poems),
+            "canonical_evidence_source": "canonical",
+            "canonical_evidence_path": POEMS_PATH.relative_to(ROOT).as_posix(),
+            "canonical_evidence_role": "display_and_chronology_evidence",
+            "emotion_profile_poems": len(emotion_payload["profiles"]),
+            "emotion_corpus_source": emotion_corpus_source,
+            "emotion_corpus_path": emotion_corpus_path,
+            "emotion_corpus_role": "full_work_textual_emotion_profiles",
             "story_count": len(stories),
             "scene_count": len(all_scenes),
             "mapped_scene_count": mapped_count,
@@ -575,9 +637,14 @@ def build_data() -> tuple[dict, dict]:
             },
         },
         "method": {
+            "scope_rule": (
+                f"双层口径：原诗展示与作品编年只使用 {len(poems):,} 篇 canonical "
+                f"展示/编年证据；文本情感画像来自 {len(emotion_payload['profiles']):,} 篇 "
+                "analysis_full 名家全作品。两层只按稳定作品 ID 关联，不混算样本量。"
+            ),
             "route_rule": "合并41条审核记录与六份候选编年，丢弃37条superseded候选；按year_start、year_end、作品ID稳定排序。",
             "line_rule": "只有相邻记录年份区间不重叠、均非争议系年且都有坐标时才连接；缺坐标或争议记录会断线。连线不代表实际道路。",
-            "poem_rule": "同作者、同题记录与 poems.json 原文绑定；同题多正文优先使用来源URL中的作品ID消歧，不能消歧则停止构建。",
+            "poem_rule": "编年记录与 canonical 展示/编年证据层的 poems.json 原文绑定；同题多正文优先使用来源URL中的作品ID消歧，不能消歧则停止构建。analysis_full 全作品层的情感档案按 canonical ID 精确关联，work ID 次之；旧 body_hash 仅在唯一候选时回退。",
             "source_rule": "审核记录显示已审核；候选记录显示候选·推定。A/B/C进入时间轴，D级无系年记录只列入未决清单。",
             "collision_rule": "跨诗人且year_start等于year_end的记录自动聚合；year/exact组标为明确同年，含approximate组标为系年指向该年（含约年），disputed不进入碰撞。并置不证明诗人互相影响。",
             "school_rule": "流派标签来自与编年记录绑定的 poems.json；省域占比只统计本页六位诗人的113个有坐标镜头，同一地点的多个镜头分别计数，不外推为全唐宋诗坛比例。",
@@ -636,18 +703,90 @@ footer{border-top:1px solid var(--line);padding:20px 0 36px;text-align:center}fo
 @media(max-width:820px){.wrap{width:min(100% - 18px,1380px)}.toolbar{grid-template-columns:1fr}.progress{grid-column:auto}.actions{justify-content:flex-start}.stage{grid-template-columns:1fr}.map{height:460px}.stage{min-height:0}.story-pane{border-left:0;border-top:1px solid var(--line);padding:17px}.collision{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr 1fr}.hero{padding-top:22px}.section{padding:20px 0}}
 @media(max-width:430px){.actions .btn{flex:1 1 calc(50% - 5px)}.seg{width:100%}.seg button{flex:1}.story-pick{align-items:flex-start;flex-direction:column}.map{height:440px}.map-controls{top:9px;left:9px;width:calc(100% - 18px);padding:9px}.map-control-head b{font-size:16px}.map-note{left:9px;right:9px;bottom:9px}.pipeline{grid-template-columns:1fr}.poem{font-size:18px}.scene-head h3{font-size:21px}footer a{display:inline-block;margin:4px 5px}}
 </style>
+<style>
+:root{
+  --ink:#07111f;--surface:rgba(5,13,22,.72);--warm:#f3e8d2;--gold:#d6b675;
+  --jade:#5fbfa5;--mist:#9fabb7;--muted:#9fabb7;--hair:rgba(214,182,117,.24);
+  --paper-ink:#0c1826;--paper-copy:#33404d;--paper-gold:#745019;--paper-hair:rgba(12,24,38,.22);
+}
+*{text-wrap:pretty}
+html{scroll-behavior:auto;min-width:1180px;background:var(--ink)}
+body{min-width:1180px;min-height:100vh;background:transparent;color:var(--warm);font-family:"Microsoft YaHei UI","PingFang SC",sans-serif;line-height:1.75;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;z-index:0;inset:0;background:url("assets/generated/page33_baidi_candidates_20260829_v1/A_彩云启程.png") center center/cover no-repeat;pointer-events:none}
+body:after{content:"";position:fixed;z-index:1;inset:0;background:linear-gradient(90deg,rgba(7,17,31,.04) 0%,rgba(7,17,31,.08) 42%,rgba(7,17,31,.42) 66%,rgba(7,17,31,.7) 100%);pointer-events:none}
+body>header,body>main,body>footer{position:relative;z-index:2}
+h1,h2,h3,.kai,.scene-head h3,.poem,.collision-card .quote{font-family:STKaiti,KaiTi,"Songti SC",serif}
+.wrap{width:min(2200px,calc(100% - 128px));margin-inline:auto}
+.hero{min-height:100vh;padding:0;border:0;display:flex;align-items:center}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(640px,.65fr);align-items:center;min-height:100vh}
+.hero-copy{grid-column:2;padding:72px 0 72px 64px;border-left:1px solid var(--hair)}
+.study-mark{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border:1px solid var(--hair);color:var(--mist);font:12px/1.2 "Cascadia Mono",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow{margin-top:40px;color:var(--gold);font-size:14px;letter-spacing:.16em}
+.hero-title{margin:8px 0 0!important;display:flex;align-items:flex-end;gap:28px}
+.hero-title .year{font:700 clamp(180px,13vw,300px)/.78 "Cascadia Mono",Consolas,monospace;color:var(--warm);letter-spacing:-.09em}
+.hero-title .parallel{font:700 clamp(48px,4.4vw,92px)/1 STKaiti,KaiTi,"Songti SC",serif;color:var(--gold);padding-bottom:18px;writing-mode:vertical-rl;letter-spacing:.12em}
+.hero p{max-width:880px;margin:40px 0 0;color:var(--warm);font-size:17px;line-height:2;opacity:.92}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin-top:48px;border-top:1px solid var(--hair)}
+.kpi{min-height:72px;padding:18px 16px;border:0;border-bottom:1px solid var(--hair);background:rgba(5,13,22,.38);color:var(--mist);font-size:12px}
+.kpi:nth-child(odd){border-right:1px solid var(--hair)}
+main.wrap{padding:0 48px 64px;background:transparent;border-inline:0;box-shadow:none;backdrop-filter:none}
+.section{padding:168px 0 0}
+.section-title{gap:20px;margin:0 0 32px;border-top:1px solid var(--paper-hair);padding-top:22px}
+.section-title .no{color:var(--paper-gold);font:14px "Cascadia Mono",Consolas,monospace;letter-spacing:.14em}
+.section-title h2{font-size:42px;color:var(--paper-ink);letter-spacing:.08em;text-shadow:0 1px rgba(255,255,255,.34)}
+.section-intro{max-width:980px;margin:-16px 0 40px;color:var(--paper-copy);font-size:15px}
+.toolbar{position:sticky;top:0;z-index:10;grid-template-columns:minmax(360px,1fr) auto auto;gap:16px;padding:16px 20px;border:1px solid var(--hair);border-radius:2px;background:rgba(5,13,22,.9);backdrop-filter:blur(16px)}
+.story-pick label,.collision-pick label,.progress{color:var(--mist)}
+select,.story-pick select,.collision-pick select{border:1px solid var(--hair);border-radius:2px;background:var(--ink);color:var(--warm);padding:10px 12px}
+.seg{border-color:var(--hair);border-radius:2px}.seg button,.map-layer-seg button{border-color:var(--hair)!important;background:rgba(5,13,22,.64)!important;color:var(--mist)!important;transition:background-color 160ms,color 160ms,border-color 160ms}
+.seg button.on,.map-layer-seg button.on{background:var(--gold)!important;color:var(--ink)!important}
+.actions{gap:8px}.btn{min-height:44px;border:1px solid var(--hair);border-radius:2px;background:rgba(5,13,22,.64);color:var(--warm);transition:background-color 160ms,color 160ms,border-color 160ms,transform 160ms}.btn.primary{border-color:var(--gold);background:var(--gold);color:var(--ink)}
+.btn:hover:not(:disabled),.seg button:hover,.map-layer-seg button:hover{border-color:var(--gold)!important;color:var(--warm)!important;background:rgba(214,182,117,.14)!important}.btn:active:not(:disabled){transform:translateY(1px)}.btn:disabled{opacity:.36;cursor:not-allowed}
+button:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.track,.emotion .meter{background:rgba(159,171,183,.2)}.fill,.emotion .meter i{background:var(--jade);transition:width 160ms linear}
+.kpis,.progress,.collision-pick,.collision-card,.route-table{font-variant-numeric:tabular-nums}
+.stage{grid-template-columns:minmax(0,1.55fr) minmax(520px,.65fr);min-height:780px;margin-top:24px;border:1px solid var(--hair);border-radius:2px;background:var(--surface);backdrop-filter:blur(18px)}
+.map-pane{background:rgba(7,17,31,.78)}.map{height:780px}
+.map-controls{top:20px;left:20px;width:340px;padding:16px;border:1px solid var(--hair);border-radius:2px;background:rgba(5,13,22,.9);box-shadow:none}.map-control-head b{color:var(--warm);font-size:20px}.map-control-head span,.school-key,.school-key span:last-child{color:var(--mist)}.map-layer-seg{border-color:var(--hair);border-radius:2px}.school-swatch{background:var(--gold)}
+.map-note{left:20px;right:20px;bottom:20px;padding:12px 14px;border:1px solid var(--hair);background:rgba(5,13,22,.9);color:var(--mist)}
+.story-pane{padding:40px;gap:20px;border-color:var(--hair);background:rgba(5,13,22,.68)}
+.scene-head{border-color:var(--gold)!important}.scene-head h3{font-size:34px;color:var(--warm)}.scene-meta{color:var(--mist)}
+.badge{border-radius:2px;color:var(--badge-color,var(--mist))}.grade-a,.grade-b{color:var(--jade)}.grade-c{color:var(--gold)}
+.event{padding:14px 16px;border-color:var(--gold);background:rgba(214,182,117,.08);color:var(--warm)}
+.poem{font-size:27px;line-height:1.9;color:var(--warm)}.poem div{opacity:1;transform:none;animation:none}
+.source{border-color:var(--hair);color:var(--mist)}.source details summary{color:var(--warm)}.source a,.method-body a,.route-table a,footer a{color:var(--jade)}
+.source a,.method-body a,.route-table a,footer a,.source summary,.method summary{transition:color 160ms,background-color 160ms,text-decoration-color 160ms}
+.source a:hover,.method-body a:hover,.route-table a:hover,footer a:hover{color:var(--warm);text-decoration-color:var(--gold)}
+.source a:active,.method-body a:active,.route-table a:active,footer a:active{color:var(--gold);background:rgba(214,182,117,.14)}
+.source summary:hover,.method summary:hover{color:var(--gold)}.source summary:active,.method summary:active{color:var(--jade)}
+.ai-note,.ai-note code{color:var(--mist)}.ai-note code{border-color:var(--hair);background:rgba(7,17,31,.7)}
+.collision{grid-template-columns:1fr;gap:24px}.collision-lane{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;padding:24px 0;border-top:1px solid var(--paper-hair)}.lane-name{margin:0;color:var(--paper-gold);font-size:34px}.lane-scenes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.collision-card{min-height:230px;padding:24px;border:1px solid var(--hair);border-top:3px solid var(--pc,var(--jade));border-radius:2px;background:var(--surface)}.collision-card h3{font-size:25px;color:var(--warm)}.collision-card .quote{font-size:22px;color:var(--gold)}.collision-card p{color:var(--mist)}
+.certainty{border-color:var(--paper-gold);border-radius:2px;color:var(--paper-gold)}.certainty.exact{border-color:#246c5a;color:#246c5a}
+#collisionSection .collision-pick label,#collisionLede{color:var(--paper-copy)!important}
+.pipeline{gap:0;border-color:var(--hair);background:var(--hair)}.pipe{min-height:170px;padding:28px;background:var(--surface)}.pipe b{color:var(--gold);font-size:23px}.pipe span{color:var(--mist);font-size:13px}
+.method,.table-scroll{border-color:var(--hair);border-radius:2px;background:var(--surface)}.method{padding:0 20px}.method summary{padding:18px 0;color:var(--warm)}.method-body{border-color:var(--hair);color:var(--mist)}
+.route-table{color:var(--warm)}.route-table th,.route-table td{padding:13px 12px;border-color:var(--hair)}.route-table th{color:var(--gold)}.route-table tr[style]{background:rgba(214,182,117,.08)!important}
+.route-table span[style]:not(.badge),#unresolvedRows span[style]:not(.badge){color:var(--mist)!important}
+footer{margin-top:168px;padding:32px 0;border-color:var(--hair);background:rgba(5,13,22,.82)}footer a{display:inline-block;padding:5px;margin:3px 8px}footer a.active{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">33 · 史料驱动的自动叙事</div>
-  <h1>诗篇有年，行旅自动成片</h1>
-  <p>系统合并诗篇系年、审核记录与候选史料，自动排序年份区间、落图并生成镜头。精确年份与约年均保留并明确标注；地图以省界内按比例交错的细线纹理呈现本页六位诗人的省域占比。</p>
-  <div class="kpis"><span class="kpi" id="kCorpus"></span><span class="kpi" id="kStories"></span><span class="kpi" id="kScenes"></span><span class="kpi" id="kProvince"></span><span class="kpi" id="kCollision"></span></div>
+  <div class="hero-copy">
+    <div class="study-mark">诗行万里 · 作品 33</div>
+    <div class="eyebrow">33 · 史料驱动的自动叙事</div>
+    <h1 class="hero-title"><span class="year">759</span><span class="parallel">平行时空</span></h1>
+    <p>系统合并诗篇系年、审核记录与候选史料，自动排序年份区间、落图并生成镜头。编年与原诗证据只取自 canonical 展示/编年证据层；文本情感画像来自 analysis_full 名家全作品层，两种口径不混算。精确年份与约年均保留并明确标注；地图以省界内按比例交错的细线纹理呈现本页六位诗人的省域占比。</p>
+    <div class="kpis"><span class="kpi" id="kCorpus"></span><span class="kpi" id="kEmotion"></span><span class="kpi" id="kStories"></span><span class="kpi" id="kScenes"></span><span class="kpi" id="kProvince"></span><span class="kpi" id="kCollision"></span></div>
+  </div>
 </div></header>
 
 <main class="wrap">
 <section class="section">
-  <div class="section-title"><span class="no">壹</span><h2>自动片单</h2></div>
+  <div class="section-title"><span class="no">01 / 壹</span><h2>一江六卷</h2></div>
+  <p class="section-intro">六位诗人的编年节点沿一幅可缩放的暗色地图展开。选择故事，逐站停留或自动播放；每一次推进都只移动到下一条真实诗篇与史料记录。</p>
   <div class="toolbar">
     <div class="story-pick"><label for="storySelect">由史料生成的影片</label><select id="storySelect"></select></div>
     <div class="seg" aria-label="播放模式"><button id="manualMode" class="on" aria-pressed="true" title="每站停留">逐站阅读</button><button id="autoMode" aria-pressed="false" title="按阅读时长自动前进">自动播放</button></div>
@@ -677,33 +816,34 @@ footer{border-top:1px solid var(--line);padding:20px 0 36px;text-align:center}fo
 </section>
 
 <section class="section" id="collisionSection">
-  <div class="section-title"><span class="no">贰</span><h2 id="collisionTitle">平行时空</h2></div>
+  <div class="section-title"><span class="no">02 / 贰</span><h2 id="collisionTitle">同年双线</h2></div>
   <div class="collision-pick"><label for="collisionSelect">自动检出组</label><select id="collisionSelect"></select><span class="certainty" id="collisionCertainty"></span></div>
   <p id="collisionLede" style="color:var(--muted);margin-top:-5px"></p>
   <div class="collision" id="collisionCards"></div>
 </section>
 
 <section class="section">
-  <div class="section-title"><span class="no">叁</span><h2>自动成片规则</h2></div>
+  <div class="section-title"><span class="no">03 / 叁</span><h2>生成逻辑</h2></div>
   <div class="pipeline">
     <div class="pipe"><b>01 诗篇系年</b><span>合并审核记录与仍有效的候选编年。</span></div>
     <div class="pipe"><b>02 地点落图</b><span>只使用诗篇系年记录中已有的地点坐标。</span></div>
     <div class="pipe"><b>03 时间排序</b><span>按年份区间与作品ID稳定排序，重叠区间不强排。</span></div>
-    <div class="pipe"><b>04 绑定原诗</b><span>同作者诗题与 poems.json 原文逐项核对。</span></div>
+    <div class="pipe"><b>04 绑定原诗</b><span>同作者诗题与 canonical 展示/编年证据层的 poems.json 原文逐项核对。</span></div>
     <div class="pipe"><b>05 生成镜头</b><span>停留时长由展示诗句长度计算，默认等待“下一步”。</span></div>
   </div>
   <details class="method" style="margin-top:12px"><summary>方法、来源与模型画面边界</summary><div class="method-body" id="methodBody"></div></details>
 </section>
 
 <section class="section">
-  <div class="section-title"><span class="no">肆</span><h2>本卷节点证据</h2></div>
-  <div class="table-scroll"><table class="route-table"><thead><tr><th>序</th><th>年份</th><th>地点</th><th>流派</th><th>诗篇</th><th>等级</th><th>来源</th></tr></thead><tbody id="routeRows"></tbody></table></div>
+  <div class="section-title"><span class="no">04 / 肆</span><h2>证据底卷</h2></div>
+  <p class="section-intro">当前所选卷的全部节点证据。切换上方故事后，本表同步更新，不隐藏候选、约年或争议信息。</p>
+  <div class="table-scroll"><table class="route-table"><caption class="sr-only">当前所选诗人本卷全部编年节点证据</caption><thead><tr><th scope="col">序</th><th scope="col">年份</th><th scope="col">地点</th><th scope="col">流派</th><th scope="col">诗篇</th><th scope="col">等级</th><th scope="col">来源</th></tr></thead><tbody id="routeRows"></tbody></table></div>
 </section>
 
 <section class="section" id="unresolvedSection">
-  <div class="section-title"><span class="no">伍</span><h2>D级未决清单</h2></div>
+  <div class="section-title"><span class="no">05 / 伍</span><h2>D级未决清单</h2></div>
   <p style="color:var(--muted)">以下5条未找到可靠年份，明确排除于路线与碰撞之外；保留来源与排除依据供复核。</p>
-  <div class="table-scroll"><table class="route-table"><thead><tr><th>诗人</th><th>诗篇</th><th>年份精度</th><th>排除原因</th><th>来源与说明</th></tr></thead><tbody id="unresolvedRows"></tbody></table></div>
+  <div class="table-scroll"><table class="route-table"><caption class="sr-only">D级无可靠系年且排除于路线与碰撞之外的未决记录</caption><thead><tr><th scope="col">诗人</th><th scope="col">诗篇</th><th scope="col">年份精度</th><th scope="col">排除原因</th><th scope="col">来源与说明</th></tr></thead><tbody id="unresolvedRows"></tbody></table></div>
 </section>
 </main>
 
@@ -717,20 +857,23 @@ footer{border-top:1px solid var(--line);padding:20px 0 36px;text-align:center}fo
 <script>
 (function(){
 "use strict";
-var D=window.AUTO_STORY_DATA, stories=D.stories, geography=D.school_geography, storyIndex=0, stepIndex=0, collisionIndex=0, auto=false, timer=0, chart=null, mapMode="both", schoolLineCache={}, schoolLineRefreshTimer=0, maxMapZoom=4.6;
-var schoolByName={}, provinceByName={};geography.schools.forEach(function(row){schoolByName[row.name]=row;});geography.provinces.forEach(function(row){provinceByName[row.name]=row;});
+var D=window.AUTO_STORY_DATA, stories=D.stories, geography=D.school_geography, storyIndex=0, stepIndex=0, collisionIndex=Math.max(0,D.collisions.findIndex(function(c){return Number(c.year)===759;})), auto=false, timer=0, chart=null, mapMode="both", schoolLineCache={}, schoolLineRefreshTimer=0, maxMapZoom=4.6;
+var schoolByName={}, schoolDisplayByName={}, provinceByName={};geography.schools.forEach(function(row,index){schoolByName[row.name]=row;schoolDisplayByName[row.name]=displayColor(index);});geography.provinces.forEach(function(row){provinceByName[row.name]=row;});
 function esc(s){return String(s==null?"":s).replace(/[&<>\"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function fmt(v){if(v==null||v!==v){return "—";}return (v>0?"+":"")+Number(v).toFixed(2);}
 function pct(v){return (Number(v)*100).toFixed(v>0&&v<.1?1:0)+"%";}
+function displayColor(index){return ["#d6b675","#5fbfa5","#9fabb7","rgba(214,182,117,.68)","rgba(95,191,165,.68)","rgba(159,171,183,.68)"][Number(index)||0]||"#9fabb7";}
+function displayColorForSchool(name){return schoolDisplayByName[name]||"#9fabb7";}
 function currentStory(){return stories[storyIndex];}function currentScene(){return currentStory().scenes[stepIndex];}
 function initMeta(){
- document.getElementById("kCorpus").textContent=D.meta.corpus_poems.toLocaleString("zh-CN")+"篇全量语料";
+ document.getElementById("kCorpus").textContent=D.meta.canonical_evidence_poems.toLocaleString("zh-CN")+"篇 canonical 展示/编年证据";
+ document.getElementById("kEmotion").textContent=D.meta.emotion_profile_poems.toLocaleString("zh-CN")+"篇 "+D.meta.emotion_corpus_source+" 全作品情感画像";
  document.getElementById("kStories").textContent=D.meta.story_count+"卷自动影片";
  document.getElementById("kScenes").textContent=D.meta.scene_count+"个可系年镜头 · "+D.meta.mapped_scene_count+"个落图";
  document.getElementById("kProvince").textContent=geography.province_count+"个省域有流派样本";
  document.getElementById("kCollision").textContent=D.meta.collision_count+"组年份碰撞";
  document.getElementById("schoolSample").textContent=geography.total_nodes+"镜头 · "+geography.province_count+"省域";
- document.getElementById("schoolLegend").innerHTML=geography.schools.map(function(row){return '<div class="school-key" style="--sc:'+row.color+'"><span class="school-swatch"></span><b>'+esc(row.name)+'</b><span>'+row.count+'</span></div>';}).join("");
+ document.getElementById("schoolLegend").innerHTML=geography.schools.map(function(row){var color=displayColorForSchool(row.name);return '<div class="school-key" style="--sc:'+color+'"><span class="school-swatch" style="background:'+color+'"></span><b>'+esc(row.name)+'</b><span>'+row.count+'</span></div>';}).join("");
  Array.prototype.forEach.call(document.querySelectorAll("[data-map-mode]"),function(button){button.addEventListener("click",function(){mapMode=button.getAttribute("data-map-mode");syncMapControls();renderMap();});});
  var sel=document.getElementById("storySelect"); stories.forEach(function(s,i){var o=document.createElement("option");o.value=String(i);o.textContent=s.title+" · "+s.scene_count+"站";sel.appendChild(o);});
  sel.addEventListener("change",function(){stopAuto();storyIndex=Number(sel.value);stepIndex=0;renderAll(true);});
@@ -772,39 +915,39 @@ function schoolLineData(zoom){
  if(mapMode==="route"){return [];}var visualZoom=Math.max(1,Math.round((Number(zoom)||2.15)*10)/10),cached=schoolLineCache[mapMode];if(cached&&cached.zoom===visualZoom){return cached.data;}var features=provinceFeatureMap(),lines=[],direction=[1,.18],magnitude=Math.sqrt(1+.18*.18);direction=[direction[0]/magnitude,direction[1]/magnitude];var normal=[-direction[1],direction[0]],geoPitch=.1*2.15/visualZoom;
  geography.provinces.forEach(function(row){provinceRings(features[row.name]).forEach(function(ring){
   var actualByName={};row.schools.forEach(function(school){actualByName[school.name]=school;});var projections=ring.map(function(point){return point[0]*normal[0]+point[1]*normal[1];}),minProjection=Math.min.apply(null,projections),maxProjection=Math.max.apply(null,projections),stripeCount=Math.min(520,Math.max(1,Math.ceil((maxProjection-minProjection)/geoPitch))),samples=weightedStripeSamples(row,stripeCount);
-  samples.forEach(function(entry,index){var offset=minProjection+(index+.5)/stripeCount*(maxProjection-minProjection),school=entry.school,actual=actualByName[school.name];clippedProvinceSegments(ring,offset,direction,normal).forEach(function(coords){lines.push({name:row.name+" · "+school.name,province:row.name,school:school.name,count:actual.count,share:actual.share,coords:coords,lineStyle:{color:school.color,width:1.2,opacity:mapMode==="both"?.88:.98},emphasis:{lineStyle:{width:2,opacity:1}}});});});
+  samples.forEach(function(entry,index){var offset=minProjection+(index+.5)/stripeCount*(maxProjection-minProjection),school=entry.school,actual=actualByName[school.name];clippedProvinceSegments(ring,offset,direction,normal).forEach(function(coords){lines.push({name:row.name+" · "+school.name,province:row.name,school:school.name,count:actual.count,share:actual.share,coords:coords,lineStyle:{color:displayColorForSchool(school.name),width:1.2,opacity:mapMode==="both"?.88:.98},emphasis:{lineStyle:{width:2,opacity:1}}});});});
  });});schoolLineCache[mapMode]={zoom:visualZoom,data:lines};return lines;
 }
-function provinceRegions(){if(mapMode==="route"){return [];}return geography.provinces.map(function(row){return {name:row.name,itemStyle:{areaColor:"#edf0e8",borderColor:"#9ba49b",borderWidth:.8},emphasis:{itemStyle:{areaColor:"#edf0e8",borderColor:"#3f4941",borderWidth:1.4},label:{show:true,color:"#252b27",fontSize:11}}};});}
+function provinceRegions(){if(mapMode==="route"){return [];}return geography.provinces.map(function(row){return {name:row.name,itemStyle:{areaColor:"rgba(7,17,31,.78)",borderColor:"rgba(214,182,117,.24)",borderWidth:.8},emphasis:{itemStyle:{areaColor:"rgba(214,182,117,.14)",borderColor:"#d6b675",borderWidth:1.4},label:{show:true,color:"#f3e8d2",fontSize:11}}};});}
 function provinceSummary(row,currentSchool){
  if(!row){return "";}var counts={};row.schools.forEach(function(school){counts[school.name]=school;});
- var entries=geography.schools.map(function(school){var item=counts[school.name],count=item?item.count:0,share=row.total?count/row.total:0;return '<span style="display:inline-block;width:12px;height:4px;background:'+school.color+';margin-right:5px;vertical-align:middle"></span>'+esc(school.name)+" "+count+" · "+pct(share);});
- return "<b>"+esc(row.name)+"</b> · "+row.total+"个落图镜头<br>"+entries.join("<br>")+(currentSchool?"<br><span style='color:#777'>当前线："+esc(currentSchool)+"</span>":"")+"<br><span style='color:#777'>当前六位诗人编年样本</span>";
+ var entries=geography.schools.map(function(school){var item=counts[school.name],count=item?item.count:0,share=row.total?count/row.total:0;return '<span style="display:inline-block;width:12px;height:4px;background:'+displayColorForSchool(school.name)+';margin-right:5px;vertical-align:middle"></span>'+esc(school.name)+" "+count+" · "+pct(share);});
+ return "<b>"+esc(row.name)+"</b> · "+row.total+"个落图镜头<br>"+entries.join("<br>")+(currentSchool?"<br><span style='color:#9fabb7'>当前线："+esc(currentSchool)+"</span>":"")+"<br><span style='color:#9fabb7'>当前六位诗人编年样本</span>";
 }
 function mapTooltip(p){
  var scene=p.data&&p.data.scene;if(scene){return "<b>"+esc(scene.place_historical)+"</b> · "+scene.year_label+"<br>"+esc(scene.poet)+" · "+esc(scene.school)+" · 《"+esc(scene.poem_title)+"》<br>"+esc(scene.source_status+" "+scene.source_grade+"级");}
  var line=p.data&&p.data.school,provinceName=line&&line.province||p.name,row=provinceByName[provinceName];if(!row||mapMode==="route"){return p.name||"";}
  return provinceSummary(row,line&&line.school);
 }
-function routeData(story){return story.scenes.filter(function(s){return s.map_eligible;}).map(function(s){var i=s.index;return {name:s.place_historical,value:[s.lon,s.lat],scene:s,symbolSize:i===stepIndex?17:(i<stepIndex?11:9),itemStyle:{color:i===stepIndex?"#a87527":(i<stepIndex?story.color:"#fff"),borderColor:story.color,borderWidth:2},label:{show:i===stepIndex,position:"right",formatter:s.place_historical+"·"+s.year_label,color:i<=stepIndex?"#252b27":"#8b918a",fontSize:11}};});}
+function routeData(story){return story.scenes.filter(function(s){return s.map_eligible;}).map(function(s){var i=s.index;return {name:s.place_historical,value:[s.lon,s.lat],scene:s,symbolSize:i===stepIndex?17:(i<stepIndex?11:9),itemStyle:{color:i===stepIndex?"#d6b675":(i<stepIndex?"#5fbfa5":"#07111f"),borderColor:i===stepIndex?"#d6b675":"#5fbfa5",borderWidth:2},label:{show:i===stepIndex,position:"right",formatter:s.place_historical+"·"+s.year_label,color:i<=stepIndex?"#f3e8d2":"#9fabb7",fontSize:11}};});}
 function renderMap(){
  var story=currentStory(), showRoute=mapMode!=="school", guides=showRoute?story.segments.map(function(seg){return {coords:seg.coords};}):[], traveled=showRoute?story.segments.filter(function(seg){return seg.to_index<=stepIndex;}).map(function(seg){return {coords:seg.coords};}):[];
  var previousGeo=chart&&chart.getOption().geo&&chart.getOption().geo[0],geoZoom=previousGeo&&Number(previousGeo.zoom)||2.15,geoCenter=previousGeo&&previousGeo.center||[108,32];
  if(!chart){chart=echarts.init(document.getElementById("routeMap"));chart.setOption({geo:{map:"china"}},true);chart.clear();chart.on("georoam",function(){window.clearTimeout(schoolLineRefreshTimer);schoolLineRefreshTimer=window.setTimeout(function(){if(mapMode==="route"){return;}renderMap();chart.getZr().refreshImmediately();},160);});window.addEventListener("resize",function(){chart.resize();});}
- chart.setOption({animationDurationUpdate:0,tooltip:{trigger:"item",confine:true,formatter:mapTooltip},geo:{map:"china",roam:true,scaleLimit:{min:1.2,max:maxMapZoom},zoom:Math.min(maxMapZoom,geoZoom),center:geoCenter,regions:provinceRegions(),tooltip:{show:true,formatter:mapTooltip},itemStyle:{areaColor:"#edf0e8",borderColor:"#c3cabe",borderWidth:.7},emphasis:{itemStyle:{areaColor:"#e6ebe4"}}},series:[{id:"school-lines",name:"省域流派细线",type:"lines",coordinateSystem:"geo",z:3,animation:false,symbol:["none","none"],lineStyle:{curveness:0,cap:"butt"},data:schoolLineData(Math.min(maxMapZoom,geoZoom))},{id:"guide",type:"lines",coordinateSystem:"geo",z:4,silent:true,lineStyle:{color:"#9ba49b",width:1.2,type:"dashed"},data:guides},{id:"traveled",type:"lines",coordinateSystem:"geo",z:5,silent:true,lineStyle:{color:story.color,width:3.2,cap:"round"},data:traveled},{id:"nodes",type:"effectScatter",coordinateSystem:"geo",z:6,showEffectOn:"emphasis",rippleEffect:{scale:2.7,brushType:"stroke"},data:showRoute?routeData(story):[]}]},{notMerge:false,replaceMerge:["series"],lazyUpdate:false});
+ chart.setOption({animationDurationUpdate:0,backgroundColor:"transparent",textStyle:{color:"#f3e8d2",fontFamily:'"Microsoft YaHei UI","PingFang SC",sans-serif'},tooltip:{trigger:"item",confine:true,formatter:mapTooltip,backgroundColor:"rgba(5,13,22,.94)",borderColor:"rgba(214,182,117,.24)",textStyle:{color:"#f3e8d2"}},geo:{map:"china",roam:true,scaleLimit:{min:1.2,max:maxMapZoom},zoom:Math.min(maxMapZoom,geoZoom),center:geoCenter,regions:provinceRegions(),tooltip:{show:true,formatter:mapTooltip},label:{color:"#9fabb7"},itemStyle:{areaColor:"rgba(7,17,31,.78)",borderColor:"rgba(214,182,117,.24)",borderWidth:.7},emphasis:{label:{color:"#f3e8d2"},itemStyle:{areaColor:"rgba(214,182,117,.14)",borderColor:"#d6b675"}}},series:[{id:"school-lines",name:"省域流派细线",type:"lines",coordinateSystem:"geo",z:3,animation:false,symbol:["none","none"],lineStyle:{curveness:0,cap:"butt"},data:schoolLineData(Math.min(maxMapZoom,geoZoom))},{id:"guide",type:"lines",coordinateSystem:"geo",z:4,silent:true,lineStyle:{color:"#9fabb7",width:1.2,type:"dashed"},data:guides},{id:"traveled",type:"lines",coordinateSystem:"geo",z:5,silent:true,lineStyle:{color:"#5fbfa5",width:3.2,cap:"round"},data:traveled},{id:"nodes",type:"effectScatter",coordinateSystem:"geo",z:6,showEffectOn:"emphasis",rippleEffect:{scale:2.7,brushType:"stroke"},data:showRoute?routeData(story):[]}]},{notMerge:false,replaceMerge:["series"],lazyUpdate:false});
  chart.getZr().refreshImmediately();
 }
 function renderScene(resetClock){
  var story=currentStory(), s=currentScene(), pane=document.getElementById("storyPane");pane.style.setProperty("--pc",story.color);pane.classList.toggle("with-art",!!s.scene_image);pane.style.setProperty("--scene",s.scene_image?'url("'+s.scene_image+'")':"none");
  document.getElementById("sceneTitle").textContent=s.life_label+" · "+s.place_historical;
  document.getElementById("sceneMeta").textContent=s.poet+" · "+s.year_label+"年 · "+(s.map_eligible?(s.place_historical+"（今"+s.place_modern+"）"):"创作地未定 · 时间轴镜头");
- document.getElementById("sceneBadges").innerHTML='<span class="badge grade-'+s.source_grade.toLowerCase()+'">'+esc(s.source_status+" "+s.source_grade+"级")+'</span><span class="badge" style="color:'+(schoolByName[s.school]||{}).color+'">'+esc(s.school)+'</span><span class="badge">'+esc(s.year_precision_display)+'</span><span class="badge">场景 '+(stepIndex+1)+'/'+story.scene_count+'</span>'+(s.scene_image?'<span class="badge ai">AI场景重建</span>':'');
+ document.getElementById("sceneBadges").innerHTML='<span class="badge grade-'+s.source_grade.toLowerCase()+'">'+esc(s.source_status+" "+s.source_grade+"级")+'</span><span class="badge" style="--badge-color:'+displayColorForSchool(s.school)+'">'+esc(s.school)+'</span><span class="badge">'+esc(s.year_precision_display)+'</span><span class="badge">场景 '+(stepIndex+1)+'/'+story.scene_count+'</span>'+(s.scene_image?'<span class="badge ai">AI场景重建</span>':'');
  document.getElementById("sceneEvent").textContent=s.event;
  var poem=document.getElementById("poemLines");poem.innerHTML="";s.poem_lines.forEach(function(line){var d=document.createElement("div");d.textContent=line+"。";poem.appendChild(d);});
- document.getElementById("emotionLabel").textContent="文本标注："+s.emotion_label+(s.emotion_evidence?" · 证据「"+s.emotion_evidence+"」":" · 词典未提取到情绪关键词");
+ document.getElementById("emotionLabel").textContent="文本情感画像（"+D.meta.emotion_corpus_source+" 全作品层）："+s.emotion_label+(s.emotion_evidence?" · 证据「"+s.emotion_evidence+"」":" · 词典未提取到情绪关键词");
  document.getElementById("emotionValue").textContent="情感 "+fmt(s.valence)+" / 强度 "+fmt(s.intensity);
  var val=s.valence==null?0:Number(s.valence);document.getElementById("emotionMeter").style.width=(50+Math.max(-1,Math.min(1,val))*48)+"%";
- document.getElementById("sourceBox").innerHTML='<details><summary>史料依据 · '+esc(s.source_name)+'</summary><div>'+esc(s.source_note)+'<br>关联规则：'+esc(s.relation)+'<br>文本情绪画像置信度：'+esc(s.confidence==null?"未给出":s.confidence)+' · <a href="'+esc(s.source_url)+'" rel="noreferrer">来源链接</a></div></details>';
+ document.getElementById("sourceBox").innerHTML='<details><summary>史料依据 · '+esc(s.source_name)+'</summary><div>'+esc(s.source_note)+'<br>关联规则：'+esc(s.relation)+'<br>文本情感画像（'+esc(D.meta.emotion_corpus_source)+' 全作品层）置信度：'+esc(s.confidence==null?"未给出":s.confidence)+' · <a href="'+esc(s.source_url)+'" rel="noreferrer">来源链接</a></div></details>';
  document.getElementById("aiNote").innerHTML=s.scene_image?'本图为 <b>AI场景重建，不是肖像复原</b>，且不参与史料计算。':'本镜头没有通过完整PNG校验的模型画面；生成提示已保存到 <code>scene_prompt_manifest.json</code>，史料动画保持完整。';
  document.getElementById("stepLabel").textContent=(stepIndex+1)+" / "+story.scene_count;document.getElementById("progressFill").style.width=((stepIndex+1)/story.scene_count*100).toFixed(1)+"%";
  var progress=document.getElementById("storyProgress");progress.setAttribute("aria-valuenow",String(stepIndex+1));progress.setAttribute("aria-valuemax",String(story.scene_count));progress.setAttribute("aria-valuetext","第"+(stepIndex+1)+"个镜头，共"+story.scene_count+"个");
@@ -813,10 +956,10 @@ function renderScene(resetClock){
  if(resetClock){document.getElementById("readClock").textContent=auto?(s.read_seconds+"秒后前进"):"逐站停留";scheduleAuto();}
  renderRows();
 }
-function renderRows(){var story=currentStory(), box=document.getElementById("routeRows");box.innerHTML=story.scenes.map(function(s,i){return '<tr'+(i===stepIndex?' style="background:#f7f3e9"':'')+'><td>'+(i+1)+'</td><td>'+s.year_label+'<br><span style="color:#777">'+esc(s.year_precision_display)+(s.sequence==="overlap"?" · 区间重叠":"")+'</span></td><td>'+esc(s.place_historical)+'<br><span style="color:#777">'+(s.map_eligible?("今"+esc(s.place_modern)):"未落图")+'</span></td><td><span class="badge" style="color:'+(schoolByName[s.school]||{}).color+'">'+esc(s.school)+'</span></td><td>《'+esc(s.poem_title)+'》</td><td>'+esc(s.source_grade)+' · '+esc(s.source_status)+'</td><td>'+esc(s.source_name)+'</td></tr>';}).join("");}
-function renderCollision(){var c=D.collisions[collisionIndex];if(!c){document.getElementById("collisionSection").style.display="none";return;}document.getElementById("collisionSelect").value=String(collisionIndex);document.getElementById("collisionTitle").textContent=c.title+" · 系统检出的年份切面";document.getElementById("collisionLede").textContent=c.lede+"。并置仅表示系年落在同一数值年份，不证明诗人互相影响。";var certainty=document.getElementById("collisionCertainty");certainty.textContent=c.certainty_display;certainty.className="certainty "+c.certainty;document.getElementById("collisionCards").innerHTML=c.scenes.map(function(s){var color=stories.filter(function(st){return st.poet===s.poet;})[0].color;return '<article class="collision-card" style="--pc:'+color+'"><h3>'+esc(s.poet)+' · '+esc(s.place_historical)+'</h3><div>'+s.year+'年 · '+esc(s.year_precision_display)+' · 《'+esc(s.poem_title)+'》 · '+esc(s.source_status)+' '+esc(s.source_grade)+'级</div><div class="quote">「'+esc(s.emotion_evidence||s.poem_lines[0]||"")+'」</div><p>'+esc(s.event)+'</p></article>';}).join("");}
+function renderRows(){var story=currentStory(), box=document.getElementById("routeRows");box.innerHTML=story.scenes.map(function(s,i){return '<tr'+(i===stepIndex?' style="background:#f7f3e9"':'')+'><td>'+(i+1)+'</td><td>'+s.year_label+'<br><span style="color:#777">'+esc(s.year_precision_display)+(s.sequence==="overlap"?" · 区间重叠":"")+'</span></td><td>'+esc(s.place_historical)+'<br><span style="color:#777">'+(s.map_eligible?("今"+esc(s.place_modern)):"未落图")+'</span></td><td><span class="badge" style="--badge-color:'+displayColorForSchool(s.school)+'">'+esc(s.school)+'</span></td><td>《'+esc(s.poem_title)+'》</td><td>'+esc(s.source_grade)+' · '+esc(s.source_status)+'</td><td>'+esc(s.source_name)+'</td></tr>';}).join("");}
+function renderCollision(){var c=D.collisions[collisionIndex];if(!c){document.getElementById("collisionSection").style.display="none";return;}document.getElementById("collisionSelect").value=String(collisionIndex);document.getElementById("collisionTitle").textContent=c.year+" · 同年双线";document.getElementById("collisionLede").textContent=c.lede+"。并置仅表示系年落在同一数值年份，不证明诗人互相影响。";var certainty=document.getElementById("collisionCertainty");certainty.textContent=c.certainty_display;certainty.className="certainty "+c.certainty;var lanes=[],byPoet={};c.scenes.forEach(function(s){if(!byPoet[s.poet]){byPoet[s.poet]=[];lanes.push({poet:s.poet,scenes:byPoet[s.poet]});}byPoet[s.poet].push(s);});document.getElementById("collisionCards").innerHTML=lanes.map(function(lane,laneIndex){return '<section class="collision-lane"><h3 class="lane-name">'+esc(lane.poet)+'</h3><div class="lane-scenes">'+lane.scenes.map(function(s){return '<article class="collision-card" style="--pc:'+displayColor(laneIndex)+'"><h3>'+esc(s.place_historical)+'</h3><div>'+s.year+'年 · '+esc(s.year_precision_display)+' · 《'+esc(s.poem_title)+'》 · '+esc(s.source_status)+' '+esc(s.source_grade)+'级</div><div class="quote">「'+esc(s.emotion_evidence||s.poem_lines[0]||"")+'」</div><p>'+esc(s.event)+'</p></article>';}).join("")+'</div></section>';}).join("");}
 function renderUnresolved(){document.getElementById("unresolvedRows").innerHTML=D.unresolved.map(function(row){return '<tr><td>'+esc(row.poet)+'</td><td>《'+esc(row.title)+'》</td><td>'+esc(row.year_precision_display)+'</td><td>'+esc(row.reason)+'</td><td><a href="'+esc(row.source_url)+'" rel="noreferrer">'+esc(row.source_name)+'</a><br><span style="color:#777">'+esc(row.source_note)+'</span></td></tr>';}).join("");}
-function renderMethod(){var m=D.method;document.getElementById("methodBody").innerHTML='<ol><li>'+esc(m.route_rule)+'</li><li>'+esc(m.line_rule)+'</li><li>'+esc(m.poem_rule)+'</li><li>'+esc(m.source_rule)+'</li><li>'+esc(m.collision_rule)+'</li><li>'+esc(m.school_rule)+'</li><li>'+esc(m.image_rule)+'</li></ol><p>动画引擎：'+esc(D.meta.engine)+'。模型图像属于气氛层，史料结论只来自本地审核数据。</p>';}
+function renderMethod(){var m=D.method;document.getElementById("methodBody").innerHTML='<ol><li>'+esc(m.scope_rule)+'</li><li>'+esc(m.route_rule)+'</li><li>'+esc(m.line_rule)+'</li><li>'+esc(m.poem_rule)+'</li><li>'+esc(m.source_rule)+'</li><li>'+esc(m.collision_rule)+'</li><li>'+esc(m.school_rule)+'</li><li>'+esc(m.image_rule)+'</li></ol><p>动画引擎：'+esc(D.meta.engine)+'。模型图像属于气氛层，史料结论只来自本地审核数据。</p>';}
 function renderAll(resetClock){document.getElementById("storySelect").value=String(storyIndex);renderMap();renderScene(resetClock);}
 function next(){var story=currentStory();if(stepIndex<story.scene_count-1){stepIndex++;}else{storyIndex=(storyIndex+1)%stories.length;stepIndex=0;}renderAll(true);}
 function prev(){if(stepIndex>0){stepIndex--;renderAll(true);}}
@@ -835,14 +978,22 @@ initMeta();syncMapControls();renderCollision();renderUnresolved();renderMethod()
 def main() -> None:
     data, prompts = build_data()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    OUT_PROMPTS.write_text(json.dumps(prompts, ensure_ascii=False, indent=2), encoding="utf-8")
+    OUT_JSON.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+        newline="\n",
+    )
+    OUT_PROMPTS.write_text(
+        json.dumps(prompts, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+        newline="\n",
+    )
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = HTML.replace("__DATA__", payload)
     assert "https://" not in "\n".join(re.findall(r"<script[^>]*src=[^>]+>", html, flags=re.I))
     assert "NaN" not in html and "Infinity" not in html
     assert len(html.encode("utf-8")) > 5000
-    OUT_HTML.write_text(html, encoding="utf-8")
+    OUT_HTML.write_text(html, encoding="utf-8", newline="\n")
     print(f"[ok] saved {OUT_HTML} ({data['meta']['story_count']}卷 / {data['meta']['scene_count']}节点 / {data['meta']['collision_count']}组同年碰撞)")
 
 

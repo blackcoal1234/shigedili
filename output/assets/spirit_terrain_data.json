@@ -1,7 +1,7 @@
 {
  "poet": "李白",
  "poet_key": "libai",
- "generated_at": "2026-07-30 12:14:35",
+ "generated_at": "2026-08-22 21:29:03",
  "periods": [
   {
    "no": 1,
@@ -48,7 +48,7 @@
     741.5
    ],
    "poem_count": 7,
-   "hit_count": 66,
+   "hit_count": 71,
    "clustered_hits": 38,
    "cluster_counts": {
     "豪情进取": 4,
@@ -64,9 +64,9 @@
     "愁苦幽愤": 34.2,
     "隐逸超脱": 21.1
    },
-   "mean_sentiment": -0.114,
-   "mean_scale": 3.19,
-   "scale_hits": 53,
+   "mean_sentiment": -0.1,
+   "mean_scale": 3.14,
+   "scale_hits": 58,
    "grade_mix": {
     "B": 7
    },
@@ -93,25 +93,25 @@
     744.5
    ],
    "poem_count": 4,
-   "hit_count": 45,
-   "clustered_hits": 22,
+   "hit_count": 46,
+   "clustered_hits": 21,
    "cluster_counts": {
     "豪情进取": 5,
-    "纵逸狂放": 10,
+    "纵逸狂放": 9,
     "漂泊羁旅": 2,
     "愁苦幽愤": 3,
     "隐逸超脱": 2
    },
    "cluster_share": {
-    "豪情进取": 22.7,
-    "纵逸狂放": 45.5,
-    "漂泊羁旅": 9.1,
-    "愁苦幽愤": 13.6,
-    "隐逸超脱": 9.1
+    "豪情进取": 23.8,
+    "纵逸狂放": 42.9,
+    "漂泊羁旅": 9.5,
+    "愁苦幽愤": 14.3,
+    "隐逸超脱": 9.5
    },
-   "mean_sentiment": 0.111,
+   "mean_sentiment": 0.107,
    "mean_scale": 2.97,
-   "scale_hits": 32,
+   "scale_hits": 33,
    "grade_mix": {
     "B": 4
    },
@@ -135,25 +135,25 @@
     755.5
    ],
    "poem_count": 9,
-   "hit_count": 138,
-   "clustered_hits": 62,
+   "hit_count": 146,
+   "clustered_hits": 61,
    "cluster_counts": {
     "豪情进取": 6,
     "纵逸狂放": 14,
-    "漂泊羁旅": 9,
+    "漂泊羁旅": 8,
     "愁苦幽愤": 20,
     "隐逸超脱": 13
    },
    "cluster_share": {
-    "豪情进取": 9.7,
-    "纵逸狂放": 22.6,
-    "漂泊羁旅": 14.5,
-    "愁苦幽愤": 32.3,
-    "隐逸超脱": 21.0
+    "豪情进取": 9.8,
+    "纵逸狂放": 23.0,
+    "漂泊羁旅": 13.1,
+    "愁苦幽愤": 32.8,
+    "隐逸超脱": 21.3
    },
-   "mean_sentiment": -0.039,
-   "mean_scale": 2.84,
-   "scale_hits": 101,
+   "mean_sentiment": -0.017,
+   "mean_scale": 2.9,
+   "scale_hits": 109,
    "grade_mix": {
     "B": 9
    },
@@ -182,7 +182,7 @@
     763.5
    ],
    "poem_count": 7,
-   "hit_count": 84,
+   "hit_count": 93,
    "clustered_hits": 23,
    "cluster_counts": {
     "豪情进取": 4,
@@ -198,9 +198,9 @@
     "愁苦幽愤": 30.4,
     "隐逸超脱": 8.7
    },
-   "mean_sentiment": -0.011,
-   "mean_scale": 3.27,
-   "scale_hits": 73,
+   "mean_sentiment": 0.022,
+   "mean_scale": 3.33,
+   "scale_hits": 81,
    "grade_mix": {
     "B": 7
    },
@@ -364,7 +364,7 @@
    "hits": [
     {
      "word": "紫烟",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": "隐逸超脱",
      "sentiment": 0.3,
      "scale": 3,
@@ -372,7 +372,7 @@
     },
     {
      "word": "瀑布",
-     "category": "地理",
+     "category": "溪泉",
      "cluster": "豪情进取",
      "sentiment": 0.4,
      "scale": 3,
@@ -380,7 +380,7 @@
     },
     {
      "word": "银河",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -388,7 +388,7 @@
     },
     {
      "word": "九天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": "豪情进取",
      "sentiment": 0.8,
      "scale": 5,
@@ -423,7 +423,7 @@
    "hits": [
     {
      "word": "竹",
-     "category": "草木",
+     "category": "梅兰竹菊",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 2,
@@ -431,7 +431,7 @@
     },
     {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -439,7 +439,7 @@
     },
     {
      "word": "床",
-     "category": "器物",
+     "category": "闺阁",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 1,
@@ -447,7 +447,7 @@
     },
     {
      "word": "梅",
-     "category": "草木",
+     "category": "梅兰竹菊",
      "cluster": "隐逸超脱",
      "sentiment": 0.4,
      "scale": 2,
@@ -455,7 +455,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -463,7 +463,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -471,7 +471,7 @@
     },
     {
      "word": "猿声",
-     "category": "走兽",
+     "category": "灵长兽",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 3,
@@ -487,7 +487,7 @@
     },
     {
      "word": "落叶",
-     "category": "草木",
+     "category": "凋零草木",
      "cluster": "愁苦幽愤",
      "sentiment": -0.6,
      "scale": 2,
@@ -495,7 +495,7 @@
     },
     {
      "word": "秋风",
-     "category": "天象",
+     "category": "风候",
      "cluster": "愁苦幽愤",
      "sentiment": -0.6,
      "scale": 3,
@@ -503,10 +503,18 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
+     "sentence": "八月蝴蝶来，双飞西园草"
+    },
+    {
+     "word": "蝴蝶",
+     "category": "飞虫",
+     "cluster": null,
+     "sentiment": 0.4,
+     "scale": 1,
      "sentence": "八月蝴蝶来，双飞西园草"
     },
     {
@@ -527,16 +535,16 @@
     },
     {
      "word": "长风",
-     "category": "天象",
+     "category": "风候",
      "cluster": "豪情进取",
      "sentiment": 0.7,
      "scale": 4,
      "sentence": "相迎不道远，直至长风沙"
     }
    ],
-   "hit_count": 14,
-   "mean_sentiment": -0.121,
-   "mean_scale": 3.0,
+   "hit_count": 15,
+   "mean_sentiment": -0.087,
+   "mean_scale": 2.85,
    "cluster_counts": {
     "隐逸超脱": 2,
     "漂泊羁旅": 1,
@@ -564,7 +572,7 @@
    "hits": [
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -572,7 +580,7 @@
     },
     {
      "word": "柳",
-     "category": "草木",
+     "category": "柳木送别",
      "cluster": "漂泊羁旅",
      "sentiment": -0.4,
      "scale": 2,
@@ -580,7 +588,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -596,9 +604,9 @@
     },
     {
      "word": "金陵",
-     "category": "地理",
+     "category": "宫苑城市",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.1,
      "scale": 3,
      "sentence": "金陵子弟来相送，欲行不行各尽觞"
     },
@@ -620,7 +628,7 @@
     }
    ],
    "hit_count": 7,
-   "mean_sentiment": -0.243,
+   "mean_sentiment": -0.229,
    "mean_scale": 2.25,
    "cluster_counts": {
     "漂泊羁旅": 3,
@@ -647,7 +655,7 @@
    "hits": [
     {
      "word": "床",
-     "category": "器物",
+     "category": "闺阁",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 1,
@@ -655,7 +663,7 @@
     },
     {
      "word": "明月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 5,
@@ -663,7 +671,7 @@
     },
     {
      "word": "霜",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.5,
      "scale": 2,
@@ -671,7 +679,7 @@
     },
     {
      "word": "明月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 5,
@@ -687,7 +695,7 @@
     },
     {
      "word": "故乡",
-     "category": "地理",
+     "category": "乡土家园",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -721,7 +729,7 @@
    "hits": [
     {
      "word": "黄鹤楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -729,7 +737,7 @@
     },
     {
      "word": "烟",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -737,7 +745,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -745,7 +753,7 @@
     },
     {
      "word": "孤帆",
-     "category": "器物",
+     "category": "舟楫",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 1,
@@ -753,7 +761,7 @@
     },
     {
      "word": "长江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.1,
      "scale": 4,
@@ -788,7 +796,7 @@
    "hits": [
     {
      "word": "蜀道",
-     "category": "地理",
+     "category": "行旅道路",
      "cluster": "愁苦幽愤",
      "sentiment": -0.4,
      "scale": 4,
@@ -796,7 +804,7 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
@@ -804,7 +812,7 @@
     },
     {
      "word": "鱼",
-     "category": "鳞介",
+     "category": "江鱼",
      "cluster": null,
      "sentiment": 0.2,
      "scale": 2,
@@ -812,7 +820,7 @@
     },
     {
      "word": "塞",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -820,7 +828,7 @@
     },
     {
      "word": "烟",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -828,7 +836,7 @@
     },
     {
      "word": "峨眉",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": 0.2,
      "scale": 3,
@@ -836,15 +844,23 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
      "sentence": "地崩山摧壮士死，然后天梯石栈相钩连"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "上有六龙回日之高标，下有冲波逆折之回川"
+    },
+    {
      "word": "鹤",
-     "category": "禽鸟",
+     "category": "瑞禽神鸟",
      "cluster": "隐逸超脱",
      "sentiment": 0.4,
      "scale": 3,
@@ -852,7 +868,7 @@
     },
     {
      "word": "猿",
-     "category": "走兽",
+     "category": "灵长兽",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 3,
@@ -876,7 +892,7 @@
     },
     {
      "word": "子规",
-     "category": "禽鸟",
+     "category": "哀鸣禽鸟",
      "cluster": "愁苦幽愤",
      "sentiment": -0.7,
      "scale": 2,
@@ -884,7 +900,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -900,7 +916,7 @@
     },
     {
      "word": "空山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": -0.1,
      "scale": 3,
@@ -908,7 +924,7 @@
     },
     {
      "word": "蜀道",
-     "category": "地理",
+     "category": "行旅道路",
      "cluster": "愁苦幽愤",
      "sentiment": -0.4,
      "scale": 4,
@@ -916,7 +932,7 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
@@ -924,7 +940,7 @@
     },
     {
      "word": "枯",
-     "category": "草木",
+     "category": "凋零草木",
      "cluster": "愁苦幽愤",
      "sentiment": -0.8,
      "scale": null,
@@ -932,15 +948,23 @@
     },
     {
      "word": "松",
-     "category": "草木",
+     "category": "松柏",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 2,
      "sentence": "连峰去天不盈尺，枯松倒挂倚绝壁"
     },
     {
+     "word": "绝壁",
+     "category": "山岳",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 3,
+     "sentence": "连峰去天不盈尺，枯松倒挂倚绝壁"
+    },
+    {
      "word": "剑阁",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "愁苦幽愤",
      "sentiment": -0.3,
      "scale": 3,
@@ -948,15 +972,31 @@
     },
     {
      "word": "关",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
      "sentence": "剑阁峥嵘而崔嵬，一夫当关，万夫莫开"
     },
     {
+     "word": "狼",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.4,
+     "scale": 2,
+     "sentence": "所守或匪亲，化为狼与豺"
+    },
+    {
+     "word": "虎",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "朝避猛虎，夕避长蛇，磨牙吮血，杀人如麻"
+    },
+    {
      "word": "城",
-     "category": "建筑",
+     "category": "宫苑城市",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -964,7 +1004,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -980,7 +1020,7 @@
     },
     {
      "word": "蜀道",
-     "category": "地理",
+     "category": "行旅道路",
      "cluster": "愁苦幽愤",
      "sentiment": -0.4,
      "scale": 4,
@@ -988,16 +1028,16 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
      "sentence": "蜀道之难，难于上青天，侧身西望长咨嗟"
     }
    ],
-   "hit_count": 26,
-   "mean_sentiment": -0.15,
-   "mean_scale": 3.48,
+   "hit_count": 30,
+   "mean_sentiment": -0.133,
+   "mean_scale": 3.4,
    "cluster_counts": {
     "愁苦幽愤": 9,
     "漂泊羁旅": 3,
@@ -1024,7 +1064,7 @@
    "hits": [
     {
      "word": "兰",
-     "category": "草木",
+     "category": "梅兰竹菊",
      "cluster": "隐逸超脱",
      "sentiment": 0.4,
      "scale": 2,
@@ -1032,7 +1072,7 @@
     },
     {
      "word": "美酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.4,
      "scale": 1,
@@ -1084,7 +1124,7 @@
    "hits": [
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -1092,7 +1132,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -1124,7 +1164,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -1156,9 +1196,9 @@
     },
     {
      "word": "落日",
-     "category": "天象",
+     "category": "晨昏光影",
      "cluster": null,
-     "sentiment": -0.2,
+     "sentiment": -0.5,
      "scale": 5,
      "sentence": "高歌取醉欲自慰，起早落日争光辉"
     },
@@ -1172,7 +1212,7 @@
     },
     {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -1188,7 +1228,7 @@
     },
     {
      "word": "蓬",
-     "category": "草木",
+     "category": "凋零草木",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 1,
@@ -1196,7 +1236,7 @@
     }
    ],
    "hit_count": 14,
-   "mean_sentiment": 0.064,
+   "mean_sentiment": 0.043,
    "mean_scale": 2.17,
    "cluster_counts": {
     "纵逸狂放": 4,
@@ -1224,7 +1264,7 @@
    "hits": [
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -1232,15 +1272,23 @@
     },
     {
      "word": "春风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": 0.7,
      "scale": 3,
      "sentence": "云想衣裳花想容，春风拂槛露华浓"
     },
     {
+     "word": "露华",
+     "category": "气象",
+     "cluster": null,
+     "sentiment": 0.2,
+     "scale": 3,
+     "sentence": "云想衣裳花想容，春风拂槛露华浓"
+    },
+    {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -1248,7 +1296,7 @@
     },
     {
      "word": "瑶台",
-     "category": "建筑",
+     "category": "神话仙境",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 5,
@@ -1256,16 +1304,16 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
      "sentence": "若非群玉山头见，会向瑶台月下逢"
     }
    ],
-   "hit_count": 5,
-   "mean_sentiment": 0.22,
-   "mean_scale": 4.2,
+   "hit_count": 6,
+   "mean_sentiment": 0.217,
+   "mean_scale": 4.0,
    "cluster_counts": {
     "隐逸超脱": 1
    }
@@ -1290,7 +1338,7 @@
    "hits": [
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -1306,7 +1354,7 @@
     },
     {
      "word": "杯",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.1,
      "scale": 1,
@@ -1314,7 +1362,7 @@
     },
     {
      "word": "明月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 5,
@@ -1322,7 +1370,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1330,7 +1378,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1346,7 +1394,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1370,7 +1418,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -1405,23 +1453,23 @@
    "hits": [
     {
      "word": "金樽",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.4,
      "scale": 1,
      "sentence": "金樽清酒斗十千，玉盘珍羞直万钱"
     },
     {
-     "word": "酒",
-     "category": "器物",
-     "cluster": "纵逸狂放",
-     "sentiment": 0.0,
+     "word": "清酒",
+     "category": "酒器宴饮",
+     "cluster": null,
+     "sentiment": 0.3,
      "scale": 1,
      "sentence": "金樽清酒斗十千，玉盘珍羞直万钱"
     },
     {
      "word": "斗",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -1429,7 +1477,7 @@
     },
     {
      "word": "杯",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.1,
      "scale": 1,
@@ -1437,7 +1485,7 @@
     },
     {
      "word": "剑",
-     "category": "器物",
+     "category": "兵器",
      "cluster": "豪情进取",
      "sentiment": 0.3,
      "scale": 1,
@@ -1445,7 +1493,7 @@
     },
     {
      "word": "黄河",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.2,
      "scale": 4,
@@ -1453,7 +1501,7 @@
     },
     {
      "word": "塞",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -1461,7 +1509,7 @@
     },
     {
      "word": "雪",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -1469,7 +1517,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -1477,7 +1525,7 @@
     },
     {
      "word": "溪",
-     "category": "地理",
+     "category": "溪泉",
      "cluster": "隐逸超脱",
      "sentiment": 0.2,
      "scale": 2,
@@ -1485,7 +1533,7 @@
     },
     {
      "word": "舟",
-     "category": "器物",
+     "category": "舟楫",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 1,
@@ -1501,7 +1549,7 @@
     },
     {
      "word": "长风",
-     "category": "天象",
+     "category": "风候",
      "cluster": "豪情进取",
      "sentiment": 0.7,
      "scale": 4,
@@ -1509,7 +1557,7 @@
     },
     {
      "word": "云帆",
-     "category": "器物",
+     "category": "舟楫",
      "cluster": "豪情进取",
      "sentiment": 0.7,
      "scale": 1,
@@ -1517,9 +1565,9 @@
     },
     {
      "word": "沧海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
-     "sentiment": 0.4,
+     "sentiment": 0.1,
      "scale": 4,
      "sentence": "长风破浪会有时，直挂云帆济沧海"
     }
@@ -1528,7 +1576,7 @@
    "mean_sentiment": 0.167,
    "mean_scale": 2.43,
    "cluster_counts": {
-    "纵逸狂放": 3,
+    "纵逸狂放": 2,
     "豪情进取": 5,
     "漂泊羁旅": 1,
     "隐逸超脱": 1
@@ -1554,7 +1602,7 @@
    "hits": [
     {
      "word": "黄河",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.2,
      "scale": 4,
@@ -1570,7 +1618,7 @@
     },
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
@@ -1578,7 +1626,7 @@
     },
     {
      "word": "明镜",
-     "category": "器物",
+     "category": "闺阁",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 1,
@@ -1594,7 +1642,7 @@
     },
     {
      "word": "白发",
-     "category": "身体",
+     "category": "身体容貌",
      "cluster": "愁苦幽愤",
      "sentiment": -0.6,
      "scale": 1,
@@ -1610,7 +1658,7 @@
     },
     {
      "word": "雪",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -1626,7 +1674,7 @@
     },
     {
      "word": "金樽",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.4,
      "scale": 1,
@@ -1634,7 +1682,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1650,7 +1698,7 @@
     },
     {
      "word": "杯",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.1,
      "scale": 1,
@@ -1658,7 +1706,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -1666,7 +1714,7 @@
     },
     {
      "word": "杯",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.1,
      "scale": 1,
@@ -1690,7 +1738,7 @@
     },
     {
      "word": "斗酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.5,
      "scale": 1,
@@ -1706,7 +1754,7 @@
     },
     {
      "word": "五花马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": "纵逸狂放",
      "sentiment": 0.5,
      "scale": 2,
@@ -1714,7 +1762,7 @@
     },
     {
      "word": "千金裘",
-     "category": "器物",
+     "category": "服饰",
      "cluster": "纵逸狂放",
      "sentiment": 0.5,
      "scale": 1,
@@ -1722,7 +1770,7 @@
     },
     {
      "word": "美酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.4,
      "scale": 1,
@@ -1766,7 +1814,7 @@
    "hits": [
     {
      "word": "黄河",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.2,
      "scale": 4,
@@ -1774,7 +1822,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -1782,7 +1830,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -1790,7 +1838,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -1822,7 +1870,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -1838,7 +1886,7 @@
     },
     {
      "word": "蓬",
-     "category": "草木",
+     "category": "凋零草木",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 1,
@@ -1862,7 +1910,7 @@
     },
     {
      "word": "美酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.4,
      "scale": 1,
@@ -1870,7 +1918,7 @@
     },
     {
      "word": "高楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -1878,7 +1926,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1894,7 +1942,7 @@
     },
     {
      "word": "梅",
-     "category": "草木",
+     "category": "梅兰竹菊",
      "cluster": "隐逸超脱",
      "sentiment": 0.4,
      "scale": 2,
@@ -1902,7 +1950,7 @@
     },
     {
      "word": "雪",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -1910,23 +1958,23 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
      "sentence": "持盐把酒但饮之，莫学夷齐事高洁"
     },
     {
-     "word": "城",
-     "category": "建筑",
+     "word": "荒城",
+     "category": "城郭关塞",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": -0.6,
      "scale": 3,
      "sentence": "荒城虚照碧山月，古木尽入苍梧云"
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -1934,7 +1982,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -1942,15 +1990,23 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
      "sentence": "荒城虚照碧山月，古木尽入苍梧云"
     },
     {
+     "word": "宫阙",
+     "category": "宫苑城市",
+     "cluster": null,
+     "sentiment": 0.2,
+     "scale": 3,
+     "sentence": "梁王宫阙今安在"
+    },
+    {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -1966,7 +2022,7 @@
     },
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
@@ -1998,7 +2054,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -2006,16 +2062,16 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
      "sentence": "东山高卧时起来，欲济苍生未应晚"
     }
    ],
-   "hit_count": 31,
-   "mean_sentiment": -0.097,
-   "mean_scale": 2.62,
+   "hit_count": 32,
+   "mean_sentiment": -0.106,
+   "mean_scale": 2.64,
    "cluster_counts": {
     "豪情进取": 1,
     "漂泊羁旅": 2,
@@ -2044,7 +2100,7 @@
    "hits": [
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
@@ -2060,7 +2116,7 @@
     },
     {
      "word": "烟",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2068,7 +2124,7 @@
     },
     {
      "word": "天姥",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": 0.3,
      "scale": 3,
@@ -2076,7 +2132,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -2084,7 +2140,7 @@
     },
     {
      "word": "天姥",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": 0.3,
      "scale": 3,
@@ -2092,7 +2148,7 @@
     },
     {
      "word": "五岳",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "豪情进取",
      "sentiment": 0.5,
      "scale": 4,
@@ -2100,7 +2156,7 @@
     },
     {
      "word": "城",
-     "category": "建筑",
+     "category": "宫苑城市",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -2108,7 +2164,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -2124,7 +2180,7 @@
     },
     {
      "word": "湖",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2132,7 +2188,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -2140,7 +2196,7 @@
     },
     {
      "word": "湖",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2148,7 +2204,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -2164,7 +2220,7 @@
     },
     {
      "word": "溪",
-     "category": "地理",
+     "category": "溪泉",
      "cluster": "隐逸超脱",
      "sentiment": 0.2,
      "scale": 2,
@@ -2179,10 +2235,10 @@
      "sentence": "谢公宿处今尚在，渌水荡漾清猿啼"
     },
     {
-     "word": "猿",
-     "category": "走兽",
-     "cluster": "漂泊羁旅",
-     "sentiment": -0.5,
+     "word": "猿啼",
+     "category": "灵长兽",
+     "cluster": null,
+     "sentiment": -0.6,
      "scale": 3,
      "sentence": "谢公宿处今尚在，渌水荡漾清猿啼"
     },
@@ -2196,7 +2252,7 @@
     },
     {
      "word": "青云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": "豪情进取",
      "sentiment": 0.6,
      "scale": 5,
@@ -2204,15 +2260,23 @@
     },
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
      "sentence": "半壁见海日，空中闻天鸡"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "熊咆龙吟殷岩泉，栗深林兮惊层巅"
+    },
+    {
      "word": "泉",
-     "category": "地理",
+     "category": "溪泉",
      "cluster": "隐逸超脱",
      "sentiment": 0.2,
      "scale": 2,
@@ -2220,7 +2284,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -2228,7 +2292,7 @@
     },
     {
      "word": "雨",
-     "category": "天象",
+     "category": "雨候",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2236,7 +2300,7 @@
     },
     {
      "word": "烟",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2244,7 +2308,7 @@
     },
     {
      "word": "日月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.2,
      "scale": 5,
@@ -2252,7 +2316,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -2260,7 +2324,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -2268,7 +2332,7 @@
     },
     {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -2276,11 +2340,19 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
      "sentence": "霓为衣兮风为马，云之君兮纷纷而来下"
+    },
+    {
+     "word": "虎",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "虎鼓瑟兮鸾回车，仙之人兮列如麻"
     },
     {
      "word": "仙",
@@ -2291,10 +2363,10 @@
      "sentence": "虎鼓瑟兮鸾回车，仙之人兮列如麻"
     },
     {
-     "word": "烟",
-     "category": "天象",
+     "word": "烟霞",
+     "category": "气象",
      "cluster": null,
-     "sentiment": -0.2,
+     "sentiment": 0.4,
      "scale": 3,
      "sentence": "惟觉时之枕席，失向来之烟霞"
     },
@@ -2316,7 +2388,7 @@
     },
     {
      "word": "白鹿",
-     "category": "走兽",
+     "category": "灵兽",
      "cluster": "隐逸超脱",
      "sentiment": 0.4,
      "scale": 2,
@@ -2324,7 +2396,7 @@
     },
     {
      "word": "青崖",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": 0.3,
      "scale": 3,
@@ -2332,18 +2404,18 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
      "sentence": "且放白鹿青崖间，须行即骑访名山"
     }
    ],
-   "hit_count": 37,
-   "mean_sentiment": 0.076,
-   "mean_scale": 3.38,
+   "hit_count": 39,
+   "mean_sentiment": 0.095,
+   "mean_scale": 3.39,
    "cluster_counts": {
-    "漂泊羁旅": 3,
+    "漂泊羁旅": 2,
     "隐逸超脱": 9,
     "豪情进取": 2
    }
@@ -2368,15 +2440,23 @@
    "hits": [
     {
      "word": "凤凰台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 2,
      "sentence": "凤凰台上凤凰游，凤去台空江自流"
     },
     {
+     "word": "凤凰",
+     "category": "瑞禽神鸟",
+     "cluster": null,
+     "sentiment": 0.8,
+     "scale": 5,
+     "sentence": "凤凰台上凤凰游，凤去台空江自流"
+    },
+    {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -2384,7 +2464,7 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -2392,7 +2472,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2400,15 +2480,23 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
      "sentence": "三山半落青天外，二水中分白鹭洲"
     },
     {
+     "word": "白鹭",
+     "category": "水禽",
+     "cluster": null,
+     "sentiment": 0.4,
+     "scale": 2,
+     "sentence": "三山半落青天外，二水中分白鹭洲"
+    },
+    {
      "word": "浮云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 5,
@@ -2416,9 +2504,9 @@
     },
     {
      "word": "长安",
-     "category": "地理",
+     "category": "宫苑城市",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "scale": 3,
      "sentence": "总为浮云能蔽日，长安不见使人愁"
     },
@@ -2431,9 +2519,9 @@
      "sentence": "总为浮云能蔽日，长安不见使人愁"
     }
    ],
-   "hit_count": 8,
-   "mean_sentiment": -0.088,
-   "mean_scale": 3.29,
+   "hit_count": 10,
+   "mean_sentiment": 0.08,
+   "mean_scale": 3.33,
    "cluster_counts": {
     "漂泊羁旅": 1,
     "愁苦幽愤": 1
@@ -2459,15 +2547,23 @@
    "hits": [
     {
      "word": "子规",
-     "category": "禽鸟",
+     "category": "哀鸣禽鸟",
      "cluster": "愁苦幽愤",
      "sentiment": -0.7,
      "scale": 2,
      "sentence": "杨花落尽子规啼，闻道龙标过五溪"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "杨花落尽子规啼，闻道龙标过五溪"
+    },
+    {
      "word": "溪",
-     "category": "地理",
+     "category": "溪泉",
      "cluster": "隐逸超脱",
      "sentiment": 0.2,
      "scale": 2,
@@ -2483,7 +2579,7 @@
     },
     {
      "word": "明月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 5,
@@ -2491,16 +2587,16 @@
     },
     {
      "word": "夜郎",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "愁苦幽愤",
      "sentiment": -0.7,
      "scale": 3,
      "sentence": "我寄愁心与明月，随君直到夜郎西"
     }
    ],
-   "hit_count": 5,
-   "mean_sentiment": -0.42,
-   "mean_scale": 3.0,
+   "hit_count": 6,
+   "mean_sentiment": -0.267,
+   "mean_scale": 3.4,
    "cluster_counts": {
     "愁苦幽愤": 3,
     "隐逸超脱": 1
@@ -2526,10 +2622,18 @@
    "hits": [
     {
      "word": "烛",
-     "category": "器物",
+     "category": "灯烛",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 1,
+     "sentence": "烛龙栖寒门，光曜犹旦开"
+    },
+    {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
      "sentence": "烛龙栖寒门，光曜犹旦开"
     },
     {
@@ -2542,7 +2646,7 @@
     },
     {
      "word": "日月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.2,
      "scale": 5,
@@ -2550,7 +2654,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -2566,7 +2670,7 @@
     },
     {
      "word": "燕",
-     "category": "禽鸟",
+     "category": "家禽",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 2,
@@ -2574,7 +2678,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2582,7 +2686,7 @@
     },
     {
      "word": "雪",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2590,7 +2694,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -2606,7 +2710,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -2622,7 +2726,7 @@
     },
     {
      "word": "城",
-     "category": "建筑",
+     "category": "宫苑城市",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -2654,15 +2758,23 @@
     },
     {
      "word": "剑",
-     "category": "器物",
+     "category": "兵器",
      "cluster": "豪情进取",
      "sentiment": 0.3,
      "scale": 1,
      "sentence": "别时提剑救边去，遗此虎文金鞞靫"
     },
     {
+     "word": "虎",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "别时提剑救边去，遗此虎文金鞞靫"
+    },
+    {
      "word": "黄河",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.2,
      "scale": 4,
@@ -2670,7 +2782,7 @@
     },
     {
      "word": "塞",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -2678,7 +2790,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -2686,7 +2798,7 @@
     },
     {
      "word": "雨",
-     "category": "天象",
+     "category": "雨候",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2694,7 +2806,7 @@
     },
     {
      "word": "雪",
-     "category": "天象",
+     "category": "霜雪冰露",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 3,
@@ -2709,9 +2821,9 @@
      "sentence": "黄河捧土尚可塞，北风雨雪恨难裁"
     }
    ],
-   "hit_count": 23,
-   "mean_sentiment": -0.113,
-   "mean_scale": 3.06,
+   "hit_count": 25,
+   "mean_sentiment": -0.088,
+   "mean_scale": 3.11,
    "cluster_counts": {
     "愁苦幽愤": 4,
     "漂泊羁旅": 2,
@@ -2738,7 +2850,7 @@
    "hits": [
     {
      "word": "孤云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 5,
@@ -2754,7 +2866,7 @@
     },
     {
      "word": "敬亭",
-     "category": "地理",
+     "category": "山岳",
      "cluster": "隐逸超脱",
      "sentiment": 0.3,
      "scale": 3,
@@ -2762,7 +2874,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2798,7 +2910,7 @@
    "hits": [
     {
      "word": "白发",
-     "category": "身体",
+     "category": "身体容貌",
      "cluster": "愁苦幽愤",
      "sentiment": -0.6,
      "scale": 1,
@@ -2814,7 +2926,7 @@
     },
     {
      "word": "明镜",
-     "category": "器物",
+     "category": "闺阁",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 1,
@@ -2856,7 +2968,7 @@
    "hits": [
     {
      "word": "舟",
-     "category": "器物",
+     "category": "舟楫",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 1,
@@ -2864,7 +2976,7 @@
     },
     {
      "word": "桃花",
-     "category": "草木",
+     "category": "桃李果木",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 2,
@@ -2906,15 +3018,31 @@
    "hits": [
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
      "sentence": "永王正月东出师，天子遥分龙虎旗"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "永王正月东出师，天子遥分龙虎旗"
+    },
+    {
+     "word": "虎",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "永王正月东出师，天子遥分龙虎旗"
+    },
+    {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -2922,7 +3050,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -2930,7 +3058,7 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -2938,7 +3066,7 @@
     },
     {
      "word": "雁",
-     "category": "禽鸟",
+     "category": "候鸟",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 4,
@@ -2946,7 +3074,7 @@
     },
     {
      "word": "四海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
      "sentiment": 0.5,
      "scale": 4,
@@ -2954,7 +3082,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -2970,7 +3098,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -2985,16 +3113,40 @@
      "sentence": "秋毫不犯三吴悦，春日遥看五色光"
     },
     {
-     "word": "金陵",
-     "category": "地理",
+     "word": "春日",
+     "category": "时令节候",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.5,
+     "scale": null,
+     "sentence": "秋毫不犯三吴悦，春日遥看五色光"
+    },
+    {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "龙盘虎踞帝王州，帝子金陵访故丘"
+    },
+    {
+     "word": "虎",
+     "category": "猛兽",
+     "cluster": null,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "龙盘虎踞帝王州，帝子金陵访故丘"
+    },
+    {
+     "word": "金陵",
+     "category": "宫苑城市",
+     "cluster": null,
+     "sentiment": 0.1,
      "scale": 3,
      "sentence": "龙盘虎踞帝王州，帝子金陵访故丘"
     },
     {
      "word": "春风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": 0.7,
      "scale": 3,
@@ -3002,7 +3154,7 @@
     },
     {
      "word": "明月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 5,
@@ -3010,7 +3162,7 @@
     },
     {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3018,7 +3170,7 @@
     },
     {
      "word": "松",
-     "category": "草木",
+     "category": "松柏",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 2,
@@ -3026,7 +3178,7 @@
     },
     {
      "word": "河",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3034,7 +3186,7 @@
     },
     {
      "word": "关",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -3042,7 +3194,7 @@
     },
     {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3050,7 +3202,7 @@
     },
     {
      "word": "台",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 2,
@@ -3058,7 +3210,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -3066,7 +3218,7 @@
     },
     {
      "word": "烽火",
-     "category": "器物",
+     "category": "战争声色",
      "cluster": null,
      "sentiment": -0.6,
      "scale": 3,
@@ -3074,15 +3226,15 @@
     },
     {
      "word": "沧海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": "豪情进取",
-     "sentiment": 0.4,
+     "sentiment": 0.1,
      "scale": 4,
      "sentence": "千岩烽火连沧海，两岸旌旗绕碧山"
     },
     {
      "word": "旌",
-     "category": "器物",
+     "category": "战争声色",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -3090,7 +3242,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3098,7 +3250,7 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3106,7 +3258,7 @@
     },
     {
      "word": "湖",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3114,7 +3266,7 @@
     },
     {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3122,23 +3274,39 @@
     },
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
      "sentence": "王出三江按五湖，楼船跨海次扬都"
     },
     {
-     "word": "帆",
-     "category": "器物",
+     "word": "虎",
+     "category": "猛兽",
      "cluster": null,
-     "sentiment": 0.1,
+     "sentiment": -0.1,
+     "scale": 2,
+     "sentence": "战舰森森罗虎士，征帆一一引龙驹"
+    },
+    {
+     "word": "征帆",
+     "category": "舟楫",
+     "cluster": null,
+     "sentiment": -0.2,
      "scale": 1,
      "sentence": "战舰森森罗虎士，征帆一一引龙驹"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "战舰森森罗虎士，征帆一一引龙驹"
+    },
+    {
      "word": "长风",
-     "category": "天象",
+     "category": "风候",
      "cluster": "豪情进取",
      "sentiment": 0.7,
      "scale": 4,
@@ -3146,7 +3314,7 @@
     },
     {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
@@ -3154,7 +3322,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3162,7 +3330,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -3170,15 +3338,31 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
      "sentence": "君看帝子浮江日，何似龙骧出峡来"
     },
     {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "君看帝子浮江日，何似龙骧出峡来"
+    },
+    {
+     "word": "龙",
+     "category": "神兽",
+     "cluster": null,
+     "sentiment": 0.5,
+     "scale": 5,
+     "sentence": "祖龙浮海不成桥，汉武寻阳空射蛟"
+    },
+    {
      "word": "海",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 4,
@@ -3186,7 +3370,7 @@
     },
     {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3194,7 +3378,7 @@
     },
     {
      "word": "关",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "漂泊羁旅",
      "sentiment": -0.3,
      "scale": 3,
@@ -3202,7 +3386,7 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3210,7 +3394,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -3226,15 +3410,15 @@
     },
     {
      "word": "金陵",
-     "category": "地理",
+     "category": "宫苑城市",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.1,
      "scale": 3,
      "sentence": "初从云梦开朱邸，更取金陵作小山"
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3242,7 +3426,7 @@
     },
     {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -3250,7 +3434,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -3258,16 +3442,16 @@
     },
     {
      "word": "长安",
-     "category": "地理",
+     "category": "宫苑城市",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "scale": 3,
      "sentence": "南风一扫胡尘静，西入长安到日边"
     }
    ],
-   "hit_count": 45,
-   "mean_sentiment": 0.036,
-   "mean_scale": 3.31,
+   "hit_count": 54,
+   "mean_sentiment": 0.078,
+   "mean_scale": 3.4,
    "cluster_counts": {
     "漂泊羁旅": 3,
     "豪情进取": 3,
@@ -3295,9 +3479,9 @@
    "hits": [
     {
      "word": "长安",
-     "category": "地理",
+     "category": "宫苑城市",
      "cluster": null,
-     "sentiment": 0.0,
+     "sentiment": 0.3,
      "scale": 3,
      "sentence": "昔在长安醉花柳，五侯七贵同落酒"
     },
@@ -3311,7 +3495,7 @@
     },
     {
      "word": "柳",
-     "category": "草木",
+     "category": "柳木送别",
      "cluster": "漂泊羁旅",
      "sentiment": -0.4,
      "scale": 2,
@@ -3319,7 +3503,7 @@
     },
     {
      "word": "酒",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.0,
      "scale": 1,
@@ -3327,7 +3511,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -3335,7 +3519,7 @@
     },
     {
      "word": "马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 2,
@@ -3343,7 +3527,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -3351,7 +3535,7 @@
     },
     {
      "word": "胡马",
-     "category": "走兽",
+     "category": "战骑",
      "cluster": null,
      "sentiment": -0.4,
      "scale": 3,
@@ -3359,7 +3543,7 @@
     },
     {
      "word": "桃",
-     "category": "草木",
+     "category": "桃李果木",
      "cluster": null,
      "sentiment": 0.5,
      "scale": 2,
@@ -3375,7 +3559,7 @@
     },
     {
      "word": "夜郎",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": "愁苦幽愤",
      "sentiment": -0.7,
      "scale": 3,
@@ -3383,7 +3567,7 @@
     }
    ],
    "hit_count": 11,
-   "mean_sentiment": -0.182,
+   "mean_sentiment": -0.155,
    "mean_scale": 2.44,
    "cluster_counts": {
     "纵逸狂放": 2,
@@ -3410,8 +3594,8 @@
    "year_label": "约759",
    "hits": [
     {
-     "word": "山",
-     "category": "地理",
+     "word": "巫山",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3419,7 +3603,7 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
@@ -3427,7 +3611,7 @@
     },
     {
      "word": "青天",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": 0.3,
      "scale": 5,
@@ -3459,7 +3643,7 @@
    "hits": [
     {
      "word": "楼",
-     "category": "建筑",
+     "category": "楼阁台榭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3467,7 +3651,7 @@
     },
     {
      "word": "洞庭",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3475,7 +3659,7 @@
     },
     {
      "word": "雁",
-     "category": "禽鸟",
+     "category": "候鸟",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 4,
@@ -3491,7 +3675,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3499,7 +3683,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -3507,7 +3691,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -3523,7 +3707,7 @@
     },
     {
      "word": "杯",
-     "category": "器物",
+     "category": "酒器宴饮",
      "cluster": "纵逸狂放",
      "sentiment": 0.1,
      "scale": 1,
@@ -3539,7 +3723,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -3575,7 +3759,7 @@
    "hits": [
     {
      "word": "白帝",
-     "category": "地理",
+     "category": "城郭关塞",
      "cluster": null,
      "sentiment": 0.2,
      "scale": 3,
@@ -3583,7 +3767,7 @@
     },
     {
      "word": "云",
-     "category": "天象",
+     "category": "云烟雾霭",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 5,
@@ -3591,7 +3775,7 @@
     },
     {
      "word": "江",
-     "category": "地理",
+     "category": "江河湖海",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 3,
@@ -3599,7 +3783,7 @@
     },
     {
      "word": "猿声",
-     "category": "走兽",
+     "category": "灵长兽",
      "cluster": "漂泊羁旅",
      "sentiment": -0.5,
      "scale": 3,
@@ -3607,7 +3791,7 @@
     },
     {
      "word": "舟",
-     "category": "器物",
+     "category": "舟楫",
      "cluster": null,
      "sentiment": 0.0,
      "scale": 1,
@@ -3615,7 +3799,7 @@
     },
     {
      "word": "山",
-     "category": "地理",
+     "category": "山岳",
      "cluster": null,
      "sentiment": 0.1,
      "scale": 3,
@@ -3649,7 +3833,7 @@
    "hits": [
     {
      "word": "松",
-     "category": "草木",
+     "category": "松柏",
      "cluster": "隐逸超脱",
      "sentiment": 0.5,
      "scale": 2,
@@ -3689,7 +3873,7 @@
     },
     {
      "word": "月",
-     "category": "天象",
+     "category": "日月星汉",
      "cluster": null,
      "sentiment": -0.2,
      "scale": 5,
@@ -3724,7 +3908,7 @@
    "hits": [
     {
      "word": "大鹏",
-     "category": "禽鸟",
+     "category": "瑞禽神鸟",
      "cluster": "豪情进取",
      "sentiment": 0.9,
      "scale": 5,
@@ -3732,7 +3916,7 @@
     },
     {
      "word": "风",
-     "category": "天象",
+     "category": "风候",
      "cluster": null,
      "sentiment": -0.1,
      "scale": 3,
@@ -3755,13 +3939,13 @@
   "愁苦幽愤"
  ],
  "dict_stats": {
-  "total_words": 197,
+  "total_words": 409,
   "clustered_words": 128,
-  "scaled_words": 166
+  "scaled_words": 347
  },
  "sample": {
   "poem_count": 27,
-  "hit_count": 333,
+  "hit_count": 356,
   "corpus_poems": 300,
   "grade_mix": {
    "B": 27
