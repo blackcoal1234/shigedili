@@ -10,9 +10,14 @@
   4. 导读卡：助手 / 模型拆分与知识库 model 字段一致，二者均为非人工考据口径；
   5. 页面标记：本地数据资产引用、hash 深链、非人工考据徽章、无远程脚本；
   6. 确定性：重跑构建器后 md5 逐字节一致。
+
+默认执行完整的知识库交叉检查。 ``--packaged`` 用于 GitHub Actions 的纯净检出：
+知识库是服务器持久资产，不随发布包提交；该模式改为从已打包诗作逐项反算元数据，
+并保留事实、富背景、助手批次和页面标记检查。
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -67,27 +72,47 @@ def kb_facts() -> tuple[dict, dict]:
     return poems, guides
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--packaged",
+        action="store_true",
+        help="校验已提交的页面数据包，不要求服务器持久知识库，也不重跑依赖知识库的构建器",
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
+    args = parse_args()
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 
-    for p in (DATA_JS, PAGE_HTML, KB_SQLITE):
+    required = (DATA_JS, PAGE_HTML) if args.packaged else (DATA_JS, PAGE_HTML, KB_SQLITE)
+    for p in required:
         if not p.exists():
             raise SystemExit(f"[failed] 缺少 {p}，先运行 tools/build_poem_page_data.py 与 数据可视化脚本/viz_44_poem_page.py")
 
     data = load_asset()
     meta = data["meta"]
     poems = data["poems"]
-    kb_poem_count, kb_guides = kb_facts()
 
     # 1. 规模与知识库一致
-    require(meta["poems"] == kb_poem_count, f"诗数不一致：资产 {meta['poems']} vs 知识库 {kb_poem_count}")
-    require(meta["guides"] == len(kb_guides), f"导读卡数不一致：资产 {meta['guides']} vs 知识库 {len(kb_guides)}")
-    hw = sum(1 for g in kb_guides.values() if g)
+    if args.packaged:
+        poem_count = len(poems)
+        guide_rows = [p["gd"] for p in poems if p.get("gd")]
+        guide_count = len(guide_rows)
+        hw = sum(1 for guide in guide_rows if guide.get("hw"))
+        require(meta["poets"] == len({p.get("p") for p in poems if p.get("p")}), "诗人总数与资产反算不一致")
+    else:
+        poem_count, kb_guides = kb_facts()
+        guide_count = len(kb_guides)
+        hw = sum(1 for guide in kb_guides.values() if guide)
+    require(meta["poems"] == poem_count, f"诗数不一致：资产 {meta['poems']} vs 校验源 {poem_count}")
+    require(meta["guides"] == guide_count, f"导读卡数不一致：资产 {meta['guides']} vs 校验源 {guide_count}")
     require(meta["guides_assistant"] == hw, f"助手卡数不一致：{meta['guides_assistant']} vs {hw}")
-    require(meta["guides_model"] == len(kb_guides) - hw, "模型卡数不一致")
+    require(meta["guides_model"] == guide_count - hw, "模型卡数不一致")
 
     # 2. 必填字段与唯一性
     ids = set()
@@ -105,6 +130,13 @@ def main() -> None:
         if p.get("im"):
             for i in p["im"]:
                 require(int(i.get("c", 0)) >= 1, f"意象计数异常：{p['id']}")
+
+    fact_counts = {
+        tier: sum(1 for p in poems if (p.get("f") or {}).get("tier") == tier)
+        for tier in ("verified", "rule", "ai")
+    }
+    for tier, count in fact_counts.items():
+        require(meta[f"facts_{tier}"] == count, f"{tier} 计数与资产反算不一致：{meta[f'facts_{tier}']} vs {count}")
 
     # 3. 富背景诚实门禁：只挂 verified，数量与 approved 记录按 body_hash 可匹配数一致
     approved_hashes = set()
@@ -127,19 +159,20 @@ def main() -> None:
         require(bool(story or notes or ap or src), f"富背景完全为空：{p['id']}")
 
     # rule / ai 只能经 hash_ok 匹配：核对各层计数不超过源文件 hash_ok 且在语料内的数量
-    kb_hashes = set()
-    db = sqlite3.connect(f"file:{KB_SQLITE}?mode=ro", uri=True, timeout=60)
-    for (h,) in db.execute("SELECT body_hash FROM poems"):
-        kb_hashes.add(h)
-    db.close()
-    for path, tier in ((RULE_JSONL, "rule"), (AI_JSONL, "ai")):
-        eligible = sum(
-            1
-            for row in read_jsonl(path)
-            if (row.get("poem_key") or {}).get("hash_ok")
-            and (row.get("poem_key") or {}).get("body_hash") in kb_hashes
-        )
-        require(meta[f"facts_{tier}"] <= eligible, f"{tier} 层计数 {meta[f'facts_{tier}']} 超过可匹配上限 {eligible}")
+    if not args.packaged:
+        kb_hashes = set()
+        db = sqlite3.connect(f"file:{KB_SQLITE}?mode=ro", uri=True, timeout=60)
+        for (h,) in db.execute("SELECT body_hash FROM poems"):
+            kb_hashes.add(h)
+        db.close()
+        for path, tier in ((RULE_JSONL, "rule"), (AI_JSONL, "ai")):
+            eligible = sum(
+                1
+                for row in read_jsonl(path)
+                if (row.get("poem_key") or {}).get("hash_ok")
+                and (row.get("poem_key") or {}).get("body_hash") in kb_hashes
+            )
+            require(meta[f"facts_{tier}"] <= eligible, f"{tier} 层计数 {meta[f'facts_{tier}']} 超过可匹配上限 {eligible}")
 
     # 3.5 助手续写层：内容门槛（story 长度、逐句必有译文、注释与赏析要点足量）与诚实口径
     html = PAGE_HTML.read_text(encoding="utf-8")
@@ -236,18 +269,20 @@ def main() -> None:
     require("NaN" not in html and "Infinity" not in html, "44_诗页.html 含非法数值")
 
     # 5. 确定性重建
-    before = hashlib.md5(DATA_JS.read_bytes()).hexdigest()
-    subprocess.run(
-        [sys.executable, "tools/build_poem_page_data.py"],
-        cwd=ROOT, check=True, capture_output=True,
-    )
-    after = hashlib.md5(DATA_JS.read_bytes()).hexdigest()
-    require(before == after, "poem_page_data.js 重建不一致（非确定性）")
+    if not args.packaged:
+        before = hashlib.md5(DATA_JS.read_bytes()).hexdigest()
+        subprocess.run(
+            [sys.executable, "tools/build_poem_page_data.py"],
+            cwd=ROOT, check=True, capture_output=True,
+        )
+        after = hashlib.md5(DATA_JS.read_bytes()).hexdigest()
+        require(before == after, "poem_page_data.js 重建不一致（非确定性）")
 
     print(
         f"[ok] 诗页数据检查通过：{meta['poems']} 首 / 导读卡 {meta['guides']}"
         f"（助手 {meta['guides_assistant']} / 模型 {meta['guides_model']}）；"
-        f"事实 人工核验 {meta['facts_verified']} / 规则晋级 {meta['facts_rule']} / AI 辅助 {meta['facts_ai']}"
+        f"事实 人工核验 {meta['facts_verified']} / 规则晋级 {meta['facts_rule']} / AI 辅助 {meta['facts_ai']}；"
+        f"模式 {'发布包' if args.packaged else '知识库严格'}"
     )
 
 

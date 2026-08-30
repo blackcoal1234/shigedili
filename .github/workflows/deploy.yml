@@ -71,7 +71,7 @@ jobs:
         run: |
           python tools/famous_poet_corpus.py check --no-source-verify
           sed -i 's/\r$//' output/assets/poem_page/poem_page_data.js
-          python tools/check_poem_page_data.py
+          python tools/check_poem_page_data.py --packaged
           python tools/check_output_index.py
           python tools/check_theme_outputs.py
 
