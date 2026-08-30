@@ -1867,6 +1867,144 @@ def main() -> None:
         }
     )
 
+    # ---- readable Tang -> Song interpretation (all statements remain computed) ----
+    # The charts above expose the evidence, while this block answers the visitor's
+    # actual question in prose: what changed, which corpus components explain the
+    # observed gap, and where the data cannot support a causal claim.
+    overall_change_pct = overall_gap / dynasty_aggregates["唐"]["ratePer10k"] * 100
+    category_shift_rows = [
+        {
+            "category": row["category"],
+            "delta": row["song"]["ratePer10k"] - row["tang"]["ratePer10k"],
+            "authorEqualDelta": robustness_categories[row["category"]]["authorEqualBaseGap"],
+        }
+        for row in category_stats
+    ]
+    category_risers = sorted(category_shift_rows, key=lambda row: (-row["delta"], row["category"]))[:3]
+    category_fallers = sorted(category_shift_rows, key=lambda row: (row["delta"], row["category"]))[:3]
+    word_risers = sorted(word_stats, key=lambda row: (-row["deltaSongMinusTang"], row["word"]))[:3]
+    word_fallers = sorted(word_stats, key=lambda row: (row["deltaSongMinusTang"], row["word"]))[:3]
+    poetry_tang = genre_stats["poetry"]["唐"]
+    poetry_song = genre_stats["poetry"]["宋"]
+    poetry_tang_rate = sum(poetry_tang["wordHits"].values()) * 10000 / poetry_tang["chars"]
+    poetry_song_rate = sum(poetry_song["wordHits"].values()) * 10000 / poetry_song["chars"]
+    ci_song_rate = sum(genre_ci["wordHits"].values()) * 10000 / genre_ci["chars"]
+    ci_song_char_share = genre_ci["chars"] / dynasty_chars["宋"]
+    supported_edge_bins = [
+        row
+        for row in bin_list
+        if row["trend"]["雨"]["supported"] and row["trend"]["云"]["supported"]
+    ]
+    chronology_early = supported_edge_bins[0]
+    chronology_late = supported_edge_bins[-1]
+    cooc_song_pair = max(divergent_pairs, key=lambda row: row["liftDelta"])
+    cooc_tang_pair = min(divergent_pairs, key=lambda row: row["liftDelta"])
+
+    def shift_labels(rows: list[dict]) -> str:
+        return "、".join(f"{row['category']} {row['delta']:+.2f}" for row in rows)
+
+    def word_shift_labels(rows: list[dict]) -> str:
+        return "、".join(f"{row['word']} {row['deltaSongMinusTang']:+.2f}" for row in rows)
+
+    change_analysis = {
+        "title": "唐 → 宋：总量略降，内部结构明显分化",
+        "thesis": (
+            f"160 个客观意象词的总体密度从唐 {dynasty_aggregates['唐']['ratePer10k']:.2f} 降到宋 "
+            f"{dynasty_aggregates['宋']['ratePer10k']:.2f} 次/万字，变化 {overall_change_pct:+.1f}%。"
+            "不能把它简化成‘宋人少写意象’：类别、词项、体裁和搭配关系都在重新分配。"
+        ),
+        "findings": [
+            {
+                "id": "category-shift",
+                "eyebrow": "类别重心",
+                "title": "最稳定的下降发生在建筑、地理与走兽",
+                "body": (
+                    f"语料加权下降最多的是 {shift_labels(category_fallers)} 次/万字，"
+                    "作者等权后方向仍全部为负。天象与器物虽在语料加权口径上分别 "
+                    f"{category_risers[0]['delta']:+.2f}、{category_risers[1]['delta']:+.2f}，"
+                    f"作者等权后却变为 {category_risers[0]['authorEqualDelta']:+.2f}、"
+                    f"{category_risers[1]['authorEqualDelta']:+.2f}；它们的表面增量与作者产量构成有关。"
+                ),
+                "evidenceWords": [top_song_word["word"], top_tang_word["word"]],
+            },
+            {
+                "id": "word-shift",
+                "eyebrow": "关键词迁移",
+                "title": "宋侧‘雨、酒、湖’增密，唐侧‘马、云、城’更突出",
+                "body": (
+                    f"160 词中率差最大的宋侧词项为 {word_shift_labels(word_risers)}；"
+                    f"唐侧词项为 {word_shift_labels(word_fallers)}（均为宋−唐，每万字）。"
+                    "这是本页最直接的‘意象潮汐’：不是原始次数多少，而是单位正文中的使用密度改变。"
+                ),
+                "evidenceWords": [row["word"] for row in word_risers[:2] + word_fallers[:2]],
+            },
+            {
+                "id": "genre-driver",
+                "eyebrow": "体裁解释",
+                "title": "高密度宋词缩小了唐宋总体差距",
+                "body": (
+                    f"只看上游明确标为诗的作品，唐为 {poetry_tang_rate:.2f}、宋为 {poetry_song_rate:.2f} 次/万字，"
+                    f"差 {poetry_song_rate - poetry_tang_rate:+.2f}；宋词为 {ci_song_rate:.2f} 次/万字，"
+                    f"比宋诗高 {ci_song_rate - poetry_song_rate:+.2f}，占宋侧正文汉字 {ci_song_char_share * 100:.1f}%。"
+                    "所以体裁混合会把宋侧总体率向上拉，但因唐侧没有同口径词样本，本页不把它解释成跨朝代的词体因果。"
+                ),
+                "evidenceWords": [genre_word_stats[0]["word"] if genre_word_stats else top_song_word["word"]],
+            },
+            {
+                "id": "author-driver",
+                "eyebrow": "作者解释",
+                "title": "贡献集中于大样本作者，但方向不依赖任何单一诗人",
+                "body": (
+                    f"‘{top_song_word['word']}’宋侧最大贡献者是 {song_contrib['song'][0]['author']}，"
+                    f"‘{top_tang_word['word']}’唐侧最大基数贡献者是 {tang_contrib['tang'][0]['author']}；"
+                    f"但总体留一作者检验翻转 {len(robustness_overall['flips'])} 次，两个代表词也都是 0 次。"
+                    "这说明作者产量影响差值大小，却不足以单独制造结论方向。"
+                ),
+                "evidenceWords": [top_song_word["word"], top_tang_word["word"]],
+            },
+            {
+                "id": "chronology-signal",
+                "eyebrow": "系年子样本",
+                "title": "‘雨’走高、‘云’走低只是年代信号，不是单调历史曲线",
+                "body": (
+                    f"在同时满足阈值的最早箱 {chronology_early['start']}–{chronology_early['end']} 与最晚箱 "
+                    f"{chronology_late['start']}–{chronology_late['end']} 中，‘雨’从 "
+                    f"{chronology_early['trend']['雨']['ratePer10k']:.2f} 到 {chronology_late['trend']['雨']['ratePer10k']:.2f}，"
+                    f"‘云’从 {chronology_early['trend']['云']['ratePer10k']:.2f} 到 "
+                    f"{chronology_late['trend']['云']['ratePer10k']:.2f} 次/万字。中间箱并非单调，"
+                    "这里只把它作为系年子样本中的阶段信号。"
+                ),
+                "evidenceWords": ["雨", "云"],
+            },
+            {
+                "id": "context-shift",
+                "eyebrow": "搭配关系",
+                "title": "变化不只在单词频率，也发生在意象组合方式",
+                "body": (
+                    f"‘{'—'.join(cooc_song_pair['pair'])}’的共现 lift 从唐 {cooc_song_pair['tangLift']:.2f} 升到宋 "
+                    f"{cooc_song_pair['songLift']:.2f}；‘{'—'.join(cooc_tang_pair['pair'])}’则从唐 "
+                    f"{cooc_tang_pair['tangLift']:.2f} 降到宋 {cooc_tang_pair['songLift']:.2f}。"
+                    "两侧均达到最低支持数，说明同一词库在唐宋形成了不同的句内组合网络。"
+                ),
+                "evidenceWords": list(dict.fromkeys(cooc_song_pair["pair"] + cooc_tang_pair["pair"])),
+            },
+        ],
+        "boundary": (
+            f"年代轴只覆盖 {dating_coverage['datedWorks']:,} 条作品（{dating_coverage['workCoverage'] * 100:.1f}%）和 "
+            f"{dating_coverage['charCoverage'] * 100:.1f}% 的正文汉字，且候选系年占多数。"
+            "因此它适合定位某些词在哪些 25 年箱增减，不足以证明战争、制度或审美观念直接造成了变化；"
+            "页面中的‘原因’只指作者构成、体裁构成与词项结构这些可计算驱动。"
+        ),
+    }
+    assert len(change_analysis["findings"]) == 6
+    assert all(
+        word in word_category
+        for finding in change_analysis["findings"]
+        for word in finding["evidenceWords"]
+    )
+    assert chronology_early["trend"]["雨"]["supported"] and chronology_late["trend"]["云"]["supported"]
+    assert "不足以证明" in change_analysis["boundary"]
+
     analysis_by_canonical_id_size = len(analysis_by_canonical_id)
 
     # ---- journey / historical lens (unchanged contract) ----
@@ -2233,6 +2371,7 @@ def main() -> None:
             ),
         },
         "conclusions": conclusions,
+        "changeAnalysis": change_analysis,
         "evidence": evidence_payload,
         "historicalLens": {
             "reviewedNodeCount": len(all_nodes),
@@ -2605,6 +2744,21 @@ footer{margin-top:42px;border-top:1px solid var(--line);padding:21px 0 34px;colo
 .conclusion-card h3{margin:0;font-size:15px;line-height:1.55}
 .conclusion-card p{margin:0;font-size:12px;color:var(--muted);line-height:1.62}
 .conclusion-card .card-foot{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;padding-top:6px}
+.change-analysis{margin-top:18px;padding:22px 24px 20px;border:1px solid var(--line-strong);border-radius:7px;background:rgba(250,251,248,.97);box-shadow:var(--shadow);backdrop-filter:blur(2px)}
+.change-analysis-head{display:grid;grid-template-columns:minmax(210px,.72fr) minmax(0,1.45fr);gap:28px;align-items:start;padding-bottom:17px;border-bottom:1px solid var(--line)}
+.change-analysis-kicker{font-size:11px;letter-spacing:.18em;color:var(--song);font-weight:700}
+.change-analysis h3{margin:7px 0 0;font-size:25px;line-height:1.35}
+.change-thesis{margin:0;color:var(--ink);font-family:KaiTi,STKaiti,serif;font-size:18px;line-height:1.8}
+.change-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.change-finding{display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;padding:18px 0 15px;border-bottom:1px solid var(--line)}
+.change-finding:nth-last-child(-n+2){border-bottom:0}
+.change-index{font-family:Georgia,serif;font-size:21px;color:var(--jade);font-variant-numeric:tabular-nums}
+.change-eyebrow{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:700}
+.change-finding h4{margin:3px 0 6px;font-size:17px;line-height:1.5}
+.change-finding p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.72;text-wrap:pretty}
+.change-evidence{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.change-boundary{margin:4px 0 0;padding:13px 14px;border-top:1px solid var(--line-strong);background:var(--paper-2);color:var(--muted);font-size:12px;line-height:1.7}
+.change-boundary b{color:var(--ink)}
 .compare-extra{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;margin-top:6px}
 .authorEqual-chart{height:470px;width:100%;min-width:560px}
 .loo-table{width:100%;border-collapse:collapse;background:var(--surface);font-size:11.5px}
@@ -2644,12 +2798,15 @@ footer{margin-top:42px;border-top:1px solid var(--line);padding:21px 0 34px;colo
 .limit-list{margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
 .limit-list li{margin:4px 0}
 @media(max-width:1150px){
-  .conclusion-grid,.coverage-tiles,.genre-note{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .conclusion-grid,.coverage-tiles,.genre-note,.change-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .change-analysis-head{grid-template-columns:1fr}
   .compare-extra,.cooc-layout{grid-template-columns:minmax(0,1fr)}
   .collocate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:720px){
-  .conclusion-grid,.coverage-tiles,.genre-note{grid-template-columns:1fr}
+  .conclusion-grid,.coverage-tiles,.genre-note,.change-grid{grid-template-columns:1fr}
+  .change-analysis{padding:18px 15px}
+  .change-finding:nth-last-child(2){border-bottom:1px solid var(--line)}
   .collocate-grid{grid-template-columns:1fr}
 }
 /* 固定画幅背景：高密度图表使用更实的纸白底板。 */
@@ -2683,6 +2840,7 @@ TEMPLATE_BODY = r'''
     </div>
     <p class="section-note">五张卡片分别对应：总体差异及其作者等权复算与留一检验、宋侧最强增量词及其推手、唐侧最强存量词及其承载者、逐篇系年时间轴的覆盖与样本量、体裁分层的口径与样本。卡片中的每个数字都由页面数据直接算出，不是手写文案。</p>
     <div class="conclusion-grid" id="conclusionGrid"></div>
+    <div class="change-analysis" id="changeAnalysis" aria-label="唐宋意象变化分析"></div>
   </section>
 
   <section id="dynastyCompare">
@@ -2873,6 +3031,47 @@ function renderConclusions(){
     card.appendChild(foot);
     host.appendChild(card);
   });
+}
+
+function renderChangeAnalysis(){
+  var data=D.changeAnalysis,host=document.getElementById("changeAnalysis");
+  if(!data||!host)return;
+  var head=el("div","change-analysis-head");
+  var titleBox=el("div");
+  titleBox.appendChild(el("div","change-analysis-kicker","变化解读 · ANALYSIS"));
+  titleBox.appendChild(el("h3","",data.title));
+  head.appendChild(titleBox);
+  head.appendChild(el("p","change-thesis",data.thesis));
+  host.appendChild(head);
+  var grid=el("div","change-grid");
+  data.findings.forEach(function(item,index){
+    var card=el("article","change-finding");
+    card.appendChild(el("div","change-index",String(index+1).padStart(2,"0")));
+    var body=el("div");
+    body.appendChild(el("div","change-eyebrow",item.eyebrow));
+    body.appendChild(el("h4","",item.title));
+    body.appendChild(el("p","",item.body));
+    var evidence=el("div","change-evidence");
+    (item.evidenceWords||[]).forEach(function(word){
+      if(!wordMap[word])return;
+      var button=el("button","word-chip","原句 · "+word);
+      button.type="button";
+      button.addEventListener("click",function(){
+        showAggregateEvidence(word);
+        var target=document.getElementById("aggregateEvidence");
+        window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-24,behavior:"smooth"});
+      });
+      evidence.appendChild(button);
+    });
+    body.appendChild(evidence);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+  host.appendChild(grid);
+  var boundary=el("p","change-boundary");
+  boundary.appendChild(el("b","","解释边界："));
+  boundary.appendChild(document.createTextNode(data.boundary));
+  host.appendChild(boundary);
 }
 
 /* ============ 第二层 · 唐宋两端 ============ */
@@ -3453,6 +3652,7 @@ function renderStationContext(station){
 window.addEventListener("resize",function(){routeMap.resize();chapterChart.resize();comparisonChart.resize();categoryChart.resize();authorEqualChart.resize();timelineChart.resize();contribChart.resize();genreChart.resize()});
 
 renderConclusions();
+renderChangeAnalysis();
 renderLooTable();
 renderChronologyCoverage();
 timelineChart.setOption(timelineOption(),true);

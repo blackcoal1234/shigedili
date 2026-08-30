@@ -218,3 +218,36 @@ def test_imagery_tide_has_no_retired_fixed_corpus_assertions() -> None:
         assert retired not in source
     assert "load_analysis_poems" in source
     assert 'row.get("person_period")' in source
+
+
+def test_imagery_tide_explains_tang_song_change_from_computed_data() -> None:
+    tide = read_output("imagery_tide_data.json")
+    analysis = tide["changeAnalysis"]
+    findings = {item["id"]: item for item in analysis["findings"]}
+
+    assert set(findings) == {
+        "category-shift",
+        "word-shift",
+        "genre-driver",
+        "author-driver",
+        "chronology-signal",
+        "context-shift",
+    }
+    assert f"{tide['dynastyAggregates']['唐']['ratePer10k']:.2f}" in analysis["thesis"]
+    assert f"{tide['dynastyAggregates']['宋']['ratePer10k']:.2f}" in analysis["thesis"]
+    assert "作者等权后却变为" in findings["category-shift"]["body"]
+    assert "中间箱并非单调" in findings["chronology-signal"]["body"]
+    assert "8.4%" in analysis["boundary"]
+    assert "不足以证明" in analysis["boundary"]
+
+    words = {row["word"] for row in tide["wordStats"]}
+    assert all(
+        word in words
+        for finding in analysis["findings"]
+        for word in finding["evidenceWords"]
+    )
+
+    html = (ROOT / "output" / "38_唐宋意象潮汐.html").read_text(encoding="utf-8")
+    assert 'id="changeAnalysis"' in html
+    assert "renderChangeAnalysis();" in html
+    assert analysis["title"] in html

@@ -1,7 +1,7 @@
 {
   "project": "诗行万里·唐宋诗词时空与意象情感",
   "version": "theme-v1",
-  "generated_at": "2026-08-30T16:12:59+08:00",
+  "generated_at": "2026-08-30T18:11:58+08:00",
   "outputs": [
     {
       "title": "诗人行旅与生命情感",
@@ -167,9 +167,9 @@
       "note": "以每万正文汉字率比较唐宋客观意象，并按审核节点五章显影。",
       "source_script": "数据可视化脚本/viz_38_imagery_tide.py",
       "exists": true,
-      "bytes": 941684,
-      "sha256": "b1e0739b86e5a8a0550cd017e7fc78705084a27542d71dcf74d4a22047f8049d",
-      "modified_at": "2026-08-30T15:27:51+08:00"
+      "bytes": 948455,
+      "sha256": "7411b2231a6212777575a280d00bf62a4d2693f3a2e1fa690b2ec365d40d7e0f",
+      "modified_at": "2026-08-30T18:11:00+08:00"
     },
     {
       "title": "诗人自述生命卷",
